@@ -22,16 +22,7 @@ This SDK is in **beta**. We cannot guarantee constant availability or stability.
 Thanks to your feedback we will make improvements on it.
 
 ## Installation
-Add to your Gradle build script the following lines: 
-```Gradle
-// https://mvnrepository.com/artifact/com.bunq.sdk/sdk
-compile group: 'com.bunq.sdk', name: 'sdk', version: '0.9.0'
-```
-
-Then run:
-```shell
-$ gradle build
-```
+TBA
 
 ## Usage
 
