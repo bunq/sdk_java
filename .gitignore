@@ -69,3 +69,5 @@ gradle-app.setting
 # bunq-specific
 bunq.conf
 tmp/attachment_out.jpg
+/tmp
+config.properties
