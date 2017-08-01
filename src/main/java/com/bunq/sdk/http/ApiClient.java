@@ -1,6 +1,7 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -256,12 +258,28 @@ public class ApiClient {
   }
 
   private byte[] getBodyBytes(CloseableHttpResponse response) throws IOException {
-    byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
     Integer responseCode = response.getStatusLine().getStatusCode();
+    byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
 
-    if (responseCode == HttpStatus.SC_OK) {
-      return responseBodyBytes;
-    } else {
+    validateResponseSignature(responseCode, responseBodyBytes, response);
+    assertResponseSuccess(responseCode, responseBodyBytes);
+
+    return responseBodyBytes;
+  }
+
+  private void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
+      HttpResponse response)
+  {
+    InstallationContext installationContext = apiContext.getInstallationContext();
+
+    if (installationContext != null) {
+      SecurityUtils.validateResponseSignature(responseCode, responseBodyBytes, response,
+          installationContext.getPublicKeyServer());
+    }
+  }
+
+  private void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {
+    if (responseCode != HttpStatus.SC_OK) {
       throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
     }
   }
