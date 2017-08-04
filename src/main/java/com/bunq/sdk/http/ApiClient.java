@@ -261,15 +261,14 @@ public class ApiClient {
     Integer responseCode = response.getStatusLine().getStatusCode();
     byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
 
-    validateResponseSignature(responseCode, responseBodyBytes, response);
     assertResponseSuccess(responseCode, responseBodyBytes);
+    validateResponseSignature(responseCode, responseBodyBytes, response);
 
     return responseBodyBytes;
   }
 
   private void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
-      HttpResponse response)
-  {
+      HttpResponse response) {
     InstallationContext installationContext = apiContext.getInstallationContext();
 
     if (installationContext != null) {

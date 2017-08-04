@@ -1,4 +1,4 @@
-package com.bunq.sdk.model.generated;
+package com.bunq.sdk;
 
 import java.io.FileInputStream;
 import java.io.IOException;

@@ -3,6 +3,8 @@ package com.bunq.sdk.model.generated;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import java.io.File;
@@ -14,10 +16,10 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  AttachmentPublic
- *  AttachmentPublicContent
+ * AttachmentPublic
+ * AttachmentPublicContent
  */
-public class AttachmentPublicTest {
+public class AttachmentPublicTest extends BunqSdkTestBase {
 
   /**
    * Config fields
@@ -34,7 +36,7 @@ public class AttachmentPublicTest {
   private static String attachmentDescription = config.getProperty(FIELD_ATTACHMENT_DESCRIPTION);
   private static String pathAttachmentIn = config.getProperty(FIELD_PATH_ATTACHMENT_IN);
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   private static byte[] getAttachmentPublicContentBytes(String uuid, ApiContext apiContext) {
     return AttachmentPublicContent.list(apiContext, uuid);

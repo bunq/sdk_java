@@ -152,3 +152,20 @@ List<User> users = User.list(apiContext);
 
 ##### Example
 See [`UserListExample.java`](./src/main/java/com/bunq/sdk/example/UserListExample.java)
+
+## Running Examples
+In order to make the experience of getting into bunq Java SDK smoother, we
+have bundled it with example use cases (located under `./src/main/java/com/bunq/sdk/example/`).
+
+To run an example, please do the following:
+1. In your IDE, open the example you are interested in and adjust the constants,
+such as `API_KEY` or `USER_ID`, to hold your data.
+2. Since Java IDE's are typically advanced just run the example of your choice in your IDE.
+
+In order for examples to run, you would need a valid context file (`bunq.conf`)
+to be present in the bunq SDK project root directory. The file can either copied
+from somewhere else (e.g. tests) or created by executing the `ApiContextSaveExample.java` in your
+IDE.
+
+Please do not forget to set the `API_KEY` constant in `ApiContextSaveExample.java` to your actual
+API key before running the example!

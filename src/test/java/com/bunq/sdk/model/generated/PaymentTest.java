@@ -1,5 +1,7 @@
 package com.bunq.sdk.model.generated;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -9,15 +11,15 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  Payment
+ * Payment
  */
-public class PaymentTest {
+public class PaymentTest extends BunqSdkTestBase {
 
   /**
    * Config fields
    */
   private static final String FIELD_USER_ID = "USER_ID";
-  private static final String FIELD_MONETARY_ACCOUNT_ID = "MA_ID";
+  private static final String FIELD_MONETARY_ACCOUNT_ID = "MONETARY_ACCOUNT_ID";
   private static final String FIELD_COUNTER_PARTY_ALIAS = "COUNTER_PARTY_ALIAS";
   private static final String FIELD_COUNTER_PARTY_TYPE = "COUNTER_PARTY_TYPE";
   private static final String FIELD_SAME_USER_OTHER_ACCOUNT_TYPE = "SAME_USER_OTHER_ACCOUNT_TYPE";
@@ -40,7 +42,7 @@ public class PaymentTest {
   private static String counterAliasSameUserOtherAccount = config.getProperty(
       FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS);
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   /**
    * Tests making a payment to another sandbox user

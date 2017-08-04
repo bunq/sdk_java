@@ -1,6 +1,10 @@
 package com.bunq.sdk.model.generated;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.model.generated.TabItemShop;
+import com.bunq.sdk.model.generated.TabUsageSingle;
 import com.bunq.sdk.model.generated.object.Amount;
 import java.util.HashMap;
 import java.util.Properties;
@@ -8,17 +12,17 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  TabUsageSingle
- *  TabItemShop
+ * TabUsageSingle
+ * TabItemShop
  */
-public class TabUsageSingleTest {
+public class TabUsageSingleTest extends BunqSdkTestBase {
 
   /**
    * Config Fields
    */
   private static final String FIELD_USER_ID = "USER_ID";
-  private static final String FIELD_MONETARY_ACCOUNT_ID = "MA_ID";
-  private static final String FIELD_CASH_REGISTER_ID = "CR_ID";
+  private static final String FIELD_MONETARY_ACCOUNT_ID = "MONETARY_ACCOUNT_ID";
+  private static final String FIELD_CASH_REGISTER_ID = "CASH_REGISTER_ID";
 
   /**
    * Config values
@@ -36,25 +40,7 @@ public class TabUsageSingleTest {
   private static Integer cashRegisterId = Integer.parseInt(config.getProperty(
       FIELD_CASH_REGISTER_ID));
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
-
-  /**
-   * Tests the creation of a Tab, adds a tab item to it and updates this tab
-   *
-   * This test has no assertion as of its testing to see if the code runs without errors
-   */
-  @Test
-  public void createAndUpdateTabTest() throws Exception {
-    String tabUuid = createTab();
-    addItemToTab(tabUuid);
-
-    HashMap<String, Object> updateMap = new HashMap<>();
-    updateMap.put(TabUsageSingle.FIELD_STATUS, STATUS_WAITING);
-    TabUsageSingle.update(apiContext, updateMap, userId, monetaryAccountId, cashRegisterId,
-        tabUuid);
-
-    TabUsageSingle.delete(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid);
-  }
+  private static ApiContext apiContext = getApiContext();
 
   private static String createTab() {
     HashMap<String, Object> createMap = new HashMap<>();
@@ -72,6 +58,24 @@ public class TabUsageSingleTest {
     tabItemMap.put(TabItemShop.FIELD_DESCRIPTION, TAB_ITEM_FIELD_DESCRIPTION);
 
     TabItemShop.create(apiContext, tabItemMap, userId, monetaryAccountId, cashRegisterId, tabUuid);
+  }
+
+  /**
+   * Tests the creation of a Tab, adds a tab item to it and updates this tab
+   *
+   * This test has no assertion as of its testing to see if the code runs without errors
+   */
+  @Test
+  public void createAndUpdateTabTest() throws Exception {
+    String tabUuid = createTab();
+    addItemToTab(tabUuid);
+
+    HashMap<String, Object> updateMap = new HashMap<>();
+    updateMap.put(TabUsageSingle.FIELD_STATUS, STATUS_WAITING);
+    TabUsageSingle.update(apiContext, updateMap, userId, monetaryAccountId, cashRegisterId,
+        tabUuid);
+
+    TabUsageSingle.delete(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid);
   }
 
 }

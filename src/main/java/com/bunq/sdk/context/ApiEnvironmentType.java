@@ -9,7 +9,7 @@ import java.net.URISyntaxException;
  */
 public enum ApiEnvironmentType {
 
-  PRODUCTION("https://public.api.bunq.com/v1/"),
+  PRODUCTION("https://api.bunq.com/v1/"),
   SANDBOX("https://sandbox.public.api.bunq.com/v1/");
 
   /**
