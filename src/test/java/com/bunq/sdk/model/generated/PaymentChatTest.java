@@ -1,5 +1,7 @@
 package com.bunq.sdk.model.generated;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -10,17 +12,17 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  Payment
- *  PaymentChat
- *  ChatMessageText
+ * Payment
+ * PaymentChat
+ * ChatMessageText
  */
-public class PaymentChatTest {
+public class PaymentChatTest extends BunqSdkTestBase {
 
   /**
    * Config fields
    */
   private static final String FIELD_USER_ID = "USER_ID";
-  private static final String FIELD_MONETARY_ACCOUNT_ID = "MA_ID";
+  private static final String FIELD_MONETARY_ACCOUNT_ID = "MONETARY_ACCOUNT_ID";
   private static final String FIELD_COUNTER_PARTY_TYPE = "SAME_USER_OTHER_ACCOUNT_TYPE";
   private static final String FIELD_COUNTER_PARTY_ALIAS = "SAME_USER_OTHER_ACCOUNT_ALIAS";
 
@@ -37,7 +39,7 @@ public class PaymentChatTest {
   private static String counterPartyType = config.getProperty(FIELD_COUNTER_PARTY_TYPE);
   private static String counterPartyAlias = config.getProperty(FIELD_COUNTER_PARTY_ALIAS);
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   /**
    * The id of the newly created payment and where the payment chat is being sent to

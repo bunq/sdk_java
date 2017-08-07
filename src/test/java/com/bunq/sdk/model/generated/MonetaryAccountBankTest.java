@@ -1,5 +1,7 @@
 package com.bunq.sdk.model.generated;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import java.util.HashMap;
 import java.util.Properties;
@@ -8,15 +10,14 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  MonetaryAccountBank
+ * MonetaryAccountBank
  */
-public class MonetaryAccountBankTest {
+public class MonetaryAccountBankTest extends BunqSdkTestBase {
 
   /**
    * Config fields
    */
   private static final String FIELD_USER_ID = "USER_ID";
-
 
   /**
    * Config values
@@ -30,23 +31,12 @@ public class MonetaryAccountBankTest {
   private static Properties config = TestConfig.prop();
   private static Integer userId = Integer.parseInt(config.getProperty(FIELD_USER_ID));
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   /**
    * The id of the newly created monetary account which should be closed after the tests completes
    */
   private static Integer monetaryAccountIdToClose;
-
-  @AfterClass
-  public static void tearDown() throws Exception {
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(MonetaryAccountBank.FIELD_STATUS, CANCELLED_STATUS);
-    requestMap.put(MonetaryAccountBank.FIELD_SUB_STATUS, SUB_STATUS);
-    requestMap.put(MonetaryAccountBank.FIELD_REASON, REASON);
-    requestMap.put(MonetaryAccountBank.FIELD_REASON_DESCRIPTION, REASON_DESCRIPTION);
-
-    MonetaryAccountBank.update(apiContext, requestMap, userId, monetaryAccountIdToClose);
-  }
 
   /**
    * Tests the creation of a new monetary account. This account will be deleted after test exited
@@ -61,6 +51,19 @@ public class MonetaryAccountBankTest {
     requestMap.put(MonetaryAccountBank.FIELD_DESCRIPTION, MONETARY_ACCOUNT_DESCRIPTION);
 
     monetaryAccountIdToClose = MonetaryAccountBank.create(apiContext, requestMap, userId);
+  }
+
+  @AfterClass
+  public static void tearDown() throws Exception {
+    if (monetaryAccountIdToClose != null) {
+      HashMap<String, Object> requestMap = new HashMap<>();
+      requestMap.put(MonetaryAccountBank.FIELD_STATUS, CANCELLED_STATUS);
+      requestMap.put(MonetaryAccountBank.FIELD_SUB_STATUS, SUB_STATUS);
+      requestMap.put(MonetaryAccountBank.FIELD_REASON, REASON);
+      requestMap.put(MonetaryAccountBank.FIELD_REASON_DESCRIPTION, REASON_DESCRIPTION);
+
+      MonetaryAccountBank.update(apiContext, requestMap, userId, monetaryAccountIdToClose);
+    }
   }
 
 }

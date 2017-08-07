@@ -1,5 +1,7 @@
 package com.bunq.sdk.model.generated;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.DraftShareInviteBankEntry;
 import com.bunq.sdk.model.generated.object.ShareDetail;
@@ -15,10 +17,10 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  DraftShareInviteBankEntry
- *  DraftShareInviteBankQrCodeContent
+ * DraftShareInviteBankEntry
+ * DraftShareInviteBankQrCodeContent
  */
-public class DraftShareInviteBankQrCodeContentTest {
+public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
 
   /**
    * Config fields
@@ -39,7 +41,7 @@ public class DraftShareInviteBankQrCodeContentTest {
    */
   private static Integer draftId;
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   @BeforeClass
   public static void setUp() throws Exception {

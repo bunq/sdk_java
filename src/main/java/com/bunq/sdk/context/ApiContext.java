@@ -108,6 +108,28 @@ public class ApiContext implements java.io.Serializable {
     return apiContext;
   }
 
+  /**
+   * Restores a context from a default location.
+   */
+  public static ApiContext restore() {
+    return restore(PATH_API_CONTEXT_DEFAULT);
+  }
+
+  /**
+   * Restores a context from a given file.
+   */
+  public static ApiContext restore(String fileName) {
+    try {
+      File file = new File(fileName);
+      String json = FileUtils.readFileToString(file, ENCODING_BUNQ_CONF);
+      JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
+
+      return gson.fromJson(jsonObject, ApiContext.class);
+    } catch (IOException exception) {
+      throw new BunqException(ERROR_COULD_NOT_RESTORE_API_CONTEXT, exception);
+    }
+  }
+
   private void initialize(String deviceDescription, List<String> permittedIps) {
     /* The calls below are order-sensitive: to initialize a Device Registration, we need an
      * Installation, and to initialize a Session we need a Device Registration. */
@@ -201,28 +223,6 @@ public class ApiContext implements java.io.Serializable {
       FileUtils.writeStringToFile(file, json, ENCODING_BUNQ_CONF);
     } catch (IOException exception) {
       throw new BunqException(ERROR_COULD_NOT_SAVE_API_CONTEXT, exception);
-    }
-  }
-
-  /**
-   * Restores a context from a default location.
-   */
-  public static ApiContext restore() {
-    return restore(PATH_API_CONTEXT_DEFAULT);
-  }
-
-  /**
-   * Restores a context from a given file.
-   */
-  public static ApiContext restore(String fileName) {
-    try {
-      File file = new File(fileName);
-      String json = FileUtils.readFileToString(file, ENCODING_BUNQ_CONF);
-      JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
-
-      return gson.fromJson(jsonObject, ApiContext.class);
-    } catch (IOException exception) {
-      throw new BunqException(ERROR_COULD_NOT_RESTORE_API_CONTEXT, exception);
     }
   }
 

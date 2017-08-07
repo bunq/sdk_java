@@ -9,7 +9,7 @@ We're very happy to introduce yet another unique product: complete banking SDKs!
 Now you can build even bigger and better apps and integrate them with your bank of the free! 🌈
 
 Before you dive into this brand new SDK, please consider:
-- Checking out our new developer’s page [bunq.com/developers](https://bunq.com/developers) 🙌  
+- Checking out our new developer’s page [https://bunq.com/en/developer](https://bunq.com/en/developer) 🙌  
 - Grabbing your production API key from the bunq app or asking our support for a Sandbox API key 🗝
 - Visiting [together.bunq.com](https://together.bunq.com) where you can share your creations,
 questions and experience 🎤
@@ -21,16 +21,7 @@ This SDK is in **beta**. We cannot guarantee constant availability or stability.
 Thanks to your feedback we will make improvements on it.
 
 ## Installation
-Add to your Gradle build script the following lines: 
-```Gradle
-// https://mvnrepository.com/artifact/com.bunq.sdk/sdk
-compile group: 'com.bunq.sdk', name: 'sdk', version: '0.9.0'
-```
-
-Then run:
-```shell
-$ gradle build
-```
+TBA
 
 ## Usage
 
@@ -161,7 +152,23 @@ List<User> users = User.list(apiContext);
 ##### Example
 See [`UserListExample.java`](./src/main/java/com/bunq/sdk/example/UserListExample.java)
 
-## Running tests
+## Running Examples
+In order to make the experience of getting into bunq Java SDK smoother, we
+have bundled it with example use cases (located under `./src/main/java/com/bunq/sdk/example/`).
 
+To run an example, please do the following:
+1. In your IDE, open the example you are interested in and adjust the constants,
+such as `API_KEY` or `USER_ID`, to hold your data.
+2. Since Java IDE's are typically advanced just run the example of your choice in your IDE.
+
+In order for examples to run, you would need a valid context file (`bunq.conf`)
+to be present in the bunq SDK project root directory. The file can either copied
+from somewhere else (e.g. tests) or created by executing the `ApiContextSaveExample.java` in your
+IDE.
+
+Please do not forget to set the `API_KEY` constant in `ApiContextSaveExample.java` to your actual
+API key before running the example!
+
+## Running tests
 Information regarding the test cases can be found in the [README.md](./src/test/README.md)
 located in [test](/src/test) 

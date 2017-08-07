@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import static org.junit.Assert.assertEquals;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.math.BigInteger;
@@ -15,11 +17,11 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  CardName
- *  User
- *  CardDebit
+ * CardName
+ * User
+ * CardDebit
  */
-public class CardDebitTest {
+public class CardDebitTest extends BunqSdkTestBase {
 
   /**
    * Config Fields
@@ -35,7 +37,7 @@ public class CardDebitTest {
   private static final int FIRST_INDEX = 0;
   private static Properties config = TestConfig.prop();
   private static Integer userId = Integer.parseInt(config.getProperty(FIELD_USER_ID));
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   /**
    * The name that is going to be shown on the card

@@ -4,7 +4,6 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.ApiEnvironmentType;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.google.gson.Gson;
-import java.util.ArrayList;
 
 /**
  * Create an API context and save it to a file.

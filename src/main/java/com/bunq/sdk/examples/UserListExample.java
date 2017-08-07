@@ -2,7 +2,6 @@ package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.User;
-import com.bunq.sdk.model.generated.UserCompany;
 import java.util.List;
 
 /**

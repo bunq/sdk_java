@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import static org.junit.Assert.assertArrayEquals;
 
+import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.TestConfig;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import java.io.File;
@@ -13,10 +15,10 @@ import org.junit.Test;
 
 /**
  * Tests:
- *  AttachmentPublic
- *  AttachmentPublicContent Avatar
+ * AttachmentPublic
+ * AttachmentPublicContent Avatar
  */
-public class AvatarTest {
+public class AvatarTest extends BunqSdkTestBase {
 
   /**
    * Config fields
@@ -34,7 +36,7 @@ public class AvatarTest {
   private static String contentType = config.getProperty(FIELD_CONTENT_TYPE);
   private static String pathAttachmentIn = config.getProperty(FIELD_PATH_ATTACHMENT_IN);
 
-  private static ApiContext apiContext = ApiContextHandler.getApiContext();
+  private static ApiContext apiContext = getApiContext();
 
   private static byte[] getFileContentBytes(String path) {
     try {
@@ -42,7 +44,7 @@ public class AvatarTest {
       return FileUtils.readFileToByteArray(new File(path));
 
     } catch (IOException exception) {
-      System.out.print(exception);
+      System.out.print(exception.getMessage());
 
       return null;
 
