@@ -3,14 +3,11 @@
 ## Introduction
 Hi developers!
 
-
 Welcome to the bunq Java SDK integration tests. Currently we are not
 targeting the 100% test coverage, but rather want to be certain that the most
 common scenarios can run without any errors.
 
-
 ## Scenarios 
-
 These are the scenarios that are currently being tested:
 * Create installation, session-server and device server
 * Create a new MonetaryAccount
@@ -30,14 +27,12 @@ Besides these scenarios, some code of ApiContext, ApiClient and the JSON module
 are also tested :thumbs_up:.
 
 ## Configuration
-
 To run the tests you must first setup the test configuration JSON. The example
 of a configuration file is located at [`src/test/config.example.properties`](./config.example.properties).
 In order to make use of the configuration file, please copy the example to the
-same directory, fill in your sandbox user data and rename the copy to `config.properties`
+same directory, fill in your sandbox user data and rename the copy to `config.properties`.
 
 ## Execution
-
 To run tests via IntelliJ IDEA, you must make sure that you've build the project with gradle.
 
 Afterwards you can right click on the tests folders and should be able to run
