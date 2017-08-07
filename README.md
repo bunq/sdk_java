@@ -171,4 +171,4 @@ API key before running the example!
 
 ## Running tests
 Information regarding the test cases can be found in the [README.md](./src/test/README.md)
-located in [test](/src/test) 
+located in [test](/src/test).
