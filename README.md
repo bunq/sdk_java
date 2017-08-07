@@ -1,5 +1,4 @@
 # bunq Java SDK
-Version 0.9.0 **BETA**
 
 ## Introduction
 Hi developers!
@@ -161,3 +160,8 @@ List<User> users = User.list(apiContext);
 
 ##### Example
 See [`UserListExample.java`](./src/main/java/com/bunq/sdk/example/UserListExample.java)
+
+## Running tests
+
+Information regarding the test cases can be found in the [README.md](./src/test/README.md)
+located in [test](/src/test) 
