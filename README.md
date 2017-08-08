@@ -1,5 +1,4 @@
 # bunq Java SDK
-Version 0.9.0 **BETA**
 
 ## Introduction
 Hi developers!
@@ -169,3 +168,7 @@ IDE.
 
 Please do not forget to set the `API_KEY` constant in `ApiContextSaveExample.java` to your actual
 API key before running the example!
+
+## Running tests
+Information regarding the test cases can be found in the [README.md](./src/test/README.md)
+located in [test](/src/test).
