@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
@@ -32,7 +34,7 @@ public class InstallationServerPublicKey extends BunqModel {
   @SerializedName("server_public_key")
   private String serverPublicKey;
 
-  public static List<InstallationServerPublicKey> list(ApiContext apiContext,
+  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
       Integer installationId) {
     return list(apiContext, installationId, new HashMap<>());
   }
@@ -40,13 +42,13 @@ public class InstallationServerPublicKey extends BunqModel {
   /**
    * Show the ServerPublicKey for this Installation.
    */
-  public static List<InstallationServerPublicKey> list(ApiContext apiContext,
+  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
       Integer installationId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, installationId), customHeaders);
 
-    return fromJsonList(InstallationServerPublicKey.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

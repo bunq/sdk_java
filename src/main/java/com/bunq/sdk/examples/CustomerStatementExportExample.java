@@ -43,10 +43,11 @@ public class CustomerStatementExportExample {
     Date dateEnd = new Date();
 
     customerStatementMap.put(CustomerStatementExport.FIELD_DATE_END, formatDate.format(dateEnd));
-    int userId = User.list(apiContext).get(INDEX_FIRST).getUserCompany().getId();
-    int monetaryAccountId = MonetaryAccountBank.list(apiContext, userId).get(INDEX_FIRST).getId();
+    int userId = User.list(apiContext).getValue().get(INDEX_FIRST).getUserCompany().getId();
+    int monetaryAccountId = MonetaryAccountBank.list(apiContext, userId).getValue().get(INDEX_FIRST)
+        .getId();
     int customerStatementId = CustomerStatementExport.create(apiContext, customerStatementMap,
-        userId, monetaryAccountId);
+        userId, monetaryAccountId).getValue();
 
     CustomerStatementExport.delete(apiContext, userId, monetaryAccountId, customerStatementId);
 

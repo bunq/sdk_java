@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.object.Schedule;
 import com.bunq.sdk.model.generated.object.SchedulePaymentEntry;
 import com.google.gson.annotations.Expose;
@@ -10,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for schedule payment batches.
@@ -48,25 +51,25 @@ public class SchedulePaymentBatch extends BunqModel {
   @SerializedName("schedule")
   private Schedule schedule;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, schedulePaymentBatchId,
         new HashMap<>());
@@ -74,31 +77,34 @@ public class SchedulePaymentBatch extends BunqModel {
 
   /**
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, schedulePaymentBatchId),
             requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer schedulePaymentBatchId) {
-    delete(apiContext, userId, monetaryAccountId, schedulePaymentBatchId, new HashMap<>());
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer schedulePaymentBatchId) {
+    return delete(apiContext, userId, monetaryAccountId, schedulePaymentBatchId, new HashMap<>());
   }
 
   /**
    */
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer schedulePaymentBatchId, Map<String, String> customHeaders) {
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer schedulePaymentBatchId,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    apiClient.delete(
+    BunqResponseRaw responseRaw = apiClient.delete(
         String.format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, schedulePaymentBatchId),
         customHeaders);
+
+    return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
   /**

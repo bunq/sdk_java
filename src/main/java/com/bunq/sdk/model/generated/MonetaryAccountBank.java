@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.MonetaryAccountSetting;
@@ -199,7 +201,7 @@ public class MonetaryAccountBank extends BunqModel {
   @SerializedName("setting")
   private MonetaryAccountSetting setting;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
@@ -207,17 +209,17 @@ public class MonetaryAccountBank extends BunqModel {
   /**
    * Create new MonetaryAccountBank.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static MonetaryAccountBank get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<MonetaryAccountBank> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountBankId) {
     return get(apiContext, userId, monetaryAccountBankId, new HashMap<>());
   }
@@ -225,16 +227,16 @@ public class MonetaryAccountBank extends BunqModel {
   /**
    * Get a specific MonetaryAccountBank.
    */
-  public static MonetaryAccountBank get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<MonetaryAccountBank> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountBankId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountBankId), customHeaders);
 
-    return fromJson(MonetaryAccountBank.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountBankId) {
     return update(apiContext, requestMap, userId, monetaryAccountBankId, new HashMap<>());
   }
@@ -242,31 +244,32 @@ public class MonetaryAccountBank extends BunqModel {
   /**
    * Update a specific existing MonetaryAccountBank.
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountBankId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountBankId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static List<MonetaryAccountBank> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<MonetaryAccountBank>> list(ApiContext apiContext,
+      Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    * Gets a listing of all MonetaryAccountBanks of a given user.
    */
-  public static List<MonetaryAccountBank> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<MonetaryAccountBank>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(MonetaryAccountBank.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

@@ -2,13 +2,16 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Used to create new and read existing statement exports. Statement exports can be created in
@@ -107,71 +110,75 @@ public class CustomerStatementExport extends BunqModel {
   @SerializedName("alias_monetary_account")
   private MonetaryAccountReference aliasMonetaryAccount;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static CustomerStatementExport get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<CustomerStatementExport> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer customerStatementExportId) {
     return get(apiContext, userId, monetaryAccountId, customerStatementExportId, new HashMap<>());
   }
 
   /**
    */
-  public static CustomerStatementExport get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<CustomerStatementExport> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer customerStatementExportId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, customerStatementExportId),
             customHeaders);
 
-    return fromJson(CustomerStatementExport.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(CustomerStatementExport.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<CustomerStatementExport> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId) {
+  public static BunqResponse<List<CustomerStatementExport>> list(ApiContext apiContext,
+      Integer userId, Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    */
-  public static List<CustomerStatementExport> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<List<CustomerStatementExport>> list(ApiContext apiContext,
+      Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(CustomerStatementExport.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(CustomerStatementExport.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer customerStatementExportId) {
-    delete(apiContext, userId, monetaryAccountId, customerStatementExportId, new HashMap<>());
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer customerStatementExportId) {
+    return delete(apiContext, userId, monetaryAccountId, customerStatementExportId,
+        new HashMap<>());
   }
 
   /**
    */
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer customerStatementExportId, Map<String, String> customHeaders) {
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer customerStatementExportId,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    apiClient.delete(
+    BunqResponseRaw responseRaw = apiClient.delete(
         String.format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, customerStatementExportId),
         customHeaders);
+
+    return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
   /**

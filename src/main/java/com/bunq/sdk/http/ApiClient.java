@@ -1,7 +1,6 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
@@ -16,10 +15,11 @@ import java.net.URI;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.apache.http.HttpResponse;
+import org.apache.http.Header;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -88,6 +88,68 @@ public class ApiClient {
     this.httpClient = buildHttpClient();
   }
 
+  private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
+      String responseBody) {
+    List<String> errorDescriptions = new ArrayList<>();
+
+    try {
+      errorDescriptions.addAll(fetchErrorDescriptions(responseBody));
+    } catch (JsonSyntaxException exception) {
+      errorDescriptions.add(responseBody);
+    }
+
+    return new ApiException(responseCode, errorDescriptions);
+  }
+
+  private static List<String> fetchErrorDescriptions(String responseBody)
+      throws JsonSyntaxException {
+    List<String> errorDescriptions = new ArrayList<>();
+    GsonBuilder gsonBuilder = BunqGsonBuilder.buildDefault();
+    JsonObject responseBodyJson = gsonBuilder.create().fromJson(responseBody, JsonObject.class);
+
+    if (responseBodyJson.getAsJsonObject().has(FIELD_ERROR)) {
+      errorDescriptions.addAll(fetchErrorDescriptions(responseBodyJson));
+    } else {
+      errorDescriptions.add(responseBody);
+    }
+
+    return errorDescriptions;
+  }
+
+  private static List<String> fetchErrorDescriptions(JsonObject responseBodyJson) {
+    List<String> errorDescriptions = new ArrayList<>();
+    JsonArray exceptionBodies = responseBodyJson.getAsJsonObject().getAsJsonArray(FIELD_ERROR);
+
+    for (JsonElement exceptionBody : exceptionBodies) {
+      JsonObject exceptionBodyJson = exceptionBody.getAsJsonObject();
+      errorDescriptions.add(exceptionBodyJson.get(FIELD_ERROR_DESCRIPTION).getAsString());
+    }
+
+    return errorDescriptions;
+  }
+
+  private static BunqResponseRaw createBunqResponseRaw(CloseableHttpResponse response)
+      throws IOException {
+    byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
+    Integer responseCode = response.getStatusLine().getStatusCode();
+
+    if (responseCode == HttpStatus.SC_OK) {
+      return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
+    } else {
+      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
+    }
+  }
+
+  private static Map<String, String> getHeadersMap(CloseableHttpResponse response) {
+    HashMap<String, String> headersMap = new HashMap<>();
+
+    for (Header header : response.getAllHeaders()) {
+      headersMap.put(header.getName(), header.getValue());
+    }
+
+    return headersMap;
+  }
+
   private CloseableHttpClient buildHttpClient() {
     try {
       // TODO: Fix SSL handling
@@ -106,13 +168,14 @@ public class ApiClient {
    *
    * @return The raw response of the POST request.
    */
-  public byte[] post(String uri, byte[] requestBodyBytes, Map<String, String> customHeaders) {
+  public BunqResponseRaw post(String uri, byte[] requestBodyBytes,
+      Map<String, String> customHeaders) {
     try {
       HttpPost httpPost = new HttpPost(determineFullUri(uri));
       httpPost.setEntity(new ByteArrayEntity(requestBodyBytes, ContentType.APPLICATION_JSON));
       CloseableHttpResponse response = executeRequest(httpPost, customHeaders);
 
-      return getBodyBytes(response);
+      return createBunqResponseRaw(response);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
     }
@@ -131,12 +194,12 @@ public class ApiClient {
    *
    * @return The raw response of the GET request.
    */
-  public byte[] get(String uri, Map<String, String> customHeaders) {
+  public BunqResponseRaw get(String uri, Map<String, String> customHeaders) {
     try {
       HttpGet httpGet = new HttpGet(determineFullUri(uri));
       CloseableHttpResponse response = executeRequest(httpGet, customHeaders);
 
-      return getBodyBytes(response);
+      return createBunqResponseRaw(response);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
     }
@@ -147,13 +210,14 @@ public class ApiClient {
    *
    * @return The raw response of the PUT request.
    */
-  public byte[] put(String uri, byte[] requestBodyBytes, Map<String, String> customHeaders) {
+  public BunqResponseRaw put(String uri, byte[] requestBodyBytes,
+      Map<String, String> customHeaders) {
     try {
       HttpPut httpPut = new HttpPut(determineFullUri(uri));
       httpPut.setEntity(new ByteArrayEntity(requestBodyBytes, ContentType.APPLICATION_JSON));
       CloseableHttpResponse response = executeRequest(httpPut, customHeaders);
 
-      return getBodyBytes(response);
+      return createBunqResponseRaw(response);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
     }
@@ -164,12 +228,12 @@ public class ApiClient {
    *
    * @return The response of the DELETE request.
    */
-  public byte[] delete(String uri, Map<String, String> customHeaders) {
+  public BunqResponseRaw delete(String uri, Map<String, String> customHeaders) {
     try {
       HttpDelete httpDelete = new HttpDelete(determineFullUri(uri));
       CloseableHttpResponse response = executeRequest(httpDelete, customHeaders);
 
-      return getBodyBytes(response);
+      return createBunqResponseRaw(response);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
     }
@@ -214,73 +278,8 @@ public class ApiClient {
         apiContext.getInstallationContext().getKeyPairClient());
   }
 
-  private ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
-      String responseBody) {
-    List<String> errorDescriptions = new ArrayList<>();
-
-    try {
-      errorDescriptions.addAll(fetchErrorDescriptions(responseBody));
-    } catch (JsonSyntaxException exception) {
-      errorDescriptions.add(responseBody);
-    }
-
-    return new ApiException(responseCode, errorDescriptions);
-  }
-
   private String getVersion() {
     return USER_AGENT_BUNQ;
-  }
-
-  private List<String> fetchErrorDescriptions(String responseBody) throws JsonSyntaxException {
-    List<String> errorDescriptions = new ArrayList<>();
-    GsonBuilder gsonBuilder = BunqGsonBuilder.buildDefault();
-    JsonObject responseBodyJson = gsonBuilder.create().fromJson(responseBody, JsonObject.class);
-
-    if (responseBodyJson.getAsJsonObject().has(FIELD_ERROR)) {
-      errorDescriptions.addAll(fetchErrorDescriptions(responseBodyJson));
-    } else {
-      errorDescriptions.add(responseBody);
-    }
-
-    return errorDescriptions;
-  }
-
-  private List<String> fetchErrorDescriptions(JsonObject responseBodyJson) {
-    List<String> errorDescriptions = new ArrayList<>();
-    JsonArray exceptionBodies = responseBodyJson.getAsJsonObject().getAsJsonArray(FIELD_ERROR);
-
-    for (JsonElement exceptionBody : exceptionBodies) {
-      JsonObject exceptionBodyJson = exceptionBody.getAsJsonObject();
-      errorDescriptions.add(exceptionBodyJson.get(FIELD_ERROR_DESCRIPTION).getAsString());
-    }
-
-    return errorDescriptions;
-  }
-
-  private byte[] getBodyBytes(CloseableHttpResponse response) throws IOException {
-    Integer responseCode = response.getStatusLine().getStatusCode();
-    byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
-
-    assertResponseSuccess(responseCode, responseBodyBytes);
-    validateResponseSignature(responseCode, responseBodyBytes, response);
-
-    return responseBodyBytes;
-  }
-
-  private void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
-      HttpResponse response) {
-    InstallationContext installationContext = apiContext.getInstallationContext();
-
-    if (installationContext != null) {
-      SecurityUtils.validateResponseSignature(responseCode, responseBodyBytes, response,
-          installationContext.getPublicKeyServer());
-    }
-  }
-
-  private void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {
-    if (responseCode != HttpStatus.SC_OK) {
-      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
-    }
   }
 
 }

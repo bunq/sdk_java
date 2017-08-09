@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,21 +24,22 @@ public class AttachmentTabContent extends BunqModel {
    */
   private static final String OBJECT_TYPE = "AttachmentTabContent";
 
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer attachmentTabId) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer attachmentTabId) {
     return list(apiContext, userId, monetaryAccountId, attachmentTabId, new HashMap<>());
   }
 
   /**
    * Get the raw content of a specific attachment.
    */
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer attachmentTabId, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer attachmentTabId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-
-    return apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, attachmentTabId),
             customHeaders);
+
+    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
 }

@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
@@ -48,58 +50,58 @@ public class PermittedIp extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public static PermittedIp get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<PermittedIp> get(ApiContext apiContext, Integer userId,
       Integer credentialPasswordIpId, Integer permittedIpId) {
     return get(apiContext, userId, credentialPasswordIpId, permittedIpId, new HashMap<>());
   }
 
   /**
    */
-  public static PermittedIp get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<PermittedIp> get(ApiContext apiContext, Integer userId,
       Integer credentialPasswordIpId, Integer permittedIpId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, credentialPasswordIpId, permittedIpId),
             customHeaders);
 
-    return fromJson(PermittedIp.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer credentialPasswordIpId) {
     return create(apiContext, requestMap, userId, credentialPasswordIpId, new HashMap<>());
   }
 
   /**
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer credentialPasswordIpId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, credentialPasswordIpId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static List<PermittedIp> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<PermittedIp>> list(ApiContext apiContext, Integer userId,
       Integer credentialPasswordIpId) {
     return list(apiContext, userId, credentialPasswordIpId, new HashMap<>());
   }
 
   /**
    */
-  public static List<PermittedIp> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<PermittedIp>> list(ApiContext apiContext, Integer userId,
       Integer credentialPasswordIpId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, credentialPasswordIpId), customHeaders);
 
-    return fromJsonList(PermittedIp.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(PermittedIp.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer credentialPasswordIpId, Integer permittedIpId) {
     return update(apiContext, requestMap, userId, credentialPasswordIpId, permittedIpId,
         new HashMap<>());
@@ -107,16 +109,16 @@ public class PermittedIp extends BunqModel {
 
   /**
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer credentialPasswordIpId, Integer permittedIpId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, credentialPasswordIpId, permittedIpId),
             requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
   /**

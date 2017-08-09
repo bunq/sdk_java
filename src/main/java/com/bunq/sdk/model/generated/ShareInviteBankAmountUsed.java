@@ -2,9 +2,12 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import java.util.HashMap;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * When you have connected your monetary account bank to a user, and given this user a (for
@@ -24,9 +27,10 @@ public class ShareInviteBankAmountUsed extends BunqModel {
    */
   private static final String OBJECT_TYPE = "ShareInviteBankAmountUsed";
 
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId) {
-    delete(apiContext, userId, monetaryAccountId, shareInviteBankInquiryId,
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer shareInviteBankInquiryId,
+      Integer shareInviteBankAmountUsedId) {
+    return delete(apiContext, userId, monetaryAccountId, shareInviteBankInquiryId,
         shareInviteBankAmountUsedId, new HashMap<>());
   }
 
@@ -34,13 +38,15 @@ public class ShareInviteBankAmountUsed extends BunqModel {
    * Reset the available budget for a bank account share. To be called without any ID at the end
    * of the path.
    */
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer shareInviteBankInquiryId,
+      Integer shareInviteBankAmountUsedId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    apiClient.delete(String
+    BunqResponseRaw responseRaw = apiClient.delete(String
         .format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, shareInviteBankInquiryId,
             shareInviteBankAmountUsedId), customHeaders);
+
+    return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
 }

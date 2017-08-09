@@ -52,7 +52,7 @@ public class PaymentBatchExample {
         paymentBatchMap,
         USER_ITEM_ID,
         MONETARY_ACCOUNT_ITEM_ID
-    );
+    ).getValue();
 
     System.out.println(
         PaymentBatch.get(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID, paymentBatchId)

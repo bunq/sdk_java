@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
@@ -208,8 +210,9 @@ public class RequestResponse extends BunqModel {
   @SerializedName("eligible_whitelist_id")
   private Integer eligibleWhitelistId;
 
-  public static RequestResponse update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer requestResponseId) {
+  public static BunqResponse<RequestResponse> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestResponseId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, requestResponseId,
         new HashMap<>());
   }
@@ -217,19 +220,19 @@ public class RequestResponse extends BunqModel {
   /**
    * Update the status to accept or reject the RequestResponse.
    */
-  public static RequestResponse update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer requestResponseId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<RequestResponse> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestResponseId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestResponseId),
             requestBytes, customHeaders);
 
-    return fromJson(RequestResponse.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<RequestResponse> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
@@ -237,16 +240,16 @@ public class RequestResponse extends BunqModel {
   /**
    * Get all RequestResponses for a MonetaryAccount.
    */
-  public static List<RequestResponse> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(RequestResponse.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static RequestResponse get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer requestResponseId) {
     return get(apiContext, userId, monetaryAccountId, requestResponseId, new HashMap<>());
   }
@@ -254,14 +257,14 @@ public class RequestResponse extends BunqModel {
   /**
    * Get the details for a specific existing RequestResponse.
    */
-  public static RequestResponse get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer requestResponseId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestResponseId),
             customHeaders);
 
-    return fromJson(RequestResponse.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

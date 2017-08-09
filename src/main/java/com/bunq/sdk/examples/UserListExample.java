@@ -16,7 +16,7 @@ public class UserListExample {
    */
   public static void main(String[] args) {
     ApiContext apiContext = ApiContext.restore(API_CONTEXT_FILE_PATH);
-    List<User> users = User.list(apiContext);
+    List<User> users = User.list(apiContext).getValue();
     apiContext.save();
 
     for (User oneUser : users) {

@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
@@ -285,23 +287,23 @@ public class UserPerson extends BunqModel {
   @SerializedName("notification_filters")
   private List<NotificationFilter> notificationFilters;
 
-  public static UserPerson get(ApiContext apiContext, Integer userPersonId) {
+  public static BunqResponse<UserPerson> get(ApiContext apiContext, Integer userPersonId) {
     return get(apiContext, userPersonId, new HashMap<>());
   }
 
   /**
    * Get a specific person.
    */
-  public static UserPerson get(ApiContext apiContext, Integer userPersonId,
+  public static BunqResponse<UserPerson> get(ApiContext apiContext, Integer userPersonId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userPersonId), customHeaders);
 
-    return fromJson(UserPerson.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(UserPerson.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userPersonId) {
     return update(apiContext, requestMap, userPersonId, new HashMap<>());
   }
@@ -309,14 +311,14 @@ public class UserPerson extends BunqModel {
   /**
    * Modify a specific person object's data.
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userPersonId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userPersonId), requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
   /**

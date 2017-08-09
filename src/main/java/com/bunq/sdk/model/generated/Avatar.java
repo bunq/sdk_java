@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.object.Image;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -49,34 +51,34 @@ public class Avatar extends BunqModel {
   @SerializedName("image")
   private List<Image> image;
 
-  public static String create(ApiContext apiContext, Map<String, Object> requestMap) {
+  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap) {
     return create(apiContext, requestMap, new HashMap<>());
   }
 
   /**
    */
-  public static String create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
-    return processForUuid(new String(responseBytes));
+    return processForUuid(responseRaw);
   }
 
-  public static Avatar get(ApiContext apiContext, String avatarUuid) {
+  public static BunqResponse<Avatar> get(ApiContext apiContext, String avatarUuid) {
     return get(apiContext, avatarUuid, new HashMap<>());
   }
 
   /**
    */
-  public static Avatar get(ApiContext apiContext, String avatarUuid,
+  public static BunqResponse<Avatar> get(ApiContext apiContext, String avatarUuid,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, avatarUuid), customHeaders);
 
-    return fromJson(Avatar.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(Avatar.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

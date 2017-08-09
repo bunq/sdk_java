@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
@@ -33,20 +35,20 @@ public class CardName extends BunqModel {
   @SerializedName("possible_card_name_array")
   private List<String> possibleCardNameArray;
 
-  public static List<CardName> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<CardName>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    * Return all the accepted card names for a specific user.
    */
-  public static List<CardName> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<CardName>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(CardName.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(CardName.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -52,7 +54,7 @@ public class TabAttachmentTab extends BunqModel {
   @SerializedName("attachment")
   private Attachment attachment;
 
-  public static TabAttachmentTab get(ApiContext apiContext, String tabUuid,
+  public static BunqResponse<TabAttachmentTab> get(ApiContext apiContext, String tabUuid,
       Integer tabAttachmentTabId) {
     return get(apiContext, tabUuid, tabAttachmentTabId, new HashMap<>());
   }
@@ -61,13 +63,13 @@ public class TabAttachmentTab extends BunqModel {
    * Get a specific attachment. The header of the response contains the content-type of the
    * attachment.
    */
-  public static TabAttachmentTab get(ApiContext apiContext, String tabUuid,
+  public static BunqResponse<TabAttachmentTab> get(ApiContext apiContext, String tabUuid,
       Integer tabAttachmentTabId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, tabUuid, tabAttachmentTabId), customHeaders);
 
-    return fromJson(TabAttachmentTab.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(TabAttachmentTab.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

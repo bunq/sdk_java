@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
@@ -34,7 +36,7 @@ public class MonetaryAccount extends BunqModel {
   @SerializedName("MonetaryAccountBank")
   private MonetaryAccountBank monetaryAccountBank;
 
-  public static MonetaryAccount get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<MonetaryAccount> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return get(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
@@ -42,29 +44,29 @@ public class MonetaryAccount extends BunqModel {
   /**
    * Get a specific MonetaryAccount.
    */
-  public static MonetaryAccount get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<MonetaryAccount> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId), customHeaders);
 
-    return fromJson(MonetaryAccount.class, new String(responseBytes));
+    return fromJson(MonetaryAccount.class, responseRaw);
   }
 
-  public static List<MonetaryAccount> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<MonetaryAccount>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    * Get a collection of all your MonetaryAccounts.
    */
-  public static List<MonetaryAccount> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<MonetaryAccount>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(MonetaryAccount.class, new String(responseBytes));
+    return fromJsonList(MonetaryAccount.class, responseRaw);
   }
 
   /**

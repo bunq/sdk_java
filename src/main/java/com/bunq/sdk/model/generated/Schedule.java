@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,25 +25,25 @@ public class Schedule extends BunqModel {
    */
   private static final String OBJECT_TYPE = "Schedule";
 
-  public static Schedule get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer scheduleId) {
+  public static BunqResponse<Schedule> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer scheduleId) {
     return get(apiContext, userId, monetaryAccountId, scheduleId, new HashMap<>());
   }
 
   /**
    * Get a specific schedule definition for a given monetary account.
    */
-  public static Schedule get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer scheduleId, Map<String, String> customHeaders) {
+  public static BunqResponse<Schedule> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer scheduleId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, scheduleId),
             customHeaders);
 
-    return fromJson(Schedule.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(Schedule.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<Schedule> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<Schedule>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
@@ -52,13 +54,13 @@ public class Schedule extends BunqModel {
    * type={SCHEDULE_DEFINITION_PAYMENT,SCHEDULE_DEFINITION_PAYMENT_BATCH} is provided only
    * schedule definition object that relate to these definitions are returned.
    */
-  public static List<Schedule> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<Schedule>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(Schedule.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(Schedule.class, responseRaw, OBJECT_TYPE);
   }
 
 }

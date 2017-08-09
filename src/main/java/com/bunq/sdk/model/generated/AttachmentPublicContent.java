@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,18 +24,20 @@ public class AttachmentPublicContent extends BunqModel {
    */
   private static final String OBJECT_TYPE = "AttachmentPublicContent";
 
-  public static byte[] list(ApiContext apiContext, String attachmentPublicUuid) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, String attachmentPublicUuid) {
     return list(apiContext, attachmentPublicUuid, new HashMap<>());
   }
 
   /**
    * Get the raw content of a specific attachment.
    */
-  public static byte[] list(ApiContext apiContext, String attachmentPublicUuid,
+  public static BunqResponse<byte[]> list(ApiContext apiContext, String attachmentPublicUuid,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, attachmentPublicUuid), customHeaders);
 
-    return apiClient.get(String.format(ENDPOINT_URL_LISTING, attachmentPublicUuid), customHeaders);
+    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
 }

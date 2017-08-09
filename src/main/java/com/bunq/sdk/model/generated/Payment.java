@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
@@ -214,7 +216,7 @@ public class Payment extends BunqModel {
   @SerializedName("allow_chat")
   private Boolean allowChat;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
   }
@@ -222,35 +224,35 @@ public class Payment extends BunqModel {
   /**
    * Create a new Payment.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static Payment get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer paymentId) {
+  public static BunqResponse<Payment> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer paymentId) {
     return get(apiContext, userId, monetaryAccountId, paymentId, new HashMap<>());
   }
 
   /**
    * Get a specific previous Payment.
    */
-  public static Payment get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer paymentId, Map<String, String> customHeaders) {
+  public static BunqResponse<Payment> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer paymentId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, paymentId), customHeaders);
 
-    return fromJson(Payment.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(Payment.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<Payment> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
@@ -258,13 +260,13 @@ public class Payment extends BunqModel {
   /**
    * Get a listing of all Payments performed on a given MonetaryAccount (incoming and outgoing).
    */
-  public static List<Payment> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(Payment.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(Payment.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
@@ -40,7 +42,7 @@ public class TabResultInquiry extends BunqModel {
   @SerializedName("payment")
   private Payment payment;
 
-  public static TabResultInquiry get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<TabResultInquiry> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, String tabUuid,
       Integer tabResultInquiryId) {
     return get(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid, tabResultInquiryId,
@@ -50,18 +52,18 @@ public class TabResultInquiry extends BunqModel {
   /**
    * Used to view a single TabResultInquiry belonging to a tab.
    */
-  public static TabResultInquiry get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<TabResultInquiry> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, String tabUuid, Integer tabResultInquiryId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient.get(String
+    BunqResponseRaw responseRaw = apiClient.get(String
         .format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUuid,
             tabResultInquiryId), customHeaders);
 
-    return fromJson(TabResultInquiry.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(TabResultInquiry.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<TabResultInquiry> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<TabResultInquiry>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, String tabUuid) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid, new HashMap<>());
   }
@@ -69,15 +71,15 @@ public class TabResultInquiry extends BunqModel {
   /**
    * Used to view a list of TabResultInquiry objects belonging to a tab.
    */
-  public static List<TabResultInquiry> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<TabResultInquiry>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, String tabUuid,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient.get(
+    BunqResponseRaw responseRaw = apiClient.get(
         String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId, tabUuid),
         customHeaders);
 
-    return fromJsonList(TabResultInquiry.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(TabResultInquiry.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

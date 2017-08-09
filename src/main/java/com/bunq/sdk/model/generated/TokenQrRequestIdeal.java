@@ -2,7 +2,9 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
@@ -181,22 +183,22 @@ public class TokenQrRequestIdeal extends BunqModel {
   @SerializedName("eligible_whitelist_id")
   private Integer eligibleWhitelistId;
 
-  public static TokenQrRequestIdeal create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId) {
+  public static BunqResponse<TokenQrRequestIdeal> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    * Create a request from an ideal transaction.
    */
-  public static TokenQrRequestIdeal create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<TokenQrRequestIdeal> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return fromJson(TokenQrRequestIdeal.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(TokenQrRequestIdeal.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

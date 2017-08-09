@@ -2,6 +2,7 @@ package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.AttachmentPublic;
 import com.bunq.sdk.model.generated.AttachmentPublicContent;
 import java.io.File;
@@ -32,9 +33,9 @@ public class AttachmentPublicExample {
 
     try {
       byte[] requestBytes = FileUtils.readFileToByteArray(new File(PATH_ATTACHMENT_IN));
-      String uuid = AttachmentPublic.create(apiContext, requestBytes, customHeaders);
-      byte[] responseBytes = AttachmentPublicContent.list(apiContext, uuid);
-      FileUtils.writeByteArrayToFile(new File(PATH_ATTACHMENT_OUT), responseBytes);
+      String uuid = AttachmentPublic.create(apiContext, requestBytes, customHeaders).getValue();
+      BunqResponse<byte[]> response = AttachmentPublicContent.list(apiContext, uuid);
+      FileUtils.writeByteArrayToFile(new File(PATH_ATTACHMENT_OUT), response.getValue());
       apiContext.save();
     } catch (IOException exception) {
       System.out.print(exception.getMessage());

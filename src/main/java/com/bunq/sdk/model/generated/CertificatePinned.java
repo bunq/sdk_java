@@ -2,13 +2,16 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.BunqResponse;
 import com.bunq.sdk.model.generated.object.Certificate;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * This endpoint allow you to pin the certificate chains to your account. These certificate
@@ -49,7 +52,7 @@ public class CertificatePinned extends BunqModel {
   @SerializedName("id")
   private Integer id;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
@@ -57,47 +60,50 @@ public class CertificatePinned extends BunqModel {
   /**
    * Pin the certificate chain.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static void delete(ApiContext apiContext, Integer userId, Integer certificatePinnedId) {
-    delete(apiContext, userId, certificatePinnedId, new HashMap<>());
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer certificatePinnedId) {
+    return delete(apiContext, userId, certificatePinnedId, new HashMap<>());
   }
 
   /**
    * Remove the pinned certificate chain with the specific ID.
    */
-  public static void delete(ApiContext apiContext, Integer userId, Integer certificatePinnedId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer certificatePinnedId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    apiClient
+    BunqResponseRaw responseRaw = apiClient
         .delete(String.format(ENDPOINT_URL_DELETE, userId, certificatePinnedId), customHeaders);
+
+    return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static List<CertificatePinned> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<CertificatePinned>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    * List all the pinned certificate chain for the given user.
    */
-  public static List<CertificatePinned> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<CertificatePinned>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(CertificatePinned.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(CertificatePinned.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static CertificatePinned get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<CertificatePinned> get(ApiContext apiContext, Integer userId,
       Integer certificatePinnedId) {
     return get(apiContext, userId, certificatePinnedId, new HashMap<>());
   }
@@ -105,13 +111,13 @@ public class CertificatePinned extends BunqModel {
   /**
    * Get the pinned certificate chain with the specified ID.
    */
-  public static CertificatePinned get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<CertificatePinned> get(ApiContext apiContext, Integer userId,
       Integer certificatePinnedId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, certificatePinnedId), customHeaders);
 
-    return fromJson(CertificatePinned.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE);
   }
 
   /**
