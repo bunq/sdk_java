@@ -1,4 +1,4 @@
-package com.bunq.sdk.model;
+package com.bunq.sdk.http;
 
 import java.util.Map;
 

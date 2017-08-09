@@ -1,5 +1,6 @@
 package com.bunq.sdk.model;
 
+import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.google.gson.Gson;

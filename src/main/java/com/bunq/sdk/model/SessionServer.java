@@ -2,6 +2,7 @@ package com.bunq.sdk.model;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.generated.UserCompany;
 import com.bunq.sdk.model.generated.UserPerson;

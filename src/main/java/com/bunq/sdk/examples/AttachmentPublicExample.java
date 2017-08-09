@@ -2,7 +2,7 @@ package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
-import com.bunq.sdk.model.BunqResponse;
+import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.model.generated.AttachmentPublic;
 import com.bunq.sdk.model.generated.AttachmentPublicContent;
 import java.io.File;
