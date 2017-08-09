@@ -2,8 +2,6 @@ package com.bunq.sdk.model;
 
 import java.util.Map;
 
-;
-
 public class BunqResponse<T> {
 
   private T value;
