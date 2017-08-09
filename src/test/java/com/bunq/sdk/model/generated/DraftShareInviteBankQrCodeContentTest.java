@@ -58,7 +58,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
     requestMap.put(DraftShareInviteBank.FIELD_EXPIRATION, date.getTime());
     requestMap.put(DraftShareInviteBank.FIELD_DRAFT_SHARE_SETTINGS, draftShareInviteBankEntry);
 
-    draftId = DraftShareInviteBank.create(apiContext, requestMap, userId);
+    draftId = DraftShareInviteBank.create(apiContext, requestMap, userId).getValue();
   }
 
   @AfterClass
@@ -76,7 +76,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
    */
   @Test
   public void testDraftShareInviteBankQrCodeContentList() throws Exception {
-    byte[] content = DraftShareInviteBankQrCodeContent.list(apiContext, userId, draftId);
+    byte[] content = DraftShareInviteBankQrCodeContent.list(apiContext, userId, draftId).getValue();
     FileUtils.writeByteArrayToFile(new File(TMP_QRCODE_JPG), content);
   }
 
