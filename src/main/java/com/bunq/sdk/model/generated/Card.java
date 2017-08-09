@@ -9,6 +9,7 @@ import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardMagStripePermission;
+import com.bunq.sdk.model.generated.object.CardPinAssignment;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -31,6 +32,8 @@ public class Card extends BunqModel {
   public static final String FIELD_MAG_STRIPE_PERMISSION = "mag_stripe_permission";
   public static final String FIELD_COUNTRY_PERMISSION = "country_permission";
   public static final String FIELD_MONETARY_ACCOUNT_CURRENT_ID = "monetary_account_current_id";
+  public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
+  public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
 
   /**
    * Endpoint constants.
@@ -151,6 +154,13 @@ public class Card extends BunqModel {
   @Expose
   @SerializedName("label_monetary_account_current")
   private MonetaryAccountReference labelMonetaryAccountCurrent;
+
+  /**
+   * Array of Types, PINs, account IDs assigned to the card.
+   */
+  @Expose
+  @SerializedName("pin_code_assignment")
+  private CardPinAssignment pinCodeAssignment;
 
   public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer cardId) {
@@ -371,6 +381,17 @@ public class Card extends BunqModel {
 
   public void setLabelMonetaryAccountCurrent(MonetaryAccountReference labelMonetaryAccountCurrent) {
     this.labelMonetaryAccountCurrent = labelMonetaryAccountCurrent;
+  }
+
+  /**
+   * Array of Types, PINs, account IDs assigned to the card.
+   */
+  public CardPinAssignment getPinCodeAssignment() {
+    return this.pinCodeAssignment;
+  }
+
+  public void setPinCodeAssignment(CardPinAssignment pinCodeAssignment) {
+    this.pinCodeAssignment = pinCodeAssignment;
   }
 
 }
