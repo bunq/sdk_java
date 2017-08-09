@@ -1,6 +1,7 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.http.Header;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -88,6 +90,111 @@ public class ApiClient {
     this.httpClient = buildHttpClient();
   }
 
+  private CloseableHttpClient buildHttpClient() {
+    try {
+      // TODO: Fix SSL handling
+      SSLContextBuilder builder = new SSLContextBuilder();
+      SSLConnectionSocketFactory sslConnectionSocketFactory =
+          new SSLConnectionSocketFactory(builder.build());
+
+      return HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
+    } catch (NoSuchAlgorithmException | KeyManagementException exception) {
+      throw new UncaughtExceptionError(exception);
+    }
+  }
+
+  /**
+   * Execute a POST request.
+   *
+   * @return The raw response of the POST request.
+   */
+  public BunqResponseRaw post(String uri, byte[] requestBodyBytes,
+      Map<String, String> customHeaders) {
+    try {
+      HttpPost httpPost = new HttpPost(determineFullUri(uri));
+      httpPost.setEntity(new ByteArrayEntity(requestBodyBytes, ContentType.APPLICATION_JSON));
+      CloseableHttpResponse response = executeRequest(httpPost, customHeaders);
+
+      return createBunqResponseRaw(response);
+    } catch (IOException exception) {
+      throw new UncaughtExceptionError(exception);
+    }
+  }
+
+  private URI determineFullUri(String uri) {
+    return URI.create(apiContext.getBaseUri().toString() + uri);
+  }
+
+  private CloseableHttpResponse executeRequest(HttpUriRequest request,
+      Map<String, String> customHeaders) throws IOException {
+    apiContext.ensureSessionActive();
+    setHeaders(request, customHeaders);
+
+    return httpClient.execute(request);
+  }
+
+  private void setHeaders(HttpUriRequest httpEntity, Map<String, String> customHeaders) {
+    setDefaultHeaders(httpEntity);
+    setCustomHeaders(httpEntity, customHeaders);
+    setSessionHeaders(httpEntity);
+  }
+
+  private void setDefaultHeaders(HttpUriRequest httpEntity) {
+    httpEntity.setHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_NONE);
+    httpEntity.setHeader(HEADER_USER_AGENT, getVersion());
+    httpEntity.setHeader(HEADER_LANGUAGE, LANGUAGE_EN_US);
+    httpEntity.setHeader(HEADER_REGION, REGION_NL_NL);
+    httpEntity.setHeader(HEADER_REQUEST_ID, UUID.randomUUID().toString());
+    httpEntity.setHeader(HEADER_GEOLOCATION, GEOLOCATION_ZERO);
+  }
+
+  private void setCustomHeaders(HttpUriRequest httpEntity, Map<String, String> customHeaders) {
+    for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
+      httpEntity.setHeader(entry.getKey(), entry.getValue());
+    }
+  }
+
+  private void setSessionHeaders(HttpUriRequest httpEntity) {
+    String sessionToken = apiContext.getSessionToken();
+
+    if (sessionToken != null) {
+      httpEntity.setHeader(HEADER_AUTHENTICATION, sessionToken);
+      httpEntity.setHeader(HEADER_SIGNATURE, generateSignature(httpEntity));
+    }
+  }
+
+  private String generateSignature(HttpUriRequest httpEntity) {
+    return SecurityUtils.generateSignature(httpEntity,
+        apiContext.getInstallationContext().getKeyPairClient());
+  }
+
+  private String getVersion() {
+    return USER_AGENT_BUNQ;
+  }
+
+  private BunqResponseRaw createBunqResponseRaw(CloseableHttpResponse response)
+      throws IOException {
+    byte[] responseBodyBytes = getBodyBytes(response);
+
+    return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
+  }
+
+  private byte[] getBodyBytes(CloseableHttpResponse response) throws IOException {
+    Integer responseCode = response.getStatusLine().getStatusCode();
+    byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
+
+    assertResponseSuccess(responseCode, responseBodyBytes);
+    validateResponseSignature(responseCode, responseBodyBytes, response);
+
+    return responseBodyBytes;
+  }
+
+  private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {
+    if (responseCode != HttpStatus.SC_OK) {
+      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
+    }
+  }
+
   private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
       String responseBody) {
     List<String> errorDescriptions = new ArrayList<>();
@@ -128,15 +235,13 @@ public class ApiClient {
     return errorDescriptions;
   }
 
-  private static BunqResponseRaw createBunqResponseRaw(CloseableHttpResponse response)
-      throws IOException {
-    byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
-    Integer responseCode = response.getStatusLine().getStatusCode();
+  private void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
+      HttpResponse response) {
+    InstallationContext installationContext = apiContext.getInstallationContext();
 
-    if (responseCode == HttpStatus.SC_OK) {
-      return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
-    } else {
-      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
+    if (installationContext != null) {
+      SecurityUtils.validateResponseSignature(responseCode, responseBodyBytes, response,
+          installationContext.getPublicKeyServer());
     }
   }
 
@@ -148,45 +253,6 @@ public class ApiClient {
     }
 
     return headersMap;
-  }
-
-  private CloseableHttpClient buildHttpClient() {
-    try {
-      // TODO: Fix SSL handling
-      SSLContextBuilder builder = new SSLContextBuilder();
-      SSLConnectionSocketFactory sslConnectionSocketFactory =
-          new SSLConnectionSocketFactory(builder.build());
-
-      return HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
-    } catch (NoSuchAlgorithmException | KeyManagementException exception) {
-      throw new UncaughtExceptionError(exception);
-    }
-  }
-
-  /**
-   * Execute a POST request.
-   *
-   * @return The raw response of the POST request.
-   */
-  public BunqResponseRaw post(String uri, byte[] requestBodyBytes,
-      Map<String, String> customHeaders) {
-    try {
-      HttpPost httpPost = new HttpPost(determineFullUri(uri));
-      httpPost.setEntity(new ByteArrayEntity(requestBodyBytes, ContentType.APPLICATION_JSON));
-      CloseableHttpResponse response = executeRequest(httpPost, customHeaders);
-
-      return createBunqResponseRaw(response);
-    } catch (IOException exception) {
-      throw new UncaughtExceptionError(exception);
-    }
-  }
-
-  private CloseableHttpResponse executeRequest(HttpUriRequest request,
-      Map<String, String> customHeaders) throws IOException {
-    apiContext.ensureSessionActive();
-    setHeaders(request, customHeaders);
-
-    return httpClient.execute(request);
   }
 
   /**
@@ -237,49 +303,6 @@ public class ApiClient {
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
     }
-  }
-
-  private URI determineFullUri(String uri) {
-    return URI.create(apiContext.getBaseUri().toString() + uri);
-  }
-
-  private void setHeaders(HttpUriRequest httpEntity, Map<String, String> customHeaders) {
-    setDefaultHeaders(httpEntity);
-    setCustomHeaders(httpEntity, customHeaders);
-    setSessionHeaders(httpEntity);
-  }
-
-  private void setDefaultHeaders(HttpUriRequest httpEntity) {
-    httpEntity.setHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_NONE);
-    httpEntity.setHeader(HEADER_USER_AGENT, getVersion());
-    httpEntity.setHeader(HEADER_LANGUAGE, LANGUAGE_EN_US);
-    httpEntity.setHeader(HEADER_REGION, REGION_NL_NL);
-    httpEntity.setHeader(HEADER_REQUEST_ID, UUID.randomUUID().toString());
-    httpEntity.setHeader(HEADER_GEOLOCATION, GEOLOCATION_ZERO);
-  }
-
-  private void setCustomHeaders(HttpUriRequest httpEntity, Map<String, String> customHeaders) {
-    for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
-      httpEntity.setHeader(entry.getKey(), entry.getValue());
-    }
-  }
-
-  private void setSessionHeaders(HttpUriRequest httpEntity) {
-    String sessionToken = apiContext.getSessionToken();
-
-    if (sessionToken != null) {
-      httpEntity.setHeader(HEADER_AUTHENTICATION, sessionToken);
-      httpEntity.setHeader(HEADER_SIGNATURE, generateSignature(httpEntity));
-    }
-  }
-
-  private String generateSignature(HttpUriRequest httpEntity) {
-    return SecurityUtils.generateSignature(httpEntity,
-        apiContext.getInstallationContext().getKeyPairClient());
-  }
-
-  private String getVersion() {
-    return USER_AGENT_BUNQ;
   }
 
 }
