@@ -53,7 +53,7 @@ public class PaymentChatTest extends BunqSdkTestBase {
         counterPartyAlias));
     requestMap.put(Payment.FIELD_AMOUNT, new Amount(AMOUNT_IN_EUR, CURRENCY));
     requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
-    paymentId = Payment.create(apiContext, requestMap, userId, maId);
+    paymentId = Payment.create(apiContext, requestMap, userId, maId).getValue();
   }
 
   private static void sendMessage(Integer chat_id) {
@@ -72,7 +72,8 @@ public class PaymentChatTest extends BunqSdkTestBase {
   public void sendPaymentMessageTest() throws Exception {
     HashMap<String, Object> requestMap = new HashMap<>();
 
-    Integer chat_id = PaymentChat.create(apiContext, requestMap, userId, maId, paymentId);
+    Integer chat_id = PaymentChat.create(apiContext, requestMap, userId, maId, paymentId)
+        .getValue();
     sendMessage(chat_id);
   }
 

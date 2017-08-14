@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Error;
 import com.google.gson.annotations.Expose;
@@ -74,7 +76,7 @@ public class ScheduleInstance extends BunqModel {
   @SerializedName("result_object")
   private BunqModel resultObject;
 
-  public static ScheduleInstance get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<ScheduleInstance> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId) {
     return get(apiContext, userId, monetaryAccountId, scheduleId, scheduleInstanceId,
         new HashMap<>());
@@ -82,18 +84,18 @@ public class ScheduleInstance extends BunqModel {
 
   /**
    */
-  public static ScheduleInstance get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<ScheduleInstance> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient.get(
+    BunqResponseRaw responseRaw = apiClient.get(
         String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, scheduleId, scheduleInstanceId),
         customHeaders);
 
-    return fromJson(ScheduleInstance.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(ScheduleInstance.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, scheduleId, scheduleInstanceId,
         new HashMap<>());
@@ -101,33 +103,33 @@ public class ScheduleInstance extends BunqModel {
 
   /**
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient.put(String
+    BunqResponseRaw responseRaw = apiClient.put(String
             .format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, scheduleId, scheduleInstanceId),
         requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static List<ScheduleInstance> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer scheduleId) {
     return list(apiContext, userId, monetaryAccountId, scheduleId, new HashMap<>());
   }
 
   /**
    */
-  public static List<ScheduleInstance> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer scheduleId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, scheduleId),
             customHeaders);
 
-    return fromJsonList(ScheduleInstance.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(ScheduleInstance.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

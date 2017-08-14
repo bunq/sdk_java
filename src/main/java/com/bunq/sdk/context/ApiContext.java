@@ -2,7 +2,7 @@ package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.json.BunqGsonBuilder;
-import com.bunq.sdk.model.DeviceServer;
+import com.bunq.sdk.model.generated.DeviceServer;
 import com.bunq.sdk.model.Installation;
 import com.bunq.sdk.model.SessionServer;
 import com.bunq.sdk.model.generated.Session;
@@ -18,7 +18,9 @@ import java.net.URI;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -146,19 +148,31 @@ public class ApiContext implements java.io.Serializable {
     Installation installation = Installation.create(
         this,
         SecurityUtils.getPublicKeyFormattedString(keyPairClient.getPublic())
-    );
+    ).getValue();
     installationContext = new InstallationContext(installation, keyPairClient);
   }
 
   private void initializeDeviceRegistration(String deviceDescription, List<String> permittedIps) {
-    DeviceServer.create(this, deviceDescription, permittedIps);
+    Map<String, Object> deviceServerRequestBody = generateDeviceServerRequestBodyBytes(
+        deviceDescription, permittedIps);
+    DeviceServer.create(this, deviceServerRequestBody);
+  }
+
+  private Map<String, Object> generateDeviceServerRequestBodyBytes(String description,
+      List<String> permittedIps) {
+    HashMap<String, Object> deviceServerRequestBody = new HashMap<>();
+    deviceServerRequestBody.put(DeviceServer.FIELD_DESCRIPTION, description);
+    deviceServerRequestBody.put(DeviceServer.FIELD_SECRET, apiKey);
+    deviceServerRequestBody.put(DeviceServer.FIELD_PERMITTED_IPS, permittedIps);
+
+    return deviceServerRequestBody;
   }
 
   /**
    * Create a new session and its data in a SessionContext.
    */
   private void initializeSession() {
-    sessionContext = new SessionContext(SessionServer.create(this));
+    sessionContext = new SessionContext(SessionServer.create(this).getValue());
   }
 
   /**

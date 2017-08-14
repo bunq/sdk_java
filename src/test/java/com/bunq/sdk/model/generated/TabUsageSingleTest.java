@@ -49,7 +49,7 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
     createMap.put(TabUsageSingle.FIELD_AMOUNT_TOTAL, new Amount(AMOUNT_IN_EUR, CURRENCY));
 
     return TabUsageSingle.create(apiContext, createMap, userId, monetaryAccountId,
-        cashRegisterId);
+        cashRegisterId).getValue();
   }
 
   private static void addItemToTab(String tabUuid) {

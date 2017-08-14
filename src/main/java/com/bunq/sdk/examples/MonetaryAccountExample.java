@@ -21,7 +21,7 @@ public class MonetaryAccountExample {
         apiContext,
         USER_ITEM_ID,
         MONETARY_ACCOUNT_ITEM_ID
-    );
+    ).getValue();
 
     System.out.println(monetaryAccount.getMonetaryAccountBank());
   }

@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.google.gson.annotations.Expose;
@@ -81,7 +83,7 @@ public class ChatMessage extends BunqModel {
   @SerializedName("content")
   private BunqModel content;
 
-  public static List<ChatMessage> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
       Integer chatConversationId) {
     return list(apiContext, userId, chatConversationId, new HashMap<>());
   }
@@ -89,13 +91,13 @@ public class ChatMessage extends BunqModel {
   /**
    * Get all the messages that are part of a specific conversation.
    */
-  public static List<ChatMessage> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
       Integer chatConversationId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, chatConversationId), customHeaders);
 
-    return fromJsonList(ChatMessage.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(ChatMessage.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

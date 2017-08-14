@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.PermittedDevice;
 import com.google.gson.annotations.Expose;
@@ -26,6 +28,27 @@ public class UserCredentialPasswordIp extends BunqModel {
    * Object type.
    */
   private static final String OBJECT_TYPE = "CredentialPasswordIp";
+
+  /**
+   * The id of the credential.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
+   * The timestamp of the credential object's creation.
+   */
+  @Expose
+  @SerializedName("created")
+  private String created;
+
+  /**
+   * The timestamp of the credential object's last update.
+   */
+  @Expose
+  @SerializedName("updated")
+  private String updated;
 
   /**
    * The status of the credential.
@@ -55,35 +78,69 @@ public class UserCredentialPasswordIp extends BunqModel {
   @SerializedName("permitted_device")
   private PermittedDevice permittedDevice;
 
-  public static UserCredentialPasswordIp get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<UserCredentialPasswordIp> get(ApiContext apiContext, Integer userId,
       Integer userCredentialPasswordIpId) {
     return get(apiContext, userId, userCredentialPasswordIpId, new HashMap<>());
   }
 
   /**
    */
-  public static UserCredentialPasswordIp get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<UserCredentialPasswordIp> get(ApiContext apiContext, Integer userId,
       Integer userCredentialPasswordIpId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, userCredentialPasswordIpId), customHeaders);
 
-    return fromJson(UserCredentialPasswordIp.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<UserCredentialPasswordIp> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<UserCredentialPasswordIp>> list(ApiContext apiContext,
+      Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    */
-  public static List<UserCredentialPasswordIp> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<UserCredentialPasswordIp>> list(ApiContext apiContext,
+      Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(UserCredentialPasswordIp.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE);
+  }
+
+  /**
+   * The id of the credential.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  /**
+   * The timestamp of the credential object's creation.
+   */
+  public String getCreated() {
+    return this.created;
+  }
+
+  public void setCreated(String created) {
+    this.created = created;
+  }
+
+  /**
+   * The timestamp of the credential object's last update.
+   */
+  public String getUpdated() {
+    return this.updated;
+  }
+
+  public void setUpdated(String updated) {
+    this.updated = updated;
   }
 
   /**

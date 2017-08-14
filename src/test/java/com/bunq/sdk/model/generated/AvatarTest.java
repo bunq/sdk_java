@@ -63,14 +63,13 @@ public class AvatarTest extends BunqSdkTestBase {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(Avatar.FIELD_ATTACHMENT_PUBLIC_UUID, attachmentPublicUuid);
 
-    String avatarUuid = Avatar.create(apiContext, requestMap);
+    String avatarUuid = Avatar.create(apiContext, requestMap).getValue();
 
-    String attachmentPublicUuidFromAvatar = Avatar.get(apiContext, avatarUuid).getImage().get(
-        INDEX_FIRST)
-        .getAttachmentPublicUuid();
+    String attachmentPublicUuidFromAvatar = Avatar.get(apiContext, avatarUuid).getValue()
+        .getImage().get(INDEX_FIRST).getAttachmentPublicUuid();
 
     byte[] fileContentsReceived = AttachmentPublicContent.list(apiContext,
-        attachmentPublicUuidFromAvatar);
+        attachmentPublicUuidFromAvatar).getValue();
 
     assertArrayEquals(fileContentsSend, fileContentsReceived);
   }
@@ -80,7 +79,7 @@ public class AvatarTest extends BunqSdkTestBase {
     customHeaders.put(ApiClient.HEADER_ATTACHMENT_DESCRIPTION, attachmentDescription);
     customHeaders.put(ApiClient.HEADER_CONTENT_TYPE, contentType);
 
-    return AttachmentPublic.create(apiContext, file_contents, customHeaders);
+    return AttachmentPublic.create(apiContext, file_contents, customHeaders).getValue();
   }
 
 }

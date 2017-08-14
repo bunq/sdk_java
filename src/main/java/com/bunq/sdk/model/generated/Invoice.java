@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
@@ -148,36 +150,36 @@ public class Invoice extends BunqModel {
   @SerializedName("vat_number")
   private String vatNumber;
 
-  public static List<Invoice> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<Invoice>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    */
-  public static List<Invoice> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<Invoice>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(Invoice.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(Invoice.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Invoice get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer invoiceId) {
+  public static BunqResponse<Invoice> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer invoiceId) {
     return get(apiContext, userId, monetaryAccountId, invoiceId, new HashMap<>());
   }
 
   /**
    */
-  public static Invoice get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer invoiceId, Map<String, String> customHeaders) {
+  public static BunqResponse<Invoice> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer invoiceId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, invoiceId), customHeaders);
 
-    return fromJson(Invoice.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(Invoice.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

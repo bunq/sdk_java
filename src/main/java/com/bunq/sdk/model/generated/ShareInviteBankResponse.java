@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.LabelUser;
@@ -103,7 +105,7 @@ public class ShareInviteBankResponse extends BunqModel {
   @SerializedName("description")
   private String description;
 
-  public static ShareInviteBankResponse get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<ShareInviteBankResponse> get(ApiContext apiContext, Integer userId,
       Integer shareInviteBankResponseId) {
     return get(apiContext, userId, shareInviteBankResponseId, new HashMap<>());
   }
@@ -111,16 +113,16 @@ public class ShareInviteBankResponse extends BunqModel {
   /**
    * Return the details of a specific share a user was invited to.
    */
-  public static ShareInviteBankResponse get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<ShareInviteBankResponse> get(ApiContext apiContext, Integer userId,
       Integer shareInviteBankResponseId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, shareInviteBankResponseId), customHeaders);
 
-    return fromJson(ShareInviteBankResponse.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(ShareInviteBankResponse.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static ShareInviteBankResponse update(ApiContext apiContext,
+  public static BunqResponse<ShareInviteBankResponse> update(ApiContext apiContext,
       Map<String, Object> requestMap, Integer userId, Integer shareInviteBankResponseId) {
     return update(apiContext, requestMap, userId, shareInviteBankResponseId, new HashMap<>());
   }
@@ -128,32 +130,33 @@ public class ShareInviteBankResponse extends BunqModel {
   /**
    * Accept or reject a share a user was invited to.
    */
-  public static ShareInviteBankResponse update(ApiContext apiContext,
+  public static BunqResponse<ShareInviteBankResponse> update(ApiContext apiContext,
       Map<String, Object> requestMap, Integer userId, Integer shareInviteBankResponseId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, shareInviteBankResponseId), requestBytes,
             customHeaders);
 
-    return fromJson(ShareInviteBankResponse.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(ShareInviteBankResponse.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<ShareInviteBankResponse> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<ShareInviteBankResponse>> list(ApiContext apiContext,
+      Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    * Return all the shares a user was invited to.
    */
-  public static List<ShareInviteBankResponse> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<ShareInviteBankResponse>> list(ApiContext apiContext,
+      Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(ShareInviteBankResponse.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(ShareInviteBankResponse.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

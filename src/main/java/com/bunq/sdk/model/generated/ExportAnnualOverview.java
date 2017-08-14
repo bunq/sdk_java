@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.google.gson.annotations.Expose;
@@ -69,7 +71,7 @@ public class ExportAnnualOverview extends BunqModel {
   @SerializedName("alias_user")
   private LabelUser aliasUser;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
@@ -78,17 +80,17 @@ public class ExportAnnualOverview extends BunqModel {
    * Create a new annual overview for a specific year. An overview can be generated only for a
    * past year.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static ExportAnnualOverview get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<ExportAnnualOverview> get(ApiContext apiContext, Integer userId,
       Integer exportAnnualOverviewId) {
     return get(apiContext, userId, exportAnnualOverviewId, new HashMap<>());
   }
@@ -96,29 +98,30 @@ public class ExportAnnualOverview extends BunqModel {
   /**
    * Get an annual overview for a user by its id.
    */
-  public static ExportAnnualOverview get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<ExportAnnualOverview> get(ApiContext apiContext, Integer userId,
       Integer exportAnnualOverviewId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, exportAnnualOverviewId), customHeaders);
 
-    return fromJson(ExportAnnualOverview.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<ExportAnnualOverview> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<ExportAnnualOverview>> list(ApiContext apiContext,
+      Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    * List all the annual overviews for a user.
    */
-  public static List<ExportAnnualOverview> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<ExportAnnualOverview>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(ExportAnnualOverview.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

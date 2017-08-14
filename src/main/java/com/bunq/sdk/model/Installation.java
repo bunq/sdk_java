@@ -2,6 +2,8 @@ package com.bunq.sdk.model;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import java.util.HashMap;
 
 public class Installation extends BunqModel {
@@ -36,12 +38,13 @@ public class Installation extends BunqModel {
    * "X-Bunq-Client-Authentication" header for the creation of a DeviceServer
    * and SessionServer.
    */
-  public static Installation create(ApiContext apiContext, String publicKeyClientString) {
+  public static BunqResponse<Installation> create(ApiContext apiContext,
+      String publicKeyClientString) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = generateRequestBodyBytes(publicKeyClientString);
-    byte[] responseBytes = apiClient.post(ENDPOINT_URL_POST, requestBytes, new HashMap<>());
+    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_POST, requestBytes, new HashMap<>());
 
-    return fromJsonArrayNested(Installation.class, new String(responseBytes));
+    return fromJsonArrayNested(Installation.class, responseRaw);
   }
 
   private static byte[] generateRequestBodyBytes(String publicKeyClientString) {

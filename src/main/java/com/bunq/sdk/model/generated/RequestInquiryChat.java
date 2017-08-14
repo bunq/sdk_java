@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -62,7 +64,7 @@ public class RequestInquiryChat extends BunqModel {
   @SerializedName("unread_message_count")
   private Integer unreadMessageCount;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer requestInquiryId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, requestInquiryId,
         new HashMap<>());
@@ -71,21 +73,21 @@ public class RequestInquiryChat extends BunqModel {
   /**
    * Create a chat for a specific request inquiry.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer requestInquiryId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, requestInquiryId),
             requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static RequestInquiryChat update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer requestInquiryId,
-      Integer requestInquiryChatId) {
+  public static BunqResponse<RequestInquiryChat> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestInquiryId, Integer requestInquiryChatId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, requestInquiryId,
         requestInquiryChatId, new HashMap<>());
   }
@@ -93,19 +95,19 @@ public class RequestInquiryChat extends BunqModel {
   /**
    * Update the last read message in the chat of a specific request inquiry.
    */
-  public static RequestInquiryChat update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer requestInquiryId,
-      Integer requestInquiryChatId, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestInquiryChat> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestInquiryId, Integer requestInquiryChatId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient.put(String
+    BunqResponseRaw responseRaw = apiClient.put(String
         .format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestInquiryId,
             requestInquiryChatId), requestBytes, customHeaders);
 
-    return fromJson(RequestInquiryChat.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(RequestInquiryChat.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<RequestInquiryChat> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<RequestInquiryChat>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer requestInquiryId) {
     return list(apiContext, userId, monetaryAccountId, requestInquiryId, new HashMap<>());
   }
@@ -113,14 +115,14 @@ public class RequestInquiryChat extends BunqModel {
   /**
    * Get the chat for a specific request inquiry.
    */
-  public static List<RequestInquiryChat> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<RequestInquiryChat>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer requestInquiryId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, requestInquiryId),
             customHeaders);
 
-    return fromJsonList(RequestInquiryChat.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(RequestInquiryChat.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

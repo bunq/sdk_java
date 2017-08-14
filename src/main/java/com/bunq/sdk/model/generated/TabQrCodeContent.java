@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +24,8 @@ public class TabQrCodeContent extends BunqModel {
    */
   private static final String OBJECT_TYPE = "TabQrCodeContent";
 
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, String tabUuid) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, String tabUuid) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid, new HashMap<>());
   }
 
@@ -31,13 +33,15 @@ public class TabQrCodeContent extends BunqModel {
    * Returns the raw content of the QR code that links to this Tab. The raw content is the binary
    * representation of a file, without any JSON wrapping.
    */
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, String tabUuid, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, String tabUuid,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-
-    return apiClient.get(
+    BunqResponseRaw responseRaw = apiClient.get(
         String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId, tabUuid),
         customHeaders);
+
+    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
 }

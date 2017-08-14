@@ -37,7 +37,7 @@ public class CardDebitExample {
     pointer.setName(POINTER_NAME_TEST);
     requestMap.put(CardDebit.FIELD_ALIAS, pointer);
 
-    System.out.println(CardDebit.create(apiContext, requestMap, USER_ITEM_ID).getId());
+    System.out.println(CardDebit.create(apiContext, requestMap, USER_ITEM_ID).getValue().getId());
   }
 
   private static String generateRandomSecondLine() {

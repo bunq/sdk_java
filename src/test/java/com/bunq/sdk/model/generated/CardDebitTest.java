@@ -51,10 +51,10 @@ public class CardDebitTest extends BunqSdkTestBase {
 
   @BeforeClass
   public static void setUp() {
-    List<CardName> cardName = CardName.list(apiContext, userId);
+    List<CardName> cardName = CardName.list(apiContext, userId).getValue();
     List cardNameList = cardName.get(FIRST_INDEX).getPossibleCardNameArray();
 
-    User user = User.get(apiContext, userId);
+    User user = User.get(apiContext, userId).getValue();
 
     alias = user.getUserCompany().getAlias().get(FIRST_INDEX);
     nameOnCard = cardNameList.get(new Random().nextInt(cardNameList.size())).toString();
@@ -79,7 +79,7 @@ public class CardDebitTest extends BunqSdkTestBase {
     requestMap.put(CardDebit.FIELD_NAME_ON_CARD, nameOnCard);
     requestMap.put(CardDebit.FIELD_PIN_CODE, PIN_CODE);
     requestMap.put(CardDebit.FIELD_ALIAS, alias);
-    CardDebit cardDebit = CardDebit.create(apiContext, requestMap, userId);
+    CardDebit cardDebit = CardDebit.create(apiContext, requestMap, userId).getValue();
 
     Card cardFromCardEndpoint = getCard(cardDebit.getId());
 
@@ -89,7 +89,7 @@ public class CardDebitTest extends BunqSdkTestBase {
   }
 
   private Card getCard(Integer cardId) {
-    return Card.get(apiContext, userId, cardId);
+    return Card.get(apiContext, userId, cardId).getValue();
   }
 
 }
