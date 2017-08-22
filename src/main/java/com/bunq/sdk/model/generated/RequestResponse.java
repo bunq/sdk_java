@@ -161,7 +161,7 @@ public class RequestResponse extends BunqModel {
   private Geolocation geolocation;
 
   /**
-   * The type of the RequestInquiry. Can be DIRECT_DEBIT, IDEAL or INTERNAL.
+   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL or INTERNAL.
    */
   @Expose
   @SerializedName("type")
@@ -202,6 +202,20 @@ public class RequestResponse extends BunqModel {
   @Expose
   @SerializedName("allow_chat")
   private Boolean allowChat;
+
+  /**
+   * The credit scheme id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  @Expose
+  @SerializedName("credit_scheme_identifier")
+  private String creditSchemeIdentifier;
+
+  /**
+   * The mandate id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  @Expose
+  @SerializedName("mandate_identifier")
+  private String mandateIdentifier;
 
   /**
    * The whitelist id for this action or null.
@@ -448,7 +462,7 @@ public class RequestResponse extends BunqModel {
   }
 
   /**
-   * The type of the RequestInquiry. Can be DIRECT_DEBIT, IDEAL or INTERNAL.
+   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL or INTERNAL.
    */
   public String getType() {
     return this.type;
@@ -512,6 +526,28 @@ public class RequestResponse extends BunqModel {
 
   public void setAllowChat(Boolean allowChat) {
     this.allowChat = allowChat;
+  }
+
+  /**
+   * The credit scheme id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  public String getCreditSchemeIdentifier() {
+    return this.creditSchemeIdentifier;
+  }
+
+  public void setCreditSchemeIdentifier(String creditSchemeIdentifier) {
+    this.creditSchemeIdentifier = creditSchemeIdentifier;
+  }
+
+  /**
+   * The mandate id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  public String getMandateIdentifier() {
+    return this.mandateIdentifier;
+  }
+
+  public void setMandateIdentifier(String mandateIdentifier) {
+    this.mandateIdentifier = mandateIdentifier;
   }
 
   /**
