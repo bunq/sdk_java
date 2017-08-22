@@ -2,16 +2,15 @@ package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.json.BunqGsonBuilder;
-import com.bunq.sdk.model.generated.DeviceServer;
 import com.bunq.sdk.model.Installation;
 import com.bunq.sdk.model.SessionServer;
+import com.bunq.sdk.model.generated.DeviceServer;
 import com.bunq.sdk.model.generated.Session;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.sun.istack.internal.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -21,6 +20,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 
 /**
