@@ -160,7 +160,7 @@ public class Card extends BunqModel {
    */
   @Expose
   @SerializedName("pin_code_assignment")
-  private CardPinAssignment pinCodeAssignment;
+  private List<CardPinAssignment> pinCodeAssignment;
 
   public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer cardId) {
@@ -386,11 +386,11 @@ public class Card extends BunqModel {
   /**
    * Array of Types, PINs, account IDs assigned to the card.
    */
-  public CardPinAssignment getPinCodeAssignment() {
+  public List<CardPinAssignment> getPinCodeAssignment() {
     return this.pinCodeAssignment;
   }
 
-  public void setPinCodeAssignment(CardPinAssignment pinCodeAssignment) {
+  public void setPinCodeAssignment(List<CardPinAssignment> pinCodeAssignment) {
     this.pinCodeAssignment = pinCodeAssignment;
   }
 

@@ -40,7 +40,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.util.EntityUtils;
-import org.jcp.xml.dsig.internal.MacOutputStream;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -333,7 +332,8 @@ public final class SecurityUtils {
       Mac mac = Mac.getInstance(ALGORITHM_MAC);
       mac.init(key);
       mac.update(initializationVector);
-      BufferedSink bufferedSink = Okio.buffer(Okio.sink(new MacOutputStream(mac)));
+      MacOutputStream outputStream = new MacOutputStream(mac);
+      BufferedSink bufferedSink = Okio.buffer(Okio.sink(outputStream));
       bufferedSink.write(requestBytes);
       bufferedSink.emit();
       bufferedSink.flush();
