@@ -8,7 +8,6 @@ import com.bunq.sdk.model.generated.DeviceServer;
 import com.bunq.sdk.model.generated.Session;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
@@ -145,12 +144,18 @@ public class ApiContext implements java.io.Serializable {
     try {
       File file = new File(fileName);
       String json = FileUtils.readFileToString(file, ENCODING_BUNQ_CONF);
-      JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
 
-      return gson.fromJson(jsonObject, ApiContext.class);
+      return fromJson(json);
     } catch (IOException exception) {
       throw new BunqException(ERROR_COULD_NOT_RESTORE_API_CONTEXT, exception);
     }
+  }
+
+  /**
+   * Restores a context from a given JSON string.
+   */
+  public static ApiContext fromJson(String json) {
+    return gson.fromJson(json, ApiContext.class);
   }
 
   private void initialize(String deviceDescription, List<String> permittedIps) {
@@ -254,11 +259,17 @@ public class ApiContext implements java.io.Serializable {
   public void save(String fileName) {
     try {
       File file = new File(fileName);
-      String json = gson.toJson(this);
-      FileUtils.writeStringToFile(file, json, ENCODING_BUNQ_CONF);
+      FileUtils.writeStringToFile(file, toJson(), ENCODING_BUNQ_CONF);
     } catch (IOException exception) {
       throw new BunqException(ERROR_COULD_NOT_SAVE_API_CONTEXT, exception);
     }
+  }
+
+  /**
+   * Serializes the context to JSON.
+   */
+  public String toJson() {
+    return gson.toJson(this);
   }
 
   /**
