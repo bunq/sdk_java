@@ -82,6 +82,10 @@ public class ApiContext implements java.io.Serializable {
   @SerializedName("session_context")
   private SessionContext sessionContext;
 
+  @Expose
+  @SerializedName("proxy")
+  private String proxy;
+
   /**
    * Create an empty API context.
    */
@@ -91,7 +95,7 @@ public class ApiContext implements java.io.Serializable {
   }
 
   /**
-   * Create and initialize an API Context with current IP as permitted.
+   * Create and initialize an API Context with current IP as permitted and no proxy.
    */
   public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
       String deviceDescription) {
@@ -99,11 +103,28 @@ public class ApiContext implements java.io.Serializable {
   }
 
   /**
-   * Create and initialize an API Context.
+   * Create and initialize an API Context with given permitted ips and no proxy.
    */
   public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
       String deviceDescription, List<String> permittedIps) {
+    return create(environmentType, apiKey, deviceDescription, permittedIps, null);
+  }
+
+  /**
+   * Create and initialize an API Context with current IP as permitted and a proxy.
+   */
+  public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
+      String deviceDescription, String proxy) {
+    return create(environmentType, apiKey, deviceDescription, new ArrayList<>(), proxy);
+  }
+
+  /**
+   * Create and initialize an API Context.
+   */
+  public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
+      String deviceDescription, List<String> permittedIps, String proxy) {
     ApiContext apiContext = new ApiContext(environmentType, apiKey);
+    apiContext.proxy = proxy;
     apiContext.initialize(deviceDescription, permittedIps);
 
     return apiContext;
@@ -287,6 +308,10 @@ public class ApiContext implements java.io.Serializable {
 
   public SessionContext getSessionContext() {
     return sessionContext;
+  }
+
+  public String getProxy() {
+    return proxy;
   }
 
 }
