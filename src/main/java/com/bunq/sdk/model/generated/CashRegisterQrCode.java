@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -79,7 +81,7 @@ public class CashRegisterQrCode extends BunqModel {
   @SerializedName("tab_object")
   private Tab tabObject;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId,
         new HashMap<>());
@@ -89,19 +91,19 @@ public class CashRegisterQrCode extends BunqModel {
    * Create a new QR code for this CashRegister. You can only have one ACTIVE CashRegister QR code
    * at the time.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer cashRegisterId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, cashRegisterId),
             requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer cashRegisterId,
       Integer cashRegisterQrCodeId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId,
@@ -112,19 +114,19 @@ public class CashRegisterQrCode extends BunqModel {
    * Modify a QR code in a given CashRegister. You can only have one ACTIVE CashRegister QR code
    * at the time.
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer cashRegisterId,
       Integer cashRegisterQrCodeId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient.put(String
+    BunqResponseRaw responseRaw = apiClient.put(String
         .format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, cashRegisterId,
             cashRegisterQrCodeId), requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static CashRegisterQrCode get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<CashRegisterQrCode> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, Integer cashRegisterQrCodeId) {
     return get(apiContext, userId, monetaryAccountId, cashRegisterId, cashRegisterQrCodeId,
         new HashMap<>());
@@ -134,18 +136,18 @@ public class CashRegisterQrCode extends BunqModel {
    * Get the information of a specific QR code. To get the RAW content of the QR code use
    * ../qr-code/{id}/content
    */
-  public static CashRegisterQrCode get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<CashRegisterQrCode> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, Integer cashRegisterQrCodeId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient.get(String
+    BunqResponseRaw responseRaw = apiClient.get(String
             .format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, cashRegisterQrCodeId),
         customHeaders);
 
-    return fromJson(CashRegisterQrCode.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<CashRegisterQrCode> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<CashRegisterQrCode>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
   }
@@ -153,14 +155,14 @@ public class CashRegisterQrCode extends BunqModel {
   /**
    * Get a collection of QR code information from a given CashRegister
    */
-  public static List<CashRegisterQrCode> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<CashRegisterQrCode>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId),
             customHeaders);
 
-    return fromJsonList(CashRegisterQrCode.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

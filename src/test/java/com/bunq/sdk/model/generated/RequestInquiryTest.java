@@ -68,13 +68,13 @@ public class RequestInquiryTest extends BunqSdkTestBase {
 
   private static String acceptRequest() {
     List<RequestResponse> responses = RequestResponse.list(apiContext, userId,
-        monetaryAccountId2);
+        monetaryAccountId2).getValue();
 
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(RequestResponse.FIELD_STATUS, ACCEPTED_STATUS);
 
     RequestResponse acceptRequest = RequestResponse.update(apiContext, requestMap, userId,
-        monetaryAccountId2, responses.get(FIRST_INDEX).getId());
+        monetaryAccountId2, responses.get(FIRST_INDEX).getId()).getValue();
 
     return acceptRequest.getStatus();
   }

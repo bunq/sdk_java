@@ -18,7 +18,8 @@ public class PaymentListExample {
    */
   public static void main(String[] args) {
     ApiContext apiContext = ApiContext.restore(API_CONTEXT_FILE_PATH);
-    List<Payment> payments = Payment.list(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID);
+    List<Payment> payments = Payment.list(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID)
+        .getValue();
     printPayments(payments);
   }
 

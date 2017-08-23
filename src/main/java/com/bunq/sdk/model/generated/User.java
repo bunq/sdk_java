@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -44,32 +46,35 @@ public class User extends BunqModel {
   @SerializedName("UserCompany")
   private UserCompany userCompany;
 
-  public static User get(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<User> get(ApiContext apiContext, Integer userId) {
     return get(apiContext, userId, new HashMap<>());
   }
 
   /**
    * Get a specific user.
    */
-  public static User get(ApiContext apiContext, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<User> get(ApiContext apiContext, Integer userId,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient.get(String.format(ENDPOINT_URL_READ, userId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId), customHeaders);
 
-    return fromJson(User.class, new String(responseBytes));
+    return fromJson(User.class, responseRaw);
   }
 
-  public static List<User> list(ApiContext apiContext) {
+  public static BunqResponse<List<User>> list(ApiContext apiContext) {
     return list(apiContext, new HashMap<>());
   }
 
   /**
    * Get a collection of all available users.
    */
-  public static List<User> list(ApiContext apiContext, Map<String, String> customHeaders) {
+  public static BunqResponse<List<User>> list(ApiContext apiContext,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
 
-    return fromJsonList(User.class, new String(responseBytes));
+    return fromJsonList(User.class, responseRaw);
   }
 
   /**

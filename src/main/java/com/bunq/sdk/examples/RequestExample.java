@@ -45,7 +45,7 @@ public class RequestExample {
         requestMap,
         USER_ITEM_ID,
         MONETARY_ACCOUNT_ITEM_ID
-    );
+    ).getValue();
 
     System.out.println(
         RequestInquiry.get(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID, requestId)

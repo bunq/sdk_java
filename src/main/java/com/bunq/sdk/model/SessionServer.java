@@ -2,6 +2,8 @@ package com.bunq.sdk.model;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.generated.UserCompany;
 import com.bunq.sdk.model.generated.UserPerson;
 import java.util.HashMap;
@@ -43,12 +45,12 @@ public class SessionServer extends BunqModel {
    * for all future API calls. The ip address making this call needs to match
    * the ip address bound to your API key.
    */
-  public static SessionServer create(ApiContext apiContext) {
+  public static BunqResponse<SessionServer> create(ApiContext apiContext) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = generateRequestBodyBytes(apiContext.getApiKey());
-    byte[] responseBytes = apiClient.post(ENDPOINT_URL_POST, requestBytes, new HashMap<>());
+    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_POST, requestBytes, new HashMap<>());
 
-    return fromJsonArrayNested(SessionServer.class, new String(responseBytes));
+    return fromJsonArrayNested(SessionServer.class, responseRaw);
   }
 
   private static byte[] generateRequestBodyBytes(String apiKey) {

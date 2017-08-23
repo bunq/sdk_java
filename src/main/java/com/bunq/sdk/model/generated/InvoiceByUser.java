@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
@@ -141,34 +143,35 @@ public class InvoiceByUser extends BunqModel {
   @SerializedName("vat_number")
   private String vatNumber;
 
-  public static List<InvoiceByUser> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
   /**
    */
-  public static List<InvoiceByUser> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(InvoiceByUser.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static InvoiceByUser get(ApiContext apiContext, Integer userId, Integer invoiceByUserId) {
+  public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId,
+      Integer invoiceByUserId) {
     return get(apiContext, userId, invoiceByUserId, new HashMap<>());
   }
 
   /**
    */
-  public static InvoiceByUser get(ApiContext apiContext, Integer userId, Integer invoiceByUserId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId,
+      Integer invoiceByUserId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, invoiceByUserId), customHeaders);
 
-    return fromJson(InvoiceByUser.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

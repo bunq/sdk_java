@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,8 @@ public class DraftShareInviteBankQrCodeContent extends BunqModel {
    */
   private static final String OBJECT_TYPE = "DraftShareInviteBankQrCodeContent";
 
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer draftShareInviteBankId) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer draftShareInviteBankId) {
     return list(apiContext, userId, draftShareInviteBankId, new HashMap<>());
   }
 
@@ -31,12 +34,13 @@ public class DraftShareInviteBankQrCodeContent extends BunqModel {
    * Returns the raw content of the QR code that links to this draft share invite. The raw content
    * is the binary representation of a file, without any JSON wrapping.
    */
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer draftShareInviteBankId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer draftShareInviteBankId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-
-    return apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, draftShareInviteBankId), customHeaders);
+
+    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
 }

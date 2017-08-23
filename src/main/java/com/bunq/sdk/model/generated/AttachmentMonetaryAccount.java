@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.google.gson.annotations.Expose;
@@ -39,7 +41,7 @@ public class AttachmentMonetaryAccount extends BunqModel {
   @SerializedName("id")
   private Integer id;
 
-  public static Integer create(ApiContext apiContext, byte[] bytes, Integer userId,
+  public static BunqResponse<Integer> create(ApiContext apiContext, byte[] bytes, Integer userId,
       Integer monetaryAccountId) {
     return create(apiContext, bytes, userId, monetaryAccountId, new HashMap<>());
   }
@@ -50,13 +52,13 @@ public class AttachmentMonetaryAccount extends BunqModel {
    * MIME type (i.e. image/jpeg) in the Content-Type header. You are required to provide a
    * description of the attachment using the X-Bunq-Attachment-Description header.
    */
-  public static Integer create(ApiContext apiContext, byte[] bytes, Integer userId,
+  public static BunqResponse<Integer> create(ApiContext apiContext, byte[] bytes, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), bytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
   /**

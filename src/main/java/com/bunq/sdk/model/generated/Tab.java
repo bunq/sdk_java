@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -41,40 +43,41 @@ public class Tab extends BunqModel {
   @SerializedName("TabUsageMultiple")
   private TabUsageMultiple tabUsageMultiple;
 
-  public static Tab get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, String tabUuid) {
+  public static BunqResponse<Tab> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, String tabUuid) {
     return get(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid, new HashMap<>());
   }
 
   /**
    * Get a specific tab. This returns a TabUsageSingle or TabUsageMultiple.
    */
-  public static Tab get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, String tabUuid, Map<String, String> customHeaders) {
+  public static BunqResponse<Tab> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, String tabUuid,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUuid),
             customHeaders);
 
-    return fromJson(Tab.class, new String(responseBytes));
+    return fromJson(Tab.class, responseRaw);
   }
 
-  public static List<Tab> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId) {
+  public static BunqResponse<List<Tab>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
   }
 
   /**
    * Get a collection of tabs.
    */
-  public static List<Tab> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, Map<String, String> customHeaders) {
+  public static BunqResponse<List<Tab>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId),
             customHeaders);
 
-    return fromJsonList(Tab.class, new String(responseBytes));
+    return fromJsonList(Tab.class, responseRaw);
   }
 
   /**

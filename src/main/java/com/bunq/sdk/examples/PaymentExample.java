@@ -32,8 +32,9 @@ public class PaymentExample {
         generateExamplePaymentMap(),
         USER_ITEM_ID,
         MONETARY_ACCOUNT_ITEM_ID
-    );
-    Payment payment = Payment.get(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID, paymentId);
+    ).getValue();
+    Payment payment = Payment.get(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID, paymentId)
+        .getValue();
     System.out.println(payment);
   }
 

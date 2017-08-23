@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Schedule;
 import com.bunq.sdk.model.generated.object.SchedulePaymentEntry;
@@ -10,6 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for schedule payments.
@@ -50,73 +53,75 @@ public class SchedulePayment extends BunqModel {
   @SerializedName("schedule")
   private Schedule schedule;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer schedulePaymentId) {
-    delete(apiContext, userId, monetaryAccountId, schedulePaymentId, new HashMap<>());
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer schedulePaymentId) {
+    return delete(apiContext, userId, monetaryAccountId, schedulePaymentId, new HashMap<>());
   }
 
   /**
    */
-  public static void delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer schedulePaymentId, Map<String, String> customHeaders) {
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer schedulePaymentId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    apiClient
+    BunqResponseRaw responseRaw = apiClient
         .delete(String.format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, schedulePaymentId),
             customHeaders);
+
+    return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static SchedulePayment get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<SchedulePayment> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer schedulePaymentId) {
     return get(apiContext, userId, monetaryAccountId, schedulePaymentId, new HashMap<>());
   }
 
   /**
    */
-  public static SchedulePayment get(ApiContext apiContext, Integer userId,
+  public static BunqResponse<SchedulePayment> get(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Integer schedulePaymentId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, schedulePaymentId),
             customHeaders);
 
-    return fromJson(SchedulePayment.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(SchedulePayment.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static List<SchedulePayment> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<SchedulePayment>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    */
-  public static List<SchedulePayment> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<SchedulePayment>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(SchedulePayment.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(SchedulePayment.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer schedulePaymentId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, schedulePaymentId,
         new HashMap<>());
@@ -124,16 +129,16 @@ public class SchedulePayment extends BunqModel {
 
   /**
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer schedulePaymentId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, schedulePaymentId),
             requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
   /**

@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,21 +24,23 @@ public class CashRegisterQrCodeContent extends BunqModel {
    */
   private static final String OBJECT_TYPE = "CashRegisterQrCodeContent";
 
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, Integer qrCodeId) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, Integer qrCodeId) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, qrCodeId, new HashMap<>());
   }
 
   /**
    * Show the raw contents of a QR code
    */
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, Integer qrCodeId, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, Integer qrCodeId,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-
-    return apiClient.get(
+    BunqResponseRaw responseRaw = apiClient.get(
         String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId, qrCodeId),
         customHeaders);
+
+    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
 }

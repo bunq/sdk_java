@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,19 +24,21 @@ public class ExportAnnualOverviewContent extends BunqModel {
    */
   private static final String OBJECT_TYPE = "ExportAnnualOverviewContent";
 
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer exportAnnualOverviewId) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer exportAnnualOverviewId) {
     return list(apiContext, userId, exportAnnualOverviewId, new HashMap<>());
   }
 
   /**
    * Used to retrieve the raw content of an annual overview.
    */
-  public static byte[] list(ApiContext apiContext, Integer userId, Integer exportAnnualOverviewId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId,
+      Integer exportAnnualOverviewId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-
-    return apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, exportAnnualOverviewId), customHeaders);
+
+    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
 }

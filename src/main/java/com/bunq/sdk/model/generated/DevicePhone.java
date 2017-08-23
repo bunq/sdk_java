@@ -14,6 +14,7 @@ public class DevicePhone extends BunqModel {
    */
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_PHONE_NUMBER = "phone_number";
+  public static final String FIELD_REMOVE_OLD_DEVICES = "remove_old_devices";
 
   /**
    * Object type.

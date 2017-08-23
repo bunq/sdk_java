@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.google.gson.annotations.Expose;
@@ -55,7 +57,7 @@ public class AttachmentTab extends BunqModel {
   @SerializedName("attachment")
   private Attachment attachment;
 
-  public static Integer create(ApiContext apiContext, byte[] bytes, Integer userId,
+  public static BunqResponse<Integer> create(ApiContext apiContext, byte[] bytes, Integer userId,
       Integer monetaryAccountId) {
     return create(apiContext, bytes, userId, monetaryAccountId, new HashMap<>());
   }
@@ -67,17 +69,17 @@ public class AttachmentTab extends BunqModel {
    * You are required to provide a description of the attachment using the
    * X-Bunq-Attachment-Description header.
    */
-  public static Integer create(ApiContext apiContext, byte[] bytes, Integer userId,
+  public static BunqResponse<Integer> create(ApiContext apiContext, byte[] bytes, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), bytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static AttachmentTab get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer attachmentTabId) {
+  public static BunqResponse<AttachmentTab> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer attachmentTabId) {
     return get(apiContext, userId, monetaryAccountId, attachmentTabId, new HashMap<>());
   }
 
@@ -85,14 +87,14 @@ public class AttachmentTab extends BunqModel {
    * Get a specific attachment. The header of the response contains the content-type of the
    * attachment.
    */
-  public static AttachmentTab get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer attachmentTabId, Map<String, String> customHeaders) {
+  public static BunqResponse<AttachmentTab> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer attachmentTabId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, attachmentTabId),
             customHeaders);
 
-    return fromJson(AttachmentTab.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(AttachmentTab.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

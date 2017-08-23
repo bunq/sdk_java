@@ -1,5 +1,7 @@
 package com.bunq.sdk.model;
 
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -33,24 +35,29 @@ abstract public class BunqModel {
   /**
    * De-serializes an object from a JSON format specific to Installation and SessionServer.
    */
-  static <T> T fromJsonArrayNested(Class<T> classOfObject, String json) {
+  static <T> BunqResponse<T> fromJsonArrayNested(Class<T> classOfObject,
+      BunqResponseRaw responseRaw) {
+    String json = new String(responseRaw.getBodyBytes());
     JsonObject values = gson.fromJson(json, JsonObject.class);
     JsonArray jsonArrayNested = values.getAsJsonArray(FIELD_RESPONSE);
+    T responseValue = gson.fromJson(jsonArrayNested, classOfObject);
 
-    return gson.fromJson(jsonArrayNested, classOfObject);
+    return new BunqResponse<>(responseValue, responseRaw.getHeaders());
   }
 
   /**
    * De-serializes an ID object and returns its integer value.
    */
-  protected static Integer processForId(String json) {
-    JsonObject responseContent = getResponseContent(json);
+  protected static BunqResponse<Integer> processForId(BunqResponseRaw responseRaw) {
+    JsonObject responseContent = getResponseContent(responseRaw);
     JsonObject objectContent = getWrappedContent(responseContent, FIELD_ID);
+    Integer responseValue = gson.fromJson(objectContent, Id.class).getId();
 
-    return gson.fromJson(objectContent, Id.class).getId();
+    return new BunqResponse<>(responseValue, responseRaw.getHeaders());
   }
 
-  private static JsonObject getResponseContent(String json) {
+  private static JsonObject getResponseContent(BunqResponseRaw responseRaw) {
+    String json = new String(responseRaw.getBodyBytes());
     JsonObject responseWithWrapper = gson.fromJson(json, JsonObject.class);
 
     return responseWithWrapper.getAsJsonArray(FIELD_RESPONSE).get(INDEX_FIRST).getAsJsonObject();
@@ -63,24 +70,30 @@ abstract public class BunqModel {
   /**
    * De-serialize an object from JSON.
    */
-  protected static <T> T fromJson(Class<T> classOfObject, String json, String wrapper) {
-    JsonObject responseContent = getResponseContent(json);
+  protected static <T> BunqResponse<T> fromJson(Class<T> classOfObject, BunqResponseRaw responseRaw,
+      String wrapper) {
+    JsonObject responseContent = getResponseContent(responseRaw);
     JsonObject objectContent = getWrappedContent(responseContent, wrapper);
+    T responseValue = gson.fromJson(objectContent, classOfObject);
 
-    return gson.fromJson(objectContent, classOfObject);
+    return new BunqResponse<>(responseValue, responseRaw.getHeaders());
   }
 
-  protected static <T> T fromJson(Class<T> classOfObject, String json) {
-    JsonObject responseContent = getResponseContent(json);
+  protected static <T> BunqResponse<T> fromJson(Class<T> classOfObject,
+      BunqResponseRaw responseRaw) {
+    JsonObject responseContent = getResponseContent(responseRaw);
+    T responseValue = gson.fromJson(responseContent, classOfObject);
 
-    return gson.fromJson(responseContent, classOfObject);
+    return new BunqResponse<>(responseValue, responseRaw.getHeaders());
   }
 
   /**
    * De-serializes a list from JSON.
    */
-  protected static <T> List<T> fromJsonList(Class<T> classOfListItem, String json, String wrapper) {
-    JsonArray responseObjectArray = getResponseContentArray(json);
+  protected static <T> BunqResponse<List<T>> fromJsonList(Class<T> classOfListItem,
+      BunqResponseRaw responseRaw,
+      String wrapper) {
+    JsonArray responseObjectArray = getResponseContentArray(responseRaw);
     List<T> list = new ArrayList<>();
 
     for (JsonElement objectContentWithWrapper : responseObjectArray) {
@@ -89,21 +102,23 @@ abstract public class BunqModel {
       list.add(gson.fromJson(objectContent, classOfListItem));
     }
 
-    return list;
+    return new BunqResponse<>(list, responseRaw.getHeaders());
   }
 
-  protected static <T> List<T> fromJsonList(Class<T> classOfListItem, String json) {
-    JsonArray responseObjectsArray = getResponseContentArray(json);
+  protected static <T> BunqResponse<List<T>> fromJsonList(Class<T> classOfListItem,
+      BunqResponseRaw responseRaw) {
+    JsonArray responseObjectsArray = getResponseContentArray(responseRaw);
     List<T> objects = new ArrayList<>();
 
     for (JsonElement responseObject : responseObjectsArray) {
       objects.add(gson.fromJson(responseObject, classOfListItem));
     }
 
-    return objects;
+    return new BunqResponse<>(objects, responseRaw.getHeaders());
   }
 
-  private static JsonArray getResponseContentArray(String json) {
+  private static JsonArray getResponseContentArray(BunqResponseRaw responseRaw) {
+    String json = new String(responseRaw.getBodyBytes());
     JsonObject responseWithWrapper = gson.fromJson(json, JsonObject.class);
 
     return responseWithWrapper.getAsJsonArray(FIELD_RESPONSE);
@@ -112,11 +127,12 @@ abstract public class BunqModel {
   /**
    * De-serializes an UUID object and returns its string value.
    */
-  protected static String processForUuid(String json) {
-    JsonObject responseContent = getResponseContent(json);
+  protected static BunqResponse<String> processForUuid(BunqResponseRaw responseRaw) {
+    JsonObject responseContent = getResponseContent(responseRaw);
     JsonObject objectContent = getWrappedContent(responseContent, FIELD_UUID);
+    String responseValue = gson.fromJson(objectContent, Uuid.class).getUuid();
 
-    return gson.fromJson(objectContent, Uuid.class).getUuid();
+    return new BunqResponse<>(responseValue, responseRaw.getHeaders());
   }
 
   public String toString() {

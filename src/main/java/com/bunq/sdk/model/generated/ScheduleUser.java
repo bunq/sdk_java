@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +24,7 @@ public class ScheduleUser extends BunqModel {
    */
   private static final String OBJECT_TYPE = "ScheduleUser";
 
-  public static List<ScheduleUser> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<ScheduleUser>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
@@ -32,13 +34,13 @@ public class ScheduleUser extends BunqModel {
    * type={SCHEDULE_DEFINITION_PAYMENT,SCHEDULE_DEFINITION_PAYMENT_BATCH} is provided only
    * schedule definition object that relate to these definitions are returned.
    */
-  public static List<ScheduleUser> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<ScheduleUser>> list(ApiContext apiContext, Integer userId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
 
-    return fromJsonList(ScheduleUser.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(ScheduleUser.class, responseRaw, OBJECT_TYPE);
   }
 
 }

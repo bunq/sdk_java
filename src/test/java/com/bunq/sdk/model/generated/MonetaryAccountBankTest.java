@@ -50,7 +50,8 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
     requestMap.put(MonetaryAccountBank.FIELD_CURRENCY, CURRENCY);
     requestMap.put(MonetaryAccountBank.FIELD_DESCRIPTION, MONETARY_ACCOUNT_DESCRIPTION);
 
-    monetaryAccountIdToClose = MonetaryAccountBank.create(apiContext, requestMap, userId);
+    monetaryAccountIdToClose = MonetaryAccountBank.create(apiContext, requestMap, userId)
+        .getValue();
   }
 
   @AfterClass

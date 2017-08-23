@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.Geolocation;
@@ -107,7 +109,7 @@ public class CashRegister extends BunqModel {
   @SerializedName("tab_text_waiting_screen")
   private List<TabTextWaitingScreen> tabTextWaitingScreen;
 
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
   }
@@ -118,36 +120,36 @@ public class CashRegister extends BunqModel {
    * you can use it. In the sandbox testing environment an CashRegister will be automatically
    * approved immediately after creation.
    */
-  public static Integer create(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes,
             customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static CashRegister get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId) {
+  public static BunqResponse<CashRegister> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId) {
     return get(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
   }
 
   /**
    * Get a specific CashRegister.
    */
-  public static CashRegister get(ApiContext apiContext, Integer userId, Integer monetaryAccountId,
-      Integer cashRegisterId, Map<String, String> customHeaders) {
+  public static BunqResponse<CashRegister> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId),
             customHeaders);
 
-    return fromJson(CashRegister.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(CashRegister.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId,
         new HashMap<>());
@@ -158,19 +160,19 @@ public class CashRegister extends BunqModel {
    * you modify the name, avatar or location of a CashRegister. To close a cash register put its
    * status to CLOSED.
    */
-  public static Integer update(ApiContext apiContext, Map<String, Object> requestMap,
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer monetaryAccountId, Integer cashRegisterId,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, cashRegisterId),
             requestBytes, customHeaders);
 
-    return processForId(new String(responseBytes));
+    return processForId(responseRaw);
   }
 
-  public static List<CashRegister> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<CashRegister>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
@@ -178,13 +180,13 @@ public class CashRegister extends BunqModel {
   /**
    * Get a collection of CashRegister for a given user and monetary account.
    */
-  public static List<CashRegister> list(ApiContext apiContext, Integer userId,
+  public static BunqResponse<List<CashRegister>> list(ApiContext apiContext, Integer userId,
       Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
 
-    return fromJsonList(CashRegister.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJsonList(CashRegister.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

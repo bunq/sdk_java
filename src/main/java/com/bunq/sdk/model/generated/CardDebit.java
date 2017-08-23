@@ -2,6 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
@@ -115,23 +117,23 @@ public class CardDebit extends BunqModel {
   @SerializedName("alias")
   private LabelUser alias;
 
-  public static CardDebit create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId) {
+  public static BunqResponse<CardDebit> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    * Create a new debit card request.
    */
-  public static CardDebit create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<CardDebit> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
-    byte[] responseBytes = apiClient
+    BunqResponseRaw responseRaw = apiClient
         .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return fromJson(CardDebit.class, new String(responseBytes), OBJECT_TYPE);
+    return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE);
   }
 
   /**

@@ -2,23 +2,24 @@ package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.json.BunqGsonBuilder;
-import com.bunq.sdk.model.DeviceServer;
 import com.bunq.sdk.model.Installation;
 import com.bunq.sdk.model.SessionServer;
+import com.bunq.sdk.model.generated.DeviceServer;
 import com.bunq.sdk.model.generated.Session;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.sun.istack.internal.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -81,6 +82,10 @@ public class ApiContext implements java.io.Serializable {
   @SerializedName("session_context")
   private SessionContext sessionContext;
 
+  @Expose
+  @SerializedName("proxy")
+  private String proxy;
+
   /**
    * Create an empty API context.
    */
@@ -90,7 +95,7 @@ public class ApiContext implements java.io.Serializable {
   }
 
   /**
-   * Create and initialize an API Context with current IP as permitted.
+   * Create and initialize an API Context with current IP as permitted and no proxy.
    */
   public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
       String deviceDescription) {
@@ -98,11 +103,28 @@ public class ApiContext implements java.io.Serializable {
   }
 
   /**
-   * Create and initialize an API Context.
+   * Create and initialize an API Context with given permitted ips and no proxy.
    */
   public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
       String deviceDescription, List<String> permittedIps) {
+    return create(environmentType, apiKey, deviceDescription, permittedIps, null);
+  }
+
+  /**
+   * Create and initialize an API Context with current IP as permitted and a proxy.
+   */
+  public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
+      String deviceDescription, String proxy) {
+    return create(environmentType, apiKey, deviceDescription, new ArrayList<>(), proxy);
+  }
+
+  /**
+   * Create and initialize an API Context.
+   */
+  public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
+      String deviceDescription, List<String> permittedIps, String proxy) {
     ApiContext apiContext = new ApiContext(environmentType, apiKey);
+    apiContext.proxy = proxy;
     apiContext.initialize(deviceDescription, permittedIps);
 
     return apiContext;
@@ -122,12 +144,18 @@ public class ApiContext implements java.io.Serializable {
     try {
       File file = new File(fileName);
       String json = FileUtils.readFileToString(file, ENCODING_BUNQ_CONF);
-      JsonObject jsonObject = gson.fromJson(json, JsonObject.class);
 
-      return gson.fromJson(jsonObject, ApiContext.class);
+      return fromJson(json);
     } catch (IOException exception) {
       throw new BunqException(ERROR_COULD_NOT_RESTORE_API_CONTEXT, exception);
     }
+  }
+
+  /**
+   * Restores a context from a given JSON string.
+   */
+  public static ApiContext fromJson(String json) {
+    return gson.fromJson(json, ApiContext.class);
   }
 
   private void initialize(String deviceDescription, List<String> permittedIps) {
@@ -146,19 +174,31 @@ public class ApiContext implements java.io.Serializable {
     Installation installation = Installation.create(
         this,
         SecurityUtils.getPublicKeyFormattedString(keyPairClient.getPublic())
-    );
+    ).getValue();
     installationContext = new InstallationContext(installation, keyPairClient);
   }
 
   private void initializeDeviceRegistration(String deviceDescription, List<String> permittedIps) {
-    DeviceServer.create(this, deviceDescription, permittedIps);
+    Map<String, Object> deviceServerRequestBody = generateDeviceServerRequestBodyBytes(
+        deviceDescription, permittedIps);
+    DeviceServer.create(this, deviceServerRequestBody);
+  }
+
+  private Map<String, Object> generateDeviceServerRequestBodyBytes(String description,
+      List<String> permittedIps) {
+    HashMap<String, Object> deviceServerRequestBody = new HashMap<>();
+    deviceServerRequestBody.put(DeviceServer.FIELD_DESCRIPTION, description);
+    deviceServerRequestBody.put(DeviceServer.FIELD_SECRET, apiKey);
+    deviceServerRequestBody.put(DeviceServer.FIELD_PERMITTED_IPS, permittedIps);
+
+    return deviceServerRequestBody;
   }
 
   /**
    * Create a new session and its data in a SessionContext.
    */
   private void initializeSession() {
-    sessionContext = new SessionContext(SessionServer.create(this));
+    sessionContext = new SessionContext(SessionServer.create(this).getValue());
   }
 
   /**
@@ -219,11 +259,17 @@ public class ApiContext implements java.io.Serializable {
   public void save(String fileName) {
     try {
       File file = new File(fileName);
-      String json = gson.toJson(this);
-      FileUtils.writeStringToFile(file, json, ENCODING_BUNQ_CONF);
+      FileUtils.writeStringToFile(file, toJson(), ENCODING_BUNQ_CONF);
     } catch (IOException exception) {
       throw new BunqException(ERROR_COULD_NOT_SAVE_API_CONTEXT, exception);
     }
+  }
+
+  /**
+   * Serializes the context to JSON.
+   */
+  public String toJson() {
+    return gson.toJson(this);
   }
 
   /**
@@ -262,6 +308,10 @@ public class ApiContext implements java.io.Serializable {
 
   public SessionContext getSessionContext() {
     return sessionContext;
+  }
+
+  public String getProxy() {
+    return proxy;
   }
 
 }

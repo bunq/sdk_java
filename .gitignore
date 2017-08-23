@@ -68,6 +68,6 @@ gradle-app.setting
 
 # bunq-specific
 bunq.conf
-tmp/attachment_out.jpg
+context-save-restore-test.conf
 /tmp
 config.properties
