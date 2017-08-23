@@ -11,7 +11,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.sun.jndi.toolkit.url.Uri;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.apache.http.Header;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -33,6 +36,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
@@ -96,10 +100,25 @@ public class ApiClient {
       SSLContextBuilder builder = new SSLContextBuilder();
       SSLConnectionSocketFactory sslConnectionSocketFactory =
           new SSLConnectionSocketFactory(builder.build());
+      HttpClientBuilder httpClientBuilder = HttpClients
+          .custom()
+          .setSSLSocketFactory(sslConnectionSocketFactory);
+      setProxyIfNeeded(httpClientBuilder);
 
-      return HttpClients.custom().setSSLSocketFactory(sslConnectionSocketFactory).build();
-    } catch (NoSuchAlgorithmException | KeyManagementException exception) {
+      return httpClientBuilder.build();
+    } catch (NoSuchAlgorithmException | KeyManagementException | MalformedURLException exception) {
       throw new UncaughtExceptionError(exception);
+    }
+  }
+
+  private void setProxyIfNeeded(HttpClientBuilder httpClientBuilder)
+      throws MalformedURLException {
+    String proxyString = apiContext.getProxy();
+
+    if (proxyString != null) {
+      Uri proxyUri = new Uri(proxyString);
+      HttpHost proxy = new HttpHost(proxyUri.getHost(), proxyUri.getPort(), proxyUri.getScheme());
+      httpClientBuilder.setProxy(proxy);
     }
   }
 
