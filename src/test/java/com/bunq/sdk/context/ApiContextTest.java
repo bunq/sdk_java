@@ -8,9 +8,9 @@ import org.junit.Test;
 
 /**
  * Tests:
- * ApiConfig
+ * ApiContext
  */
-public class ApiConfigTest extends BunqSdkTestBase {
+public class ApiContextTest extends BunqSdkTestBase {
 
   /**
    * Path to a temporary context file.
