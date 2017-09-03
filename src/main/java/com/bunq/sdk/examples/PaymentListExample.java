@@ -4,7 +4,6 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.Pagination;
 import com.bunq.sdk.model.generated.Payment;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -40,13 +39,13 @@ public class PaymentListExample {
    */
   public static void main(String[] args) {
     ApiContext apiContext = ApiContext.restore(API_CONTEXT_FILE_PATH);
-    HashMap<String, String> params = new HashMap<>();
-    params.put(Pagination.PARAM_COUNT, Integer.toString(PAGE_SIZE));
+    Pagination paginationCountOnly = new Pagination();
+    paginationCountOnly.setCount(PAGE_SIZE);
     BunqResponse<List<Payment>> paymentListResponse = Payment.list(
         apiContext,
         USER_ITEM_ID,
         MONETARY_ACCOUNT_ITEM_ID,
-        params
+        paginationCountOnly.getUrlParamsCountOnly()
     );
     List<Payment> payments = paymentListResponse.getValue();
 
