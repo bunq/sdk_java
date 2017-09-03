@@ -74,7 +74,7 @@ public class Pagination {
   }
 
   public boolean hasPreviousItem() {
-    return this.olderId != null;
+    return olderId != null;
   }
 
   public Map<String, String> getUrlParamsCountOnly() {
