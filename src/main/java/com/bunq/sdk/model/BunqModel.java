@@ -52,8 +52,8 @@ abstract public class BunqModel {
    */
   protected static BunqResponse<Integer> processForId(BunqResponseRaw responseRaw) {
     JsonObject responseItemObject = getResponseItemObject(responseRaw);
-    JsonObject objectContent = getWrappedContent(responseItemObject, FIELD_ID);
-    Integer responseValue = gson.fromJson(objectContent, Id.class).getId();
+    JsonObject responseItemObjectUnwrapped = getWrappedContent(responseItemObject, FIELD_ID);
+    Integer responseValue = gson.fromJson(responseItemObjectUnwrapped, Id.class).getId();
 
     return new BunqResponse<>(responseValue, responseRaw.getHeaders());
   }
