@@ -32,7 +32,6 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
   @Override
   public SessionServer deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
-    System.out.println(json);
     JsonArray values = json.getAsJsonArray();
 
     Id id = context.deserialize(
