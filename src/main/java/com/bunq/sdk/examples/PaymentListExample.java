@@ -56,14 +56,13 @@ public class PaymentListExample {
     Pagination pagination = paymentListResponse.getPagination();
 
     if (pagination.hasPreviousItem()) {
+      System.out.println(MESSAGE_SECOND_LATEST_PAGE_IDS);
       List<Payment> previousPayments = Payment.list(
           apiContext,
           USER_ITEM_ID,
           MONETARY_ACCOUNT_ITEM_ID,
           pagination.getUrlParamsPreviousPage()
       ).getValue();
-
-      System.out.println(MESSAGE_SECOND_LATEST_PAGE_IDS);
       printPayments(previousPayments);
     } else {
       System.out.println(MESSAGE_NO_PRIOR_PAYMENTS_FOUND);

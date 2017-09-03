@@ -6,6 +6,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import java.io.Console;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -81,7 +82,7 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
       String responseField,
       String responseParam
   ) throws URISyntaxException {
-    if (responseJson.has(responseField)) {
+    if (responseJson.has(responseField) && !responseJson.get(responseField).isJsonNull()) {
       URI uri = new URI(responseJson.get(responseField).getAsString());
       List<NameValuePair> params = URLEncodedUtils.parse(uri, Charset.defaultCharset());
 
@@ -89,7 +90,7 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
         if (responseParam.equals(param.getName())) {
           paginationBody.put(idField, Integer.parseInt(param.getValue()));
         } else if (Pagination.PARAM_COUNT.equals(param.getName()) &&
-            paginationBody.get(Pagination.PARAM_COUNT) != null) {
+            paginationBody.get(Pagination.PARAM_COUNT) == null) {
           paginationBody.put(Pagination.PARAM_COUNT, Integer.parseInt(param.getValue()));
         }
       }
