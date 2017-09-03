@@ -1,14 +1,8 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -63,7 +57,8 @@ public class Address extends BunqModel {
   @SerializedName("province")
   private String province;
 
-  public Address(String street, String houseNumber, String postalCode, String city, String country) {
+  public Address(String street, String houseNumber, String postalCode, String city,
+      String country) {
     this.street = street;
     this.houseNumber = houseNumber;
     this.postalCode = postalCode;

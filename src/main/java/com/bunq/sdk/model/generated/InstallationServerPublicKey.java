@@ -5,15 +5,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Using /installation/_/server-public-key you can request the ServerPublicKey again. This is
@@ -38,20 +34,24 @@ public class InstallationServerPublicKey extends BunqModel {
   @SerializedName("server_public_key")
   private String serverPublicKey;
 
-  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext, Integer installationId) {
+  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
+      Integer installationId) {
     return list(apiContext, installationId, new HashMap<>());
   }
 
-  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext, Integer installationId, Map<String, String> params) {
+  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
+      Integer installationId, Map<String, String> params) {
     return list(apiContext, installationId, params, new HashMap<>());
   }
 
   /**
    * Show the ServerPublicKey for this Installation.
    */
-  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext, Integer installationId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
+      Integer installationId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
 
     return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE);
   }

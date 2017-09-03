@@ -5,15 +5,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Used to view a customer.
@@ -69,42 +65,51 @@ public class Customer extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
-  public static BunqResponse<List<Customer>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
+  public static BunqResponse<List<Customer>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
     return list(apiContext, userId, params, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<List<Customer>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<Customer>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(Customer.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<Customer> get(ApiContext apiContext, Integer userId, Integer customerId) {
+  public static BunqResponse<Customer> get(ApiContext apiContext, Integer userId,
+      Integer customerId) {
     return get(apiContext, userId, customerId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<Customer> get(ApiContext apiContext, Integer userId, Integer customerId, Map<String, String> customHeaders) {
+  public static BunqResponse<Customer> get(ApiContext apiContext, Integer userId,
+      Integer customerId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, customerId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId, customerId), new HashMap<>(), customHeaders);
 
     return fromJson(Customer.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer customerId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
+      Integer userId, Integer customerId) {
     return update(apiContext, requestMap, userId, customerId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer customerId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
+      Integer userId, Integer customerId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, customerId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .put(String.format(ENDPOINT_URL_UPDATE, userId, customerId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }

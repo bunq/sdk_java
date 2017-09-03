@@ -5,15 +5,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Using this call you can retrieve information of the user you are logged in as. This includes
@@ -57,9 +53,11 @@ public class User extends BunqModel {
   /**
    * Get a specific user.
    */
-  public static BunqResponse<User> get(ApiContext apiContext, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<User> get(ApiContext apiContext, Integer userId,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId), new HashMap<>(), customHeaders);
 
     return fromJson(User.class, responseRaw);
   }
@@ -75,7 +73,8 @@ public class User extends BunqModel {
   /**
    * Get a collection of all available users.
    */
-  public static BunqResponse<List<User>> list(ApiContext apiContext, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<User>> list(ApiContext apiContext, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 

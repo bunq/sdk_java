@@ -5,19 +5,15 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.InvoiceItemGroup;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Used to list bunq invoices by user.
@@ -151,28 +147,35 @@ public class InvoiceByUser extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
-  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
+  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
     return list(apiContext, userId, params, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId, Integer invoiceByUserId) {
+  public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId,
+      Integer invoiceByUserId) {
     return get(apiContext, userId, invoiceByUserId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId, Integer invoiceByUserId, Map<String, String> customHeaders) {
+  public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId,
+      Integer invoiceByUserId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, invoiceByUserId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId, invoiceByUserId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
   }

@@ -5,28 +5,23 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.bunq.sdk.model.generated.object.Geolocation;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
- * Using this call you create a request for payment from an external token provided with an
- * ideal transaction. Make sure your iDEAL payments are compliant with the iDEAL standards, by
- * following the following manual: <a
- * href="https://www.bunq.com/files/media/legal/en/20170315_ideal_standards_en.pdf">https://www.bunq.com/files/media/legal/en/20170315_ideal_standards_en.pdf</a>.
- * It's very important to keep these points in mind when you are using the endpoint to make
- * iDEAL payments from your application.
+ * Using this call you create a request for payment from an external token provided with an ideal
+ * transaction. Make sure your iDEAL payments are compliant with the iDEAL standards, by following
+ * the following manual: <a href="https://www.bunq.com/files/media/legal/en/20170315_ideal_standards_en.pdf">https://www.bunq.com/files/media/legal/en/20170315_ideal_standards_en.pdf</a>.
+ * It's very important to keep these points in mind when you are using the endpoint to make iDEAL
+ * payments from your application.
  */
 public class TokenQrRequestIdeal extends BunqModel {
 
@@ -188,17 +183,20 @@ public class TokenQrRequestIdeal extends BunqModel {
   @SerializedName("eligible_whitelist_id")
   private Integer eligibleWhitelistId;
 
-  public static BunqResponse<TokenQrRequestIdeal> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
+  public static BunqResponse<TokenQrRequestIdeal> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    * Create a request from an ideal transaction.
    */
-  public static BunqResponse<TokenQrRequestIdeal> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<TokenQrRequestIdeal> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
     return fromJson(TokenQrRequestIdeal.class, responseRaw, OBJECT_TYPE);
   }

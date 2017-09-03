@@ -5,21 +5,17 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * With bunq it is possible to order debit cards that can then be connected with each one of the
@@ -168,18 +164,21 @@ public class CardDebit extends BunqModel {
   @SerializedName("monetary_account_id_fallback")
   private Integer monetaryAccountIdFallback;
 
-  public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
+  public static BunqResponse<CardDebit> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    * Create a new debit card request.
    */
-  public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<CardDebit> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
     return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE);
   }

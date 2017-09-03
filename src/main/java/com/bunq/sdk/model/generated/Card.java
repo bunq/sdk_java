@@ -5,21 +5,17 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardMagStripePermission;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for retrieving details for the cards the user has access to.
@@ -174,7 +170,8 @@ public class Card extends BunqModel {
   @SerializedName("monetary_account_id_fallback")
   private Integer monetaryAccountIdFallback;
 
-  public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
+  public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap,
+      Integer userId, Integer cardId) {
     return update(apiContext, requestMap, userId, cardId, new HashMap<>());
   }
 
@@ -183,11 +180,13 @@ public class Card extends BunqModel {
    * the monetary account connected to the card. When the card has been received, it can be also
    * activated through this endpoint.
    */
-  public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap,
+      Integer userId, Integer cardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, cardId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .put(String.format(ENDPOINT_URL_UPDATE, userId, cardId), requestBytes, customHeaders);
 
     return fromJson(Card.class, responseRaw, OBJECT_TYPE);
   }
@@ -199,9 +198,11 @@ public class Card extends BunqModel {
   /**
    * Return the details of a specific card.
    */
-  public static BunqResponse<Card> get(ApiContext apiContext, Integer userId, Integer cardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Card> get(ApiContext apiContext, Integer userId, Integer cardId,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, cardId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId, cardId), new HashMap<>(), customHeaders);
 
     return fromJson(Card.class, responseRaw, OBJECT_TYPE);
   }
@@ -210,16 +211,19 @@ public class Card extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
-  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
+  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
     return list(apiContext, userId, params, new HashMap<>());
   }
 
   /**
    * Return all the cards available to the user.
    */
-  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(Card.class, responseRaw, OBJECT_TYPE);
   }

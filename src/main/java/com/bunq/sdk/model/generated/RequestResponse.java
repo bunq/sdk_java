@@ -5,20 +5,16 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.bunq.sdk.model.generated.object.Geolocation;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * A RequestResponse is what a user on the other side of a RequestInquiry gets when he is sent
@@ -228,49 +224,64 @@ public class RequestResponse extends BunqModel {
   @SerializedName("eligible_whitelist_id")
   private Integer eligibleWhitelistId;
 
-  public static BunqResponse<RequestResponse> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer requestResponseId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, requestResponseId, new HashMap<>());
+  public static BunqResponse<RequestResponse> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestResponseId) {
+    return update(apiContext, requestMap, userId, monetaryAccountId, requestResponseId,
+        new HashMap<>());
   }
 
   /**
    * Update the status to accept or reject the RequestResponse.
    */
-  public static BunqResponse<RequestResponse> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer requestResponseId, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestResponse> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestResponseId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestResponseId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestResponseId),
+            requestBytes, customHeaders);
 
     return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
+  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
-  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
     return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
   }
 
   /**
    * Get all RequestResponses for a MonetaryAccount.
    */
-  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer requestResponseId) {
+  public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer requestResponseId) {
     return get(apiContext, userId, monetaryAccountId, requestResponseId, new HashMap<>());
   }
 
   /**
    * Get the details for a specific existing RequestResponse.
    */
-  public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer requestResponseId, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer requestResponseId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestResponseId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestResponseId),
+            new HashMap<>(), customHeaders);
 
     return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }

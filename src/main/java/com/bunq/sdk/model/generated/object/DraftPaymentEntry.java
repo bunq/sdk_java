@@ -4,11 +4,7 @@ import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -80,7 +76,8 @@ public class DraftPaymentEntry extends BunqModel {
   @SerializedName("type")
   private String type;
 
-  public DraftPaymentEntry(Amount amount, MonetaryAccountReference counterpartyAlias, String description) {
+  public DraftPaymentEntry(Amount amount, MonetaryAccountReference counterpartyAlias,
+      String description) {
     this.amount = amount;
     this.counterpartyAlias = counterpartyAlias;
     this.description = description;

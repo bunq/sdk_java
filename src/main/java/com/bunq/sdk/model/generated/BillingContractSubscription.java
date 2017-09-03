@@ -5,15 +5,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Show the subscription billing contract for the authenticated user.
@@ -86,34 +82,41 @@ public class BillingContractSubscription extends BunqModel {
   @SerializedName("subscription_type")
   private String subscriptionType;
 
-  public static BunqResponse<BillingContractSubscription> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
+  public static BunqResponse<BillingContractSubscription> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<BillingContractSubscription> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<BillingContractSubscription> create(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
     return fromJson(BillingContractSubscription.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId) {
+  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext,
+      Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
 
-  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
+  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext,
+      Integer userId, Map<String, String> params) {
     return list(apiContext, userId, params, new HashMap<>());
   }
 
   /**
    * Get all subscription billing contract for the authenticated user.
    */
-  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext,
+      Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(BillingContractSubscription.class, responseRaw, OBJECT_TYPE);
   }

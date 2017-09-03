@@ -6,15 +6,11 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.LabelUser;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for retrieving the messages that are part of a conversation.
@@ -87,20 +83,25 @@ public class ChatMessage extends BunqModel {
   @SerializedName("content")
   private BunqModel content;
 
-  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId, Integer chatConversationId) {
+  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
+      Integer chatConversationId) {
     return list(apiContext, userId, chatConversationId, new HashMap<>());
   }
 
-  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId, Integer chatConversationId, Map<String, String> params) {
+  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
+      Integer chatConversationId, Map<String, String> params) {
     return list(apiContext, userId, chatConversationId, params, new HashMap<>());
   }
 
   /**
    * Get all the messages that are part of a specific conversation.
    */
-  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId, Integer chatConversationId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
+      Integer chatConversationId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, chatConversationId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId, chatConversationId), params,
+            customHeaders);
 
     return fromJsonList(ChatMessage.class, responseRaw, OBJECT_TYPE);
   }

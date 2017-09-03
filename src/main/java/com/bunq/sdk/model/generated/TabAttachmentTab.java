@@ -6,15 +6,10 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Attachment;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * This call is used to view an attachment that is linked to a tab.
@@ -59,7 +54,8 @@ public class TabAttachmentTab extends BunqModel {
   @SerializedName("attachment")
   private Attachment attachment;
 
-  public static BunqResponse<TabAttachmentTab> get(ApiContext apiContext, String tabUuid, Integer tabAttachmentTabId) {
+  public static BunqResponse<TabAttachmentTab> get(ApiContext apiContext, String tabUuid,
+      Integer tabAttachmentTabId) {
     return get(apiContext, tabUuid, tabAttachmentTabId, new HashMap<>());
   }
 
@@ -67,9 +63,12 @@ public class TabAttachmentTab extends BunqModel {
    * Get a specific attachment. The header of the response contains the content-type of the
    * attachment.
    */
-  public static BunqResponse<TabAttachmentTab> get(ApiContext apiContext, String tabUuid, Integer tabAttachmentTabId, Map<String, String> customHeaders) {
+  public static BunqResponse<TabAttachmentTab> get(ApiContext apiContext, String tabUuid,
+      Integer tabAttachmentTabId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, tabUuid, tabAttachmentTabId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, tabUuid, tabAttachmentTabId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(TabAttachmentTab.class, responseRaw, OBJECT_TYPE);
   }

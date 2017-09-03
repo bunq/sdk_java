@@ -6,15 +6,10 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Attachment;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * This call is used to upload an attachment that can be referenced to as an avatar (through the
@@ -71,14 +66,16 @@ public class AttachmentPublic extends BunqModel {
    * (i.e. image/jpeg, or image/png) in the Content-Type header. You are required to provide a
    * description of the attachment using the X-Bunq-Attachment-Description header.
    */
-  public static BunqResponse<String> create(ApiContext apiContext, byte[] bytes, Map<String, String> customHeaders) {
+  public static BunqResponse<String> create(ApiContext apiContext, byte[] bytes,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, bytes, customHeaders);
 
     return processForUuid(responseRaw);
   }
 
-  public static BunqResponse<AttachmentPublic> get(ApiContext apiContext, String attachmentPublicUuid) {
+  public static BunqResponse<AttachmentPublic> get(ApiContext apiContext,
+      String attachmentPublicUuid) {
     return get(apiContext, attachmentPublicUuid, new HashMap<>());
   }
 
@@ -86,9 +83,12 @@ public class AttachmentPublic extends BunqModel {
    * Get a specific attachment's metadata through its UUID. The Content-Type header of the
    * response will describe the MIME type of the attachment file.
    */
-  public static BunqResponse<AttachmentPublic> get(ApiContext apiContext, String attachmentPublicUuid, Map<String, String> customHeaders) {
+  public static BunqResponse<AttachmentPublic> get(ApiContext apiContext,
+      String attachmentPublicUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), new HashMap<>(),
+            customHeaders);
 
     return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE);
   }

@@ -5,21 +5,17 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.BunqId;
 import com.bunq.sdk.model.generated.object.Geolocation;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * RequestInquiry, aka 'RFP' (Request for Payment), is one of the innovative features that bunq
@@ -236,64 +232,83 @@ public class RequestInquiry extends BunqModel {
   @SerializedName("allow_chat")
   private Boolean allowChat;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
+      Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
   }
 
   /**
    * Create a new payment request.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
+      Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes,
+            customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<RequestInquiry> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer requestInquiryId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, requestInquiryId, new HashMap<>());
+  public static BunqResponse<RequestInquiry> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestInquiryId) {
+    return update(apiContext, requestMap, userId, monetaryAccountId, requestInquiryId,
+        new HashMap<>());
   }
 
   /**
    * Revoke a request for payment, by updating the status to REVOKED.
    */
-  public static BunqResponse<RequestInquiry> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer requestInquiryId, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestInquiry> update(ApiContext apiContext,
+      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId,
+      Integer requestInquiryId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestInquiryId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestInquiryId),
+            requestBytes, customHeaders);
 
     return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
+  public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId) {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
-  public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
     return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
   }
 
   /**
    * Get all payment requests for a user's monetary account.
    */
-  public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(RequestInquiry.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<RequestInquiry> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer requestInquiryId) {
+  public static BunqResponse<RequestInquiry> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer requestInquiryId) {
     return get(apiContext, userId, monetaryAccountId, requestInquiryId, new HashMap<>());
   }
 
   /**
    * Get the details of a specific payment request, including its status.
    */
-  public static BunqResponse<RequestInquiry> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer requestInquiryId, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestInquiry> get(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer requestInquiryId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestInquiryId), new HashMap<>(), customHeaders);
+    BunqResponseRaw responseRaw = apiClient
+        .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestInquiryId),
+            new HashMap<>(), customHeaders);
 
     return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE);
   }

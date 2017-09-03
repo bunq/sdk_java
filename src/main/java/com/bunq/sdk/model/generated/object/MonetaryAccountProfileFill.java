@@ -1,14 +1,8 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -50,7 +44,8 @@ public class MonetaryAccountProfileFill extends BunqModel {
   @SerializedName("issuer")
   private Issuer issuer;
 
-  public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow, String methodFill) {
+  public MonetaryAccountProfileFill(String status, Amount balancePreferred,
+      Amount balanceThresholdLow, String methodFill) {
     this.status = status;
     this.balancePreferred = balancePreferred;
     this.balanceThresholdLow = balanceThresholdLow;
