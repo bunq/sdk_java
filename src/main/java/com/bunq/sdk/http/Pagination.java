@@ -61,6 +61,9 @@ public class Pagination {
     }
   }
 
+  /**
+   * Get the URL params required to request the previous page of the listing.
+   */
   public Map<String, String> getUrlParamsPreviousPage() {
     if (!hasPreviousItem()) {
       throw new BunqException(ERROR_NO_PREVIOUS_PAGE);
@@ -77,6 +80,9 @@ public class Pagination {
     return olderId != null;
   }
 
+  /**
+   * Get the URL params required to request the latest page with count of this pagination.
+   */
   public Map<String, String> getUrlParamsCountOnly() {
     Map<String, String> params = new HashMap<>();
     addCountToParamsIfNeeded(params);
