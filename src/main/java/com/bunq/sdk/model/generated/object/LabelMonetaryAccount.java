@@ -4,6 +4,11 @@ import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  */
@@ -50,6 +55,13 @@ public class LabelMonetaryAccount extends BunqModel {
   @Expose
   @SerializedName("bunq_me")
   private MonetaryAccountReference bunqMe;
+
+  /**
+   * Whether or not the monetary account is light.
+   */
+  @Expose
+  @SerializedName("is_light")
+  private Boolean isLight;
 
   /**
    * The IBAN of the monetary account.
@@ -115,6 +127,17 @@ public class LabelMonetaryAccount extends BunqModel {
 
   public void setBunqMe(MonetaryAccountReference bunqMe) {
     this.bunqMe = bunqMe;
+  }
+
+  /**
+   * Whether or not the monetary account is light.
+   */
+  public Boolean getIsLight() {
+    return this.isLight;
+  }
+
+  public void setIsLight(Boolean isLight) {
+    this.isLight = isLight;
   }
 
 }

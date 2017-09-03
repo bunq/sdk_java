@@ -7,13 +7,19 @@ import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
+import com.bunq.sdk.model.generated.object.CardPinAssignment;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * With bunq it is possible to order debit cards that can then be connected with each one of the
@@ -29,6 +35,8 @@ public class CardDebit extends BunqModel {
   public static final String FIELD_PIN_CODE = "pin_code";
   public static final String FIELD_ALIAS = "alias";
   public static final String FIELD_TYPE = "type";
+  public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
+  public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
 
   /**
    * Endpoint constants.
@@ -62,6 +70,13 @@ public class CardDebit extends BunqModel {
   private String updated;
 
   /**
+   * The public UUID of the card.
+   */
+  @Expose
+  @SerializedName("public_uuid")
+  private String publicUuid;
+
+  /**
    * The second line of text on the card
    */
   @Expose
@@ -74,6 +89,13 @@ public class CardDebit extends BunqModel {
   @Expose
   @SerializedName("name_on_card")
   private String nameOnCard;
+
+  /**
+   * The last 4 digits of the PAN of the card.
+   */
+  @Expose
+  @SerializedName("primary_account_number_four_digit")
+  private String primaryAccountNumberFourDigit;
 
   /**
    * The status to set for the card. After ordering the card it will be DEACTIVATED.
@@ -111,27 +133,53 @@ public class CardDebit extends BunqModel {
   private List<CardCountryPermission> countryPermission;
 
   /**
+   * The monetary account this card was ordered on and the label user that owns the card.
+   */
+  @Expose
+  @SerializedName("label_monetary_account_ordered")
+  private MonetaryAccountReference labelMonetaryAccountOrdered;
+
+  /**
+   * The monetary account that this card is currently linked to and the label user viewing it.
+   */
+  @Expose
+  @SerializedName("label_monetary_account_current")
+  private MonetaryAccountReference labelMonetaryAccountCurrent;
+
+  /**
    * The label for the user who requested the card.
    */
   @Expose
   @SerializedName("alias")
   private LabelUser alias;
 
-  public static BunqResponse<CardDebit> create(ApiContext apiContext,
-      Map<String, Object> requestMap, Integer userId) {
+  /**
+   * Array of Types, PINs, account IDs assigned to the card.
+   */
+  @Expose
+  @SerializedName("pin_code_assignment")
+  private List<CardPinAssignment> pinCodeAssignment;
+
+  /**
+   * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
+   * is removed if not supplied.
+   */
+  @Expose
+  @SerializedName("monetary_account_id_fallback")
+  private Integer monetaryAccountIdFallback;
+
+  public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    * Create a new debit card request.
    */
-  public static BunqResponse<CardDebit> create(ApiContext apiContext,
-      Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
-    BunqResponseRaw responseRaw = apiClient
-        .post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
     return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE);
   }
@@ -170,6 +218,17 @@ public class CardDebit extends BunqModel {
   }
 
   /**
+   * The public UUID of the card.
+   */
+  public String getPublicUuid() {
+    return this.publicUuid;
+  }
+
+  public void setPublicUuid(String publicUuid) {
+    this.publicUuid = publicUuid;
+  }
+
+  /**
    * The second line of text on the card
    */
   public String getSecondLine() {
@@ -189,6 +248,17 @@ public class CardDebit extends BunqModel {
 
   public void setNameOnCard(String nameOnCard) {
     this.nameOnCard = nameOnCard;
+  }
+
+  /**
+   * The last 4 digits of the PAN of the card.
+   */
+  public String getPrimaryAccountNumberFourDigit() {
+    return this.primaryAccountNumberFourDigit;
+  }
+
+  public void setPrimaryAccountNumberFourDigit(String primaryAccountNumberFourDigit) {
+    this.primaryAccountNumberFourDigit = primaryAccountNumberFourDigit;
   }
 
   /**
@@ -247,6 +317,28 @@ public class CardDebit extends BunqModel {
   }
 
   /**
+   * The monetary account this card was ordered on and the label user that owns the card.
+   */
+  public MonetaryAccountReference getLabelMonetaryAccountOrdered() {
+    return this.labelMonetaryAccountOrdered;
+  }
+
+  public void setLabelMonetaryAccountOrdered(MonetaryAccountReference labelMonetaryAccountOrdered) {
+    this.labelMonetaryAccountOrdered = labelMonetaryAccountOrdered;
+  }
+
+  /**
+   * The monetary account that this card is currently linked to and the label user viewing it.
+   */
+  public MonetaryAccountReference getLabelMonetaryAccountCurrent() {
+    return this.labelMonetaryAccountCurrent;
+  }
+
+  public void setLabelMonetaryAccountCurrent(MonetaryAccountReference labelMonetaryAccountCurrent) {
+    this.labelMonetaryAccountCurrent = labelMonetaryAccountCurrent;
+  }
+
+  /**
    * The label for the user who requested the card.
    */
   public LabelUser getAlias() {
@@ -255,6 +347,29 @@ public class CardDebit extends BunqModel {
 
   public void setAlias(LabelUser alias) {
     this.alias = alias;
+  }
+
+  /**
+   * Array of Types, PINs, account IDs assigned to the card.
+   */
+  public List<CardPinAssignment> getPinCodeAssignment() {
+    return this.pinCodeAssignment;
+  }
+
+  public void setPinCodeAssignment(List<CardPinAssignment> pinCodeAssignment) {
+    this.pinCodeAssignment = pinCodeAssignment;
+  }
+
+  /**
+   * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
+   * is removed if not supplied.
+   */
+  public Integer getMonetaryAccountIdFallback() {
+    return this.monetaryAccountIdFallback;
+  }
+
+  public void setMonetaryAccountIdFallback(Integer monetaryAccountIdFallback) {
+    this.monetaryAccountIdFallback = monetaryAccountIdFallback;
   }
 
 }

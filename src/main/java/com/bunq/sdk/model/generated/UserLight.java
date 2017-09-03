@@ -11,11 +11,15 @@ import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.TaxResident;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Show the authenticated user, if it is a light user.
@@ -30,7 +34,6 @@ public class UserLight extends BunqModel {
   public static final String FIELD_LAST_NAME = "last_name";
   public static final String FIELD_PUBLIC_NICK_NAME = "public_nick_name";
   public static final String FIELD_COUNTER_BANK_IBAN = "counter_bank_iban";
-  public static final String FIELD_ADDRESS = "address";
   public static final String FIELD_ADDRESS_MAIN = "address_main";
   public static final String FIELD_ADDRESS_POSTAL = "address_postal";
   public static final String FIELD_AVATAR_UUID = "avatar_uuid";
@@ -300,11 +303,9 @@ public class UserLight extends BunqModel {
   /**
    * Get a specific bunq light user.
    */
-  public static BunqResponse<UserLight> get(ApiContext apiContext, Integer userLightId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<UserLight> get(ApiContext apiContext, Integer userLightId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userLightId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userLightId), new HashMap<>(), customHeaders);
 
     return fromJson(UserLight.class, responseRaw, OBJECT_TYPE);
   }

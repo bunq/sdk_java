@@ -5,11 +5,15 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * After having created an Installation you can now create a DeviceServer. A DeviceServer is
@@ -78,8 +82,7 @@ public class DeviceServer extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext,
-      Map<String, Object> requestMap) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap) {
     return create(apiContext, requestMap, new HashMap<>());
   }
 
@@ -89,8 +92,7 @@ public class DeviceServer extends BunqModel {
    * the public part to create the Installation. Your API key will be bound to the ip address of
    * this DeviceServer.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
@@ -105,11 +107,9 @@ public class DeviceServer extends BunqModel {
   /**
    * Get one of your DeviceServers.
    */
-  public static BunqResponse<DeviceServer> get(ApiContext apiContext, Integer deviceServerId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<DeviceServer> get(ApiContext apiContext, Integer deviceServerId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, deviceServerId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceServerId), new HashMap<>(), customHeaders);
 
     return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE);
   }
@@ -118,13 +118,16 @@ public class DeviceServer extends BunqModel {
     return list(apiContext, new HashMap<>());
   }
 
+  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext, Map<String, String> params) {
+    return list(apiContext, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of all the DeviceServers you have created.
    */
-  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
     return fromJsonList(DeviceServer.class, responseRaw, OBJECT_TYPE);
   }

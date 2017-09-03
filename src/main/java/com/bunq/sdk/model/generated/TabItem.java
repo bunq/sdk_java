@@ -4,9 +4,14 @@ import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.AttachmentPublic;
 import com.bunq.sdk.model.generated.object.AttachmentTab;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Used to get items on a tab.

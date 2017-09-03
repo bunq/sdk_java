@@ -5,9 +5,15 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Manages user's conversations.
@@ -29,29 +35,28 @@ public class ChatConversation extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ChatConversation>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    */
-  public static BunqResponse<List<ChatConversation>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<ChatConversation>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(ChatConversation.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<ChatConversation> get(ApiContext apiContext, Integer userId,
-      Integer chatConversationId) {
+  public static BunqResponse<ChatConversation> get(ApiContext apiContext, Integer userId, Integer chatConversationId) {
     return get(apiContext, userId, chatConversationId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<ChatConversation> get(ApiContext apiContext, Integer userId,
-      Integer chatConversationId, Map<String, String> customHeaders) {
+  public static BunqResponse<ChatConversation> get(ApiContext apiContext, Integer userId, Integer chatConversationId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, chatConversationId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, chatConversationId), new HashMap<>(), customHeaders);
 
     return fromJson(ChatConversation.class, responseRaw, OBJECT_TYPE);
   }

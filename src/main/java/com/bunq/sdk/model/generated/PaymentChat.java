@@ -5,11 +5,15 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Manage the chat connected to a payment.
@@ -61,62 +65,50 @@ public class PaymentChat extends BunqModel {
   @SerializedName("unread_message_count")
   private Integer unreadMessageCount;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer paymentId) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, paymentId, new HashMap<>());
   }
 
   /**
    * Create a chat for a specific payment.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer paymentId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient
-        .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, paymentId),
-            requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, paymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<PaymentChat> update(ApiContext apiContext,
-      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId,
-      Integer paymentChatId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, paymentId, paymentChatId,
-        new HashMap<>());
+  public static BunqResponse<PaymentChat> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Integer paymentChatId) {
+    return update(apiContext, requestMap, userId, monetaryAccountId, paymentId, paymentChatId, new HashMap<>());
   }
 
   /**
    * Update the last read message in the chat of a specific payment.
    */
-  public static BunqResponse<PaymentChat> update(ApiContext apiContext,
-      Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId,
-      Integer paymentChatId, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentChat> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Integer paymentChatId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(
-        String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, paymentId, paymentChatId),
-        requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, paymentId, paymentChatId), requestBytes, customHeaders);
 
     return fromJson(PaymentChat.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer paymentId) {
+  public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer paymentId) {
     return list(apiContext, userId, monetaryAccountId, paymentId, new HashMap<>());
+  }
+
+  public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer paymentId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, paymentId, params, new HashMap<>());
   }
 
   /**
    * Get the chat for a specific payment.
    */
-  public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer paymentId, Map<String, String> customHeaders) {
+  public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer paymentId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, paymentId),
-            customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, paymentId), params, customHeaders);
 
     return fromJsonList(PaymentChat.class, responseRaw, OBJECT_TYPE);
   }

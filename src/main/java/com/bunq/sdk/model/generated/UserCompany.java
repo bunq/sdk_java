@@ -12,11 +12,15 @@ import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.Ubo;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Show the authenticated user, if it is a company.
@@ -29,7 +33,6 @@ public class UserCompany extends BunqModel {
   public static final String FIELD_NAME = "name";
   public static final String FIELD_PUBLIC_NICK_NAME = "public_nick_name";
   public static final String FIELD_AVATAR_UUID = "avatar_uuid";
-  public static final String FIELD_ADDRESS = "address";
   public static final String FIELD_ADDRESS_MAIN = "address_main";
   public static final String FIELD_ADDRESS_POSTAL = "address_postal";
   public static final String FIELD_LANGUAGE = "language";
@@ -183,6 +186,13 @@ public class UserCompany extends BunqModel {
   private String language;
 
   /**
+   * The country as an ISO 3166-1 alpha-2 country code..
+   */
+  @Expose
+  @SerializedName("country")
+  private String country;
+
+  /**
    * The person's preferred region. Formatted as a ISO 639-1 language code plus a ISO 3166-1
    * alpha-2 country code, seperated by an underscore.
    */
@@ -234,6 +244,27 @@ public class UserCompany extends BunqModel {
   @SerializedName("notification_filters")
   private List<NotificationFilter> notificationFilters;
 
+  /**
+   * The customer profile of the company.
+   */
+  @Expose
+  @SerializedName("customer")
+  private Customer customer;
+
+  /**
+   * The customer limits of the company.
+   */
+  @Expose
+  @SerializedName("customer_limit")
+  private CustomerLimit customerLimit;
+
+  /**
+   * The subscription of the company.
+   */
+  @Expose
+  @SerializedName("billing_contract")
+  private List<BillingContractSubscription> billingContract;
+
   public static BunqResponse<UserCompany> get(ApiContext apiContext, Integer userCompanyId) {
     return get(apiContext, userCompanyId, new HashMap<>());
   }
@@ -241,29 +272,24 @@ public class UserCompany extends BunqModel {
   /**
    * Get a specific company.
    */
-  public static BunqResponse<UserCompany> get(ApiContext apiContext, Integer userCompanyId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<UserCompany> get(ApiContext apiContext, Integer userCompanyId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userCompanyId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userCompanyId), new HashMap<>(), customHeaders);
 
     return fromJson(UserCompany.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userCompanyId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userCompanyId) {
     return update(apiContext, requestMap, userCompanyId, new HashMap<>());
   }
 
   /**
    * Modify a specific company's data.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userCompanyId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userCompanyId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient
-        .put(String.format(ENDPOINT_URL_UPDATE, userCompanyId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userCompanyId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
@@ -468,6 +494,17 @@ public class UserCompany extends BunqModel {
   }
 
   /**
+   * The country as an ISO 3166-1 alpha-2 country code..
+   */
+  public String getCountry() {
+    return this.country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
+  /**
    * The person's preferred region. Formatted as a ISO 639-1 language code plus a ISO 3166-1
    * alpha-2 country code, seperated by an underscore.
    */
@@ -545,6 +582,39 @@ public class UserCompany extends BunqModel {
 
   public void setNotificationFilters(List<NotificationFilter> notificationFilters) {
     this.notificationFilters = notificationFilters;
+  }
+
+  /**
+   * The customer profile of the company.
+   */
+  public Customer getCustomer() {
+    return this.customer;
+  }
+
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
+
+  /**
+   * The customer limits of the company.
+   */
+  public CustomerLimit getCustomerLimit() {
+    return this.customerLimit;
+  }
+
+  public void setCustomerLimit(CustomerLimit customerLimit) {
+    this.customerLimit = customerLimit;
+  }
+
+  /**
+   * The subscription of the company.
+   */
+  public List<BillingContractSubscription> getBillingContract() {
+    return this.billingContract;
+  }
+
+  public void setBillingContract(List<BillingContractSubscription> billingContract) {
+    this.billingContract = billingContract;
   }
 
 }

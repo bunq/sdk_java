@@ -1,8 +1,14 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  */
@@ -22,8 +28,26 @@ public class CardCountryPermission extends BunqModel {
   @SerializedName("expiry_time")
   private String expiryTime;
 
+  /**
+   * The id of the card country permission entry.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
   public CardCountryPermission(String country) {
     this.country = country;
+  }
+
+  /**
+   * The id of the card country permission entry.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**

@@ -6,11 +6,15 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.generated.object.Image;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Avatars are public images used to represent you or your company. Avatars are used to
@@ -57,8 +61,7 @@ public class Avatar extends BunqModel {
 
   /**
    */
-  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
@@ -72,11 +75,9 @@ public class Avatar extends BunqModel {
 
   /**
    */
-  public static BunqResponse<Avatar> get(ApiContext apiContext, String avatarUuid,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<Avatar> get(ApiContext apiContext, String avatarUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, avatarUuid), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, avatarUuid), new HashMap<>(), customHeaders);
 
     return fromJson(Avatar.class, responseRaw, OBJECT_TYPE);
   }

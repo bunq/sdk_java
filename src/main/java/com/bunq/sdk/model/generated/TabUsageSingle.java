@@ -5,13 +5,16 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.BunqId;
 import com.bunq.sdk.model.generated.object.Geolocation;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.TabVisibility;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -195,32 +198,23 @@ public class TabUsageSingle extends BunqModel {
   @SerializedName("tab_attachment")
   private List<BunqId> tabAttachment;
 
-  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId,
-        new HashMap<>());
+  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
+    return create(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
   }
 
   /**
    * Create a TabUsageSingle. The initial status must be OPEN
    */
-  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer cashRegisterId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient
-        .post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, cashRegisterId),
-            requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, cashRegisterId), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
   }
 
-  public static BunqResponse<String> update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer cashRegisterId,
-      String tabUsageSingleUuid) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId,
-        tabUsageSingleUuid, new HashMap<>());
+  public static BunqResponse<String> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid) {
+    return update(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid, new HashMap<>());
   }
 
   /**
@@ -228,72 +222,56 @@ public class TabUsageSingle extends BunqModel {
    * Once you change the status to WAITING_FOR_PAYMENT the TabUsageSingle will expire after 5
    * minutes (default) or up to 1 hour if a different expiration is provided.
    */
-  public static BunqResponse<String> update(ApiContext apiContext, Map<String, Object> requestMap,
-      Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<String> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String
-            .format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid),
-        requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
   }
 
-  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid) {
-    return delete(apiContext, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid,
-        new HashMap<>());
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid) {
+    return delete(apiContext, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid, new HashMap<>());
   }
 
   /**
    * Cancel a specific TabUsageSingle. This request returns an empty response.
    */
-  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.delete(String
-            .format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid),
-        customHeaders);
+    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<TabUsageSingle> get(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid) {
-    return get(apiContext, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid,
-        new HashMap<>());
+  public static BunqResponse<TabUsageSingle> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid) {
+    return get(apiContext, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid, new HashMap<>());
   }
 
   /**
    * Get a specific TabUsageSingle.
    */
-  public static BunqResponse<TabUsageSingle> get(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<TabUsageSingle> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String
-            .format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid),
-        customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid), new HashMap<>(), customHeaders);
 
     return fromJson(TabUsageSingle.class, responseRaw, OBJECT_TYPE);
   }
 
-  public static BunqResponse<List<TabUsageSingle>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId) {
+  public static BunqResponse<List<TabUsageSingle>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
+  }
+
+  public static BunqResponse<List<TabUsageSingle>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, cashRegisterId, params, new HashMap<>());
   }
 
   /**
    * Get a collection of TabUsageSingle.
    */
-  public static BunqResponse<List<TabUsageSingle>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
+  public static BunqResponse<List<TabUsageSingle>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId),
-            customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId), params, customHeaders);
 
     return fromJsonList(TabUsageSingle.class, responseRaw, OBJECT_TYPE);
   }

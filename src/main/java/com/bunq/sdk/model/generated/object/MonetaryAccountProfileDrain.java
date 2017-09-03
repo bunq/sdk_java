@@ -4,6 +4,11 @@ import com.bunq.sdk.model.BunqModel;
 import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  */
@@ -37,8 +42,7 @@ public class MonetaryAccountProfileDrain extends BunqModel {
   @SerializedName("savings_account_alias")
   private MonetaryAccountReference savingsAccountAlias;
 
-  public MonetaryAccountProfileDrain(String status, Amount balancePreferred,
-      Amount balanceThresholdHigh, MonetaryAccountReference savingsAccountAlias) {
+  public MonetaryAccountProfileDrain(String status, Amount balancePreferred, Amount balanceThresholdHigh, MonetaryAccountReference savingsAccountAlias) {
     this.status = status;
     this.balancePreferred = balancePreferred;
     this.balanceThresholdHigh = balanceThresholdHigh;

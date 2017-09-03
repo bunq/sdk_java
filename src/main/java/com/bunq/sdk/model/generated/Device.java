@@ -5,11 +5,15 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Used to get a Device or a listing of Devices. Creating a DeviceServer should happen via
@@ -47,11 +51,9 @@ public class Device extends BunqModel {
   /**
    * Get a single Device. A Device is either a DevicePhone or a DeviceServer.
    */
-  public static BunqResponse<Device> get(ApiContext apiContext, Integer deviceId,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<Device> get(ApiContext apiContext, Integer deviceId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, deviceId), customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceId), new HashMap<>(), customHeaders);
 
     return fromJson(Device.class, responseRaw);
   }
@@ -60,13 +62,16 @@ public class Device extends BunqModel {
     return list(apiContext, new HashMap<>());
   }
 
+  public static BunqResponse<List<Device>> list(ApiContext apiContext, Map<String, String> params) {
+    return list(apiContext, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of Devices. A Device is either a DevicePhone or a DeviceServer.
    */
-  public static BunqResponse<List<Device>> list(ApiContext apiContext,
-      Map<String, String> customHeaders) {
+  public static BunqResponse<List<Device>> list(ApiContext apiContext, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
     return fromJsonList(Device.class, responseRaw);
   }

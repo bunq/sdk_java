@@ -29,13 +29,10 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
   private static final String FIELD_USER_COMPANY = "UserCompany";
   private static final String FIELD_USER_PERSON = "UserPerson";
 
-  private static JsonElement getByIndexAndFieldName(JsonArray values, int index, String fieldName) {
-    return values.get(index).getAsJsonObject().get(fieldName);
-  }
-
   @Override
   public SessionServer deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
+    System.out.println(json);
     JsonArray values = json.getAsJsonArray();
 
     Id id = context.deserialize(
@@ -63,6 +60,10 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
 
       return new SessionServer(id, token, userPerson);
     }
+  }
+
+  private static JsonElement getByIndexAndFieldName(JsonArray values, int index, String fieldName) {
+    return values.get(index).getAsJsonObject().get(fieldName);
   }
 
 }
