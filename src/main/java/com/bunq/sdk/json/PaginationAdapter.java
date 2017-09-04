@@ -34,13 +34,8 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
     try {
       JsonObject responseJson = json.getAsJsonObject();
       Map<String, Integer> paginationBody = parsePaginationBody(responseJson);
-      Pagination pagination = new Pagination();
-      pagination.setOlderId(paginationBody.get(Pagination.PARAM_OLDER_ID));
-      pagination.setNewerId(paginationBody.get(Pagination.PARAM_NEWER_ID));
-      pagination.setFutureId(paginationBody.get(Pagination.PARAM_FUTURE_ID));
-      pagination.setCount(paginationBody.get(Pagination.PARAM_COUNT));
 
-      return pagination;
+      return createPagination(paginationBody);
     } catch (URISyntaxException exception) {
       throw new JsonParseException(exception);
     }
@@ -72,6 +67,16 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
     );
 
     return paginationBody;
+  }
+
+  private Pagination createPagination(Map<String, Integer> paginationBody) {
+    Pagination pagination = new Pagination();
+    pagination.setOlderId(paginationBody.get(Pagination.PARAM_OLDER_ID));
+    pagination.setNewerId(paginationBody.get(Pagination.PARAM_NEWER_ID));
+    pagination.setFutureId(paginationBody.get(Pagination.PARAM_FUTURE_ID));
+    pagination.setCount(paginationBody.get(Pagination.PARAM_COUNT));
+
+    return pagination;
   }
 
   private void updatePaginationBodyFromResponseField(

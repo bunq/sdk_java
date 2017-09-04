@@ -31,8 +31,8 @@ public class PaymentListExample {
   /**
    * Constants to be changed to run the example.
    */
-  private static final int USER_ITEM_ID = 1969; // Put your user ID here
-  private static final int MONETARY_ACCOUNT_ITEM_ID = 1988; // Put your monetary account ID here
+  private static final int USER_ITEM_ID = 0; // Put your user ID here
+  private static final int MONETARY_ACCOUNT_ITEM_ID = 0; // Put your monetary account ID here
 
   /**
    * @param args Command line arguments.

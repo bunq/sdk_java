@@ -59,9 +59,9 @@ abstract public class BunqModel {
   }
 
   private static JsonObject getResponseItemObject(BunqResponseRaw responseRaw) {
-    JsonObject responseObject = deserializeResponseObject(responseRaw);
+    JsonObject responseItemObject = deserializeResponseObject(responseRaw);
 
-    return responseObject.getAsJsonArray(FIELD_RESPONSE).get(INDEX_FIRST).getAsJsonObject();
+    return responseItemObject.getAsJsonArray(FIELD_RESPONSE).get(INDEX_FIRST).getAsJsonObject();
   }
 
   private static JsonObject getWrappedContent(JsonObject json, String wrapper) {
