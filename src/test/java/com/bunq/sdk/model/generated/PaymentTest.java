@@ -1,7 +1,7 @@
 package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -17,10 +17,10 @@ public class PaymentTest extends BunqSdkTestBase {
   /**
    * Config values
    */
-  private static final int userId = TestConfig.getUserId();
-  private static final int monetaryAccountId = TestConfig.getMonetaryAccountId();
-  private static final Pointer counterPartyAliasOther = TestConfig.getCounterPartyAliasOther();
-  private static final Pointer counterPartyAliasSelf = TestConfig.getCounterPartyAliasSelf();
+  private static final int userId = Config.getUserId();
+  private static final int monetaryAccountId = Config.getMonetaryAccountId();
+  private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
+  private static final Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
 
   private static final ApiContext apiContext = getApiContext();
 

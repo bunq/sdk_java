@@ -3,7 +3,7 @@ package com.bunq.sdk.model.generated;
 import static org.junit.Assert.assertEquals;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.math.BigInteger;
@@ -25,7 +25,7 @@ public class CardDebitTest extends BunqSdkTestBase {
   /**
    * Config values.
    */
-  private static final int userId = TestConfig.getUserId();
+  private static final int userId = Config.getUserId();
 
   private static final ApiContext apiContext = getApiContext();
 

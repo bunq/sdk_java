@@ -21,9 +21,9 @@ public class BunqSdkTestBase {
   /**
    * Individual properties.
    */
-  private static String apiKey = TestConfig.getApiKey();
-  private static String[] permittedIps = TestConfig.getPermittedIps();
-  private static String apiConfigPath = TestConfig.getApiConfigPath();
+  private static String apiKey = Config.getApiKey();
+  private static String[] permittedIps = Config.getPermittedIps();
+  private static String apiConfigPath = Config.getApiConfigPath();
 
   /**
    * Based on the result of isSessionActive will create a new ApiContext or restore an old conf

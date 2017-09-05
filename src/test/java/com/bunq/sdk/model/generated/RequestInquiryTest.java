@@ -3,7 +3,7 @@ package com.bunq.sdk.model.generated;
 import static org.junit.Assert.assertEquals;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -20,10 +20,10 @@ public class RequestInquiryTest extends BunqSdkTestBase {
   /**
    * Config values.
    */
-  private static int userId = TestConfig.getUserId();
-  private static int monetaryAccountId = TestConfig.getMonetaryAccountId();
-  private static int monetaryAccountId2 = TestConfig.getMonetaryAccountId2();
-  private static Pointer counterPartyAliasSelf = TestConfig.getCounterPartyAliasSelf();
+  private static int userId = Config.getUserId();
+  private static int monetaryAccountId = Config.getMonetaryAccountId();
+  private static int monetaryAccountId2 = Config.getMonetaryAccountId2();
+  private static Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
 
   private static final String ACCEPTED_STATUS = "ACCEPTED";
   private static final String AMOUNT_IN_EUR = "0.01";

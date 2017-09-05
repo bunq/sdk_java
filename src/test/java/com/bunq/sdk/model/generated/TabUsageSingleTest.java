@@ -1,7 +1,7 @@
 package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import java.util.HashMap;
@@ -17,9 +17,9 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
   /**
    * Config values.
    */
-  private static final int userId = TestConfig.getUserId();
-  private static final int monetaryAccountId = TestConfig.getMonetaryAccountId();
-  private static final int cashRegisterId = TestConfig.getCashRegisterId();
+  private static final int userId = Config.getUserId();
+  private static final int monetaryAccountId = Config.getMonetaryAccountId();
+  private static final int cashRegisterId = Config.getCashRegisterId();
 
   private static final ApiContext apiContext = getApiContext();
 

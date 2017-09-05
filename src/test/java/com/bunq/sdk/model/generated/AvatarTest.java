@@ -3,7 +3,7 @@ package com.bunq.sdk.model.generated;
 import static org.junit.Assert.assertArrayEquals;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import java.io.File;
@@ -22,9 +22,9 @@ public class AvatarTest extends BunqSdkTestBase {
   /**
    * Config values.
    */
-  private static final String attachmentDescription = TestConfig.getAttachmentDescription();
-  private static final String contentType = TestConfig.getContentType();
-  private static final String pathAttachmentIn = TestConfig.getPathAttachmentIn();
+  private static final String attachmentDescription = Config.getAttachmentDescription();
+  private static final String contentType = Config.getContentType();
+  private static final String pathAttachmentIn = Config.getPathAttachmentIn();
 
   /**
    * The very first index in an array.

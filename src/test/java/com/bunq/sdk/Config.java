@@ -8,7 +8,7 @@ import java.util.Properties;
 /**
  * Returns the properties used for testing
  */
-public class TestConfig {
+public class Config {
 
   /**
    * Path to the file with properties.
