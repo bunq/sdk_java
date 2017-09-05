@@ -26,7 +26,7 @@ public class RequestInquiryTest extends BunqSdkTestBase {
   private static Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
 
   private static final String ACCEPTED_STATUS = "ACCEPTED";
-  private static final String AMOUNT_IN_EUR = "0.01";
+  private static final String AMOUNT_EUR = "0.01";
   private static final String CURRENCY = "EUR";
   private static final String REQUEST_DESCRIPTION = "Java Test Payment";
   private static final int INDEX_FIRST = 0;
@@ -41,7 +41,7 @@ public class RequestInquiryTest extends BunqSdkTestBase {
   public void createRequestInquiryTest() throws Exception {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(RequestInquiry.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasSelf);
-    requestMap.put(RequestInquiry.FIELD_AMOUNT_INQUIRED, new Amount(AMOUNT_IN_EUR, CURRENCY));
+    requestMap.put(RequestInquiry.FIELD_AMOUNT_INQUIRED, new Amount(AMOUNT_EUR, CURRENCY));
     requestMap.put(RequestInquiry.FIELD_DESCRIPTION, REQUEST_DESCRIPTION);
     requestMap.put(RequestInquiry.FIELD_ALLOW_BUNQME, false);
 

@@ -25,7 +25,7 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
 
   private static final String TAB_FIELD_DESCRIPTION = "Pay the tab for Java test please.";
   private static final String STATUS_OPEN = "OPEN";
-  private static final String AMOUNT_IN_EUR = "10.00";
+  private static final String AMOUNT_EUR = "10.00";
   private static final String CURRENCY = "EUR";
   private static final String TAB_ITEM_FIELD_DESCRIPTION = "Super expensive java tea";
   private static final String STATUS_WAITING = "WAITING_FOR_PAYMENT";
@@ -34,7 +34,7 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
     HashMap<String, Object> createMap = new HashMap<>();
     createMap.put(TabUsageSingle.FIELD_DESCRIPTION, TAB_FIELD_DESCRIPTION);
     createMap.put(TabUsageSingle.FIELD_STATUS, STATUS_OPEN);
-    createMap.put(TabUsageSingle.FIELD_AMOUNT_TOTAL, new Amount(AMOUNT_IN_EUR, CURRENCY));
+    createMap.put(TabUsageSingle.FIELD_AMOUNT_TOTAL, new Amount(AMOUNT_EUR, CURRENCY));
 
     return TabUsageSingle.create(apiContext, createMap, userId, monetaryAccountId,
         cashRegisterId).getValue();
@@ -42,7 +42,7 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
 
   private static void addItemToTab(String tabUuid) {
     HashMap<String, Object> tabItemMap = new HashMap<>();
-    tabItemMap.put(TabItemShop.FIELD_AMOUNT, new Amount(AMOUNT_IN_EUR, CURRENCY));
+    tabItemMap.put(TabItemShop.FIELD_AMOUNT, new Amount(AMOUNT_EUR, CURRENCY));
     tabItemMap.put(TabItemShop.FIELD_DESCRIPTION, TAB_ITEM_FIELD_DESCRIPTION);
 
     TabItemShop.create(apiContext, tabItemMap, userId, monetaryAccountId, cashRegisterId, tabUuid);
