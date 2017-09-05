@@ -22,13 +22,6 @@ public class Pagination {
   public static final String PARAM_FUTURE_ID = "future_id";
   public static final String PARAM_COUNT = "count";
 
-  /**
-   * Field constants.
-   */
-  private static final String FIELD_OLDER_URL = "older_url";
-  private static final String FIELD_NEWER_URL = "newer_url";
-  private static final String FIELD_FUTURE_URL = "future_url";
-
   private Integer olderId;
   private Integer newerId;
   private Integer futureId;
