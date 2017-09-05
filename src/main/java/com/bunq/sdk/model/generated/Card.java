@@ -91,6 +91,13 @@ public class Card extends BunqModel {
   private String status;
 
   /**
+   * The sub-status of the card. Can be NONE or REPLACED.
+   */
+  @Expose
+  @SerializedName("sub_status")
+  private String subStatus;
+
+  /**
    * The order status of the card. Can be CARD_UPDATE_REQUESTED, CARD_UPDATE_SENT,
    * CARD_UPDATE_ACCEPTED, ACCEPTED_FOR_PRODUCTION or DELIVERED_TO_CUSTOMER.
    */
@@ -293,6 +300,17 @@ public class Card extends BunqModel {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  /**
+   * The sub-status of the card. Can be NONE or REPLACED.
+   */
+  public String getSubStatus() {
+    return this.subStatus;
+  }
+
+  public void setSubStatus(String subStatus) {
+    this.subStatus = subStatus;
   }
 
   /**

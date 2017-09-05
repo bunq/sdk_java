@@ -47,6 +47,13 @@ public class CustomerLimit extends BunqModel {
   @SerializedName("limit_card_debit_mastercard")
   private Integer limitCardDebitMastercard;
 
+  /**
+   * The limit of free replacement cards.
+   */
+  @Expose
+  @SerializedName("limit_card_debit_replacement")
+  private Integer limitCardDebitReplacement;
+
   public static BunqResponse<List<CustomerLimit>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
   }
@@ -99,6 +106,17 @@ public class CustomerLimit extends BunqModel {
 
   public void setLimitCardDebitMastercard(Integer limitCardDebitMastercard) {
     this.limitCardDebitMastercard = limitCardDebitMastercard;
+  }
+
+  /**
+   * The limit of free replacement cards.
+   */
+  public Integer getLimitCardDebitReplacement() {
+    return this.limitCardDebitReplacement;
+  }
+
+  public void setLimitCardDebitReplacement(Integer limitCardDebitReplacement) {
+    this.limitCardDebitReplacement = limitCardDebitReplacement;
   }
 
 }
