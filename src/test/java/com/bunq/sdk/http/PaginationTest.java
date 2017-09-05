@@ -123,7 +123,7 @@ public class PaginationTest {
   }
 
   @Test
-  public void getUrlParamPreviousPageFromPaginationWithNoPreviousPageTest() {
+  public void getUrlParamsPreviousPageFromPaginationWithNoPreviousPageTest() {
     Pagination pagination = createPaginationWithAllPropertiesSet();
     pagination.setOlderId(null);
 
@@ -132,7 +132,7 @@ public class PaginationTest {
   }
 
   @Test
-  public void getUrlParamNextPageFromPaginationWithNoNextPageTest() {
+  public void getUrlParamsNextPageFromPaginationWithNoNextPageTest() {
     Pagination pagination = createPaginationWithAllPropertiesSet();
     pagination.setNewerId(null);
     pagination.setFutureId(null);

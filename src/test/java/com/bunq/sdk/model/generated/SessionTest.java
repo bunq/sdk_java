@@ -12,11 +12,11 @@ import org.junit.Test;
 public class SessionTest extends BunqSdkTestBase {
 
   /**
-   * Config value
+   * Config value.
    */
-  private static final Integer SESSION_ID_DUMMY = 0;
+  private static final int SESSION_ID_DUMMY = 0;
 
-  private ApiContext apiContext = getApiContext();
+  private static final ApiContext apiContext = getApiContext();
 
   /**
    * Tests deletion of the current session

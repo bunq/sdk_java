@@ -10,7 +10,6 @@ import com.bunq.sdk.http.ApiClient;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -22,21 +21,13 @@ import org.junit.Test;
 public class AttachmentPublicTest extends BunqSdkTestBase {
 
   /**
-   * Config fields
+   * Config values.
    */
-  private static final String FIELD_ATTACHMENT_DESCRIPTION = "ATTACHMENT_DESCRIPTION";
-  private static final String FIELD_CONTENT_TYPE = "CONTENT_TYPE";
-  private static final String FIELD_PATH_ATTACHMENT_IN = "PATH_ATTACHMENT_IN";
+  private static final String contentType = TestConfig.getContentType();
+  private static final String attachmentDescription = TestConfig.getAttachmentDescription();
+  private static final String pathAttachmentIn = TestConfig.getPathAttachmentIn();
 
-  /**
-   * Config values
-   */
-  private static Properties config = TestConfig.prop();
-  private static String contentType = config.getProperty(FIELD_CONTENT_TYPE);
-  private static String attachmentDescription = config.getProperty(FIELD_ATTACHMENT_DESCRIPTION);
-  private static String pathAttachmentIn = config.getProperty(FIELD_PATH_ATTACHMENT_IN);
-
-  private static ApiContext apiContext = getApiContext();
+  private static final ApiContext apiContext = getApiContext();
 
   private static byte[] getAttachmentPublicContentBytes(String uuid, ApiContext apiContext) {
     return AttachmentPublicContent.list(apiContext, uuid).getValue();

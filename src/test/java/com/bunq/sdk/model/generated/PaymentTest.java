@@ -6,7 +6,6 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.util.HashMap;
-import java.util.Properties;
 import org.junit.Test;
 
 /**
@@ -16,33 +15,18 @@ import org.junit.Test;
 public class PaymentTest extends BunqSdkTestBase {
 
   /**
-   * Config fields
-   */
-  private static final String FIELD_USER_ID = "USER_ID";
-  private static final String FIELD_MONETARY_ACCOUNT_ID = "MONETARY_ACCOUNT_ID";
-  private static final String FIELD_COUNTER_PARTY_ALIAS = "COUNTER_PARTY_ALIAS";
-  private static final String FIELD_COUNTER_PARTY_TYPE = "COUNTER_PARTY_TYPE";
-  private static final String FIELD_SAME_USER_OTHER_ACCOUNT_TYPE = "SAME_USER_OTHER_ACCOUNT_TYPE";
-  private static final String FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS = "SAME_USER_OTHER_ACCOUNT_ALIAS";
-
-  /**
    * Config values
    */
+  private static final int userId = TestConfig.getUserId();
+  private static final int monetaryAccountId = TestConfig.getMonetaryAccountId();
+  private static final Pointer counterPartyAliasOther = TestConfig.getCounterPartyAliasOther();
+  private static final Pointer counterPartyAliasSelf = TestConfig.getCounterPartyAliasSelf();
+
+  private static final ApiContext apiContext = getApiContext();
+
   private static final String AMOUNT_IN_EUR = "00.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
-  private static Properties config = TestConfig.prop();
-  private static Integer userId = Integer.parseInt(config.getProperty(FIELD_USER_ID));
-  private static Integer monetaryAccountID = Integer.parseInt(config.getProperty(
-      FIELD_MONETARY_ACCOUNT_ID));
-  private static String counterPartyAlias = config.getProperty(FIELD_COUNTER_PARTY_ALIAS);
-  private static String counterPartyType = config.getProperty(FIELD_COUNTER_PARTY_TYPE);
-  private static String counterTypeSameUserOtherAccount = config.getProperty(
-      FIELD_SAME_USER_OTHER_ACCOUNT_TYPE);
-  private static String counterAliasSameUserOtherAccount = config.getProperty(
-      FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS);
-
-  private static ApiContext apiContext = getApiContext();
 
   /**
    * Tests making a payment to another sandbox user
@@ -51,16 +35,14 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   @Test
   public void makePaymentToOtherUser() throws Exception {
-    Pointer counterPartyAlias = new Pointer(counterPartyType, PaymentTest.counterPartyAlias);
-
     Amount amount = new Amount(AMOUNT_IN_EUR, CURRENCY);
 
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(Payment.FIELD_AMOUNT, amount);
-    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAlias);
+    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasSelf);
     requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
 
-    Payment.create(apiContext, requestMap, userId, monetaryAccountID);
+    Payment.create(apiContext, requestMap, userId, monetaryAccountId);
   }
 
   /**
@@ -70,17 +52,14 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   @Test
   public void makePaymentToOtherAccount() throws Exception {
-    Pointer counterPartyAlias = new Pointer(counterTypeSameUserOtherAccount,
-        counterAliasSameUserOtherAccount);
-
     Amount amount = new Amount(AMOUNT_IN_EUR, CURRENCY);
 
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
     requestMap.put(Payment.FIELD_AMOUNT, amount);
-    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAlias);
+    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
 
-    Payment.create(apiContext, requestMap, userId, monetaryAccountID);
+    Payment.create(apiContext, requestMap, userId, monetaryAccountId);
   }
 
 }
