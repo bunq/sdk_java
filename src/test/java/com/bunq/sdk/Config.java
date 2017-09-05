@@ -18,7 +18,7 @@ public class Config {
   /**
    * Delimiter between the IP addresses in the PERMITTED_IPS field.
    */
-  private static final String DELIMITER_IPS = ", ";
+  private static final String DELIMITER_IPS = ",";
 
   /**
    * Constant for a length of an empty array.
