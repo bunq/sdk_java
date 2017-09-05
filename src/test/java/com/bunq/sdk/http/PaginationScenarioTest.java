@@ -10,10 +10,8 @@ import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
