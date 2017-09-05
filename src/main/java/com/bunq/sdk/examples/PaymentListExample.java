@@ -54,7 +54,7 @@ public class PaymentListExample {
 
     Pagination pagination = paymentListResponse.getPagination();
 
-    if (pagination.hasPreviousItem()) {
+    if (pagination.hasPreviousPage()) {
       System.out.println(MESSAGE_SECOND_LATEST_PAGE_IDS);
       List<Payment> previousPayments = Payment.list(
           apiContext,

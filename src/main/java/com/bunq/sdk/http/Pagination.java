@@ -11,6 +11,8 @@ public class Pagination {
    */
   private static final String ERROR_NO_PREVIOUS_PAGE =
       "Could not generate previous page URL params: there is no previous page.";
+  private static final String ERROR_NO_NEXT_PAGE =
+      "Could not generate next page URL params: next page not found.";
 
   /**
    * URL Param constants.
@@ -36,6 +38,8 @@ public class Pagination {
    * Get the URL params required to request the next page of the listing.
    */
   public Map<String, String> getUrlParamsNextPage() {
+    assertHasNextPage();
+
     Map<String, String> params = new HashMap<>();
     params.put(PARAM_NEWER_ID, Integer.toString(getNextId()));
     addCountToParamsIfNeeded(params);
@@ -43,15 +47,21 @@ public class Pagination {
     return params;
   }
 
+  private void assertHasNextPage() {
+    if (getNextId() == null) {
+      throw new BunqException(ERROR_NO_NEXT_PAGE);
+    }
+  }
+
   private Integer getNextId() {
-    if (hasNextItemAssured()) {
+    if (hasNextPageAssured()) {
       return newerId;
     } else {
       return futureId;
     }
   }
 
-  public boolean hasNextItemAssured() {
+  public boolean hasNextPageAssured() {
     return newerId != null;
   }
 
@@ -65,9 +75,7 @@ public class Pagination {
    * Get the URL params required to request the previous page of the listing.
    */
   public Map<String, String> getUrlParamsPreviousPage() {
-    if (!hasPreviousItem()) {
-      throw new BunqException(ERROR_NO_PREVIOUS_PAGE);
-    }
+    assertHasPreviousPage();
 
     Map<String, String> params = new HashMap<>();
     params.put(PARAM_OLDER_ID, Integer.toString(olderId));
@@ -76,7 +84,13 @@ public class Pagination {
     return params;
   }
 
-  public boolean hasPreviousItem() {
+  private void assertHasPreviousPage() {
+    if (!hasPreviousPage()) {
+      throw new BunqException(ERROR_NO_PREVIOUS_PAGE);
+    }
+  }
+
+  public boolean hasPreviousPage() {
     return olderId != null;
   }
 
