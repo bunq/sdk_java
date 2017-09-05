@@ -24,7 +24,7 @@ public class PaymentTest extends BunqSdkTestBase {
 
   private static final ApiContext apiContext = getApiContext();
 
-  private static final String AMOUNT_IN_EUR = "00.01";
+  private static final String AMOUNT_EUR = "00.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
 
@@ -35,7 +35,7 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   @Test
   public void makePaymentToOtherUser() throws Exception {
-    Amount amount = new Amount(AMOUNT_IN_EUR, CURRENCY);
+    Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(Payment.FIELD_AMOUNT, amount);
@@ -52,7 +52,7 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   @Test
   public void makePaymentToOtherAccount() throws Exception {
-    Amount amount = new Amount(AMOUNT_IN_EUR, CURRENCY);
+    Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
