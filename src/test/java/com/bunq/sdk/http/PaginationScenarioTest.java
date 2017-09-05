@@ -43,7 +43,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
    */
   private final static String AMOUNT_EUR = "0.01";
   private final static String CURRENCY = "EUR";
-  private final static String PAYMENT_DESCRIPTION = "C# test Payment";
+  private final static String PAYMENT_DESCRIPTION = "Java test Payment";
 
   /**
    * Gson builder for serialization.
