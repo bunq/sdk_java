@@ -42,8 +42,8 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
    * Constants for payment creation.
    */
   private final static String AMOUNT_IN_EUR = "0.01";
-  private final static String FIELD_CURRENCY = "EUR";
-  private final static String FIELD_PAYMENT_DESCRIPTION = "C# test Payment";
+  private final static String CURRENCY = "EUR";
+  private final static String PAYMENT_DESCRIPTION = "C# test Payment";
 
   /**
    * Gson builder for serialization.
@@ -105,8 +105,8 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   private static void CreatePayment()
   {
     Map<String, Object> requestMap = new HashMap<>();
-    requestMap.put(Payment.FIELD_AMOUNT, new Amount(AMOUNT_IN_EUR, FIELD_CURRENCY));
-    requestMap.put(Payment.FIELD_DESCRIPTION, FIELD_PAYMENT_DESCRIPTION);
+    requestMap.put(Payment.FIELD_AMOUNT, new Amount(AMOUNT_IN_EUR, CURRENCY));
+    requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
     requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
 
     Payment.create(apiContext, requestMap, userId, monetaryAccountId);
