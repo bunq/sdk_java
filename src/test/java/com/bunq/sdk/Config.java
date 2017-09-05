@@ -21,6 +21,11 @@ public class Config {
   private static final String DELIMITER_IPS = ", ";
 
   /**
+   * Constant for a length of an empty array.
+   */
+  private static final int LENGTH_NONE = 0;
+
+  /**
    * Field constants.
    */
   private static final String FIELD_API_CONFIG_PATH = "API_CONFIG_PATH";
@@ -62,7 +67,13 @@ public class Config {
   }
 
   public static String[] getPermittedIps() {
-    return properties.getProperty(FIELD_PERMITTED_IPS).split(DELIMITER_IPS);
+    String permittedIpsString = properties.getProperty(FIELD_PERMITTED_IPS);
+
+    if (permittedIpsString.isEmpty()) {
+      return new String[LENGTH_NONE];
+    } else {
+      return permittedIpsString.split(DELIMITER_IPS);
+    }
   }
 
   public static Integer getUserId() {
