@@ -8,6 +8,7 @@ import com.bunq.sdk.model.generated.Payment;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.Gson;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -54,7 +55,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   public void apiScenarioPaymentListingWithPaginationTest()
   {
     EnsureEnoughPayments();
-    Set paymentsExpected = new LinkedHashSet<>(GetPaymentsRequired());
+    ArrayList paymentsExpected = new ArrayList<>(GetPaymentsRequired());
     Pagination paginationCountOnly = new Pagination();
     paginationCountOnly.setCount(PAYMENT_LISTING_PAGE_SIZE);
 
@@ -67,7 +68,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     BunqResponse<List<Payment>> paymentResponsePreviousNext =
         ListPayments(paginationPrevious.getUrlParamsNextPage());
 
-    Set<Payment> paymentsActual = new LinkedHashSet<>();
+    ArrayList<Payment> paymentsActual = new ArrayList<>();
     paymentsActual.addAll(paymentResponsePreviousNext.getValue());
     paymentsActual.addAll(paymentResponsePrevious.getValue());
     String paymentsExpectedSerialized = gson.toJson(paymentsExpected);
