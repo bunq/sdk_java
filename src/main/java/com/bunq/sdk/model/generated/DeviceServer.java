@@ -84,10 +84,13 @@ public class DeviceServer extends BunqModel {
   }
 
   /**
-   * Create a new DeviceServer. Provide the Installation token in the
-   * "X-Bunq-Client-Authentication" header. And sign this request with the key of which you used
-   * the public part to create the Installation. Your API key will be bound to the ip address of
-   * this DeviceServer.
+   * Create a new DeviceServer providing the installation token in the header and signing the
+   * request with the private part of the key you used to create the installation. The API Key
+   * that you are using will be bound to the IP address of the DeviceServer which you have
+   * created.<br/><br/>Using a Wildcard API Key gives you the freedom to make API calls even if
+   * the IP address has changed after the POST device-server.<br/><br/>Find out more at this link
+   * <a href="https://bunq.com/en/apikey-dynamic-ip"
+   * target="_blank">https://bunq.com/en/apikey-dynamic-ip</a>.
    */
   public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap,
       Map<String, String> customHeaders) {
@@ -109,7 +112,7 @@ public class DeviceServer extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, deviceServerId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, deviceServerId), new HashMap<>(), customHeaders);
 
     return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE);
   }
@@ -118,13 +121,18 @@ public class DeviceServer extends BunqModel {
     return list(apiContext, new HashMap<>());
   }
 
+  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext,
+      Map<String, String> params) {
+    return list(apiContext, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of all the DeviceServers you have created.
    */
   public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
     return fromJsonList(DeviceServer.class, responseRaw, OBJECT_TYPE);
   }

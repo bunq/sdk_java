@@ -88,14 +88,20 @@ public class ChatMessage extends BunqModel {
     return list(apiContext, userId, chatConversationId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
+      Integer chatConversationId, Map<String, String> params) {
+    return list(apiContext, userId, chatConversationId, params, new HashMap<>());
+  }
+
   /**
    * Get all the messages that are part of a specific conversation.
    */
   public static BunqResponse<List<ChatMessage>> list(ApiContext apiContext, Integer userId,
-      Integer chatConversationId, Map<String, String> customHeaders) {
+      Integer chatConversationId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, chatConversationId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, chatConversationId), params,
+            customHeaders);
 
     return fromJsonList(ChatMessage.class, responseRaw, OBJECT_TYPE);
   }

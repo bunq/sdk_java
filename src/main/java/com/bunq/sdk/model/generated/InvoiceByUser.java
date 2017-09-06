@@ -147,13 +147,18 @@ public class InvoiceByUser extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    */
   public static BunqResponse<List<InvoiceByUser>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
   }
@@ -169,7 +174,8 @@ public class InvoiceByUser extends BunqModel {
       Integer invoiceByUserId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, invoiceByUserId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, invoiceByUserId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
   }

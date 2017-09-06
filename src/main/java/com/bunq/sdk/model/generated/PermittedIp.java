@@ -62,7 +62,7 @@ public class PermittedIp extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, credentialPasswordIpId, permittedIpId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE);
   }
@@ -90,13 +90,20 @@ public class PermittedIp extends BunqModel {
     return list(apiContext, userId, credentialPasswordIpId, new HashMap<>());
   }
 
+  public static BunqResponse<List<PermittedIp>> list(ApiContext apiContext, Integer userId,
+      Integer credentialPasswordIpId, Map<String, String> params) {
+    return list(apiContext, userId, credentialPasswordIpId, params, new HashMap<>());
+  }
+
   /**
    */
   public static BunqResponse<List<PermittedIp>> list(ApiContext apiContext, Integer userId,
-      Integer credentialPasswordIpId, Map<String, String> customHeaders) {
+      Integer credentialPasswordIpId, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, credentialPasswordIpId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, credentialPasswordIpId), params,
+            customHeaders);
 
     return fromJsonList(PermittedIp.class, responseRaw, OBJECT_TYPE);
   }

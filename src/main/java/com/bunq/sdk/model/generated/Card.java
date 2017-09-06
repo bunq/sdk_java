@@ -91,6 +91,13 @@ public class Card extends BunqModel {
   private String status;
 
   /**
+   * The sub-status of the card. Can be NONE or REPLACED.
+   */
+  @Expose
+  @SerializedName("sub_status")
+  private String subStatus;
+
+  /**
    * The order status of the card. Can be CARD_UPDATE_REQUESTED, CARD_UPDATE_SENT,
    * CARD_UPDATE_ACCEPTED, ACCEPTED_FOR_PRODUCTION or DELIVERED_TO_CUSTOMER.
    */
@@ -162,6 +169,14 @@ public class Card extends BunqModel {
   @SerializedName("pin_code_assignment")
   private List<CardPinAssignment> pinCodeAssignment;
 
+  /**
+   * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
+   * is removed if not supplied.
+   */
+  @Expose
+  @SerializedName("monetary_account_id_fallback")
+  private Integer monetaryAccountIdFallback;
+
   public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap,
       Integer userId, Integer cardId) {
     return update(apiContext, requestMap, userId, cardId, new HashMap<>());
@@ -194,7 +209,7 @@ public class Card extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, cardId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, cardId), new HashMap<>(), customHeaders);
 
     return fromJson(Card.class, responseRaw, OBJECT_TYPE);
   }
@@ -203,14 +218,19 @@ public class Card extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    * Return all the cards available to the user.
    */
   public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(Card.class, responseRaw, OBJECT_TYPE);
   }
@@ -280,6 +300,17 @@ public class Card extends BunqModel {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  /**
+   * The sub-status of the card. Can be NONE or REPLACED.
+   */
+  public String getSubStatus() {
+    return this.subStatus;
+  }
+
+  public void setSubStatus(String subStatus) {
+    this.subStatus = subStatus;
   }
 
   /**
@@ -392,6 +423,18 @@ public class Card extends BunqModel {
 
   public void setPinCodeAssignment(List<CardPinAssignment> pinCodeAssignment) {
     this.pinCodeAssignment = pinCodeAssignment;
+  }
+
+  /**
+   * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
+   * is removed if not supplied.
+   */
+  public Integer getMonetaryAccountIdFallback() {
+    return this.monetaryAccountIdFallback;
+  }
+
+  public void setMonetaryAccountIdFallback(Integer monetaryAccountIdFallback) {
+    this.monetaryAccountIdFallback = monetaryAccountIdFallback;
   }
 
 }

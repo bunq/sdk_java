@@ -38,7 +38,7 @@ public class Schedule extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, scheduleId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(Schedule.class, responseRaw, OBJECT_TYPE);
   }
@@ -48,6 +48,11 @@ public class Schedule extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
+  public static BunqResponse<List<Schedule>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of scheduled definition for a given monetary account. You can add the
    * parameter type to filter the response. When
@@ -55,10 +60,10 @@ public class Schedule extends BunqModel {
    * schedule definition object that relate to these definitions are returned.
    */
   public static BunqResponse<List<Schedule>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(Schedule.class, responseRaw, OBJECT_TYPE);
   }

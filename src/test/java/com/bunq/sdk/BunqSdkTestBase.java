@@ -7,7 +7,6 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.generated.User;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Base class for the Bunq SDK tests.
@@ -20,29 +19,11 @@ public class BunqSdkTestBase {
   private static final String DEVICE_DESCRIPTION = "Java test device";
 
   /**
-   * Config fields.
-   */
-  private static final String FIELD_API_KEY = "API_KEY";
-  private static final String FIELD_PERMITTED_IPS = "PERMITTED_IPS";
-  private static final String FIELD_API_CONFIG_PATH = "API_CONFIG_PATH";
-
-  /**
-   * Delimiter between the IP addresses in the PERMITTED_IPS field.
-   */
-  private static final String DELIMITER_IPS = ", ";
-
-  /**
-   * Properties for the tests.
-   */
-  private static Properties config = TestConfig.prop();
-
-  /**
    * Individual properties.
    */
-  private static String apiKey = config.getProperty(FIELD_API_KEY);
-  private static String[] permittedIps = config.getProperty(FIELD_PERMITTED_IPS).split(
-      DELIMITER_IPS);
-  private static String apiConfigPath = config.getProperty(FIELD_API_CONFIG_PATH);
+  private static String apiKey = Config.getApiKey();
+  private static String[] permittedIps = Config.getPermittedIps();
+  private static String apiConfigPath = Config.getApiConfigPath();
 
   /**
    * Based on the result of isSessionActive will create a new ApiContext or restore an old conf

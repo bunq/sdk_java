@@ -161,7 +161,7 @@ public class RequestResponse extends BunqModel {
   private Geolocation geolocation;
 
   /**
-   * The type of the RequestInquiry. Can be DIRECT_DEBIT, IDEAL or INTERNAL.
+   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL or INTERNAL.
    */
   @Expose
   @SerializedName("type")
@@ -204,6 +204,20 @@ public class RequestResponse extends BunqModel {
   private Boolean allowChat;
 
   /**
+   * The credit scheme id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  @Expose
+  @SerializedName("credit_scheme_identifier")
+  private String creditSchemeIdentifier;
+
+  /**
+   * The mandate id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  @Expose
+  @SerializedName("mandate_identifier")
+  private String mandateIdentifier;
+
+  /**
    * The whitelist id for this action or null.
    */
   @Expose
@@ -237,14 +251,19 @@ public class RequestResponse extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
+  public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  }
+
   /**
    * Get all RequestResponses for a MonetaryAccount.
    */
   public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
@@ -262,7 +281,7 @@ public class RequestResponse extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestResponseId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
   }
@@ -448,7 +467,7 @@ public class RequestResponse extends BunqModel {
   }
 
   /**
-   * The type of the RequestInquiry. Can be DIRECT_DEBIT, IDEAL or INTERNAL.
+   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL or INTERNAL.
    */
   public String getType() {
     return this.type;
@@ -512,6 +531,28 @@ public class RequestResponse extends BunqModel {
 
   public void setAllowChat(Boolean allowChat) {
     this.allowChat = allowChat;
+  }
+
+  /**
+   * The credit scheme id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  public String getCreditSchemeIdentifier() {
+    return this.creditSchemeIdentifier;
+  }
+
+  public void setCreditSchemeIdentifier(String creditSchemeIdentifier) {
+    this.creditSchemeIdentifier = creditSchemeIdentifier;
+  }
+
+  /**
+   * The mandate id provided by the counterparty for DIRECT_DEBIT inquiries.
+   */
+  public String getMandateIdentifier() {
+    return this.mandateIdentifier;
+  }
+
+  public void setMandateIdentifier(String mandateIdentifier) {
+    this.mandateIdentifier = mandateIdentifier;
   }
 
   /**

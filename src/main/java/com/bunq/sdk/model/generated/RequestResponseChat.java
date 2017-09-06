@@ -112,15 +112,21 @@ public class RequestResponseChat extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, requestResponseId, new HashMap<>());
   }
 
+  public static BunqResponse<List<RequestResponseChat>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer requestResponseId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, requestResponseId, params, new HashMap<>());
+  }
+
   /**
    * Get the chat for a specific request response.
    */
   public static BunqResponse<List<RequestResponseChat>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer requestResponseId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Integer requestResponseId, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, requestResponseId),
-            customHeaders);
+            params, customHeaders);
 
     return fromJsonList(RequestResponseChat.class, responseRaw, OBJECT_TYPE);
   }

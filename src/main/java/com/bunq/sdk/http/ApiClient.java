@@ -15,12 +15,15 @@ import com.sun.jndi.toolkit.url.Uri;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.UUID;
 import org.apache.http.Header;
 import org.apache.http.HttpHost;
@@ -32,6 +35,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.ContentType;
@@ -75,7 +79,7 @@ public class ApiClient {
   /**
    * Prefix for bunq's own headers.
    */
-  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.10.0";
+  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.11.0";
   private static final String LANGUAGE_EN_US = "en_US";
   private static final String REGION_NL_NL = "nl_NL";
   private static final String GEOLOCATION_ZERO = "0 0 0 0 000";
@@ -135,13 +139,24 @@ public class ApiClient {
       CloseableHttpResponse response = executeRequest(httpPost, customHeaders);
 
       return createBunqResponseRaw(response);
-    } catch (IOException exception) {
+    } catch (IOException | URISyntaxException exception) {
       throw new UncaughtExceptionError(exception);
     }
   }
 
-  private URI determineFullUri(String uri) {
-    return URI.create(apiContext.getBaseUri().toString() + uri);
+  private URI determineFullUri(String uri) throws URISyntaxException {
+    return determineFullUri(uri, new HashMap<>());
+  }
+
+  private URI determineFullUri(String uri, Map<String, String> params) throws URISyntaxException {
+    URIBuilder builder = new URIBuilder(apiContext.getBaseUri().toString() + uri);
+    SortedMap<String, String> paramsSorted = new TreeMap<>(params);
+
+    for (Map.Entry<String, String> param : paramsSorted.entrySet()) {
+      builder.addParameter(param.getKey(), param.getValue());
+    }
+
+    return builder.build();
   }
 
   private CloseableHttpResponse executeRequest(HttpUriRequest request,
@@ -279,13 +294,14 @@ public class ApiClient {
    *
    * @return The raw response of the GET request.
    */
-  public BunqResponseRaw get(String uri, Map<String, String> customHeaders) {
+  public BunqResponseRaw get(String uri, Map<String, String> params,
+      Map<String, String> customHeaders) {
     try {
-      HttpGet httpGet = new HttpGet(determineFullUri(uri));
+      HttpGet httpGet = new HttpGet(determineFullUri(uri, params));
       CloseableHttpResponse response = executeRequest(httpGet, customHeaders);
 
       return createBunqResponseRaw(response);
-    } catch (IOException exception) {
+    } catch (IOException | URISyntaxException exception) {
       throw new UncaughtExceptionError(exception);
     }
   }
@@ -303,7 +319,7 @@ public class ApiClient {
       CloseableHttpResponse response = executeRequest(httpPut, customHeaders);
 
       return createBunqResponseRaw(response);
-    } catch (IOException exception) {
+    } catch (IOException | URISyntaxException exception) {
       throw new UncaughtExceptionError(exception);
     }
   }
@@ -319,7 +335,7 @@ public class ApiClient {
       CloseableHttpResponse response = executeRequest(httpDelete, customHeaders);
 
       return createBunqResponseRaw(response);
-    } catch (IOException exception) {
+    } catch (IOException | URISyntaxException exception) {
       throw new UncaughtExceptionError(exception);
     }
   }

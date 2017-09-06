@@ -57,7 +57,7 @@ public class User extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId), new HashMap<>(), customHeaders);
 
     return fromJson(User.class, responseRaw);
   }
@@ -66,13 +66,17 @@ public class User extends BunqModel {
     return list(apiContext, new HashMap<>());
   }
 
+  public static BunqResponse<List<User>> list(ApiContext apiContext, Map<String, String> params) {
+    return list(apiContext, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of all available users.
    */
-  public static BunqResponse<List<User>> list(ApiContext apiContext,
+  public static BunqResponse<List<User>> list(ApiContext apiContext, Map<String, String> params,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
     return fromJsonList(User.class, responseRaw);
   }

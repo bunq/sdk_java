@@ -247,7 +247,8 @@ public class Payment extends BunqModel {
       Integer monetaryAccountId, Integer paymentId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, paymentId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, paymentId),
+            new HashMap<>(), customHeaders);
 
     return fromJson(Payment.class, responseRaw, OBJECT_TYPE);
   }
@@ -257,14 +258,19 @@ public class Payment extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
+  public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  }
+
   /**
    * Get a listing of all Payments performed on a given MonetaryAccount (incoming and outgoing).
    */
   public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(Payment.class, responseRaw, OBJECT_TYPE);
   }

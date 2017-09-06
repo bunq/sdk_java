@@ -29,13 +29,18 @@ public class ChatConversation extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ChatConversation>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    */
   public static BunqResponse<List<ChatConversation>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(ChatConversation.class, responseRaw, OBJECT_TYPE);
   }
@@ -51,7 +56,8 @@ public class ChatConversation extends BunqModel {
       Integer chatConversationId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, chatConversationId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, chatConversationId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(ChatConversation.class, responseRaw, OBJECT_TYPE);
   }

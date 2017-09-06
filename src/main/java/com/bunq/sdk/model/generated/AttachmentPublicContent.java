@@ -35,7 +35,8 @@ public class AttachmentPublicContent extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, attachmentPublicUuid), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, attachmentPublicUuid), new HashMap<>(),
+            customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }

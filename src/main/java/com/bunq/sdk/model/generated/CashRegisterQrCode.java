@@ -142,7 +142,7 @@ public class CashRegisterQrCode extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String
             .format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, cashRegisterQrCodeId),
-        customHeaders);
+        new HashMap<>(), customHeaders);
 
     return fromJson(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE);
   }
@@ -152,14 +152,20 @@ public class CashRegisterQrCode extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
   }
 
+  public static BunqResponse<List<CashRegisterQrCode>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, cashRegisterId, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of QR code information from a given CashRegister
    */
   public static BunqResponse<List<CashRegisterQrCode>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId),
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId), params,
             customHeaders);
 
     return fromJsonList(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE);

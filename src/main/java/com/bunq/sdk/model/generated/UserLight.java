@@ -30,7 +30,6 @@ public class UserLight extends BunqModel {
   public static final String FIELD_LAST_NAME = "last_name";
   public static final String FIELD_PUBLIC_NICK_NAME = "public_nick_name";
   public static final String FIELD_COUNTER_BANK_IBAN = "counter_bank_iban";
-  public static final String FIELD_ADDRESS = "address";
   public static final String FIELD_ADDRESS_MAIN = "address_main";
   public static final String FIELD_ADDRESS_POSTAL = "address_postal";
   public static final String FIELD_AVATAR_UUID = "avatar_uuid";
@@ -304,7 +303,7 @@ public class UserLight extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userLightId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userLightId), new HashMap<>(), customHeaders);
 
     return fromJson(UserLight.class, responseRaw, OBJECT_TYPE);
   }

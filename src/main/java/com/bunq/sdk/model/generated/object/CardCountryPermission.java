@@ -22,8 +22,26 @@ public class CardCountryPermission extends BunqModel {
   @SerializedName("expiry_time")
   private String expiryTime;
 
+  /**
+   * The id of the card country permission entry.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
   public CardCountryPermission(String country) {
     this.country = country;
+  }
+
+  /**
+   * The id of the card country permission entry.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**

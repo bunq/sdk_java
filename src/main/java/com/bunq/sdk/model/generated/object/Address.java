@@ -50,6 +50,13 @@ public class Address extends BunqModel {
   @SerializedName("country")
   private String country;
 
+  /**
+   * The province according to local standard.
+   */
+  @Expose
+  @SerializedName("province")
+  private String province;
+
   public Address(String street, String houseNumber, String postalCode, String city,
       String country) {
     this.street = street;
@@ -123,6 +130,17 @@ public class Address extends BunqModel {
 
   public void setCountry(String country) {
     this.country = country;
+  }
+
+  /**
+   * The province according to local standard.
+   */
+  public String getProvince() {
+    return this.province;
+  }
+
+  public void setProvince(String province) {
+    this.province = province;
   }
 
 }

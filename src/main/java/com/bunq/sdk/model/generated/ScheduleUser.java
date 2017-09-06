@@ -28,6 +28,11 @@ public class ScheduleUser extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ScheduleUser>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of scheduled definition for all accessible monetary accounts of the user.
    * You can add the parameter type to filter the response. When
@@ -35,10 +40,10 @@ public class ScheduleUser extends BunqModel {
    * schedule definition object that relate to these definitions are returned.
    */
   public static BunqResponse<List<ScheduleUser>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(ScheduleUser.class, responseRaw, OBJECT_TYPE);
   }

@@ -92,7 +92,7 @@ public class AttachmentTab extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, attachmentTabId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(AttachmentTab.class, responseRaw, OBJECT_TYPE);
   }

@@ -39,14 +39,19 @@ public class InstallationServerPublicKey extends BunqModel {
     return list(apiContext, installationId, new HashMap<>());
   }
 
+  public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
+      Integer installationId, Map<String, String> params) {
+    return list(apiContext, installationId, params, new HashMap<>());
+  }
+
   /**
    * Show the ServerPublicKey for this Installation.
    */
   public static BunqResponse<List<InstallationServerPublicKey>> list(ApiContext apiContext,
-      Integer installationId, Map<String, String> customHeaders) {
+      Integer installationId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, installationId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
 
     return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE);
   }

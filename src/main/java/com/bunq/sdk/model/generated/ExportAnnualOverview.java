@@ -102,7 +102,8 @@ public class ExportAnnualOverview extends BunqModel {
       Integer exportAnnualOverviewId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, exportAnnualOverviewId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, exportAnnualOverviewId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE);
   }
@@ -112,14 +113,19 @@ public class ExportAnnualOverview extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ExportAnnualOverview>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    * List all the annual overviews for a user.
    */
   public static BunqResponse<List<ExportAnnualOverview>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE);
   }

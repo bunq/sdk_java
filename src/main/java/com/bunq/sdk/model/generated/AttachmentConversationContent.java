@@ -37,7 +37,7 @@ public class AttachmentConversationContent extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_LISTING, userId, chatConversationId, attachmentId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }

@@ -55,7 +55,7 @@ public class TabResultResponse extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, tabResultResponseId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(TabResultResponse.class, responseRaw, OBJECT_TYPE);
   }
@@ -65,14 +65,19 @@ public class TabResultResponse extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
+  public static BunqResponse<List<TabResultResponse>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  }
+
   /**
    * Used to view a list of TabResultResponse objects belonging to a tab.
    */
   public static BunqResponse<List<TabResultResponse>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(TabResultResponse.class, responseRaw, OBJECT_TYPE);
   }
