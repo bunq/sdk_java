@@ -127,6 +127,7 @@ public class PaginationTest {
     Pagination pagination = createPaginationWithAllPropertiesSet();
     pagination.setOlderId(null);
 
+    Assert.assertFalse(pagination.hasPreviousPage());
     exception.expect(BunqException.class);
     pagination.getUrlParamsPreviousPage();
   }
