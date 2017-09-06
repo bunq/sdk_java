@@ -67,7 +67,8 @@ public class TabAttachmentTab extends BunqModel {
       Integer tabAttachmentTabId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, tabUuid, tabAttachmentTabId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, tabUuid, tabAttachmentTabId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(TabAttachmentTab.class, responseRaw, OBJECT_TYPE);
   }

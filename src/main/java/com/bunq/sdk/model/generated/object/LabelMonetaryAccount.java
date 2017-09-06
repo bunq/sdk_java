@@ -52,6 +52,13 @@ public class LabelMonetaryAccount extends BunqModel {
   private MonetaryAccountReference bunqMe;
 
   /**
+   * Whether or not the monetary account is light.
+   */
+  @Expose
+  @SerializedName("is_light")
+  private Boolean isLight;
+
+  /**
    * The IBAN of the monetary account.
    */
   public String getIban() {
@@ -115,6 +122,17 @@ public class LabelMonetaryAccount extends BunqModel {
 
   public void setBunqMe(MonetaryAccountReference bunqMe) {
     this.bunqMe = bunqMe;
+  }
+
+  /**
+   * Whether or not the monetary account is light.
+   */
+  public Boolean getIsLight() {
+    return this.isLight;
+  }
+
+  public void setIsLight(Boolean isLight) {
+    this.isLight = isLight;
   }
 
 }

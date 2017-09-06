@@ -29,7 +29,6 @@ public class UserPerson extends BunqModel {
   public static final String FIELD_MIDDLE_NAME = "middle_name";
   public static final String FIELD_LAST_NAME = "last_name";
   public static final String FIELD_PUBLIC_NICK_NAME = "public_nick_name";
-  public static final String FIELD_ADDRESS = "address";
   public static final String FIELD_ADDRESS_MAIN = "address_main";
   public static final String FIELD_ADDRESS_POSTAL = "address_postal";
   public static final String FIELD_AVATAR_UUID = "avatar_uuid";
@@ -298,7 +297,7 @@ public class UserPerson extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userPersonId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userPersonId), new HashMap<>(), customHeaders);
 
     return fromJson(UserPerson.class, responseRaw, OBJECT_TYPE);
   }

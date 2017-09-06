@@ -96,7 +96,7 @@ public class PaymentBatch extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, paymentBatchId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(PaymentBatch.class, responseRaw, OBJECT_TYPE);
   }
@@ -106,14 +106,19 @@ public class PaymentBatch extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
+  public static BunqResponse<List<PaymentBatch>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  }
+
   /**
    * Return all the payment batches for a monetary account.
    */
   public static BunqResponse<List<PaymentBatch>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(PaymentBatch.class, responseRaw, OBJECT_TYPE);
   }

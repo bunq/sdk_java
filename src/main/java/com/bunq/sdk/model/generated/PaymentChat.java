@@ -108,14 +108,20 @@ public class PaymentChat extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, paymentId, new HashMap<>());
   }
 
+  public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer paymentId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, paymentId, params, new HashMap<>());
+  }
+
   /**
    * Get the chat for a specific payment.
    */
   public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer paymentId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Integer paymentId, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, paymentId),
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, paymentId), params,
             customHeaders);
 
     return fromJsonList(PaymentChat.class, responseRaw, OBJECT_TYPE);

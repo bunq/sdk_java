@@ -38,7 +38,7 @@ public class CashRegisterQrCodeContent extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(
         String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId, qrCodeId),
-        customHeaders);
+        new HashMap<>(), customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }

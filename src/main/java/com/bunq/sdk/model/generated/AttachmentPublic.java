@@ -87,7 +87,8 @@ public class AttachmentPublic extends BunqModel {
       String attachmentPublicUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), new HashMap<>(),
+            customHeaders);
 
     return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE);
   }

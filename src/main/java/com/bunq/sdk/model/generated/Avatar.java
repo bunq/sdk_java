@@ -76,7 +76,7 @@ public class Avatar extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, avatarUuid), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, avatarUuid), new HashMap<>(), customHeaders);
 
     return fromJson(Avatar.class, responseRaw, OBJECT_TYPE);
   }

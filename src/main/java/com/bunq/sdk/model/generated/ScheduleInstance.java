@@ -90,7 +90,7 @@ public class ScheduleInstance extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(
         String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, scheduleId, scheduleInstanceId),
-        customHeaders);
+        new HashMap<>(), customHeaders);
 
     return fromJson(ScheduleInstance.class, responseRaw, OBJECT_TYPE);
   }
@@ -120,13 +120,19 @@ public class ScheduleInstance extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, scheduleId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId,
+      Integer monetaryAccountId, Integer scheduleId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, scheduleId, params, new HashMap<>());
+  }
+
   /**
    */
   public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId,
-      Integer monetaryAccountId, Integer scheduleId, Map<String, String> customHeaders) {
+      Integer monetaryAccountId, Integer scheduleId, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, scheduleId),
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, scheduleId), params,
             customHeaders);
 
     return fromJsonList(ScheduleInstance.class, responseRaw, OBJECT_TYPE);

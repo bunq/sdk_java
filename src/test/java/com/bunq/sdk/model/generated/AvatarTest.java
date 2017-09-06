@@ -3,13 +3,12 @@ package com.bunq.sdk.model.generated;
 import static org.junit.Assert.assertArrayEquals;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -21,20 +20,16 @@ import org.junit.Test;
 public class AvatarTest extends BunqSdkTestBase {
 
   /**
-   * Config fields
+   * Config values.
    */
-  private static final String FIELD_ATTACHMENT_DESCRIPTION = "ATTACHMENT_DESCRIPTION";
-  private static final String FIELD_CONTENT_TYPE = "CONTENT_TYPE";
-  private static final String FIELD_PATH_ATTACHMENT_IN = "PATH_ATTACHMENT_IN";
+  private static final String attachmentDescription = Config.getAttachmentDescription();
+  private static final String contentType = Config.getContentType();
+  private static final String pathAttachmentIn = Config.getPathAttachmentIn();
 
   /**
-   * Config values
+   * The very first index in an array.
    */
   private static final int INDEX_FIRST = 0;
-  private static Properties config = TestConfig.prop();
-  private static String attachmentDescription = config.getProperty(FIELD_ATTACHMENT_DESCRIPTION);
-  private static String contentType = config.getProperty(FIELD_CONTENT_TYPE);
-  private static String pathAttachmentIn = config.getProperty(FIELD_PATH_ATTACHMENT_IN);
 
   private static ApiContext apiContext = getApiContext();
 

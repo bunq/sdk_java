@@ -231,7 +231,8 @@ public class MonetaryAccountBank extends BunqModel {
       Integer monetaryAccountBankId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountBankId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountBankId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE);
   }
@@ -260,14 +261,19 @@ public class MonetaryAccountBank extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<MonetaryAccountBank>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    * Gets a listing of all MonetaryAccountBanks of a given user.
    */
   public static BunqResponse<List<MonetaryAccountBank>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE);
   }

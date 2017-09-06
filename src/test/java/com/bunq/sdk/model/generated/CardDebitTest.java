@@ -3,14 +3,13 @@ package com.bunq.sdk.model.generated;
 import static org.junit.Assert.assertEquals;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -24,20 +23,16 @@ import org.junit.Test;
 public class CardDebitTest extends BunqSdkTestBase {
 
   /**
-   * Config Fields
+   * Config values.
    */
-  private static final String FIELD_USER_ID = "USER_ID";
+  private static final int userId = Config.getUserId();
 
-  /**
-   * Config values
-   */
+  private static final ApiContext apiContext = getApiContext();
+
   private static final String PIN_CODE = "4045";
   private static final int RADIX_DIGITS_AND_LATIN_LETTERS = 36;
   private static final int NUM_BITS_23_DECIMAL_DIGITS = 76;
   private static final int FIRST_INDEX = 0;
-  private static Properties config = TestConfig.prop();
-  private static Integer userId = Integer.parseInt(config.getProperty(FIELD_USER_ID));
-  private static ApiContext apiContext = getApiContext();
 
   /**
    * The name that is going to be shown on the card

@@ -156,7 +156,7 @@ public class ShareInviteBankInquiry extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
         .get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, shareInviteBankInquiryId),
-            customHeaders);
+            new HashMap<>(), customHeaders);
 
     return fromJson(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE);
   }
@@ -189,15 +189,21 @@ public class ShareInviteBankInquiry extends BunqModel {
     return list(apiContext, userId, monetaryAccountId, new HashMap<>());
   }
 
+  public static BunqResponse<List<ShareInviteBankInquiry>> list(ApiContext apiContext,
+      Integer userId, Integer monetaryAccountId, Map<String, String> params) {
+    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  }
+
   /**
    * Get a list with all the share inquiries for a monetary account, only if the requesting user
    * has permission to change the details of the various ones.
    */
   public static BunqResponse<List<ShareInviteBankInquiry>> list(ApiContext apiContext,
-      Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+      Integer userId, Integer monetaryAccountId, Map<String, String> params,
+      Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE);
   }

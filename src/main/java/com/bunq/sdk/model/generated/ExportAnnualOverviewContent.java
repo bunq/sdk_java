@@ -36,7 +36,8 @@ public class ExportAnnualOverviewContent extends BunqModel {
       Integer exportAnnualOverviewId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, exportAnnualOverviewId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, exportAnnualOverviewId), new HashMap<>(),
+            customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }

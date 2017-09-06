@@ -48,7 +48,7 @@ ApiContext apiContext = ApiContext.restore(API_CONTEXT_FILE_PATH);
 to/restored from the `bunq.conf` file in the same folder with your executable.
 
 #### Example
-See [`ApiContextSaveExample.java`](./src/main/java/com/bunq/sdk/example/ApiContextSaveExample.java)
+See [`ApiContextSaveExample.java`](./src/main/java/com/bunq/sdk/examples/ApiContextSaveExample.java)
 
 The API context can then be saved with:
 
@@ -89,7 +89,7 @@ Integer paymentId = Payment.create(
 ```
 
 ##### Example
-See [`PaymentExample.java`](./src/main/java/com/bunq/sdk/example/PaymentExample.java)
+See [`PaymentExample.java`](./src/main/java/com/bunq/sdk/examples/PaymentExample.java)
 
 #### Reading objects
 Reading objects through the API requires an `ApiContext`, identifiers of all dependencies (such as
@@ -107,7 +107,7 @@ MonetaryAccount monetaryAccount = MonetaryAccount.get(
 ```
 
 ##### Example
-See [`MonetaryAccountExample.java`](./src/main/java/com/bunq/sdk/example/MonetaryAccountExample.java)
+See [`MonetaryAccountExample.java`](./src/main/java/com/bunq/sdk/examples/MonetaryAccountExample.java)
 
 #### Updating objects
 Updating objects through the API goes the same way as creating objects, except that also the object to update identifier 
@@ -127,7 +127,7 @@ RequestInquiry.update(
 ```
 
 ##### Example
-See [`RequestExample.java`](./src/main/java/com/bunq/sdk/example/RequestExample.java)
+See [`RequestExample.java`](./src/main/java/com/bunq/sdk/examples/RequestExample.java)
 
 #### Deleting objects
 Deleting objects through the API requires an `ApiContext`, identifiers of all dependencies (such as User ID required for
@@ -139,7 +139,7 @@ CustomerStatementExport.delete(apiContext, userId, monetaryAccountId, customerSt
 ```
 
 ##### Example
-See [`CustomerStatementExportExample.java`](./src/main/java/com/bunq/sdk/example/CustomerStatementExportExample.java)
+See [`CustomerStatementExportExample.java`](./src/main/java/com/bunq/sdk/examples/CustomerStatementExportExample.java)
 
 #### Listing objects
 Listing objects through the API requires an `ApiContext` and identifiers of all dependencies (such as User ID required
@@ -150,11 +150,11 @@ List<User> users = User.list(apiContext);
 ```
 
 ##### Example
-See [`UserListExample.java`](./src/main/java/com/bunq/sdk/example/UserListExample.java)
+See [`UserListExample.java`](./src/main/java/com/bunq/sdk/examples/UserListExample.java)
 
 ## Running Examples
 In order to make the experience of getting into bunq Java SDK smoother, we
-have bundled it with example use cases (located under `./src/main/java/com/bunq/sdk/example/`).
+have bundled it with example use cases (located under `./src/main/java/com/bunq/sdk/examples/`).
 
 To run an example, please do the following:
 1. In your IDE, open the example you are interested in and adjust the constants,

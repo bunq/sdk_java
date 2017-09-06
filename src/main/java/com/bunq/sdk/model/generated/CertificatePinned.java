@@ -5,7 +5,6 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.generated.object.Certificate;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
@@ -39,11 +38,11 @@ public class CertificatePinned extends BunqModel {
   private static final String OBJECT_TYPE = "CertificatePinned";
 
   /**
-   * The certificate chain in .PEM format.
+   * The certificate chain in .PEM format. Certificates are glued with newline characters.
    */
   @Expose
   @SerializedName("certificate_chain")
-  private List<Certificate> certificateChain;
+  private String certificateChain;
 
   /**
    * The id generated for the pinned certificate chain.
@@ -91,14 +90,19 @@ public class CertificatePinned extends BunqModel {
     return list(apiContext, userId, new HashMap<>());
   }
 
+  public static BunqResponse<List<CertificatePinned>> list(ApiContext apiContext, Integer userId,
+      Map<String, String> params) {
+    return list(apiContext, userId, params, new HashMap<>());
+  }
+
   /**
    * List all the pinned certificate chain for the given user.
    */
   public static BunqResponse<List<CertificatePinned>> list(ApiContext apiContext, Integer userId,
-      Map<String, String> customHeaders) {
+      Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
     return fromJsonList(CertificatePinned.class, responseRaw, OBJECT_TYPE);
   }
@@ -115,19 +119,20 @@ public class CertificatePinned extends BunqModel {
       Integer certificatePinnedId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, userId, certificatePinnedId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, userId, certificatePinnedId), new HashMap<>(),
+            customHeaders);
 
     return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE);
   }
 
   /**
-   * The certificate chain in .PEM format.
+   * The certificate chain in .PEM format. Certificates are glued with newline characters.
    */
-  public List<Certificate> getCertificateChain() {
+  public String getCertificateChain() {
     return this.certificateChain;
   }
 
-  public void setCertificateChain(List<Certificate> certificateChain) {
+  public void setCertificateChain(String certificateChain) {
     this.certificateChain = certificateChain;
   }
 

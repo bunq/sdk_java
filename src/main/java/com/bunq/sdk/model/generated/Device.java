@@ -51,7 +51,7 @@ public class Device extends BunqModel {
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_READ, deviceId), customHeaders);
+        .get(String.format(ENDPOINT_URL_READ, deviceId), new HashMap<>(), customHeaders);
 
     return fromJson(Device.class, responseRaw);
   }
@@ -60,13 +60,17 @@ public class Device extends BunqModel {
     return list(apiContext, new HashMap<>());
   }
 
+  public static BunqResponse<List<Device>> list(ApiContext apiContext, Map<String, String> params) {
+    return list(apiContext, params, new HashMap<>());
+  }
+
   /**
    * Get a collection of Devices. A Device is either a DevicePhone or a DeviceServer.
    */
-  public static BunqResponse<List<Device>> list(ApiContext apiContext,
+  public static BunqResponse<List<Device>> list(ApiContext apiContext, Map<String, String> params,
       Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
     return fromJsonList(Device.class, responseRaw);
   }

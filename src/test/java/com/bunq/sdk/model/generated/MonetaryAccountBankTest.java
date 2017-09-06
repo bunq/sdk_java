@@ -1,10 +1,9 @@
 package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.TestConfig;
+import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import java.util.HashMap;
-import java.util.Properties;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -15,23 +14,18 @@ import org.junit.Test;
 public class MonetaryAccountBankTest extends BunqSdkTestBase {
 
   /**
-   * Config fields
+   * Config values.
    */
-  private static final String FIELD_USER_ID = "USER_ID";
+  private static final int userId = Config.getUserId();
 
-  /**
-   * Config values
-   */
+  private static final ApiContext apiContext = getApiContext();
+
   private static final String CANCELLED_STATUS = "CANCELLED";
   private static final String SUB_STATUS = "REDEMPTION_VOLUNTARY";
   private static final String REASON = "OTHER";
   private static final String REASON_DESCRIPTION = "Because this is a test";
   private static final String CURRENCY = "EUR";
   private static final String MONETARY_ACCOUNT_DESCRIPTION = "Test Java monetary account";
-  private static Properties config = TestConfig.prop();
-  private static Integer userId = Integer.parseInt(config.getProperty(FIELD_USER_ID));
-
-  private static ApiContext apiContext = getApiContext();
 
   /**
    * The id of the newly created monetary account which should be closed after the tests completes

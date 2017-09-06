@@ -30,10 +30,28 @@ public class CardLimit extends BunqModel {
   @SerializedName("type")
   private String type;
 
+  /**
+   * The id of the card limit entry.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
   public CardLimit(String dailyLimit, String currency, String type) {
     this.dailyLimit = dailyLimit;
     this.currency = currency;
     this.type = type;
+  }
+
+  /**
+   * The id of the card limit entry.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**

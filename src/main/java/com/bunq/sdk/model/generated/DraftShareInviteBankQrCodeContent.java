@@ -38,7 +38,8 @@ public class DraftShareInviteBankQrCodeContent extends BunqModel {
       Integer draftShareInviteBankId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient
-        .get(String.format(ENDPOINT_URL_LISTING, userId, draftShareInviteBankId), customHeaders);
+        .get(String.format(ENDPOINT_URL_LISTING, userId, draftShareInviteBankId), new HashMap<>(),
+            customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
