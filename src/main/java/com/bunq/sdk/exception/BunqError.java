@@ -4,8 +4,14 @@ public class BunqError extends RuntimeException {
   private int responseCode;
   private String message;
 
+  /**
+   */
   public BunqError(){super();}
 
+  /**
+   * @param message The error message of the failed request.
+   * @param responseCode The response code of the failed request.
+   */
   public BunqError(String message, int responseCode) {
     super(message);
 

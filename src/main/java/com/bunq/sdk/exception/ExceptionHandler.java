@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ExceptionHandler {
 
+//  HTTP error response codes constants.
   private static final int HTTP_RESPONSE_CODE_BAD_REQUEST = 400;
   private static final int HTTP_RESPONSE_CODE_UNAUTHORIZED = 401;
   private static final int HTTP_RESPONSE_CODE_FORBIDDEN = 403;
@@ -12,17 +13,16 @@ public class ExceptionHandler {
   private static final int HTTP_RESPONSE_CODE_TOO_MANY_REQUESTS = 429;
   private static final int HTTP_RESPONSE_CODE_INTERNAL_SERVER_ERROR = 500;
 
+//  Some glue to glue the error message together.
   private static final String GLUE_ERROR_MESSAGES = "\n";
 
-//  /**
-//   * @param responseCode The HTTP Response code of the failed request.
-//   * @param messages The list of messages related to this exception.
-//   */
-//  public ExceptionHandler(int responseCode, List<String> messages) {
-//    this.responseCode = responseCode;
-//    this.messages = concatenateMessages(messages);
-//  }
-
+  /**
+   *
+   * @param responseCode The HTTP response code related to the request.
+   * @param messages  The error message related to the exception that should be raised.
+   *
+   * @return The exception that belongs to this status code.
+   */
   public static BunqError createExceptionForResponse(int responseCode, List<String> messages){
     String error_message = concatenateMessages(messages);
 
