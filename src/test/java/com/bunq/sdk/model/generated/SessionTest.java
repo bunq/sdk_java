@@ -2,7 +2,8 @@ package com.bunq.sdk.model.generated;
 
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.exception.ApiException;
+import com.bunq.sdk.exception.UnauthorizedException;
+import com.bunq.sdk.exception.UnknownApiErrorException;
 import org.junit.Test;
 
 /**
@@ -21,7 +22,7 @@ public class SessionTest extends BunqSdkTestBase {
   /**
    * Tests deletion of the current session
    */
-  @Test(expected = ApiException.class)
+  @Test(expected = UnauthorizedException.class)
   public void deleteSessionTest() throws Exception {
     Session.delete(apiContext, SESSION_ID_DUMMY);
     User.list(apiContext);

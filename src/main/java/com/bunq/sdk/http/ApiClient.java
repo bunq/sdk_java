@@ -3,8 +3,7 @@ package com.bunq.sdk.http;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
-import com.bunq.sdk.exception.BunqError;
-import com.bunq.sdk.exception.ExceptionHandler;
+import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.security.SecurityUtils;
@@ -231,7 +230,7 @@ public class ApiClient {
     }
   }
 
-  private static BunqError createApiExceptionRequestUnsuccessful(Integer responseCode,
+  private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
       String responseBody) {
     List<String> errorDescriptions = new ArrayList<>();
 
@@ -241,7 +240,7 @@ public class ApiClient {
       errorDescriptions.add(responseBody);
     }
 
-    return ExceptionHandler.createExceptionForResponse(responseCode, errorDescriptions);
+    return ExceptionFactory.createExceptionForResponse(responseCode, errorDescriptions);
   }
 
   private static List<String> fetchErrorDescriptions(String responseBody)
