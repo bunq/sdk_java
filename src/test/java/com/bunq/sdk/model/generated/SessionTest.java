@@ -3,7 +3,6 @@ package com.bunq.sdk.model.generated;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.UnauthorizedException;
-import com.bunq.sdk.exception.UnknownApiErrorException;
 import org.junit.Test;
 
 /**
