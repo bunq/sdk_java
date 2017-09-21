@@ -42,7 +42,7 @@ public class ExceptionFactory {
       case HTTP_RESPONSE_CODE_METHOD_NOT_ALLOWED:
         return new MethodNotAllowedException(error_message, responseCode);
       case HTTP_RESPONSE_CODE_TOO_MANY_REQUESTS:
-        return new ToManyRequestsException(error_message, responseCode);
+        return new TooManyRequestsException(error_message, responseCode);
       case HTTP_RESPONSE_CODE_INTERNAL_SERVER_ERROR:
         return new PleaseContactBunqException(error_message, responseCode);
       default:
