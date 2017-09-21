@@ -5,7 +5,7 @@ import java.util.List;
 public class ExceptionFactory {
 
   /**
-   *HTTP error response codes constants.
+   * HTTP error response codes constants.
    */
   private static final int HTTP_RESPONSE_CODE_BAD_REQUEST = 400;
   private static final int HTTP_RESPONSE_CODE_UNAUTHORIZED = 401;
@@ -16,7 +16,7 @@ public class ExceptionFactory {
   private static final int HTTP_RESPONSE_CODE_INTERNAL_SERVER_ERROR = 500;
 
   /**
-   *Some glue to glue the error message together.
+   * Some glue to glue the error message together.
    */
   private static final String GLUE_ERROR_MESSAGES = "\n";
 
