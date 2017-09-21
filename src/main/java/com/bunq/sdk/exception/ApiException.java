@@ -8,10 +8,6 @@ public class ApiException extends RuntimeException {
   private String message;
 
   /**
-   */
-  public ApiException(){super();}
-
-  /**
    * @param message The error message of the failed request.
    * @param responseCode The response code of the failed request.
    */
