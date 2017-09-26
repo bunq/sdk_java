@@ -1,6 +1,6 @@
 package com.bunq.sdk.context;
 
-import com.bunq.sdk.model.Installation;
+import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.security.SecurityUtils;
 import java.security.KeyPair;
 import java.security.PublicKey;

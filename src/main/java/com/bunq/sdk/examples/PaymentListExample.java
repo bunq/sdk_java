@@ -3,7 +3,7 @@ package com.bunq.sdk.examples;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.Pagination;
-import com.bunq.sdk.model.generated.Payment;
+import com.bunq.sdk.model.generated.endpoint.Payment;
 import java.util.List;
 
 /**

@@ -1,10 +1,10 @@
 package com.bunq.sdk.json;
 
-import com.bunq.sdk.model.Id;
-import com.bunq.sdk.model.SessionServer;
-import com.bunq.sdk.model.SessionToken;
-import com.bunq.sdk.model.generated.UserCompany;
-import com.bunq.sdk.model.generated.UserPerson;
+import com.bunq.sdk.model.core.Id;
+import com.bunq.sdk.model.core.SessionServer;
+import com.bunq.sdk.model.core.SessionToken;
+import com.bunq.sdk.model.generated.endpoint.UserCompany;
+import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

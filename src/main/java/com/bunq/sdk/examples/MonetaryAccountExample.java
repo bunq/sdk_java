@@ -1,7 +1,7 @@
 package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.model.generated.MonetaryAccount;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccount;
 
 /**
  * Get info of a monetary account.

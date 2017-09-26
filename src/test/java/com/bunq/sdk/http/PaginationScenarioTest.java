@@ -4,7 +4,7 @@ import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.json.BunqGsonBuilder;
-import com.bunq.sdk.model.generated.Payment;
+import com.bunq.sdk.model.generated.endpoint.Payment;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.Gson;
@@ -50,8 +50,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   private static Gson gson = BunqGsonBuilder.buildDefault().create();
 
   @Test
-  public void apiScenarioPaymentListingWithPaginationTest()
-  {
+  public void apiScenarioPaymentListingWithPaginationTest() {
     EnsureEnoughPayments();
     ArrayList paymentsExpected = new ArrayList<>(GetPaymentsRequired());
     Pagination paginationCountOnly = new Pagination();
@@ -75,34 +74,28 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     Assert.assertEquals(paymentsExpectedSerialized, paymentsActualSerialized);
   }
 
-  private static void EnsureEnoughPayments()
-  {
-    for (int i = NUMBER_ZERO; i < GetPaymentsMissingCount(); ++i)
-    {
+  private static void EnsureEnoughPayments() {
+    for (int i = NUMBER_ZERO; i < GetPaymentsMissingCount(); ++i) {
       CreatePayment();
     }
   }
 
-  private static int GetPaymentsMissingCount()
-  {
+  private static int GetPaymentsMissingCount() {
     return PAYMENT_REQUIRED_COUNT_MINIMUM - GetPaymentsRequired().size();
   }
 
-  private static List<Payment> GetPaymentsRequired()
-  {
+  private static List<Payment> GetPaymentsRequired() {
     Pagination pagination = new Pagination();
     pagination.setCount(PAYMENT_REQUIRED_COUNT_MINIMUM);
 
     return ListPayments(pagination.getUrlParamsCountOnly()).getValue();
   }
 
-  private static BunqResponse<List<Payment>> ListPayments(Map<String, String> urlParams)
-  {
+  private static BunqResponse<List<Payment>> ListPayments(Map<String, String> urlParams) {
     return Payment.list(apiContext, userId, monetaryAccountId, urlParams);
   }
 
-  private static void CreatePayment()
-  {
+  private static void CreatePayment() {
     Map<String, Object> requestMap = new HashMap<>();
     requestMap.put(Payment.FIELD_AMOUNT, new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY));
     requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
