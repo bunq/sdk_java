@@ -36,6 +36,10 @@ public class PaymentExample {
     Payment payment = Payment.get(apiContext, USER_ITEM_ID, MONETARY_ACCOUNT_ITEM_ID, paymentId)
         .getValue();
     System.out.println(payment);
+    
+    // Save the API context to account for all the changes that might have occurred to it during
+    // the example execution
+    apiContext.save(API_CONTEXT_FILE_PATH);
   }
 
   private static Map<String, Object> generateExamplePaymentMap() {
