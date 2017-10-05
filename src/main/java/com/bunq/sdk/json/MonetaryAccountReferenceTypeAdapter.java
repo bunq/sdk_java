@@ -1,6 +1,6 @@
 package com.bunq.sdk.json;
 
-import com.bunq.sdk.model.MonetaryAccountReference;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.TypeAdapter;

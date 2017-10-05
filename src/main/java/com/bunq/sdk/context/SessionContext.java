@@ -1,8 +1,8 @@
 package com.bunq.sdk.context;
 
-import com.bunq.sdk.model.SessionServer;
-import com.bunq.sdk.model.generated.UserCompany;
-import com.bunq.sdk.model.generated.UserPerson;
+import com.bunq.sdk.model.core.SessionServer;
+import com.bunq.sdk.model.generated.endpoint.UserCompany;
+import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.util.Date;

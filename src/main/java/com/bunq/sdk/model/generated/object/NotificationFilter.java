@@ -1,8 +1,14 @@
 package com.bunq.sdk.model.generated.object;
 
-import com.bunq.sdk.model.BunqModel;
+import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  */
@@ -36,8 +42,7 @@ public class NotificationFilter extends BunqModel {
   @SerializedName("category")
   private String category;
 
-  public NotificationFilter(String notificationDeliveryMethod, String notificationTarget,
-      String category) {
+  public NotificationFilter(String notificationDeliveryMethod, String notificationTarget, String category) {
     this.notificationDeliveryMethod = notificationDeliveryMethod;
     this.notificationTarget = notificationTarget;
     this.category = category;

@@ -1,9 +1,9 @@
 package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.model.generated.CustomerStatementExport;
-import com.bunq.sdk.model.generated.MonetaryAccountBank;
-import com.bunq.sdk.model.generated.User;
+import com.bunq.sdk.model.generated.endpoint.CustomerStatementExport;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
+import com.bunq.sdk.model.generated.endpoint.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;

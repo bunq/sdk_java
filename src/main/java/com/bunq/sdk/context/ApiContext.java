@@ -2,10 +2,10 @@ package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.json.BunqGsonBuilder;
-import com.bunq.sdk.model.Installation;
-import com.bunq.sdk.model.SessionServer;
-import com.bunq.sdk.model.generated.DeviceServer;
-import com.bunq.sdk.model.generated.Session;
+import com.bunq.sdk.model.core.Installation;
+import com.bunq.sdk.model.core.SessionServer;
+import com.bunq.sdk.model.generated.endpoint.DeviceServer;
+import com.bunq.sdk.model.generated.endpoint.Session;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;

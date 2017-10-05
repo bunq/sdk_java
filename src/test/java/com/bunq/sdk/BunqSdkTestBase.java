@@ -4,7 +4,7 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.ApiEnvironmentType;
 import com.bunq.sdk.exception.ApiException;
 import com.bunq.sdk.exception.BunqException;
-import com.bunq.sdk.model.generated.User;
+import com.bunq.sdk.model.generated.endpoint.User;
 import java.util.Arrays;
 import java.util.List;
 

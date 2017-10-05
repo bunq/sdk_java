@@ -1,9 +1,14 @@
 package com.bunq.sdk.model.generated.object;
 
-import com.bunq.sdk.model.BunqModel;
-import com.bunq.sdk.model.MonetaryAccountReference;
+import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  */
@@ -57,6 +62,20 @@ public class LabelMonetaryAccount extends BunqModel {
   @Expose
   @SerializedName("is_light")
   private Boolean isLight;
+
+  /**
+   * The BIC used for a SWIFT payment.
+   */
+  @Expose
+  @SerializedName("swift_bic")
+  private String swiftBic;
+
+  /**
+   * The account number used for a SWIFT payment. May or may not be an IBAN.
+   */
+  @Expose
+  @SerializedName("swift_account_number")
+  private String swiftAccountNumber;
 
   /**
    * The IBAN of the monetary account.
@@ -133,6 +152,28 @@ public class LabelMonetaryAccount extends BunqModel {
 
   public void setIsLight(Boolean isLight) {
     this.isLight = isLight;
+  }
+
+  /**
+   * The BIC used for a SWIFT payment.
+   */
+  public String getSwiftBic() {
+    return this.swiftBic;
+  }
+
+  public void setSwiftBic(String swiftBic) {
+    this.swiftBic = swiftBic;
+  }
+
+  /**
+   * The account number used for a SWIFT payment. May or may not be an IBAN.
+   */
+  public String getSwiftAccountNumber() {
+    return this.swiftAccountNumber;
+  }
+
+  public void setSwiftAccountNumber(String swiftAccountNumber) {
+    this.swiftAccountNumber = swiftAccountNumber;
   }
 
 }

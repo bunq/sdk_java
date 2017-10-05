@@ -1,7 +1,7 @@
 package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.model.generated.RequestInquiry;
+import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.util.HashMap;

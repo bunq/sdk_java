@@ -1,8 +1,8 @@
 package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.model.generated.Payment;
-import com.bunq.sdk.model.generated.PaymentBatch;
+import com.bunq.sdk.model.generated.endpoint.Payment;
+import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.util.ArrayList;
