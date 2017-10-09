@@ -1,7 +1,7 @@
 ## Exceptions
 When you make a request via the SDK, there is a chance of request failing
 due to various reasons. When such a failure happens, an exception
-corresponding to the error occurred is raised.
+corresponding to the error occurred is thrown.
 
 
 ----
@@ -35,7 +35,9 @@ public class ApiException extends RuntimeException {
    * @param message The error message of the failed request.
    * @param responseCode The response code of the failed request.
    */
-  public ApiException(String message, int responseCode) {}
+  public ApiException(String message, int responseCode) {
+    // Some hidden code    
+  }
 
   public int getResponseCode() {
     return responseCode;

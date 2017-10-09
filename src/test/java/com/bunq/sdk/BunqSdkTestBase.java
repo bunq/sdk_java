@@ -40,7 +40,7 @@ public class BunqSdkTestBase {
       apiContext = ApiContext.create(ApiEnvironmentType.SANDBOX, apiKey, DEVICE_DESCRIPTION, ips);
     }
 
-    apiContext.save();
+    apiContext.save(apiConfigPath);
 
     return apiContext;
   }
