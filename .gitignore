@@ -71,3 +71,4 @@ bunq.conf
 context-save-restore-test.conf
 /tmp
 config.properties
+bunq-test.conf

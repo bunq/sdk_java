@@ -172,3 +172,7 @@ API key before running the example!
 ## Running tests
 Information regarding the test cases can be found in the [README.md](./src/test/README.md)
 located in [test](/src/test).
+
+## Exceptions
+The SDK can throw multiple exceptions. For an overview of these exceptions please
+take a look at [EXCEPTIONS.md](./src/main/java/com/bunq/sdk/exception/EXCEPTIONS.md)

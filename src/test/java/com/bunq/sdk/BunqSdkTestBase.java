@@ -2,7 +2,7 @@ package com.bunq.sdk;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.ApiEnvironmentType;
-import com.bunq.sdk.exception.ApiException;
+import com.bunq.sdk.exception.UnknownApiErrorException;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.generated.endpoint.User;
 import java.util.Arrays;
@@ -34,13 +34,13 @@ public class BunqSdkTestBase {
 
     try {
       apiContext = ApiContext.restore(apiConfigPath);
-      User.list(apiContext);
-    } catch (ApiException | BunqException exception) {
+      apiContext.ensureSessionActive();
+    } catch (BunqException exception) {
       List<String> ips = Arrays.asList(permittedIps);
       apiContext = ApiContext.create(ApiEnvironmentType.SANDBOX, apiKey, DEVICE_DESCRIPTION, ips);
     }
 
-    apiContext.save();
+    apiContext.save(apiConfigPath);
 
     return apiContext;
   }
