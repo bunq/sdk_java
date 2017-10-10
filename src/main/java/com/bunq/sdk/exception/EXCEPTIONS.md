@@ -39,7 +39,7 @@ public class ApiException extends RuntimeException {
 }
 ```
 This means that each exception will have a response code and an error message
-related to the specific error returned by API.`
+related to the specific error returned by API.
 
 ---
 #### Exception handling
