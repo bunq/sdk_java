@@ -2,9 +2,9 @@ package com.bunq.sdk.json;
 
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.http.Pagination;
-import com.bunq.sdk.model.Installation;
-import com.bunq.sdk.model.MonetaryAccountReference;
-import com.bunq.sdk.model.SessionServer;
+import com.bunq.sdk.model.core.Installation;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.generated.object.Geolocation;
 import com.google.gson.GsonBuilder;
 import java.math.BigDecimal;

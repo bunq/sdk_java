@@ -1,7 +1,7 @@
 package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.model.generated.CardDebit;
+import com.bunq.sdk.model.generated.endpoint.CardDebit;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.io.IOException;
 import java.math.BigInteger;

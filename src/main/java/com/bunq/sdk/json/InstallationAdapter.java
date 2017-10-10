@@ -1,9 +1,9 @@
 package com.bunq.sdk.json;
 
-import com.bunq.sdk.model.Id;
-import com.bunq.sdk.model.Installation;
-import com.bunq.sdk.model.PublicKeyServer;
-import com.bunq.sdk.model.SessionToken;
+import com.bunq.sdk.model.core.Id;
+import com.bunq.sdk.model.core.Installation;
+import com.bunq.sdk.model.core.PublicKeyServer;
+import com.bunq.sdk.model.core.SessionToken;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
