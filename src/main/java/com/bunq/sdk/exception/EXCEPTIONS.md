@@ -26,15 +26,8 @@ All the exceptions have the same base exception which looks like this:
 ```java
 public class ApiException extends RuntimeException {
   
-  /**
-   */
   private int responseCode;
-  private String message;
 
-  /**
-   * @param message The error message of the failed request.
-   * @param responseCode The response code of the failed request.
-   */
   public ApiException(String message, int responseCode) {
     // Some hidden code    
   }
@@ -43,15 +36,10 @@ public class ApiException extends RuntimeException {
     return responseCode;
   }
 
-  @Override
-  public String getMessage() {
-    return message;
-  }
-
 }
 ```
 This means that each exception will have a response code and an error message
-related to the specific error returned by API.
+related to the specific error returned by API.`
 
 ---
 #### Exception handling
