@@ -17,8 +17,6 @@ import com.bunq.sdk.model.generated.endpoint.RequestResponse;
 import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
 import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
 import com.bunq.sdk.model.generated.endpoint.SchedulePaymentBatch;
-import com.bunq.sdk.model.generated.endpoint.ScheduleRequestInquiry;
-import com.bunq.sdk.model.generated.endpoint.ScheduleRequestInquiryBatch;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
 import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIp;
@@ -117,18 +115,6 @@ public class AnchoredObject extends BunqModel {
   @Expose
   @SerializedName("ScheduledPayment")
   private SchedulePayment scheduledPayment;
-
-  /**
-   */
-  @Expose
-  @SerializedName("ScheduledRequestInquiryBatch")
-  private ScheduleRequestInquiryBatch scheduledRequestInquiryBatch;
-
-  /**
-   */
-  @Expose
-  @SerializedName("ScheduledRequestInquiry")
-  private ScheduleRequestInquiry scheduledRequestInquiry;
 
   /**
    */
@@ -292,26 +278,6 @@ public class AnchoredObject extends BunqModel {
 
   public void setScheduledPayment(SchedulePayment scheduledPayment) {
     this.scheduledPayment = scheduledPayment;
-  }
-
-  /**
-   */
-  public ScheduleRequestInquiryBatch getScheduledRequestInquiryBatch() {
-    return this.scheduledRequestInquiryBatch;
-  }
-
-  public void setScheduledRequestInquiryBatch(ScheduleRequestInquiryBatch scheduledRequestInquiryBatch) {
-    this.scheduledRequestInquiryBatch = scheduledRequestInquiryBatch;
-  }
-
-  /**
-   */
-  public ScheduleRequestInquiry getScheduledRequestInquiry() {
-    return this.scheduledRequestInquiry;
-  }
-
-  public void setScheduledRequestInquiry(ScheduleRequestInquiry scheduledRequestInquiry) {
-    this.scheduledRequestInquiry = scheduledRequestInquiry;
   }
 
   /**
