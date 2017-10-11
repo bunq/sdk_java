@@ -21,7 +21,7 @@ This SDK is in **beta**. We cannot guarantee constant availability or stability.
 Thanks to your feedback we will make improvements on it.
 
 ## Installation
-TBA
+To install the package, please follow the instructions corresponding to your build tool under "How to" on the package page on JitPack: https://jitpack.io/#bunq/sdk_java
 
 ## Usage
 
