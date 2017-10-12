@@ -230,17 +230,15 @@ public class ApiContext implements java.io.Serializable {
    * needed.
    */
   public void ensureSessionActive() {
-   if (isExpired() && sessionContext != null){
+   if (isSessionExpired() && sessionContext != null){
      resetSession();
    }
   }
 
   /**
-   * Checks if the session has expired
-   *
    * @return True if session has expired, otherwise false.
    */
-  public boolean isExpired() {
+  public boolean isSessionExpired() {
     return sessionContext == null
         || getTimeToSessionExpiryInSeconds() < TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
 
