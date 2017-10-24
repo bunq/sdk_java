@@ -59,11 +59,11 @@ public class ApiClient {
   private static final String DEVICE_SERVER_URL = "device-server";
   private static final String INSTALLATION_URL = "installation";
   private static final String SESSION_SERVER_URL = "session-server";
-  private static List<String> URIS_NOT_REQUIRING_ACTIVE_SESSION = Arrays.asList(
+  private static final List<String> URIS_NOT_REQUIRING_ACTIVE_SESSION = Arrays.asList(
       DEVICE_SERVER_URL,
       INSTALLATION_URL,
       SESSION_SERVER_URL
-      );
+  );
 
   /**
    * Header constants.
@@ -178,6 +178,7 @@ public class ApiClient {
     if (!URIS_NOT_REQUIRING_ACTIVE_SESSION.contains(uri)) {
       apiContext.ensureSessionActive();
     }
+
     setHeaders(request, customHeaders);
 
     return httpClient.execute(request);
