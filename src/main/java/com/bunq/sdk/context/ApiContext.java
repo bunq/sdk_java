@@ -230,13 +230,14 @@ public class ApiContext implements java.io.Serializable {
    * needed.
    */
   public void ensureSessionActive() {
-    if (sessionContext == null) {
-      return;
-    }
+   if (!isSessionActive()){
+     resetSession();
+   }
+  }
 
-    if (getTimeToSessionExpiryInSeconds() < TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS) {
-      resetSession();
-    }
+  public boolean isSessionActive() {
+    return sessionContext != null ||
+      getTimeToSessionExpiryInSeconds() > TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
   }
 
   private long getTimeToSessionExpiryInSeconds() {
