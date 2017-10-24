@@ -236,8 +236,8 @@ public class ApiContext implements java.io.Serializable {
   }
 
   public boolean isSessionActive() {
-    return sessionContext != null
-        || getTimeToSessionExpiryInSeconds() > TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
+    return sessionContext != null ||
+      getTimeToSessionExpiryInSeconds() > TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
 
   }
 
