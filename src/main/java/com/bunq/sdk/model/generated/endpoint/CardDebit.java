@@ -77,6 +77,13 @@ public class CardDebit extends BunqModel {
   private String publicUuid;
 
   /**
+   * The type of the card. Can be MAESTRO, MASTERCARD.
+   */
+  @Expose
+  @SerializedName("type")
+  private String type;
+
+  /**
    * The second line of text on the card
    */
   @Expose
@@ -226,6 +233,17 @@ public class CardDebit extends BunqModel {
 
   public void setPublicUuid(String publicUuid) {
     this.publicUuid = publicUuid;
+  }
+
+  /**
+   * The type of the card. Can be MAESTRO, MASTERCARD.
+   */
+  public String getType() {
+    return this.type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   /**

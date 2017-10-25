@@ -23,7 +23,10 @@ import java.util.Map;
 import javax.lang.model.type.NullType;
 
 /**
- * Show the authenticated user, if it is a company.
+ * With UserCompany you can retrieve information regarding the authenticated UserCompany and
+ * update specific fields.<br/><br/>Notification filters can be set on a UserCompany level to
+ * receive callbacks. For more information check the <a href="/api/1/page/callbacks">dedicated
+ * callbacks page</a>.
  */
 public class UserCompany extends BunqModel {
 
