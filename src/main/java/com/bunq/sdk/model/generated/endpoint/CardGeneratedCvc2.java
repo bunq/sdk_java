@@ -34,6 +34,27 @@ public class CardGeneratedCvc2 extends BunqModel {
   private static final String OBJECT_TYPE = "CardGeneratedCvc2";
 
   /**
+   * The id of the cvc code.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
+   * The timestamp of the cvc code's creation.
+   */
+  @Expose
+  @SerializedName("created")
+  private String created;
+
+  /**
+   * The timestamp of the cvc code's last update.
+   */
+  @Expose
+  @SerializedName("updated")
+  private String updated;
+
+  /**
    * The cvc2 code.
    */
   @Expose
@@ -100,6 +121,39 @@ public class CardGeneratedCvc2 extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, cardId), params, customHeaders);
 
     return fromJsonList(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE);
+  }
+
+  /**
+   * The id of the cvc code.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  /**
+   * The timestamp of the cvc code's creation.
+   */
+  public String getCreated() {
+    return this.created;
+  }
+
+  public void setCreated(String created) {
+    this.created = created;
+  }
+
+  /**
+   * The timestamp of the cvc code's last update.
+   */
+  public String getUpdated() {
+    return this.updated;
+  }
+
+  public void setUpdated(String updated) {
+    this.updated = updated;
   }
 
   /**
