@@ -20,6 +20,7 @@ import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,18 @@ import org.apache.http.util.EntityUtils;
 public class ApiClient {
 
   /**
+   * Endpoints not requiring active session for the request to succeed.
+   */
+  private static final String DEVICE_SERVER_URL = "device-server";
+  private static final String INSTALLATION_URL = "installation";
+  private static final String SESSION_SERVER_URL = "session-server";
+  private static final List<String> URIS_NOT_REQUIRING_ACTIVE_SESSION = Arrays.asList(
+      DEVICE_SERVER_URL,
+      INSTALLATION_URL,
+      SESSION_SERVER_URL
+  );
+
+  /**
    * Header constants.
    */
   public static final String HEADER_ATTACHMENT_DESCRIPTION = "X-Bunq-Attachment-Description";
@@ -80,7 +93,7 @@ public class ApiClient {
   /**
    * Prefix for bunq's own headers.
    */
-  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.12.0";
+  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.12.2";
   private static final String LANGUAGE_EN_US = "en_US";
   private static final String REGION_NL_NL = "nl_NL";
   private static final String GEOLOCATION_ZERO = "0 0 0 0 000";
@@ -137,7 +150,7 @@ public class ApiClient {
     try {
       HttpPost httpPost = new HttpPost(determineFullUri(uri));
       httpPost.setEntity(new ByteArrayEntity(requestBodyBytes, ContentType.APPLICATION_JSON));
-      CloseableHttpResponse response = executeRequest(httpPost, customHeaders);
+      CloseableHttpResponse response = executeRequest(httpPost, customHeaders, uri);
 
       return createBunqResponseRaw(response);
     } catch (IOException | URISyntaxException exception) {
@@ -161,8 +174,11 @@ public class ApiClient {
   }
 
   private CloseableHttpResponse executeRequest(HttpUriRequest request,
-      Map<String, String> customHeaders) throws IOException {
-    apiContext.ensureSessionActive();
+      Map<String, String> customHeaders, String uri) throws IOException {
+    if (!URIS_NOT_REQUIRING_ACTIVE_SESSION.contains(uri)) {
+      apiContext.ensureSessionActive();
+    }
+
     setHeaders(request, customHeaders);
 
     return httpClient.execute(request);
@@ -299,7 +315,7 @@ public class ApiClient {
       Map<String, String> customHeaders) {
     try {
       HttpGet httpGet = new HttpGet(determineFullUri(uri, params));
-      CloseableHttpResponse response = executeRequest(httpGet, customHeaders);
+      CloseableHttpResponse response = executeRequest(httpGet, customHeaders, uri);
 
       return createBunqResponseRaw(response);
     } catch (IOException | URISyntaxException exception) {
@@ -317,7 +333,7 @@ public class ApiClient {
     try {
       HttpPut httpPut = new HttpPut(determineFullUri(uri));
       httpPut.setEntity(new ByteArrayEntity(requestBodyBytes, ContentType.APPLICATION_JSON));
-      CloseableHttpResponse response = executeRequest(httpPut, customHeaders);
+      CloseableHttpResponse response = executeRequest(httpPut, customHeaders, uri);
 
       return createBunqResponseRaw(response);
     } catch (IOException | URISyntaxException exception) {
@@ -333,7 +349,7 @@ public class ApiClient {
   public BunqResponseRaw delete(String uri, Map<String, String> customHeaders) {
     try {
       HttpDelete httpDelete = new HttpDelete(determineFullUri(uri));
-      CloseableHttpResponse response = executeRequest(httpDelete, customHeaders);
+      CloseableHttpResponse response = executeRequest(httpDelete, customHeaders, uri);
 
       return createBunqResponseRaw(response);
     } catch (IOException | URISyntaxException exception) {
