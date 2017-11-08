@@ -6,6 +6,7 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.DraftPaymentAnchorObject;
 import com.bunq.sdk.model.generated.object.DraftPaymentEntry;
 import com.bunq.sdk.model.generated.object.DraftPaymentResponse;
 import com.bunq.sdk.model.generated.object.LabelUser;
@@ -46,7 +47,7 @@ public class DraftPayment extends BunqModel {
   private static final String OBJECT_TYPE = "DraftPayment";
 
   /**
-   * The id of the DraftPayment.
+   * The id of the created DrafPayment.
    */
   @Expose
   @SerializedName("id")
@@ -100,7 +101,7 @@ public class DraftPayment extends BunqModel {
    */
   @Expose
   @SerializedName("object")
-  private BunqModel object;
+  private DraftPaymentAnchorObject object;
 
   public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
     return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
@@ -165,7 +166,7 @@ public class DraftPayment extends BunqModel {
   }
 
   /**
-   * The id of the DraftPayment.
+   * The id of the created DrafPayment.
    */
   public Integer getId() {
     return this.id;
@@ -245,11 +246,11 @@ public class DraftPayment extends BunqModel {
    * The Payment or PaymentBatch. This will only be present after the DraftPayment has been
    * accepted.
    */
-  public BunqModel getObject() {
+  public DraftPaymentAnchorObject getObject() {
     return this.object;
   }
 
-  public void setObject(BunqModel object) {
+  public void setObject(DraftPaymentAnchorObject object) {
     this.object = object;
   }
 
