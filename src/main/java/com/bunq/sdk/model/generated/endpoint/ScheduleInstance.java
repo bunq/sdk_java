@@ -7,6 +7,8 @@ import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Error;
+import com.bunq.sdk.model.generated.object.ScheduleAnchorObject;
+import com.bunq.sdk.model.generated.object.ScheduleInstanceAnchorObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.math.BigDecimal;
@@ -22,16 +24,16 @@ import javax.lang.model.type.NullType;
 public class ScheduleInstance extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_STATE = "state";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule/%s/schedule-instance";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_STATE = "state";
 
   /**
    * Object type.
@@ -67,18 +69,18 @@ public class ScheduleInstance extends BunqModel {
   private List<Error> errorMessage;
 
   /**
-   * The scheduled object.
+   * The scheduled object. (Payment, PaymentBatch)
    */
   @Expose
   @SerializedName("scheduled_object")
-  private BunqModel scheduledObject;
+  private ScheduleAnchorObject scheduledObject;
 
   /**
-   * The result object of this schedule instance. (payment, payment batch)
+   * The result object of this schedule instance. (Payment, PaymentBatch)
    */
   @Expose
   @SerializedName("result_object")
-  private BunqModel resultObject;
+  private ScheduleInstanceAnchorObject resultObject;
 
   public static BunqResponse<ScheduleInstance> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId) {
     return get(apiContext, userId, monetaryAccountId, scheduleId, scheduleInstanceId, new HashMap<>());
@@ -169,24 +171,24 @@ public class ScheduleInstance extends BunqModel {
   }
 
   /**
-   * The scheduled object.
+   * The scheduled object. (Payment, PaymentBatch)
    */
-  public BunqModel getScheduledObject() {
+  public ScheduleAnchorObject getScheduledObject() {
     return this.scheduledObject;
   }
 
-  public void setScheduledObject(BunqModel scheduledObject) {
+  public void setScheduledObject(ScheduleAnchorObject scheduledObject) {
     this.scheduledObject = scheduledObject;
   }
 
   /**
-   * The result object of this schedule instance. (payment, payment batch)
+   * The result object of this schedule instance. (Payment, PaymentBatch)
    */
-  public BunqModel getResultObject() {
+  public ScheduleInstanceAnchorObject getResultObject() {
     return this.resultObject;
   }
 
-  public void setResultObject(BunqModel resultObject) {
+  public void setResultObject(ScheduleInstanceAnchorObject resultObject) {
     this.resultObject = resultObject;
   }
 

@@ -32,7 +32,7 @@ public class UserCredentialPasswordIp extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CredentialPasswordIp";
+  private static final String OBJECT_TYPE = "UserCredentialPasswordIp";
 
   /**
    * The id of the credential.

@@ -30,7 +30,7 @@ public class CardName extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardUserNameArray";
+  private static final String OBJECT_TYPE = "CardName";
 
   /**
    * All possible variations (of suitable length) of user's legal name for the debit card.

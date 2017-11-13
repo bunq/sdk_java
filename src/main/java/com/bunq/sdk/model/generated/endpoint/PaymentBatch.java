@@ -21,18 +21,18 @@ import javax.lang.model.type.NullType;
 public class PaymentBatch extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_PAYMENTS = "payments";
-  public static final String FIELD_BUNQTO_STATUS = "bunqto_status";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment-batch";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/payment-batch/%s";
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment-batch/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment-batch";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_PAYMENTS = "payments";
+  public static final String FIELD_BUNQTO_STATUS = "bunqto_status";
 
   /**
    * Object type.

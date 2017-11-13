@@ -24,16 +24,16 @@ import javax.lang.model.type.NullType;
 public class RequestInquiryChat extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_LAST_READ_MESSAGE_ID = "last_read_message_id";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry/%s/chat";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry/%s/chat/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry/%s/chat";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_LAST_READ_MESSAGE_ID = "last_read_message_id";
 
   /**
    * Object type.

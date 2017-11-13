@@ -1,5 +1,6 @@
 package com.bunq.sdk.model.generated.object;
 
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.endpoint.CardDebit;
@@ -31,6 +32,11 @@ import java.util.Map;
 /**
  */
 public class AnchoredObject extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    */
@@ -318,6 +324,84 @@ public class AnchoredObject extends BunqModel {
 
   public void setUserCredentialPasswordIp(UserCredentialPasswordIp userCredentialPasswordIp) {
     this.userCredentialPasswordIp = userCredentialPasswordIp;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.cardDebit != null) {
+      return this.cardDebit;
+    }
+
+    if (this.cardPinChange != null) {
+      return this.cardPinChange;
+    }
+
+    if (this.cardResult != null) {
+      return this.cardResult;
+    }
+
+    if (this.draftPayment != null) {
+      return this.draftPayment;
+    }
+
+    if (this.idealMerchantTransaction != null) {
+      return this.idealMerchantTransaction;
+    }
+
+    if (this.invoice != null) {
+      return this.invoice;
+    }
+
+    if (this.payment != null) {
+      return this.payment;
+    }
+
+    if (this.paymentBatch != null) {
+      return this.paymentBatch;
+    }
+
+    if (this.promotionDisplay != null) {
+      return this.promotionDisplay;
+    }
+
+    if (this.requestInquiryBatch != null) {
+      return this.requestInquiryBatch;
+    }
+
+    if (this.requestInquiry != null) {
+      return this.requestInquiry;
+    }
+
+    if (this.requestResponse != null) {
+      return this.requestResponse;
+    }
+
+    if (this.scheduledPaymentBatch != null) {
+      return this.scheduledPaymentBatch;
+    }
+
+    if (this.scheduledPayment != null) {
+      return this.scheduledPayment;
+    }
+
+    if (this.scheduledInstance != null) {
+      return this.scheduledInstance;
+    }
+
+    if (this.shareInviteBankInquiry != null) {
+      return this.shareInviteBankInquiry;
+    }
+
+    if (this.shareInviteBankResponse != null) {
+      return this.shareInviteBankResponse;
+    }
+
+    if (this.userCredentialPasswordIp != null) {
+      return this.userCredentialPasswordIp;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }

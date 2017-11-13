@@ -23,17 +23,17 @@ import javax.lang.model.type.NullType;
 public class IdealMerchantTransaction extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
-  public static final String FIELD_ISSUER = "issuer";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/ideal-merchant-transaction";
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/ideal-merchant-transaction/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/ideal-merchant-transaction";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
+  public static final String FIELD_ISSUER = "issuer";
 
   /**
    * Object type.

@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -20,6 +21,11 @@ import javax.lang.model.type.NullType;
  * your user id, which is referred to in endpoints.
  */
 public class User extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    * Endpoint constants.
@@ -110,6 +116,24 @@ public class User extends BunqModel {
 
   public void setUserCompany(UserCompany userCompany) {
     this.userCompany = userCompany;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.userLight != null) {
+      return this.userLight;
+    }
+
+    if (this.userPerson != null) {
+      return this.userPerson;
+    }
+
+    if (this.userCompany != null) {
+      return this.userCompany;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }

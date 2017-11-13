@@ -30,6 +30,13 @@ import javax.lang.model.type.NullType;
 public class Payment extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT = "amount";
@@ -39,13 +46,6 @@ public class Payment extends BunqModel {
   public static final String FIELD_MERCHANT_REFERENCE = "merchant_reference";
   public static final String FIELD_ALLOW_BUNQTO = "allow_bunqto";
   public static final String FIELD_BUNQTO_STATUS = "bunqto_status";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment";
 
   /**
    * Object type.

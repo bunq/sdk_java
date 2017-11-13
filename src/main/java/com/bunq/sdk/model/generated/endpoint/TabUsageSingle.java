@@ -32,6 +32,15 @@ import javax.lang.model.type.NullType;
 public class TabUsageSingle extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
+  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
+  private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_MERCHANT_REFERENCE = "merchant_reference";
@@ -47,15 +56,6 @@ public class TabUsageSingle extends BunqModel {
   public static final String FIELD_VISIBILITY = "visibility";
   public static final String FIELD_EXPIRATION = "expiration";
   public static final String FIELD_TAB_ATTACHMENT = "tab_attachment";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
-  private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
 
   /**
    * Object type.

@@ -22,15 +22,15 @@ import javax.lang.model.type.NullType;
 public class PromotionDisplay extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_READ = "user/%s/promotion-display/%s";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/promotion-display/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
 
   /**
    * Object type.

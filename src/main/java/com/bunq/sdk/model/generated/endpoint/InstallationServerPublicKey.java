@@ -29,7 +29,7 @@ public class InstallationServerPublicKey extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ServerPublicKey";
+  private static final String OBJECT_TYPE = "InstallationServerPublicKey";
 
   /**
    * The server's public key for this Installation.

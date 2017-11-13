@@ -30,7 +30,7 @@ public class BunqMeTabEntry extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "BunqMeTab";
+  private static final String OBJECT_TYPE = "BunqMeTabEntry";
 
   /**
    * The uuid of the bunq.me.

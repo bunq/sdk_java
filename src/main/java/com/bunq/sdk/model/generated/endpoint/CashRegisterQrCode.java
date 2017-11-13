@@ -23,11 +23,6 @@ import javax.lang.model.type.NullType;
 public class CashRegisterQrCode extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/qr-code";
@@ -36,9 +31,14 @@ public class CashRegisterQrCode extends BunqModel {
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/qr-code";
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+
+  /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TokenQrCashRegister";
+  private static final String OBJECT_TYPE = "CashRegisterQrCode";
 
   /**
    * The id of the created QR code. Use this id to get the RAW content of the QR code with:

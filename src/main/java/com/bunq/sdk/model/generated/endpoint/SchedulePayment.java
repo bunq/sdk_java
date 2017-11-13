@@ -6,7 +6,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.Schedule;
 import com.bunq.sdk.model.generated.object.SchedulePaymentEntry;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -23,12 +22,6 @@ import javax.lang.model.type.NullType;
 public class SchedulePayment extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_PAYMENT = "payment";
-  public static final String FIELD_SCHEDULE = "schedule";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment";
@@ -36,6 +29,12 @@ public class SchedulePayment extends BunqModel {
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule-payment/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule-payment";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule-payment/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_PAYMENT = "payment";
+  public static final String FIELD_SCHEDULE = "schedule";
 
   /**
    * Object type.

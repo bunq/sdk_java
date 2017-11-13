@@ -26,22 +26,23 @@ import javax.lang.model.type.NullType;
 public class ShareInviteBankInquiry extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_COUNTER_USER_ALIAS = "counter_user_alias";
-  public static final String FIELD_DRAFT_SHARE_INVITE_BANK_ID = "draft_share_invite_bank_id";
-  public static final String FIELD_SHARE_DETAIL = "share_detail";
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_START_DATE = "start_date";
-  public static final String FIELD_END_DATE = "end_date";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_COUNTER_USER_ALIAS = "counter_user_alias";
+  public static final String FIELD_DRAFT_SHARE_INVITE_BANK_ID = "draft_share_invite_bank_id";
+  public static final String FIELD_SHARE_DETAIL = "share_detail";
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_SHARE_TYPE = "share_type";
+  public static final String FIELD_START_DATE = "start_date";
+  public static final String FIELD_END_DATE = "end_date";
 
   /**
    * Object type.
@@ -99,11 +100,20 @@ public class ShareInviteBankInquiry extends BunqModel {
 
   /**
    * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted) or CANCELLED (the user deletes an active share).
+   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects)
    */
   @Expose
   @SerializedName("status")
   private String status;
+
+  /**
+   * The share type, either STANDARD or MUTUAL.
+   */
+  @Expose
+  @SerializedName("share_type")
+  private String shareType;
 
   /**
    * The start date of this share.
@@ -270,7 +280,9 @@ public class ShareInviteBankInquiry extends BunqModel {
 
   /**
    * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted) or CANCELLED (the user deletes an active share).
+   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects)
    */
   public String getStatus() {
     return this.status;
@@ -278,6 +290,17 @@ public class ShareInviteBankInquiry extends BunqModel {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  /**
+   * The share type, either STANDARD or MUTUAL.
+   */
+  public String getShareType() {
+    return this.shareType;
+  }
+
+  public void setShareType(String shareType) {
+    this.shareType = shareType;
   }
 
   /**

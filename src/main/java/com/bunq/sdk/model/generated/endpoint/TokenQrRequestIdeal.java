@@ -31,14 +31,14 @@ import javax.lang.model.type.NullType;
 public class TokenQrRequestIdeal extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_TOKEN = "token";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-ideal";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_TOKEN = "token";
 
   /**
    * Object type.

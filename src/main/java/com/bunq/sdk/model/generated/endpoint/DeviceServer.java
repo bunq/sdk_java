@@ -22,18 +22,18 @@ import javax.lang.model.type.NullType;
 public class DeviceServer extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_DESCRIPTION = "description";
-  public static final String FIELD_SECRET = "secret";
-  public static final String FIELD_PERMITTED_IPS = "permitted_ips";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "device-server";
   private static final String ENDPOINT_URL_READ = "device-server/%s";
   private static final String ENDPOINT_URL_LISTING = "device-server";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_DESCRIPTION = "description";
+  public static final String FIELD_SECRET = "secret";
+  public static final String FIELD_PERMITTED_IPS = "permitted_ips";
 
   /**
    * Object type.

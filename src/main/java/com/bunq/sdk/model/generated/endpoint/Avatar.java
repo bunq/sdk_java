@@ -26,15 +26,15 @@ import javax.lang.model.type.NullType;
 public class Avatar extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_ATTACHMENT_PUBLIC_UUID = "attachment_public_uuid";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "avatar";
   private static final String ENDPOINT_URL_READ = "avatar/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_ATTACHMENT_PUBLIC_UUID = "attachment_public_uuid";
 
   /**
    * Object type.

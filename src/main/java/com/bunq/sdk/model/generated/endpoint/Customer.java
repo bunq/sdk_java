@@ -21,16 +21,16 @@ import javax.lang.model.type.NullType;
 public class Customer extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_BILLING_ACCOUNT_ID = "billing_account_id";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_LISTING = "user/%s/customer";
   private static final String ENDPOINT_URL_READ = "user/%s/customer/%s";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/customer/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_BILLING_ACCOUNT_ID = "billing_account_id";
 
   /**
    * Object type.

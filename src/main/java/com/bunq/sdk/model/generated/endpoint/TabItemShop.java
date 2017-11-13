@@ -29,6 +29,15 @@ import javax.lang.model.type.NullType;
 public class TabItemShop extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
+  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
+  private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_DESCRIPTION = "description";
@@ -39,18 +48,9 @@ public class TabItemShop extends BunqModel {
   public static final String FIELD_AMOUNT = "amount";
 
   /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
-  private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
-
-  /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabItem";
+  private static final String OBJECT_TYPE = "TabItemShop";
 
   /**
    * The id of the created TabItem.

@@ -26,20 +26,20 @@ import javax.lang.model.type.NullType;
 public class DraftPayment extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_ENTRIES = "entries";
-  public static final String FIELD_PREVIOUS_UPDATED_TIMESTAMP = "previous_updated_timestamp";
-  public static final String FIELD_NUMBER_OF_REQUIRED_ACCEPTS = "number_of_required_accepts";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/draft-payment";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/draft-payment/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/draft-payment";
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/draft-payment/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_ENTRIES = "entries";
+  public static final String FIELD_PREVIOUS_UPDATED_TIMESTAMP = "previous_updated_timestamp";
+  public static final String FIELD_NUMBER_OF_REQUIRED_ACCEPTS = "number_of_required_accepts";
 
   /**
    * Object type.

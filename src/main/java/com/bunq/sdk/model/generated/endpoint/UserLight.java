@@ -27,6 +27,11 @@ import javax.lang.model.type.NullType;
 public class UserLight extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_READ = "user-light/%s";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_FIRST_NAME = "first_name";
@@ -59,14 +64,9 @@ public class UserLight extends BunqModel {
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
 
   /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_READ = "user-light/%s";
-
-  /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "UserPerson";
+  private static final String OBJECT_TYPE = "UserLight";
 
   /**
    * The id of the user.

@@ -1,0 +1,81 @@
+package com.bunq.sdk.model.generated.object;
+
+import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ */
+public class NotificationUrl extends BunqModel {
+
+  /**
+   */
+  @Expose
+  @SerializedName("target_url")
+  private String targetUrl;
+
+  /**
+   */
+  @Expose
+  @SerializedName("category")
+  private String category;
+
+  /**
+   */
+  @Expose
+  @SerializedName("event_type")
+  private String eventType;
+
+  /**
+   */
+  @Expose
+  @SerializedName("object")
+  private NotificationAnchorObject object;
+
+  /**
+   */
+  public String getTargetUrl() {
+    return this.targetUrl;
+  }
+
+  public void setTargetUrl(String targetUrl) {
+    this.targetUrl = targetUrl;
+  }
+
+  /**
+   */
+  public String getCategory() {
+    return this.category;
+  }
+
+  public void setCategory(String category) {
+    this.category = category;
+  }
+
+  /**
+   */
+  public String getEventType() {
+    return this.eventType;
+  }
+
+  public void setEventType(String eventType) {
+    this.eventType = eventType;
+  }
+
+  /**
+   */
+  public NotificationAnchorObject getObject() {
+    return this.object;
+  }
+
+  public void setObject(NotificationAnchorObject object) {
+    this.object = object;
+  }
+
+}

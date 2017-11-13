@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  */
-public class DraftPaymentAnchorObject extends BunqModel {
+public class ScheduleAnchorObject extends BunqModel {
 
   /**
    * Error constants.

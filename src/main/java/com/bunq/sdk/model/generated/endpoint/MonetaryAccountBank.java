@@ -31,6 +31,14 @@ import javax.lang.model.type.NullType;
 public class MonetaryAccountBank extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-bank";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account-bank/%s";
+  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-bank/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-bank";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_CURRENCY = "currency";
@@ -46,14 +54,6 @@ public class MonetaryAccountBank extends BunqModel {
   public static final String FIELD_SHARE = "share";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-bank";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account-bank/%s";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-bank/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-bank";
 
   /**
    * Object type.

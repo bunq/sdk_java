@@ -18,7 +18,7 @@ public class ChatConversationSupportExternal extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "SupportConversationExternal";
+  private static final String OBJECT_TYPE = "ChatConversationSupportExternal";
 
   /**
    * The id of this conversation.

@@ -20,7 +20,7 @@ public class ChatMessageAnnouncement extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ChatMessageUser";
+  private static final String OBJECT_TYPE = "ChatMessageAnnouncement";
 
   /**
    * The id of the message.

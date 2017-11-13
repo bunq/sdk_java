@@ -33,7 +33,7 @@ public class InvoiceByUser extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Invoice";
+  private static final String OBJECT_TYPE = "InvoiceByUser";
 
   /**
    * The id of the invoice object.
