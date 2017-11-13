@@ -164,3 +164,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void paymentBatchModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_PAYMENT_BATCH_MODEL,
+                PaymentBatch.class.getName(),
+                GET_PAYMENT_BATCH
+        );
+    }
+
