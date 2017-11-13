@@ -176,3 +176,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void requestInquiryModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_REQUEST_INQUIRY_MODEL,
+                RequestInquiry.class.getName(),
+                GET_REQUEST_INQUIRY
+        );
+    }
+
