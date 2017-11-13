@@ -116,3 +116,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void chatMessageAnnouncementModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL,
+                ChatMessageAnnouncement.class.getName(),
+                GET_CHAT_MESSAGE_ANNOUNCEMENT
+        );
+    }
+
