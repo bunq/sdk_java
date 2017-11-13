@@ -128,3 +128,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void draftPaymentModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_DRAFT_PAYMENT_MODEL,
+                DraftPayment.class.getName(),
+                GET_DRAFT_PAYMENT
+        );
+    }
+
