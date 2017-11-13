@@ -104,3 +104,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void bunqMeTabModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_BUNQ_ME_TAB_MODEL,
+                BunqMeTab.class.getName(),
+                GET_BUNQ_ME_TAB
+        );
+    }
+
