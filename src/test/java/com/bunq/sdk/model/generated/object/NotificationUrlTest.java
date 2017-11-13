@@ -236,3 +236,16 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void shareInviteBankResponseModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL,
+                ShareInviteBankResponse.class.getName(),
+                GET_SHARE_INVITE_BANK_RESPONSE
+        );
+    }
+
+}
