@@ -200,3 +200,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void scheduledInstanceModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_SCHEDULE_INSTANCE_MODEL,
+                ScheduleInstance.class.getName(),
+                GET_SCHEDULE_INSTANCE
+        );
+    }
+
