@@ -152,3 +152,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void monetaryAccountModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_MONETARY_ACCOUNT_BANK_MODEL,
+                MonetaryAccountBank.class.getName(),
+                GET_MONETARY_ACCOUNT_BANK
+        );
+    }
+
