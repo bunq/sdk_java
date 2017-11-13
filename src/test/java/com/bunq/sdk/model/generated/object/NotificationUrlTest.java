@@ -91,3 +91,16 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         assertNotNull(referencedModel);
         assertTrue(Class.forName(classNameExpected).isInstance(referencedModel));
     }
+
+    @Test
+    public void mutationModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_MUTATION_MODEL,
+                Payment.class.getName(),
+                GET_PAYMENT
+        );
+    }
+
