@@ -140,3 +140,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void masterCardActionModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_MASTER_CARD_ACTION_MODEL,
+                MasterCardAction.class.getName(),
+                GET_MASTER_CARD_ACTION
+        );
+    }
+
