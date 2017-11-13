@@ -212,3 +212,15 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         );
     }
 
+    @Test
+    public void scheduledPaymentModelTest() throws InvocationTargetException, FileNotFoundException,
+            ClassNotFoundException,
+            IllegalAccessException,
+            NoSuchMethodException {
+        executeNotificationUrlTest(
+                JSON_PATH_SCHEDULE_PAYMENT_MODEL,
+                SchedulePayment.class.getName(),
+                GET_SCHEDULE_PAYMENT
+        );
+    }
+
