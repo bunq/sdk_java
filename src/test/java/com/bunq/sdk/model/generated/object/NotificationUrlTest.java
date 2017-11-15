@@ -3,7 +3,6 @@ package com.bunq.sdk.model.generated.object;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.endpoint.*;
@@ -67,8 +66,8 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         JsonReader jsonReader = new JsonReader(new FileReader(expectedJsonFileName));
         NotificationUrl notificationUrl = new Gson().fromJson(jsonReader, NOTIFICATION_URL_TYPE);
 
-       assertNotNull(notificationUrl);
-       assertNotNull(notificationUrl.getObject());
+        assertNotNull(notificationUrl);
+        assertNotNull(notificationUrl.getObject());
 
         Object model = notificationUrl.getObject().getClass().getDeclaredMethod(referencedObjectGetterName).invoke(
                 notificationUrl.getObject()
