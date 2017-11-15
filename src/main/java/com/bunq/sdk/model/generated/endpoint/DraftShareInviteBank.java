@@ -25,19 +25,19 @@ import javax.lang.model.type.NullType;
 public class DraftShareInviteBank extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_EXPIRATION = "expiration";
-  public static final String FIELD_DRAFT_SHARE_SETTINGS = "draft_share_settings";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/draft-share-invite-bank";
   private static final String ENDPOINT_URL_READ = "user/%s/draft-share-invite-bank/%s";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/draft-share-invite-bank/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/draft-share-invite-bank";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_EXPIRATION = "expiration";
+  public static final String FIELD_DRAFT_SHARE_SETTINGS = "draft_share_settings";
 
   /**
    * Object type.

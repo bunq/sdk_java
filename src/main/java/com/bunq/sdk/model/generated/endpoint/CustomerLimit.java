@@ -52,6 +52,13 @@ public class CustomerLimit extends BunqModel {
   private Integer limitCardDebitMastercard;
 
   /**
+   * The limit of wildcards, e.g. Maestro or MasterCard cards.
+   */
+  @Expose
+  @SerializedName("limit_card_debit_wildcard")
+  private Integer limitCardDebitWildcard;
+
+  /**
    * The limit of free replacement cards.
    */
   @Expose
@@ -107,6 +114,17 @@ public class CustomerLimit extends BunqModel {
 
   public void setLimitCardDebitMastercard(Integer limitCardDebitMastercard) {
     this.limitCardDebitMastercard = limitCardDebitMastercard;
+  }
+
+  /**
+   * The limit of wildcards, e.g. Maestro or MasterCard cards.
+   */
+  public Integer getLimitCardDebitWildcard() {
+    return this.limitCardDebitWildcard;
+  }
+
+  public void setLimitCardDebitWildcard(Integer limitCardDebitWildcard) {
+    this.limitCardDebitWildcard = limitCardDebitWildcard;
   }
 
   /**

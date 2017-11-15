@@ -31,6 +31,14 @@ import javax.lang.model.type.NullType;
 public class RequestInquiry extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry";
+  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry/%s";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT_INQUIRED = "amount_inquired";
@@ -46,14 +54,6 @@ public class RequestInquiry extends BunqModel {
   public static final String FIELD_ALLOW_AMOUNT_HIGHER = "allow_amount_higher";
   public static final String FIELD_ALLOW_BUNQME = "allow_bunqme";
   public static final String FIELD_REDIRECT_URL = "redirect_url";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry/%s";
 
   /**
    * Object type.

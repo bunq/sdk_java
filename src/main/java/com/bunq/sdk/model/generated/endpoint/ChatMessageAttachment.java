@@ -21,15 +21,15 @@ import javax.lang.model.type.NullType;
 public class ChatMessageAttachment extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/chat-conversation/%s/message-attachment";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_CLIENT_MESSAGE_UUID = "client_message_uuid";
   public static final String FIELD_ATTACHMENT = "attachment";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/chat-conversation/%s/message-attachment";
 
   /**
    * Object type.

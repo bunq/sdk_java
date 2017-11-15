@@ -1,5 +1,6 @@
 package com.bunq.sdk.model.generated.object;
 
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
@@ -13,6 +14,11 @@ import java.util.Map;
 /**
  */
 public class ChatMessageContent extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    */
@@ -124,6 +130,40 @@ public class ChatMessageContent extends BunqModel {
 
   public void setChatMessageContentText(ChatMessageContentText chatMessageContentText) {
     this.chatMessageContentText = chatMessageContentText;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.chatMessageContentAnchorEvent != null) {
+      return this.chatMessageContentAnchorEvent;
+    }
+
+    if (this.chatMessageContentAttachment != null) {
+      return this.chatMessageContentAttachment;
+    }
+
+    if (this.chatMessageContentGeolocation != null) {
+      return this.chatMessageContentGeolocation;
+    }
+
+    if (this.chatMessageContentStatusConversationTitle != null) {
+      return this.chatMessageContentStatusConversationTitle;
+    }
+
+    if (this.chatMessageContentStatusConversation != null) {
+      return this.chatMessageContentStatusConversation;
+    }
+
+    if (this.chatMessageContentStatusMembership != null) {
+      return this.chatMessageContentStatusMembership;
+    }
+
+    if (this.chatMessageContentText != null) {
+      return this.chatMessageContentText;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }

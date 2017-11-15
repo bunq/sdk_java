@@ -29,19 +29,19 @@ import javax.lang.model.type.NullType;
 public class RequestResponse extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-response/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-response";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-response/%s";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT_RESPONDED = "amount_responded";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_ADDRESS_SHIPPING = "address_shipping";
   public static final String FIELD_ADDRESS_BILLING = "address_billing";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-response/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-response";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-response/%s";
 
   /**
    * Object type.

@@ -6,7 +6,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.Schedule;
 import com.bunq.sdk.model.generated.object.SchedulePaymentEntry;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -23,12 +22,6 @@ import javax.lang.model.type.NullType;
 public class SchedulePaymentBatch extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_PAYMENTS = "payments";
-  public static final String FIELD_SCHEDULE = "schedule";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment-batch";
@@ -36,9 +29,15 @@ public class SchedulePaymentBatch extends BunqModel {
   private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_PAYMENTS = "payments";
+  public static final String FIELD_SCHEDULE = "schedule";
+
+  /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "SchedulePaymentBatch";
+  private static final String OBJECT_TYPE = "ScheduledPaymentBatch";
 
   /**
    * The payment details.
@@ -68,18 +67,18 @@ public class SchedulePaymentBatch extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId) {
+  public static BunqResponse<SchedulePaymentBatch> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, schedulePaymentBatchId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId, Map<String, String> customHeaders) {
+  public static BunqResponse<SchedulePaymentBatch> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, schedulePaymentBatchId), requestBytes, customHeaders);
 
-    return processForId(responseRaw);
+    return fromJson(SchedulePaymentBatch.class, responseRaw, OBJECT_TYPE);
   }
 
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId) {

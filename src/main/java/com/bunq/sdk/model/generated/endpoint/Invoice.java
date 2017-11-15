@@ -25,17 +25,17 @@ import javax.lang.model.type.NullType;
 public class Invoice extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
+  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_EXTERNAL_URL = "external_url";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
 
   /**
    * Object type.

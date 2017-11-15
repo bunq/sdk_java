@@ -22,19 +22,19 @@ import javax.lang.model.type.NullType;
 public class RequestInquiryBatch extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_REQUEST_INQUIRIES = "request_inquiries";
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_TOTAL_AMOUNT_INQUIRED = "total_amount_inquired";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry-batch";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry-batch/%s";
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry-batch/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry-batch";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_REQUEST_INQUIRIES = "request_inquiries";
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_TOTAL_AMOUNT_INQUIRED = "total_amount_inquired";
 
   /**
    * Object type.

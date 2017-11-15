@@ -1,5 +1,6 @@
 package com.bunq.sdk.model.generated.object;
 
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.endpoint.Payment;
@@ -15,6 +16,11 @@ import java.util.Map;
 /**
  */
 public class DraftPaymentAnchorObject extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    */
@@ -46,6 +52,20 @@ public class DraftPaymentAnchorObject extends BunqModel {
 
   public void setPaymentBatch(PaymentBatch paymentBatch) {
     this.paymentBatch = paymentBatch;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.payment != null) {
+      return this.payment;
+    }
+
+    if (this.paymentBatch != null) {
+      return this.paymentBatch;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }
