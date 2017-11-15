@@ -21,16 +21,16 @@ import javax.lang.model.type.NullType;
 public class PaymentChat extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_LAST_READ_MESSAGE_ID = "last_read_message_id";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment/%s/chat";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/payment/%s/chat/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment/%s/chat";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_LAST_READ_MESSAGE_ID = "last_read_message_id";
 
   /**
    * Object type.

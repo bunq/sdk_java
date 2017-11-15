@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -22,6 +23,11 @@ import javax.lang.model.type.NullType;
 public class Device extends BunqModel {
 
   /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
+
+  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_READ = "device/%s";
@@ -31,12 +37,6 @@ public class Device extends BunqModel {
    * Object type.
    */
   private static final String OBJECT_TYPE = "Device";
-
-  /**
-   */
-  @Expose
-  @SerializedName("DevicePhone")
-  private DevicePhone devicePhone;
 
   /**
    */
@@ -78,22 +78,22 @@ public class Device extends BunqModel {
 
   /**
    */
-  public DevicePhone getDevicePhone() {
-    return this.devicePhone;
-  }
-
-  public void setDevicePhone(DevicePhone devicePhone) {
-    this.devicePhone = devicePhone;
-  }
-
-  /**
-   */
   public DeviceServer getDeviceServer() {
     return this.deviceServer;
   }
 
   public void setDeviceServer(DeviceServer deviceServer) {
     this.deviceServer = deviceServer;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.deviceServer != null) {
+      return this.deviceServer;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }

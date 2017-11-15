@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -19,6 +20,11 @@ import javax.lang.model.type.NullType;
  * Manages user's conversations.
  */
 public class ChatConversation extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    * Endpoint constants.
@@ -91,6 +97,20 @@ public class ChatConversation extends BunqModel {
 
   public void setChatConversationReference(ChatConversationReference chatConversationReference) {
     this.chatConversationReference = chatConversationReference;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.supportConversationExternal != null) {
+      return this.supportConversationExternal;
+    }
+
+    if (this.chatConversationReference != null) {
+      return this.chatConversationReference;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }

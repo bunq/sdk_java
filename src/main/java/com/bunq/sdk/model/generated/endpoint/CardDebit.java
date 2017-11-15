@@ -28,6 +28,11 @@ import javax.lang.model.type.NullType;
 public class CardDebit extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_SECOND_LINE = "second_line";
@@ -37,11 +42,7 @@ public class CardDebit extends BunqModel {
   public static final String FIELD_TYPE = "type";
   public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
   public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
+  public static final String FIELD_COUNTRY = "country";
 
   /**
    * Object type.
@@ -82,6 +83,13 @@ public class CardDebit extends BunqModel {
   @Expose
   @SerializedName("type")
   private String type;
+
+  /**
+   * The sub_type of card.
+   */
+  @Expose
+  @SerializedName("sub_type")
+  private String subType;
 
   /**
    * The second line of text on the card
@@ -175,6 +183,13 @@ public class CardDebit extends BunqModel {
   @SerializedName("monetary_account_id_fallback")
   private Integer monetaryAccountIdFallback;
 
+  /**
+   * The country that is domestic to the card. Defaults to country of residence of user.
+   */
+  @Expose
+  @SerializedName("country")
+  private String country;
+
   public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
@@ -244,6 +259,17 @@ public class CardDebit extends BunqModel {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  /**
+   * The sub_type of card.
+   */
+  public String getSubType() {
+    return this.subType;
+  }
+
+  public void setSubType(String subType) {
+    this.subType = subType;
   }
 
   /**
@@ -388,6 +414,17 @@ public class CardDebit extends BunqModel {
 
   public void setMonetaryAccountIdFallback(Integer monetaryAccountIdFallback) {
     this.monetaryAccountIdFallback = monetaryAccountIdFallback;
+  }
+
+  /**
+   * The country that is domestic to the card. Defaults to country of residence of user.
+   */
+  public String getCountry() {
+    return this.country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
   }
 
 }

@@ -25,16 +25,16 @@ import javax.lang.model.type.NullType;
 public class ShareInviteBankResponse extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_READ = "user/%s/share-invite-bank-response/%s";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/share-invite-bank-response/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/share-invite-bank-response";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
 
   /**
    * Object type.
@@ -77,16 +77,21 @@ public class ShareInviteBankResponse extends BunqModel {
   private ShareDetail shareDetail;
 
   /**
-   * The status of the share. Can be ACCEPTED (other user scans the QR and accepts the share),
-   * REVOKED (other user scans the QR but denies the share), CANCELLED (other user cancels an
-   * existing share), EXPIRED (other user did not react before expiration), PENDING (share is
-   * waiting for reply by the other user) or REJECTED (share initiated by other user but
-   * rejected). Once the share's status becomes REVOKED, CANCELLED, EXPIRED or REJECTED, its
-   * status can no longer be updated.
+   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
+   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects)
    */
   @Expose
   @SerializedName("status")
   private String status;
+
+  /**
+   * The share type: STANDARD.
+   */
+  @Expose
+  @SerializedName("share_type")
+  private String shareType;
 
   /**
    * The start date of this share.
@@ -212,12 +217,10 @@ public class ShareInviteBankResponse extends BunqModel {
   }
 
   /**
-   * The status of the share. Can be ACCEPTED (other user scans the QR and accepts the share),
-   * REVOKED (other user scans the QR but denies the share), CANCELLED (other user cancels an
-   * existing share), EXPIRED (other user did not react before expiration), PENDING (share is
-   * waiting for reply by the other user) or REJECTED (share initiated by other user but
-   * rejected). Once the share's status becomes REVOKED, CANCELLED, EXPIRED or REJECTED, its
-   * status can no longer be updated.
+   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
+   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects)
    */
   public String getStatus() {
     return this.status;
@@ -225,6 +228,17 @@ public class ShareInviteBankResponse extends BunqModel {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  /**
+   * The share type: STANDARD.
+   */
+  public String getShareType() {
+    return this.shareType;
+  }
+
+  public void setShareType(String shareType) {
+    this.shareType = shareType;
   }
 
   /**

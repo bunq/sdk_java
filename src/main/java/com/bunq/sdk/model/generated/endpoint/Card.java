@@ -27,6 +27,13 @@ import javax.lang.model.type.NullType;
 public class Card extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s";
+  private static final String ENDPOINT_URL_READ = "user/%s/card/%s";
+  private static final String ENDPOINT_URL_LISTING = "user/%s/card";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_PIN_CODE = "pin_code";
@@ -38,13 +45,6 @@ public class Card extends BunqModel {
   public static final String FIELD_MONETARY_ACCOUNT_CURRENT_ID = "monetary_account_current_id";
   public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
   public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s";
-  private static final String ENDPOINT_URL_READ = "user/%s/card/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/card";
 
   /**
    * Object type.
@@ -85,6 +85,13 @@ public class Card extends BunqModel {
   @Expose
   @SerializedName("type")
   private String type;
+
+  /**
+   * The sub-type of the card.
+   */
+  @Expose
+  @SerializedName("sub_type")
+  private String subType;
 
   /**
    * The second line of text on the card
@@ -187,6 +194,13 @@ public class Card extends BunqModel {
   @Expose
   @SerializedName("monetary_account_id_fallback")
   private Integer monetaryAccountIdFallback;
+
+  /**
+   * The country that is domestic to the card. Defaults to country of residence of user.
+   */
+  @Expose
+  @SerializedName("country")
+  private String country;
 
   public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
     return update(apiContext, requestMap, userId, cardId, new HashMap<>());
@@ -291,6 +305,17 @@ public class Card extends BunqModel {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  /**
+   * The sub-type of the card.
+   */
+  public String getSubType() {
+    return this.subType;
+  }
+
+  public void setSubType(String subType) {
+    this.subType = subType;
   }
 
   /**
@@ -449,6 +474,17 @@ public class Card extends BunqModel {
 
   public void setMonetaryAccountIdFallback(Integer monetaryAccountIdFallback) {
     this.monetaryAccountIdFallback = monetaryAccountIdFallback;
+  }
+
+  /**
+   * The country that is domestic to the card. Defaults to country of residence of user.
+   */
+  public String getCountry() {
+    return this.country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
   }
 
 }

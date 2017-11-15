@@ -31,6 +31,12 @@ import javax.lang.model.type.NullType;
 public class UserCompany extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_READ = "user-company/%s";
+  private static final String ENDPOINT_URL_UPDATE = "user-company/%s";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_NAME = "name";
@@ -49,12 +55,6 @@ public class UserCompany extends BunqModel {
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
   public static final String FIELD_COUNTER_BANK_IBAN = "counter_bank_iban";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_READ = "user-company/%s";
-  private static final String ENDPOINT_URL_UPDATE = "user-company/%s";
 
   /**
    * Object type.

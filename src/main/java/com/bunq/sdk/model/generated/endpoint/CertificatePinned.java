@@ -23,17 +23,17 @@ import javax.lang.model.type.NullType;
 public class CertificatePinned extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_CERTIFICATE_CHAIN = "certificate_chain";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/certificate-pinned";
   private static final String ENDPOINT_URL_DELETE = "user/%s/certificate-pinned/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/certificate-pinned";
   private static final String ENDPOINT_URL_READ = "user/%s/certificate-pinned/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_CERTIFICATE_CHAIN = "certificate_chain";
 
   /**
    * Object type.

@@ -26,15 +26,15 @@ import javax.lang.model.type.NullType;
 public class CardReplace extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/replace";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_PIN_CODE = "pin_code";
   public static final String FIELD_SECOND_LINE = "second_line";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/replace";
 
   /**
    * Object type.

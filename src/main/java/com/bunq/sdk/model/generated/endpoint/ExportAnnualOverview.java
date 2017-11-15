@@ -24,16 +24,16 @@ import javax.lang.model.type.NullType;
 public class ExportAnnualOverview extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_YEAR = "year";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/export-annual-overview";
   private static final String ENDPOINT_URL_READ = "user/%s/export-annual-overview/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/export-annual-overview";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_YEAR = "year";
 
   /**
    * Object type.

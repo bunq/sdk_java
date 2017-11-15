@@ -21,15 +21,15 @@ import javax.lang.model.type.NullType;
 public class BillingContractSubscription extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_SUBSCRIPTION_TYPE = "subscription_type";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/billing-contract-subscription";
   private static final String ENDPOINT_URL_LISTING = "user/%s/billing-contract-subscription";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_SUBSCRIPTION_TYPE = "subscription_type";
 
   /**
    * Object type.

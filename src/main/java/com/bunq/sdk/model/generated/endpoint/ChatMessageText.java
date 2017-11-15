@@ -21,15 +21,15 @@ import javax.lang.model.type.NullType;
 public class ChatMessageText extends BunqModel {
 
   /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_URL_CREATE = "user/%s/chat-conversation/%s/message-text";
+
+  /**
    * Field constants.
    */
   public static final String FIELD_CLIENT_MESSAGE_UUID = "client_message_uuid";
   public static final String FIELD_TEXT = "text";
-
-  /**
-   * Endpoint constants.
-   */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/chat-conversation/%s/message-text";
 
   /**
    * Object type.

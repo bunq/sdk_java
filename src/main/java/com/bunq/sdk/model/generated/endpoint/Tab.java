@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -23,6 +24,11 @@ import javax.lang.model.type.NullType;
  * TabUsageMultiple is a Tab that can be paid multiple times by different users.
  */
 public class Tab extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    * Endpoint constants.
@@ -97,6 +103,20 @@ public class Tab extends BunqModel {
 
   public void setTabUsageMultiple(TabUsageMultiple tabUsageMultiple) {
     this.tabUsageMultiple = tabUsageMultiple;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.tabUsageSingle != null) {
+      return this.tabUsageSingle;
+    }
+
+    if (this.tabUsageMultiple != null) {
+      return this.tabUsageMultiple;
+    }
+
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
 }

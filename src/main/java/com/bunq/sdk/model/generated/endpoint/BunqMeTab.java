@@ -23,18 +23,18 @@ import javax.lang.model.type.NullType;
 public class BunqMeTab extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_BUNQME_TAB_ENTRY = "bunqme_tab_entry";
-  public static final String FIELD_STATUS = "status";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/bunqme-tab";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/bunqme-tab/%s";
   private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/bunqme-tab";
   private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/bunqme-tab/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_BUNQME_TAB_ENTRY = "bunqme_tab_entry";
+  public static final String FIELD_STATUS = "status";
 
   /**
    * Object type.

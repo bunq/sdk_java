@@ -21,18 +21,18 @@ import javax.lang.model.type.NullType;
 public class PermittedIp extends BunqModel {
 
   /**
-   * Field constants.
-   */
-  public static final String FIELD_IP = "ip";
-  public static final String FIELD_STATUS = "status";
-
-  /**
    * Endpoint constants.
    */
   private static final String ENDPOINT_URL_READ = "user/%s/credential-password-ip/%s/ip/%s";
   private static final String ENDPOINT_URL_CREATE = "user/%s/credential-password-ip/%s/ip";
   private static final String ENDPOINT_URL_LISTING = "user/%s/credential-password-ip/%s/ip";
   private static final String ENDPOINT_URL_UPDATE = "user/%s/credential-password-ip/%s/ip/%s";
+
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_IP = "ip";
+  public static final String FIELD_STATUS = "status";
 
   /**
    * Object type.
