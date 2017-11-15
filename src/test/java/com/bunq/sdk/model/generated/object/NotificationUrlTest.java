@@ -21,19 +21,6 @@ public class NotificationUrlTest extends BunqSdkTestBase {
     /**
      * Getter string constants
      */
-    private static final String GET_PAYMENT = "getPayment";
-    private static final String GET_BUNQ_ME_TAB = "getBunqMeTab";
-    private static final String GET_CHAT_MESSAGE_ANNOUNCEMENT = "getChatMessageAnnouncement";
-    private static final String GET_DRAFT_PAYMENT = "getDraftPayment";
-    private static final String GET_MASTER_CARD_ACTION = "getMasterCardAction";
-    private static final String GET_MONETARY_ACCOUNT_BANK = "getMonetaryAccountBank";
-    private static final String GET_PAYMENT_BATCH = "getPaymentBatch";
-    private static final String GET_REQUEST_INQUIRY = "getRequestInquiry";
-    private static final String GET_REQUEST_RESPONSE = "getRequestResponse";
-    private static final String GET_SCHEDULE_PAYMENT = "getScheduledPayment";
-    private static final String GET_SCHEDULE_INSTANCE = "getScheduledInstance";
-    private static final String GET_SHARE_INVITE_BANK_INQUIRY = "getShareInviteBankInquiry";
-    private static final String GET_SHARE_INVITE_BANK_RESPONSE = "getShareInviteBankResponse";
 
     /**
      * Assertion errors.
@@ -41,6 +28,19 @@ public class NotificationUrlTest extends BunqSdkTestBase {
     private static final String ASSERT_SHOULD_NOT_REACH_THIS_CODE_ERROR = "Congratulations you've reached unreachable code.";
     private static final String ASSERT_JSON_DECODE_ERROR = "Error accorded while decoding the JSON file.";
     private static final String ASSERT_OBJECT_IS_NULL_ERROR = "The field object of NotificationUrl is null.";
+    private static final String GETTER_PAYMENT = "getPayment";
+    private static final String GETTER_BUNQ_ME_TAB = "getBunqMeTab";
+    private static final String GETTER_CHAT_MESSAGE_ANNOUNCEMENT = "getChatMessageAnnouncement";
+    private static final String GETTER_DRAFT_PAYMENT = "getDraftPayment";
+    private static final String GETTER_MASTER_CARD_ACTION = "getMasterCardAction";
+    private static final String GETTER_MONETARY_ACCOUNT_BANK = "getMonetaryAccountBank";
+    private static final String GETTER_PAYMENT_BATCH = "getPaymentBatch";
+    private static final String GETTER_REQUEST_INQUIRY = "getRequestInquiry";
+    private static final String GETTER_REQUEST_RESPONSE = "getRequestResponse";
+    private static final String GETTER_SCHEDULE_PAYMENT = "getScheduledPayment";
+    private static final String GETTER_SCHEDULE_INSTANCE = "getScheduledInstance";
+    private static final String GETTER_SHARE_INVITE_BANK_INQUIRY = "getShareInviteBankInquiry";
+    private static final String GETTER_SHARE_INVITE_BANK_RESPONSE = "getShareInviteBankResponse";
 
     /**
      * Model json paths constants.
@@ -100,7 +100,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_MUTATION_MODEL,
                 Payment.class.getName(),
-                GET_PAYMENT
+                GETTER_PAYMENT
         );
     }
 
@@ -112,7 +112,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_BUNQ_ME_TAB_MODEL,
                 BunqMeTab.class.getName(),
-                GET_BUNQ_ME_TAB
+                GETTER_BUNQ_ME_TAB
         );
     }
 
@@ -124,7 +124,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL,
                 ChatMessageAnnouncement.class.getName(),
-                GET_CHAT_MESSAGE_ANNOUNCEMENT
+                GETTER_CHAT_MESSAGE_ANNOUNCEMENT
         );
     }
 
@@ -136,7 +136,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_DRAFT_PAYMENT_MODEL,
                 DraftPayment.class.getName(),
-                GET_DRAFT_PAYMENT
+                GETTER_DRAFT_PAYMENT
         );
     }
 
@@ -148,7 +148,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_MASTER_CARD_ACTION_MODEL,
                 MasterCardAction.class.getName(),
-                GET_MASTER_CARD_ACTION
+                GETTER_MASTER_CARD_ACTION
         );
     }
 
@@ -160,7 +160,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_MONETARY_ACCOUNT_BANK_MODEL,
                 MonetaryAccountBank.class.getName(),
-                GET_MONETARY_ACCOUNT_BANK
+                GETTER_MONETARY_ACCOUNT_BANK
         );
     }
 
@@ -172,7 +172,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_PAYMENT_BATCH_MODEL,
                 PaymentBatch.class.getName(),
-                GET_PAYMENT_BATCH
+                GETTER_PAYMENT_BATCH
         );
     }
 
@@ -184,7 +184,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_REQUEST_INQUIRY_MODEL,
                 RequestInquiry.class.getName(),
-                GET_REQUEST_INQUIRY
+                GETTER_REQUEST_INQUIRY
         );
     }
 
@@ -196,7 +196,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_REQUEST_RESPONSE_MODEL,
                 RequestResponse.class.getName(),
-                GET_REQUEST_RESPONSE
+                GETTER_REQUEST_RESPONSE
         );
     }
 
@@ -208,7 +208,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_SCHEDULE_INSTANCE_MODEL,
                 ScheduleInstance.class.getName(),
-                GET_SCHEDULE_INSTANCE
+                GETTER_SCHEDULE_INSTANCE
         );
     }
 
@@ -220,7 +220,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_SCHEDULE_PAYMENT_MODEL,
                 SchedulePayment.class.getName(),
-                GET_SCHEDULE_PAYMENT
+                GETTER_SCHEDULE_PAYMENT
         );
     }
 
@@ -232,7 +232,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_SHARE_INVITE_BANK_INQUIRY_MODEL,
                 ShareInviteBankInquiry.class.getName(),
-                GET_SHARE_INVITE_BANK_INQUIRY
+                GETTER_SHARE_INVITE_BANK_INQUIRY
         );
     }
 
@@ -244,7 +244,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         executeNotificationUrlTest(
                 JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL,
                 ShareInviteBankResponse.class.getName(),
-                GET_SHARE_INVITE_BANK_RESPONSE
+                GETTER_SHARE_INVITE_BANK_RESPONSE
         );
     }
 
