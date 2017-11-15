@@ -21,13 +21,6 @@ public class NotificationUrlTest extends BunqSdkTestBase {
     /**
      * Getter string constants
      */
-
-    /**
-     * Assertion errors.
-     */
-    private static final String ASSERT_SHOULD_NOT_REACH_THIS_CODE_ERROR = "Congratulations you've reached unreachable code.";
-    private static final String ASSERT_JSON_DECODE_ERROR = "Error accorded while decoding the JSON file.";
-    private static final String ASSERT_OBJECT_IS_NULL_ERROR = "The field object of NotificationUrl is null.";
     private static final String GETTER_PAYMENT = "getPayment";
     private static final String GETTER_BUNQ_ME_TAB = "getBunqMeTab";
     private static final String GETTER_CHAT_MESSAGE_ANNOUNCEMENT = "getChatMessageAnnouncement";
@@ -63,11 +56,6 @@ public class NotificationUrlTest extends BunqSdkTestBase {
             "/ShareInviteBankInquiry.json";
     private static final String JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL = BASE_PATH_JSON_MODEL +
             "/ShareInviteBankResponse.json";
-
-    /**
-     * Model root key.
-     */
-    private static final String KEY_NOTIFICATION_URL_MODEL = "NotificationUrl";
 
     private static final Type NOTIFICATION_URL_TYPE = new TypeToken<NotificationUrl>(){}.getType();
 
