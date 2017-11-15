@@ -17,6 +17,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class NotificationUrlTest extends BunqSdkTestBase {
+
   /**
    * Getter string constants
    */
@@ -56,8 +57,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
   private static final String JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL = BASE_PATH_JSON_MODEL +
       "/ShareInviteBankResponse.json";
 
-  private static final Type TYPE_NOTIFICATION_URL = new TypeToken<NotificationUrl>() {
-  }.getType();
+  private static final Type TYPE_NOTIFICATION_URL = new TypeToken<NotificationUrl>() {}.getType();
 
   private void executeNotificationUrlTest(
       String expectedJsonFileName,
