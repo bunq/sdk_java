@@ -85,6 +85,13 @@ public class CardDebit extends BunqModel {
   private String type;
 
   /**
+   * The sub_type of card.
+   */
+  @Expose
+  @SerializedName("sub_type")
+  private String subType;
+
+  /**
    * The second line of text on the card
    */
   @Expose
@@ -252,6 +259,17 @@ public class CardDebit extends BunqModel {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  /**
+   * The sub_type of card.
+   */
+  public String getSubType() {
+    return this.subType;
+  }
+
+  public void setSubType(String subType) {
+    this.subType = subType;
   }
 
   /**

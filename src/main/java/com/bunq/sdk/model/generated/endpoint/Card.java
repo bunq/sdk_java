@@ -87,7 +87,7 @@ public class Card extends BunqModel {
   private String type;
 
   /**
-   * The sub-type of the card. Can be WILDCARD or NONE.
+   * The sub-type of the card.
    */
   @Expose
   @SerializedName("sub_type")
@@ -308,7 +308,7 @@ public class Card extends BunqModel {
   }
 
   /**
-   * The sub-type of the card. Can be WILDCARD or NONE.
+   * The sub-type of the card.
    */
   public String getSubType() {
     return this.subType;
