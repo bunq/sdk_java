@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class NotificationUrlTest extends BunqSdkTestBase {
 
   /**
-   * Getter string constants
+   * Getter string constants.
    */
   private static final String GETTER_PAYMENT = "getPayment";
   private static final String GETTER_BUNQ_ME_TAB = "getBunqMeTab";
