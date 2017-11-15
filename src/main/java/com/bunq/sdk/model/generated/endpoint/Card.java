@@ -49,7 +49,7 @@ public class Card extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Card";
+  private static final String OBJECT_TYPE = "CardDebit";
 
   /**
    * The id of the card.

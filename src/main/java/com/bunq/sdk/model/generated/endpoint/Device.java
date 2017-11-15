@@ -41,12 +41,6 @@ public class Device extends BunqModel {
   /**
    */
   @Expose
-  @SerializedName("DevicePhone")
-  private DevicePhone devicePhone;
-
-  /**
-   */
-  @Expose
   @SerializedName("DeviceServer")
   private DeviceServer deviceServer;
 
@@ -84,16 +78,6 @@ public class Device extends BunqModel {
 
   /**
    */
-  public DevicePhone getDevicePhone() {
-    return this.devicePhone;
-  }
-
-  public void setDevicePhone(DevicePhone devicePhone) {
-    this.devicePhone = devicePhone;
-  }
-
-  /**
-   */
   public DeviceServer getDeviceServer() {
     return this.deviceServer;
   }
@@ -105,10 +89,6 @@ public class Device extends BunqModel {
   /**
    */
   public BunqModel getReferencedObject() {
-    if (this.devicePhone != null) {
-      return this.devicePhone;
-    }
-
     if (this.deviceServer != null) {
       return this.deviceServer;
     }

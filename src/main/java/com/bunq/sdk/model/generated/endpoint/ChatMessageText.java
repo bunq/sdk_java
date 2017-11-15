@@ -34,7 +34,7 @@ public class ChatMessageText extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ChatMessageText";
+  private static final String OBJECT_TYPE = "Id";
 
   /**
    * The id of the newly created chat message.

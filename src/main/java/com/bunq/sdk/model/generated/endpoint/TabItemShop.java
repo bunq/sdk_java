@@ -50,7 +50,7 @@ public class TabItemShop extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabItemShop";
+  private static final String OBJECT_TYPE = "TabItem";
 
   /**
    * The id of the created TabItem.

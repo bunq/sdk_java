@@ -38,7 +38,7 @@ public class CashRegisterQrCode extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CashRegisterQrCode";
+  private static final String OBJECT_TYPE = "TokenQrCashRegister";
 
   /**
    * The id of the created QR code. Use this id to get the RAW content of the QR code with:

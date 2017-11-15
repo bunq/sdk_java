@@ -35,7 +35,7 @@ public class PaymentChat extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "PaymentChat";
+  private static final String OBJECT_TYPE = "ChatConversationPayment";
 
   /**
    * The id of the chat conversation.

@@ -66,7 +66,7 @@ public class UserLight extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "UserLight";
+  private static final String OBJECT_TYPE = "UserPerson";
 
   /**
    * The id of the user.
