@@ -41,32 +41,33 @@ public class NotificationUrlTest extends BunqSdkTestBase {
   private static final String JSON_PATH_MUTATION_MODEL = BASE_PATH_JSON_MODEL + "/Mutation.json";
   private static final String JSON_PATH_BUNQ_ME_TAB_MODEL = BASE_PATH_JSON_MODEL + "/BunqMeTab.json";
   private static final String JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL = BASE_PATH_JSON_MODEL +
-          "/ChatMessageAnnouncement.json";
+      "/ChatMessageAnnouncement.json";
   private static final String JSON_PATH_DRAFT_PAYMENT_MODEL = BASE_PATH_JSON_MODEL + "/DraftPayment.json";
   private static final String JSON_PATH_MASTER_CARD_ACTION_MODEL = BASE_PATH_JSON_MODEL + "/MasterCardAction.json";
   private static final String JSON_PATH_MONETARY_ACCOUNT_BANK_MODEL = BASE_PATH_JSON_MODEL +
-          "/MonetaryAccountBank.json";
+      "/MonetaryAccountBank.json";
   private static final String JSON_PATH_PAYMENT_BATCH_MODEL = BASE_PATH_JSON_MODEL + "/PaymentBatch.json";
   private static final String JSON_PATH_REQUEST_INQUIRY_MODEL = BASE_PATH_JSON_MODEL + "/RequestInquiry.json";
   private static final String JSON_PATH_REQUEST_RESPONSE_MODEL = BASE_PATH_JSON_MODEL + "/RequestResponse.json";
   private static final String JSON_PATH_SCHEDULE_PAYMENT_MODEL = BASE_PATH_JSON_MODEL + "/ScheduledPayment.json";
   private static final String JSON_PATH_SCHEDULE_INSTANCE_MODEL = BASE_PATH_JSON_MODEL + "/ScheduledInstance.json";
   private static final String JSON_PATH_SHARE_INVITE_BANK_INQUIRY_MODEL = BASE_PATH_JSON_MODEL +
-          "/ShareInviteBankInquiry.json";
+      "/ShareInviteBankInquiry.json";
   private static final String JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL = BASE_PATH_JSON_MODEL +
-          "/ShareInviteBankResponse.json";
+      "/ShareInviteBankResponse.json";
 
-  private static final Type TYPE_NOTIFICATION_URL = new TypeToken<NotificationUrl>() {}.getType();
+  private static final Type TYPE_NOTIFICATION_URL = new TypeToken<NotificationUrl>() {
+  }.getType();
 
   private void executeNotificationUrlTest(
-          String expectedJsonFileName,
-          String classNameExpected,
-          String referencedObjectGetterName
+      String expectedJsonFileName,
+      String classNameExpected,
+      String referencedObjectGetterName
   ) throws FileNotFoundException,
-          NoSuchMethodException,
-          InvocationTargetException,
-          IllegalAccessException,
-          ClassNotFoundException {
+      NoSuchMethodException,
+      InvocationTargetException,
+      IllegalAccessException,
+      ClassNotFoundException {
     JsonReader jsonReader = new JsonReader(new FileReader(expectedJsonFileName));
     NotificationUrl notificationUrl = new Gson().fromJson(jsonReader, TYPE_NOTIFICATION_URL);
 
@@ -74,7 +75,7 @@ public class NotificationUrlTest extends BunqSdkTestBase {
     assertNotNull(notificationUrl.getObject());
 
     Object model = notificationUrl.getObject().getClass().getDeclaredMethod(referencedObjectGetterName).invoke(
-            notificationUrl.getObject()
+        notificationUrl.getObject()
     );
     BunqModel referencedModel = notificationUrl.getObject().getReferencedObject();
 
@@ -85,157 +86,157 @@ public class NotificationUrlTest extends BunqSdkTestBase {
 
   @Test
   public void mutationModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_MUTATION_MODEL,
-            Payment.class.getName(),
-            GETTER_PAYMENT
+        JSON_PATH_MUTATION_MODEL,
+        Payment.class.getName(),
+        GETTER_PAYMENT
     );
   }
 
   @Test
   public void bunqMeTabModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_BUNQ_ME_TAB_MODEL,
-            BunqMeTab.class.getName(),
-            GETTER_BUNQ_ME_TAB
+        JSON_PATH_BUNQ_ME_TAB_MODEL,
+        BunqMeTab.class.getName(),
+        GETTER_BUNQ_ME_TAB
     );
   }
 
   @Test
   public void chatMessageAnnouncementModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL,
-            ChatMessageAnnouncement.class.getName(),
-            GETTER_CHAT_MESSAGE_ANNOUNCEMENT
+        JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL,
+        ChatMessageAnnouncement.class.getName(),
+        GETTER_CHAT_MESSAGE_ANNOUNCEMENT
     );
   }
 
   @Test
   public void draftPaymentModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_DRAFT_PAYMENT_MODEL,
-            DraftPayment.class.getName(),
-            GETTER_DRAFT_PAYMENT
+        JSON_PATH_DRAFT_PAYMENT_MODEL,
+        DraftPayment.class.getName(),
+        GETTER_DRAFT_PAYMENT
     );
   }
 
   @Test
   public void masterCardActionModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_MASTER_CARD_ACTION_MODEL,
-            MasterCardAction.class.getName(),
-            GETTER_MASTER_CARD_ACTION
+        JSON_PATH_MASTER_CARD_ACTION_MODEL,
+        MasterCardAction.class.getName(),
+        GETTER_MASTER_CARD_ACTION
     );
   }
 
   @Test
   public void monetaryAccountModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_MONETARY_ACCOUNT_BANK_MODEL,
-            MonetaryAccountBank.class.getName(),
-            GETTER_MONETARY_ACCOUNT_BANK
+        JSON_PATH_MONETARY_ACCOUNT_BANK_MODEL,
+        MonetaryAccountBank.class.getName(),
+        GETTER_MONETARY_ACCOUNT_BANK
     );
   }
 
   @Test
   public void paymentBatchModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_PAYMENT_BATCH_MODEL,
-            PaymentBatch.class.getName(),
-            GETTER_PAYMENT_BATCH
+        JSON_PATH_PAYMENT_BATCH_MODEL,
+        PaymentBatch.class.getName(),
+        GETTER_PAYMENT_BATCH
     );
   }
 
   @Test
   public void requestInquiryModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_REQUEST_INQUIRY_MODEL,
-            RequestInquiry.class.getName(),
-            GETTER_REQUEST_INQUIRY
+        JSON_PATH_REQUEST_INQUIRY_MODEL,
+        RequestInquiry.class.getName(),
+        GETTER_REQUEST_INQUIRY
     );
   }
 
   @Test
   public void requestResponseModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_REQUEST_RESPONSE_MODEL,
-            RequestResponse.class.getName(),
-            GETTER_REQUEST_RESPONSE
+        JSON_PATH_REQUEST_RESPONSE_MODEL,
+        RequestResponse.class.getName(),
+        GETTER_REQUEST_RESPONSE
     );
   }
 
   @Test
   public void scheduledInstanceModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_SCHEDULE_INSTANCE_MODEL,
-            ScheduleInstance.class.getName(),
-            GETTER_SCHEDULE_INSTANCE
+        JSON_PATH_SCHEDULE_INSTANCE_MODEL,
+        ScheduleInstance.class.getName(),
+        GETTER_SCHEDULE_INSTANCE
     );
   }
 
   @Test
   public void scheduledPaymentModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_SCHEDULE_PAYMENT_MODEL,
-            SchedulePayment.class.getName(),
-            GETTER_SCHEDULE_PAYMENT
+        JSON_PATH_SCHEDULE_PAYMENT_MODEL,
+        SchedulePayment.class.getName(),
+        GETTER_SCHEDULE_PAYMENT
     );
   }
 
   @Test
   public void shareInviteBankInquiryModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_SHARE_INVITE_BANK_INQUIRY_MODEL,
-            ShareInviteBankInquiry.class.getName(),
-            GETTER_SHARE_INVITE_BANK_INQUIRY
+        JSON_PATH_SHARE_INVITE_BANK_INQUIRY_MODEL,
+        ShareInviteBankInquiry.class.getName(),
+        GETTER_SHARE_INVITE_BANK_INQUIRY
     );
   }
 
   @Test
   public void shareInviteBankResponseModelTest() throws InvocationTargetException, FileNotFoundException,
-          ClassNotFoundException,
-          IllegalAccessException,
-          NoSuchMethodException {
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
     executeNotificationUrlTest(
-            JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL,
-            ShareInviteBankResponse.class.getName(),
-            GETTER_SHARE_INVITE_BANK_RESPONSE
+        JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL,
+        ShareInviteBankResponse.class.getName(),
+        GETTER_SHARE_INVITE_BANK_RESPONSE
     );
   }
 
