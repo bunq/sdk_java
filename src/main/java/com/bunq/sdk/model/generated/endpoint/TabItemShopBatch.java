@@ -68,4 +68,14 @@ public class TabItemShopBatch extends BunqModel {
     this.tabItems = tabItems;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.tabItems != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

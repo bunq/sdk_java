@@ -353,4 +353,74 @@ public class InvoiceByUser extends BunqModel {
     this.vatNumber = vatNumber;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.invoiceDate != null) {
+      return false;
+    }
+
+    if (this.invoiceNumber != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.group != null) {
+      return false;
+    }
+
+    if (this.totalVatInclusive != null) {
+      return false;
+    }
+
+    if (this.totalVatExclusive != null) {
+      return false;
+    }
+
+    if (this.totalVat != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.address != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAddress != null) {
+      return false;
+    }
+
+    if (this.chamberOfCommerceNumber != null) {
+      return false;
+    }
+
+    if (this.vatNumber != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

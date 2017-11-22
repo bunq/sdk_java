@@ -104,4 +104,18 @@ public class Avatar extends BunqModel {
     this.image = image;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.image != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

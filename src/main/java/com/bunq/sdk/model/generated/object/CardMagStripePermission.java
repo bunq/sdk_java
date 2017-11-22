@@ -32,4 +32,14 @@ public class CardMagStripePermission extends BunqModel {
     this.expiryTime = expiryTime;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.expiryTime != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

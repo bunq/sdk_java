@@ -352,4 +352,74 @@ public class CardResult extends BunqModel {
     this.reservationExpiryTime = reservationExpiryTime;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.cardId != null) {
+      return false;
+    }
+
+    if (this.amountOriginal != null) {
+      return false;
+    }
+
+    if (this.amountFinal != null) {
+      return false;
+    }
+
+    if (this.decision != null) {
+      return false;
+    }
+
+    if (this.decisionDescription != null) {
+      return false;
+    }
+
+    if (this.decisionDescriptionTranslated != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.messageType != null) {
+      return false;
+    }
+
+    if (this.authorisationType != null) {
+      return false;
+    }
+
+    if (this.city != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.labelCard != null) {
+      return false;
+    }
+
+    if (this.reservationStatus != null) {
+      return false;
+    }
+
+    if (this.reservationExpiryTime != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

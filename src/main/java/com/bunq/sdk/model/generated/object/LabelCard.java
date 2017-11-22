@@ -122,4 +122,34 @@ public class LabelCard extends BunqModel {
     this.labelUser = labelUser;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.secondLine != null) {
+      return false;
+    }
+
+    if (this.expiryDate != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.labelUser != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -74,4 +74,22 @@ public class ChatConversationReference extends BunqModel {
     this.updated = updated;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -5,6 +5,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
@@ -20,7 +21,7 @@ import javax.lang.model.type.NullType;
  * Using this call you can retrieve information of the user you are logged in as. This includes
  * your user id, which is referred to in endpoints.
  */
-public class User extends BunqModel {
+public class User extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -134,6 +135,24 @@ public class User extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.userLight != null) {
+      return false;
+    }
+
+    if (this.userPerson != null) {
+      return false;
+    }
+
+    if (this.userCompany != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }

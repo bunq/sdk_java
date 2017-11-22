@@ -113,4 +113,30 @@ public class MonetaryAccountProfileFill extends BunqModel {
     this.issuer = issuer;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.balancePreferred != null) {
+      return false;
+    }
+
+    if (this.balanceThresholdLow != null) {
+      return false;
+    }
+
+    if (this.methodFill != null) {
+      return false;
+    }
+
+    if (this.issuer != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

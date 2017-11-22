@@ -120,4 +120,14 @@ public class PaymentBatch extends BunqModel {
     this.payments = payments;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.payments != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

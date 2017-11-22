@@ -88,4 +88,22 @@ public class NotificationFilter extends BunqModel {
     this.category = category;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.notificationDeliveryMethod != null) {
+      return false;
+    }
+
+    if (this.notificationTarget != null) {
+      return false;
+    }
+
+    if (this.category != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

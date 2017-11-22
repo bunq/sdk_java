@@ -51,4 +51,10 @@ public class ScheduleUser extends BunqModel {
     return fromJsonList(ScheduleUser.class, responseRaw, OBJECT_TYPE);
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    return true;
+  }
+
 }

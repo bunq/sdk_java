@@ -54,4 +54,18 @@ public class AttachmentMonetaryAccountPayment extends BunqModel {
     this.monetaryAccountId = monetaryAccountId;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

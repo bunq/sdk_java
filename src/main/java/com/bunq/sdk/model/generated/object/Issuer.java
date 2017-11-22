@@ -54,4 +54,18 @@ public class Issuer extends BunqModel {
     this.name = name;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.bic != null) {
+      return false;
+    }
+
+    if (this.name != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

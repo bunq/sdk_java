@@ -133,4 +133,34 @@ public class ShareDetailPayment extends BunqModel {
     this.budget = budget;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.makePayments != null) {
+      return false;
+    }
+
+    if (this.makeDraftPayments != null) {
+      return false;
+    }
+
+    if (this.viewBalance != null) {
+      return false;
+    }
+
+    if (this.viewOldEvents != null) {
+      return false;
+    }
+
+    if (this.viewNewEvents != null) {
+      return false;
+    }
+
+    if (this.budget != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

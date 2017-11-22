@@ -135,4 +135,18 @@ public class PermittedIp extends BunqModel {
     this.status = status;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.ip != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

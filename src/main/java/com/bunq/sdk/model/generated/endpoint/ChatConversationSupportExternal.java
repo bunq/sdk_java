@@ -92,4 +92,26 @@ public class ChatConversationSupportExternal extends BunqModel {
     this.lastMessage = lastMessage;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.lastMessage != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

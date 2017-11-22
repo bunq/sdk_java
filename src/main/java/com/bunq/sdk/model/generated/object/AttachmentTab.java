@@ -68,4 +68,22 @@ public class AttachmentTab extends BunqModel {
     this.contentType = contentType;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.contentType != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

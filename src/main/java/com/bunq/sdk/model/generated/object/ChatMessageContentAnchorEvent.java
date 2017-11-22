@@ -40,4 +40,14 @@ public class ChatMessageContentAnchorEvent extends BunqModel {
     this.anchoredObject = anchoredObject;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.anchoredObject != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -160,4 +160,38 @@ public class BunqMeTabEntry extends BunqModel {
     this.merchantAvailable = merchantAvailable;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.amountInquired != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.redirectUrl != null) {
+      return false;
+    }
+
+    if (this.merchantAvailable != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

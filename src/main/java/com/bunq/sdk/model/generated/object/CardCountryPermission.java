@@ -72,4 +72,22 @@ public class CardCountryPermission extends BunqModel {
     this.expiryTime = expiryTime;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    if (this.expiryTime != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -148,4 +148,38 @@ public class Address extends BunqModel {
     this.province = province;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.street != null) {
+      return false;
+    }
+
+    if (this.houseNumber != null) {
+      return false;
+    }
+
+    if (this.poBox != null) {
+      return false;
+    }
+
+    if (this.postalCode != null) {
+      return false;
+    }
+
+    if (this.city != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    if (this.province != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

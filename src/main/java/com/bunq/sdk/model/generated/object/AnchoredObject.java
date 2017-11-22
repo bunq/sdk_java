@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.endpoint.CardDebit;
@@ -31,7 +32,7 @@ import java.util.Map;
 
 /**
  */
-public class AnchoredObject extends BunqModel {
+public class AnchoredObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -402,6 +403,84 @@ public class AnchoredObject extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.cardDebit != null) {
+      return false;
+    }
+
+    if (this.cardPinChange != null) {
+      return false;
+    }
+
+    if (this.cardResult != null) {
+      return false;
+    }
+
+    if (this.draftPayment != null) {
+      return false;
+    }
+
+    if (this.idealMerchantTransaction != null) {
+      return false;
+    }
+
+    if (this.invoice != null) {
+      return false;
+    }
+
+    if (this.payment != null) {
+      return false;
+    }
+
+    if (this.paymentBatch != null) {
+      return false;
+    }
+
+    if (this.promotionDisplay != null) {
+      return false;
+    }
+
+    if (this.requestInquiryBatch != null) {
+      return false;
+    }
+
+    if (this.requestInquiry != null) {
+      return false;
+    }
+
+    if (this.requestResponse != null) {
+      return false;
+    }
+
+    if (this.scheduledPaymentBatch != null) {
+      return false;
+    }
+
+    if (this.scheduledPayment != null) {
+      return false;
+    }
+
+    if (this.scheduledInstance != null) {
+      return false;
+    }
+
+    if (this.shareInviteBankInquiry != null) {
+      return false;
+    }
+
+    if (this.shareInviteBankResponse != null) {
+      return false;
+    }
+
+    if (this.userCredentialPasswordIp != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }

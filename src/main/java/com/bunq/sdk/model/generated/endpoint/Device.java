@@ -5,6 +5,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
@@ -20,7 +21,7 @@ import javax.lang.model.type.NullType;
  * Used to get a Device or a listing of Devices. Creating a DeviceServer should happen via
  * /device-server
  */
-public class Device extends BunqModel {
+public class Device extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -94,6 +95,16 @@ public class Device extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.deviceServer != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }

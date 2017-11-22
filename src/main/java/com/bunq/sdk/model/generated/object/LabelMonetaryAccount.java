@@ -176,4 +176,46 @@ public class LabelMonetaryAccount extends BunqModel {
     this.swiftAccountNumber = swiftAccountNumber;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.iban != null) {
+      return false;
+    }
+
+    if (this.displayName != null) {
+      return false;
+    }
+
+    if (this.avatar != null) {
+      return false;
+    }
+
+    if (this.labelUser != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    if (this.bunqMe != null) {
+      return false;
+    }
+
+    if (this.isLight != null) {
+      return false;
+    }
+
+    if (this.swiftBic != null) {
+      return false;
+    }
+
+    if (this.swiftAccountNumber != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

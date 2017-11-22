@@ -201,4 +201,34 @@ public class DeviceServer extends BunqModel {
     this.status = status;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.ip != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

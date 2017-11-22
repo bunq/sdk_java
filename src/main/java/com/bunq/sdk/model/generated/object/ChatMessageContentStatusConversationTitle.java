@@ -32,4 +32,14 @@ public class ChatMessageContentStatusConversationTitle extends BunqModel {
     this.title = title;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.title != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -189,4 +189,34 @@ public class CardGeneratedCvc2 extends BunqModel {
     this.expiryTime = expiryTime;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.cvc2 != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.expiryTime != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

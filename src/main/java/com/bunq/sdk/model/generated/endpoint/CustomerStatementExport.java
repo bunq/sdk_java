@@ -280,4 +280,50 @@ public class CustomerStatementExport extends BunqModel {
     this.aliasMonetaryAccount = aliasMonetaryAccount;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.dateStart != null) {
+      return false;
+    }
+
+    if (this.dateEnd != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.statementNumber != null) {
+      return false;
+    }
+
+    if (this.statementFormat != null) {
+      return false;
+    }
+
+    if (this.regionalFormat != null) {
+      return false;
+    }
+
+    if (this.aliasMonetaryAccount != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

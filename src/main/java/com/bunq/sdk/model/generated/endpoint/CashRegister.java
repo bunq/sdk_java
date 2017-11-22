@@ -283,4 +283,46 @@ public class CashRegister extends BunqModel {
     this.tabTextWaitingScreen = tabTextWaitingScreen;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.name != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.avatar != null) {
+      return false;
+    }
+
+    if (this.location != null) {
+      return false;
+    }
+
+    if (this.notificationFilters != null) {
+      return false;
+    }
+
+    if (this.tabTextWaitingScreen != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

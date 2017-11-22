@@ -94,4 +94,26 @@ public class CardLimit extends BunqModel {
     this.type = type;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.dailyLimit != null) {
+      return false;
+    }
+
+    if (this.currency != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

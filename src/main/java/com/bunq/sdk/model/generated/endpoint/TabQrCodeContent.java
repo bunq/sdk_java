@@ -46,4 +46,10 @@ public class TabQrCodeContent extends BunqModel {
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    return true;
+  }
+
 }

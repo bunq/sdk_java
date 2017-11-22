@@ -185,4 +185,34 @@ public class Schedule extends BunqModel {
     this.object = object;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.timeStart != null) {
+      return false;
+    }
+
+    if (this.timeEnd != null) {
+      return false;
+    }
+
+    if (this.recurrenceUnit != null) {
+      return false;
+    }
+
+    if (this.recurrenceSize != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.object != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

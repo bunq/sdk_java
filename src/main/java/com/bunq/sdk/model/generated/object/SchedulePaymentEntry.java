@@ -143,4 +143,34 @@ public class SchedulePaymentEntry extends BunqModel {
     this.merchantReference = merchantReference;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.amount != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.attachment != null) {
+      return false;
+    }
+
+    if (this.merchantReference != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

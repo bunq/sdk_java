@@ -32,4 +32,14 @@ public class ChatMessageContentGeolocation extends BunqModel {
     this.geolocation = geolocation;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.geolocation != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

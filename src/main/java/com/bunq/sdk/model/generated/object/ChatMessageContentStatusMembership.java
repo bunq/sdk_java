@@ -50,4 +50,18 @@ public class ChatMessageContentStatusMembership extends BunqModel {
     this.member = member;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.action != null) {
+      return false;
+    }
+
+    if (this.member != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

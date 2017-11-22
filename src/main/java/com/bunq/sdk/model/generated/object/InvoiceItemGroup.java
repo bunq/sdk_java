@@ -140,4 +140,38 @@ public class InvoiceItemGroup extends BunqModel {
     this.item = item;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.typeDescription != null) {
+      return false;
+    }
+
+    if (this.typeDescriptionTranslated != null) {
+      return false;
+    }
+
+    if (this.instanceDescription != null) {
+      return false;
+    }
+
+    if (this.productVatExclusive != null) {
+      return false;
+    }
+
+    if (this.productVatInclusive != null) {
+      return false;
+    }
+
+    if (this.item != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

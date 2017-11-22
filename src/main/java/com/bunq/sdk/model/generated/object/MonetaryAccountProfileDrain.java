@@ -93,4 +93,26 @@ public class MonetaryAccountProfileDrain extends BunqModel {
     this.savingsAccountAlias = savingsAccountAlias;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.balancePreferred != null) {
+      return false;
+    }
+
+    if (this.balanceThresholdHigh != null) {
+      return false;
+    }
+
+    if (this.savingsAccountAlias != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

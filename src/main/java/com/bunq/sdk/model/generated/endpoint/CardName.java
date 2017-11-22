@@ -68,4 +68,14 @@ public class CardName extends BunqModel {
     this.possibleCardNameArray = possibleCardNameArray;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.possibleCardNameArray != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -426,4 +426,90 @@ public class TokenQrRequestIdeal extends BunqModel {
     this.eligibleWhitelistId = eligibleWhitelistId;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.timeResponded != null) {
+      return false;
+    }
+
+    if (this.timeExpiry != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.amountInquired != null) {
+      return false;
+    }
+
+    if (this.amountResponded != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.attachment != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.minimumAge != null) {
+      return false;
+    }
+
+    if (this.requireAddress != null) {
+      return false;
+    }
+
+    if (this.addressShipping != null) {
+      return false;
+    }
+
+    if (this.addressBilling != null) {
+      return false;
+    }
+
+    if (this.geolocation != null) {
+      return false;
+    }
+
+    if (this.redirectUrl != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.subType != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    if (this.eligibleWhitelistId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

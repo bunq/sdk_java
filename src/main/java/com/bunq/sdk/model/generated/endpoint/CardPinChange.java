@@ -171,4 +171,34 @@ public class CardPinChange extends BunqModel {
     this.status = status;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.labelCard != null) {
+      return false;
+    }
+
+    if (this.labelMonetaryAccountCurrent != null) {
+      return false;
+    }
+
+    if (this.timeRequest != null) {
+      return false;
+    }
+
+    if (this.timeAccept != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

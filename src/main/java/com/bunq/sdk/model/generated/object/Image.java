@@ -86,4 +86,26 @@ public class Image extends BunqModel {
     this.width = width;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.attachmentPublicUuid != null) {
+      return false;
+    }
+
+    if (this.contentType != null) {
+      return false;
+    }
+
+    if (this.height != null) {
+      return false;
+    }
+
+    if (this.width != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

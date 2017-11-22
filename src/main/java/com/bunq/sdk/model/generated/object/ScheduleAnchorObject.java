@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.endpoint.Payment;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 /**
  */
-public class ScheduleAnchorObject extends BunqModel {
+public class ScheduleAnchorObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -66,6 +67,20 @@ public class ScheduleAnchorObject extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.payment != null) {
+      return false;
+    }
+
+    if (this.paymentBatch != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }

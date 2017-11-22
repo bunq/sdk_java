@@ -138,4 +138,30 @@ public class CustomerLimit extends BunqModel {
     this.limitCardDebitReplacement = limitCardDebitReplacement;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.limitMonetaryAccount != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitMaestro != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitMastercard != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitWildcard != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitReplacement != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

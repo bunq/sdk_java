@@ -39,4 +39,14 @@ public class BunqMeTabResultResponse extends BunqModel {
     this.payment = payment;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.payment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

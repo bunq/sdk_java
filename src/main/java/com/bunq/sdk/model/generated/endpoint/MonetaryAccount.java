@@ -5,6 +5,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
@@ -22,7 +23,7 @@ import javax.lang.model.type.NullType;
  * can be set on a monetary account level to receive callbacks. For more information check the
  * <a href="/api/2/page/callbacks">dedicated callbacks page</a>.
  */
-public class MonetaryAccount extends BunqModel {
+public class MonetaryAccount extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -96,6 +97,16 @@ public class MonetaryAccount extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.monetaryAccountBank != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }

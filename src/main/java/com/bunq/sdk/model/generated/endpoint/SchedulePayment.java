@@ -148,4 +148,18 @@ public class SchedulePayment extends BunqModel {
     this.schedule = schedule;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.payment != null) {
+      return false;
+    }
+
+    if (this.schedule != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

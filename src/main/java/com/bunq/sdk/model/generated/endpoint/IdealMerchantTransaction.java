@@ -336,4 +336,66 @@ public class IdealMerchantTransaction extends BunqModel {
     this.allowChat = allowChat;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.amountGuaranteed != null) {
+      return false;
+    }
+
+    if (this.amountRequested != null) {
+      return false;
+    }
+
+    if (this.expiration != null) {
+      return false;
+    }
+
+    if (this.issuer != null) {
+      return false;
+    }
+
+    if (this.issuerName != null) {
+      return false;
+    }
+
+    if (this.issuerAuthenticationUrl != null) {
+      return false;
+    }
+
+    if (this.purchaseIdentifier != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.statusTimestamp != null) {
+      return false;
+    }
+
+    if (this.transactionIdentifier != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

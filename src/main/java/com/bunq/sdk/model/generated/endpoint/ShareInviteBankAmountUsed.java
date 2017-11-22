@@ -48,4 +48,10 @@ public class ShareInviteBankAmountUsed extends BunqModel {
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    return true;
+  }
+
 }

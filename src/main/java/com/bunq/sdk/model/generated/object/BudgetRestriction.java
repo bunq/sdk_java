@@ -50,4 +50,18 @@ public class BudgetRestriction extends BunqModel {
     this.frequency = frequency;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.amount != null) {
+      return false;
+    }
+
+    if (this.frequency != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

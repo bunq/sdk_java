@@ -32,4 +32,14 @@ public class ChatMessageContentAttachment extends BunqModel {
     this.attachment = attachment;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.attachment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

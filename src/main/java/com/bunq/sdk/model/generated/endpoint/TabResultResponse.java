@@ -100,4 +100,18 @@ public class TabResultResponse extends BunqModel {
     this.payment = payment;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.tab != null) {
+      return false;
+    }
+
+    if (this.payment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -196,4 +196,38 @@ public class BillingContractSubscription extends BunqModel {
     this.subscriptionType = subscriptionType;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.contractDateStart != null) {
+      return false;
+    }
+
+    if (this.contractDateEnd != null) {
+      return false;
+    }
+
+    if (this.contractVersion != null) {
+      return false;
+    }
+
+    if (this.subscriptionType != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

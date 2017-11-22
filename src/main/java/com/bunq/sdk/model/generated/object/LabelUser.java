@@ -110,4 +110,30 @@ public class LabelUser extends BunqModel {
     this.country = country;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.avatar != null) {
+      return false;
+    }
+
+    if (this.publicNickName != null) {
+      return false;
+    }
+
+    if (this.displayName != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

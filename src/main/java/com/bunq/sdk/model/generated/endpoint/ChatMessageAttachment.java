@@ -69,4 +69,14 @@ public class ChatMessageAttachment extends BunqModel {
     this.id = id;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

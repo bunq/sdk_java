@@ -527,4 +527,102 @@ public class Payment extends BunqModel {
     this.allowChat = allowChat;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.amount != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.subType != null) {
+      return false;
+    }
+
+    if (this.bunqtoStatus != null) {
+      return false;
+    }
+
+    if (this.bunqtoSubStatus != null) {
+      return false;
+    }
+
+    if (this.bunqtoShareUrl != null) {
+      return false;
+    }
+
+    if (this.bunqtoExpiry != null) {
+      return false;
+    }
+
+    if (this.bunqtoTimeResponded != null) {
+      return false;
+    }
+
+    if (this.attachment != null) {
+      return false;
+    }
+
+    if (this.merchantReference != null) {
+      return false;
+    }
+
+    if (this.batchId != null) {
+      return false;
+    }
+
+    if (this.scheduledId != null) {
+      return false;
+    }
+
+    if (this.addressShipping != null) {
+      return false;
+    }
+
+    if (this.addressBilling != null) {
+      return false;
+    }
+
+    if (this.geolocation != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

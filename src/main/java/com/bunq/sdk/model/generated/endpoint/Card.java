@@ -487,4 +487,94 @@ public class Card extends BunqModel {
     this.country = country;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.publicUuid != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.subType != null) {
+      return false;
+    }
+
+    if (this.secondLine != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.subStatus != null) {
+      return false;
+    }
+
+    if (this.orderStatus != null) {
+      return false;
+    }
+
+    if (this.expiryDate != null) {
+      return false;
+    }
+
+    if (this.nameOnCard != null) {
+      return false;
+    }
+
+    if (this.primaryAccountNumberFourDigit != null) {
+      return false;
+    }
+
+    if (this.limit != null) {
+      return false;
+    }
+
+    if (this.magStripePermission != null) {
+      return false;
+    }
+
+    if (this.countryPermission != null) {
+      return false;
+    }
+
+    if (this.labelMonetaryAccountOrdered != null) {
+      return false;
+    }
+
+    if (this.labelMonetaryAccountCurrent != null) {
+      return false;
+    }
+
+    if (this.pinCodeAssignment != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountIdFallback != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

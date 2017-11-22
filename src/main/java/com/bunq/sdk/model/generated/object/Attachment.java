@@ -50,4 +50,18 @@ public class Attachment extends BunqModel {
     this.contentType = contentType;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.contentType != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

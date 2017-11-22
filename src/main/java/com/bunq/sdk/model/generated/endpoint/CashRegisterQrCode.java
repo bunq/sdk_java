@@ -219,4 +219,34 @@ public class CashRegisterQrCode extends BunqModel {
     this.tabObject = tabObject;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.cashRegister != null) {
+      return false;
+    }
+
+    if (this.tabObject != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -192,4 +192,34 @@ public class ScheduleInstance extends BunqModel {
     this.resultObject = resultObject;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.state != null) {
+      return false;
+    }
+
+    if (this.timeStart != null) {
+      return false;
+    }
+
+    if (this.timeEnd != null) {
+      return false;
+    }
+
+    if (this.errorMessage != null) {
+      return false;
+    }
+
+    if (this.scheduledObject != null) {
+      return false;
+    }
+
+    if (this.resultObject != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

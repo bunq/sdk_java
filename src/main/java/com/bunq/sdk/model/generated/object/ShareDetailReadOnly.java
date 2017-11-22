@@ -78,4 +78,22 @@ public class ShareDetailReadOnly extends BunqModel {
     this.viewNewEvents = viewNewEvents;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.viewBalance != null) {
+      return false;
+    }
+
+    if (this.viewOldEvents != null) {
+      return false;
+    }
+
+    if (this.viewNewEvents != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

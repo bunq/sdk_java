@@ -78,4 +78,26 @@ public class NotificationUrl extends BunqModel {
     this.object = object;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.targetUrl != null) {
+      return false;
+    }
+
+    if (this.category != null) {
+      return false;
+    }
+
+    if (this.eventType != null) {
+      return false;
+    }
+
+    if (this.object != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

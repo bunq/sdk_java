@@ -36,4 +36,14 @@ public class Certificate extends BunqModel {
     this.certificate = certificate;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.certificate != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

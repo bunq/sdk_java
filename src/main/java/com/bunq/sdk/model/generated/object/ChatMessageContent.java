@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
@@ -13,7 +14,7 @@ import java.util.Map;
 
 /**
  */
-public class ChatMessageContent extends BunqModel {
+public class ChatMessageContent extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -164,6 +165,40 @@ public class ChatMessageContent extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.chatMessageContentAnchorEvent != null) {
+      return false;
+    }
+
+    if (this.chatMessageContentAttachment != null) {
+      return false;
+    }
+
+    if (this.chatMessageContentGeolocation != null) {
+      return false;
+    }
+
+    if (this.chatMessageContentStatusConversationTitle != null) {
+      return false;
+    }
+
+    if (this.chatMessageContentStatusConversation != null) {
+      return false;
+    }
+
+    if (this.chatMessageContentStatusMembership != null) {
+      return false;
+    }
+
+    if (this.chatMessageContentText != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }

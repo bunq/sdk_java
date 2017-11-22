@@ -153,4 +153,26 @@ public class Customer extends BunqModel {
     this.billingAccountId = billingAccountId;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.billingAccountId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

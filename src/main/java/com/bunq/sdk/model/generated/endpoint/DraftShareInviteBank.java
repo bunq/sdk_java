@@ -231,4 +231,38 @@ public class DraftShareInviteBank extends BunqModel {
     this.id = id;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.userAliasCreated != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.expiration != null) {
+      return false;
+    }
+
+    if (this.shareInviteBankResponseId != null) {
+      return false;
+    }
+
+    if (this.draftShareUrl != null) {
+      return false;
+    }
+
+    if (this.draftShareSettings != null) {
+      return false;
+    }
+
+    if (this.id != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

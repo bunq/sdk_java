@@ -45,4 +45,10 @@ public class CustomerStatementExportContent extends BunqModel {
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    return true;
+  }
+
 }

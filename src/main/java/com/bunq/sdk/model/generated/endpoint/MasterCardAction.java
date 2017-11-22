@@ -480,4 +480,102 @@ public class MasterCardAction extends BunqModel {
     this.eligibleWhitelistId = eligibleWhitelistId;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.cardId != null) {
+      return false;
+    }
+
+    if (this.amountLocal != null) {
+      return false;
+    }
+
+    if (this.amountBilling != null) {
+      return false;
+    }
+
+    if (this.amountOriginalLocal != null) {
+      return false;
+    }
+
+    if (this.amountOriginalBilling != null) {
+      return false;
+    }
+
+    if (this.amountFee != null) {
+      return false;
+    }
+
+    if (this.decision != null) {
+      return false;
+    }
+
+    if (this.decisionDescription != null) {
+      return false;
+    }
+
+    if (this.decisionDescriptionTranslated != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.authorisationStatus != null) {
+      return false;
+    }
+
+    if (this.authorisationType != null) {
+      return false;
+    }
+
+    if (this.panEntryModeUser != null) {
+      return false;
+    }
+
+    if (this.city != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.labelCard != null) {
+      return false;
+    }
+
+    if (this.tokenStatus != null) {
+      return false;
+    }
+
+    if (this.reservationExpiryTime != null) {
+      return false;
+    }
+
+    if (this.appliedLimit != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    if (this.eligibleWhitelistId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

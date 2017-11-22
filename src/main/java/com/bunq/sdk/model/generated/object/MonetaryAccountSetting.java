@@ -68,4 +68,22 @@ public class MonetaryAccountSetting extends BunqModel {
     this.restrictionChat = restrictionChat;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.color != null) {
+      return false;
+    }
+
+    if (this.defaultAvatarStatus != null) {
+      return false;
+    }
+
+    if (this.restrictionChat != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

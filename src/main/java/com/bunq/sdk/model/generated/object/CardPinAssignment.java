@@ -61,4 +61,18 @@ public class CardPinAssignment extends BunqModel {
     this.monetaryAccountId = monetaryAccountId;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

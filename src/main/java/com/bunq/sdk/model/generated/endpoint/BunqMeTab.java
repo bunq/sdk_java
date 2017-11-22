@@ -261,4 +261,46 @@ public class BunqMeTab extends BunqModel {
     this.resultInquiries = resultInquiries;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.timeExpiry != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.bunqmeTabShareUrl != null) {
+      return false;
+    }
+
+    if (this.bunqmeTabEntry != null) {
+      return false;
+    }
+
+    if (this.resultInquiries != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

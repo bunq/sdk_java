@@ -148,4 +148,38 @@ public class ChatMessageUser extends BunqModel {
     this.content = content;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.conversationId != null) {
+      return false;
+    }
+
+    if (this.creator != null) {
+      return false;
+    }
+
+    if (this.displayedSender != null) {
+      return false;
+    }
+
+    if (this.content != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

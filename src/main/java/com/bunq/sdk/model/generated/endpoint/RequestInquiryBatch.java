@@ -140,4 +140,18 @@ public class RequestInquiryBatch extends BunqModel {
     this.totalAmountInquired = totalAmountInquired;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.requestInquiries != null) {
+      return false;
+    }
+
+    if (this.totalAmountInquired != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

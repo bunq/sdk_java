@@ -86,4 +86,26 @@ public class Geolocation extends BunqModel {
     this.radius = radius;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.latitude != null) {
+      return false;
+    }
+
+    if (this.longitude != null) {
+      return false;
+    }
+
+    if (this.altitude != null) {
+      return false;
+    }
+
+    if (this.radius != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

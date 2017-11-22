@@ -50,4 +50,18 @@ public class DraftPaymentResponse extends BunqModel {
     this.userAliasCreated = userAliasCreated;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.userAliasCreated != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

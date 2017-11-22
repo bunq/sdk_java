@@ -55,4 +55,18 @@ public class TabTextWaitingScreen extends BunqModel {
     this.description = description;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.language != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

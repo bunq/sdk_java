@@ -151,4 +151,38 @@ public class TabItem extends BunqModel {
     this.amount = amount;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.eanCode != null) {
+      return false;
+    }
+
+    if (this.avatarAttachment != null) {
+      return false;
+    }
+
+    if (this.tabAttachment != null) {
+      return false;
+    }
+
+    if (this.quantity != null) {
+      return false;
+    }
+
+    if (this.amount != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

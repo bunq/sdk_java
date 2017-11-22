@@ -50,4 +50,18 @@ public class Error extends BunqModel {
     this.errorDescriptionTranslated = errorDescriptionTranslated;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.errorDescription != null) {
+      return false;
+    }
+
+    if (this.errorDescriptionTranslated != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -55,4 +55,18 @@ public class Amount extends BunqModel {
     this.currency = currency;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.value != null) {
+      return false;
+    }
+
+    if (this.currency != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

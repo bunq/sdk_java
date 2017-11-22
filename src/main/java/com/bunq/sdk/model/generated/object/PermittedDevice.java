@@ -50,4 +50,18 @@ public class PermittedDevice extends BunqModel {
     this.ip = ip;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.ip != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -74,4 +74,22 @@ public class ShareDetail extends BunqModel {
     this.draftPayment = draftPayment;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.payment != null) {
+      return false;
+    }
+
+    if (this.readOnly != null) {
+      return false;
+    }
+
+    if (this.draftPayment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

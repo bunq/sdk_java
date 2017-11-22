@@ -488,4 +488,86 @@ public class TabUsageSingle extends BunqModel {
     this.tabAttachment = tabAttachment;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.merchantReference != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.amountTotal != null) {
+      return false;
+    }
+
+    if (this.amountPaid != null) {
+      return false;
+    }
+
+    if (this.qrCodeToken != null) {
+      return false;
+    }
+
+    if (this.tabUrl != null) {
+      return false;
+    }
+
+    if (this.visibility != null) {
+      return false;
+    }
+
+    if (this.minimumAge != null) {
+      return false;
+    }
+
+    if (this.requireAddress != null) {
+      return false;
+    }
+
+    if (this.redirectUrl != null) {
+      return false;
+    }
+
+    if (this.expiration != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.cashRegisterLocation != null) {
+      return false;
+    }
+
+    if (this.tabItem != null) {
+      return false;
+    }
+
+    if (this.tabAttachment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

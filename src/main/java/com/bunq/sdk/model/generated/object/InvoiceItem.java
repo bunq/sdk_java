@@ -176,4 +176,46 @@ public class InvoiceItem extends BunqModel {
     this.totalVatInclusive = totalVatInclusive;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.billingDate != null) {
+      return false;
+    }
+
+    if (this.typeDescription != null) {
+      return false;
+    }
+
+    if (this.typeDescriptionTranslated != null) {
+      return false;
+    }
+
+    if (this.unitVatExclusive != null) {
+      return false;
+    }
+
+    if (this.unitVatInclusive != null) {
+      return false;
+    }
+
+    if (this.vat != null) {
+      return false;
+    }
+
+    if (this.quantity != null) {
+      return false;
+    }
+
+    if (this.totalVatExclusive != null) {
+      return false;
+    }
+
+    if (this.totalVatInclusive != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -65,4 +65,18 @@ public class MonetaryAccountProfile extends BunqModel {
     this.profileDrain = profileDrain;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.profileFill != null) {
+      return false;
+    }
+
+    if (this.profileDrain != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

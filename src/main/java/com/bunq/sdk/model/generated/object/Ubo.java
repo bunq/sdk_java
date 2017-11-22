@@ -68,4 +68,22 @@ public class Ubo extends BunqModel {
     this.nationality = nationality;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.name != null) {
+      return false;
+    }
+
+    if (this.dateOfBirth != null) {
+      return false;
+    }
+
+    if (this.nationality != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -50,4 +50,18 @@ public class BunqMeMerchantAvailable extends BunqModel {
     this.available = available;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.merchantType != null) {
+      return false;
+    }
+
+    if (this.available != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -254,4 +254,42 @@ public class DraftPayment extends BunqModel {
     this.object = object;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.userAliasCreated != null) {
+      return false;
+    }
+
+    if (this.responses != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.entries != null) {
+      return false;
+    }
+
+    if (this.object != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -190,4 +190,38 @@ public class UserCredentialPasswordIp extends BunqModel {
     this.permittedDevice = permittedDevice;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.expiryTime != null) {
+      return false;
+    }
+
+    if (this.tokenValue != null) {
+      return false;
+    }
+
+    if (this.permittedDevice != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

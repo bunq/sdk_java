@@ -72,4 +72,22 @@ public class DraftShareInviteBankEntry extends BunqModel {
     this.endDate = endDate;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.shareDetail != null) {
+      return false;
+    }
+
+    if (this.startDate != null) {
+      return false;
+    }
+
+    if (this.endDate != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

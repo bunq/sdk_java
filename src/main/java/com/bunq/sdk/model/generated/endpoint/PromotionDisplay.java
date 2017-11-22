@@ -136,4 +136,26 @@ public class PromotionDisplay extends BunqModel {
     this.status = status;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.eventDescription != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

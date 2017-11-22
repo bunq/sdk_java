@@ -97,4 +97,26 @@ public class ShareDetailDraftPayment extends BunqModel {
     this.viewNewEvents = viewNewEvents;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.makeDraftPayments != null) {
+      return false;
+    }
+
+    if (this.viewBalance != null) {
+      return false;
+    }
+
+    if (this.viewOldEvents != null) {
+      return false;
+    }
+
+    if (this.viewNewEvents != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

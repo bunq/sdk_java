@@ -75,4 +75,22 @@ public class TabVisibility extends BunqModel {
     this.location = location;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.cashRegisterQrCode != null) {
+      return false;
+    }
+
+    if (this.tabQrCode != null) {
+      return false;
+    }
+
+    if (this.location != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

@@ -336,4 +336,58 @@ public class ShareInviteBankInquiry extends BunqModel {
     this.id = id;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.userAliasCreated != null) {
+      return false;
+    }
+
+    if (this.userAliasRevoked != null) {
+      return false;
+    }
+
+    if (this.counterUserAlias != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.draftShareInviteBankId != null) {
+      return false;
+    }
+
+    if (this.shareDetail != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.shareType != null) {
+      return false;
+    }
+
+    if (this.startDate != null) {
+      return false;
+    }
+
+    if (this.endDate != null) {
+      return false;
+    }
+
+    if (this.id != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

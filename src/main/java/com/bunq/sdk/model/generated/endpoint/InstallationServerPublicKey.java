@@ -67,4 +67,14 @@ public class InstallationServerPublicKey extends BunqModel {
     this.serverPublicKey = serverPublicKey;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.serverPublicKey != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

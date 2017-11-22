@@ -137,4 +137,26 @@ public class AttachmentPublic extends BunqModel {
     this.attachment = attachment;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.attachment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

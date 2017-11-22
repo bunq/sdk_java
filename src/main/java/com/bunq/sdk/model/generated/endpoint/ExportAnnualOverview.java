@@ -178,4 +178,30 @@ public class ExportAnnualOverview extends BunqModel {
     this.aliasUser = aliasUser;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.year != null) {
+      return false;
+    }
+
+    if (this.aliasUser != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

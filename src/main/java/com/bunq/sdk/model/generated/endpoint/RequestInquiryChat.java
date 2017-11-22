@@ -160,4 +160,26 @@ public class RequestInquiryChat extends BunqModel {
     this.unreadMessageCount = unreadMessageCount;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.unreadMessageCount != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

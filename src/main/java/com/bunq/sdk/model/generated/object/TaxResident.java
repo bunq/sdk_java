@@ -55,4 +55,18 @@ public class TaxResident extends BunqModel {
     this.taxNumber = taxNumber;
   }
 
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.country != null) {
+      return false;
+    }
+
+    if (this.taxNumber != null) {
+      return false;
+    }
+
+    return true;
+  }
+
 }

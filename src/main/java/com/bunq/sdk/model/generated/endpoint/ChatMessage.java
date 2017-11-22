@@ -5,6 +5,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
@@ -19,7 +20,7 @@ import javax.lang.model.type.NullType;
 /**
  * Endpoint for retrieving the messages that are part of a conversation.
  */
-public class ChatMessage extends BunqModel {
+public class ChatMessage extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -118,6 +119,24 @@ public class ChatMessage extends BunqModel {
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean areAllFieldNull() {
+    if (this.chatMessageAnnouncement != null) {
+      return false;
+    }
+
+    if (this.chatMessageStatus != null) {
+      return false;
+    }
+
+    if (this.chatMessageUser != null) {
+      return false;
+    }
+
+    return true;
   }
 
 }
