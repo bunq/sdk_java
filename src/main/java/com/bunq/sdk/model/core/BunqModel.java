@@ -147,4 +147,8 @@ abstract public class BunqModel {
     return gson.toJson(this);
   }
 
+  /**
+   */
+  abstract public boolean areAllFieldNull();
+
 }
