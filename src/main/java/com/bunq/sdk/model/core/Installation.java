@@ -66,4 +66,20 @@ public class Installation extends BunqModel {
     return publicKeyServer.getPublicKeyServer();
   }
 
+  @Override
+  public boolean areAllFieldNull() {
+    if (this.id == null) {
+      return false;
+    }
+
+    if (this.sessionToken == null) {
+      return false;
+    }
+
+    if (this.publicKeyServer == null) {
+      return false;
+    }
+
+    return true;
+  }
 }

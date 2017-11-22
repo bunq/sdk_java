@@ -7,6 +7,15 @@ public class SessionToken extends BunqModel {
   protected SessionToken() {
   }
 
+  @Override
+  public boolean areAllFieldNull() {
+    if (this.token == null) {
+      return false;
+    }
+
+    return true;
+  }
+
   public SessionToken(String token) {
     this.token = token;
   }

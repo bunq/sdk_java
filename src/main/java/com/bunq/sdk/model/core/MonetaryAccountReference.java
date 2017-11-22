@@ -28,4 +28,16 @@ public class MonetaryAccountReference extends BunqModel {
     return labelMonetaryAccount;
   }
 
+  @Override
+  public boolean areAllFieldNull() {
+    if (this.pointer == null) {
+      return false;
+    }
+
+    if (this.labelMonetaryAccount == null) {
+      return false;
+    }
+
+    return true;
+  }
 }
