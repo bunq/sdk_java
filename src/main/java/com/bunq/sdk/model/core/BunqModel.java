@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,13 @@ abstract public class BunqModel {
   protected static Gson gson = BunqGsonBuilder.buildDefault().create();
 
   protected BunqModel() {
+  }
+
+  public static <T> T fromJsonReader(Class<T> tClass, JsonReader reader) {
+    return gson.fromJson(
+        reader,
+        tClass
+    );
   }
 
   /**
