@@ -24,9 +24,11 @@ public class NotificationUrlTest extends BunqSdkTestBase {
   private static final String GETTER_PAYMENT = "getPayment";
   private static final String GETTER_BUNQ_ME_TAB = "getBunqMeTab";
   private static final String GETTER_CHAT_MESSAGE_ANNOUNCEMENT = "getChatMessageAnnouncement";
+  private static final String GETTER_CHAT_MESSAGE = "getChatMessage";
   private static final String GETTER_DRAFT_PAYMENT = "getDraftPayment";
   private static final String GETTER_MASTER_CARD_ACTION = "getMasterCardAction";
   private static final String GETTER_MONETARY_ACCOUNT_BANK = "getMonetaryAccountBank";
+  private static final String GETTER_MONETARY_ACCOUNT = "getMonetaryAccount";
   private static final String GETTER_PAYMENT_BATCH = "getPaymentBatch";
   private static final String GETTER_REQUEST_INQUIRY = "getRequestInquiry";
   private static final String GETTER_REQUEST_RESPONSE = "getRequestResponse";
@@ -62,14 +64,16 @@ public class NotificationUrlTest extends BunqSdkTestBase {
   private void executeNotificationUrlTest(
       String expectedJsonFileName,
       String classNameExpected,
-      String referencedObjectGetterName
+      String referencedObjectGetterName,
+      String subClassExpectedName,
+      String subClassGetterName
   ) throws FileNotFoundException,
       NoSuchMethodException,
       InvocationTargetException,
       IllegalAccessException,
       ClassNotFoundException {
     JsonReader jsonReader = new JsonReader(new FileReader(expectedJsonFileName));
-    NotificationUrl notificationUrl = new Gson().fromJson(jsonReader, TYPE_NOTIFICATION_URL);
+    NotificationUrl notificationUrl = BunqModel.fromJsonReader(NotificationUrl.class, jsonReader);
 
     assertNotNull(notificationUrl);
     assertNotNull(notificationUrl.getObject());
@@ -82,6 +86,33 @@ public class NotificationUrlTest extends BunqSdkTestBase {
     assertNotNull(model);
     assertNotNull(referencedModel);
     assertTrue(Class.forName(classNameExpected).isInstance(referencedModel));
+
+    if (subClassExpectedName != null && subClassGetterName != null) {
+      Object subClass = referencedModel.getClass().getDeclaredMethod(subClassGetterName).invoke(
+          referencedModel
+      );
+
+      assertNotNull(subClass);
+      assertTrue(Class.forName(subClassExpectedName).isInstance(subClass));
+    }
+  }
+
+  private void executeNotificationUrlTest(
+      String expectedJsonFileName,
+      String classNameExpected,
+      String referencedObjectGetterName
+  ) throws InvocationTargetException,
+      FileNotFoundException,
+      ClassNotFoundException,
+      IllegalAccessException,
+      NoSuchMethodException {
+    this.executeNotificationUrlTest(
+        expectedJsonFileName,
+        classNameExpected,
+        referencedObjectGetterName,
+        null,
+        null
+    );
   }
 
   @Test
@@ -115,6 +146,8 @@ public class NotificationUrlTest extends BunqSdkTestBase {
       NoSuchMethodException {
     executeNotificationUrlTest(
         JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL,
+        ChatMessage.class.getName(),
+        GETTER_CHAT_MESSAGE,
         ChatMessageAnnouncement.class.getName(),
         GETTER_CHAT_MESSAGE_ANNOUNCEMENT
     );
@@ -151,6 +184,8 @@ public class NotificationUrlTest extends BunqSdkTestBase {
       NoSuchMethodException {
     executeNotificationUrlTest(
         JSON_PATH_MONETARY_ACCOUNT_BANK_MODEL,
+        MonetaryAccount.class.getName(),
+        GETTER_MONETARY_ACCOUNT,
         MonetaryAccountBank.class.getName(),
         GETTER_MONETARY_ACCOUNT_BANK
     );
