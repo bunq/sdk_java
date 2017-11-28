@@ -7,7 +7,6 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import javax.annotation.Nullable;
 
 /**
  * Custom (de)serialization of Geolocation for GSON, required because Geolocation uses BiDecimal's,
@@ -33,7 +32,6 @@ public class GeolocationTypeAdapter implements JsonSerializer<Geolocation> {
     return jsonObject;
   }
 
-  @Nullable
   private String getBigDecimalStringOrNull(BigDecimal bigDecimal) {
     if (bigDecimal == null) {
       return null;

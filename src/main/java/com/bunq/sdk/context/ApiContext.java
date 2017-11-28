@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Nullable;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -284,8 +283,7 @@ public class ApiContext implements java.io.Serializable {
    * @return The session token, installation token if the session isn't created yet, or null if no
    * installation is created either.
    */
-  public @Nullable
-  String getSessionToken() {
+  public String getSessionToken() {
     if (sessionContext != null) {
       return sessionContext.getToken();
     } else if (installationContext != null) {
