@@ -157,6 +157,6 @@ abstract public class BunqModel {
 
   /**
    */
-  abstract public boolean areAllFieldNull();
+  abstract public boolean isAllFieldNull();
 
 }

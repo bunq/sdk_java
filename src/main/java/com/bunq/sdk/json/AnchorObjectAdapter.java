@@ -15,7 +15,7 @@ public class AnchorObjectAdapter implements JsonDeserializer<AnchorObjectInterfa
     AnchorObjectInterface model = new Gson().fromJson(json, typeOfT);
 
 
-    if (model.areAllFieldNull()) {
+    if (model.isAllFieldNull()) {
 
       Field[] allFields = model.getClass().getDeclaredFields();
 
@@ -30,7 +30,7 @@ public class AnchorObjectAdapter implements JsonDeserializer<AnchorObjectInterfa
         field.setAccessible(true);
 
         try {
-          if (content.areAllFieldNull()) {
+          if (content.isAllFieldNull()) {
             field.set(model, null);
           } else {
             field.set(model, content);

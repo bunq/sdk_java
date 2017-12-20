@@ -29,7 +29,7 @@ public class MonetaryAccountReference extends BunqModel {
   }
 
   @Override
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.pointer == null) {
       return false;
     }

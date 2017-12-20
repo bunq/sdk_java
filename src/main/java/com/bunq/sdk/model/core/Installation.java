@@ -67,7 +67,7 @@ public class Installation extends BunqModel {
   }
 
   @Override
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.id == null) {
       return false;
     }
