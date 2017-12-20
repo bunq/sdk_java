@@ -16,13 +16,10 @@ public class AnchorObjectAdapter implements JsonDeserializer<AnchorObjectInterfa
 
 
     if (model.isAllFieldNull()) {
-
       Field[] allFields = model.getClass().getDeclaredFields();
 
       for(Field field : allFields) {
-
         if (!BunqModel.class.isAssignableFrom(field.getType())) {
-
           continue;
         }
 
@@ -38,6 +35,7 @@ public class AnchorObjectAdapter implements JsonDeserializer<AnchorObjectInterfa
         } catch (IllegalAccessException e) {
           throw new BunqException(e.getMessage());
         }
+
         field.setAccessible(false);
       }
     }
