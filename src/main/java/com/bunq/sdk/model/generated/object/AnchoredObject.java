@@ -24,6 +24,7 @@ import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
 import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIp;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -407,7 +408,7 @@ public class AnchoredObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.cardDebit != null) {
       return false;
     }
@@ -481,6 +482,12 @@ public class AnchoredObject extends BunqModel implements AnchorObjectInterface {
     }
 
     return true;
+  }
+
+  /**
+   */
+  public static AnchoredObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AnchoredObject.class, reader);
   }
 
 }

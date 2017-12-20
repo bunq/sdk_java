@@ -13,6 +13,7 @@ import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -494,7 +495,7 @@ public class MonetaryAccountBank extends BunqModel {
 
   /**
    */
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.id != null) {
       return false;
     }
@@ -576,6 +577,12 @@ public class MonetaryAccountBank extends BunqModel {
     }
 
     return true;
+  }
+
+  /**
+   */
+  public static MonetaryAccountBank fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountBank.class, reader);
   }
 
 }

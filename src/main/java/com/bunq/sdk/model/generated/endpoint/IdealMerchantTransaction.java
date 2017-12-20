@@ -10,6 +10,7 @@ import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -338,7 +339,7 @@ public class IdealMerchantTransaction extends BunqModel {
 
   /**
    */
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.monetaryAccountId != null) {
       return false;
     }
@@ -396,6 +397,12 @@ public class IdealMerchantTransaction extends BunqModel {
     }
 
     return true;
+  }
+
+  /**
+   */
+  public static IdealMerchantTransaction fromJsonReader(JsonReader reader) {
+    return fromJsonReader(IdealMerchantTransaction.class, reader);
   }
 
 }

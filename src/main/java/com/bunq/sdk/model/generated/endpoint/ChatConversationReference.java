@@ -4,6 +4,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,7 +77,7 @@ public class ChatConversationReference extends BunqModel {
 
   /**
    */
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.id != null) {
       return false;
     }
@@ -90,6 +91,12 @@ public class ChatConversationReference extends BunqModel {
     }
 
     return true;
+  }
+
+  /**
+   */
+  public static ChatConversationReference fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ChatConversationReference.class, reader);
   }
 
 }

@@ -28,6 +28,7 @@ import com.bunq.sdk.model.generated.endpoint.TabResultResponse;
 import com.bunq.sdk.model.generated.endpoint.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -491,7 +492,7 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
 
   /**
    */
-  public boolean areAllFieldNull() {
+  public boolean isAllFieldNull() {
     if (this.bunqMeFundraiserResult != null) {
       return false;
     }
@@ -581,6 +582,12 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
     }
 
     return true;
+  }
+
+  /**
+   */
+  public static NotificationAnchorObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationAnchorObject.class, reader);
   }
 
 }
