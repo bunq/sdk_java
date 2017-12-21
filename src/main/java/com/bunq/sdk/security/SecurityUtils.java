@@ -159,8 +159,8 @@ public final class SecurityUtils {
   /**
    * Substring constants.
    */
-  private static final int SUBSTRING_BEGIN_INDEX = 0;
-  private static final int SUBSTRING_END_INDEX = 1;
+  private static final int SUBSTRING_BEGIN_INDEX_FIRST_CHAR = 0;
+  private static final int SUBSTRING_END_INDEX_LAST_CHAR = 1;
 
   /**
    */
@@ -523,8 +523,8 @@ public final class SecurityUtils {
 
   private static String getHeaderNameCorrectlyCased(String headerName) {
     headerName = headerName.toLowerCase();
-    headerName = headerName.substring(SUBSTRING_BEGIN_INDEX, SUBSTRING_END_INDEX).toUpperCase()
-        + headerName.substring(SUBSTRING_END_INDEX);
+    headerName = headerName.substring(SUBSTRING_BEGIN_INDEX_FIRST_CHAR, SUBSTRING_END_INDEX_LAST_CHAR).toUpperCase()
+        + headerName.substring(SUBSTRING_END_INDEX_LAST_CHAR);
     Pattern pattern = Pattern.compile(REGEX_FOR_LOWERCASE_HEADERS);
     Matcher matcher = pattern.matcher(headerName);
 
