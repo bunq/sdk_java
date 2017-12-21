@@ -14,8 +14,8 @@ import java.lang.reflect.Type;
 
 public class AnchorObjectAdapter implements JsonDeserializer<AnchorObjectInterface> {
   @Override
-  public AnchorObjectInterface deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws
-      JsonParseException {
+  public AnchorObjectInterface deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
     AnchorObjectInterface model = new Gson().fromJson(json, typeOfT);
 
     if (model.isAllFieldNull()) {
