@@ -35,6 +35,8 @@ abstract public class BunqModel {
   protected BunqModel() {
   }
 
+  /**
+   */
   public static <T> T fromJsonReader(Class<T> tClass, JsonReader reader) {
     return gson.fromJson(
         reader,
