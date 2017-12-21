@@ -44,6 +44,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -225,19 +226,13 @@ public class ApiClient {
 
   private BunqResponseRaw createBunqResponseRaw(CloseableHttpResponse response)
       throws IOException {
-    byte[] responseBodyBytes = getBodyBytes(response);
-
-    return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
-  }
-
-  private byte[] getBodyBytes(CloseableHttpResponse response) throws IOException {
     Integer responseCode = response.getStatusLine().getStatusCode();
     byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
 
     assertResponseSuccess(responseCode, responseBodyBytes);
     validateResponseSignature(responseCode, responseBodyBytes, response);
 
-    return responseBodyBytes;
+    return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
   }
 
   private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {
