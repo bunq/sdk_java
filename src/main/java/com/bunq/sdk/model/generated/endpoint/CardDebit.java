@@ -14,6 +14,7 @@ import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -425,6 +426,98 @@ public class CardDebit extends BunqModel {
 
   public void setCountry(String country) {
     this.country = country;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.publicUuid != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.subType != null) {
+      return false;
+    }
+
+    if (this.secondLine != null) {
+      return false;
+    }
+
+    if (this.nameOnCard != null) {
+      return false;
+    }
+
+    if (this.primaryAccountNumberFourDigit != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.orderStatus != null) {
+      return false;
+    }
+
+    if (this.expiryDate != null) {
+      return false;
+    }
+
+    if (this.limit != null) {
+      return false;
+    }
+
+    if (this.countryPermission != null) {
+      return false;
+    }
+
+    if (this.labelMonetaryAccountOrdered != null) {
+      return false;
+    }
+
+    if (this.labelMonetaryAccountCurrent != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.pinCodeAssignment != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountIdFallback != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static CardDebit fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardDebit.class, reader);
   }
 
 }

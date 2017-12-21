@@ -4,6 +4,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,6 +85,34 @@ public class Geolocation extends BunqModel {
 
   public void setRadius(BigDecimal radius) {
     this.radius = radius;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.latitude != null) {
+      return false;
+    }
+
+    if (this.longitude != null) {
+      return false;
+    }
+
+    if (this.altitude != null) {
+      return false;
+    }
+
+    if (this.radius != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static Geolocation fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Geolocation.class, reader);
   }
 
 }

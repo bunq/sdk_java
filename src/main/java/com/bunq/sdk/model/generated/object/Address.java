@@ -4,6 +4,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,6 +147,46 @@ public class Address extends BunqModel {
 
   public void setProvince(String province) {
     this.province = province;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.street != null) {
+      return false;
+    }
+
+    if (this.houseNumber != null) {
+      return false;
+    }
+
+    if (this.poBox != null) {
+      return false;
+    }
+
+    if (this.postalCode != null) {
+      return false;
+    }
+
+    if (this.city != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    if (this.province != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static Address fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Address.class, reader);
   }
 
 }

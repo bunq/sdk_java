@@ -15,6 +15,7 @@ import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.Ubo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -618,6 +619,134 @@ public class UserCompany extends BunqModel {
 
   public void setBillingContract(List<BillingContractSubscription> billingContract) {
     this.billingContract = billingContract;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.publicUuid != null) {
+      return false;
+    }
+
+    if (this.name != null) {
+      return false;
+    }
+
+    if (this.displayName != null) {
+      return false;
+    }
+
+    if (this.publicNickName != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.chamberOfCommerceNumber != null) {
+      return false;
+    }
+
+    if (this.typeOfBusinessEntity != null) {
+      return false;
+    }
+
+    if (this.sectorOfIndustry != null) {
+      return false;
+    }
+
+    if (this.counterBankIban != null) {
+      return false;
+    }
+
+    if (this.avatar != null) {
+      return false;
+    }
+
+    if (this.addressMain != null) {
+      return false;
+    }
+
+    if (this.addressPostal != null) {
+      return false;
+    }
+
+    if (this.versionTermsOfService != null) {
+      return false;
+    }
+
+    if (this.directorAlias != null) {
+      return false;
+    }
+
+    if (this.language != null) {
+      return false;
+    }
+
+    if (this.country != null) {
+      return false;
+    }
+
+    if (this.region != null) {
+      return false;
+    }
+
+    if (this.ubo != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.subStatus != null) {
+      return false;
+    }
+
+    if (this.sessionTimeout != null) {
+      return false;
+    }
+
+    if (this.dailyLimitWithoutConfirmationLogin != null) {
+      return false;
+    }
+
+    if (this.notificationFilters != null) {
+      return false;
+    }
+
+    if (this.customer != null) {
+      return false;
+    }
+
+    if (this.customerLimit != null) {
+      return false;
+    }
+
+    if (this.billingContract != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static UserCompany fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserCompany.class, reader);
   }
 
 }

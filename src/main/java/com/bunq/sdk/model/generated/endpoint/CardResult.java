@@ -11,6 +11,7 @@ import com.bunq.sdk.model.generated.object.LabelCard;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -350,6 +351,82 @@ public class CardResult extends BunqModel {
 
   public void setReservationExpiryTime(String reservationExpiryTime) {
     this.reservationExpiryTime = reservationExpiryTime;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.cardId != null) {
+      return false;
+    }
+
+    if (this.amountOriginal != null) {
+      return false;
+    }
+
+    if (this.amountFinal != null) {
+      return false;
+    }
+
+    if (this.decision != null) {
+      return false;
+    }
+
+    if (this.decisionDescription != null) {
+      return false;
+    }
+
+    if (this.decisionDescriptionTranslated != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.messageType != null) {
+      return false;
+    }
+
+    if (this.authorisationType != null) {
+      return false;
+    }
+
+    if (this.city != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.labelCard != null) {
+      return false;
+    }
+
+    if (this.reservationStatus != null) {
+      return false;
+    }
+
+    if (this.reservationExpiryTime != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static CardResult fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardResult.class, reader);
   }
 
 }

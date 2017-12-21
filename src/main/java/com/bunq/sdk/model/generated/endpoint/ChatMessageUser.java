@@ -6,6 +6,7 @@ import com.bunq.sdk.model.generated.object.ChatMessageContent;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -146,6 +147,46 @@ public class ChatMessageUser extends BunqModel {
 
   public void setContent(ChatMessageContent content) {
     this.content = content;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.conversationId != null) {
+      return false;
+    }
+
+    if (this.creator != null) {
+      return false;
+    }
+
+    if (this.displayedSender != null) {
+      return false;
+    }
+
+    if (this.content != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static ChatMessageUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ChatMessageUser.class, reader);
   }
 
 }

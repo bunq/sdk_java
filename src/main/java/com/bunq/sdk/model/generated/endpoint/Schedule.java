@@ -9,6 +9,7 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.ScheduleAnchorObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,6 +184,42 @@ public class Schedule extends BunqModel {
 
   public void setObject(ScheduleAnchorObject object) {
     this.object = object;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.timeStart != null) {
+      return false;
+    }
+
+    if (this.timeEnd != null) {
+      return false;
+    }
+
+    if (this.recurrenceUnit != null) {
+      return false;
+    }
+
+    if (this.recurrenceSize != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.object != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static Schedule fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Schedule.class, reader);
   }
 
 }

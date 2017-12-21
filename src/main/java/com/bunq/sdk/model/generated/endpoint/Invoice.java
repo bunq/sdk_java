@@ -12,6 +12,7 @@ import com.bunq.sdk.model.generated.object.InvoiceItemGroup;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -358,6 +359,82 @@ public class Invoice extends BunqModel {
 
   public void setVatNumber(String vatNumber) {
     this.vatNumber = vatNumber;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.invoiceDate != null) {
+      return false;
+    }
+
+    if (this.invoiceNumber != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.group != null) {
+      return false;
+    }
+
+    if (this.totalVatInclusive != null) {
+      return false;
+    }
+
+    if (this.totalVatExclusive != null) {
+      return false;
+    }
+
+    if (this.totalVat != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.address != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAddress != null) {
+      return false;
+    }
+
+    if (this.chamberOfCommerceNumber != null) {
+      return false;
+    }
+
+    if (this.vatNumber != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static Invoice fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Invoice.class, reader);
   }
 
 }

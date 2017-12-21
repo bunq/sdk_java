@@ -8,6 +8,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -136,6 +137,38 @@ public class CustomerLimit extends BunqModel {
 
   public void setLimitCardDebitReplacement(Integer limitCardDebitReplacement) {
     this.limitCardDebitReplacement = limitCardDebitReplacement;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.limitMonetaryAccount != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitMaestro != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitMastercard != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitWildcard != null) {
+      return false;
+    }
+
+    if (this.limitCardDebitReplacement != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static CustomerLimit fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CustomerLimit.class, reader);
   }
 
 }

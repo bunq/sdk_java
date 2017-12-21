@@ -76,4 +76,24 @@ public class SessionServer extends BunqModel {
     return userPerson;
   }
 
+  @Override
+  public boolean isAllFieldNull() {
+    if (this.id == null) {
+      return false;
+    }
+
+    if (this.sessionToken == null) {
+      return false;
+    }
+
+    if (this.userCompany == null) {
+      return false;
+    }
+
+    if (this.userPerson == null) {
+      return false;
+    }
+
+    return true;
+  }
 }
