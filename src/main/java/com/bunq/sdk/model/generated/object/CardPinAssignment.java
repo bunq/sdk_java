@@ -4,6 +4,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +60,26 @@ public class CardPinAssignment extends BunqModel {
 
   public void setMonetaryAccountId(String monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static CardPinAssignment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardPinAssignment.class, reader);
   }
 
 }

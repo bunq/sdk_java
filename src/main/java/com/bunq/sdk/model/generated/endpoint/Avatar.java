@@ -9,6 +9,7 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Image;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,6 +103,26 @@ public class Avatar extends BunqModel {
 
   public void setImage(List<Image> image) {
     this.image = image;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.image != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static Avatar fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Avatar.class, reader);
   }
 
 }

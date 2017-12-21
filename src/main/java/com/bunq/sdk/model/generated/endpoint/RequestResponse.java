@@ -13,6 +13,7 @@ import com.bunq.sdk.model.generated.object.Geolocation;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -553,6 +554,118 @@ public class RequestResponse extends BunqModel {
 
   public void setEligibleWhitelistId(Integer eligibleWhitelistId) {
     this.eligibleWhitelistId = eligibleWhitelistId;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.timeResponded != null) {
+      return false;
+    }
+
+    if (this.timeExpiry != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.amountInquired != null) {
+      return false;
+    }
+
+    if (this.amountResponded != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.attachment != null) {
+      return false;
+    }
+
+    if (this.minimumAge != null) {
+      return false;
+    }
+
+    if (this.requireAddress != null) {
+      return false;
+    }
+
+    if (this.geolocation != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.subType != null) {
+      return false;
+    }
+
+    if (this.redirectUrl != null) {
+      return false;
+    }
+
+    if (this.addressBilling != null) {
+      return false;
+    }
+
+    if (this.addressShipping != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    if (this.creditSchemeIdentifier != null) {
+      return false;
+    }
+
+    if (this.mandateIdentifier != null) {
+      return false;
+    }
+
+    if (this.eligibleWhitelistId != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static RequestResponse fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestResponse.class, reader);
   }
 
 }

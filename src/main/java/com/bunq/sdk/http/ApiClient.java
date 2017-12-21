@@ -44,6 +44,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -93,7 +94,7 @@ public class ApiClient {
   /**
    * Prefix for bunq's own headers.
    */
-  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.12.3";
+  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.12.4";
   private static final String LANGUAGE_EN_US = "en_US";
   private static final String REGION_NL_NL = "nl_NL";
   private static final String GEOLOCATION_ZERO = "0 0 0 0 000";
@@ -225,19 +226,13 @@ public class ApiClient {
 
   private BunqResponseRaw createBunqResponseRaw(CloseableHttpResponse response)
       throws IOException {
-    byte[] responseBodyBytes = getBodyBytes(response);
-
-    return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
-  }
-
-  private byte[] getBodyBytes(CloseableHttpResponse response) throws IOException {
     Integer responseCode = response.getStatusLine().getStatusCode();
     byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
 
     assertResponseSuccess(responseCode, responseBodyBytes);
     validateResponseSignature(responseCode, responseBodyBytes, response);
 
-    return responseBodyBytes;
+    return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
   }
 
   private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {

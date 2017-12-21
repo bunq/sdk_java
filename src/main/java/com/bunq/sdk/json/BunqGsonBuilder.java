@@ -2,6 +2,7 @@ package com.bunq.sdk.json;
 
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.http.Pagination;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.core.SessionServer;
@@ -33,7 +34,8 @@ public class BunqGsonBuilder {
             new MonetaryAccountReferenceTypeAdapter()
         )
         .registerTypeAdapter(InstallationContext.class, new InstallationContextAdapter())
-        .registerTypeAdapter(Pagination.class, new PaginationAdapter());
+        .registerTypeAdapter(Pagination.class, new PaginationAdapter())
+        .registerTypeHierarchyAdapter(AnchorObjectInterface.class, new AnchorObjectAdapter());
   }
 
 }

@@ -7,6 +7,7 @@ import com.bunq.sdk.model.generated.object.AttachmentPublic;
 import com.bunq.sdk.model.generated.object.AttachmentTab;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -149,6 +150,46 @@ public class TabItem extends BunqModel {
 
   public void setAmount(Amount amount) {
     this.amount = amount;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.eanCode != null) {
+      return false;
+    }
+
+    if (this.avatarAttachment != null) {
+      return false;
+    }
+
+    if (this.tabAttachment != null) {
+      return false;
+    }
+
+    if (this.quantity != null) {
+      return false;
+    }
+
+    if (this.amount != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static TabItem fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabItem.class, reader);
   }
 
 }

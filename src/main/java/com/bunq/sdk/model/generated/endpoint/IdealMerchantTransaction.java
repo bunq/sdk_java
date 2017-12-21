@@ -10,6 +10,7 @@ import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -334,6 +335,74 @@ public class IdealMerchantTransaction extends BunqModel {
 
   public void setAllowChat(Boolean allowChat) {
     this.allowChat = allowChat;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.amountGuaranteed != null) {
+      return false;
+    }
+
+    if (this.amountRequested != null) {
+      return false;
+    }
+
+    if (this.expiration != null) {
+      return false;
+    }
+
+    if (this.issuer != null) {
+      return false;
+    }
+
+    if (this.issuerName != null) {
+      return false;
+    }
+
+    if (this.issuerAuthenticationUrl != null) {
+      return false;
+    }
+
+    if (this.purchaseIdentifier != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.statusTimestamp != null) {
+      return false;
+    }
+
+    if (this.transactionIdentifier != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static IdealMerchantTransaction fromJsonReader(JsonReader reader) {
+    return fromJsonReader(IdealMerchantTransaction.class, reader);
   }
 
 }

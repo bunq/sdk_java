@@ -13,6 +13,7 @@ import com.bunq.sdk.model.generated.object.Geolocation;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -525,6 +526,110 @@ public class Payment extends BunqModel {
 
   public void setAllowChat(Boolean allowChat) {
     this.allowChat = allowChat;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.amount != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.subType != null) {
+      return false;
+    }
+
+    if (this.bunqtoStatus != null) {
+      return false;
+    }
+
+    if (this.bunqtoSubStatus != null) {
+      return false;
+    }
+
+    if (this.bunqtoShareUrl != null) {
+      return false;
+    }
+
+    if (this.bunqtoExpiry != null) {
+      return false;
+    }
+
+    if (this.bunqtoTimeResponded != null) {
+      return false;
+    }
+
+    if (this.attachment != null) {
+      return false;
+    }
+
+    if (this.merchantReference != null) {
+      return false;
+    }
+
+    if (this.batchId != null) {
+      return false;
+    }
+
+    if (this.scheduledId != null) {
+      return false;
+    }
+
+    if (this.addressShipping != null) {
+      return false;
+    }
+
+    if (this.addressBilling != null) {
+      return false;
+    }
+
+    if (this.geolocation != null) {
+      return false;
+    }
+
+    if (this.allowChat != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static Payment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Payment.class, reader);
   }
 
 }

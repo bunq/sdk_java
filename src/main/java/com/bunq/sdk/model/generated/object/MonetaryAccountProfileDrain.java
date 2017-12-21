@@ -4,6 +4,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,6 +92,34 @@ public class MonetaryAccountProfileDrain extends BunqModel {
 
   public void setSavingsAccountAlias(MonetaryAccountReference savingsAccountAlias) {
     this.savingsAccountAlias = savingsAccountAlias;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.balancePreferred != null) {
+      return false;
+    }
+
+    if (this.balanceThresholdHigh != null) {
+      return false;
+    }
+
+    if (this.savingsAccountAlias != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static MonetaryAccountProfileDrain fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountProfileDrain.class, reader);
   }
 
 }

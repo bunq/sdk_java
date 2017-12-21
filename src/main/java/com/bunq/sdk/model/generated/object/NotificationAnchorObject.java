@@ -1,19 +1,19 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.endpoint.BunqMeFundraiserResult;
 import com.bunq.sdk.model.generated.endpoint.BunqMeTab;
 import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultInquiry;
 import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultResponse;
-import com.bunq.sdk.model.generated.endpoint.ChatMessageAnnouncement;
-import com.bunq.sdk.model.generated.endpoint.ChatMessageStatus;
-import com.bunq.sdk.model.generated.endpoint.ChatMessageUser;
+import com.bunq.sdk.model.generated.endpoint.ChatMessage;
 import com.bunq.sdk.model.generated.endpoint.DraftPayment;
 import com.bunq.sdk.model.generated.endpoint.IdealMerchantTransaction;
 import com.bunq.sdk.model.generated.endpoint.Invoice;
 import com.bunq.sdk.model.generated.endpoint.MasterCardAction;
-import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccount;
 import com.bunq.sdk.model.generated.endpoint.Payment;
 import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
 import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
@@ -25,10 +25,10 @@ import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
 import com.bunq.sdk.model.generated.endpoint.TabResultInquiry;
 import com.bunq.sdk.model.generated.endpoint.TabResultResponse;
-import com.bunq.sdk.model.generated.endpoint.UserCompany;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,12 +37,18 @@ import java.util.Map;
 
 /**
  */
-public class NotificationAnchorObject extends BunqModel {
+public class NotificationAnchorObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
    */
   private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
+
+  /**
+   */
+  @Expose
+  @SerializedName("BunqMeFundraiserResult")
+  private BunqMeFundraiserResult bunqMeFundraiserResult;
 
   /**
    */
@@ -65,20 +71,8 @@ public class NotificationAnchorObject extends BunqModel {
   /**
    */
   @Expose
-  @SerializedName("ChatMessageStatus")
-  private ChatMessageStatus chatMessageStatus;
-
-  /**
-   */
-  @Expose
-  @SerializedName("ChatMessageUser")
-  private ChatMessageUser chatMessageUser;
-
-  /**
-   */
-  @Expose
-  @SerializedName("ChatMessageAnnouncement")
-  private ChatMessageAnnouncement chatMessageAnnouncement;
+  @SerializedName("ChatMessage")
+  private ChatMessage chatMessage;
 
   /**
    */
@@ -107,8 +101,8 @@ public class NotificationAnchorObject extends BunqModel {
   /**
    */
   @Expose
-  @SerializedName("MonetaryAccountBank")
-  private MonetaryAccountBank monetaryAccountBank;
+  @SerializedName("MonetaryAccount")
+  private MonetaryAccount monetaryAccount;
 
   /**
    */
@@ -179,14 +173,18 @@ public class NotificationAnchorObject extends BunqModel {
   /**
    */
   @Expose
-  @SerializedName("UserPerson")
-  private UserPerson userPerson;
+  @SerializedName("User")
+  private User user;
 
   /**
    */
-  @Expose
-  @SerializedName("UserCompany")
-  private UserCompany userCompany;
+  public BunqMeFundraiserResult getBunqMeFundraiserResult() {
+    return this.bunqMeFundraiserResult;
+  }
+
+  public void setBunqMeFundraiserResult(BunqMeFundraiserResult bunqMeFundraiserResult) {
+    this.bunqMeFundraiserResult = bunqMeFundraiserResult;
+  }
 
   /**
    */
@@ -220,32 +218,12 @@ public class NotificationAnchorObject extends BunqModel {
 
   /**
    */
-  public ChatMessageStatus getChatMessageStatus() {
-    return this.chatMessageStatus;
+  public ChatMessage getChatMessage() {
+    return this.chatMessage;
   }
 
-  public void setChatMessageStatus(ChatMessageStatus chatMessageStatus) {
-    this.chatMessageStatus = chatMessageStatus;
-  }
-
-  /**
-   */
-  public ChatMessageUser getChatMessageUser() {
-    return this.chatMessageUser;
-  }
-
-  public void setChatMessageUser(ChatMessageUser chatMessageUser) {
-    this.chatMessageUser = chatMessageUser;
-  }
-
-  /**
-   */
-  public ChatMessageAnnouncement getChatMessageAnnouncement() {
-    return this.chatMessageAnnouncement;
-  }
-
-  public void setChatMessageAnnouncement(ChatMessageAnnouncement chatMessageAnnouncement) {
-    this.chatMessageAnnouncement = chatMessageAnnouncement;
+  public void setChatMessage(ChatMessage chatMessage) {
+    this.chatMessage = chatMessage;
   }
 
   /**
@@ -290,12 +268,12 @@ public class NotificationAnchorObject extends BunqModel {
 
   /**
    */
-  public MonetaryAccountBank getMonetaryAccountBank() {
-    return this.monetaryAccountBank;
+  public MonetaryAccount getMonetaryAccount() {
+    return this.monetaryAccount;
   }
 
-  public void setMonetaryAccountBank(MonetaryAccountBank monetaryAccountBank) {
-    this.monetaryAccountBank = monetaryAccountBank;
+  public void setMonetaryAccount(MonetaryAccount monetaryAccount) {
+    this.monetaryAccount = monetaryAccount;
   }
 
   /**
@@ -410,27 +388,21 @@ public class NotificationAnchorObject extends BunqModel {
 
   /**
    */
-  public UserPerson getUserPerson() {
-    return this.userPerson;
+  public User getUser() {
+    return this.user;
   }
 
-  public void setUserPerson(UserPerson userPerson) {
-    this.userPerson = userPerson;
-  }
-
-  /**
-   */
-  public UserCompany getUserCompany() {
-    return this.userCompany;
-  }
-
-  public void setUserCompany(UserCompany userCompany) {
-    this.userCompany = userCompany;
+  public void setUser(User user) {
+    this.user = user;
   }
 
   /**
    */
   public BunqModel getReferencedObject() {
+    if (this.bunqMeFundraiserResult != null) {
+      return this.bunqMeFundraiserResult;
+    }
+
     if (this.bunqMeTab != null) {
       return this.bunqMeTab;
     }
@@ -443,16 +415,8 @@ public class NotificationAnchorObject extends BunqModel {
       return this.bunqMeTabResultResponse;
     }
 
-    if (this.chatMessageStatus != null) {
-      return this.chatMessageStatus;
-    }
-
-    if (this.chatMessageUser != null) {
-      return this.chatMessageUser;
-    }
-
-    if (this.chatMessageAnnouncement != null) {
-      return this.chatMessageAnnouncement;
+    if (this.chatMessage != null) {
+      return this.chatMessage;
     }
 
     if (this.draftPayment != null) {
@@ -471,8 +435,8 @@ public class NotificationAnchorObject extends BunqModel {
       return this.masterCardAction;
     }
 
-    if (this.monetaryAccountBank != null) {
-      return this.monetaryAccountBank;
+    if (this.monetaryAccount != null) {
+      return this.monetaryAccount;
     }
 
     if (this.payment != null) {
@@ -519,15 +483,111 @@ public class NotificationAnchorObject extends BunqModel {
       return this.tabResultResponse;
     }
 
-    if (this.userPerson != null) {
-      return this.userPerson;
-    }
-
-    if (this.userCompany != null) {
-      return this.userCompany;
+    if (this.user != null) {
+      return this.user;
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.bunqMeFundraiserResult != null) {
+      return false;
+    }
+
+    if (this.bunqMeTab != null) {
+      return false;
+    }
+
+    if (this.bunqMeTabResultInquiry != null) {
+      return false;
+    }
+
+    if (this.bunqMeTabResultResponse != null) {
+      return false;
+    }
+
+    if (this.chatMessage != null) {
+      return false;
+    }
+
+    if (this.draftPayment != null) {
+      return false;
+    }
+
+    if (this.idealMerchantTransaction != null) {
+      return false;
+    }
+
+    if (this.invoice != null) {
+      return false;
+    }
+
+    if (this.masterCardAction != null) {
+      return false;
+    }
+
+    if (this.monetaryAccount != null) {
+      return false;
+    }
+
+    if (this.payment != null) {
+      return false;
+    }
+
+    if (this.paymentBatch != null) {
+      return false;
+    }
+
+    if (this.requestInquiry != null) {
+      return false;
+    }
+
+    if (this.requestInquiryBatch != null) {
+      return false;
+    }
+
+    if (this.requestResponse != null) {
+      return false;
+    }
+
+    if (this.shareInviteBankInquiry != null) {
+      return false;
+    }
+
+    if (this.shareInviteBankResponse != null) {
+      return false;
+    }
+
+    if (this.scheduledPayment != null) {
+      return false;
+    }
+
+    if (this.scheduledInstance != null) {
+      return false;
+    }
+
+    if (this.tabResultInquiry != null) {
+      return false;
+    }
+
+    if (this.tabResultResponse != null) {
+      return false;
+    }
+
+    if (this.user != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static NotificationAnchorObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationAnchorObject.class, reader);
   }
 
 }

@@ -4,6 +4,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,6 +121,42 @@ public class LabelCard extends BunqModel {
 
   public void setLabelUser(LabelUser labelUser) {
     this.labelUser = labelUser;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.type != null) {
+      return false;
+    }
+
+    if (this.secondLine != null) {
+      return false;
+    }
+
+    if (this.expiryDate != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.labelUser != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static LabelCard fromJsonReader(JsonReader reader) {
+    return fromJsonReader(LabelCard.class, reader);
   }
 
 }

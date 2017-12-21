@@ -9,6 +9,7 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -138,6 +139,26 @@ public class RequestInquiryBatch extends BunqModel {
 
   public void setTotalAmountInquired(Amount totalAmountInquired) {
     this.totalAmountInquired = totalAmountInquired;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.requestInquiries != null) {
+      return false;
+    }
+
+    if (this.totalAmountInquired != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static RequestInquiryBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestInquiryBatch.class, reader);
   }
 
 }

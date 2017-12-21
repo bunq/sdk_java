@@ -13,6 +13,7 @@ import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.TabVisibility;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -450,6 +451,86 @@ public class TabUsageMultiple extends BunqModel {
 
   public void setTabAttachment(List<BunqId> tabAttachment) {
     this.tabAttachment = tabAttachment;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.description != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.amountTotal != null) {
+      return false;
+    }
+
+    if (this.qrCodeToken != null) {
+      return false;
+    }
+
+    if (this.tabUrl != null) {
+      return false;
+    }
+
+    if (this.visibility != null) {
+      return false;
+    }
+
+    if (this.minimumAge != null) {
+      return false;
+    }
+
+    if (this.requireAddress != null) {
+      return false;
+    }
+
+    if (this.redirectUrl != null) {
+      return false;
+    }
+
+    if (this.expiration != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
+      return false;
+    }
+
+    if (this.cashRegisterLocation != null) {
+      return false;
+    }
+
+    if (this.tabItem != null) {
+      return false;
+    }
+
+    if (this.tabAttachment != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static TabUsageMultiple fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabUsageMultiple.class, reader);
   }
 
 }

@@ -8,6 +8,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +44,18 @@ public class ExportAnnualOverviewContent extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, exportAnnualOverviewId), new HashMap<>(), customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    return true;
+  }
+
+  /**
+   */
+  public static ExportAnnualOverviewContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ExportAnnualOverviewContent.class, reader);
   }
 
 }

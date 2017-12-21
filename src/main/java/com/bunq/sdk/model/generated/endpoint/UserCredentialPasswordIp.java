@@ -10,6 +10,7 @@ import com.bunq.sdk.model.generated.object.PermittedDevice;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.stream.JsonReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -188,6 +189,46 @@ public class UserCredentialPasswordIp extends BunqModel {
 
   public void setPermittedDevice(PermittedDevice permittedDevice) {
     this.permittedDevice = permittedDevice;
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.expiryTime != null) {
+      return false;
+    }
+
+    if (this.tokenValue != null) {
+      return false;
+    }
+
+    if (this.permittedDevice != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   */
+  public static UserCredentialPasswordIp fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserCredentialPasswordIp.class, reader);
   }
 
 }
