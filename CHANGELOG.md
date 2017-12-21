@@ -1,5 +1,29 @@
 # Change Log
 
+## [0.12.4](https://github.com/bunq/sdk_java/tree/0.12.4) (2017-12-21)
+[Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.3...0.12.4)
+
+**Implemented enhancements:**
+
+- Introduce fromJson method [\#51](https://github.com/bunq/sdk_java/issues/51)
+- Make sure received signatures headers are correctly cased [\#43](https://github.com/bunq/sdk_java/issues/43)
+- Remove guava  [\#41](https://github.com/bunq/sdk_java/issues/41)
+- Return base class from createFromJsonString [\#40](https://github.com/bunq/sdk_java/issues/40)
+- CHANGELOG.md is empty [\#38](https://github.com/bunq/sdk_java/issues/38)
+- Improve decoder to recognise child object  [\#35](https://github.com/bunq/sdk_java/issues/35)
+
+**Fixed bugs:**
+
+- Remove guava  [\#41](https://github.com/bunq/sdk_java/issues/41)
+
+**Merged pull requests:**
+
+- Added method to ensure that reponse headers are correclty cased befor… [\#53](https://github.com/bunq/sdk_java/pull/53) ([OGKevin](https://github.com/OGKevin))
+- Feature/improve decoder bunq/sdk java\#35 [\#52](https://github.com/bunq/sdk_java/pull/52) ([OGKevin](https://github.com/OGKevin))
+- Removed guava as dependency. \(bunq/sdk\_java\#41\) [\#44](https://github.com/bunq/sdk_java/pull/44) ([OGKevin](https://github.com/OGKevin))
+- Generated CHANGELOG.md :clap:. \(bunq/sdk\_java\#38\) [\#39](https://github.com/bunq/sdk_java/pull/39) ([OGKevin](https://github.com/OGKevin))
+- Removed guava as dependency. \\(bunq/sdk\\_java\\#41\\) [\#44](https://github.com/bunq/sdk_java/pull/44) ([OGKevin](https://github.com/OGKevin))
+
 ## [0.12.3](https://github.com/bunq/sdk_java/tree/0.12.3) (2017-11-15)
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.2...0.12.3)
 
