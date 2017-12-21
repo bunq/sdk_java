@@ -4,6 +4,25 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.http.ApiClient;
+import okio.BufferedSink;
+import okio.Okio;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.http.Header;
+import org.apache.http.HttpEntityEnclosingRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.util.EntityUtils;
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -22,24 +41,9 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
-import okio.BufferedSink;
-import okio.Okio;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.http.Header;
-import org.apache.http.HttpEntityEnclosingRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.util.EntityUtils;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -62,6 +66,7 @@ public final class SecurityUtils {
   private static final String ERROR_COULD_NOT_VERIFY_DATA = "Could not verify signed data.";
   private static final String ERROR_CAN_NOT_GET_ENTITY_BODY_BYTES =
       "Can't get body bytes of the entity.";
+  private static final String ERROR_RESPONSE_VERIFICATION_FAILED = "Response verification failed";
 
   /**
    * Constants to generate encryption keys.
@@ -140,6 +145,22 @@ public final class SecurityUtils {
   private static final String HEADER_NAME_PREFIX_X_BUNQ = "X-Bunq-";
   private static final String DELIMITER_METHOD_PATH = " ";
   private static final String DELIMITER_HEADER_NAME_AND_VALUE = ": ";
+
+  /**
+   * Regex constants.
+   */
+  private static final String REGEX_FOR_LOWERCASE_HEADERS = "(-[a-z])";
+
+  /**
+   * The index of the first item in an array.
+   */
+  private static final int INDEX_FIRST = 0;
+
+  /**
+   * Substring constants.
+   */
+  private static final int SUBSTRING_BEGIN_INDEX_FIRST_CHAR = 0;
+  private static final int SUBSTRING_END_INDEX_FIRST_CHAR = 1;
 
   /**
    */
@@ -455,7 +476,10 @@ public final class SecurityUtils {
     try {
       signature.initVerify(publicKey);
       signature.update(dataBytes);
-      signature.verify(dataBytesSigned);
+
+      if (!signature.verify(dataBytesSigned)) {
+        throw new BunqException(ERROR_RESPONSE_VERIFICATION_FAILED);
+      }
     } catch (GeneralSecurityException exception) {
       throw new BunqException(ERROR_COULD_NOT_VERIFY_DATA, exception);
     }
@@ -476,6 +500,17 @@ public final class SecurityUtils {
       Header[] responseHeaders) {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
+    for (int i = INDEX_FIRST; i < responseHeaders.length; i++) {
+      if (responseHeaders[i].getName().equals(HEADER_SERVER_SIGNATURE)) {
+        continue;
+      }
+
+      responseHeaders[i] = new BasicHeader(
+          getHeaderNameCorrectlyCased(responseHeaders[i].getName()),
+          responseHeaders[i].getValue()
+      );
+    }
+
     try {
       outputStream.write(getResponseHeadBytes(responseCode, responseHeaders));
       outputStream.write(responseBodyBytes);
@@ -484,6 +519,21 @@ public final class SecurityUtils {
     }
 
     return outputStream.toByteArray();
+  }
+
+  private static String getHeaderNameCorrectlyCased(String headerName) {
+    headerName = headerName.toLowerCase();
+    headerName = headerName.substring(SUBSTRING_BEGIN_INDEX_FIRST_CHAR, SUBSTRING_END_INDEX_FIRST_CHAR).toUpperCase()
+        + headerName.substring(SUBSTRING_END_INDEX_FIRST_CHAR);
+    Pattern pattern = Pattern.compile(REGEX_FOR_LOWERCASE_HEADERS);
+    Matcher matcher = pattern.matcher(headerName);
+
+    while (matcher.find()) {
+     String result = matcher.group();
+     headerName = headerName.replace(result, result.toUpperCase());
+    }
+
+    return headerName;
   }
 
   private static byte[] getResponseHeadBytes(int responseCode, Header[] responseHeaders) {
