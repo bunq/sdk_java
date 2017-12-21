@@ -506,7 +506,7 @@ public final class SecurityUtils {
       }
 
       responseHeaders[i] = new BasicHeader(
-          ensureHeaderCorrectlyCased(responseHeaders[i].getName()),
+          getHeaderNameCorrectlyCased(responseHeaders[i].getName()),
           responseHeaders[i].getValue()
       );
     }
@@ -521,7 +521,7 @@ public final class SecurityUtils {
     return outputStream.toByteArray();
   }
 
-  private static String ensureHeaderCorrectlyCased(String headerName) {
+  private static String getHeaderNameCorrectlyCased(String headerName) {
     headerName = headerName.toLowerCase();
     headerName = headerName.substring(SUBSTRING_BEGIN_INDEX, SUBSTRING_END_INDEX).toUpperCase()
         + headerName.substring(SUBSTRING_END_INDEX);
