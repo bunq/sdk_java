@@ -3,6 +3,7 @@ package com.bunq.sdk.http;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
@@ -44,7 +45,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -237,13 +237,12 @@ public class ApiClient {
     Integer responseCode = response.getStatusLine().getStatusCode();
     byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
 
-    assertResponseSuccess(responseCode, responseBodyBytes);
+    assertResponseSuccess(responseCode, responseBodyBytes, getResponseId(response));
     validateResponseSignature(responseCode, responseBodyBytes, response);
 
     return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
   }
 
-  private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {
   private static String getResponseId(CloseableHttpResponse response) {
     Map<String, String> headerMap = getHeadersMap(response);
 
