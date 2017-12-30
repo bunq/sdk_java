@@ -55,6 +55,12 @@ import org.apache.http.util.EntityUtils;
 public class ApiClient {
 
   /**
+   * Error constants.
+   */
+  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID_HEADER =
+      "The response header \"X-Bunq-Client-Response-Id\" or \"x-bunq-client-response-id\" could not be found.";
+
+  /**
    * Endpoints not requiring active session for the request to succeed.
    */
   private static final String DEVICE_SERVER_URL = "device-server";
@@ -79,6 +85,8 @@ public class ApiClient {
   private static final String HEADER_GEOLOCATION = "X-Bunq-Geolocation";
   private static final String HEADER_SIGNATURE = "X-Bunq-Client-Signature";
   private static final String HEADER_AUTHENTICATION = "X-Bunq-Client-Authentication";
+  private static final String HEADER_RESPONSE_ID_LOWER_CASE = "x-bunq-client-response-id";
+  private static final String HEADER_RESPONSE_ID_UPPER_CASE = "X-Bunq-Client-Response-Id";
 
   /**
    * Field constants.
