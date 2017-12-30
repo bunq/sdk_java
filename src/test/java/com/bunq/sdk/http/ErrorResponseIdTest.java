@@ -7,7 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
-public class ErrorResponseTest extends BunqSdkTestBase {
+public class ErrorResponseIdTest extends BunqSdkTestBase {
+
   /**
    * Invalid user id to trigger BadRequestException
    */
@@ -29,4 +30,5 @@ public class ErrorResponseTest extends BunqSdkTestBase {
     assertNotNull(caughtException);
     assertNotNull(caughtException.getResponseId());
   }
+
 }
