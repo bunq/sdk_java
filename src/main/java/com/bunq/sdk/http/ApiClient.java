@@ -256,32 +256,33 @@ public class ApiClient {
     throw new BunqException(ERROR_COULD_NOT_DETERMINE_RESPONSE_ID_HEADER);
   }
 
+  private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
     if (responseCode != HttpStatus.SC_OK) {
-      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
+      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
   }
 
   private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
-      String responseBody) {
-    List<String> errorDescriptions = new ArrayList<>();
+      String responseBody, String responseId) {
+    List<String> AllErrorDescription = new ArrayList<>();
 
     try {
-      errorDescriptions.addAll(fetchErrorDescriptions(responseBody));
+      AllErrorDescription.addAll(fetchAllErrorDescription(responseBody));
     } catch (JsonSyntaxException exception) {
-      errorDescriptions.add(responseBody);
+      AllErrorDescription.add(responseBody);
     }
 
-    return ExceptionFactory.createExceptionForResponse(responseCode, errorDescriptions);
+    return ExceptionFactory.createExceptionForResponse(responseCode, AllErrorDescription, responseId);
   }
 
-  private static List<String> fetchErrorDescriptions(String responseBody)
+  private static List<String> fetchAllErrorDescription(String responseBody)
       throws JsonSyntaxException {
     List<String> errorDescriptions = new ArrayList<>();
     GsonBuilder gsonBuilder = BunqGsonBuilder.buildDefault();
     JsonObject responseBodyJson = gsonBuilder.create().fromJson(responseBody, JsonObject.class);
 
     if (responseBodyJson.getAsJsonObject().has(FIELD_ERROR)) {
-      errorDescriptions.addAll(fetchErrorDescriptions(responseBodyJson));
+      errorDescriptions.addAll(fetchAllErrorDescription(responseBodyJson));
     } else {
       errorDescriptions.add(responseBody);
     }
@@ -289,7 +290,7 @@ public class ApiClient {
     return errorDescriptions;
   }
 
-  private static List<String> fetchErrorDescriptions(JsonObject responseBodyJson) {
+  private static List<String> fetchAllErrorDescription(JsonObject responseBodyJson) {
     List<String> errorDescriptions = new ArrayList<>();
     JsonArray exceptionBodies = responseBodyJson.getAsJsonObject().getAsJsonArray(FIELD_ERROR);
 
