@@ -6,13 +6,14 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.DraftShareInviteBankEntry;
 import com.bunq.sdk.model.generated.object.ShareDetail;
 import com.bunq.sdk.model.generated.object.ShareDetailPayment;
-import java.io.File;
-import java.util.Calendar;
-import java.util.HashMap;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * Tests:
@@ -65,7 +66,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
 
   /**
    * Tests the creation of a connect and retrieves the QR code bound to this connect
-   *
+   * <p>
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

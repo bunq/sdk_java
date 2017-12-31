@@ -4,8 +4,9 @@ import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
-import java.util.HashMap;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Tests:
@@ -50,7 +51,7 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
 
   /**
    * Tests the creation of a Tab, adds a tab item to it and updates this tab
-   *
+   * <p>
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

@@ -3,9 +3,10 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
-import java.util.HashMap;
 import org.junit.AfterClass;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Tests:

@@ -4,9 +4,10 @@ import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.UnauthorizedException;
-import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Test;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Tests:

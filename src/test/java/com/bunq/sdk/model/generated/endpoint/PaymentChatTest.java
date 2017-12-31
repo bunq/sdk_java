@@ -1,13 +1,14 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.BunqSdkTestBase;
+import qcom.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
-import java.util.HashMap;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Tests:
@@ -54,7 +55,7 @@ public class PaymentChatTest extends BunqSdkTestBase {
 
   /**
    * Test sending a chat payment to a newly created payment.
-   *
+   * <p>
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

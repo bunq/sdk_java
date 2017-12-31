@@ -1,12 +1,13 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.exception.BunqException;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Tests:
