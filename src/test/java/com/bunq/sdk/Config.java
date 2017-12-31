@@ -42,6 +42,7 @@ public class Config {
   private static final String FIELD_CASH_REGISTER_ID = "CASH_REGISTER_ID";
   private static final String FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS = "SAME_USER_OTHER_ACCOUNT_ALIAS";
   private static final String FIELD_SAME_USER_OTHER_ACCOUNT_TYPE = "SAME_USER_OTHER_ACCOUNT_TYPE";
+  private static final String FIELD_PAYMENT_ID_WITH_GEOLOCATION = "PAYMENT_ID_WITH_GEOLOCATION";
 
   private static Properties properties = getProperties();
 
@@ -116,6 +117,10 @@ public class Config {
     String value = properties.getProperty(FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS);
 
     return new Pointer(type, value);
+  }
+
+  public static Integer getPaymentIdWithGeolocation() {
+    return Integer.parseInt(properties.getProperty(FIELD_PAYMENT_ID_WITH_GEOLOCATION));
   }
 
 }
