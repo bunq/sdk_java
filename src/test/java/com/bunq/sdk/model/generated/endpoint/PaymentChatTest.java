@@ -1,6 +1,6 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import qcom.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;

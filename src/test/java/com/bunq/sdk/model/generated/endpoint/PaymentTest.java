@@ -31,6 +31,7 @@ public class PaymentTest extends BunqSdkTestBase {
   private static final String AMOUNT_EUR = "0.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
+  private static final int PAGE_SIZE = 200;
 
   /**
    * Tests making a payment to another sandbox user
@@ -64,6 +65,24 @@ public class PaymentTest extends BunqSdkTestBase {
     requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
 
     Payment.create(apiContext, requestMap, userId, monetaryAccountId);
+  }
+
+  @Test
+  public void counterPartyAliasNotNullTest() {
+    Pagination pagination = new Pagination();
+    pagination.setCount(PAGE_SIZE);
+
+    List<Payment> allPayment = Payment.list(
+        apiContext,
+        userId,
+        monetaryAccountId,
+        pagination.getUrlParamsCountOnly()
+    ).getValue();
+
+    for (Payment payment : allPayment) {
+      Assert.assertNotNull(payment.getCounterpartyAlias());
+      Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
+    }
   }
 
 }
