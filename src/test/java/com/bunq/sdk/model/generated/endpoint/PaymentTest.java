@@ -7,6 +7,8 @@ import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import java.util.HashMap;
 import org.junit.Test;
+import org.junit.Assert;
+import org.junit.Assume;
 
 /**
  * Tests:
@@ -19,6 +21,7 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   private static final int userId = Config.getUserId();
   private static final int monetaryAccountId = Config.getMonetaryAccountId();
+  private static final int paymentIdwithGeolocation = Config.getPaymentIdWithGeolocation();
   private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
   private static final Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
 
@@ -27,6 +30,10 @@ public class PaymentTest extends BunqSdkTestBase {
   private static final String AMOUNT_EUR = "00.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
+
+  private static final int NUMBER_ZERO = 0;
+
+  private static final int COMPARE_EQUAL = 0;
 
   /**
    * Tests making a payment to another sandbox user
@@ -60,6 +67,16 @@ public class PaymentTest extends BunqSdkTestBase {
     requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
 
     Payment.create(apiContext, requestMap, userId, monetaryAccountId);
+  }
+
+  @Test
+  public void getPaymentWithGeolocationTest() {
+    Assume.assumeFalse(Integer.compare(paymentIdwithGeolocation, NUMBER_ZERO) == COMPARE_EQUAL);
+
+    Payment payment = Payment.get(apiContext, userId, monetaryAccountId, paymentIdwithGeolocation).getValue();
+
+    Assert.assertNotNull(payment.getGeolocation());
+    Assert.assertFalse(payment.getGeolocation().isAllFieldNull());
   }
 
 }
