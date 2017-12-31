@@ -33,22 +33,6 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
    */
   private static Integer monetaryAccountIdToClose;
 
-  /**
-   * Tests the creation of a new monetary account. This account will be deleted after test exited
-   * with code 0
-   *
-   * This test has no assertion as of its testing to see if the code runs without errors
-   */
-  @Test
-  public void createNewMonetaryAccountTest() throws Exception {
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(MonetaryAccountBank.FIELD_CURRENCY, CURRENCY);
-    requestMap.put(MonetaryAccountBank.FIELD_DESCRIPTION, MONETARY_ACCOUNT_DESCRIPTION);
-
-    monetaryAccountIdToClose = MonetaryAccountBank.create(apiContext, requestMap, userId)
-        .getValue();
-  }
-
   @AfterClass
   public static void tearDown() throws Exception {
     if (monetaryAccountIdToClose != null) {
@@ -60,6 +44,22 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
 
       MonetaryAccountBank.update(apiContext, requestMap, userId, monetaryAccountIdToClose);
     }
+  }
+
+  /**
+   * Tests the creation of a new monetary account. This account will be deleted after test exited
+   * with code 0
+   * <p>
+   * This test has no assertion as of its testing to see if the code runs without errors
+   */
+  @Test
+  public void createNewMonetaryAccountTest() throws Exception {
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(MonetaryAccountBank.FIELD_CURRENCY, CURRENCY);
+    requestMap.put(MonetaryAccountBank.FIELD_DESCRIPTION, MONETARY_ACCOUNT_DESCRIPTION);
+
+    monetaryAccountIdToClose = MonetaryAccountBank.create(apiContext, requestMap, userId)
+        .getValue();
   }
 
 }

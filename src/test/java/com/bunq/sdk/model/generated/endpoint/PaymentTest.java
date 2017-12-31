@@ -28,13 +28,13 @@ public class PaymentTest extends BunqSdkTestBase {
 
   private static final ApiContext apiContext = getApiContext();
 
-  private static final String AMOUNT_EUR = "00.01";
+  private static final String AMOUNT_EUR = "0.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
 
   /**
    * Tests making a payment to another sandbox user
-   *
+   * <p>
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
@@ -51,7 +51,7 @@ public class PaymentTest extends BunqSdkTestBase {
 
   /**
    * Tests making a payment to another monetary account of the same user
-   *
+   * <p>
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

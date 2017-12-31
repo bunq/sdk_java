@@ -20,10 +20,8 @@ public class SessionTest extends BunqSdkTestBase {
    */
   private static final int SESSION_ID_DUMMY = 0;
   private static final int SECONDS_TO_SLEEP = 2;
-
-  private static String apiConfigPath = Config.getApiConfigPath();
-
   private static final ApiContext apiContext = getApiContext();
+  private static String apiConfigPath = Config.getApiConfigPath();
 
   /**
    * Tests deletion of the current session
