@@ -49,7 +49,7 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
   /**
    * Tests the creation of a new monetary account. This account will be deleted after test exited
    * with code 0
-   * <p>
+   *
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

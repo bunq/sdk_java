@@ -66,7 +66,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
 
   /**
    * Tests the creation of a connect and retrieves the QR code bound to this connect
-   * <p>
+   *
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

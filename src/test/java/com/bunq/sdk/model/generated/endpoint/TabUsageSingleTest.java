@@ -51,7 +51,7 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
 
   /**
    * Tests the creation of a Tab, adds a tab item to it and updates this tab
-   * <p>
+   *
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test

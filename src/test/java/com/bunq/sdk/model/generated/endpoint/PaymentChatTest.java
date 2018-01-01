@@ -55,7 +55,7 @@ public class PaymentChatTest extends BunqSdkTestBase {
 
   /**
    * Test sending a chat payment to a newly created payment.
-   * <p>
+   *
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
