@@ -96,12 +96,12 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     BunqResponse<List<Payment>> responsePreviousNext =
         ListPayments(paginationPrevious.getUrlParamsNextPage());
 
-    ArrayList<Payment> paymentsActual = new ArrayList<>();
-    paymentsActual.addAll(responsePreviousNext.getValue());
-    paymentsActual.addAll(responsePrevious.getValue());
-    String paymentsExpectedSerialized = gson.toJson(paymentsExpected);
-    String paymentsActualSerialized = gson.toJson(paymentsActual);
+    ArrayList<Payment> allPaymentActual = new ArrayList<>();
+    allPaymentActual.addAll(responsePreviousNext.getValue());
+    allPaymentActual.addAll(responsePrevious.getValue());
+    String allPaymentExpectedSerialized = gson.toJson(paymentsExpected);
+    String allPaymentActualSerialized = gson.toJson(allPaymentActual);
 
-    Assert.assertEquals(paymentsExpectedSerialized, paymentsActualSerialized);
+    Assert.assertEquals(allPaymentExpectedSerialized, allPaymentActualSerialized);
   }
 }
