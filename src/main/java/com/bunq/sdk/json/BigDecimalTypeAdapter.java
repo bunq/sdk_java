@@ -29,7 +29,11 @@ public class BigDecimalTypeAdapter extends TypeAdapter<BigDecimal> {
 
   @Override
   public BigDecimal read(JsonReader input) throws IOException {
-    if (input.peek() == JsonToken.NUMBER) {
+    JsonToken type = input.peek();
+
+    if (type == JsonToken.NUMBER) {
+      return new BigDecimal(input.nextInt());
+    } else if (type == JsonToken.STRING) {
       return new BigDecimal(input.nextString());
     } else {
       input.nextNull();
