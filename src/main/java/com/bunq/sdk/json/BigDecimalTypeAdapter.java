@@ -32,7 +32,7 @@ public class BigDecimalTypeAdapter extends TypeAdapter<BigDecimal> {
     JsonToken type = input.peek();
 
     if (type == JsonToken.NUMBER) {
-      return new BigDecimal(input.nextInt());
+      return new BigDecimal(input.nextDouble());
     } else if (type == JsonToken.STRING) {
       return new BigDecimal(input.nextString());
     } else {
