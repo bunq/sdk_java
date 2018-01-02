@@ -250,9 +250,9 @@ public class ApiClient {
       return headerMap.get(HEADER_RESPONSE_ID_LOWER_CASE);
     } else if (headerMap.containsKey(HEADER_RESPONSE_ID_UPPER_CASE)) {
       return  headerMap.get(HEADER_RESPONSE_ID_UPPER_CASE);
+    } else {
+      throw new BunqException(ERROR_COULD_NOT_DETERMINE_RESPONSE_ID_HEADER);
     }
-
-    throw new BunqException(ERROR_COULD_NOT_DETERMINE_RESPONSE_ID_HEADER);
   }
 
   private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
