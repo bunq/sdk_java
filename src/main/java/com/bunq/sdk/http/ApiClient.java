@@ -263,15 +263,15 @@ public class ApiClient {
 
   private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
       String responseBody, String responseId) {
-    List<String> AllErrorDescription = new ArrayList<>();
+    List<String> allErrorDescription = new ArrayList<>();
 
     try {
-      AllErrorDescription.addAll(fetchAllErrorDescription(responseBody));
+      allErrorDescription.addAll(fetchAllErrorDescription(responseBody));
     } catch (JsonSyntaxException exception) {
-      AllErrorDescription.add(responseBody);
+      allErrorDescription.add(responseBody);
     }
 
-    return ExceptionFactory.createExceptionForResponse(responseCode, AllErrorDescription, responseId);
+    return ExceptionFactory.createExceptionForResponse(responseCode, allErrorDescription, responseId);
   }
 
   private static List<String> fetchAllErrorDescription(String responseBody)
