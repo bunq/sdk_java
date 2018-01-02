@@ -33,7 +33,7 @@ public class ExceptionFactory {
    * @return The exception that belongs to this status code.
    */
   public static ApiException createExceptionForResponse(int responseCode, List<String> messages, String responseId){
-    String error_message = concatenateMessages(messages, responseId);
+    String error_message = concatenateAllMessage(messages, responseId);
 
     switch (responseCode) {
       case HTTP_RESPONSE_CODE_BAD_REQUEST:
@@ -55,7 +55,7 @@ public class ExceptionFactory {
     }
   }
 
-  private static String concatenateMessages(List<String> messages, String responseId) {
+  private static String concatenateAllMessage(List<String> messages, String responseId) {
     return String.format(FORMAT_ERROR_MESSAGE, responseId, String.join(SEPARATOR_ERROR_MESSAGES, messages));
   }
   
