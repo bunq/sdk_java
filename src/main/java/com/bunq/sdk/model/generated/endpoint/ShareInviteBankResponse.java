@@ -88,7 +88,7 @@ public class ShareInviteBankResponse extends BunqModel {
   private String status;
 
   /**
-   * The share type: STANDARD.
+   * The share type, either STANDARD or MUTUAL.
    */
   @Expose
   @SerializedName("share_type")
@@ -232,7 +232,7 @@ public class ShareInviteBankResponse extends BunqModel {
   }
 
   /**
-   * The share type: STANDARD.
+   * The share type, either STANDARD or MUTUAL.
    */
   public String getShareType() {
     return this.shareType;

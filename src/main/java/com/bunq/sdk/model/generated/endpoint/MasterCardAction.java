@@ -36,6 +36,13 @@ public class MasterCardAction extends BunqModel {
   private static final String OBJECT_TYPE = "MasterCardAction";
 
   /**
+   * The id of the MastercardAction.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
    * The id of the monetary account this action links to.
    */
   @Expose
@@ -225,6 +232,17 @@ public class MasterCardAction extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
     return fromJsonList(MasterCardAction.class, responseRaw, OBJECT_TYPE);
+  }
+
+  /**
+   * The id of the MastercardAction.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**
@@ -484,6 +502,10 @@ public class MasterCardAction extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
     if (this.monetaryAccountId != null) {
       return false;
     }
