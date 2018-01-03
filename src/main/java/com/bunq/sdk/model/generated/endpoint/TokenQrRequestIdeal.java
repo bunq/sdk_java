@@ -47,6 +47,13 @@ public class TokenQrRequestIdeal extends BunqModel {
   private static final String OBJECT_TYPE = "TokenQrRequestIdeal";
 
   /**
+   * The id of the RequestResponse.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
    * The timestamp of when the RequestResponse was responded to.
    */
   @Expose
@@ -202,6 +209,17 @@ public class TokenQrRequestIdeal extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
     return fromJson(TokenQrRequestIdeal.class, responseRaw, OBJECT_TYPE);
+  }
+
+  /**
+   * The id of the RequestResponse.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   /**
@@ -430,6 +448,10 @@ public class TokenQrRequestIdeal extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
     if (this.timeResponded != null) {
       return false;
     }
