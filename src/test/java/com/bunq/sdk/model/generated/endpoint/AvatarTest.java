@@ -1,16 +1,17 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import static org.junit.Assert.assertArrayEquals;
-
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Tests:

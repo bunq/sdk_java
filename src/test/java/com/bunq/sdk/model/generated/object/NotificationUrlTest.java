@@ -2,8 +2,21 @@ package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.generated.endpoint.*;
-import com.google.gson.Gson;
+import com.bunq.sdk.model.generated.endpoint.BunqMeTab;
+import com.bunq.sdk.model.generated.endpoint.ChatMessage;
+import com.bunq.sdk.model.generated.endpoint.ChatMessageAnnouncement;
+import com.bunq.sdk.model.generated.endpoint.DraftPayment;
+import com.bunq.sdk.model.generated.endpoint.MasterCardAction;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccount;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
+import com.bunq.sdk.model.generated.endpoint.Payment;
+import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
+import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
+import com.bunq.sdk.model.generated.endpoint.RequestResponse;
+import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
+import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
+import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiry;
+import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.junit.Test;
@@ -58,8 +71,6 @@ public class NotificationUrlTest extends BunqSdkTestBase {
       "/ShareInviteBankInquiry.json";
   private static final String JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL = BASE_PATH_JSON_MODEL +
       "/ShareInviteBankResponse.json";
-
-  private static final Type TYPE_NOTIFICATION_URL = new TypeToken<NotificationUrl>() {}.getType();
 
   private void executeNotificationUrlTest(
       String expectedJsonFileName,

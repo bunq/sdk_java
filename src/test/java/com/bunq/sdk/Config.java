@@ -1,6 +1,7 @@
 package com.bunq.sdk;
 
 import com.bunq.sdk.model.generated.object.Pointer;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;

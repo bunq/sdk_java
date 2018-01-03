@@ -1,10 +1,10 @@
 package com.bunq.sdk.context;
 
-import static org.junit.Assert.assertEquals;
-
 import com.bunq.sdk.BunqSdkTestBase;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests:

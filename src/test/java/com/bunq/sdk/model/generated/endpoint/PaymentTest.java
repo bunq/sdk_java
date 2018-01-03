@@ -3,12 +3,16 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.http.Pagination;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
-import java.util.HashMap;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Assume;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Tests:
@@ -27,9 +31,10 @@ public class PaymentTest extends BunqSdkTestBase {
 
   private static final ApiContext apiContext = getApiContext();
 
-  private static final String AMOUNT_EUR = "00.01";
+  private static final String AMOUNT_EUR = "0.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
+  private static final int PAGE_SIZE = 200;
 
   private static final int NUMBER_ZERO = 0;
 
@@ -70,6 +75,22 @@ public class PaymentTest extends BunqSdkTestBase {
   }
 
   @Test
+  public void counterPartyAliasNotNullTest() {
+    Pagination pagination = new Pagination();
+    pagination.setCount(PAGE_SIZE);
+
+    List<Payment> allPayment = Payment.list(
+        apiContext,
+        userId,
+        monetaryAccountId,
+        pagination.getUrlParamsCountOnly()
+    ).getValue();
+
+    for (Payment payment : allPayment) {
+      Assert.assertNotNull(payment.getCounterpartyAlias());
+      Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
+    }
+
   public void getPaymentWithGeolocationTest() {
     Assume.assumeFalse(Integer.compare(paymentIdwithGeolocation, NUMBER_ZERO) == COMPARE_EQUAL);
 
@@ -77,6 +98,7 @@ public class PaymentTest extends BunqSdkTestBase {
 
     Assert.assertNotNull(payment.getGeolocation());
     Assert.assertFalse(payment.getGeolocation().isAllFieldNull());
+
   }
 
 }

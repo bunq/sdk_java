@@ -1,18 +1,19 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import static org.junit.Assert.assertEquals;
-
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Pointer;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests:

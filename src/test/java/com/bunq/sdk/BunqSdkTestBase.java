@@ -2,9 +2,8 @@ package com.bunq.sdk;
 
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.ApiEnvironmentType;
-import com.bunq.sdk.exception.UnknownApiErrorException;
 import com.bunq.sdk.exception.BunqException;
-import com.bunq.sdk.model.generated.endpoint.User;
+
 import java.util.Arrays;
 import java.util.List;
 

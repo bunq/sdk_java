@@ -6,13 +6,14 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.DraftShareInviteBankEntry;
 import com.bunq.sdk.model.generated.object.ShareDetail;
 import com.bunq.sdk.model.generated.object.ShareDetailPayment;
-import java.io.File;
-import java.util.Calendar;
-import java.util.HashMap;
 import org.apache.commons.io.FileUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * Tests:

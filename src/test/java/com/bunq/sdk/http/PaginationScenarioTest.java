@@ -8,12 +8,13 @@ import com.bunq.sdk.model.generated.endpoint.Payment;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.Gson;
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
 
 /**
  * Tests:
@@ -49,31 +50,6 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
    */
   private static Gson gson = BunqGsonBuilder.buildDefault().create();
 
-  @Test
-  public void apiScenarioPaymentListingWithPaginationTest() {
-    EnsureEnoughPayments();
-    ArrayList paymentsExpected = new ArrayList<>(GetPaymentsRequired());
-    Pagination paginationCountOnly = new Pagination();
-    paginationCountOnly.setCount(PAYMENT_LISTING_PAGE_SIZE);
-
-    BunqResponse<List<Payment>> responseLatest =
-        ListPayments(paginationCountOnly.getUrlParamsCountOnly());
-    Pagination paginationLatest = responseLatest.getPagination();
-    BunqResponse<List<Payment>> responsePrevious =
-        ListPayments(paginationLatest.getUrlParamsPreviousPage());
-    Pagination paginationPrevious = responsePrevious.getPagination();
-    BunqResponse<List<Payment>> responsePreviousNext =
-        ListPayments(paginationPrevious.getUrlParamsNextPage());
-
-    ArrayList<Payment> paymentsActual = new ArrayList<>();
-    paymentsActual.addAll(responsePreviousNext.getValue());
-    paymentsActual.addAll(responsePrevious.getValue());
-    String paymentsExpectedSerialized = gson.toJson(paymentsExpected);
-    String paymentsActualSerialized = gson.toJson(paymentsActual);
-
-    Assert.assertEquals(paymentsExpectedSerialized, paymentsActualSerialized);
-  }
-
   private static void EnsureEnoughPayments() {
     for (int i = NUMBER_ZERO; i < GetPaymentsMissingCount(); ++i) {
       CreatePayment();
@@ -102,5 +78,30 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
 
     Payment.create(apiContext, requestMap, userId, monetaryAccountId);
+  }
+
+  @Test
+  public void apiScenarioPaymentListingWithPaginationTest() {
+    EnsureEnoughPayments();
+    ArrayList paymentsExpected = new ArrayList<>(GetPaymentsRequired());
+    Pagination paginationCountOnly = new Pagination();
+    paginationCountOnly.setCount(PAYMENT_LISTING_PAGE_SIZE);
+
+    BunqResponse<List<Payment>> responseLatest =
+        ListPayments(paginationCountOnly.getUrlParamsCountOnly());
+    Pagination paginationLatest = responseLatest.getPagination();
+    BunqResponse<List<Payment>> responsePrevious =
+        ListPayments(paginationLatest.getUrlParamsPreviousPage());
+    Pagination paginationPrevious = responsePrevious.getPagination();
+    BunqResponse<List<Payment>> responsePreviousNext =
+        ListPayments(paginationPrevious.getUrlParamsNextPage());
+
+    ArrayList<Payment> allPaymentActual = new ArrayList<>();
+    allPaymentActual.addAll(responsePreviousNext.getValue());
+    allPaymentActual.addAll(responsePrevious.getValue());
+    String allPaymentExpectedSerialized = gson.toJson(paymentsExpected);
+    String allPaymentActualSerialized = gson.toJson(allPaymentActual);
+
+    Assert.assertEquals(allPaymentExpectedSerialized, allPaymentActualSerialized);
   }
 }

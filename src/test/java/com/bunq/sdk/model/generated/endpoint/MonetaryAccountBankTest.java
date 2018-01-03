@@ -3,9 +3,10 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
-import java.util.HashMap;
 import org.junit.AfterClass;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Tests:
@@ -32,6 +33,19 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
    */
   private static Integer monetaryAccountIdToClose;
 
+  @AfterClass
+  public static void tearDown() throws Exception {
+    if (monetaryAccountIdToClose != null) {
+      HashMap<String, Object> requestMap = new HashMap<>();
+      requestMap.put(MonetaryAccountBank.FIELD_STATUS, CANCELLED_STATUS);
+      requestMap.put(MonetaryAccountBank.FIELD_SUB_STATUS, SUB_STATUS);
+      requestMap.put(MonetaryAccountBank.FIELD_REASON, REASON);
+      requestMap.put(MonetaryAccountBank.FIELD_REASON_DESCRIPTION, REASON_DESCRIPTION);
+
+      MonetaryAccountBank.update(apiContext, requestMap, userId, monetaryAccountIdToClose);
+    }
+  }
+
   /**
    * Tests the creation of a new monetary account. This account will be deleted after test exited
    * with code 0
@@ -46,19 +60,6 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
 
     monetaryAccountIdToClose = MonetaryAccountBank.create(apiContext, requestMap, userId)
         .getValue();
-  }
-
-  @AfterClass
-  public static void tearDown() throws Exception {
-    if (monetaryAccountIdToClose != null) {
-      HashMap<String, Object> requestMap = new HashMap<>();
-      requestMap.put(MonetaryAccountBank.FIELD_STATUS, CANCELLED_STATUS);
-      requestMap.put(MonetaryAccountBank.FIELD_SUB_STATUS, SUB_STATUS);
-      requestMap.put(MonetaryAccountBank.FIELD_REASON, REASON);
-      requestMap.put(MonetaryAccountBank.FIELD_REASON_DESCRIPTION, REASON_DESCRIPTION);
-
-      MonetaryAccountBank.update(apiContext, requestMap, userId, monetaryAccountIdToClose);
-    }
   }
 
 }
