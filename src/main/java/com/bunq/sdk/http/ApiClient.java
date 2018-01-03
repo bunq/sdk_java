@@ -3,6 +3,7 @@ package com.bunq.sdk.http;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
@@ -44,7 +45,6 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.ssl.SSLContextBuilder;
 import org.apache.http.util.EntityUtils;
 
@@ -53,6 +53,12 @@ import org.apache.http.util.EntityUtils;
  * default headers or signing the requests with your API key.
  */
 public class ApiClient {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID_HEADER =
+      "The response header \"X-Bunq-Client-Response-Id\" or \"x-bunq-client-response-id\" could not be found.";
 
   /**
    * Endpoints not requiring active session for the request to succeed.
@@ -79,6 +85,8 @@ public class ApiClient {
   private static final String HEADER_GEOLOCATION = "X-Bunq-Geolocation";
   private static final String HEADER_SIGNATURE = "X-Bunq-Client-Signature";
   private static final String HEADER_AUTHENTICATION = "X-Bunq-Client-Authentication";
+  private static final String HEADER_RESPONSE_ID_LOWER_CASE = "x-bunq-client-response-id";
+  private static final String HEADER_RESPONSE_ID_UPPER_CASE = "X-Bunq-Client-Response-Id";
 
   /**
    * Field constants.
@@ -229,39 +237,51 @@ public class ApiClient {
     Integer responseCode = response.getStatusLine().getStatusCode();
     byte[] responseBodyBytes = EntityUtils.toByteArray(response.getEntity());
 
-    assertResponseSuccess(responseCode, responseBodyBytes);
+    assertResponseSuccess(responseCode, responseBodyBytes, getResponseId(response));
     validateResponseSignature(responseCode, responseBodyBytes, response);
 
     return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
   }
 
-  private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes) {
+  private static String getResponseId(CloseableHttpResponse response) {
+    Map<String, String> headerMap = getHeadersMap(response);
+
+    if (headerMap.containsKey(HEADER_RESPONSE_ID_LOWER_CASE)) {
+      return headerMap.get(HEADER_RESPONSE_ID_LOWER_CASE);
+    } else if (headerMap.containsKey(HEADER_RESPONSE_ID_UPPER_CASE)) {
+      return  headerMap.get(HEADER_RESPONSE_ID_UPPER_CASE);
+    } else {
+      throw new BunqException(ERROR_COULD_NOT_DETERMINE_RESPONSE_ID_HEADER);
+    }
+  }
+
+  private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
     if (responseCode != HttpStatus.SC_OK) {
-      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes));
+      throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
   }
 
   private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
-      String responseBody) {
-    List<String> errorDescriptions = new ArrayList<>();
+      String responseBody, String responseId) {
+    List<String> allErrorDescription = new ArrayList<>();
 
     try {
-      errorDescriptions.addAll(fetchErrorDescriptions(responseBody));
+      allErrorDescription.addAll(fetchAllErrorDescription(responseBody));
     } catch (JsonSyntaxException exception) {
-      errorDescriptions.add(responseBody);
+      allErrorDescription.add(responseBody);
     }
 
-    return ExceptionFactory.createExceptionForResponse(responseCode, errorDescriptions);
+    return ExceptionFactory.createExceptionForResponse(responseCode, allErrorDescription, responseId);
   }
 
-  private static List<String> fetchErrorDescriptions(String responseBody)
+  private static List<String> fetchAllErrorDescription(String responseBody)
       throws JsonSyntaxException {
     List<String> errorDescriptions = new ArrayList<>();
     GsonBuilder gsonBuilder = BunqGsonBuilder.buildDefault();
     JsonObject responseBodyJson = gsonBuilder.create().fromJson(responseBody, JsonObject.class);
 
     if (responseBodyJson.getAsJsonObject().has(FIELD_ERROR)) {
-      errorDescriptions.addAll(fetchErrorDescriptions(responseBodyJson));
+      errorDescriptions.addAll(fetchAllErrorDescription(responseBodyJson));
     } else {
       errorDescriptions.add(responseBody);
     }
@@ -269,7 +289,7 @@ public class ApiClient {
     return errorDescriptions;
   }
 
-  private static List<String> fetchErrorDescriptions(JsonObject responseBodyJson) {
+  private static List<String> fetchAllErrorDescription(JsonObject responseBodyJson) {
     List<String> errorDescriptions = new ArrayList<>();
     JsonArray exceptionBodies = responseBodyJson.getAsJsonObject().getAsJsonArray(FIELD_ERROR);
 
