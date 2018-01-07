@@ -90,7 +90,9 @@ public class PaymentTest extends BunqSdkTestBase {
       Assert.assertNotNull(payment.getCounterpartyAlias());
       Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
     }
+  }
 
+  @Test
   public void getPaymentWithGeolocationTest() {
     Assume.assumeFalse(Integer.compare(paymentIdwithGeolocation, NUMBER_ZERO) == COMPARE_EQUAL);
 
