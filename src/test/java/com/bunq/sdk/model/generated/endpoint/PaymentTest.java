@@ -28,17 +28,30 @@ public class PaymentTest extends BunqSdkTestBase {
   private static final int paymentIdwithGeolocation = Config.getPaymentIdWithGeolocation();
   private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
   private static final Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
-
   private static final ApiContext apiContext = getApiContext();
 
+  /**
+   * Payment field value constants.
+   */
   private static final String AMOUNT_EUR = "0.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
-  private static final int PAGE_SIZE = 200;
+  private static final int PAGE_SIZE = 100;
 
+  /**
+   * Number constants.
+   */
   private static final int NUMBER_ZERO = 0;
 
+  /**
+   * Comparison constants.
+   */
   private static final int COMPARE_EQUAL = 0;
+
+  /**
+   * String constants.
+   */
+  private static final String STRING_NULL = "null";
 
   /**
    * Tests making a payment to another sandbox user
@@ -89,6 +102,7 @@ public class PaymentTest extends BunqSdkTestBase {
     for (Payment payment : allPayment) {
       Assert.assertNotNull(payment.getCounterpartyAlias());
       Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
+      Assert.assertNotEquals(payment.getCounterpartyAlias().toString(), STRING_NULL);
     }
   }
 
@@ -100,7 +114,6 @@ public class PaymentTest extends BunqSdkTestBase {
 
     Assert.assertNotNull(payment.getGeolocation());
     Assert.assertFalse(payment.getGeolocation().isAllFieldNull());
-
   }
 
 }
