@@ -19,7 +19,7 @@ public class MonetaryAccountReferenceTypeAdapter extends TypeAdapter<MonetaryAcc
   public void write(JsonWriter out, MonetaryAccountReference value) throws IOException {
     if (value == null || value.isAllFieldNull()) {
       out.nullValue();
-    } else if (value.getPointer() == null) {
+    } else if (value.getLabelMonetaryAccount() != null) {
       LabelMonetaryAccount labelMonetaryAccount = value.getLabelMonetaryAccount();
 
       BunqGsonBuilder.buildDefault().create().toJson(labelMonetaryAccount, LabelMonetaryAccount.class, out);
