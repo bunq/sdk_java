@@ -33,7 +33,7 @@ public class CardResult extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardResult";
+  private static final String OBJECT_TYPE_GET = "CardResult";
 
   /**
    * The id of the monetary account this card result links to.
@@ -157,7 +157,7 @@ public class CardResult extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cardResultId), new HashMap<>(), customHeaders);
 
-    return fromJson(CardResult.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CardResult.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<CardResult>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -174,7 +174,7 @@ public class CardResult extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(CardResult.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CardResult.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

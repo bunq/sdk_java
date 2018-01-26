@@ -59,7 +59,7 @@ public class MonetaryAccountBank extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "MonetaryAccountBank";
+  private static final String OBJECT_TYPE_GET = "MonetaryAccountBank";
 
   /**
    * The id of the MonetaryAccountBank.
@@ -232,7 +232,7 @@ public class MonetaryAccountBank extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountBankId), new HashMap<>(), customHeaders);
 
-    return fromJson(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE);
+    return fromJson(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountBankId) {
@@ -265,7 +265,7 @@ public class MonetaryAccountBank extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

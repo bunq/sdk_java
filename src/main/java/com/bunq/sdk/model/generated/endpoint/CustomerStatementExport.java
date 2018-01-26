@@ -42,7 +42,7 @@ public class CustomerStatementExport extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CustomerStatementExport";
+  private static final String OBJECT_TYPE_GET = "CustomerStatementExport";
 
   /**
    * The id of the customer statement model.
@@ -138,7 +138,7 @@ public class CustomerStatementExport extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, customerStatementExportId), new HashMap<>(), customHeaders);
 
-    return fromJson(CustomerStatementExport.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CustomerStatementExport.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<CustomerStatementExport>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -155,7 +155,7 @@ public class CustomerStatementExport extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(CustomerStatementExport.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CustomerStatementExport.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer customerStatementExportId) {

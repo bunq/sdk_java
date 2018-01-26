@@ -27,7 +27,6 @@ public class BunqMeFundraiserProfile extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "BunqMeFundraiserProfileModel";
 
   /**
    * The color chosen for the bunq.me fundraiser profile in hexadecimal format.

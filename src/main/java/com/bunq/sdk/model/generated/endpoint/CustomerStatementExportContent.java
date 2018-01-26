@@ -31,7 +31,7 @@ public class CustomerStatementExportContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CustomerStatementExportContent";
+  private static final String OBJECT_TYPE_GET = "CustomerStatementExportContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer customerStatementId) {
     return list(apiContext, userId, monetaryAccountId, customerStatementId, new HashMap<>());

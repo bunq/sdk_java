@@ -29,7 +29,7 @@ public class ScheduleUser extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ScheduleUser";
+  private static final String OBJECT_TYPE_GET = "ScheduleUser";
 
   public static BunqResponse<List<ScheduleUser>> list(ApiContext apiContext, Integer userId) {
     return list(apiContext, userId, new HashMap<>());
@@ -49,7 +49,7 @@ public class ScheduleUser extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(ScheduleUser.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(ScheduleUser.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -38,7 +38,7 @@ public class PermittedIp extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "PermittedIp";
+  private static final String OBJECT_TYPE_GET = "PermittedIp";
 
   /**
    * The IP address.
@@ -65,7 +65,7 @@ public class PermittedIp extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, credentialPasswordIpId, permittedIpId), new HashMap<>(), customHeaders);
 
-    return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE);
+    return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer credentialPasswordIpId) {
@@ -96,7 +96,7 @@ public class PermittedIp extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, credentialPasswordIpId), params, customHeaders);
 
-    return fromJsonList(PermittedIp.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer credentialPasswordIpId, Integer permittedIpId) {

@@ -38,7 +38,7 @@ public class User extends BunqModel implements AnchorObjectInterface {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "User";
+  private static final String OBJECT_TYPE_GET = "User";
 
   /**
    */

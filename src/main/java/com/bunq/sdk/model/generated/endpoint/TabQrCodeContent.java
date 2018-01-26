@@ -30,7 +30,7 @@ public class TabQrCodeContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabQrCodeContent";
+  private static final String OBJECT_TYPE_GET = "TabQrCodeContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUuid) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid, new HashMap<>());

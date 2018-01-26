@@ -39,7 +39,7 @@ public class ExportAnnualOverview extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ExportAnnualOverview";
+  private static final String OBJECT_TYPE_GET = "ExportAnnualOverview";
 
   /**
    * The id of the annual overview as created on the server.
@@ -103,7 +103,7 @@ public class ExportAnnualOverview extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, exportAnnualOverviewId), new HashMap<>(), customHeaders);
 
-    return fromJson(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE);
+    return fromJson(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<ExportAnnualOverview>> list(ApiContext apiContext, Integer userId) {
@@ -121,7 +121,7 @@ public class ExportAnnualOverview extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

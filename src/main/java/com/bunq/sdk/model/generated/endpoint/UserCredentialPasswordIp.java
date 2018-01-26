@@ -33,7 +33,7 @@ public class UserCredentialPasswordIp extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CredentialPasswordIp";
+  private static final String OBJECT_TYPE_GET = "CredentialPasswordIp";
 
   /**
    * The id of the credential.
@@ -94,7 +94,7 @@ public class UserCredentialPasswordIp extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, userCredentialPasswordIpId), new HashMap<>(), customHeaders);
 
-    return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE);
+    return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<UserCredentialPasswordIp>> list(ApiContext apiContext, Integer userId) {
@@ -111,7 +111,7 @@ public class UserCredentialPasswordIp extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

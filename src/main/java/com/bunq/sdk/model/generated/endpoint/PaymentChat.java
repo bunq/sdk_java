@@ -36,7 +36,7 @@ public class PaymentChat extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ChatConversationPayment";
+  private static final String OBJECT_TYPE_GET = "ChatConversationPayment";
 
   /**
    * The id of the chat conversation.
@@ -81,19 +81,19 @@ public class PaymentChat extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<PaymentChat> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Integer paymentChatId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Integer paymentChatId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, paymentId, paymentChatId, new HashMap<>());
   }
 
   /**
    * Update the last read message in the chat of a specific payment.
    */
-  public static BunqResponse<PaymentChat> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Integer paymentChatId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer paymentId, Integer paymentChatId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, paymentId, paymentChatId), requestBytes, customHeaders);
 
-    return fromJson(PaymentChat.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<List<PaymentChat>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer paymentId) {
@@ -111,7 +111,7 @@ public class PaymentChat extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, paymentId), params, customHeaders);
 
-    return fromJsonList(PaymentChat.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(PaymentChat.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -31,7 +31,6 @@ public class AttachmentMonetaryAccount extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "AttachmentMonetaryAccount";
 
   /**
    * The attachment.

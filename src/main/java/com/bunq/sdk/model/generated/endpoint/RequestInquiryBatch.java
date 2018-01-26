@@ -40,7 +40,7 @@ public class RequestInquiryBatch extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "RequestInquiryBatch";
+  private static final String OBJECT_TYPE_GET = "RequestInquiryBatch";
 
   /**
    * The list of requests that were made.
@@ -98,7 +98,7 @@ public class RequestInquiryBatch extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestInquiryBatchId), new HashMap<>(), customHeaders);
 
-    return fromJson(RequestInquiryBatch.class, responseRaw, OBJECT_TYPE);
+    return fromJson(RequestInquiryBatch.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<RequestInquiryBatch>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -116,7 +116,7 @@ public class RequestInquiryBatch extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(RequestInquiryBatch.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(RequestInquiryBatch.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

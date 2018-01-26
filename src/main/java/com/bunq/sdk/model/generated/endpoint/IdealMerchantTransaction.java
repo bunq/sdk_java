@@ -39,7 +39,7 @@ public class IdealMerchantTransaction extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "IdealMerchantTransaction";
+  private static final String OBJECT_TYPE_GET = "IdealMerchantTransaction";
 
   /**
    * The id of the monetary account this ideal merchant transaction links to.
@@ -163,7 +163,7 @@ public class IdealMerchantTransaction extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, idealMerchantTransactionId), new HashMap<>(), customHeaders);
 
-    return fromJson(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE);
+    return fromJson(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<IdealMerchantTransaction>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -180,7 +180,7 @@ public class IdealMerchantTransaction extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

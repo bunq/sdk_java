@@ -40,7 +40,6 @@ public class CardReplace extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardReplace";
 
   /**
    * The id of the new card.

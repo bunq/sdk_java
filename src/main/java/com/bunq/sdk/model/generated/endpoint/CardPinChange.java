@@ -32,7 +32,7 @@ public class CardPinChange extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardPinChange";
+  private static final String OBJECT_TYPE_GET = "CardPinChange";
 
   /**
    * The id of the pin change.
@@ -90,7 +90,7 @@ public class CardPinChange extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, cardId), params, customHeaders);
 
-    return fromJsonList(CardPinChange.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CardPinChange.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<CardPinChange> get(ApiContext apiContext, Integer userId, Integer cardId, Integer cardPinChangeId) {
@@ -103,7 +103,7 @@ public class CardPinChange extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, cardId, cardPinChangeId), new HashMap<>(), customHeaders);
 
-    return fromJson(CardPinChange.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CardPinChange.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

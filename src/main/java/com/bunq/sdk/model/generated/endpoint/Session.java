@@ -29,14 +29,13 @@ public class Session extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Session";
 
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer sessionId) {
     return delete(apiContext, sessionId, new HashMap<>());
   }
 
   /**
-   * Deletes the current session. No response is returned for this request.
+   * Deletes the current session.
    */
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer sessionId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);

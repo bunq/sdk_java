@@ -70,7 +70,7 @@ public class UserPerson extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "UserPerson";
+  private static final String OBJECT_TYPE_GET = "UserPerson";
 
   /**
    * The id of the modified person object.
@@ -305,7 +305,7 @@ public class UserPerson extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userPersonId), new HashMap<>(), customHeaders);
 
-    return fromJson(UserPerson.class, responseRaw, OBJECT_TYPE);
+    return fromJson(UserPerson.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userPersonId) {

@@ -40,7 +40,7 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "MonetaryAccount";
+  private static final String OBJECT_TYPE_GET = "MonetaryAccount";
 
   /**
    */

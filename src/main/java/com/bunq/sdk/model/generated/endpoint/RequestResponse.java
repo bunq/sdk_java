@@ -47,7 +47,8 @@ public class RequestResponse extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "RequestResponse";
+  private static final String OBJECT_TYPE_PUT = "RequestResponse";
+  private static final String OBJECT_TYPE_GET = "RequestResponse";
 
   /**
    * The id of the Request Response.
@@ -241,7 +242,7 @@ public class RequestResponse extends BunqModel {
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestResponseId), requestBytes, customHeaders);
 
-    return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
+    return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
   public static BunqResponse<List<RequestResponse>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -259,7 +260,7 @@ public class RequestResponse extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(RequestResponse.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(RequestResponse.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<RequestResponse> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer requestResponseId) {
@@ -273,7 +274,7 @@ public class RequestResponse extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestResponseId), new HashMap<>(), customHeaders);
 
-    return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE);
+    return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

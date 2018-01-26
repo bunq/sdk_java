@@ -48,7 +48,7 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ShareInviteBankInquiry";
+  private static final String OBJECT_TYPE_GET = "ShareInviteBankInquiry";
 
   /**
    * The label of the monetary account that's being shared.
@@ -164,10 +164,10 @@ public class ShareInviteBankInquiry extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, shareInviteBankInquiryId), new HashMap<>(), customHeaders);
 
-    return fromJson(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE);
+    return fromJson(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<ShareInviteBankInquiry> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, shareInviteBankInquiryId, new HashMap<>());
   }
 
@@ -175,12 +175,12 @@ public class ShareInviteBankInquiry extends BunqModel {
    * Update the details of a share. This includes updating status (revoking or cancelling it),
    * granted permission and validity period of this share.
    */
-  public static BunqResponse<ShareInviteBankInquiry> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, shareInviteBankInquiryId), requestBytes, customHeaders);
 
-    return fromJson(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<List<ShareInviteBankInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -199,7 +199,7 @@ public class ShareInviteBankInquiry extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

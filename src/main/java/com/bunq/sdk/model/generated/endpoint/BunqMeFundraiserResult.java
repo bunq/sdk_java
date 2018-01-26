@@ -19,7 +19,6 @@ public class BunqMeFundraiserResult extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "BunqMeFundraiserResult";
 
   /**
    * The id of the bunq.me.

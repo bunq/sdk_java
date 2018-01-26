@@ -21,7 +21,6 @@ public class ChatMessageStatus extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ChatMessageUser";
 
   /**
    * The id of the message.

@@ -32,7 +32,6 @@ public class ShareInviteBankAmountUsed extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ShareInviteBankAmountUsed";
 
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId) {
     return delete(apiContext, userId, monetaryAccountId, shareInviteBankInquiryId, shareInviteBankAmountUsedId, new HashMap<>());

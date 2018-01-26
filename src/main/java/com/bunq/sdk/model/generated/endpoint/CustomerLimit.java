@@ -29,7 +29,7 @@ public class CustomerLimit extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CustomerLimit";
+  private static final String OBJECT_TYPE_GET = "CustomerLimit";
 
   /**
    * The limit of monetary accounts.
@@ -81,7 +81,7 @@ public class CustomerLimit extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(CustomerLimit.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CustomerLimit.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

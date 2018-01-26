@@ -31,7 +31,7 @@ public class TabResultResponse extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabResultResponse";
+  private static final String OBJECT_TYPE_GET = "TabResultResponse";
 
   /**
    * The Tab details.
@@ -58,7 +58,7 @@ public class TabResultResponse extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, tabResultResponseId), new HashMap<>(), customHeaders);
 
-    return fromJson(TabResultResponse.class, responseRaw, OBJECT_TYPE);
+    return fromJson(TabResultResponse.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<TabResultResponse>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -76,7 +76,7 @@ public class TabResultResponse extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(TabResultResponse.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(TabResultResponse.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -39,7 +39,7 @@ public class CertificatePinned extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CertificatePinned";
+  private static final String OBJECT_TYPE_GET = "CertificatePinned";
 
   /**
    * The certificate chain in .PEM format. Certificates are glued with newline characters.
@@ -99,7 +99,7 @@ public class CertificatePinned extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(CertificatePinned.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<CertificatePinned> get(ApiContext apiContext, Integer userId, Integer certificatePinnedId) {
@@ -113,7 +113,7 @@ public class CertificatePinned extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, certificatePinnedId), new HashMap<>(), customHeaders);
 
-    return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

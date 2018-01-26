@@ -19,7 +19,6 @@ public class ChatConversationReference extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "SupportConversationReference";
 
   /**
    * The id of this conversation.

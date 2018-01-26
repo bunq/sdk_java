@@ -44,7 +44,7 @@ public class TokenQrRequestIdeal extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TokenQrRequestIdeal";
+  private static final String OBJECT_TYPE_POST = "RequestResponse";
 
   /**
    * The id of the RequestResponse.
@@ -208,7 +208,7 @@ public class TokenQrRequestIdeal extends BunqModel {
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return fromJson(TokenQrRequestIdeal.class, responseRaw, OBJECT_TYPE);
+    return fromJson(TokenQrRequestIdeal.class, responseRaw, OBJECT_TYPE_POST);
   }
 
   /**

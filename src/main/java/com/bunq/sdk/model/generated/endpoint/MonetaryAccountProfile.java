@@ -28,7 +28,6 @@ public class MonetaryAccountProfile extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "MonetaryAccountProfile";
 
   /**
    * The profile settings for triggering the fill of a monetary account.

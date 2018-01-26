@@ -36,7 +36,7 @@ public class Customer extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Customer";
+  private static final String OBJECT_TYPE_GET = "Customer";
 
   /**
    * The id of the customer.
@@ -80,7 +80,7 @@ public class Customer extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(Customer.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(Customer.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Customer> get(ApiContext apiContext, Integer userId, Integer customerId) {
@@ -93,7 +93,7 @@ public class Customer extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, customerId), new HashMap<>(), customHeaders);
 
-    return fromJson(Customer.class, responseRaw, OBJECT_TYPE);
+    return fromJson(Customer.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer customerId) {

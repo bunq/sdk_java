@@ -33,7 +33,7 @@ public class MasterCardAction extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "MasterCardAction";
+  private static final String OBJECT_TYPE_GET = "MasterCardAction";
 
   /**
    * The id of the MastercardAction.
@@ -214,7 +214,7 @@ public class MasterCardAction extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, masterCardActionId), new HashMap<>(), customHeaders);
 
-    return fromJson(MasterCardAction.class, responseRaw, OBJECT_TYPE);
+    return fromJson(MasterCardAction.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<MasterCardAction>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -231,7 +231,7 @@ public class MasterCardAction extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(MasterCardAction.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(MasterCardAction.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

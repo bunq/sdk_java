@@ -31,7 +31,7 @@ public class DraftShareInviteBankQrCodeContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "DraftShareInviteBankQrCodeContent";
+  private static final String OBJECT_TYPE_GET = "DraftShareInviteBankQrCodeContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId, Integer draftShareInviteBankId) {
     return list(apiContext, userId, draftShareInviteBankId, new HashMap<>());

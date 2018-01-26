@@ -30,7 +30,7 @@ public class CashRegisterQrCodeContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CashRegisterQrCodeContent";
+  private static final String OBJECT_TYPE_GET = "CashRegisterQrCodeContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Integer qrCodeId) {
     return list(apiContext, userId, monetaryAccountId, cashRegisterId, qrCodeId, new HashMap<>());

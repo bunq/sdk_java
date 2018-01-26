@@ -43,7 +43,7 @@ public class DraftShareInviteBank extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "DraftShareInviteBank";
+  private static final String OBJECT_TYPE_GET = "DraftShareInviteBank";
 
   /**
    * The user who created the draft share invite.
@@ -119,10 +119,10 @@ public class DraftShareInviteBank extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, draftShareInviteBankId), new HashMap<>(), customHeaders);
 
-    return fromJson(DraftShareInviteBank.class, responseRaw, OBJECT_TYPE);
+    return fromJson(DraftShareInviteBank.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<DraftShareInviteBank> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer draftShareInviteBankId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer draftShareInviteBankId) {
     return update(apiContext, requestMap, userId, draftShareInviteBankId, new HashMap<>());
   }
 
@@ -130,12 +130,12 @@ public class DraftShareInviteBank extends BunqModel {
    * Update a draft share invite. When sending status CANCELLED it is possible to cancel the draft
    * share invite.
    */
-  public static BunqResponse<DraftShareInviteBank> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer draftShareInviteBankId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer draftShareInviteBankId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, draftShareInviteBankId), requestBytes, customHeaders);
 
-    return fromJson(DraftShareInviteBank.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<List<DraftShareInviteBank>> list(ApiContext apiContext, Integer userId) {
@@ -152,7 +152,7 @@ public class DraftShareInviteBank extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(DraftShareInviteBank.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(DraftShareInviteBank.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**
