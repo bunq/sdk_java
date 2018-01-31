@@ -26,10 +26,6 @@ public class Session extends BunqModel {
    */
   private static final String ENDPOINT_URL_DELETE = "session/%s";
 
-  /**
-   * Object type.
-   */
-
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer sessionId) {
     return delete(apiContext, sessionId, new HashMap<>());
   }

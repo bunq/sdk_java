@@ -33,10 +33,6 @@ public class ChatMessageText extends BunqModel {
   public static final String FIELD_TEXT = "text";
 
   /**
-   * Object type.
-   */
-
-  /**
    * The id of the newly created chat message.
    */
   @Expose

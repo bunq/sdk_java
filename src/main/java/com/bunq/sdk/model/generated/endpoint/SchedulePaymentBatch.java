@@ -36,10 +36,6 @@ public class SchedulePaymentBatch extends BunqModel {
   public static final String FIELD_SCHEDULE = "schedule";
 
   /**
-   * Object type.
-   */
-
-  /**
    * The payment details.
    */
   @Expose

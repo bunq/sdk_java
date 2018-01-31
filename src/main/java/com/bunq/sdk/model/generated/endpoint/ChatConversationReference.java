@@ -17,10 +17,6 @@ import java.util.Map;
 public class ChatConversationReference extends BunqModel {
 
   /**
-   * Object type.
-   */
-
-  /**
    * The id of this conversation.
    */
   @Expose

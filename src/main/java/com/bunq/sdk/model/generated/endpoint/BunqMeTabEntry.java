@@ -29,10 +29,6 @@ public class BunqMeTabEntry extends BunqModel {
   public static final String FIELD_REDIRECT_URL = "redirect_url";
 
   /**
-   * Object type.
-   */
-
-  /**
    * The uuid of the bunq.me.
    */
   @Expose

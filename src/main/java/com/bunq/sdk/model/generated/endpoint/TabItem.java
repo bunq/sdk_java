@@ -20,10 +20,6 @@ import java.util.Map;
 public class TabItem extends BunqModel {
 
   /**
-   * Object type.
-   */
-
-  /**
    * The id of the tab item.
    */
   @Expose

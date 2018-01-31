@@ -19,10 +19,6 @@ import java.util.Map;
 public class ChatMessageUser extends BunqModel {
 
   /**
-   * Object type.
-   */
-
-  /**
    * The id of the message.
    */
   @Expose

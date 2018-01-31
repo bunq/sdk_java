@@ -17,10 +17,6 @@ import java.util.Map;
 public class BunqMeFundraiserResult extends BunqModel {
 
   /**
-   * Object type.
-   */
-
-  /**
    * The id of the bunq.me.
    */
   @Expose
