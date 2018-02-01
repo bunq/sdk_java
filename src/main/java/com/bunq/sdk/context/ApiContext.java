@@ -275,8 +275,12 @@ public class ApiContext implements java.io.Serializable {
   /**
    * @return The base URI of the current environment.
    */
-  public URI getBaseUri() {
+  public String getBaseUri() {
     return environmentType.getBaseUri();
+  }
+
+  public String getApiVersoin() {
+    return environmentType.getApiVersion();
   }
 
   /**

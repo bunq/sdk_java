@@ -87,14 +87,11 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     Pagination paginationCountOnly = new Pagination();
     paginationCountOnly.setCount(PAYMENT_LISTING_PAGE_SIZE);
 
-    BunqResponse<List<Payment>> responseLatest =
-        ListPayments(paginationCountOnly.getUrlParamsCountOnly());
+    BunqResponse<List<Payment>> responseLatest = ListPayments(paginationCountOnly.getUrlParamsCountOnly());
     Pagination paginationLatest = responseLatest.getPagination();
-    BunqResponse<List<Payment>> responsePrevious =
-        ListPayments(paginationLatest.getUrlParamsPreviousPage());
+    BunqResponse<List<Payment>> responsePrevious = ListPayments(paginationLatest.getUrlParamsPreviousPage());
     Pagination paginationPrevious = responsePrevious.getPagination();
-    BunqResponse<List<Payment>> responsePreviousNext =
-        ListPayments(paginationPrevious.getUrlParamsNextPage());
+    BunqResponse<List<Payment>> responsePreviousNext =  ListPayments(paginationPrevious.getUrlParamsNextPage());
 
     ArrayList<Payment> allPaymentActual = new ArrayList<>();
     allPaymentActual.addAll(responsePreviousNext.getValue());

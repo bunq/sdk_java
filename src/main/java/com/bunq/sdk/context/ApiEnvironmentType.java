@@ -9,27 +9,29 @@ import java.net.URISyntaxException;
  */
 public enum ApiEnvironmentType {
 
-  PRODUCTION("https://api.bunq.com/v1/"),
-  SANDBOX("https://sandbox.public.api.bunq.com/v1/");
+  PRODUCTION("api.bunq.com", "v1"),
+  SANDBOX("sandbox.public.api.bunq.com", "v1");
 
   /**
    * Base URI of each given environment.
    */
   private String baseUri;
+  private String apiVersion;
 
-  ApiEnvironmentType(String baseUri) {
+  ApiEnvironmentType(String baseUri, String apiVersion) {
     this.baseUri = baseUri;
+    this.apiVersion = apiVersion;
   }
 
   /**
    * @return Base URI of the environment.
    */
-  URI getBaseUri() {
-    try {
-      return new URI(this.baseUri);
-    } catch (URISyntaxException exception) {
-      throw new UncaughtExceptionError(exception);
-    }
+  String getBaseUri() {
+    return this.baseUri;
+  }
+
+  String getApiVersion() {
+    return this.apiVersion;
   }
 
 }
