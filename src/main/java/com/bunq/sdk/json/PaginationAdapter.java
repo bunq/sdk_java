@@ -87,6 +87,8 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
       String responseParam
   ) {
     if (responseJson.has(responseField) && !responseJson.get(responseField).isJsonNull()) {
+      // Uses EXAMPLE_URL to build a proper URL string that the parser understands to extract
+      // the url parameters.
       HttpUrl url = HttpUrl.parse(EXAMPLE_URL + responseJson.get(responseField).getAsString());
 
       for (String parameterName : Objects.requireNonNull(url).queryParameterNames()) {
@@ -101,3 +103,4 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
   }
 
 }
+1

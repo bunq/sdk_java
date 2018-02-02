@@ -439,7 +439,7 @@ public final class SecurityUtils {
     byte[] dataBytesSigned = signDataWithSignature(signature, bytesToSign);
     verifyDataSigned(signature, keyPair.getPublic(), bytesToSign, dataBytesSigned);
 
-    return new String(Base64.getEncoder().encodeToString(dataBytesSigned));
+    return Base64.getEncoder().encodeToString(dataBytesSigned);
   }
 
   private static Signature getSignatureInstance() throws BunqException {
@@ -484,15 +484,22 @@ public final class SecurityUtils {
     }
   }
 
-  public static void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
-                                               Response response, PublicKey keyPublicServer) {
+  public static void validateResponseSignature(
+      int responseCode,
+      byte[] responseBodyBytes,
+      Response response,
+      PublicKey keyPublicServer
+  ) {
     byte[] responseBytes = getResponseBytes(
         responseCode,
         responseBodyBytes,
         response.headers()
     );
     Signature signature = getSignatureInstance();
-    BunqBasicHeader headerServerSignature = new BunqBasicHeader(HEADER_SERVER_SIGNATURE, response.header(HEADER_SERVER_SIGNATURE));
+    BunqBasicHeader headerServerSignature = new BunqBasicHeader(
+        HEADER_SERVER_SIGNATURE,
+        response.header(HEADER_SERVER_SIGNATURE)
+    );
     byte[] serverSignatureBase64Bytes = headerServerSignature.getValue().getBytes();
     byte[] serverSignatureDecoded = Base64.getDecoder().decode(serverSignatureBase64Bytes);
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
@@ -518,7 +525,12 @@ public final class SecurityUtils {
     }
 
     try {
-      outputStream.write(getResponseHeadBytes(responseCode, allResponseHeader.toArray(new BunqBasicHeader[allResponseHeader.size()])));
+      outputStream.write(
+          getResponseHeadBytes(
+              responseCode,
+              allResponseHeader.toArray(new BunqBasicHeader[allResponseHeader.size()])
+          )
+      );
       outputStream.write(responseBodyBytes);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);

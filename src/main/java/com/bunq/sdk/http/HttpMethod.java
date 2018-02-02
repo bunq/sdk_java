@@ -3,7 +3,10 @@ package com.bunq.sdk.http;
 import com.bunq.sdk.exception.BunqException;
 
 public enum HttpMethod {
-  GET("GET"), POST("POST"), PUT("PUT"), DELETE("DELETE");
+  GET("GET"),
+  POST("POST"),
+  PUT("PUT"),
+  DELETE("DELETE");
 
   /**
    * Error constant.

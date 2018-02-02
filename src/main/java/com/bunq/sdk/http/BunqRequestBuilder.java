@@ -13,6 +13,11 @@ import java.util.List;
 
 public class BunqRequestBuilder extends Request.Builder {
 
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_BODY_IS_OF_UNEXPECTED_INSTANCE = "Body is of unexpected instance.";
+
   private HttpUrl url;
   private HttpMethod method;
   private BunqRequestBody body;
@@ -31,20 +36,20 @@ public class BunqRequestBuilder extends Request.Builder {
 
   @Override
   public BunqRequestBuilder method(String method, RequestBody body) {
-    RequestBody bodyToPassTpSuper;
+    RequestBody bodyToPassToSuper;
 
     if (body instanceof BunqRequestBody) {
-      bodyToPassTpSuper = ((BunqRequestBody) body).getRequestBody();
+      bodyToPassToSuper = ((BunqRequestBody) body).getRequestBody();
     } else if (body == null) {
-      bodyToPassTpSuper = null;
+      bodyToPassToSuper = null;
     } else {
-      throw new BunqException("");
+      throw new BunqException(ERROR_BODY_IS_OF_UNEXPECTED_INSTANCE);
     }
 
     this.method = HttpMethod.createFromMethodString(method.toUpperCase());
     this.body = (BunqRequestBody) body;
 
-    return (BunqRequestBuilder) super.method(method, bodyToPassTpSuper);
+    return (BunqRequestBuilder) super.method(method, bodyToPassToSuper);
   }
 
   @Override

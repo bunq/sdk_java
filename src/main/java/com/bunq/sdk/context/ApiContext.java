@@ -278,7 +278,7 @@ public class ApiContext implements java.io.Serializable {
     return environmentType.getBaseUri();
   }
 
-  public String getApiVersoin() {
+  public String getApiVersion() {
     return environmentType.getApiVersion();
   }
 

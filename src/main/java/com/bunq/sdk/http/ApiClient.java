@@ -19,6 +19,7 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -33,6 +34,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 /**
  * API Client encapsulates the basic operations for the API, such as HTTP requests to API, setting
@@ -104,7 +106,7 @@ public class ApiClient {
    * Time out constants.
    */
   private static final int TIMEOUT_SECONDS = 30;
-  public static final int OK_STATUS_CODE = 200;
+  private static final String OK_STATUS_CODE_RANGE = "2[0-9]{2}";
 
   /**
    * Private variables.
@@ -150,11 +152,11 @@ public class ApiClient {
     switch (apiContext.getEnvironmentType()) {
       case PRODUCTION:
         return certificateBuilder.add(
-            apiContext.getBaseUri(), getPinnedKeyStringProduction()
+            apiContext.getBaseUri(), PINNED_KEY_PRODUCTION
         ).build();
       case SANDBOX:
         return certificateBuilder.add(
-            apiContext.getBaseUri(), getPinnedKeyStringSandbox()
+            apiContext.getBaseUri(), PINNED_KEY_SANDBOX
         ).build();
       default:
         throw new BunqException(
@@ -163,25 +165,23 @@ public class ApiClient {
     }
   }
 
-  private String getPinnedKeyStringSandbox() {
-    return PINNED_KEY_SANDBOX;
-  }
-
-  private String getPinnedKeyStringProduction() {
-    return PINNED_KEY_PRODUCTION;
-  }
-
   /**
    * Execute a POST request.
    *
-   * @return The raw response of the POST request.s
+   * @return The raw response of the POST request.
    */
-  public BunqResponseRaw post(String uri, byte[] requestBodyBytes,
-                              Map<String, String> customHeaders) {
+  public BunqResponseRaw post(
+      String uri,
+      byte[] requestBodyBytes,
+      Map<String, String> customHeaders
+  ) {
     BunqRequestBody bunqRequestBody = BunqRequestBody.create(ContentType.JSON.getMediaType(), requestBodyBytes);
 
     if (customHeaders.containsKey(HEADER_CONTENT_TYPE)) {
-      bunqRequestBody = BunqRequestBody.create(MediaType.parse(customHeaders.get(HEADER_CONTENT_TYPE)),requestBodyBytes);
+      bunqRequestBody = BunqRequestBody.create(
+          MediaType.parse(customHeaders.get(HEADER_CONTENT_TYPE)),
+          requestBodyBytes
+      );
     }
 
     try {
@@ -204,7 +204,7 @@ public class ApiClient {
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
         .scheme(SCHEME_HTTPS)
         .host(apiContext.getBaseUri())
-        .addPathSegment(apiContext.getApiVersoin())
+        .addPathSegment(apiContext.getApiVersion())
         .addPathSegments(uri);
 
     SortedMap<String, String> paramsSorted = new TreeMap<>(params);
@@ -216,8 +216,11 @@ public class ApiClient {
     return urlBuilder.build();
   }
 
-  private Response executeRequest(BunqRequestBuilder request,
-                                  Map<String, String> customHeaders, String uri) throws IOException {
+  private Response executeRequest(
+      BunqRequestBuilder request,
+      Map<String, String> customHeaders,
+      String uri
+  ) throws IOException {
     if (!URIS_NOT_REQUIRING_ACTIVE_SESSION.contains(uri)) {
       apiContext.ensureSessionActive();
     }
@@ -286,13 +289,16 @@ public class ApiClient {
   }
 
   private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
-    if (responseCode != OK_STATUS_CODE) {
+    if (Pattern.matches(OK_STATUS_CODE_RANGE, responseId)) {
       throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
   }
 
-  private static ApiException createApiExceptionRequestUnsuccessful(Integer responseCode,
-                                                                    String responseBody, String responseId) {
+  private static ApiException createApiExceptionRequestUnsuccessful(
+      Integer responseCode,
+      String responseBody,
+      String responseId
+  ) {
     List<String> allErrorDescription = new ArrayList<>();
 
     try {
@@ -356,8 +362,11 @@ public class ApiClient {
    *
    * @return The raw response of the GET request.
    */
-  public BunqResponseRaw get(String uri, Map<String, String> params,
-                             Map<String, String> customHeaders) {
+  public BunqResponseRaw get(
+      String uri,
+      Map<String, String> params,
+      Map<String, String> customHeaders
+  ) {
     try {
       BunqRequestBuilder requestBuilder = new BunqRequestBuilder()
           .get()
@@ -375,8 +384,11 @@ public class ApiClient {
    *
    * @return The raw response of the PUT request.
    */
-  public BunqResponseRaw put(String uri, byte[] requestBodyBytes,
-                             Map<String, String> customHeaders) {
+  public BunqResponseRaw put(
+      String uri,
+      byte[] requestBodyBytes,
+      Map<String, String> customHeaders
+  ) {
     try {
       BunqRequestBuilder requestBuilder = new BunqRequestBuilder()
           .put(BunqRequestBody.create(ContentType.JSON.getMediaType(), requestBodyBytes))
