@@ -1,9 +1,5 @@
 package com.bunq.sdk.context;
 
-import com.bunq.sdk.exception.UncaughtExceptionError;
-import java.net.URI;
-import java.net.URISyntaxException;
-
 /**
  * Enum for the API environment types and their URIs.
  */

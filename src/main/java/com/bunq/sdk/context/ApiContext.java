@@ -12,7 +12,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;

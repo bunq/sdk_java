@@ -17,14 +17,12 @@ import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
 import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
