@@ -32,6 +32,7 @@ import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * API Client encapsulates the basic operations for the API, such as HTTP requests to API, setting
@@ -43,6 +44,7 @@ public class ApiClient {
    * Error constants.
    */
   private static final String ERROR_AMI_ENVIRONMENT_NOT_EXPECTED = "ApiEnvironment type \"%s\" is unexpected";
+  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
 
   /**
    * Endpoints not requiring active session for the request to succeed.
@@ -91,13 +93,17 @@ public class ApiClient {
   private static final String REGION_NL_NL = "nl_NL";
   private static final String GEOLOCATION_ZERO = "0 0 0 0 000";
   private static final String SCHEME_HTTPS = "https";
-  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
 
   /**
    * Pinned keys.
    */
   private static final String PINNED_KEY_SANDBOX = "sha256/MU13KqZt0UuH2FWgIWlTZOwpXYyqa1gnBMIzKqHNMRg=";
   private static final String PINNED_KEY_PRODUCTION = "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0=";
+
+  /**
+   * Time out constants.
+   */
+  private static final int TIMEOUT_SECONDS = 30;
 
   /**
    * Private variables.
@@ -117,7 +123,10 @@ public class ApiClient {
     OkHttpClient.Builder clientBuilder;
 
     clientBuilder = new OkHttpClient().newBuilder()
-        .certificatePinner(determineCertificateToPin());
+        .certificatePinner(determineCertificateToPin())
+        .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS);
 
     setProxyIfNeeded(clientBuilder);
 
