@@ -25,15 +25,18 @@ public class BunqRequestBody extends RequestBody {
     return new BunqRequestBody(contentType, content.length, 0, content);
   }
 
-  @Override public MediaType contentType() {
+  @Override
+  public MediaType contentType() {
     return contentType;
   }
 
-  @Override public long contentLength() {
+  @Override
+  public long contentLength() {
     return byteCount;
   }
 
-  @Override public void writeTo(BufferedSink sink) throws IOException {
+  @Override
+  public void writeTo(BufferedSink sink) throws IOException {
     sink.write(content, offset, byteCount);
   }
 

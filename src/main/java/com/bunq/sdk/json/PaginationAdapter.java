@@ -7,6 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import okhttp3.HttpUrl;
+
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -84,7 +85,7 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
       JsonObject responseJson,
       String responseField,
       String responseParam
-  ) throws URISyntaxException {
+  ) {
     if (responseJson.has(responseField) && !responseJson.get(responseField).isJsonNull()) {
       HttpUrl url = HttpUrl.parse(EXAMPLE_URL + responseJson.get(responseField).getAsString());
 
@@ -96,18 +97,6 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
           paginationBody.put(Pagination.PARAM_COUNT, Integer.parseInt(Objects.requireNonNull(url.queryParameter(parameterName))));
         }
       }
-
-//
-//   URI uri = new URI(responseJson.get(responseField).getAsString());
-//      List<NameValuePair> params = URLEncodedUtils.parse(uri, Charset.defaultCharset());
-//
-//      for (NameValuePair param : params) {
-//        if (responseParam.equals(param.getName())) {
-//          paginationBody.put(idField, Integer.parseInt(param.getValue()));
-//        } else if (Pagination.PARAM_COUNT.equals(param.getName()) &&
-//            paginationBody.get(Pagination.PARAM_COUNT) == null) {
-//          paginationBody.put(Pagination.PARAM_COUNT, Integer.parseInt(param.getValue()));
-//        }
     }
   }
 

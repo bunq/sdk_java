@@ -104,6 +104,7 @@ public class ApiClient {
    * Time out constants.
    */
   private static final int TIMEOUT_SECONDS = 30;
+  public static final int OK_STATUS_CODE = 200;
 
   /**
    * Private variables.
@@ -190,8 +191,8 @@ public class ApiClient {
       Response response = executeRequest(requestBuilder, customHeaders, uri);
 
       return createBunqResponseRaw(response);
-    } catch (IOException e) {
-      throw new UncaughtExceptionError(e);
+    } catch (IOException exception) {
+      throw new UncaughtExceptionError(exception);
     }
   }
 
@@ -285,7 +286,7 @@ public class ApiClient {
   }
 
   private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
-    if (responseCode != 200) {
+    if (responseCode != OK_STATUS_CODE) {
       throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
   }
