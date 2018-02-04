@@ -337,8 +337,11 @@ public class ApiClient {
     return errorDescriptions;
   }
 
-  private void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
-                                         Response response) {
+  private void validateResponseSignature(
+      int responseCode,
+      byte[] responseBodyBytes,
+      Response response
+  ) {
     InstallationContext installationContext = apiContext.getInstallationContext();
 
     if (installationContext != null) {
