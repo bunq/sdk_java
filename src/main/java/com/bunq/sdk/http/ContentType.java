@@ -7,10 +7,14 @@ public enum  ContentType {
 
   private String contentType;
 
+  /**
+   */
   ContentType(String contentType) {
     this.contentType = contentType;
   }
 
+  /**
+   */
   public MediaType getMediaType() {
     return MediaType.parse(this.contentType);
   }

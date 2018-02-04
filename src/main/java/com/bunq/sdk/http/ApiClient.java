@@ -136,6 +136,8 @@ public class ApiClient {
     return clientBuilder.build();
   }
 
+  /**
+   */
   private void setProxyIfNeeded(OkHttpClient.Builder httpClientBuilder) {
     String proxyString = apiContext.getProxy();
 
@@ -146,6 +148,8 @@ public class ApiClient {
     }
   }
 
+  /**
+   */
   private CertificatePinner determineCertificateToPin() {
     CertificatePinner.Builder certificateBuilder = new CertificatePinner.Builder();
 
@@ -196,10 +200,14 @@ public class ApiClient {
     }
   }
 
+  /**
+   */
   private HttpUrl determineFullUri(String uri) {
     return determineFullUri(uri, new HashMap<>());
   }
 
+  /**
+   */
   private HttpUrl determineFullUri(String uri, Map<String, String> params) {
     HttpUrl.Builder urlBuilder = new HttpUrl.Builder()
         .scheme(SCHEME_HTTPS)
@@ -216,6 +224,8 @@ public class ApiClient {
     return urlBuilder.build();
   }
 
+  /**
+   */
   private Response executeRequest(
       BunqRequestBuilder request,
       Map<String, String> customHeaders,
@@ -230,12 +240,16 @@ public class ApiClient {
     return httpClient.newCall(request.build()).execute();
   }
 
+  /**
+   */
   private void setHeaders(BunqRequestBuilder requestBuilder, Map<String, String> customHeaders) {
     setDefaultHeaders(requestBuilder);
     setCustomHeaders(requestBuilder, customHeaders);
     setSessionHeaders(requestBuilder);
   }
 
+  /**
+   */
   private void setDefaultHeaders(Request.Builder httpEntity) {
     httpEntity.addHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_NONE);
     httpEntity.addHeader(HEADER_USER_AGENT, getVersion());
@@ -245,12 +259,16 @@ public class ApiClient {
     httpEntity.addHeader(HEADER_GEOLOCATION, GEOLOCATION_ZERO);
   }
 
+  /**
+   */
   private void setCustomHeaders(Request.Builder requestBuilder, Map<String, String> customHeaders) {
     for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
       requestBuilder.addHeader(entry.getKey(), entry.getValue());
     }
   }
 
+  /**
+   */
   private void setSessionHeaders(BunqRequestBuilder requestBuilder) {
     String sessionToken = apiContext.getSessionToken();
 
@@ -260,15 +278,21 @@ public class ApiClient {
     }
   }
 
+  /**
+   */
   private String generateSignature(BunqRequestBuilder requestBuilder) {
     return SecurityUtils.generateSignature(requestBuilder,
         apiContext.getInstallationContext().getKeyPairClient());
   }
 
+  /**
+   */
   private String getVersion() {
     return USER_AGENT_BUNQ;
   }
 
+  /**
+   */
   private BunqResponseRaw createBunqResponseRaw(Response response)
       throws IOException {
     Integer responseCode = response.code();
@@ -280,6 +304,8 @@ public class ApiClient {
     return new BunqResponseRaw(responseBodyBytes, getHeadersMap(response));
   }
 
+  /**
+   */
   private static String getResponseId(Response response) {
     Map<String, String> headerMap = getHeadersMap(response);
 
@@ -288,12 +314,16 @@ public class ApiClient {
     } else return headerMap.getOrDefault(HEADER_RESPONSE_ID_UPPER_CASE, ERROR_COULD_NOT_DETERMINE_RESPONSE_ID);
   }
 
+  /**
+   */
   private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
     if (Pattern.matches(OK_STATUS_CODE_RANGE, responseId)) {
       throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
   }
 
+  /**
+   */
   private static ApiException createApiExceptionRequestUnsuccessful(
       Integer responseCode,
       String responseBody,
@@ -310,6 +340,8 @@ public class ApiClient {
     return ExceptionFactory.createExceptionForResponse(responseCode, allErrorDescription, responseId);
   }
 
+  /**
+   */
   private static List<String> fetchAllErrorDescription(String responseBody)
       throws JsonSyntaxException {
     List<String> errorDescriptions = new ArrayList<>();
@@ -325,6 +357,8 @@ public class ApiClient {
     return errorDescriptions;
   }
 
+  /**
+   */
   private static List<String> fetchAllErrorDescription(JsonObject responseBodyJson) {
     List<String> errorDescriptions = new ArrayList<>();
     JsonArray exceptionBodies = responseBodyJson.getAsJsonObject().getAsJsonArray(FIELD_ERROR);
@@ -337,6 +371,8 @@ public class ApiClient {
     return errorDescriptions;
   }
 
+  /**
+   */
   private void validateResponseSignature(
       int responseCode,
       byte[] responseBodyBytes,
@@ -350,6 +386,8 @@ public class ApiClient {
     }
   }
 
+  /**
+   */
   private static Map<String, String> getHeadersMap(Response response) {
     HashMap<String, String> headersMap = new HashMap<>();
 
