@@ -316,8 +316,8 @@ public class ApiClient {
 
   /**
    */
-  private static void assertResponseSuccess(int responseCode, byte[] responseBodyBytes, String responseId) {
-    if (Pattern.matches(OK_STATUS_CODE_RANGE, responseId)) {
+  private static void assertResponseSuccess(Integer responseCode, byte[] responseBodyBytes, String responseId) {
+    if (!Pattern.matches(OK_STATUS_CODE_RANGE, responseCode.toString())) {
       throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
   }

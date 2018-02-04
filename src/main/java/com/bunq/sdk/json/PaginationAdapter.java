@@ -103,4 +103,3 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
   }
 
 }
-1
