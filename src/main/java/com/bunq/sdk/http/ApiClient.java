@@ -109,6 +109,11 @@ public class ApiClient {
   private static final String OK_STATUS_CODE_RANGE = "2[0-9]{2}";
 
   /**
+   * Response code to use in case the response code is null due to unforeseen circumstances.
+   */
+  private static final int DUMMY_RESPONSE_CODE = 0;
+
+  /**
    * Private variables.
    */
   private OkHttpClient httpClient;
@@ -317,6 +322,10 @@ public class ApiClient {
   /**
    */
   private static void assertResponseSuccess(Integer responseCode, byte[] responseBodyBytes, String responseId) {
+    if (responseCode == null) {
+      responseCode = DUMMY_RESPONSE_CODE;
+    }
+
     if (!Pattern.matches(OK_STATUS_CODE_RANGE, responseCode.toString())) {
       throw createApiExceptionRequestUnsuccessful(responseCode, new String(responseBodyBytes), responseId);
     }
