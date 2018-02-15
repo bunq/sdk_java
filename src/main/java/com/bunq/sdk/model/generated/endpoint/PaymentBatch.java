@@ -38,7 +38,7 @@ public class PaymentBatch extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "PaymentBatch";
+  private static final String OBJECT_TYPE_GET = "PaymentBatch";
 
   /**
    * The list of mutations that were made.
@@ -89,7 +89,7 @@ public class PaymentBatch extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, paymentBatchId), new HashMap<>(), customHeaders);
 
-    return fromJson(PaymentBatch.class, responseRaw, OBJECT_TYPE);
+    return fromJson(PaymentBatch.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<PaymentBatch>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -107,7 +107,7 @@ public class PaymentBatch extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(PaymentBatch.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(PaymentBatch.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -40,7 +40,7 @@ public class SchedulePayment extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ScheduledPayment";
+  private static final String OBJECT_TYPE_GET = "ScheduledPayment";
 
   /**
    * The payment details.
@@ -93,7 +93,7 @@ public class SchedulePayment extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, schedulePaymentId), new HashMap<>(), customHeaders);
 
-    return fromJson(SchedulePayment.class, responseRaw, OBJECT_TYPE);
+    return fromJson(SchedulePayment.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<SchedulePayment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -110,21 +110,21 @@ public class SchedulePayment extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(SchedulePayment.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(SchedulePayment.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<SchedulePayment> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, schedulePaymentId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<SchedulePayment> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, schedulePaymentId), requestBytes, customHeaders);
 
-    return fromJson(SchedulePayment.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   /**

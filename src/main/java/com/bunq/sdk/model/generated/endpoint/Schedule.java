@@ -39,7 +39,7 @@ public class Schedule extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Schedule";
+  private static final String OBJECT_TYPE_GET = "Schedule";
 
   /**
    * The schedule start time (UTC).
@@ -95,7 +95,7 @@ public class Schedule extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, scheduleId), new HashMap<>(), customHeaders);
 
-    return fromJson(Schedule.class, responseRaw, OBJECT_TYPE);
+    return fromJson(Schedule.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<Schedule>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -116,7 +116,7 @@ public class Schedule extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(Schedule.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(Schedule.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

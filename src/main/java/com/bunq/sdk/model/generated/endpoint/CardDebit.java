@@ -48,7 +48,7 @@ public class CardDebit extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardDebit";
+  private static final String OBJECT_TYPE_POST = "CardDebit";
 
   /**
    * The id of the card.
@@ -204,7 +204,7 @@ public class CardDebit extends BunqModel {
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE_POST);
   }
 
   /**

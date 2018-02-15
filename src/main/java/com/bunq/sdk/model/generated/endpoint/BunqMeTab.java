@@ -40,7 +40,7 @@ public class BunqMeTab extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "BunqMeTab";
+  private static final String OBJECT_TYPE_GET = "BunqMeTab";
 
   /**
    * The id of the created bunq.me.
@@ -119,18 +119,18 @@ public class BunqMeTab extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<BunqMeTab> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId) {
     return update(apiContext, requestMap, userId, monetaryAccountId, bunqMeTabId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<BunqMeTab> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, bunqMeTabId), requestBytes, customHeaders);
 
-    return fromJson(BunqMeTab.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<List<BunqMeTab>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -147,7 +147,7 @@ public class BunqMeTab extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(BunqMeTab.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(BunqMeTab.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<BunqMeTab> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId) {
@@ -160,7 +160,7 @@ public class BunqMeTab extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, bunqMeTabId), new HashMap<>(), customHeaders);
 
-    return fromJson(BunqMeTab.class, responseRaw, OBJECT_TYPE);
+    return fromJson(BunqMeTab.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

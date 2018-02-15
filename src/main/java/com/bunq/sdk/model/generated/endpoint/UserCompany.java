@@ -60,7 +60,7 @@ public class UserCompany extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "UserCompany";
+  private static final String OBJECT_TYPE_GET = "UserCompany";
 
   /**
    * The id of the modified company.
@@ -280,7 +280,7 @@ public class UserCompany extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userCompanyId), new HashMap<>(), customHeaders);
 
-    return fromJson(UserCompany.class, responseRaw, OBJECT_TYPE);
+    return fromJson(UserCompany.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userCompanyId) {

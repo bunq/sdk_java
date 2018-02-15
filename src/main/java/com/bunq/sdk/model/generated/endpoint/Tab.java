@@ -41,7 +41,7 @@ public class Tab extends BunqModel implements AnchorObjectInterface {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Tab";
+  private static final String OBJECT_TYPE_GET = "Tab";
 
   /**
    */

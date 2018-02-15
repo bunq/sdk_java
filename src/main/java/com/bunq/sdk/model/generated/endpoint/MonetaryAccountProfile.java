@@ -26,11 +26,6 @@ public class MonetaryAccountProfile extends BunqModel {
   public static final String FIELD_PROFILE_DRAIN = "profile_drain";
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "MonetaryAccountProfile";
-
-  /**
    * The profile settings for triggering the fill of a monetary account.
    */
   @Expose

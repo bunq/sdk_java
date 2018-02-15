@@ -32,7 +32,7 @@ public class CardGeneratedCvc2 extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardGeneratedCvc2";
+  private static final String OBJECT_TYPE_GET = "CardGeneratedCvc2";
 
   /**
    * The id of the cvc code.
@@ -76,20 +76,20 @@ public class CardGeneratedCvc2 extends BunqModel {
   @SerializedName("expiry_time")
   private String expiryTime;
 
-  public static BunqResponse<CardGeneratedCvc2> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
     return create(apiContext, requestMap, userId, cardId, new HashMap<>());
   }
 
   /**
    * Generate a new CVC2 code for a card.
    */
-  public static BunqResponse<CardGeneratedCvc2> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, cardId), requestBytes, customHeaders);
 
-    return fromJson(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<CardGeneratedCvc2> get(ApiContext apiContext, Integer userId, Integer cardId, Integer cardGeneratedCvc2Id) {
@@ -103,7 +103,7 @@ public class CardGeneratedCvc2 extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, cardId, cardGeneratedCvc2Id), new HashMap<>(), customHeaders);
 
-    return fromJson(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<CardGeneratedCvc2>> list(ApiContext apiContext, Integer userId, Integer cardId) {
@@ -121,7 +121,7 @@ public class CardGeneratedCvc2 extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, cardId), params, customHeaders);
 
-    return fromJsonList(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

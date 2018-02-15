@@ -51,7 +51,7 @@ public class CashRegister extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CashRegister";
+  private static final String OBJECT_TYPE_GET = "CashRegister";
 
   /**
    * The id of the created CashRegister.
@@ -146,7 +146,7 @@ public class CashRegister extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId), new HashMap<>(), customHeaders);
 
-    return fromJson(CashRegister.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CashRegister.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
@@ -181,7 +181,7 @@ public class CashRegister extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(CashRegister.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CashRegister.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -18,16 +18,18 @@ import java.util.Map;
 public class BunqMeTabResultInquiry extends BunqModel {
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "BunqMeTabResultInquiry";
-
-  /**
    * The payment made for the Tab.
    */
   @Expose
   @SerializedName("payment")
   private Payment payment;
+
+  /**
+   * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
+   */
+  @Expose
+  @SerializedName("bunq_me_tab_id")
+  private Integer bunqMeTabId;
 
   /**
    * The payment made for the Tab.
@@ -41,9 +43,24 @@ public class BunqMeTabResultInquiry extends BunqModel {
   }
 
   /**
+   * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
+   */
+  public Integer getBunqMeTabId() {
+    return this.bunqMeTabId;
+  }
+
+  public void setBunqMeTabId(Integer bunqMeTabId) {
+    this.bunqMeTabId = bunqMeTabId;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.payment != null) {
+      return false;
+    }
+
+    if (this.bunqMeTabId != null) {
       return false;
     }
 

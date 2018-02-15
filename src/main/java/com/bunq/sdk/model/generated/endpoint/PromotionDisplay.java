@@ -36,7 +36,7 @@ public class PromotionDisplay extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "PromotionDisplay";
+  private static final String OBJECT_TYPE_GET = "PromotionDisplay";
 
   /**
    * The id of the promotion.
@@ -76,7 +76,7 @@ public class PromotionDisplay extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, promotionDisplayId), new HashMap<>(), customHeaders);
 
-    return fromJson(PromotionDisplay.class, responseRaw, OBJECT_TYPE);
+    return fromJson(PromotionDisplay.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer promotionDisplayId) {

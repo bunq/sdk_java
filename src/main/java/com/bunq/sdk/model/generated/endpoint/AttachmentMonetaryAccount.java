@@ -29,11 +29,6 @@ public class AttachmentMonetaryAccount extends BunqModel {
   private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/attachment";
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "AttachmentMonetaryAccount";
-
-  /**
    * The attachment.
    */
   @Expose

@@ -30,7 +30,7 @@ public class AttachmentPublicContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "AttachmentPublicContent";
+  private static final String OBJECT_TYPE_GET = "AttachmentPublicContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, String attachmentPublicUuid) {
     return list(apiContext, attachmentPublicUuid, new HashMap<>());

@@ -32,7 +32,8 @@ public class AttachmentPublic extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "AttachmentPublic";
+  private static final String OBJECT_TYPE_POST = "Uuid";
+  private static final String OBJECT_TYPE_GET = "AttachmentPublic";
 
   /**
    * The UUID of the attachment.
@@ -91,7 +92,7 @@ public class AttachmentPublic extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), new HashMap<>(), customHeaders);
 
-    return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE);
+    return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

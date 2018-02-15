@@ -59,7 +59,8 @@ public class RequestInquiry extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "RequestInquiry";
+  private static final String OBJECT_TYPE_PUT = "RequestInquiry";
+  private static final String OBJECT_TYPE_GET = "RequestInquiry";
 
   /**
    * The id of the created RequestInquiry.
@@ -264,7 +265,7 @@ public class RequestInquiry extends BunqModel {
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, requestInquiryId), requestBytes, customHeaders);
 
-    return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE);
+    return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
   public static BunqResponse<List<RequestInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
@@ -282,7 +283,7 @@ public class RequestInquiry extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(RequestInquiry.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(RequestInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<RequestInquiry> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer requestInquiryId) {
@@ -296,7 +297,7 @@ public class RequestInquiry extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, requestInquiryId), new HashMap<>(), customHeaders);
 
-    return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE);
+    return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

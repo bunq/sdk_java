@@ -34,7 +34,7 @@ public class InvoiceByUser extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Invoice";
+  private static final String OBJECT_TYPE_GET = "Invoice";
 
   /**
    * The id of the invoice object.
@@ -162,7 +162,7 @@ public class InvoiceByUser extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(InvoiceByUser.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<InvoiceByUser> get(ApiContext apiContext, Integer userId, Integer invoiceByUserId) {
@@ -175,7 +175,7 @@ public class InvoiceByUser extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, invoiceByUserId), new HashMap<>(), customHeaders);
 
-    return fromJson(InvoiceByUser.class, responseRaw, OBJECT_TYPE);
+    return fromJson(InvoiceByUser.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

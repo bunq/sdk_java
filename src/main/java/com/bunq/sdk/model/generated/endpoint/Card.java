@@ -50,7 +50,7 @@ public class Card extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardDebit";
+  private static final String OBJECT_TYPE_GET = "CardDebit";
 
   /**
    * The id of the card.
@@ -203,7 +203,7 @@ public class Card extends BunqModel {
   @SerializedName("country")
   private String country;
 
-  public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
     return update(apiContext, requestMap, userId, cardId, new HashMap<>());
   }
 
@@ -212,13 +212,13 @@ public class Card extends BunqModel {
    * the monetary account connected to the card. When the card has been received, it can be also
    * activated through this endpoint.
    */
-  public static BunqResponse<Card> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, cardId), requestBytes, customHeaders);
 
-    return fromJson(Card.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<Card> get(ApiContext apiContext, Integer userId, Integer cardId) {
@@ -232,7 +232,7 @@ public class Card extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, cardId), new HashMap<>(), customHeaders);
 
-    return fromJson(Card.class, responseRaw, OBJECT_TYPE);
+    return fromJson(Card.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId) {
@@ -250,7 +250,7 @@ public class Card extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(Card.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(Card.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

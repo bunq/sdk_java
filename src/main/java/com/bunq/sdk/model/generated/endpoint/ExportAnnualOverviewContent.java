@@ -30,7 +30,7 @@ public class ExportAnnualOverviewContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ExportAnnualOverviewContent";
+  private static final String OBJECT_TYPE_GET = "ExportAnnualOverviewContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId, Integer exportAnnualOverviewId) {
     return list(apiContext, userId, exportAnnualOverviewId, new HashMap<>());

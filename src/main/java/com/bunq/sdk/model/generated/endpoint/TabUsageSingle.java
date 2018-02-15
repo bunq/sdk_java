@@ -61,7 +61,9 @@ public class TabUsageSingle extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabUsageSingle";
+  private static final String OBJECT_TYPE_POST = "Uuid";
+  private static final String OBJECT_TYPE_PUT = "Uuid";
+  private static final String OBJECT_TYPE_GET = "TabUsageSingle";
 
   /**
    * The uuid of the created TabUsageSingle.
@@ -236,7 +238,7 @@ public class TabUsageSingle extends BunqModel {
   }
 
   /**
-   * Cancel a specific TabUsageSingle. This request returns an empty response.
+   * Cancel a specific TabUsageSingle.
    */
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageSingleUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
@@ -256,7 +258,7 @@ public class TabUsageSingle extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUsageSingleUuid), new HashMap<>(), customHeaders);
 
-    return fromJson(TabUsageSingle.class, responseRaw, OBJECT_TYPE);
+    return fromJson(TabUsageSingle.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<TabUsageSingle>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
@@ -274,7 +276,7 @@ public class TabUsageSingle extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId), params, customHeaders);
 
-    return fromJsonList(TabUsageSingle.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(TabUsageSingle.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

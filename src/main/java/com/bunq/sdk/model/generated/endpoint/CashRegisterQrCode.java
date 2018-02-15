@@ -39,7 +39,7 @@ public class CashRegisterQrCode extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TokenQrCashRegister";
+  private static final String OBJECT_TYPE_GET = "TokenQrCashRegister";
 
   /**
    * The id of the created QR code. Use this id to get the RAW content of the QR code with:
@@ -130,7 +130,7 @@ public class CashRegisterQrCode extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, cashRegisterQrCodeId), new HashMap<>(), customHeaders);
 
-    return fromJson(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<CashRegisterQrCode>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
@@ -148,7 +148,7 @@ public class CashRegisterQrCode extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId), params, customHeaders);
 
-    return fromJsonList(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

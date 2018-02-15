@@ -33,11 +33,6 @@ public class ChatMessageAttachment extends BunqModel {
   public static final String FIELD_ATTACHMENT = "attachment";
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "Id";
-
-  /**
    * The id of the newly created chat message.
    */
   @Expose

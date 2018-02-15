@@ -51,7 +51,7 @@ public class TabItemShop extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabItem";
+  private static final String OBJECT_TYPE_GET = "TabItem";
 
   /**
    * The id of the created TabItem.
@@ -137,7 +137,7 @@ public class TabItemShop extends BunqModel {
   }
 
   /**
-   * Delete a specific TabItem from a Tab. This request returns an empty response.
+   * Delete a specific TabItem from a Tab.
    */
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUuid, Integer tabItemShopId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
@@ -161,7 +161,7 @@ public class TabItemShop extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId, tabUuid), params, customHeaders);
 
-    return fromJsonList(TabItemShop.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(TabItemShop.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<TabItemShop> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUuid, Integer tabItemShopId) {
@@ -175,7 +175,7 @@ public class TabItemShop extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUuid, tabItemShopId), new HashMap<>(), customHeaders);
 
-    return fromJson(TabItemShop.class, responseRaw, OBJECT_TYPE);
+    return fromJson(TabItemShop.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

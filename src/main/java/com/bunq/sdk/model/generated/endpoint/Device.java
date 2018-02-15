@@ -38,7 +38,7 @@ public class Device extends BunqModel implements AnchorObjectInterface {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Device";
+  private static final String OBJECT_TYPE_GET = "Device";
 
   /**
    */

@@ -45,7 +45,7 @@ public class DraftPayment extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "DraftPayment";
+  private static final String OBJECT_TYPE_GET = "DraftPayment";
 
   /**
    * The id of the created DrafPayment.
@@ -149,7 +149,7 @@ public class DraftPayment extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
 
-    return fromJsonList(DraftPayment.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(DraftPayment.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<DraftPayment> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer draftPaymentId) {
@@ -163,7 +163,7 @@ public class DraftPayment extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, draftPaymentId), new HashMap<>(), customHeaders);
 
-    return fromJson(DraftPayment.class, responseRaw, OBJECT_TYPE);
+    return fromJson(DraftPayment.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

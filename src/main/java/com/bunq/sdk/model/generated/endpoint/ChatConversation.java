@@ -37,7 +37,7 @@ public class ChatConversation extends BunqModel implements AnchorObjectInterface
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ChatConversation";
+  private static final String OBJECT_TYPE_GET = "ChatConversation";
 
   /**
    */

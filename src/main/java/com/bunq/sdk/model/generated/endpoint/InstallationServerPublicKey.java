@@ -30,7 +30,7 @@ public class InstallationServerPublicKey extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "ServerPublicKey";
+  private static final String OBJECT_TYPE_GET = "ServerPublicKey";
 
   /**
    * The server's public key for this Installation.
@@ -54,7 +54,7 @@ public class InstallationServerPublicKey extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
 
-    return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

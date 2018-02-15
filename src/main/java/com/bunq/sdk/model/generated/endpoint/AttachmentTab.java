@@ -33,7 +33,7 @@ public class AttachmentTab extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "AttachmentTab";
+  private static final String OBJECT_TYPE_GET = "AttachmentTab";
 
   /**
    * The id of the attachment.
@@ -93,7 +93,7 @@ public class AttachmentTab extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, attachmentTabId), new HashMap<>(), customHeaders);
 
-    return fromJson(AttachmentTab.class, responseRaw, OBJECT_TYPE);
+    return fromJson(AttachmentTab.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

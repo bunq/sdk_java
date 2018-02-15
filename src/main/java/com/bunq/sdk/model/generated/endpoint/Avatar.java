@@ -40,7 +40,8 @@ public class Avatar extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Avatar";
+  private static final String OBJECT_TYPE_POST = "Uuid";
+  private static final String OBJECT_TYPE_GET = "Avatar";
 
   /**
    * The UUID of the created avatar.
@@ -80,7 +81,7 @@ public class Avatar extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, avatarUuid), new HashMap<>(), customHeaders);
 
-    return fromJson(Avatar.class, responseRaw, OBJECT_TYPE);
+    return fromJson(Avatar.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

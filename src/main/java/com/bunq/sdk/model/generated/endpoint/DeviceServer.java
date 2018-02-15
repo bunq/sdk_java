@@ -39,7 +39,7 @@ public class DeviceServer extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "DeviceServer";
+  private static final String OBJECT_TYPE_GET = "DeviceServer";
 
   /**
    * The id of the DeviceServer as created on the server.
@@ -115,7 +115,7 @@ public class DeviceServer extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceServerId), new HashMap<>(), customHeaders);
 
-    return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE);
+    return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext) {
@@ -133,7 +133,7 @@ public class DeviceServer extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
-    return fromJsonList(DeviceServer.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(DeviceServer.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -32,11 +32,6 @@ public class TabItemShopBatch extends BunqModel {
   public static final String FIELD_TAB_ITEMS = "tab_items";
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "TabItemShopBatch";
-
-  /**
    * The list of tab items in the batch.
    */
   @Expose

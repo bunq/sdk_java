@@ -38,11 +38,6 @@ public class CardReplace extends BunqModel {
   public static final String FIELD_SECOND_LINE = "second_line";
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "CardReplace";
-
-  /**
    * The id of the new card.
    */
   @Expose

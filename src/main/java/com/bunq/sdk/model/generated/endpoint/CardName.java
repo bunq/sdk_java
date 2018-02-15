@@ -31,7 +31,7 @@ public class CardName extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardUserNameArray";
+  private static final String OBJECT_TYPE_GET = "CardUserNameArray";
 
   /**
    * All possible variations (of suitable length) of user's legal name for the debit card.
@@ -55,7 +55,7 @@ public class CardName extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(CardName.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CardName.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

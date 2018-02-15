@@ -30,7 +30,7 @@ public class AttachmentConversationContent extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "AttachmentConversationContent";
+  private static final String OBJECT_TYPE_GET = "AttachmentConversationContent";
 
   public static BunqResponse<byte[]> list(ApiContext apiContext, Integer userId, Integer chatConversationId, Integer attachmentId) {
     return list(apiContext, userId, chatConversationId, attachmentId, new HashMap<>());

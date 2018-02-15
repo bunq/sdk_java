@@ -29,11 +29,6 @@ public class ShareInviteBankAmountUsed extends BunqModel {
    */
   private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s/amount-used/%s";
 
-  /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "ShareInviteBankAmountUsed";
-
   public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId) {
     return delete(apiContext, userId, monetaryAccountId, shareInviteBankInquiryId, shareInviteBankAmountUsedId, new HashMap<>());
   }

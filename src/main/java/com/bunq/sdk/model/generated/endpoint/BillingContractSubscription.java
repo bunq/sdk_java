@@ -35,7 +35,7 @@ public class BillingContractSubscription extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "BillingContractSubscription";
+  private static final String OBJECT_TYPE_GET = "BillingContractSubscription";
 
   /**
    * The id of the billing contract.
@@ -87,18 +87,18 @@ public class BillingContractSubscription extends BunqModel {
   @SerializedName("subscription_type")
   private String subscriptionType;
 
-  public static BunqResponse<BillingContractSubscription> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
     return create(apiContext, requestMap, userId, new HashMap<>());
   }
 
   /**
    */
-  public static BunqResponse<BillingContractSubscription> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
 
-    return fromJson(BillingContractSubscription.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
   public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId) {
@@ -116,7 +116,7 @@ public class BillingContractSubscription extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
 
-    return fromJsonList(BillingContractSubscription.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(BillingContractSubscription.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**

@@ -67,7 +67,7 @@ public class UserLight extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "UserPerson";
+  private static final String OBJECT_TYPE_GET = "UserPerson";
 
   /**
    * The id of the user.
@@ -308,7 +308,7 @@ public class UserLight extends BunqModel {
     ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userLightId), new HashMap<>(), customHeaders);
 
-    return fromJson(UserLight.class, responseRaw, OBJECT_TYPE);
+    return fromJson(UserLight.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   /**
