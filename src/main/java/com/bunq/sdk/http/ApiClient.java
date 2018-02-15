@@ -127,6 +127,8 @@ public class ApiClient {
     this.httpClient = buildOkHttpClient();
   }
 
+  /**
+   */
   private OkHttpClient buildOkHttpClient() {
     OkHttpClient.Builder clientBuilder;
 
