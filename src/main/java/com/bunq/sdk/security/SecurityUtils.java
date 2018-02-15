@@ -4,19 +4,13 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqBasicHeader;
+import com.bunq.sdk.http.BunqRequestBuilder;
+import com.bunq.sdk.http.HttpMethod;
+import okhttp3.Headers;
+import okhttp3.Response;
 import okio.BufferedSink;
 import okio.Okio;
-import org.apache.commons.codec.binary.Base64;
-import org.apache.http.Header;
-import org.apache.http.HttpEntityEnclosingRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.util.EntityUtils;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -39,7 +33,10 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -192,7 +189,7 @@ public final class SecurityUtils {
    */
   private static String getPrivateKeyFormattedString(PrivateKey privateKey) {
     byte[] encodedPrivateKey = privateKey.getEncoded();
-    byte[] base64 = Base64.encodeBase64(encodedPrivateKey);
+    byte[] base64 = Base64.getEncoder().encode(encodedPrivateKey);
 
     return String.format(PRIVATE_KEY_FORMAT, new String(base64));
   }
@@ -233,7 +230,7 @@ public final class SecurityUtils {
     publicKeyString = publicKeyString.replace(PUBLIC_KEY_END, STRING_EMPTY);
     publicKeyString = publicKeyString.replace(NEWLINE, STRING_EMPTY);
 
-    return Base64.decodeBase64(publicKeyString);
+    return Base64.getDecoder().decode(publicKeyString);
   }
 
   /**
@@ -260,7 +257,7 @@ public final class SecurityUtils {
     privateKeyString = privateKeyString.replace(PRIVATE_KEY_END, STRING_EMPTY);
     privateKeyString = privateKeyString.replace(NEWLINE, STRING_EMPTY);
 
-    return Base64.decodeBase64(privateKeyString);
+    return Base64.getDecoder().decode(privateKeyString);
   }
 
   public static String getPublicKeyFormattedString(KeyPair keyPair) {
@@ -272,7 +269,7 @@ public final class SecurityUtils {
    */
   public static String getPublicKeyFormattedString(PublicKey publicKey) {
     byte[] encodedPublicKey = publicKey.getEncoded();
-    byte[] base64 = Base64.encodeBase64(encodedPublicKey);
+    byte[] base64 = Base64.getEncoder().encode(encodedPublicKey);
 
     return String.format(PUBLIC_KEY_FORMAT, new String(base64));
   }
@@ -317,7 +314,7 @@ public final class SecurityUtils {
       Cipher cipher = Cipher.getInstance(KEY_CIPHER_ALGORITHM);
       cipher.init(Cipher.ENCRYPT_MODE, apiContext.getInstallationContext().getPublicKeyServer());
       byte[] keyEncrypted = cipher.doFinal(key.getEncoded());
-      String keyEncryptedEncoded = Base64.encodeBase64String(keyEncrypted);
+      String keyEncryptedEncoded = Base64.getEncoder().encodeToString(keyEncrypted);
       customHeaders.put(HEADER_CLIENT_ENCRYPTION_KEY, keyEncryptedEncoded);
     } catch (GeneralSecurityException exception) {
       throw new BunqException(exception.getMessage());
@@ -326,7 +323,7 @@ public final class SecurityUtils {
 
   private static void addHeaderClientEncryptionIv(byte[] initializationVector, Map<String,
       String> customHeaders) {
-    String initializationVectorEncoded = Base64.encodeBase64String(initializationVector);
+    String initializationVectorEncoded = Base64.getEncoder().encodeToString(initializationVector);
 
     customHeaders.put(HEADER_CLIENT_ENCRYPTION_IV, initializationVectorEncoded);
   }
@@ -360,25 +357,25 @@ public final class SecurityUtils {
       bufferedSink.flush();
       bufferedSink.close();
       byte[] hmac = mac.doFinal();
-      String hmacEncoded = Base64.encodeBase64String(hmac);
+      String hmacEncoded = Base64.getEncoder().encodeToString(hmac);
       customHeaders.put(HEADER_CLIENT_ENCRYPTION_HMAC, hmacEncoded);
     } catch (GeneralSecurityException | IOException exception) {
       throw new BunqException(exception.getMessage());
     }
   }
 
-  public static String generateSignature(HttpUriRequest httpEntity, KeyPair keyPairClient) {
-    byte[] requestBytes = getRequestBytes(httpEntity);
+  public static String generateSignature(BunqRequestBuilder requestBuilder, KeyPair keyPairClient) {
+    byte[] requestBytes = getRequestBytes(requestBuilder);
 
     return SecurityUtils.signBase64(requestBytes, keyPairClient);
   }
 
-  private static byte[] getRequestBytes(HttpUriRequest httpEntity) {
+  private static byte[] getRequestBytes(BunqRequestBuilder requestBuilder) {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
     try {
-      outputStream.write(getRequestHeadBytes(httpEntity));
-      outputStream.write(getEntityBodyBytes(httpEntity));
+      outputStream.write(getRequestHeadBytes(requestBuilder));
+      outputStream.write(getEntityBodyBytes(requestBuilder));
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
     }
@@ -386,34 +383,36 @@ public final class SecurityUtils {
     return outputStream.toByteArray();
   }
 
-  private static byte[] getRequestHeadBytes(HttpUriRequest httpEntity) {
-    String requestHeadString = generateMethodAndEndpointString(httpEntity) + NEWLINE +
-        generateRequestHeadersSortedString(httpEntity) + NEWLINE + NEWLINE;
+  private static byte[] getRequestHeadBytes(BunqRequestBuilder requestBuilder) {
+    String requestHeadString = generateMethodAndEndpointString(requestBuilder) + NEWLINE +
+        generateRequestHeadersSortedString(requestBuilder) + NEWLINE + NEWLINE;
 
     return requestHeadString.getBytes();
   }
 
-  private static String generateMethodAndEndpointString(HttpUriRequest httpEntity) {
-    String uriString = httpEntity.getURI().toString();
-    String method = httpEntity.getMethod();
-    String path = httpEntity.getURI().getPath();
+  private static String generateMethodAndEndpointString(BunqRequestBuilder requestBuilder) {
+    String uriString = requestBuilder.getUrl().toString();
+    String method = requestBuilder.getMethod().getMethodSrring();
+    String path = requestBuilder.getUrl().encodedPath();
     String pathWithParameters = uriString.substring(uriString.indexOf(path));
 
     return method + DELIMITER_METHOD_PATH + pathWithParameters;
   }
 
-  private static byte[] getEntityBodyBytes(HttpUriRequest httpEntity) throws IOException {
-    if (httpEntity instanceof HttpGet || httpEntity instanceof HttpDelete) {
+  private static byte[] getEntityBodyBytes(BunqRequestBuilder requestBuilder) throws IOException {
+    HttpMethod method = requestBuilder.getMethod();
+
+    if (method.equals(HttpMethod.GET) || method.equals(HttpMethod.DELETE)) {
       return new byte[ARRAY_LENGTH_EMPTY];
-    } else if (httpEntity instanceof HttpPost || httpEntity instanceof HttpPut) {
-      return EntityUtils.toByteArray(((HttpEntityEnclosingRequest) httpEntity).getEntity());
+    } else if (method.equals(HttpMethod.POST) || method.equals(HttpMethod.PUT)) {
+      return requestBuilder.getBody().getContent();
     } else {
       throw new IllegalStateException(ERROR_CAN_NOT_GET_ENTITY_BODY_BYTES);
     }
   }
 
-  private static String generateRequestHeadersSortedString(HttpUriRequest httpEntity) {
-    return Arrays.stream(httpEntity.getAllHeaders())
+  private static String generateRequestHeadersSortedString(BunqRequestBuilder bunqRequestBuilder) {
+    return Arrays.stream(bunqRequestBuilder.getAllHeaderAsArray())
         .filter(
             header ->
                 header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) ||
@@ -440,7 +439,7 @@ public final class SecurityUtils {
     byte[] dataBytesSigned = signDataWithSignature(signature, bytesToSign);
     verifyDataSigned(signature, keyPair.getPublic(), bytesToSign, dataBytesSigned);
 
-    return new String(Base64.encodeBase64(dataBytesSigned));
+    return Base64.getEncoder().encodeToString(dataBytesSigned);
   }
 
   private static Signature getSignatureInstance() throws BunqException {
@@ -485,34 +484,53 @@ public final class SecurityUtils {
     }
   }
 
-  public static void validateResponseSignature(int responseCode, byte[] responseBodyBytes,
-      HttpResponse httpEntity, PublicKey keyPublicServer) {
-    byte[] responseBytes = getResponseBytes(responseCode, responseBodyBytes,
-        httpEntity.getAllHeaders());
+  public static void validateResponseSignature(
+      int responseCode,
+      byte[] responseBodyBytes,
+      Response response,
+      PublicKey keyPublicServer
+  ) {
+    byte[] responseBytes = getResponseBytes(
+        responseCode,
+        responseBodyBytes,
+        response.headers()
+    );
     Signature signature = getSignatureInstance();
-    Header headerServerSignature = httpEntity.getFirstHeader(HEADER_SERVER_SIGNATURE);
+    BunqBasicHeader headerServerSignature = new BunqBasicHeader(
+        HEADER_SERVER_SIGNATURE,
+        response.header(HEADER_SERVER_SIGNATURE)
+    );
     byte[] serverSignatureBase64Bytes = headerServerSignature.getValue().getBytes();
-    byte[] serverSignatureDecoded = Base64.decodeBase64(serverSignatureBase64Bytes);
+    byte[] serverSignatureDecoded = Base64.getDecoder().decode(serverSignatureBase64Bytes);
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
   }
 
-  private static byte[] getResponseBytes(int responseCode, byte[] responseBodyBytes,
-      Header[] responseHeaders) {
+  private static byte[] getResponseBytes(
+      int responseCode,
+      byte[] responseBodyBytes,
+      Headers allHeader
+  ) {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    List<BunqBasicHeader> allResponseHeader = new ArrayList<>();
 
-    for (int i = INDEX_FIRST; i < responseHeaders.length; i++) {
-      if (responseHeaders[i].getName().equals(HEADER_SERVER_SIGNATURE)) {
+    for (int i = INDEX_FIRST; i < allHeader.names().size(); i++) {
+      if (allHeader.name(i).equals(HEADER_SERVER_SIGNATURE)) {
         continue;
       }
 
-      responseHeaders[i] = new BasicHeader(
-          getHeaderNameCorrectlyCased(responseHeaders[i].getName()),
-          responseHeaders[i].getValue()
-      );
+      allResponseHeader.add(new BunqBasicHeader(
+          getHeaderNameCorrectlyCased(allHeader.name(i)),
+          allHeader.get(allHeader.name(i))
+      ));
     }
 
     try {
-      outputStream.write(getResponseHeadBytes(responseCode, responseHeaders));
+      outputStream.write(
+          getResponseHeadBytes(
+              responseCode,
+              allResponseHeader.toArray(new BunqBasicHeader[allResponseHeader.size()])
+          )
+      );
       outputStream.write(responseBodyBytes);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
@@ -536,14 +554,14 @@ public final class SecurityUtils {
     return headerName;
   }
 
-  private static byte[] getResponseHeadBytes(int responseCode, Header[] responseHeaders) {
+  private static byte[] getResponseHeadBytes(int responseCode, BunqBasicHeader[] responseHeaders) {
     String requestHeadString = responseCode + NEWLINE +
         generateResponseHeadersSortedString(responseHeaders) + NEWLINE + NEWLINE;
 
     return requestHeadString.getBytes();
   }
 
-  private static String generateResponseHeadersSortedString(Header[] responseHeaders) {
+  private static String generateResponseHeadersSortedString(BunqBasicHeader[] responseHeaders) {
     return Arrays.stream(responseHeaders)
         .filter(
             header ->

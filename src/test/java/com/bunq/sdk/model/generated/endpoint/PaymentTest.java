@@ -7,9 +7,8 @@ import com.bunq.sdk.http.Pagination;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Assert;
 import org.junit.Assume;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;

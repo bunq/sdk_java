@@ -12,7 +12,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
@@ -275,8 +274,12 @@ public class ApiContext implements java.io.Serializable {
   /**
    * @return The base URI of the current environment.
    */
-  public URI getBaseUri() {
+  public String getBaseUri() {
     return environmentType.getBaseUri();
+  }
+
+  public String getApiVersion() {
+    return environmentType.getApiVersion();
   }
 
   /**
