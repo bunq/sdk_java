@@ -9,6 +9,8 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
+import com.bunq.sdk.model.generated.object.BunqId;
+import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -232,6 +234,20 @@ public class UserCompany extends BunqModel {
   @Expose
   @SerializedName("session_timeout")
   private Integer sessionTimeout;
+
+  /**
+   * Card ids used for centralized card limits.
+   */
+  @Expose
+  @SerializedName("card_ids")
+  private List<BunqId> cardIds;
+
+  /**
+   * The centralized limits for user's cards.
+   */
+  @Expose
+  @SerializedName("card_limits")
+  private List<CardLimit> cardLimits;
 
   /**
    * The amount the company can pay in the session without asking for credentials.
@@ -566,6 +582,28 @@ public class UserCompany extends BunqModel {
   }
 
   /**
+   * Card ids used for centralized card limits.
+   */
+  public List<BunqId> getCardIds() {
+    return this.cardIds;
+  }
+
+  public void setCardIds(List<BunqId> cardIds) {
+    this.cardIds = cardIds;
+  }
+
+  /**
+   * The centralized limits for user's cards.
+   */
+  public List<CardLimit> getCardLimits() {
+    return this.cardLimits;
+  }
+
+  public void setCardLimits(List<CardLimit> cardLimits) {
+    this.cardLimits = cardLimits;
+  }
+
+  /**
    * The amount the company can pay in the session without asking for credentials.
    */
   public Amount getDailyLimitWithoutConfirmationLogin() {
@@ -717,6 +755,14 @@ public class UserCompany extends BunqModel {
     }
 
     if (this.sessionTimeout != null) {
+      return false;
+    }
+
+    if (this.cardIds != null) {
+      return false;
+    }
+
+    if (this.cardLimits != null) {
       return false;
     }
 

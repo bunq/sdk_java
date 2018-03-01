@@ -204,6 +204,13 @@ public class MasterCardAction extends BunqModel {
   @SerializedName("eligible_whitelist_id")
   private Integer eligibleWhitelistId;
 
+  /**
+   * The secure code id for this mastercard action or null.
+   */
+  @Expose
+  @SerializedName("secure_code_id")
+  private Integer secureCodeId;
+
   public static BunqResponse<MasterCardAction> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer masterCardActionId) {
     return get(apiContext, userId, monetaryAccountId, masterCardActionId, new HashMap<>());
   }
@@ -500,6 +507,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The secure code id for this mastercard action or null.
+   */
+  public Integer getSecureCodeId() {
+    return this.secureCodeId;
+  }
+
+  public void setSecureCodeId(Integer secureCodeId) {
+    this.secureCodeId = secureCodeId;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -595,6 +613,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.eligibleWhitelistId != null) {
+      return false;
+    }
+
+    if (this.secureCodeId != null) {
       return false;
     }
 

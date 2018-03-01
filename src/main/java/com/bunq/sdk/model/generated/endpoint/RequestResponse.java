@@ -167,7 +167,8 @@ public class RequestResponse extends BunqModel {
   private Geolocation geolocation;
 
   /**
-   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL or INTERNAL.
+   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL, SOFORT or
+   * INTERNAL.
    */
   @Expose
   @SerializedName("type")
@@ -458,7 +459,8 @@ public class RequestResponse extends BunqModel {
   }
 
   /**
-   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL or INTERNAL.
+   * The type of the RequestInquiry. Can be DIRECT_DEBIT, DIRECT_DEBIT_B2B, IDEAL, SOFORT or
+   * INTERNAL.
    */
   public String getType() {
     return this.type;
