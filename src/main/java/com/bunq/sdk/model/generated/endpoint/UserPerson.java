@@ -63,6 +63,8 @@ public class UserPerson extends BunqModel {
   public static final String FIELD_SUB_STATUS = "sub_status";
   public static final String FIELD_LEGAL_GUARDIAN_ALIAS = "legal_guardian_alias";
   public static final String FIELD_SESSION_TIMEOUT = "session_timeout";
+  public static final String FIELD_CARD_IDS = "card_ids";
+  public static final String FIELD_CARD_LIMITS = "card_limits";
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
   public static final String FIELD_COUNTER_BANK_IBAN = "counter_bank_iban";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";

@@ -34,10 +34,12 @@ public class CardPinAssignment extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private String monetaryAccountId;
+  private Integer monetaryAccountId;
 
-  public CardPinAssignment(String type) {
+  public CardPinAssignment(String type, String pinCode, Integer monetaryAccountId) {
     this.type = type;
+    this.pinCode = pinCode;
+    this.monetaryAccountId = monetaryAccountId;
   }
 
   /**
@@ -54,11 +56,11 @@ public class CardPinAssignment extends BunqModel {
   /**
    * The ID of the monetary account to assign to this pin for the card.
    */
-  public String getMonetaryAccountId() {
+  public Integer getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(String monetaryAccountId) {
+  public void setMonetaryAccountId(Integer monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

@@ -38,7 +38,6 @@ public class CardDebit extends BunqModel {
    */
   public static final String FIELD_SECOND_LINE = "second_line";
   public static final String FIELD_NAME_ON_CARD = "name_on_card";
-  public static final String FIELD_PIN_CODE = "pin_code";
   public static final String FIELD_ALIAS = "alias";
   public static final String FIELD_TYPE = "type";
   public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";

@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.model.generated.object.CardPinAssignment;
 import com.bunq.sdk.model.generated.object.Pointer;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,6 +35,7 @@ public class CardDebitTest extends BunqSdkTestBase {
   private static final int RADIX_DIGITS_AND_LATIN_LETTERS = 36;
   private static final int NUM_BITS_23_DECIMAL_DIGITS = 76;
   private static final int FIRST_INDEX = 0;
+  private static final String CARD_PIN_ASSIGNMENT_TYPE_PRIMARY = "PRIMARY";
 
   /**
    * The name that is going to be shown on the card
@@ -70,10 +72,16 @@ public class CardDebitTest extends BunqSdkTestBase {
   public void orderNewMaestroCardTest() throws Exception {
     String secondLine = generateRandomSecondLine();
 
+    CardPinAssignment cardPinAssignment = new CardPinAssignment(
+        CARD_PIN_ASSIGNMENT_TYPE_PRIMARY,
+        PIN_CODE,
+        Config.getMonetaryAccountId()
+    );
+
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(CardDebit.FIELD_SECOND_LINE, secondLine);
     requestMap.put(CardDebit.FIELD_NAME_ON_CARD, nameOnCard);
-    requestMap.put(CardDebit.FIELD_PIN_CODE, PIN_CODE);
+    requestMap.put(CardDebit.FIELD_PIN_CODE_ASSIGNMENT, new CardPinAssignment[]{cardPinAssignment});
     requestMap.put(CardDebit.FIELD_ALIAS, alias);
     CardDebit cardDebit = CardDebit.create(apiContext, requestMap, userId).getValue();
 
