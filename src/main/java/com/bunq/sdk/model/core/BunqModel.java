@@ -1,5 +1,7 @@
 package com.bunq.sdk.model.core;
 
+import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.http.Pagination;
@@ -9,6 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -161,4 +164,19 @@ abstract public class BunqModel {
    */
   abstract public boolean isAllFieldNull();
 
+  protected static ApiContext getApiContext() {
+    return BunqContext.getApiContext();
+  }
+
+  protected static Integer determineUserId() {
+    return BunqContext.getUserContext().getUserId();
+  }
+
+  protected static Integer determineMonetaryAccountId(Integer id) {
+    if (id == null) {
+      return BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId();
+    } else {
+      return id;
+    }
+  }
 }
