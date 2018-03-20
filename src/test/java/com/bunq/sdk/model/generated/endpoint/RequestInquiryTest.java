@@ -33,14 +33,9 @@ public class RequestInquiryTest extends BunqSdkTestBase {
   private static ApiContext apiContext = getApiContext();
 
   private static String acceptRequest() {
-    List<RequestResponse> responses = RequestResponse.list(apiContext, userId,
-        monetaryAccountId2).getValue();
+    List<RequestResponse> responses = RequestResponse.list(monetaryAccountId2).getValue();
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(RequestResponse.FIELD_STATUS, ACCEPTED_STATUS);
-
-    RequestResponse acceptRequest = RequestResponse.update(apiContext, requestMap, userId,
-        monetaryAccountId2, responses.get(INDEX_FIRST).getId()).getValue();
+    RequestResponse acceptRequest = RequestResponse.update(responses.get(0).getId(), monetaryAccountId2, null, ACCEPTED_STATUS).getValue();
 
     return acceptRequest.getStatus();
   }
@@ -51,13 +46,7 @@ public class RequestInquiryTest extends BunqSdkTestBase {
    */
   @Test
   public void createRequestInquiryTest() throws Exception {
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(RequestInquiry.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasSelf);
-    requestMap.put(RequestInquiry.FIELD_AMOUNT_INQUIRED, new Amount(AMOUNT_EUR, CURRENCY));
-    requestMap.put(RequestInquiry.FIELD_DESCRIPTION, REQUEST_DESCRIPTION);
-    requestMap.put(RequestInquiry.FIELD_ALLOW_BUNQME, false);
-
-    RequestInquiry.create(apiContext, requestMap, userId, monetaryAccountId);
+    RequestInquiry.create(new Amount(AMOUNT_EUR, CURRENCY), counterPartyAliasSelf, REQUEST_DESCRIPTION, false);
 
     assertEquals(ACCEPTED_STATUS, acceptRequest());
   }

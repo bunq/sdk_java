@@ -29,8 +29,8 @@ public class SessionTest extends BunqSdkTestBase {
    */
   @Test(expected = ForbiddenException.class)
   public void deleteSessionTest() throws Exception {
-    Session.delete(apiContext, SESSION_ID_DUMMY);
-    User.list(apiContext);
+    Session.delete(SESSION_ID_DUMMY);
+    User.list();
   }
 
   /**

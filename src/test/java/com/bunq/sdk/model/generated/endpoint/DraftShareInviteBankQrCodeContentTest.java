@@ -3,7 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.model.generated.object.DraftShareInviteBankEntry;
+import com.bunq.sdk.model.generated.object.DraftShareInviteEntry;
 import com.bunq.sdk.model.generated.object.ShareDetail;
 import com.bunq.sdk.model.generated.object.ShareDetailPayment;
 import org.apache.commons.io.FileUtils;
@@ -39,29 +39,24 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
   private static Integer draftId;
 
   @BeforeClass
-  public static void setUp() throws Exception {
+  public static void setUp() {
+    BunqSdkTestBase.setUp();
     Calendar expiryDate = Calendar.getInstance();
     expiryDate.add(Calendar.HOUR, HOURS_TO_EXPIRY);
 
     ShareDetailPayment shareDetailPayment = new ShareDetailPayment(true, true, true, true);
     ShareDetail shareDetail = new ShareDetail();
     shareDetail.setPayment(shareDetailPayment);
-    DraftShareInviteBankEntry draftShareInviteBankEntry = new DraftShareInviteBankEntry(
+    DraftShareInviteEntry draftShareInviteBankEntry = new DraftShareInviteEntry(
         shareDetail);
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(DraftShareInviteBank.FIELD_EXPIRATION, expiryDate.getTime());
-    requestMap.put(DraftShareInviteBank.FIELD_DRAFT_SHARE_SETTINGS, draftShareInviteBankEntry);
-
-    draftId = DraftShareInviteBank.create(apiContext, requestMap, userId).getValue();
+    draftId = DraftShareInviteBank.create(expiryDate.getTime().toString(), draftShareInviteBankEntry).getValue();
   }
 
   @AfterClass
   public static void tearDown() throws Exception {
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(DraftShareInviteBank.FIELD_STATUS, DRAFT_SHARE_INVITE_BANK_STATUS_CANCELLED);
 
-    DraftShareInviteBank.update(apiContext, requestMap, userId, draftId);
+    DraftShareInviteBank.update(draftId, DRAFT_SHARE_INVITE_BANK_STATUS_CANCELLED);
   }
 
   /**
@@ -71,7 +66,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
    */
   @Test
   public void testDraftShareInviteBankQrCodeContentList() throws Exception {
-    byte[] content = DraftShareInviteBankQrCodeContent.list(apiContext, userId, draftId).getValue();
+    byte[] content = DraftShareInviteBankQrCodeContent.list(draftId).getValue();
     FileUtils.writeByteArrayToFile(new File(FILENAME_QR_CODE), content);
   }
 

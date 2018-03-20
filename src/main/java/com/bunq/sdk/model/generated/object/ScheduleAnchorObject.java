@@ -3,17 +3,11 @@ package com.bunq.sdk.model.generated.object;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.endpoint.Payment;
 import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -22,7 +16,7 @@ public class ScheduleAnchorObject extends BunqModel implements AnchorObjectInter
   /**
    * Error constants.
    */
-  private static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
+  protected static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    */

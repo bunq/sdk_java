@@ -1,11 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
@@ -15,12 +13,9 @@ import com.bunq.sdk.model.generated.object.TaxResident;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Show the authenticated user, if it is a light user.
@@ -30,7 +25,7 @@ public class UserLight extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_READ = "user-light/%s";
+  protected static final String ENDPOINT_URL_READ = "user-light/%s";
 
   /**
    * Field constants.
@@ -39,7 +34,6 @@ public class UserLight extends BunqModel {
   public static final String FIELD_MIDDLE_NAME = "middle_name";
   public static final String FIELD_LAST_NAME = "last_name";
   public static final String FIELD_PUBLIC_NICK_NAME = "public_nick_name";
-  public static final String FIELD_COUNTER_BANK_IBAN = "counter_bank_iban";
   public static final String FIELD_ADDRESS_MAIN = "address_main";
   public static final String FIELD_ADDRESS_POSTAL = "address_postal";
   public static final String FIELD_AVATAR_UUID = "avatar_uuid";
@@ -67,7 +61,7 @@ public class UserLight extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "UserPerson";
+  protected static final String OBJECT_TYPE_GET = "UserPerson";
 
   /**
    * The id of the user.
@@ -297,18 +291,26 @@ public class UserLight extends BunqModel {
   @SerializedName("notification_filters")
   private List<NotificationFilter> notificationFilters;
 
-  public static BunqResponse<UserLight> get(ApiContext apiContext, Integer userLightId) {
-    return get(apiContext, userLightId, new HashMap<>());
-  }
-
   /**
    * Get a specific bunq light user.
    */
-  public static BunqResponse<UserLight> get(ApiContext apiContext, Integer userLightId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userLightId), new HashMap<>(), customHeaders);
+  public static BunqResponse<UserLight> get(Integer userLightId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userLightId), params, customHeaders);
 
     return fromJson(UserLight.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<UserLight> get() {
+    return get(null, null, null);
+  }
+
+  public static BunqResponse<UserLight> get(Integer userLightId) {
+    return get(userLightId, null, null);
+  }
+
+  public static BunqResponse<UserLight> get(Integer userLightId, Map<String, String> params) {
+    return get(userLightId, params, null);
   }
 
   /**

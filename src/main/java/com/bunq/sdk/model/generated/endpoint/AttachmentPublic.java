@@ -1,21 +1,15 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * This call is used to upload an attachment that can be referenced to as an avatar (through the
@@ -26,14 +20,14 @@ public class AttachmentPublic extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "attachment-public";
-  private static final String ENDPOINT_URL_READ = "attachment-public/%s";
+  protected static final String ENDPOINT_URL_CREATE = "attachment-public";
+  protected static final String ENDPOINT_URL_READ = "attachment-public/%s";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_POST = "Uuid";
-  private static final String OBJECT_TYPE_GET = "AttachmentPublic";
+  protected static final String OBJECT_TYPE_POST = "Uuid";
+  protected static final String OBJECT_TYPE_GET = "AttachmentPublic";
 
   /**
    * The UUID of the attachment.
@@ -63,36 +57,44 @@ public class AttachmentPublic extends BunqModel {
   @SerializedName("attachment")
   private Attachment attachment;
 
-  public static BunqResponse<String> create(ApiContext apiContext, byte[] bytes) {
-    return create(apiContext, bytes, new HashMap<>());
-  }
-
   /**
    * Create a new public attachment. Create a POST request with a payload that contains a binary
    * representation of the file, without any JSON wrapping. Make sure you define the MIME type
    * (i.e. image/jpeg, or image/png) in the Content-Type header. You are required to provide a
    * description of the attachment using the X-Bunq-Attachment-Description header.
    */
-  public static BunqResponse<String> create(ApiContext apiContext, byte[] bytes, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<String> create(Map<String, String> customHeaders, byte[] bytes) {
+    ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, bytes, customHeaders);
 
     return processForUuid(responseRaw);
   }
 
-  public static BunqResponse<AttachmentPublic> get(ApiContext apiContext, String attachmentPublicUuid) {
-    return get(apiContext, attachmentPublicUuid, new HashMap<>());
+  public static BunqResponse<String> create(byte[] bytes) {
+    return create(null, bytes);
   }
 
   /**
    * Get a specific attachment's metadata through its UUID. The Content-Type header of the
    * response will describe the MIME type of the attachment file.
    */
-  public static BunqResponse<AttachmentPublic> get(ApiContext apiContext, String attachmentPublicUuid, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), new HashMap<>(), customHeaders);
+  public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), params, customHeaders);
 
     return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<AttachmentPublic> get() {
+    return get(null, null, null);
+  }
+
+  public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid) {
+    return get(attachmentPublicUuid, null, null);
+  }
+
+  public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid, Map<String, String> params) {
+    return get(attachmentPublicUuid, params, null);
   }
 
   /**

@@ -186,6 +186,10 @@ public class ApiClient {
       byte[] requestBodyBytes,
       Map<String, String> customHeaders
   ) {
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
     BunqRequestBody bunqRequestBody = BunqRequestBody.create(ContentType.JSON.getMediaType(), requestBodyBytes);
 
     if (customHeaders.containsKey(HEADER_CONTENT_TYPE)) {
@@ -419,6 +423,14 @@ public class ApiClient {
       Map<String, String> params,
       Map<String, String> customHeaders
   ) {
+    if (params == null) {
+      params = new HashMap<>();
+    }
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
     try {
       BunqRequestBuilder requestBuilder = new BunqRequestBuilder()
           .get()
@@ -441,6 +453,10 @@ public class ApiClient {
       byte[] requestBodyBytes,
       Map<String, String> customHeaders
   ) {
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
     try {
       BunqRequestBuilder requestBuilder = new BunqRequestBuilder()
           .put(BunqRequestBody.create(ContentType.JSON.getMediaType(), requestBodyBytes))
@@ -459,6 +475,10 @@ public class ApiClient {
    * @return The response of the DELETE request.
    */
   public BunqResponseRaw delete(String uri, Map<String, String> customHeaders) {
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
     try {
       BunqRequestBuilder requestBuilder = new BunqRequestBuilder()
           .delete()

@@ -1,23 +1,20 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Error;
+import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.bunq.sdk.model.generated.object.ScheduleAnchorObject;
 import com.bunq.sdk.model.generated.object.ScheduleInstanceAnchorObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * view for reading, updating and listing the scheduled instance.
@@ -27,9 +24,9 @@ public class ScheduleInstance extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule/%s/schedule-instance";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule/%s/schedule-instance";
 
   /**
    * Field constants.
@@ -39,7 +36,7 @@ public class ScheduleInstance extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "ScheduledInstance";
+  protected static final String OBJECT_TYPE_GET = "ScheduledInstance";
 
   /**
    * The state of the scheduleInstance. (FINISHED_SUCCESSFULLY, RETRY, FAILED_USER_ERROR)
@@ -83,48 +80,101 @@ public class ScheduleInstance extends BunqModel {
   @SerializedName("result_object")
   private ScheduleInstanceAnchorObject resultObject;
 
-  public static BunqResponse<ScheduleInstance> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId) {
-    return get(apiContext, userId, monetaryAccountId, scheduleId, scheduleInstanceId, new HashMap<>());
-  }
+  /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  @Expose
+  @SerializedName("request_reference_split_the_bill")
+  private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
    */
-  public static BunqResponse<ScheduleInstance> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, scheduleId, scheduleInstanceId), new HashMap<>(), customHeaders);
+  public static BunqResponse<ScheduleInstance> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), params, customHeaders);
 
     return fromJson(ScheduleInstance.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, scheduleId, scheduleInstanceId, new HashMap<>());
+  public static BunqResponse<ScheduleInstance> get() {
+    return get(null, null, null, null, null);
+  }
+
+  public static BunqResponse<ScheduleInstance> get(Integer scheduleId) {
+    return get(scheduleId, null, null, null, null);
+  }
+
+  public static BunqResponse<ScheduleInstance> get(Integer scheduleId, Integer scheduleInstanceId) {
+    return get(scheduleId, scheduleInstanceId, null, null, null);
+  }
+
+  public static BunqResponse<ScheduleInstance> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId) {
+    return get(scheduleId, scheduleInstanceId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<ScheduleInstance> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(scheduleId, scheduleInstanceId, monetaryAccountId, params, null);
   }
 
   /**
+   * @param state Change the state of the scheduleInstance from FAILED_USER_ERROR to RETRY.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer scheduleId, Integer scheduleInstanceId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_STATE, state);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, scheduleId, scheduleInstanceId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer scheduleId) {
-    return list(apiContext, userId, monetaryAccountId, scheduleId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer scheduleId) {
+    return update(scheduleId, null, null, null, null);
   }
 
-  public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer scheduleId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, scheduleId, params, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId) {
+    return update(scheduleId, scheduleInstanceId, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId) {
+    return update(scheduleId, scheduleInstanceId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state) {
+    return update(scheduleId, scheduleInstanceId, monetaryAccountId, state, null);
   }
 
   /**
    */
-  public static BunqResponse<List<ScheduleInstance>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer scheduleId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, scheduleId), params, customHeaders);
+  public static BunqResponse<List<ScheduleInstance>> list(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId), params, customHeaders);
 
     return fromJsonList(ScheduleInstance.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<ScheduleInstance>> list() {
+    return list(null, null, null, null);
+  }
+
+  public static BunqResponse<List<ScheduleInstance>> list(Integer scheduleId) {
+    return list(scheduleId, null, null, null);
+  }
+
+  public static BunqResponse<List<ScheduleInstance>> list(Integer scheduleId, Integer monetaryAccountId) {
+    return list(scheduleId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<ScheduleInstance>> list(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params) {
+    return list(scheduleId, monetaryAccountId, params, null);
   }
 
   /**
@@ -194,6 +244,18 @@ public class ScheduleInstance extends BunqModel {
   }
 
   /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  public List<RequestInquiryReference> getRequestReferenceSplitTheBill() {
+    return this.requestReferenceSplitTheBill;
+  }
+
+  public void setRequestReferenceSplitTheBill(List<RequestInquiryReference> requestReferenceSplitTheBill) {
+    this.requestReferenceSplitTheBill = requestReferenceSplitTheBill;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.state != null) {
@@ -217,6 +279,10 @@ public class ScheduleInstance extends BunqModel {
     }
 
     if (this.resultObject != null) {
+      return false;
+    }
+
+    if (this.requestReferenceSplitTheBill != null) {
       return false;
     }
 

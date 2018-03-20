@@ -1,6 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -10,17 +9,14 @@ import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardMagStripePermission;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for retrieving details for the cards the user has access to.
@@ -30,9 +26,9 @@ public class Card extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s";
-  private static final String ENDPOINT_URL_READ = "user/%s/card/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/card";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s";
+  protected static final String ENDPOINT_URL_READ = "user/%s/card/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/card";
 
   /**
    * Field constants.
@@ -50,7 +46,8 @@ public class Card extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "CardDebit";
+  protected static final String OBJECT_TYPE_PUT = "CardDebit";
+  protected static final String OBJECT_TYPE_GET = "CardDebit";
 
   /**
    * The id of the card.
@@ -203,54 +200,136 @@ public class Card extends BunqModel {
   @SerializedName("country")
   private String country;
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId) {
-    return update(apiContext, requestMap, userId, cardId, new HashMap<>());
-  }
-
   /**
    * Update the card details. Allow to change pin code, status, limits, country permissions and
    * the monetary account connected to the card. When the card has been received, it can be also
    * activated through this endpoint.
+   * @param pinCode The plaintext pin code. Requests require encryption to be enabled.
+   * @param activationCode The activation code required to set status to ACTIVE initially. Can
+   * only set status to ACTIVE using activation code when order_status is ACCEPTED_FOR_PRODUCTION
+   * and status is DEACTIVATED.
+   * @param status The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or
+   * CANCELLED, and can only be set to LOST/STOLEN/CANCELLED when order status is
+   * ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
+   * Can only be set to DEACTIVATED after initial activation, i.e. order_status is
+   * DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED. Mind that
+   * all the possible choices (apart from ACTIVE and DEACTIVATED) are permanent and cannot be
+   * changed after.
+   * @param limit The limits to define for the card, among CARD_LIMIT_CONTACTLESS, CARD_LIMIT_ATM,
+   * CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS). All the
+   * limits must be provided on update.
+   * @param magStripePermission Whether or not it is allowed to use the mag stripe for the card.
+   * @param countryPermission The countries for which to grant (temporary) permissions to use the
+   * card.
+   * @param monetaryAccountCurrentId The ID of the monetary account that card transactions will
+   * use.
+   * @param pinCodeAssignment Array of Types, PINs, account IDs assigned to the card.
+   * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
+   * insufficient balance. Fallback account is removed if not supplied.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer cardId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, cardId), requestBytes, customHeaders);
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
 
-    return processForId(responseRaw);
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_PIN_CODE, pinCode);
+    requestMap.put(FIELD_ACTIVATION_CODE, activationCode);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_LIMIT, limit);
+    requestMap.put(FIELD_MAG_STRIPE_PERMISSION, magStripePermission);
+    requestMap.put(FIELD_COUNTRY_PERMISSION, countryPermission);
+    requestMap.put(FIELD_MONETARY_ACCOUNT_CURRENT_ID, monetaryAccountCurrentId);
+    requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
+    requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
+
+    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), cardId), requestBytes, customHeaders);
+
+    return fromJson(Card.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<Card> get(ApiContext apiContext, Integer userId, Integer cardId) {
-    return get(apiContext, userId, cardId, new HashMap<>());
+  public static BunqResponse<Card> update(Integer cardId) {
+    return update(cardId, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode) {
+    return update(cardId, pinCode, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode) {
+    return update(cardId, pinCode, activationCode, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status) {
+    return update(cardId, pinCode, activationCode, status, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit) {
+    return update(cardId, pinCode, activationCode, status, limit, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission) {
+    return update(cardId, pinCode, activationCode, status, limit, magStripePermission, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
+    return update(cardId, pinCode, activationCode, status, limit, magStripePermission, countryPermission, null, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId) {
+    return update(cardId, pinCode, activationCode, status, limit, magStripePermission, countryPermission, monetaryAccountCurrentId, null, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId, List<CardPinAssignment> pinCodeAssignment) {
+    return update(cardId, pinCode, activationCode, status, limit, magStripePermission, countryPermission, monetaryAccountCurrentId, pinCodeAssignment, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    return update(cardId, pinCode, activationCode, status, limit, magStripePermission, countryPermission, monetaryAccountCurrentId, pinCodeAssignment, monetaryAccountIdFallback, null);
   }
 
   /**
    * Return the details of a specific card.
    */
-  public static BunqResponse<Card> get(ApiContext apiContext, Integer userId, Integer cardId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, cardId), new HashMap<>(), customHeaders);
+  public static BunqResponse<Card> get(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId), params, customHeaders);
 
     return fromJson(Card.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId) {
-    return list(apiContext, userId, new HashMap<>());
+  public static BunqResponse<Card> get() {
+    return get(null, null, null);
   }
 
-  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
-    return list(apiContext, userId, params, new HashMap<>());
+  public static BunqResponse<Card> get(Integer cardId) {
+    return get(cardId, null, null);
+  }
+
+  public static BunqResponse<Card> get(Integer cardId, Map<String, String> params) {
+    return get(cardId, params, null);
   }
 
   /**
    * Return all the cards available to the user.
    */
-  public static BunqResponse<List<Card>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+  public static BunqResponse<List<Card>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
     return fromJsonList(Card.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<Card>> list() {
+    return list(null, null);
+  }
+
+  public static BunqResponse<List<Card>> list(Map<String, String> params) {
+    return list(params, null);
   }
 
   /**

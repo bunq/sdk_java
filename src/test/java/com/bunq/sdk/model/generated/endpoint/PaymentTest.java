@@ -61,12 +61,7 @@ public class PaymentTest extends BunqSdkTestBase {
   public void makePaymentToOtherUser() throws Exception {
     Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(Payment.FIELD_AMOUNT, amount);
-    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasSelf);
-    requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
-
-    Payment.create(apiContext, requestMap, userId, monetaryAccountId);
+    Payment.create(amount, counterPartyAliasSelf, PAYMENT_DESCRIPTION, null);
   }
 
   /**
@@ -78,12 +73,7 @@ public class PaymentTest extends BunqSdkTestBase {
   public void makePaymentToOtherAccount() throws Exception {
     Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
-    requestMap.put(Payment.FIELD_AMOUNT, amount);
-    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
-
-    Payment.create(apiContext, requestMap, userId, monetaryAccountId);
+    Payment.create(amount, counterPartyAliasOther,PAYMENT_DESCRIPTION);
   }
 
   @Test
@@ -92,9 +82,7 @@ public class PaymentTest extends BunqSdkTestBase {
     pagination.setCount(PAGE_SIZE);
 
     List<Payment> allPayment = Payment.list(
-        apiContext,
-        userId,
-        monetaryAccountId,
+        null,
         pagination.getUrlParamsCountOnly()
     ).getValue();
 
@@ -109,7 +97,7 @@ public class PaymentTest extends BunqSdkTestBase {
   public void getPaymentWithGeolocationTest() {
     Assume.assumeFalse(Integer.compare(paymentIdwithGeolocation, NUMBER_ZERO) == COMPARE_EQUAL);
 
-    Payment payment = Payment.get(apiContext, userId, monetaryAccountId, paymentIdwithGeolocation).getValue();
+    Payment payment = Payment.get(paymentIdwithGeolocation).getValue();
 
     Assert.assertNotNull(payment.getGeolocation());
     Assert.assertFalse(payment.getGeolocation().isAllFieldNull());
