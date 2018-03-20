@@ -3,6 +3,7 @@ package com.bunq.sdk.examples;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.model.generated.endpoint.CardDebit;
+import com.bunq.sdk.model.generated.object.CardPinAssignment;
 import com.bunq.sdk.model.generated.object.Pointer;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class CardDebitExample {
   private static final String POINTER_NAME_TEST = "test pointer";
   private static final int NUM_BITS_20_DECIMAL_DIGITS = 66;
   private static final int RADIX_DIGITS_AND_LATIN_LETTERS = 36;
+  private static final String CARD_PIN_ASSIGNMENT_TYPE_PRIMARY = "PRIMARY";
 
   /**
    * @param args Command line arguments.

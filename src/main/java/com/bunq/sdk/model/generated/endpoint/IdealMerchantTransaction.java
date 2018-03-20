@@ -31,6 +31,7 @@ public class IdealMerchantTransaction extends BunqModel {
    */
   public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
   public static final String FIELD_ISSUER = "issuer";
+  public static final String FIELD_CALLBACK_TYPE = "callback_type";
 
   /**
    * Object type.
