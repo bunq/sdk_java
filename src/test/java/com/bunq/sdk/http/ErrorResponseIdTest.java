@@ -2,7 +2,7 @@ package com.bunq.sdk.http;
 
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.exception.ApiException;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccount;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -12,7 +12,7 @@ public class ErrorResponseIdTest extends BunqSdkTestBase {
   /**
    * Invalid user id to trigger BadRequestException
    */
-  private static final int INVALID_USER_PERSON_ID = 0;
+  private static final int INVALID_MONETARY_ACCOUNT_ID = 0;
 
   /**
    */
@@ -22,7 +22,7 @@ public class ErrorResponseIdTest extends BunqSdkTestBase {
     ApiException caughtException = null;
 
     try {
-      UserPerson.get(getApiContext(), INVALID_USER_PERSON_ID);
+      MonetaryAccount.get(INVALID_MONETARY_ACCOUNT_ID);
     } catch (ApiException $exception) {
       caughtException = $exception;
     }

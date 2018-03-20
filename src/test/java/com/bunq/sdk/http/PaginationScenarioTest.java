@@ -25,11 +25,8 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   /**
    * Config values.
    */
-  private static final Integer userId = Config.getUserId();
   private static final Integer monetaryAccountId = Config.getMonetaryAccountId();
   private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
-
-  private static final ApiContext apiContext = getApiContext();
 
   /**
    * Constants for scenario testing.
@@ -68,16 +65,11 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   }
 
   private static BunqResponse<List<Payment>> ListPayments(Map<String, String> urlParams) {
-    return Payment.list(apiContext, userId, monetaryAccountId, urlParams);
+    return Payment.list(monetaryAccountId, urlParams);
   }
 
   private static void CreatePayment() {
-    Map<String, Object> requestMap = new HashMap<>();
-    requestMap.put(Payment.FIELD_AMOUNT, new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY));
-    requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
-    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
-
-    Payment.create(apiContext, requestMap, userId, monetaryAccountId);
+    Payment.create(new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY), counterPartyAliasOther, PAYMENT_DESCRIPTION);
   }
 
   @Test
