@@ -1,21 +1,17 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.SchedulePaymentEntry;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for schedule payment batches.
@@ -25,9 +21,9 @@ public class SchedulePaymentBatch extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment-batch";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
-  private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment-batch";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
+  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
 
   /**
    * Field constants.
@@ -49,45 +45,95 @@ public class SchedulePaymentBatch extends BunqModel {
   @SerializedName("schedule")
   private Schedule schedule;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
-
   /**
+   * @param payments The payment details.
+   * @param schedule The schedule details when creating a scheduled payment.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(List<SchedulePaymentEntry> payments, Schedule schedule, Integer monetaryAccountId, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_PAYMENTS, payments);
+    requestMap.put(FIELD_SCHEDULE, schedule);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, schedulePaymentBatchId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<SchedulePaymentEntry> payments) {
+    return create(payments, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<SchedulePaymentEntry> payments, Schedule schedule) {
+    return create(payments, schedule, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<SchedulePaymentEntry> payments, Schedule schedule, Integer monetaryAccountId) {
+    return create(payments, schedule, monetaryAccountId, null);
   }
 
   /**
+   * @param payments The payment details.
+   * @param schedule The schedule details when creating a scheduled payment.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(Integer schedulePaymentBatchId, Integer monetaryAccountId, List<SchedulePaymentEntry> payments, Schedule schedule, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_PAYMENTS, payments);
+    requestMap.put(FIELD_SCHEDULE, schedule);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, schedulePaymentBatchId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentBatchId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId) {
-    return delete(apiContext, userId, monetaryAccountId, schedulePaymentBatchId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer schedulePaymentBatchId) {
+    return update(schedulePaymentBatchId, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer schedulePaymentBatchId, Integer monetaryAccountId) {
+    return update(schedulePaymentBatchId, monetaryAccountId, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer schedulePaymentBatchId, Integer monetaryAccountId, List<SchedulePaymentEntry> payments) {
+    return update(schedulePaymentBatchId, monetaryAccountId, payments, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer schedulePaymentBatchId, Integer monetaryAccountId, List<SchedulePaymentEntry> payments, Schedule schedule) {
+    return update(schedulePaymentBatchId, monetaryAccountId, payments, schedule, null);
   }
 
   /**
    */
-  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer schedulePaymentBatchId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, schedulePaymentBatchId), customHeaders);
+  public static BunqResponse<SchedulePaymentBatch> delete(Integer schedulePaymentBatchId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentBatchId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
+  }
+
+  public static BunqResponse<SchedulePaymentBatch> delete(Integer schedulePaymentBatchId) {
+    return delete(schedulePaymentBatchId, null, null);
+  }
+
+  public static BunqResponse<SchedulePaymentBatch> delete(Integer schedulePaymentBatchId, Integer monetaryAccountId) {
+    return delete(schedulePaymentBatchId, monetaryAccountId, null);
   }
 
   /**

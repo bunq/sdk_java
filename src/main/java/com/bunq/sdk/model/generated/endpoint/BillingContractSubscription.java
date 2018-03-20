@@ -1,20 +1,16 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Show the subscription billing contract for the authenticated user.
@@ -24,8 +20,8 @@ public class BillingContractSubscription extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/billing-contract-subscription";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/billing-contract-subscription";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/billing-contract-subscription";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/billing-contract-subscription";
 
   /**
    * Field constants.
@@ -35,7 +31,7 @@ public class BillingContractSubscription extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "BillingContractSubscription";
+  protected static final String OBJECT_TYPE_GET = "BillingContractSubscription";
 
   /**
    * The id of the billing contract.
@@ -87,36 +83,50 @@ public class BillingContractSubscription extends BunqModel {
   @SerializedName("subscription_type")
   private String subscriptionType;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
-    return create(apiContext, requestMap, userId, new HashMap<>());
-  }
-
   /**
+   * @param subscriptionType The subscription type of the user. Can be one of PERSON_LIGHT_V1,
+   * PERSON_MORE_V1, PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(String subscriptionType, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_SUBSCRIPTION_TYPE, subscriptionType);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId) {
-    return list(apiContext, userId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null);
   }
 
-  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
-    return list(apiContext, userId, params, new HashMap<>());
+  public static BunqResponse<Integer> create(String subscriptionType) {
+    return create(subscriptionType, null);
   }
 
   /**
    * Get all subscription billing contract for the authenticated user.
    */
-  public static BunqResponse<List<BillingContractSubscription>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+  public static BunqResponse<List<BillingContractSubscription>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
     return fromJsonList(BillingContractSubscription.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<BillingContractSubscription>> list() {
+    return list(null, null);
+  }
+
+  public static BunqResponse<List<BillingContractSubscription>> list(Map<String, String> params) {
+    return list(params, null);
   }
 
   /**

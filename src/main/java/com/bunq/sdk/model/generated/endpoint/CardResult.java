@@ -1,6 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -8,16 +7,12 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelCard;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for Card result requests (failed and successful transactions).
@@ -27,13 +22,13 @@ public class CardResult extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/card-result/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/card-result";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/card-result/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/card-result";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "CardResult";
+  protected static final String OBJECT_TYPE_GET = "CardResult";
 
   /**
    * The id of the monetary account this card result links to.
@@ -147,34 +142,50 @@ public class CardResult extends BunqModel {
   @SerializedName("reservation_expiry_time")
   private String reservationExpiryTime;
 
-  public static BunqResponse<CardResult> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cardResultId) {
-    return get(apiContext, userId, monetaryAccountId, cardResultId, new HashMap<>());
-  }
-
   /**
    */
-  public static BunqResponse<CardResult> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cardResultId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cardResultId), new HashMap<>(), customHeaders);
+  public static BunqResponse<CardResult> get(Integer cardResultId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cardResultId), params, customHeaders);
 
     return fromJson(CardResult.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<CardResult>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<CardResult> get() {
+    return get(null, null, null, null);
   }
 
-  public static BunqResponse<List<CardResult>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<CardResult> get(Integer cardResultId) {
+    return get(cardResultId, null, null, null);
+  }
+
+  public static BunqResponse<CardResult> get(Integer cardResultId, Integer monetaryAccountId) {
+    return get(cardResultId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<CardResult> get(Integer cardResultId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(cardResultId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<CardResult>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<List<CardResult>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
     return fromJsonList(CardResult.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<CardResult>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<CardResult>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<CardResult>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**

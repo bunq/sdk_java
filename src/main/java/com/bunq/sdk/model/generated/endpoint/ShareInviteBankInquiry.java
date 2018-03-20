@@ -1,23 +1,20 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
+import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.ShareDetail;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Used to share a monetary account with another bunq user, as in the 'Connect' feature in the
@@ -29,10 +26,10 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
 
   /**
    * Field constants.
@@ -48,7 +45,7 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "ShareInviteBankInquiry";
+  protected static final String OBJECT_TYPE_GET = "ShareInviteBankInquiry";
 
   /**
    * The label of the monetary account that's being shared.
@@ -137,69 +134,179 @@ public class ShareInviteBankInquiry extends BunqModel {
   @SerializedName("id")
   private Integer id;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
-
   /**
    * Create a new share inquiry for a monetary account, specifying the permission the other bunq
    * user will have on it.
+   * @param counterUserAlias The pointer of the user to share with.
+   * @param shareDetail The share details. Only one of these objects may be passed.
+   * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
+   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects).
+   * @param draftShareInviteBankId The id of the draft share invite bank.
+   * @param shareType The share type, either STANDARD or MUTUAL.
+   * @param startDate The start date of this share.
+   * @param endDate The expiration date of this share.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_COUNTER_USER_ALIAS, counterUserAlias);
+    requestMap.put(FIELD_DRAFT_SHARE_INVITE_BANK_ID, draftShareInviteBankId);
+    requestMap.put(FIELD_SHARE_DETAIL, shareDetail);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SHARE_TYPE, shareType);
+    requestMap.put(FIELD_START_DATE, startDate);
+    requestMap.put(FIELD_END_DATE, endDate);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<ShareInviteBankInquiry> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId) {
-    return get(apiContext, userId, monetaryAccountId, shareInviteBankInquiryId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias) {
+    return create(counterUserAlias, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail) {
+    return create(counterUserAlias, shareDetail, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
+    return create(counterUserAlias, shareDetail, status, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId) {
+    return create(counterUserAlias, shareDetail, status, monetaryAccountId, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId) {
+    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType) {
+    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, shareType, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate) {
+    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, shareType, startDate, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate, String endDate) {
+    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, shareType, startDate, endDate, null);
   }
 
   /**
    * Get the details of a specific share inquiry.
    */
-  public static BunqResponse<ShareInviteBankInquiry> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, shareInviteBankInquiryId), new HashMap<>(), customHeaders);
+  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId), params, customHeaders);
 
     return fromJson(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, shareInviteBankInquiryId, new HashMap<>());
+  public static BunqResponse<ShareInviteBankInquiry> get() {
+    return get(null, null, null, null);
+  }
+
+  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId) {
+    return get(shareInviteBankInquiryId, null, null, null);
+  }
+
+  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId) {
+    return get(shareInviteBankInquiryId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(shareInviteBankInquiryId, monetaryAccountId, params, null);
   }
 
   /**
    * Update the details of a share. This includes updating status (revoking or cancelling it),
    * granted permission and validity period of this share.
+   * @param shareDetail The share details. Only one of these objects may be passed.
+   * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
+   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects).
+   * @param startDate The start date of this share.
+   * @param endDate The expiration date of this share.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer shareInviteBankInquiryId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_SHARE_DETAIL, shareDetail);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_START_DATE, startDate);
+    requestMap.put(FIELD_END_DATE, endDate);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, shareInviteBankInquiryId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<List<ShareInviteBankInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId) {
+    return update(shareInviteBankInquiryId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<List<ShareInviteBankInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId) {
+    return update(shareInviteBankInquiryId, monetaryAccountId, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail) {
+    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status) {
+    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, status, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate) {
+    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, status, startDate, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate) {
+    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, status, startDate, endDate, null);
   }
 
   /**
    * Get a list with all the share inquiries for a monetary account, only if the requesting user
    * has permission to change the details of the various ones.
    */
-  public static BunqResponse<List<ShareInviteBankInquiry>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
     return fromJsonList(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<ShareInviteBankInquiry>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**

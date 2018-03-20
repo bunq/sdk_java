@@ -1,6 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -10,16 +9,15 @@ import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.AttachmentMonetaryAccountPayment;
 import com.bunq.sdk.model.generated.object.Geolocation;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
+import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Using Payment, you can send payments to bunq and non-bunq users from your bunq
@@ -33,9 +31,9 @@ public class Payment extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment";
 
   /**
    * Field constants.
@@ -45,13 +43,11 @@ public class Payment extends BunqModel {
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_ATTACHMENT = "attachment";
   public static final String FIELD_MERCHANT_REFERENCE = "merchant_reference";
-  public static final String FIELD_ALLOW_BUNQTO = "allow_bunqto";
-  public static final String FIELD_BUNQTO_STATUS = "bunqto_status";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "Payment";
+  protected static final String OBJECT_TYPE_GET = "Payment";
 
   /**
    * The id of the created Payment.
@@ -221,51 +217,122 @@ public class Payment extends BunqModel {
   @SerializedName("allow_chat")
   private Boolean allowChat;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
+  /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  @Expose
+  @SerializedName("request_reference_split_the_bill")
+  private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
    * Create a new Payment.
+   * @param amount The Amount to transfer with the Payment. Must be bigger than 0 and smaller than
+   * the MonetaryAccount's balance.
+   * @param counterpartyAlias The Alias of the party we are transferring the money to. Can be an
+   * Alias of type EMAIL or PHONE_NUMBER (for bunq MonetaryAccounts or bunq.to payments) or IBAN
+   * (for external bank account).
+   * @param description The description for the Payment. Maximum 140 characters for Payments to
+   * external IBANs, 9000 characters for Payments to only other bunq MonetaryAccounts. Field is
+   * required but can be an empty string.
+   * @param attachment The Attachments to attach to the Payment.
+   * @param merchantReference Optional data to be included with the Payment specific to the
+   * merchant.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_AMOUNT, amount);
+    requestMap.put(FIELD_COUNTERPARTY_ALIAS, counterpartyAlias);
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_ATTACHMENT, attachment);
+    requestMap.put(FIELD_MERCHANT_REFERENCE, merchantReference);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Payment> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer paymentId) {
-    return get(apiContext, userId, monetaryAccountId, paymentId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount) {
+    return create(amount, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias) {
+    return create(amount, counterpartyAlias, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description) {
+    return create(amount, counterpartyAlias, description, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId) {
+    return create(amount, counterpartyAlias, description, monetaryAccountId, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment) {
+    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference) {
+    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, null);
   }
 
   /**
    * Get a specific previous Payment.
    */
-  public static BunqResponse<Payment> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer paymentId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, paymentId), new HashMap<>(), customHeaders);
+  public static BunqResponse<Payment> get(Integer paymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentId), params, customHeaders);
 
     return fromJson(Payment.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<Payment> get() {
+    return get(null, null, null, null);
   }
 
-  public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<Payment> get(Integer paymentId) {
+    return get(paymentId, null, null, null);
+  }
+
+  public static BunqResponse<Payment> get(Integer paymentId, Integer monetaryAccountId) {
+    return get(paymentId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<Payment> get(Integer paymentId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(paymentId, monetaryAccountId, params, null);
   }
 
   /**
    * Get a listing of all Payments performed on a given MonetaryAccount (incoming and outgoing).
    */
-  public static BunqResponse<List<Payment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<List<Payment>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
     return fromJsonList(Payment.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<Payment>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<Payment>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<Payment>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**
@@ -529,6 +596,18 @@ public class Payment extends BunqModel {
   }
 
   /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  public List<RequestInquiryReference> getRequestReferenceSplitTheBill() {
+    return this.requestReferenceSplitTheBill;
+  }
+
+  public void setRequestReferenceSplitTheBill(List<RequestInquiryReference> requestReferenceSplitTheBill) {
+    this.requestReferenceSplitTheBill = requestReferenceSplitTheBill;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -620,6 +699,10 @@ public class Payment extends BunqModel {
     }
 
     if (this.allowChat != null) {
+      return false;
+    }
+
+    if (this.requestReferenceSplitTheBill != null) {
       return false;
     }
 

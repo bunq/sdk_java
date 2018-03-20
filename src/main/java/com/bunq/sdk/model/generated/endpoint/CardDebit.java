@@ -1,6 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -9,18 +8,16 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
+import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * With bunq it is possible to order debit cards that can then be connected with each one of the
@@ -31,24 +28,22 @@ public class CardDebit extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
 
   /**
    * Field constants.
    */
   public static final String FIELD_SECOND_LINE = "second_line";
   public static final String FIELD_NAME_ON_CARD = "name_on_card";
-  public static final String FIELD_PIN_CODE = "pin_code";
   public static final String FIELD_ALIAS = "alias";
   public static final String FIELD_TYPE = "type";
   public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
   public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
-  public static final String FIELD_COUNTRY = "country";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_POST = "CardDebit";
+  protected static final String OBJECT_TYPE_POST = "CardDebit";
 
   /**
    * The id of the card.
@@ -191,20 +186,68 @@ public class CardDebit extends BunqModel {
   @SerializedName("country")
   private String country;
 
-  public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId) {
-    return create(apiContext, requestMap, userId, new HashMap<>());
-  }
-
   /**
    * Create a new debit card request.
+   * @param secondLine The second line of text on the card, used as name/description for it. It
+   * can contain at most 17 characters and it can be empty.
+   * @param nameOnCard The user's name as it will be on the card. Check 'card-name' for the
+   * available card names for a user.
+   * @param alias The pointer to the monetary account that will be connected at first with the
+   * card. Its IBAN code is also the one that will be printed on the card itself. The pointer must
+   * be of type IBAN.
+   * @param type The type of card to order. Can be MAESTRO or MASTERCARD.
+   * @param pinCodeAssignment Array of Types, PINs, account IDs assigned to the card.
+   * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
+   * insufficient balance. Fallback account is removed if not supplied.
    */
-  public static BunqResponse<CardDebit> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_SECOND_LINE, secondLine);
+    requestMap.put(FIELD_NAME_ON_CARD, nameOnCard);
+    requestMap.put(FIELD_ALIAS, alias);
+    requestMap.put(FIELD_TYPE, type);
+    requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
+    requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    requestBytes = SecurityUtils.encrypt(apiContext, requestBytes, customHeaders);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId), requestBytes, customHeaders);
+    requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE_POST);
+  }
+
+  public static BunqResponse<CardDebit> create() {
+    return create(null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<CardDebit> create(String secondLine) {
+    return create(secondLine, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard) {
+    return create(secondLine, nameOnCard, null, null, null, null, null);
+  }
+
+  public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias) {
+    return create(secondLine, nameOnCard, alias, null, null, null, null);
+  }
+
+  public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias, String type) {
+    return create(secondLine, nameOnCard, alias, type, null, null, null);
+  }
+
+  public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment) {
+    return create(secondLine, nameOnCard, alias, type, pinCodeAssignment, null, null);
+  }
+
+  public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    return create(secondLine, nameOnCard, alias, type, pinCodeAssignment, monetaryAccountIdFallback, null);
   }
 
   /**

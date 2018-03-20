@@ -1,20 +1,15 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Show the limits for the authenticated user.
@@ -24,12 +19,12 @@ public class CustomerLimit extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_LISTING = "user/%s/limit";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/limit";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE_GET = "CustomerLimit";
+  protected static final String OBJECT_TYPE_GET = "CustomerLimit";
 
   /**
    * The limit of monetary accounts.
@@ -66,22 +61,22 @@ public class CustomerLimit extends BunqModel {
   @SerializedName("limit_card_debit_replacement")
   private Integer limitCardDebitReplacement;
 
-  public static BunqResponse<List<CustomerLimit>> list(ApiContext apiContext, Integer userId) {
-    return list(apiContext, userId, new HashMap<>());
-  }
-
-  public static BunqResponse<List<CustomerLimit>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
-    return list(apiContext, userId, params, new HashMap<>());
-  }
-
   /**
    * Get all limits for the authenticated user.
    */
-  public static BunqResponse<List<CustomerLimit>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
+  public static BunqResponse<List<CustomerLimit>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
     return fromJsonList(CustomerLimit.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<CustomerLimit>> list() {
+    return list(null, null);
+  }
+
+  public static BunqResponse<List<CustomerLimit>> list(Map<String, String> params) {
+    return list(params, null);
   }
 
   /**

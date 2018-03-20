@@ -38,6 +38,8 @@ public class DraftShareInviteBankEntry extends BunqModel {
 
   public DraftShareInviteBankEntry(ShareDetail shareDetail) {
     this.shareDetail = shareDetail;
+    this.startDate = startDate;
+    this.endDate = endDate;
   }
 
   /**
