@@ -1,9 +1,11 @@
 package com.bunq.sdk.examples;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.Pagination;
 import com.bunq.sdk.model.generated.endpoint.Payment;
+
 import java.util.List;
 
 /**
@@ -31,19 +33,16 @@ public class PaymentListExample {
   /**
    * Constants to be changed to run the example.
    */
-  private static final int USER_ITEM_ID = 0; // Put your user ID here
   private static final int MONETARY_ACCOUNT_ITEM_ID = 0; // Put your monetary account ID here
 
   /**
    * @param args Command line arguments.
    */
   public static void main(String[] args) {
-    ApiContext apiContext = ApiContext.restore(API_CONTEXT_FILE_PATH);
+    BunqContext.loadApiContext(ApiContext.restore(API_CONTEXT_FILE_PATH));
     Pagination paginationCountOnly = new Pagination();
     paginationCountOnly.setCount(PAGE_SIZE);
     BunqResponse<List<Payment>> paymentListResponse = Payment.list(
-        apiContext,
-        USER_ITEM_ID,
         MONETARY_ACCOUNT_ITEM_ID,
         paginationCountOnly.getUrlParamsCountOnly()
     );
@@ -57,8 +56,6 @@ public class PaymentListExample {
     if (pagination.hasPreviousPage()) {
       System.out.println(MESSAGE_SECOND_LATEST_PAGE_IDS);
       List<Payment> previousPayments = Payment.list(
-          apiContext,
-          USER_ITEM_ID,
           MONETARY_ACCOUNT_ITEM_ID,
           pagination.getUrlParamsPreviousPage()
       ).getValue();
