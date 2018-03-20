@@ -5,11 +5,8 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -53,13 +50,6 @@ public class DraftPaymentEntry extends BunqModel {
   private List<AttachmentMonetaryAccountPayment> attachment;
 
   /**
-   * Whether or not sending a bunq.to payment is allowed.
-   */
-  @Expose
-  @SerializedName("allow_bunqto")
-  private Boolean allowBunqto;
-
-  /**
    * The id of the draft payment entry.
    */
   @Expose
@@ -85,6 +75,8 @@ public class DraftPaymentEntry extends BunqModel {
     this.amount = amount;
     this.counterpartyAlias = counterpartyAlias;
     this.description = description;
+    this.merchantReference = merchantReference;
+    this.attachment = attachment;
   }
 
   /**

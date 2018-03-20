@@ -5,9 +5,10 @@ import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
-import java.util.HashMap;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Tests:
@@ -37,19 +38,12 @@ public class PaymentChatTest extends BunqSdkTestBase {
   private static Integer paymentId;
 
   @BeforeClass
-  public static void setUp() throws Exception {
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(Payment.FIELD_COUNTERPARTY_ALIAS, counterPartyAliasOther);
-    requestMap.put(Payment.FIELD_AMOUNT, new Amount(AMOUNT_EUR, CURRENCY));
-    requestMap.put(Payment.FIELD_DESCRIPTION, PAYMENT_DESCRIPTION);
-    paymentId = Payment.create(apiContext, requestMap, userId, monetaryAccountId).getValue();
+  public static void setUp() {
+    paymentId = Payment.create(new Amount(AMOUNT_EUR, CURRENCY), counterPartyAliasOther, PAYMENT_DESCRIPTION).getValue();
   }
 
   private static void sendMessage(Integer chat_id) {
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(ChatMessageText.FIELD_TEXT, MESSAGE_TEXT);
-
-    ChatMessageText.create(apiContext, requestMap, userId, chat_id);
+    ChatMessageText.create(chat_id, MESSAGE_TEXT);
   }
 
   /**
@@ -59,10 +53,8 @@ public class PaymentChatTest extends BunqSdkTestBase {
    */
   @Test
   public void sendPaymentMessageTest() throws Exception {
-    HashMap<String, Object> requestMap = new HashMap<>();
-
     Integer chat_id = PaymentChat
-        .create(apiContext, requestMap, userId, monetaryAccountId, paymentId)
+        .create(paymentId)
         .getValue();
     sendMessage(chat_id);
   }

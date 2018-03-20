@@ -1,6 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -9,16 +8,13 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.InvoiceItemGroup;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
+import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Used to view a bunq invoice.
@@ -28,8 +24,8 @@ public class Invoice extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
 
   /**
    * Field constants.
@@ -41,7 +37,7 @@ public class Invoice extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "Invoice";
+  protected static final String OBJECT_TYPE_GET = "Invoice";
 
   /**
    * The id of the invoice object.
@@ -155,34 +151,58 @@ public class Invoice extends BunqModel {
   @SerializedName("vat_number")
   private String vatNumber;
 
-  public static BunqResponse<List<Invoice>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  @Expose
+  @SerializedName("request_reference_split_the_bill")
+  private List<RequestInquiryReference> requestReferenceSplitTheBill;
+
+  /**
+   */
+  public static BunqResponse<List<Invoice>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
+
+    return fromJsonList(Invoice.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<Invoice>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<List<Invoice>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<Invoice>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<Invoice>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<Invoice>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<Invoice> get(Integer invoiceId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), invoiceId), params, customHeaders);
 
-    return fromJsonList(Invoice.class, responseRaw, OBJECT_TYPE);
+    return fromJson(Invoice.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<Invoice> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer invoiceId) {
-    return get(apiContext, userId, monetaryAccountId, invoiceId, new HashMap<>());
+  public static BunqResponse<Invoice> get() {
+    return get(null, null, null, null);
   }
 
-  /**
-   */
-  public static BunqResponse<Invoice> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer invoiceId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, invoiceId), new HashMap<>(), customHeaders);
+  public static BunqResponse<Invoice> get(Integer invoiceId) {
+    return get(invoiceId, null, null, null);
+  }
 
-    return fromJson(Invoice.class, responseRaw, OBJECT_TYPE);
+  public static BunqResponse<Invoice> get(Integer invoiceId, Integer monetaryAccountId) {
+    return get(invoiceId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<Invoice> get(Integer invoiceId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(invoiceId, monetaryAccountId, params, null);
   }
 
   /**
@@ -362,6 +382,18 @@ public class Invoice extends BunqModel {
   }
 
   /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  public List<RequestInquiryReference> getRequestReferenceSplitTheBill() {
+    return this.requestReferenceSplitTheBill;
+  }
+
+  public void setRequestReferenceSplitTheBill(List<RequestInquiryReference> requestReferenceSplitTheBill) {
+    this.requestReferenceSplitTheBill = requestReferenceSplitTheBill;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -425,6 +457,10 @@ public class Invoice extends BunqModel {
     }
 
     if (this.vatNumber != null) {
+      return false;
+    }
+
+    if (this.requestReferenceSplitTheBill != null) {
       return false;
     }
 

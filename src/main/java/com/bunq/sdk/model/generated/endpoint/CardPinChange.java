@@ -1,22 +1,17 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.LabelCard;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * View for the pin change.
@@ -26,13 +21,13 @@ public class CardPinChange extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/pin-change";
-  private static final String ENDPOINT_URL_READ = "user/%s/card/%s/pin-change/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/pin-change";
+  protected static final String ENDPOINT_URL_READ = "user/%s/card/%s/pin-change/%s";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CardPinChange";
+  protected static final String OBJECT_TYPE_GET = "CardPinChange";
 
   /**
    * The id of the pin change.
@@ -76,34 +71,50 @@ public class CardPinChange extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public static BunqResponse<List<CardPinChange>> list(ApiContext apiContext, Integer userId, Integer cardId) {
-    return list(apiContext, userId, cardId, new HashMap<>());
+  /**
+   */
+  public static BunqResponse<List<CardPinChange>> list(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId), params, customHeaders);
+
+    return fromJsonList(CardPinChange.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<CardPinChange>> list(ApiContext apiContext, Integer userId, Integer cardId, Map<String, String> params) {
-    return list(apiContext, userId, cardId, params, new HashMap<>());
+  public static BunqResponse<List<CardPinChange>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<CardPinChange>> list(Integer cardId) {
+    return list(cardId, null, null);
+  }
+
+  public static BunqResponse<List<CardPinChange>> list(Integer cardId, Map<String, String> params) {
+    return list(cardId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<CardPinChange>> list(ApiContext apiContext, Integer userId, Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, cardId), params, customHeaders);
+  public static BunqResponse<CardPinChange> get(Integer cardId, Integer cardPinChangeId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId, cardPinChangeId), params, customHeaders);
 
-    return fromJsonList(CardPinChange.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CardPinChange.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<CardPinChange> get(ApiContext apiContext, Integer userId, Integer cardId, Integer cardPinChangeId) {
-    return get(apiContext, userId, cardId, cardPinChangeId, new HashMap<>());
+  public static BunqResponse<CardPinChange> get() {
+    return get(null, null, null, null);
   }
 
-  /**
-   */
-  public static BunqResponse<CardPinChange> get(ApiContext apiContext, Integer userId, Integer cardId, Integer cardPinChangeId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, cardId, cardPinChangeId), new HashMap<>(), customHeaders);
+  public static BunqResponse<CardPinChange> get(Integer cardId) {
+    return get(cardId, null, null, null);
+  }
 
-    return fromJson(CardPinChange.class, responseRaw, OBJECT_TYPE);
+  public static BunqResponse<CardPinChange> get(Integer cardId, Integer cardPinChangeId) {
+    return get(cardId, cardPinChangeId, null, null);
+  }
+
+  public static BunqResponse<CardPinChange> get(Integer cardId, Integer cardPinChangeId, Map<String, String> params) {
+    return get(cardId, cardPinChangeId, params, null);
   }
 
   /**

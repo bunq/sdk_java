@@ -1,22 +1,16 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.PermittedDevice;
-import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Create a credential of a user for server authentication, or delete the credential of a user
@@ -27,13 +21,13 @@ public class UserCredentialPasswordIp extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_READ = "user/%s/credential-password-ip/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/credential-password-ip";
+  protected static final String ENDPOINT_URL_READ = "user/%s/credential-password-ip/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/credential-password-ip";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CredentialPasswordIp";
+  protected static final String OBJECT_TYPE_GET = "CredentialPasswordIp";
 
   /**
    * The id of the credential.
@@ -84,34 +78,42 @@ public class UserCredentialPasswordIp extends BunqModel {
   @SerializedName("permitted_device")
   private PermittedDevice permittedDevice;
 
-  public static BunqResponse<UserCredentialPasswordIp> get(ApiContext apiContext, Integer userId, Integer userCredentialPasswordIpId) {
-    return get(apiContext, userId, userCredentialPasswordIpId, new HashMap<>());
+  /**
+   */
+  public static BunqResponse<UserCredentialPasswordIp> get(Integer userCredentialPasswordIpId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), userCredentialPasswordIpId), params, customHeaders);
+
+    return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<UserCredentialPasswordIp> get() {
+    return get(null, null, null);
+  }
+
+  public static BunqResponse<UserCredentialPasswordIp> get(Integer userCredentialPasswordIpId) {
+    return get(userCredentialPasswordIpId, null, null);
+  }
+
+  public static BunqResponse<UserCredentialPasswordIp> get(Integer userCredentialPasswordIpId, Map<String, String> params) {
+    return get(userCredentialPasswordIpId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<UserCredentialPasswordIp> get(ApiContext apiContext, Integer userId, Integer userCredentialPasswordIpId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, userCredentialPasswordIpId), new HashMap<>(), customHeaders);
+  public static BunqResponse<List<UserCredentialPasswordIp>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-    return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<UserCredentialPasswordIp>> list(ApiContext apiContext, Integer userId) {
-    return list(apiContext, userId, new HashMap<>());
+  public static BunqResponse<List<UserCredentialPasswordIp>> list() {
+    return list(null, null);
   }
 
-  public static BunqResponse<List<UserCredentialPasswordIp>> list(ApiContext apiContext, Integer userId, Map<String, String> params) {
-    return list(apiContext, userId, params, new HashMap<>());
-  }
-
-  /**
-   */
-  public static BunqResponse<List<UserCredentialPasswordIp>> list(ApiContext apiContext, Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId), params, customHeaders);
-
-    return fromJsonList(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE);
+  public static BunqResponse<List<UserCredentialPasswordIp>> list(Map<String, String> params) {
+    return list(params, null);
   }
 
   /**

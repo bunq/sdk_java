@@ -1,17 +1,18 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Tests:
@@ -30,7 +31,7 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
   private static final ApiContext apiContext = getApiContext();
 
   private static byte[] getAttachmentPublicContentBytes(String uuid, ApiContext apiContext) {
-    return AttachmentPublicContent.list(apiContext, uuid).getValue();
+    return AttachmentPublicContent.list(uuid).getValue();
   }
 
   private static byte[] getRequestBytes(String path) {
@@ -48,7 +49,7 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
 
     byte[] RequestBytes = getRequestBytes(pathAttachmentIn);
 
-    return AttachmentPublic.create(apiContext, RequestBytes, customHeaders).getValue();
+    return AttachmentPublic.create(customHeaders, RequestBytes).getValue();
   }
 
   /**
@@ -57,7 +58,7 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
   @Test
   public void fileUploadAndRetrievalTest() throws Exception {
     String uuidBefore = uploadFileAndGetUuid();
-    AttachmentPublic uuidFromAttachmentPublic = AttachmentPublic.get(apiContext, uuidBefore)
+    AttachmentPublic uuidFromAttachmentPublic = AttachmentPublic.get(uuidBefore)
         .getValue();
 
     byte[] requestBytes = getRequestBytes(pathAttachmentIn);

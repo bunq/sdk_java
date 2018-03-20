@@ -2,6 +2,7 @@ package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.json.BunqGsonBuilder;
+import com.bunq.sdk.model.core.DeviceServerInternal;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.generated.endpoint.DeviceServer;
@@ -12,7 +13,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
@@ -178,19 +178,7 @@ public class ApiContext implements java.io.Serializable {
   }
 
   private void initializeDeviceRegistration(String deviceDescription, List<String> permittedIps) {
-    Map<String, Object> deviceServerRequestBody = generateDeviceServerRequestBodyBytes(
-        deviceDescription, permittedIps);
-    DeviceServer.create(this, deviceServerRequestBody);
-  }
-
-  private Map<String, Object> generateDeviceServerRequestBodyBytes(String description,
-      List<String> permittedIps) {
-    HashMap<String, Object> deviceServerRequestBody = new HashMap<>();
-    deviceServerRequestBody.put(DeviceServer.FIELD_DESCRIPTION, description);
-    deviceServerRequestBody.put(DeviceServer.FIELD_SECRET, apiKey);
-    deviceServerRequestBody.put(DeviceServer.FIELD_PERMITTED_IPS, permittedIps);
-
-    return deviceServerRequestBody;
+    DeviceServerInternal.create(this, deviceDescription, this.apiKey, permittedIps);
   }
 
   /**
@@ -221,7 +209,7 @@ public class ApiContext implements java.io.Serializable {
   }
 
   private void deleteSession() {
-    Session.delete(this, SESSION_ID_DUMMY);
+    Session.delete(SESSION_ID_DUMMY);
   }
 
   /**
@@ -275,8 +263,12 @@ public class ApiContext implements java.io.Serializable {
   /**
    * @return The base URI of the current environment.
    */
-  public URI getBaseUri() {
+  public String getBaseUri() {
     return environmentType.getBaseUri();
+  }
+
+  public String getApiVersion() {
+    return environmentType.getApiVersion();
   }
 
   /**

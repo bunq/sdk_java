@@ -17,11 +17,6 @@ import java.util.Map;
 public class ChatConversationSupportExternal extends BunqModel {
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "SupportConversationExternal";
-
-  /**
    * The id of this conversation.
    */
   @Expose

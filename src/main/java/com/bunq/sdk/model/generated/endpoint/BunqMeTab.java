@@ -1,20 +1,16 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * bunq.me tabs allows you to create a payment request and share the link through e-mail, chat,
@@ -26,10 +22,10 @@ public class BunqMeTab extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/bunqme-tab";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/bunqme-tab/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/bunqme-tab";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/bunqme-tab/%s";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/bunqme-tab";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/bunqme-tab/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/bunqme-tab";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/bunqme-tab/%s";
 
   /**
    * Field constants.
@@ -40,7 +36,7 @@ public class BunqMeTab extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "BunqMeTab";
+  protected static final String OBJECT_TYPE_GET = "BunqMeTab";
 
   /**
    * The id of the created bunq.me.
@@ -105,62 +101,120 @@ public class BunqMeTab extends BunqModel {
   @SerializedName("result_inquiries")
   private List<BunqMeTabResultInquiry> resultInquiries;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
-
   /**
+   * @param bunqmeTabEntry The bunq.me entry containing the payment information.
+   * @param status The status of the bunq.me. Ignored in POST requests but can be used for
+   * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_BUNQME_TAB_ENTRY, bunqmeTabEntry);
+    requestMap.put(FIELD_STATUS, status);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<BunqMeTab> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, bunqMeTabId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry) {
+    return create(bunqmeTabEntry, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId) {
+    return create(bunqmeTabEntry, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status) {
+    return create(bunqmeTabEntry, monetaryAccountId, status, null);
   }
 
   /**
+   * @param status The status of the bunq.me. Ignored in POST requests but can be used for
+   * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    */
-  public static BunqResponse<BunqMeTab> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_STATUS, status);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, bunqMeTabId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabId), requestBytes, customHeaders);
 
-    return fromJson(BunqMeTab.class, responseRaw, OBJECT_TYPE);
+    return processForId(responseRaw);
   }
 
-  public static BunqResponse<List<BunqMeTab>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer bunqMeTabId) {
+    return update(bunqMeTabId, null, null, null);
   }
 
-  public static BunqResponse<List<BunqMeTab>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId) {
+    return update(bunqMeTabId, monetaryAccountId, null, null);
   }
 
-  /**
-   */
-  public static BunqResponse<List<BunqMeTab>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
-
-    return fromJsonList(BunqMeTab.class, responseRaw, OBJECT_TYPE);
-  }
-
-  public static BunqResponse<BunqMeTab> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId) {
-    return get(apiContext, userId, monetaryAccountId, bunqMeTabId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status) {
+    return update(bunqMeTabId, monetaryAccountId, status, null);
   }
 
   /**
    */
-  public static BunqResponse<BunqMeTab> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer bunqMeTabId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, bunqMeTabId), new HashMap<>(), customHeaders);
+  public static BunqResponse<List<BunqMeTab>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
-    return fromJson(BunqMeTab.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(BunqMeTab.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<BunqMeTab>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<BunqMeTab>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<BunqMeTab>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
+  }
+
+  /**
+   */
+  public static BunqResponse<BunqMeTab> get(Integer bunqMeTabId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabId), params, customHeaders);
+
+    return fromJson(BunqMeTab.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<BunqMeTab> get() {
+    return get(null, null, null, null);
+  }
+
+  public static BunqResponse<BunqMeTab> get(Integer bunqMeTabId) {
+    return get(bunqMeTabId, null, null, null);
+  }
+
+  public static BunqResponse<BunqMeTab> get(Integer bunqMeTabId, Integer monetaryAccountId) {
+    return get(bunqMeTabId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<BunqMeTab> get(Integer bunqMeTabId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(bunqMeTabId, monetaryAccountId, params, null);
   }
 
   /**

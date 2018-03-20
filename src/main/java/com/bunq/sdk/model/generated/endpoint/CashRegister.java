@@ -1,11 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.Geolocation;
 import com.bunq.sdk.model.generated.object.NotificationFilter;
@@ -13,12 +11,10 @@ import com.bunq.sdk.model.generated.object.TabTextWaitingScreen;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * CashRegisters are virtual points of sale. They have a specific name and avatar, and
@@ -33,10 +29,10 @@ public class CashRegister extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register";
 
   /**
    * Field constants.
@@ -51,7 +47,7 @@ public class CashRegister extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "CashRegister";
+  protected static final String OBJECT_TYPE_GET = "CashRegister";
 
   /**
    * The id of the created CashRegister.
@@ -117,71 +113,187 @@ public class CashRegister extends BunqModel {
   @SerializedName("tab_text_waiting_screen")
   private List<TabTextWaitingScreen> tabTextWaitingScreen;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
-
   /**
    * Create a new CashRegister. Only an UserCompany can create a CashRegisters. They need to be
    * created with status PENDING_APPROVAL, an bunq admin has to approve your CashRegister before
    * you can use it. In the sandbox testing environment an CashRegister will be automatically
    * approved immediately after creation.
+   * @param name The name of the CashRegister. Must be unique for this MonetaryAccount.
+   * @param status The status of the CashRegister. Can only be created or updated with
+   * PENDING_APPROVAL or CLOSED.
+   * @param avatarUuid The UUID of the avatar of the CashRegister. Use the calls
+   * /attachment-public and /avatar to create a new Avatar and get its UUID.
+   * @param location The geolocation of the CashRegister.
+   * @param notificationFilters The types of notifications that will result in a push notification
+   * or URL callback for this CashRegister.
+   * @param tabTextWaitingScreen The tab text for waiting screen of CashRegister.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_NAME, name);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_LOCATION, location);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<CashRegister> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
-    return get(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name) {
+    return create(name, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name, String status) {
+    return create(name, status, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name, String status, String avatarUuid) {
+    return create(name, status, avatarUuid, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId) {
+    return create(name, status, avatarUuid, monetaryAccountId, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location) {
+    return create(name, status, avatarUuid, monetaryAccountId, location, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters) {
+    return create(name, status, avatarUuid, monetaryAccountId, location, notificationFilters, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen) {
+    return create(name, status, avatarUuid, monetaryAccountId, location, notificationFilters, tabTextWaitingScreen, null);
   }
 
   /**
    * Get a specific CashRegister.
    */
-  public static BunqResponse<CashRegister> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId), new HashMap<>(), customHeaders);
+  public static BunqResponse<CashRegister> get(Integer cashRegisterId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), params, customHeaders);
 
-    return fromJson(CashRegister.class, responseRaw, OBJECT_TYPE);
+    return fromJson(CashRegister.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
+  public static BunqResponse<CashRegister> get() {
+    return get(null, null, null, null);
+  }
+
+  public static BunqResponse<CashRegister> get(Integer cashRegisterId) {
+    return get(cashRegisterId, null, null, null);
+  }
+
+  public static BunqResponse<CashRegister> get(Integer cashRegisterId, Integer monetaryAccountId) {
+    return get(cashRegisterId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<CashRegister> get(Integer cashRegisterId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(cashRegisterId, monetaryAccountId, params, null);
   }
 
   /**
    * Modify or close an existing CashRegister. You must set the status back to PENDING_APPROVAL if
    * you modify the name, avatar or location of a CashRegister. To close a cash register put its
    * status to CLOSED.
+   * @param name The name of the CashRegister. Must be unique for this MonetaryAccount.
+   * @param status The status of the CashRegister. Can only be created or updated with
+   * PENDING_APPROVAL or CLOSED.
+   * @param avatarUuid The UUID of the avatar of the CashRegister. Use the calls
+   * /attachment-public and /avatar to create a new Avatar and get its UUID.
+   * @param location The geolocation of the CashRegister.
+   * @param notificationFilters The types of notifications that will result in a push notification
+   * or URL callback for this CashRegister.
+   * @param tabTextWaitingScreen The tab text for waiting screen of CashRegister.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_NAME, name);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_LOCATION, location);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, cashRegisterId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<List<CashRegister>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer cashRegisterId) {
+    return update(cashRegisterId, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<List<CashRegister>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId) {
+    return update(cashRegisterId, monetaryAccountId, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name) {
+    return update(cashRegisterId, monetaryAccountId, name, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status) {
+    return update(cashRegisterId, monetaryAccountId, name, status, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid) {
+    return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location) {
+    return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters) {
+    return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, notificationFilters, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen) {
+    return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, notificationFilters, tabTextWaitingScreen, null);
   }
 
   /**
    * Get a collection of CashRegister for a given user and monetary account.
    */
-  public static BunqResponse<List<CashRegister>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<List<CashRegister>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
-    return fromJsonList(CashRegister.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(CashRegister.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<CashRegister>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<CashRegister>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<CashRegister>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**

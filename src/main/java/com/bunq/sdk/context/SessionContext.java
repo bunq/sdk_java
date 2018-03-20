@@ -1,5 +1,7 @@
 package com.bunq.sdk.context;
 
+import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
@@ -11,6 +13,11 @@ import java.util.Date;
  * Context of your current bunq Public API session.
  */
 class SessionContext implements java.io.Serializable {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_UNEXPECTED_USER_TYPE = "Unexpected user type.";
 
   /**
    * Default assumed value for session timeout.
@@ -36,12 +43,27 @@ class SessionContext implements java.io.Serializable {
   @SerializedName("expiry_time")
   private Date expiryTime;
 
+  @Expose
+  @SerializedName("user_id")
+  private Integer userId;
+
   /**
    * @param sessionServer Object containing the session info.
    */
   SessionContext(SessionServer sessionServer) {
     this.token = sessionServer.getSessionToken().getToken();
     this.expiryTime = calculateExpiryTime(sessionServer);
+    this.userId = getUserId(sessionServer.getReferencedObject());
+  }
+
+  private Integer getUserId(BunqModel user) {
+    if (user instanceof UserPerson) {
+      return ((UserPerson) user).getId();
+    } else if (user instanceof UserCompany) {
+      return  ((UserCompany) user).getId();
+    } else {
+      throw new BunqException(ERROR_UNEXPECTED_USER_TYPE);
+    }
   }
 
   private static Date calculateExpiryTime(SessionServer sessionServer) {
@@ -74,6 +96,10 @@ class SessionContext implements java.io.Serializable {
 
   Date getExpiryTime() {
     return expiryTime;
+  }
+
+  public Integer getUserId() {
+    return userId;
   }
 
 }

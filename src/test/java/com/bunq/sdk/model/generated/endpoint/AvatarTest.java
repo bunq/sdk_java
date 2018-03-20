@@ -1,16 +1,17 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import static org.junit.Assert.assertArrayEquals;
-
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
+import org.apache.commons.io.FileUtils;
+import org.junit.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Tests:
@@ -55,16 +56,12 @@ public class AvatarTest extends BunqSdkTestBase {
     byte[] fileContentsSend = getFileContentBytes(pathAttachmentIn);
     String attachmentPublicUuid = uploadAvatar(fileContentsSend);
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(Avatar.FIELD_ATTACHMENT_PUBLIC_UUID, attachmentPublicUuid);
+    String avatarUuid = Avatar.create(attachmentPublicUuid).getValue();
 
-    String avatarUuid = Avatar.create(apiContext, requestMap).getValue();
-
-    String attachmentPublicUuidFromAvatar = Avatar.get(apiContext, avatarUuid).getValue()
+    String attachmentPublicUuidFromAvatar = Avatar.get(avatarUuid).getValue()
         .getImage().get(INDEX_FIRST).getAttachmentPublicUuid();
 
-    byte[] fileContentsReceived = AttachmentPublicContent.list(apiContext,
-        attachmentPublicUuidFromAvatar).getValue();
+    byte[] fileContentsReceived = AttachmentPublicContent.list(attachmentPublicUuidFromAvatar).getValue();
 
     assertArrayEquals(fileContentsSend, fileContentsReceived);
   }
@@ -74,7 +71,7 @@ public class AvatarTest extends BunqSdkTestBase {
     customHeaders.put(ApiClient.HEADER_ATTACHMENT_DESCRIPTION, attachmentDescription);
     customHeaders.put(ApiClient.HEADER_CONTENT_TYPE, contentType);
 
-    return AttachmentPublic.create(apiContext, file_contents, customHeaders).getValue();
+    return AttachmentPublic.create(customHeaders, file_contents).getValue();
   }
 
 }

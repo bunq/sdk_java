@@ -1,12 +1,13 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.exception.BunqException;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Tests:
@@ -25,16 +26,6 @@ public class PaginationTest {
   @Rule
   public final ExpectedException exception = ExpectedException.none();
 
-  @Test
-  public void getUrlParamsCountOnlyTest() {
-    Pagination pagination = createPaginationWithAllPropertiesSet();
-    Map<String, String> urlParamsCountOnlyExpected = new HashMap<>();
-    urlParamsCountOnlyExpected.put(Pagination.PARAM_COUNT,
-        Integer.toString(PAGINATION_COUNT_CUSTOM));
-
-    Assert.assertEquals(urlParamsCountOnlyExpected, pagination.getUrlParamsCountOnly());
-  }
-
   private static Pagination createPaginationWithAllPropertiesSet() {
     Pagination pagination = new Pagination();
     pagination.setOlderId(PAGINATION_OLDER_ID_CUSTOM);
@@ -43,6 +34,16 @@ public class PaginationTest {
     pagination.setCount(PAGINATION_COUNT_CUSTOM);
 
     return pagination;
+  }
+
+  @Test
+  public void getUrlParamsCountOnlyTest() {
+    Pagination pagination = createPaginationWithAllPropertiesSet();
+    Map<String, String> urlParamsCountOnlyExpected = new HashMap<>();
+    urlParamsCountOnlyExpected.put(Pagination.PARAM_COUNT,
+        Integer.toString(PAGINATION_COUNT_CUSTOM));
+
+    Assert.assertEquals(urlParamsCountOnlyExpected, pagination.getUrlParamsCountOnly());
   }
 
   @Test

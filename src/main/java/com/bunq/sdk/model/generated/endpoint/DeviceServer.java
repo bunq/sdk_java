@@ -1,20 +1,16 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * After having created an Installation you can now create a DeviceServer. A DeviceServer is
@@ -25,9 +21,9 @@ public class DeviceServer extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "device-server";
-  private static final String ENDPOINT_URL_READ = "device-server/%s";
-  private static final String ENDPOINT_URL_LISTING = "device-server";
+  protected static final String ENDPOINT_URL_CREATE = "device-server";
+  protected static final String ENDPOINT_URL_READ = "device-server/%s";
+  protected static final String ENDPOINT_URL_LISTING = "device-server";
 
   /**
    * Field constants.
@@ -39,7 +35,7 @@ public class DeviceServer extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "DeviceServer";
+  protected static final String OBJECT_TYPE_GET = "DeviceServer";
 
   /**
    * The id of the DeviceServer as created on the server.
@@ -83,10 +79,6 @@ public class DeviceServer extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap) {
-    return create(apiContext, requestMap, new HashMap<>());
-  }
-
   /**
    * Create a new DeviceServer providing the installation token in the header and signing the
    * request with the private part of the key you used to create the installation. The API Key
@@ -95,45 +87,84 @@ public class DeviceServer extends BunqModel {
    * the IP address has changed after the POST device-server.<br/><br/>Find out more at this link
    * <a href="https://bunq.com/en/apikey-dynamic-ip"
    * target="_blank">https://bunq.com/en/apikey-dynamic-ip</a>.
+   * @param description The description of the DeviceServer. This is only for your own reference
+   * when reading the DeviceServer again.
+   * @param secret The API key. You can request an API key in the bunq app.
+   * @param permittedIps An array of IPs (v4 or v6) this DeviceServer will be able to do calls
+   * from. These will be linked to the API key.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_SECRET, secret);
+    requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<DeviceServer> get(ApiContext apiContext, Integer deviceServerId) {
-    return get(apiContext, deviceServerId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String description) {
+    return create(description, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String description, String secret) {
+    return create(description, secret, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps) {
+    return create(description, secret, permittedIps, null);
   }
 
   /**
    * Get one of your DeviceServers.
    */
-  public static BunqResponse<DeviceServer> get(ApiContext apiContext, Integer deviceServerId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceServerId), new HashMap<>(), customHeaders);
+  public static BunqResponse<DeviceServer> get(Integer deviceServerId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceServerId), params, customHeaders);
 
-    return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE);
+    return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext) {
-    return list(apiContext, new HashMap<>());
+  public static BunqResponse<DeviceServer> get() {
+    return get(null, null, null);
   }
 
-  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext, Map<String, String> params) {
-    return list(apiContext, params, new HashMap<>());
+  public static BunqResponse<DeviceServer> get(Integer deviceServerId) {
+    return get(deviceServerId, null, null);
+  }
+
+  public static BunqResponse<DeviceServer> get(Integer deviceServerId, Map<String, String> params) {
+    return get(deviceServerId, params, null);
   }
 
   /**
    * Get a collection of all the DeviceServers you have created.
    */
-  public static BunqResponse<List<DeviceServer>> list(ApiContext apiContext, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<List<DeviceServer>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
-    return fromJsonList(DeviceServer.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(DeviceServer.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<DeviceServer>> list() {
+    return list(null, null);
+  }
+
+  public static BunqResponse<List<DeviceServer>> list(Map<String, String> params) {
+    return list(params, null);
   }
 
   /**

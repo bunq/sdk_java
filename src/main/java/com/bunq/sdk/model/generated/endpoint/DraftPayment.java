@@ -1,24 +1,21 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.DraftPaymentAnchorObject;
 import com.bunq.sdk.model.generated.object.DraftPaymentEntry;
 import com.bunq.sdk.model.generated.object.DraftPaymentResponse;
 import com.bunq.sdk.model.generated.object.LabelUser;
+import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * A DraftPayment is like a regular Payment, but it needs to be accepted by the sending party
@@ -29,10 +26,10 @@ public class DraftPayment extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/draft-payment";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/draft-payment/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/draft-payment";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/draft-payment/%s";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/draft-payment";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/draft-payment/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/draft-payment";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/draft-payment/%s";
 
   /**
    * Field constants.
@@ -45,7 +42,7 @@ public class DraftPayment extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "DraftPayment";
+  protected static final String OBJECT_TYPE_GET = "DraftPayment";
 
   /**
    * The id of the created DrafPayment.
@@ -104,66 +101,159 @@ public class DraftPayment extends BunqModel {
   @SerializedName("object")
   private DraftPaymentAnchorObject object;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
+  /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  @Expose
+  @SerializedName("request_reference_split_the_bill")
+  private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
    * Create a new DraftPayment.
+   * @param entries The list of entries in the DraftPayment. Each entry will result in a payment
+   * when the DraftPayment is accepted.
+   * @param numberOfRequiredAccepts The number of accepts that are required for the draft payment
+   * to receive status ACCEPTED. Currently only 1 is valid.
+   * @param status The status of the DraftPayment.
+   * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
+   * DraftPayment. This needs to be provided to prevent race conditions.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_ENTRIES, entries);
+    requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
+    requestMap.put(FIELD_NUMBER_OF_REQUIRED_ACCEPTS, numberOfRequiredAccepts);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer draftPaymentId) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, draftPaymentId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries) {
+    return create(entries, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts) {
+    return create(entries, numberOfRequiredAccepts, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, null, null);
+  }
+
+  public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, null);
   }
 
   /**
    * Update a DraftPayment.
+   * @param status The status of the DraftPayment.
+   * @param entries The list of entries in the DraftPayment. Each entry will result in a payment
+   * when the DraftPayment is accepted.
+   * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
+   * DraftPayment. This needs to be provided to prevent race conditions.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer draftPaymentId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_ENTRIES, entries);
+    requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, draftPaymentId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<List<DraftPayment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer draftPaymentId) {
+    return update(draftPaymentId, null, null, null, null, null);
   }
 
-  public static BunqResponse<List<DraftPayment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId) {
+    return update(draftPaymentId, monetaryAccountId, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status) {
+    return update(draftPaymentId, monetaryAccountId, status, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries) {
+    return update(draftPaymentId, monetaryAccountId, status, entries, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp) {
+    return update(draftPaymentId, monetaryAccountId, status, entries, previousUpdatedTimestamp, null);
   }
 
   /**
    * Get a listing of all DraftPayments from a given MonetaryAccount.
    */
-  public static BunqResponse<List<DraftPayment>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<List<DraftPayment>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
-    return fromJsonList(DraftPayment.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(DraftPayment.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<DraftPayment> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer draftPaymentId) {
-    return get(apiContext, userId, monetaryAccountId, draftPaymentId, new HashMap<>());
+  public static BunqResponse<List<DraftPayment>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<DraftPayment>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<DraftPayment>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**
    * Get a specific DraftPayment.
    */
-  public static BunqResponse<DraftPayment> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer draftPaymentId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, draftPaymentId), new HashMap<>(), customHeaders);
+  public static BunqResponse<DraftPayment> get(Integer draftPaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), params, customHeaders);
 
-    return fromJson(DraftPayment.class, responseRaw, OBJECT_TYPE);
+    return fromJson(DraftPayment.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<DraftPayment> get() {
+    return get(null, null, null, null);
+  }
+
+  public static BunqResponse<DraftPayment> get(Integer draftPaymentId) {
+    return get(draftPaymentId, null, null, null);
+  }
+
+  public static BunqResponse<DraftPayment> get(Integer draftPaymentId, Integer monetaryAccountId) {
+    return get(draftPaymentId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<DraftPayment> get(Integer draftPaymentId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(draftPaymentId, monetaryAccountId, params, null);
   }
 
   /**
@@ -256,6 +346,18 @@ public class DraftPayment extends BunqModel {
   }
 
   /**
+   * The reference to the object used for split the bill. Can be RequestInquiry or
+   * RequestInquiryBatch
+   */
+  public List<RequestInquiryReference> getRequestReferenceSplitTheBill() {
+    return this.requestReferenceSplitTheBill;
+  }
+
+  public void setRequestReferenceSplitTheBill(List<RequestInquiryReference> requestReferenceSplitTheBill) {
+    this.requestReferenceSplitTheBill = requestReferenceSplitTheBill;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -287,6 +389,10 @@ public class DraftPayment extends BunqModel {
     }
 
     if (this.object != null) {
+      return false;
+    }
+
+    if (this.requestReferenceSplitTheBill != null) {
       return false;
     }
 

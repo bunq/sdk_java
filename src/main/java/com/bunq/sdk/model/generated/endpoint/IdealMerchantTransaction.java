@@ -1,22 +1,18 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * View for requesting iDEAL transactions and polling their status.
@@ -26,20 +22,21 @@ public class IdealMerchantTransaction extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/ideal-merchant-transaction";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/ideal-merchant-transaction/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/ideal-merchant-transaction";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/ideal-merchant-transaction";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/ideal-merchant-transaction/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/ideal-merchant-transaction";
 
   /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
   public static final String FIELD_ISSUER = "issuer";
+  public static final String FIELD_CALLBACK_TYPE = "callback_type";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "IdealMerchantTransaction";
+  protected static final String OBJECT_TYPE_GET = "IdealMerchantTransaction";
 
   /**
    * The id of the monetary account this ideal merchant transaction links to.
@@ -139,48 +136,87 @@ public class IdealMerchantTransaction extends BunqModel {
   @SerializedName("allow_chat")
   private Boolean allowChat;
 
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, new HashMap<>());
-  }
-
   /**
+   * @param amountRequested The requested amount of money to add.
+   * @param issuer The BIC of the issuing bank to ask for money.
    */
-  public static BunqResponse<Integer> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> create(Amount amountRequested, String issuer, Integer monetaryAccountId, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_AMOUNT_REQUESTED, amountRequested);
+    requestMap.put(FIELD_ISSUER, issuer);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<IdealMerchantTransaction> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer idealMerchantTransactionId) {
-    return get(apiContext, userId, monetaryAccountId, idealMerchantTransactionId, new HashMap<>());
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amountRequested) {
+    return create(amountRequested, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amountRequested, String issuer) {
+    return create(amountRequested, issuer, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amountRequested, String issuer, Integer monetaryAccountId) {
+    return create(amountRequested, issuer, monetaryAccountId, null);
   }
 
   /**
    */
-  public static BunqResponse<IdealMerchantTransaction> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer idealMerchantTransactionId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, idealMerchantTransactionId), new HashMap<>(), customHeaders);
+  public static BunqResponse<IdealMerchantTransaction> get(Integer idealMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), idealMerchantTransactionId), params, customHeaders);
 
-    return fromJson(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE);
+    return fromJson(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<IdealMerchantTransaction>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId) {
-    return list(apiContext, userId, monetaryAccountId, new HashMap<>());
+  public static BunqResponse<IdealMerchantTransaction> get() {
+    return get(null, null, null, null);
   }
 
-  public static BunqResponse<List<IdealMerchantTransaction>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, params, new HashMap<>());
+  public static BunqResponse<IdealMerchantTransaction> get(Integer idealMerchantTransactionId) {
+    return get(idealMerchantTransactionId, null, null, null);
+  }
+
+  public static BunqResponse<IdealMerchantTransaction> get(Integer idealMerchantTransactionId, Integer monetaryAccountId) {
+    return get(idealMerchantTransactionId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<IdealMerchantTransaction> get(Integer idealMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(idealMerchantTransactionId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<IdealMerchantTransaction>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId), params, customHeaders);
+  public static BunqResponse<List<IdealMerchantTransaction>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
-    return fromJsonList(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<IdealMerchantTransaction>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<IdealMerchantTransaction>> list(Integer monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<IdealMerchantTransaction>> list(Integer monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**

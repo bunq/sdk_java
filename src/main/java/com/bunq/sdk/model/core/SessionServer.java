@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.core;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -9,6 +10,11 @@ import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import java.util.HashMap;
 
 public class SessionServer extends BunqModel {
+
+  /**
+   * Error constants.
+   */
+  private static final String ERROR_ALL_FIELD_NULL = "All fields of an extended model or object are null.";
 
   /**
    * Endpoint name.
@@ -95,5 +101,15 @@ public class SessionServer extends BunqModel {
     }
 
     return true;
+  }
+
+  public BunqModel getReferencedObject() {
+    if (this.userCompany == null) {
+      return this.userPerson;
+    } else if (this.userPerson == null) {
+      return this.userCompany;
+    } else {
+      throw new BunqException(ERROR_ALL_FIELD_NULL);
+    }
   }
 }

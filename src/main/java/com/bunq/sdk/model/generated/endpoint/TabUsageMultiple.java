@@ -1,6 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -9,17 +8,14 @@ import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.BunqId;
 import com.bunq.sdk.model.generated.object.Geolocation;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.TabVisibility;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * TabUsageMultiple is a Tab that can be paid by multiple users. Just like the TabUsageSingle it
@@ -35,11 +31,11 @@ public class TabUsageMultiple extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple";
-  private static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple/%s";
-  private static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple/%s";
-  private static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple/%s";
-  private static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple/%s";
+  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple/%s";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-multiple";
 
   /**
    * Field constants.
@@ -60,7 +56,9 @@ public class TabUsageMultiple extends BunqModel {
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "TabUsageMultiple";
+  protected static final String OBJECT_TYPE_POST = "Uuid";
+  protected static final String OBJECT_TYPE_PUT = "Uuid";
+  protected static final String OBJECT_TYPE_GET = "TabUsageMultiple";
 
   /**
    * The uuid of the created TabUsageMultiple.
@@ -184,23 +182,119 @@ public class TabUsageMultiple extends BunqModel {
   @SerializedName("tab_attachment")
   private List<BunqId> tabAttachment;
 
-  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
-    return create(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
-  }
-
   /**
    * Create a TabUsageMultiple. On creation the status must be set to OPEN
+   * @param description The description of the TabUsageMultiple. Maximum 9000 characters. Field is
+   * required but can be an empty string.
+   * @param status The status of the TabUsageMultiple. On creation the status must be set to OPEN.
+   * You can change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status
+   * will remain PAYABLE.
+   * @param amountTotal The total amount of the Tab. Must be a positive amount. As long as the tab
+   * has the status OPEN you can change the total amount. This amount is not affected by the
+   * amounts of the TabItems. However, if you've created any TabItems for a Tab the sum of the
+   * amounts of these items must be equal to the total_amount of the Tab when you change its
+   * status to PAYABLE
+   * @param allowAmountHigher [DEPRECATED] Whether or not a higher amount can be paid.
+   * @param allowAmountLower [DEPRECATED] Whether or not a lower amount can be paid.
+   * @param wantTip [DEPRECATED] Whether or not the user paying the Tab should be asked if he
+   * wants to give a tip. When want_tip is set to true, allow_amount_higher must also be set to
+   * true and allow_amount_lower must be false.
+   * @param minimumAge The minimum age of the user paying the Tab.
+   * @param requireAddress Whether a billing and shipping address must be provided when paying the
+   * Tab. Possible values are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is
+   * NONE.
+   * @param redirectUrl The URL which the user is sent to after paying the Tab.
+   * @param visibility The visibility of a Tab. A Tab can be visible trough NearPay, the QR code
+   * of the CashRegister and its own QR code.
+   * @param expiration The moment when this Tab expires. Can be at most 365 days into the future.
+   * @param tabAttachment An array of attachments that describe the tab. Uploaded through the POST
+   * /user/{userid}/attachment-tab endpoint.
    */
-  public static BunqResponse<String> create(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility, String expiration, List<BunqId> tabAttachment, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_AMOUNT_TOTAL, amountTotal);
+    requestMap.put(FIELD_ALLOW_AMOUNT_HIGHER, allowAmountHigher);
+    requestMap.put(FIELD_ALLOW_AMOUNT_LOWER, allowAmountLower);
+    requestMap.put(FIELD_WANT_TIP, wantTip);
+    requestMap.put(FIELD_MINIMUM_AGE, minimumAge);
+    requestMap.put(FIELD_REQUIRE_ADDRESS, requireAddress);
+    requestMap.put(FIELD_REDIRECT_URL, redirectUrl);
+    requestMap.put(FIELD_VISIBILITY, visibility);
+    requestMap.put(FIELD_EXPIRATION, expiration);
+    requestMap.put(FIELD_TAB_ATTACHMENT, tabAttachment);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, userId, monetaryAccountId, cashRegisterId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
   }
 
-  public static BunqResponse<String> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageMultipleUuid) {
-    return update(apiContext, requestMap, userId, monetaryAccountId, cashRegisterId, tabUsageMultipleUuid, new HashMap<>());
+  public static BunqResponse<String> create() {
+    return create(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId) {
+    return create(cashRegisterId, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description) {
+    return create(cashRegisterId, description, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status) {
+    return create(cashRegisterId, description, status, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal) {
+    return create(cashRegisterId, description, status, amountTotal, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, minimumAge, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, null, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, visibility, null, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility, String expiration) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, visibility, expiration, null, null);
+  }
+
+  public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility, String expiration, List<BunqId> tabAttachment) {
+    return create(cashRegisterId, description, status, amountTotal, monetaryAccountId, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, visibility, expiration, tabAttachment, null);
   }
 
   /**
@@ -208,59 +302,148 @@ public class TabUsageMultiple extends BunqModel {
    * Once you change the status to PAYABLE the TabUsageMultiple will expire after a year
    * (default). If you've created any TabItems for a Tab the sum of the amounts of these items
    * must be equal to the total_amount of the Tab when you change its status to PAYABLE.
+   * @param status The status of the TabUsageMultiple. On creation the status must be set to OPEN.
+   * You can change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status
+   * will remain PAYABLE.
+   * @param amountTotal The total amount of the Tab. Must be a positive amount. As long as the tab
+   * has the status OPEN you can change the total amount. This amount is not affected by the
+   * amounts of the TabItems. However, if you've created any TabItems for a Tab the sum of the
+   * amounts of these items must be equal to the total_amount of the Tab when you change its
+   * status to PAYABLE
+   * @param visibility The visibility of a Tab. A Tab can be visible trough NearPay, the QR code
+   * of the CashRegister and its own QR code.
+   * @param expiration The moment when this Tab expires. Can be at most 365 days into the future.
+   * @param tabAttachment An array of attachments that describe the tab. Uploaded through the POST
+   * /user/{userid}/attachment-tab endpoint.
    */
-  public static BunqResponse<String> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageMultipleUuid, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status, Amount amountTotal, TabVisibility visibility, String expiration, List<BunqId> tabAttachment, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_AMOUNT_TOTAL, amountTotal);
+    requestMap.put(FIELD_VISIBILITY, visibility);
+    requestMap.put(FIELD_EXPIRATION, expiration);
+    requestMap.put(FIELD_TAB_ATTACHMENT, tabAttachment);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userId, monetaryAccountId, cashRegisterId, tabUsageMultipleUuid), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUsageMultipleUuid), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
   }
 
-  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageMultipleUuid) {
-    return delete(apiContext, userId, monetaryAccountId, cashRegisterId, tabUsageMultipleUuid, new HashMap<>());
+  public static BunqResponse<String> update(Integer cashRegisterId) {
+    return update(cashRegisterId, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid) {
+    return update(cashRegisterId, tabUsageMultipleUuid, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId) {
+    return update(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status) {
+    return update(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, status, null, null, null, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status, Amount amountTotal) {
+    return update(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, status, amountTotal, null, null, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status, Amount amountTotal, TabVisibility visibility) {
+    return update(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, status, amountTotal, visibility, null, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status, Amount amountTotal, TabVisibility visibility, String expiration) {
+    return update(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, status, amountTotal, visibility, expiration, null, null);
+  }
+
+  public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status, Amount amountTotal, TabVisibility visibility, String expiration, List<BunqId> tabAttachment) {
+    return update(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, status, amountTotal, visibility, expiration, tabAttachment, null);
   }
 
   /**
-   * Close a specific TabUsageMultiple. This request returns an empty response.
+   * Close a specific TabUsageMultiple.
    */
-  public static BunqResponse<NullType> delete(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageMultipleUuid, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, userId, monetaryAccountId, cashRegisterId, tabUsageMultipleUuid), customHeaders);
+  public static BunqResponse<TabUsageMultiple> delete(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUsageMultipleUuid), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<TabUsageMultiple> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageMultipleUuid) {
-    return get(apiContext, userId, monetaryAccountId, cashRegisterId, tabUsageMultipleUuid, new HashMap<>());
+  public static BunqResponse<TabUsageMultiple> delete(Integer cashRegisterId) {
+    return delete(cashRegisterId, null, null, null);
+  }
+
+  public static BunqResponse<TabUsageMultiple> delete(Integer cashRegisterId, String tabUsageMultipleUuid) {
+    return delete(cashRegisterId, tabUsageMultipleUuid, null, null);
+  }
+
+  public static BunqResponse<TabUsageMultiple> delete(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId) {
+    return delete(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, null);
   }
 
   /**
    * Get a specific TabUsageMultiple.
    */
-  public static BunqResponse<TabUsageMultiple> get(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, String tabUsageMultipleUuid, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userId, monetaryAccountId, cashRegisterId, tabUsageMultipleUuid), new HashMap<>(), customHeaders);
+  public static BunqResponse<TabUsageMultiple> get(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUsageMultipleUuid), params, customHeaders);
 
-    return fromJson(TabUsageMultiple.class, responseRaw, OBJECT_TYPE);
+    return fromJson(TabUsageMultiple.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<TabUsageMultiple>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId) {
-    return list(apiContext, userId, monetaryAccountId, cashRegisterId, new HashMap<>());
+  public static BunqResponse<TabUsageMultiple> get() {
+    return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<List<TabUsageMultiple>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> params) {
-    return list(apiContext, userId, monetaryAccountId, cashRegisterId, params, new HashMap<>());
+  public static BunqResponse<TabUsageMultiple> get(Integer cashRegisterId) {
+    return get(cashRegisterId, null, null, null, null);
+  }
+
+  public static BunqResponse<TabUsageMultiple> get(Integer cashRegisterId, String tabUsageMultipleUuid) {
+    return get(cashRegisterId, tabUsageMultipleUuid, null, null, null);
+  }
+
+  public static BunqResponse<TabUsageMultiple> get(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId) {
+    return get(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<TabUsageMultiple> get(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, Map<String, String> params) {
+    return get(cashRegisterId, tabUsageMultipleUuid, monetaryAccountId, params, null);
   }
 
   /**
    * Get a collection of TabUsageMultiple.
    */
-  public static BunqResponse<List<TabUsageMultiple>> list(ApiContext apiContext, Integer userId, Integer monetaryAccountId, Integer cashRegisterId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, userId, monetaryAccountId, cashRegisterId), params, customHeaders);
+  public static BunqResponse<List<TabUsageMultiple>> list(Integer cashRegisterId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), params, customHeaders);
 
-    return fromJsonList(TabUsageMultiple.class, responseRaw, OBJECT_TYPE);
+    return fromJsonList(TabUsageMultiple.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<TabUsageMultiple>> list() {
+    return list(null, null, null, null);
+  }
+
+  public static BunqResponse<List<TabUsageMultiple>> list(Integer cashRegisterId) {
+    return list(cashRegisterId, null, null, null);
+  }
+
+  public static BunqResponse<List<TabUsageMultiple>> list(Integer cashRegisterId, Integer monetaryAccountId) {
+    return list(cashRegisterId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<TabUsageMultiple>> list(Integer cashRegisterId, Integer monetaryAccountId, Map<String, String> params) {
+    return list(cashRegisterId, monetaryAccountId, params, null);
   }
 
   /**

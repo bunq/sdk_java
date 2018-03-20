@@ -1,14 +1,14 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
+import com.bunq.sdk.model.generated.object.BunqId;
+import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -16,12 +16,10 @@ import com.bunq.sdk.model.generated.object.Ubo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * With UserCompany you can retrieve information regarding the authenticated UserCompany and
@@ -34,8 +32,8 @@ public class UserCompany extends BunqModel {
   /**
    * Endpoint constants.
    */
-  private static final String ENDPOINT_URL_READ = "user-company/%s";
-  private static final String ENDPOINT_URL_UPDATE = "user-company/%s";
+  protected static final String ENDPOINT_URL_READ = "user-company/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user-company/%s";
 
   /**
    * Field constants.
@@ -54,13 +52,12 @@ public class UserCompany extends BunqModel {
   public static final String FIELD_SUB_STATUS = "sub_status";
   public static final String FIELD_SESSION_TIMEOUT = "session_timeout";
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
-  public static final String FIELD_COUNTER_BANK_IBAN = "counter_bank_iban";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
 
   /**
    * Object type.
    */
-  private static final String OBJECT_TYPE = "UserCompany";
+  protected static final String OBJECT_TYPE_GET = "UserCompany";
 
   /**
    * The id of the modified company.
@@ -234,6 +231,20 @@ public class UserCompany extends BunqModel {
   private Integer sessionTimeout;
 
   /**
+   * Card ids used for centralized card limits.
+   */
+  @Expose
+  @SerializedName("card_ids")
+  private List<BunqId> cardIds;
+
+  /**
+   * The centralized limits for user's cards.
+   */
+  @Expose
+  @SerializedName("card_limits")
+  private List<CardLimit> cardLimits;
+
+  /**
    * The amount the company can pay in the session without asking for credentials.
    */
   @Expose
@@ -269,33 +280,136 @@ public class UserCompany extends BunqModel {
   @SerializedName("billing_contract")
   private List<BillingContractSubscription> billingContract;
 
-  public static BunqResponse<UserCompany> get(ApiContext apiContext, Integer userCompanyId) {
-    return get(apiContext, userCompanyId, new HashMap<>());
-  }
-
   /**
    * Get a specific company.
    */
-  public static BunqResponse<UserCompany> get(ApiContext apiContext, Integer userCompanyId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userCompanyId), new HashMap<>(), customHeaders);
+  public static BunqResponse<UserCompany> get(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId()), params, customHeaders);
 
-    return fromJson(UserCompany.class, responseRaw, OBJECT_TYPE);
+    return fromJson(UserCompany.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userCompanyId) {
-    return update(apiContext, requestMap, userCompanyId, new HashMap<>());
+  public static BunqResponse<UserCompany> get() {
+    return get(null, null);
+  }
+
+  public static BunqResponse<UserCompany> get(Map<String, String> params) {
+    return get(params, null);
   }
 
   /**
    * Modify a specific company's data.
+   * @param name The company name.
+   * @param publicNickName The company's nick name.
+   * @param avatarUuid The public UUID of the company's avatar.
+   * @param addressMain The user's main address.
+   * @param addressPostal The company's postal address.
+   * @param language The person's preferred language. Formatted as a ISO 639-1 language code plus
+   * a ISO 3166-1 alpha-2 country code, seperated by an underscore.
+   * @param region The person's preferred region. Formatted as a ISO 639-1 language code plus a
+   * ISO 3166-1 alpha-2 country code, seperated by an underscore.
+   * @param country The country where the company is registered.
+   * @param ubo The names and birth dates of the company's ultimate beneficiary owners. Minimum
+   * zero, maximum four.
+   * @param chamberOfCommerceNumber The company's chamber of commerce number.
+   * @param status The user status. Can be: ACTIVE, SIGNUP, RECOVERY.
+   * @param subStatus The user sub-status. Can be: NONE, FACE_RESET, APPROVAL, APPROVAL_DIRECTOR,
+   * APPROVAL_PARENT, APPROVAL_SUPPORT, COUNTER_IBAN, IDEAL or SUBMIT.
+   * @param sessionTimeout The setting for the session timeout of the company in seconds.
+   * @param dailyLimitWithoutConfirmationLogin The amount the company can pay in the session
+   * without asking for credentials.
+   * @param notificationFilters The types of notifications that will result in a push notification
+   * or URL callback for this UserCompany.
    */
-  public static BunqResponse<Integer> update(ApiContext apiContext, Map<String, Object> requestMap, Integer userCompanyId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(apiContext);
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_NAME, name);
+    requestMap.put(FIELD_PUBLIC_NICK_NAME, publicNickName);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_ADDRESS_MAIN, addressMain);
+    requestMap.put(FIELD_ADDRESS_POSTAL, addressPostal);
+    requestMap.put(FIELD_LANGUAGE, language);
+    requestMap.put(FIELD_REGION, region);
+    requestMap.put(FIELD_COUNTRY, country);
+    requestMap.put(FIELD_UBO, ubo);
+    requestMap.put(FIELD_CHAMBER_OF_COMMERCE_NUMBER, chamberOfCommerceNumber);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_SESSION_TIMEOUT, sessionTimeout);
+    requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutConfirmationLogin);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, userCompanyId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update(String name) {
+    return update(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName) {
+    return update(name, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid) {
+    return update(name, publicNickName, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain) {
+    return update(name, publicNickName, avatarUuid, addressMain, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String status) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, status, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String status, String subStatus) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, status, subStatus, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String status, String subStatus, Integer sessionTimeout) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, status, subStatus, sessionTimeout, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null);
+  }
+
+  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters) {
+    return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, notificationFilters, null);
   }
 
   /**
@@ -566,6 +680,28 @@ public class UserCompany extends BunqModel {
   }
 
   /**
+   * Card ids used for centralized card limits.
+   */
+  public List<BunqId> getCardIds() {
+    return this.cardIds;
+  }
+
+  public void setCardIds(List<BunqId> cardIds) {
+    this.cardIds = cardIds;
+  }
+
+  /**
+   * The centralized limits for user's cards.
+   */
+  public List<CardLimit> getCardLimits() {
+    return this.cardLimits;
+  }
+
+  public void setCardLimits(List<CardLimit> cardLimits) {
+    this.cardLimits = cardLimits;
+  }
+
+  /**
    * The amount the company can pay in the session without asking for credentials.
    */
   public Amount getDailyLimitWithoutConfirmationLogin() {
@@ -717,6 +853,14 @@ public class UserCompany extends BunqModel {
     }
 
     if (this.sessionTimeout != null) {
+      return false;
+    }
+
+    if (this.cardIds != null) {
+      return false;
+    }
+
+    if (this.cardLimits != null) {
       return false;
     }
 

@@ -18,11 +18,6 @@ import java.util.Map;
 public class BunqMeTabResultResponse extends BunqModel {
 
   /**
-   * Object type.
-   */
-  private static final String OBJECT_TYPE = "BunqMeTabResultResponse";
-
-  /**
    * The payment made for the bunq.me tab.
    */
   @Expose

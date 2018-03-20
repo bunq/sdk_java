@@ -4,8 +4,9 @@ import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
-import java.util.HashMap;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 /**
  * Tests:
@@ -31,21 +32,11 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
   private static final String STATUS_WAITING = "WAITING_FOR_PAYMENT";
 
   private static String createTab() {
-    HashMap<String, Object> createMap = new HashMap<>();
-    createMap.put(TabUsageSingle.FIELD_DESCRIPTION, TAB_FIELD_DESCRIPTION);
-    createMap.put(TabUsageSingle.FIELD_STATUS, STATUS_OPEN);
-    createMap.put(TabUsageSingle.FIELD_AMOUNT_TOTAL, new Amount(AMOUNT_EUR, CURRENCY));
-
-    return TabUsageSingle.create(apiContext, createMap, userId, monetaryAccountId,
-        cashRegisterId).getValue();
+    return TabUsageSingle.create(cashRegisterId, TAB_FIELD_DESCRIPTION, STATUS_OPEN, new Amount(AMOUNT_EUR, CURRENCY)).getValue();
   }
 
   private static void addItemToTab(String tabUuid) {
-    HashMap<String, Object> tabItemMap = new HashMap<>();
-    tabItemMap.put(TabItemShop.FIELD_AMOUNT, new Amount(AMOUNT_EUR, CURRENCY));
-    tabItemMap.put(TabItemShop.FIELD_DESCRIPTION, TAB_ITEM_FIELD_DESCRIPTION);
-
-    TabItemShop.create(apiContext, tabItemMap, userId, monetaryAccountId, cashRegisterId, tabUuid);
+    TabItemShop.create(cashRegisterId, tabUuid, TAB_ITEM_FIELD_DESCRIPTION, null, null, null, null, null, new Amount(AMOUNT_EUR, CURRENCY));
   }
 
   /**
@@ -58,12 +49,8 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
     String tabUuid = createTab();
     addItemToTab(tabUuid);
 
-    HashMap<String, Object> updateMap = new HashMap<>();
-    updateMap.put(TabUsageSingle.FIELD_STATUS, STATUS_WAITING);
-    TabUsageSingle.update(apiContext, updateMap, userId, monetaryAccountId, cashRegisterId,
-        tabUuid);
-
-    TabUsageSingle.delete(apiContext, userId, monetaryAccountId, cashRegisterId, tabUuid);
+    TabUsageSingle.update(cashRegisterId, tabUuid, null, STATUS_WAITING);
+    TabUsageSingle.delete(cashRegisterId, tabUuid);
   }
 
 }

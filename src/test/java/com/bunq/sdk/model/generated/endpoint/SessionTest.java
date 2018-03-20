@@ -3,8 +3,10 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.exception.UnauthorizedException;
+import com.bunq.sdk.exception.ForbiddenException;
+
 import java.util.concurrent.TimeUnit;
+
 import org.junit.After;
 import org.junit.Test;
 
@@ -19,18 +21,16 @@ public class SessionTest extends BunqSdkTestBase {
    */
   private static final int SESSION_ID_DUMMY = 0;
   private static final int SECONDS_TO_SLEEP = 2;
-
-  private static String apiConfigPath = Config.getApiConfigPath();
-
   private static final ApiContext apiContext = getApiContext();
+  private static String apiConfigPath = Config.getApiConfigPath();
 
   /**
    * Tests deletion of the current session
    */
-  @Test(expected = UnauthorizedException.class)
+  @Test(expected = ForbiddenException.class)
   public void deleteSessionTest() throws Exception {
-    Session.delete(apiContext, SESSION_ID_DUMMY);
-    User.list(apiContext);
+    Session.delete(SESSION_ID_DUMMY);
+    User.list();
   }
 
   /**
