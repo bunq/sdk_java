@@ -59,6 +59,11 @@ public class UserContext {
     throw new BunqException(ERROR_NO_ACTIVE_MONETARY_ACCOUNT_FOUND);
   }
 
+  public void refreshContext() {
+    this.setUser(this.getUserObject());
+    this.initMainMonetaryAccount();
+  }
+
   public Integer getUserId() {
     return this.userId;
   }
