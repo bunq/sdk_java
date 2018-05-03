@@ -113,7 +113,6 @@ public class DraftShareInviteBank extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -139,7 +138,6 @@ public class DraftShareInviteBank extends BunqModel {
 
     return fromJson(DraftShareInviteBank.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<DraftShareInviteBank> get() {
     return get(null, null, null);
   }
@@ -176,6 +174,10 @@ public class DraftShareInviteBank extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteBankId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update() {
+    return update(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer draftShareInviteBankId) {

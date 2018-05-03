@@ -61,7 +61,6 @@ public class CardReplace extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }

@@ -1,11 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.MonetaryAccountSetting;
@@ -14,12 +12,10 @@ import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * With MonetaryAccountLight is a monetary account for bunq light users. Through this endpoint
@@ -285,7 +281,6 @@ requestMap.put(FIELD_SETTING, setting);
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null);
   }
@@ -339,7 +334,6 @@ requestMap.put(FIELD_SETTING, setting);
 
     return fromJson(MonetaryAccountLight.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<MonetaryAccountLight> get() {
     return get(null, null, null);
   }
@@ -397,6 +391,10 @@ requestMap.put(FIELD_SETTING, setting);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountLightId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update() {
+    return update(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer monetaryAccountLightId) {

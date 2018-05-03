@@ -150,7 +150,6 @@ public class CardResult extends BunqModel {
 
     return fromJson(CardResult.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<CardResult> get() {
     return get(null, null, null, null);
   }

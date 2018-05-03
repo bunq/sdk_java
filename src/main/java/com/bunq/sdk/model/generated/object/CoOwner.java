@@ -1,15 +1,9 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -20,7 +14,7 @@ public class CoOwner extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private List<LabelUser> alias;
+  private LabelUser alias;
 
   /**
    * Can be: ACCEPTED, REJECTED, PENDING or REVOKED
@@ -29,18 +23,18 @@ public class CoOwner extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public CoOwner(List<LabelUser> alias) {
+  public CoOwner(LabelUser alias) {
     this.alias = alias;
   }
 
   /**
    * The Alias of the co-owner.
    */
-  public List<LabelUser> getAlias() {
+  public LabelUser getAlias() {
     return this.alias;
   }
 
-  public void setAlias(List<LabelUser> alias) {
+  public void setAlias(LabelUser alias) {
     this.alias = alias;
   }
 

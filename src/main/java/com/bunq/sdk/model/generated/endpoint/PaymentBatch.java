@@ -62,7 +62,6 @@ public class PaymentBatch extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null);
   }
@@ -93,6 +92,10 @@ public class PaymentBatch extends BunqModel {
     return processForId(responseRaw);
   }
 
+  public static BunqResponse<Integer> update() {
+    return update(null, null, null);
+  }
+
   public static BunqResponse<Integer> update(Integer paymentBatchId) {
     return update(paymentBatchId, null, null);
   }
@@ -110,7 +113,6 @@ public class PaymentBatch extends BunqModel {
 
     return fromJson(PaymentBatch.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<PaymentBatch> get() {
     return get(null, null, null, null);
   }

@@ -102,7 +102,6 @@ public class BillingContractSubscription extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null);
   }

@@ -110,7 +110,6 @@ public class DeviceServer extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -136,7 +135,6 @@ public class DeviceServer extends BunqModel {
 
     return fromJson(DeviceServer.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<DeviceServer> get() {
     return get(null, null, null);
   }

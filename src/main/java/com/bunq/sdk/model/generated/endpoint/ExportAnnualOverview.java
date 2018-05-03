@@ -92,7 +92,6 @@ public class ExportAnnualOverview extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null);
   }
@@ -110,7 +109,6 @@ public class ExportAnnualOverview extends BunqModel {
 
     return fromJson(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<ExportAnnualOverview> get() {
     return get(null, null, null);
   }

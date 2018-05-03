@@ -84,7 +84,6 @@ public class RequestInquiryChat extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -119,6 +118,10 @@ public class RequestInquiryChat extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId, requestInquiryChatId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update() {
+    return update(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer requestInquiryId) {

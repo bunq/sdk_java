@@ -72,7 +72,6 @@ public class SchedulePayment extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -97,7 +96,6 @@ public class SchedulePayment extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
-
   public static BunqResponse<SchedulePayment> delete(Integer schedulePaymentId) {
     return delete(schedulePaymentId, null, null);
   }
@@ -114,7 +112,6 @@ public class SchedulePayment extends BunqModel {
 
     return fromJson(SchedulePayment.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<SchedulePayment> get() {
     return get(null, null, null, null);
   }
@@ -171,6 +168,10 @@ public class SchedulePayment extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update() {
+    return update(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer schedulePaymentId) {

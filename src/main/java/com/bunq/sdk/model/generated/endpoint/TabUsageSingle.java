@@ -254,7 +254,6 @@ public class TabUsageSingle extends BunqModel {
 
     return processForUuid(responseRaw);
   }
-
   public static BunqResponse<String> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
@@ -356,6 +355,10 @@ public class TabUsageSingle extends BunqModel {
     return processForUuid(responseRaw);
   }
 
+  public static BunqResponse<String> update() {
+    return update(null, null, null, null, null, null, null, null, null);
+  }
+
   public static BunqResponse<String> update(Integer cashRegisterId) {
     return update(cashRegisterId, null, null, null, null, null, null, null, null);
   }
@@ -397,7 +400,6 @@ public class TabUsageSingle extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
-
   public static BunqResponse<TabUsageSingle> delete(Integer cashRegisterId) {
     return delete(cashRegisterId, null, null, null);
   }
@@ -419,7 +421,6 @@ public class TabUsageSingle extends BunqModel {
 
     return fromJson(TabUsageSingle.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<TabUsageSingle> get() {
     return get(null, null, null, null, null);
   }

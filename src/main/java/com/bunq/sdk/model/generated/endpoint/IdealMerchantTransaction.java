@@ -31,7 +31,6 @@ public class IdealMerchantTransaction extends BunqModel {
    */
   public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
   public static final String FIELD_ISSUER = "issuer";
-  public static final String FIELD_CALLBACK_TYPE = "callback_type";
 
   /**
    * Object type.
@@ -156,7 +155,6 @@ public class IdealMerchantTransaction extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -181,7 +179,6 @@ public class IdealMerchantTransaction extends BunqModel {
 
     return fromJson(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<IdealMerchantTransaction> get() {
     return get(null, null, null, null);
   }

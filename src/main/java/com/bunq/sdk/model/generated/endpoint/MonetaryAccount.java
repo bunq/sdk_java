@@ -64,7 +64,6 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
 
     return fromJson(MonetaryAccount.class, responseRaw);
   }
-
   public static BunqResponse<MonetaryAccount> get() {
     return get(null, null, null);
   }

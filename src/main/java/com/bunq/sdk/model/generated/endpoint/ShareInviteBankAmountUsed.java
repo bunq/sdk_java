@@ -31,7 +31,6 @@ public class ShareInviteBankAmountUsed extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
-
   public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId) {
     return delete(shareInviteBankInquiryId, null, null, null);
   }

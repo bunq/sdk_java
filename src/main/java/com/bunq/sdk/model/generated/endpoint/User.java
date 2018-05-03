@@ -62,7 +62,6 @@ public class User extends BunqModel implements AnchorObjectInterface {
 
     return fromJson(User.class, responseRaw);
   }
-
   public static BunqResponse<User> get() {
     return get(null, null);
   }

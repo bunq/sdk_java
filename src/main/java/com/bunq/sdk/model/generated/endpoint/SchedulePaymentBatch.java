@@ -65,7 +65,6 @@ public class SchedulePaymentBatch extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -103,6 +102,10 @@ public class SchedulePaymentBatch extends BunqModel {
     return processForId(responseRaw);
   }
 
+  public static BunqResponse<Integer> update() {
+    return update(null, null, null, null, null);
+  }
+
   public static BunqResponse<Integer> update(Integer schedulePaymentBatchId) {
     return update(schedulePaymentBatchId, null, null, null, null);
   }
@@ -127,7 +130,6 @@ public class SchedulePaymentBatch extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
-
   public static BunqResponse<SchedulePaymentBatch> delete(Integer schedulePaymentBatchId) {
     return delete(schedulePaymentBatchId, null, null);
   }

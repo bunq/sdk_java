@@ -72,7 +72,6 @@ public class Avatar extends BunqModel {
 
     return processForUuid(responseRaw);
   }
-
   public static BunqResponse<String> create() {
     return create(null, null);
   }
@@ -89,7 +88,6 @@ public class Avatar extends BunqModel {
 
     return fromJson(Avatar.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<Avatar> get() {
     return get(null, null, null);
   }

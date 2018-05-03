@@ -54,7 +54,6 @@ public class TabItemShopBatch extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null);
   }

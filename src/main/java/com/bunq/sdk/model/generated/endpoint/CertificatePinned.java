@@ -71,7 +71,6 @@ public class CertificatePinned extends BunqModel {
 
     return processForId(responseRaw);
   }
-
   public static BunqResponse<Integer> create() {
     return create(null, null);
   }
@@ -89,7 +88,6 @@ public class CertificatePinned extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
-
   public static BunqResponse<CertificatePinned> delete(Integer certificatePinnedId) {
     return delete(certificatePinnedId, null);
   }
@@ -121,7 +119,6 @@ public class CertificatePinned extends BunqModel {
 
     return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
   }
-
   public static BunqResponse<CertificatePinned> get() {
     return get(null, null, null);
   }

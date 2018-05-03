@@ -71,7 +71,6 @@ public class ChatConversation extends BunqModel implements AnchorObjectInterface
 
     return fromJson(ChatConversation.class, responseRaw);
   }
-
   public static BunqResponse<ChatConversation> get() {
     return get(null, null, null);
   }

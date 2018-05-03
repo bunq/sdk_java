@@ -50,7 +50,6 @@ public class Device extends BunqModel implements AnchorObjectInterface {
 
     return fromJson(Device.class, responseRaw);
   }
-
   public static BunqResponse<Device> get() {
     return get(null, null, null);
   }
