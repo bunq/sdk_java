@@ -19,6 +19,7 @@ public class UserContext {
   private static final String ERROR_PRIMARY_MONETARY_ACCOUNT_IS_NOT_SET = "Primary monetaryAccount is not set.";
 
   private static final String MONETARY_ACCOUNT_STATUS_ACTIVE = "ACTIVE";
+  private static final int INDEX_FIRST = 0;
 
   private UserCompany userCompany;
   private UserPerson userPerson;
@@ -26,10 +27,12 @@ public class UserContext {
   private Integer userId;
 
   public UserContext(Integer userId) {
-    BunqModel userObject = User.list().getValue().get(0).getReferencedObject();
-
-    this.setUser(userObject);
+    this.setUser(this.getUserObject());
     this.userId = userId;
+  }
+
+  private BunqModel getUserObject() {
+    return User.list().getValue().get(INDEX_FIRST).getReferencedObject();
   }
 
   private void setUser(BunqModel user) {
