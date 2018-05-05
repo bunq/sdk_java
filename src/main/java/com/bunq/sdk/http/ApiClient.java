@@ -215,7 +215,7 @@ public class ApiClient {
   /**
    */
   private HttpUrl determineFullUri(String uri) {
-    return determineFullUri(uri, new HashMap<>());
+    return determineFullUri(uri, new HashMap<String, String>());
   }
 
   /**
