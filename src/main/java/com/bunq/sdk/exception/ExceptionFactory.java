@@ -56,7 +56,14 @@ public class ExceptionFactory {
   }
 
   private static String concatenateAllMessage(List<String> messages, String responseId) {
-    return String.format(FORMAT_ERROR_MESSAGE, responseId, String.join(SEPARATOR_ERROR_MESSAGES, messages));
+    StringBuilder stringBuilder = new StringBuilder();
+
+    for (String message : messages) {
+      stringBuilder.append(SEPARATOR_ERROR_MESSAGES);
+      stringBuilder.append(message);
+    }
+
+    return String.format(FORMAT_ERROR_MESSAGE, responseId, stringBuilder.toString());
   }
   
 }
