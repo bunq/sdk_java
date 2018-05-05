@@ -189,9 +189,9 @@ public final class SecurityUtils {
    */
   private static String getPrivateKeyFormattedString(PrivateKey privateKey) {
     byte[] encodedPrivateKey = privateKey.getEncoded();
-    byte[] base64 = Base64.getEncoder().encode(encodedPrivateKey);
+    String privateKeyString = DatatypeConverter.printBase64Binary(encodedPrivateKey);
 
-    return String.format(PRIVATE_KEY_FORMAT, new String(base64));
+    return String.format(PRIVATE_KEY_FORMAT, privateKeyString);
   }
 
   /**
@@ -230,7 +230,7 @@ public final class SecurityUtils {
     publicKeyString = publicKeyString.replace(PUBLIC_KEY_END, STRING_EMPTY);
     publicKeyString = publicKeyString.replace(NEWLINE, STRING_EMPTY);
 
-    return Base64.getDecoder().decode(publicKeyString);
+    return DatatypeConverter.parseBase64Binary(publicKeyString);
   }
 
   /**
@@ -257,7 +257,7 @@ public final class SecurityUtils {
     privateKeyString = privateKeyString.replace(PRIVATE_KEY_END, STRING_EMPTY);
     privateKeyString = privateKeyString.replace(NEWLINE, STRING_EMPTY);
 
-    return Base64.getDecoder().decode(privateKeyString);
+    return DatatypeConverter.parseBase64Binary(privateKeyString);
   }
 
   public static String getPublicKeyFormattedString(KeyPair keyPair) {
@@ -269,9 +269,9 @@ public final class SecurityUtils {
    */
   public static String getPublicKeyFormattedString(PublicKey publicKey) {
     byte[] encodedPublicKey = publicKey.getEncoded();
-    byte[] base64 = Base64.getEncoder().encode(encodedPublicKey);
+    String publicKeyString = DatatypeConverter.printBase64Binary(encodedPublicKey);
 
-    return String.format(PUBLIC_KEY_FORMAT, new String(base64));
+    return String.format(PUBLIC_KEY_FORMAT, publicKeyString);
   }
 
   /**
@@ -308,22 +308,27 @@ public final class SecurityUtils {
     return initializationVector;
   }
 
-  private static void addHeaderClientEncryptionKey(ApiContext apiContext, SecretKey key,
-      Map<String, String> customHeaders) {
+  private static void addHeaderClientEncryptionKey(
+      ApiContext apiContext,
+      SecretKey key,
+      Map<String, String> customHeaders
+  ) {
     try {
       Cipher cipher = Cipher.getInstance(KEY_CIPHER_ALGORITHM);
       cipher.init(Cipher.ENCRYPT_MODE, apiContext.getInstallationContext().getPublicKeyServer());
       byte[] keyEncrypted = cipher.doFinal(key.getEncoded());
-      String keyEncryptedEncoded = Base64.getEncoder().encodeToString(keyEncrypted);
+      String keyEncryptedEncoded = DatatypeConverter.printBase64Binary(keyEncrypted);
       customHeaders.put(HEADER_CLIENT_ENCRYPTION_KEY, keyEncryptedEncoded);
     } catch (GeneralSecurityException exception) {
       throw new BunqException(exception.getMessage());
     }
   }
 
-  private static void addHeaderClientEncryptionIv(byte[] initializationVector, Map<String,
-      String> customHeaders) {
-    String initializationVectorEncoded = Base64.getEncoder().encodeToString(initializationVector);
+  private static void addHeaderClientEncryptionIv(
+      byte[] initializationVector,
+      Map<String, String> customHeaders
+  ) {
+    String initializationVectorEncoded = DatatypeConverter.printBase64Binary(initializationVector);
 
     customHeaders.put(HEADER_CLIENT_ENCRYPTION_IV, initializationVectorEncoded);
   }
@@ -357,7 +362,7 @@ public final class SecurityUtils {
       bufferedSink.flush();
       bufferedSink.close();
       byte[] hmac = mac.doFinal();
-      String hmacEncoded = Base64.getEncoder().encodeToString(hmac);
+      String hmacEncoded = DatatypeConverter.printBase64Binary(hmac);
       customHeaders.put(HEADER_CLIENT_ENCRYPTION_HMAC, hmacEncoded);
     } catch (GeneralSecurityException | IOException exception) {
       throw new BunqException(exception.getMessage());
@@ -439,7 +444,7 @@ public final class SecurityUtils {
     byte[] dataBytesSigned = signDataWithSignature(signature, bytesToSign);
     verifyDataSigned(signature, keyPair.getPublic(), bytesToSign, dataBytesSigned);
 
-    return Base64.getEncoder().encodeToString(dataBytesSigned);
+    return DatatypeConverter.printBase64Binary(dataBytesSigned);
   }
 
   private static Signature getSignatureInstance() throws BunqException {
@@ -501,7 +506,7 @@ public final class SecurityUtils {
         response.header(HEADER_SERVER_SIGNATURE)
     );
     byte[] serverSignatureBase64Bytes = headerServerSignature.getValue().getBytes();
-    byte[] serverSignatureDecoded = Base64.getDecoder().decode(serverSignatureBase64Bytes);
+    byte[] serverSignatureDecoded = DatatypeConverter.printBase64Binary(serverSignatureBase64Bytes).getBytes();
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
   }
 
