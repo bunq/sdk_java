@@ -1,6 +1,7 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
 import com.bunq.sdk.exception.BunqException;
@@ -242,8 +243,8 @@ public class ApiClient {
       Map<String, String> customHeaders,
       String uri
   ) throws IOException {
-    if (!URIS_NOT_REQUIRING_ACTIVE_SESSION.contains(uri)) {
-      apiContext.ensureSessionActive();
+    if (!URIS_NOT_REQUIRING_ACTIVE_SESSION.contains(uri) && apiContext.ensureSessionActive()) {
+        BunqContext.updateApiContext(apiContext);
     }
 
     setHeaders(request, customHeaders);
