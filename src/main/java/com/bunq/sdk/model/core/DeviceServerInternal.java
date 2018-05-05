@@ -8,7 +8,6 @@ import com.bunq.sdk.model.generated.endpoint.DeviceServer;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DeviceServerInternal extends DeviceServer {
   public static BunqResponse<Integer> create(ApiContext apiContext, String description, String secret, List<String> permittedIps) {

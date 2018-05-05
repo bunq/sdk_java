@@ -8,6 +8,7 @@ import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.security.SecurityUtils;
+import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

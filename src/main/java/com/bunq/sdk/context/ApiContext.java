@@ -5,7 +5,6 @@ import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.model.core.DeviceServerInternal;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.SessionServer;
-import com.bunq.sdk.model.generated.endpoint.DeviceServer;
 import com.bunq.sdk.model.generated.endpoint.Session;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
@@ -16,9 +15,8 @@ import java.io.IOException;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import org.apache.commons.io.FileUtils;
 
 /**
