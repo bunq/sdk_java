@@ -6,6 +6,8 @@ import com.bunq.sdk.exception.ForbiddenException;
 import org.junit.After;
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Tests:
  * Session
@@ -21,7 +23,7 @@ public class SessionTest extends BunqSdkTestBase {
   /**
    * Tests deletion of the current session
    */
-  @Test()
+  @Test(expected = ForbiddenException.class)
   public void deleteSessionTest() {
     Session.delete(SESSION_ID_DUMMY);
     User.list();
