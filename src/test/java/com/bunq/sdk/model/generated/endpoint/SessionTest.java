@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.ForbiddenException;
 
 import java.util.concurrent.TimeUnit;
@@ -21,14 +22,12 @@ public class SessionTest extends BunqSdkTestBase {
    */
   private static final int SESSION_ID_DUMMY = 0;
   private static final int SECONDS_TO_SLEEP = 2;
-  private static final ApiContext apiContext = getApiContext();
-  private static String apiConfigPath = Config.getApiConfigPath();
 
   /**
    * Tests deletion of the current session
    */
-  @Test(expected = ForbiddenException.class)
-  public void deleteSessionTest() throws Exception {
+  @Test()
+  public void deleteSessionTest() {
     Session.delete(SESSION_ID_DUMMY);
     User.list();
   }
@@ -40,12 +39,12 @@ public class SessionTest extends BunqSdkTestBase {
   public void after() {
     try {
       TimeUnit.SECONDS.sleep(SECONDS_TO_SLEEP);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
+    } catch (InterruptedException exception) {
+      throw new BunqException(exception.getMessage());
     }
 
-    apiContext.resetSession();
-    apiContext.save(apiConfigPath);
+    getApiContext().resetSession();
+    getApiContext().save(TEST_CONFIG_PATH);
   }
 
 }

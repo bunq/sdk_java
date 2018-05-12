@@ -20,16 +20,6 @@ import java.util.List;
 public class PaymentTest extends BunqSdkTestBase {
 
   /**
-   * Config values
-   */
-  private static final int userId = Config.getUserId();
-  private static final int monetaryAccountId = Config.getMonetaryAccountId();
-  private static final int paymentIdwithGeolocation = Config.getPaymentIdWithGeolocation();
-  private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
-  private static final Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
-  private static final ApiContext apiContext = getApiContext();
-
-  /**
    * Payment field value constants.
    */
   private static final String AMOUNT_EUR = "0.01";
@@ -51,6 +41,7 @@ public class PaymentTest extends BunqSdkTestBase {
    * String constants.
    */
   private static final String STRING_NULL = "null";
+  private static final int INDEX_FIRST = 0;
 
   /**
    * Tests making a payment to another sandbox user
@@ -58,10 +49,15 @@ public class PaymentTest extends BunqSdkTestBase {
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
-  public void makePaymentToOtherUser() throws Exception {
+  public void makePaymentToOtherUser() {
     Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
-    Payment.create(amount, counterPartyAliasSelf, PAYMENT_DESCRIPTION, null);
+    Payment.create(
+        amount,
+        secondMonetaryAccountBank.getAlias().get(INDEX_FIRST),
+        PAYMENT_DESCRIPTION,
+        null
+    );
   }
 
   /**
@@ -70,10 +66,10 @@ public class PaymentTest extends BunqSdkTestBase {
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
-  public void makePaymentToOtherAccount() throws Exception {
+  public void makePaymentToOtherAccount() {
     Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
-    Payment.create(amount, counterPartyAliasOther,PAYMENT_DESCRIPTION);
+    Payment.create(amount, getPointerBravo(),PAYMENT_DESCRIPTION);
   }
 
   @Test
@@ -91,16 +87,6 @@ public class PaymentTest extends BunqSdkTestBase {
       Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
       Assert.assertNotEquals(payment.getCounterpartyAlias().toString(), STRING_NULL);
     }
-  }
-
-  @Test
-  public void getPaymentWithGeolocationTest() {
-    Assume.assumeFalse(Integer.compare(paymentIdwithGeolocation, NUMBER_ZERO) == COMPARE_EQUAL);
-
-    Payment payment = Payment.get(paymentIdwithGeolocation).getValue();
-
-    Assert.assertNotNull(payment.getGeolocation());
-    Assert.assertFalse(payment.getGeolocation().isAllFieldNull());
   }
 
 }

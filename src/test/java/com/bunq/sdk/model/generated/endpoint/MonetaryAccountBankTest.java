@@ -14,13 +14,6 @@ import java.util.HashMap;
  */
 public class MonetaryAccountBankTest extends BunqSdkTestBase {
 
-  /**
-   * Config values.
-   */
-  private static final int userId = Config.getUserId();
-
-  private static final ApiContext apiContext = getApiContext();
-
   private static final String CANCELLED_STATUS = "CANCELLED";
   private static final String SUB_STATUS = "REDEMPTION_VOLUNTARY";
   private static final String REASON = "OTHER";
@@ -34,9 +27,17 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
   private static Integer monetaryAccountIdToClose;
 
   @AfterClass
-  public static void tearDown() throws Exception {
+  public static void tearDown() {
     if (monetaryAccountIdToClose != null) {
-      MonetaryAccountBank.update(monetaryAccountIdToClose, null, null, null, CANCELLED_STATUS, SUB_STATUS, REASON, REASON_DESCRIPTION);
+      MonetaryAccountBank.update(monetaryAccountIdToClose,
+          null,
+          null,
+          null,
+          CANCELLED_STATUS,
+          SUB_STATUS,
+          REASON,
+          REASON_DESCRIPTION
+      );
     }
   }
 
@@ -47,7 +48,7 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
-  public void createNewMonetaryAccountTest() throws Exception {
+  public void createNewMonetaryAccountTest() {
     monetaryAccountIdToClose = MonetaryAccountBank.create(CURRENCY, MONETARY_ACCOUNT_DESCRIPTION)
         .getValue();
   }

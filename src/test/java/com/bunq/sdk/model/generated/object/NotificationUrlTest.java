@@ -18,6 +18,7 @@ import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
 import com.google.gson.stream.JsonReader;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
@@ -69,6 +70,10 @@ public class NotificationUrlTest extends BunqSdkTestBase {
       "/ShareInviteBankInquiry.json";
   private static final String JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL = BASE_PATH_JSON_MODEL +
       "/ShareInviteBankResponse.json";
+
+  @BeforeClass
+  public static void setUpBeforeClass() {
+  }
 
   private void executeNotificationUrlTest(
       String expectedJsonFileName,
