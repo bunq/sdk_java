@@ -1,13 +1,8 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.Config;
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.ForbiddenException;
-
-import java.util.concurrent.TimeUnit;
-
 import org.junit.After;
 import org.junit.Test;
 

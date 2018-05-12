@@ -1,16 +1,11 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.Config;
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runners.JUnit4;
-
-import java.util.HashMap;
 
 /**
  * Tests:
