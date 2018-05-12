@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.Pagination;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
@@ -52,12 +53,15 @@ public class PaymentTest extends BunqSdkTestBase {
   public void makePaymentToOtherUser() {
     Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
-    Payment.create(
+    BunqResponse<Integer> response = Payment.create(
         amount,
         secondMonetaryAccountBank.getAlias().get(INDEX_FIRST),
         PAYMENT_DESCRIPTION,
         null
     );
+
+    Assert.assertNotNull(response);
+    Assert.assertNotNull(response.getValue());
   }
 
   /**
@@ -69,7 +73,10 @@ public class PaymentTest extends BunqSdkTestBase {
   public void makePaymentToOtherAccount() {
     Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
 
-    Payment.create(amount, getPointerBravo(),PAYMENT_DESCRIPTION);
+    BunqResponse<Integer> response = Payment.create(amount, getPointerBravo(),PAYMENT_DESCRIPTION);
+
+    Assert.assertNotNull(response);
+    Assert.assertNotNull(response.getValue());
   }
 
   @Test

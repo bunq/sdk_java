@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.model.generated.object.Amount;
+import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -38,6 +39,9 @@ public class TabUsageSingleTest extends BunqSdkTestBase {
   @Test
   public void createAndUpdateTabTest() {
     String tabUuid = createTab();
+
+    Assert.assertNotNull(tabUuid);
+
     addItemToTab(tabUuid);
 
     TabUsageSingle.update(getCashRegister().getId(), tabUuid, null, STATUS_WAITING);

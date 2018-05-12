@@ -4,6 +4,7 @@ import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -44,13 +45,13 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
   /**
    * Tests the creation of a new monetary account. This account will be deleted after test exited
    * with code 0
-   *
-   * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
   public void createNewMonetaryAccountTest() {
     monetaryAccountIdToClose = MonetaryAccountBank.create(CURRENCY, MONETARY_ACCOUNT_DESCRIPTION)
         .getValue();
+
+    Assert.assertNotNull(monetaryAccountIdToClose);
   }
 
 }

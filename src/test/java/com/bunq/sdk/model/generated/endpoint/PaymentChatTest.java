@@ -5,6 +5,7 @@ import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -47,6 +48,9 @@ public class PaymentChatTest extends BunqSdkTestBase {
     Integer chat_id = PaymentChat
         .create(paymentId)
         .getValue();
+
+    Assert.assertNotNull(chat_id);
+
     sendMessage(chat_id);
   }
 
