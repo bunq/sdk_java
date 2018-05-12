@@ -67,10 +67,10 @@ public class ApiClient {
   public static final String HEADER_CONTENT_TYPE = "Content-Type";
   public static final String HEADER_USER_AGENT = "User-Agent";
   public static final String HEADER_CACHE_CONTROL = "Cache-Control";
-  private static final String HEADER_LANGUAGE = "X-Bunq-Language";
-  private static final String HEADER_REGION = "X-Bunq-Region";
-  private static final String HEADER_REQUEST_ID = "X-Bunq-Client-Request-Id";
-  private static final String HEADER_GEOLOCATION = "X-Bunq-Geolocation";
+  public static final String HEADER_LANGUAGE = "X-Bunq-Language";
+  public static final String HEADER_REGION = "X-Bunq-Region";
+  public static final String HEADER_REQUEST_ID = "X-Bunq-Client-Request-Id";
+  public static final String HEADER_GEOLOCATION = "X-Bunq-Geolocation";
   private static final String HEADER_SIGNATURE = "X-Bunq-Client-Signature";
   private static final String HEADER_AUTHENTICATION = "X-Bunq-Client-Authentication";
   private static final String HEADER_RESPONSE_ID_LOWER_CASE = "x-bunq-client-response-id";
@@ -85,15 +85,15 @@ public class ApiClient {
   /**
    * Header value to disable the cache control.
    */
-  private static final String CACHE_CONTROL_NONE = "no-cache";
+  public static final String CACHE_CONTROL_NONE = "no-cache";
 
   /**
    * Prefix for bunq's own headers.
    */
   private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.13.0";
-  private static final String LANGUAGE_EN_US = "en_US";
-  private static final String REGION_NL_NL = "nl_NL";
-  private static final String GEOLOCATION_ZERO = "0 0 0 0 000";
+  public static final String LANGUAGE_EN_US = "en_US";
+  public static final String REGION_NL_NL = "nl_NL";
+  public static final String GEOLOCATION_ZERO = "0 0 0 0 000";
   private static final String SCHEME_HTTPS = "https";
 
   /**
