@@ -71,6 +71,9 @@ public class NotificationUrlTest extends BunqSdkTestBase {
   private static final String JSON_PATH_SHARE_INVITE_BANK_RESPONSE_MODEL = BASE_PATH_JSON_MODEL +
       "/ShareInviteBankResponse.json";
 
+  /**
+   * No need for ApiContext in this test.
+   */
   @BeforeClass
   public static void setUpBeforeClass() {
   }
