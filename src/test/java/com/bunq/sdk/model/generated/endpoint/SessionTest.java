@@ -1,9 +1,12 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.context.BunqContext;
+import com.bunq.sdk.context.SessionContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.ForbiddenException;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -23,10 +26,13 @@ public class SessionTest extends BunqSdkTestBase {
   /**
    * Tests deletion of the current session
    */
-  @Test(expected = ForbiddenException.class)
+  @Test
   public void deleteSessionTest() {
+    SessionContext context = BunqContext.getApiContext().getSessionContext();
     Session.delete(SESSION_ID_DUMMY);
     User.list();
+
+    Assert.assertNotEquals(context, BunqContext.getApiContext().getSessionContext());
   }
 
   /**
