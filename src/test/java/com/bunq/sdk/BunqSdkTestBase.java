@@ -73,6 +73,7 @@ public class BunqSdkTestBase {
 
     try {
       Thread.sleep(500);
+      BunqContext.getUserContext().refreshContext();
     } catch (InterruptedException exception) {
       throw new BunqException(exception.getMessage());
     }
@@ -153,6 +154,10 @@ public class BunqSdkTestBase {
     secondMonetaryAccountBank = MonetaryAccountBank.get(response.getValue()).getValue();
   }
 
+  /**
+   * To ensure that our test user has enough money on the account, we sent a request to suggerdaddy@bunq.com
+   * to top-up the account.
+   */
   private static void requestSpendingMoney() {
     if (shouldMoneyBeRequested(BunqContext.getUserContext().getPrimaryMonetaryAccountBank())) {
       RequestInquiry.create(
