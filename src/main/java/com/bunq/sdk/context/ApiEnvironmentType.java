@@ -22,11 +22,11 @@ public enum ApiEnvironmentType {
   /**
    * @return Base URI of the environment.
    */
-  String getBaseUri() {
+  public String getBaseUri() {
     return this.baseUri;
   }
 
-  String getApiVersion() {
+  public String getApiVersion() {
     return this.apiVersion;
   }
 

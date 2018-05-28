@@ -5,6 +5,7 @@ import com.bunq.sdk.Config;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,15 +19,6 @@ import java.util.HashMap;
  */
 public class PaymentChatTest extends BunqSdkTestBase {
 
-  /**
-   * Config values
-   */
-  private static final int userId = Config.getUserId();
-  private static final int monetaryAccountId = Config.getMonetaryAccountId();
-  private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
-
-  private static final ApiContext apiContext = getApiContext();
-
   private static final String AMOUNT_EUR = "0.01";
   private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Payment From Java Test";
@@ -39,7 +31,7 @@ public class PaymentChatTest extends BunqSdkTestBase {
 
   @BeforeClass
   public static void setUp() {
-    paymentId = Payment.create(new Amount(AMOUNT_EUR, CURRENCY), counterPartyAliasOther, PAYMENT_DESCRIPTION).getValue();
+    paymentId = Payment.create(new Amount(AMOUNT_EUR, CURRENCY), getPointerBravo(), PAYMENT_DESCRIPTION).getValue();
   }
 
   private static void sendMessage(Integer chat_id) {
@@ -52,10 +44,13 @@ public class PaymentChatTest extends BunqSdkTestBase {
    * This test has no assertion as of its testing to see if the code runs without errors
    */
   @Test
-  public void sendPaymentMessageTest() throws Exception {
+  public void sendPaymentMessageTest() {
     Integer chat_id = PaymentChat
         .create(paymentId)
         .getValue();
+
+    Assert.assertNotNull(chat_id);
+
     sendMessage(chat_id);
   }
 

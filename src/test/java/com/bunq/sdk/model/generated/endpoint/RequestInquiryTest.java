@@ -23,19 +23,16 @@ public class RequestInquiryTest extends BunqSdkTestBase {
   private static final String CURRENCY = "EUR";
   private static final String REQUEST_DESCRIPTION = "Java Test Payment";
   private static final int INDEX_FIRST = 0;
-  /**
-   * Config values.
-   */
-  private static int userId = Config.getUserId();
-  private static int monetaryAccountId = Config.getMonetaryAccountId();
-  private static int monetaryAccountId2 = Config.getMonetaryAccountId2();
-  private static Pointer counterPartyAliasSelf = Config.getCounterPartyAliasSelf();
-  private static ApiContext apiContext = getApiContext();
 
   private static String acceptRequest() {
-    List<RequestResponse> responses = RequestResponse.list(monetaryAccountId2).getValue();
+    List<RequestResponse> responses = RequestResponse.list(secondMonetaryAccountBank.getId()).getValue();
 
-    RequestResponse acceptRequest = RequestResponse.update(responses.get(0).getId(), monetaryAccountId2, null, ACCEPTED_STATUS).getValue();
+    RequestResponse acceptRequest = RequestResponse.update(
+        responses.get(INDEX_FIRST).getId(),
+        secondMonetaryAccountBank.getId(),
+        null,
+        ACCEPTED_STATUS
+    ).getValue();
 
     return acceptRequest.getStatus();
   }
@@ -45,8 +42,13 @@ public class RequestInquiryTest extends BunqSdkTestBase {
    * request
    */
   @Test
-  public void createRequestInquiryTest() throws Exception {
-    RequestInquiry.create(new Amount(AMOUNT_EUR, CURRENCY), counterPartyAliasSelf, REQUEST_DESCRIPTION, false);
+  public void createRequestInquiryTest() {
+    RequestInquiry.create(
+        new Amount(AMOUNT_EUR, CURRENCY),
+        secondMonetaryAccountBank.getAlias().get(INDEX_FIRST),
+        REQUEST_DESCRIPTION,
+        false
+    );
 
     assertEquals(ACCEPTED_STATUS, acceptRequest());
   }

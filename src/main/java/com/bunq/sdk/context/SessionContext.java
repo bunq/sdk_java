@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Context of your current bunq Public API session.
  */
-class SessionContext implements java.io.Serializable {
+public class SessionContext implements java.io.Serializable {
 
   /**
    * Error constants.

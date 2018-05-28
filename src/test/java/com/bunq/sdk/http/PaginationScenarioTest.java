@@ -23,12 +23,6 @@ import java.util.Map;
 public class PaginationScenarioTest extends BunqSdkTestBase {
 
   /**
-   * Config values.
-   */
-  private static final Integer monetaryAccountId = Config.getMonetaryAccountId();
-  private static final Pointer counterPartyAliasOther = Config.getCounterPartyAliasOther();
-
-  /**
    * Constants for scenario testing.
    */
   private final static int PAYMENT_LISTING_PAGE_SIZE = 2;
@@ -65,11 +59,11 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   }
 
   private static BunqResponse<List<Payment>> ListPayments(Map<String, String> urlParams) {
-    return Payment.list(monetaryAccountId, urlParams);
+    return Payment.list(null, urlParams);
   }
 
   private static void CreatePayment() {
-    Payment.create(new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY), counterPartyAliasOther, PAYMENT_DESCRIPTION);
+    Payment.create(new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY), getPointerBravo(), PAYMENT_DESCRIPTION);
   }
 
   @Test
