@@ -73,6 +73,7 @@ public class BunqSdkTestBase {
 
     try {
       Thread.sleep(500);
+      BunqContext.getUserContext().refreshContext();
     } catch (InterruptedException exception) {
       throw new BunqException(exception.getMessage());
     }
