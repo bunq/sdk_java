@@ -20,18 +20,26 @@ public final class BunqContext {
   }
 
   public static ApiContext getApiContext() {
-    if (apiContext == null) {
+    if (BunqContext.apiContext == null) {
       throw new BunqException(ERROR_API_CONTEXT_HAS_NOT_BEEN_SET);
     }
 
-    return apiContext;
+    return BunqContext.apiContext;
   }
 
   public static UserContext getUserContext() {
-    if (userContext == null) {
+    if (BunqContext.userContext == null) {
       throw new BunqException(ERROR_USER_CONTEXT_HAS_NOT_BEEN_SET);
     }
 
-    return userContext;
+    return BunqContext.userContext;
+  }
+
+  public static void updateApiContext(ApiContext apiContext) {
+    if (BunqContext.apiContext == null) {
+      throw new BunqException(ERROR_API_CONTEXT_HAS_NOT_BEEN_SET);
+    }
+
+    BunqContext.apiContext = apiContext;
   }
 }
