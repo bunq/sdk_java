@@ -17,7 +17,7 @@ public class MonetaryAccountJointTest extends BunqSdkTestBase {
       "src/test/Recourse/ResponseJsons/MonetaryAccountJoint.json";
 
   @BeforeClass
-  public static void setUp() {
+  public static void setUpBeforeClass() {
   }
 
   @Test
