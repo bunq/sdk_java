@@ -99,7 +99,7 @@ public class ApiClient {
   /**
    * Pinned keys.
    */
-  private static final String PINNED_KEY_SANDBOX = "sha256/MU13KqZt0UuH2FWgIWlTZOwpXYyqa1gnBMIzKqHNMRg=";
+  private static final String PINNED_KEY_SANDBOX = "sha256/GhNvDokiMyXzhGft+xXWFGchUmmh8R5dQEnO4xu81NY=";
   private static final String PINNED_KEY_PRODUCTION = "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0=";
 
   /**
