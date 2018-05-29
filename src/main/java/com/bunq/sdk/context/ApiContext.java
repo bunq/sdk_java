@@ -216,10 +216,14 @@ public class ApiContext implements java.io.Serializable {
    * Check if current time is too close to the saved session expiry time and reset session if
    * needed.
    */
-  public void ensureSessionActive() {
-   if (!isSessionActive()){
+  public boolean ensureSessionActive() {
+   if (!isSessionActive()) {
      resetSession();
+
+     return true;
    }
+
+   return false;
   }
 
   public boolean isSessionActive() {
