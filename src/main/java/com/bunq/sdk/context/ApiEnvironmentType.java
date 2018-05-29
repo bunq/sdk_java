@@ -6,7 +6,7 @@ package com.bunq.sdk.context;
 public enum ApiEnvironmentType {
 
   PRODUCTION("api.bunq.com", "v1"),
-  SANDBOX("sandbox.public.api.bunq.com", "v1");
+  SANDBOX("public-api.sandbox.bunq.com", "v1");
 
   /**
    * Base URI of each given environment.
