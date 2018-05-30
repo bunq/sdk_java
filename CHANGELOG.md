@@ -1,5 +1,18 @@
 # Change Log
 
+## [0.13.1](https://github.com/bunq/sdk_java/tree/0.13.1)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/0.13.0...0.13.1)
+
+**Closed issues:**
+
+- Move to new sandbox [\#89](https://github.com/bunq/sdk_java/issues/89)
+
+
+**Merged pull requests:**
+
+- Changed sandbox url and pinned key.  [\#92](https://github.com/bunq/sdk_java/pull/92) ([OGKevin](https://github.com/OGKevin))
+
 ## [0.13.0](https://github.com/bunq/sdk_java/tree/0.13.0) [(2017-12-21)](https://github.com/bunq/sdk_java/tree/0.13.0)
 
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.4...0.13.0)
