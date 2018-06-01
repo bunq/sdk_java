@@ -64,6 +64,7 @@ public class TabAttachmentTab extends BunqModel {
 
     return fromJson(TabAttachmentTab.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<TabAttachmentTab> get() {
     return get(null, null, null, null);
   }

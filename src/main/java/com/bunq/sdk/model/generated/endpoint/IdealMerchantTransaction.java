@@ -155,6 +155,7 @@ public class IdealMerchantTransaction extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -179,6 +180,7 @@ public class IdealMerchantTransaction extends BunqModel {
 
     return fromJson(IdealMerchantTransaction.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<IdealMerchantTransaction> get() {
     return get(null, null, null, null);
   }

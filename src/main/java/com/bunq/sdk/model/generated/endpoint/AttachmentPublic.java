@@ -84,6 +84,7 @@ public class AttachmentPublic extends BunqModel {
 
     return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<AttachmentPublic> get() {
     return get(null, null, null);
   }

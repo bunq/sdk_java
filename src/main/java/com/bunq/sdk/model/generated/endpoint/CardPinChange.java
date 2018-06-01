@@ -100,6 +100,7 @@ public class CardPinChange extends BunqModel {
 
     return fromJson(CardPinChange.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<CardPinChange> get() {
     return get(null, null, null, null);
   }

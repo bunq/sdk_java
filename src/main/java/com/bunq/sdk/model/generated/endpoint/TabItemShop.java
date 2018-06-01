@@ -131,6 +131,7 @@ public class TabItemShop extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null, null, null, null, null);
   }
@@ -204,10 +205,6 @@ public class TabItemShop extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null, null, null, null, null, null, null);
-  }
-
   public static BunqResponse<Integer> update(Integer cashRegisterId) {
     return update(cashRegisterId, null, null, null, null, null, null, null, null, null, null);
   }
@@ -257,6 +254,7 @@ public class TabItemShop extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
+
   public static BunqResponse<TabItemShop> delete(Integer cashRegisterId) {
     return delete(cashRegisterId, null, null, null, null);
   }
@@ -312,6 +310,7 @@ public class TabItemShop extends BunqModel {
 
     return fromJson(TabItemShop.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<TabItemShop> get() {
     return get(null, null, null, null, null, null);
   }

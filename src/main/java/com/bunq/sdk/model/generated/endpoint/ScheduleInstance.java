@@ -96,6 +96,7 @@ public class ScheduleInstance extends BunqModel {
 
     return fromJson(ScheduleInstance.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<ScheduleInstance> get() {
     return get(null, null, null, null, null);
   }
@@ -133,10 +134,6 @@ public class ScheduleInstance extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer scheduleId) {

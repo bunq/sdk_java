@@ -88,6 +88,7 @@ public class Schedule extends BunqModel {
 
     return fromJson(Schedule.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<Schedule> get() {
     return get(null, null, null, null);
   }

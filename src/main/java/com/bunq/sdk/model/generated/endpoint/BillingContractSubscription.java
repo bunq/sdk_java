@@ -84,6 +84,20 @@ public class BillingContractSubscription extends BunqModel {
   private String subscriptionType;
 
   /**
+   * The subscription status.
+   */
+  @Expose
+  @SerializedName("status")
+  private String status;
+
+  /**
+   * The subscription substatus.
+   */
+  @Expose
+  @SerializedName("sub_status")
+  private String subStatus;
+
+  /**
    * @param subscriptionType The subscription type of the user. Can be one of PERSON_LIGHT_V1,
    * PERSON_MORE_V1, PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
    */
@@ -102,6 +116,7 @@ public class BillingContractSubscription extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null);
   }
@@ -207,6 +222,28 @@ public class BillingContractSubscription extends BunqModel {
   }
 
   /**
+   * The subscription status.
+   */
+  public String getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  /**
+   * The subscription substatus.
+   */
+  public String getSubStatus() {
+    return this.subStatus;
+  }
+
+  public void setSubStatus(String subStatus) {
+    this.subStatus = subStatus;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -234,6 +271,14 @@ public class BillingContractSubscription extends BunqModel {
     }
 
     if (this.subscriptionType != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.subStatus != null) {
       return false;
     }
 

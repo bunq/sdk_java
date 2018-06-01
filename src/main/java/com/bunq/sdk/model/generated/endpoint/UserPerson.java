@@ -302,6 +302,7 @@ public class UserPerson extends BunqModel {
 
     return fromJson(UserPerson.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<UserPerson> get() {
     return get(null, null);
   }
@@ -390,10 +391,6 @@ public class UserPerson extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName) {

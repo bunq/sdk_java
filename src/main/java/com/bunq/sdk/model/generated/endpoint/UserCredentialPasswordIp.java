@@ -86,6 +86,7 @@ public class UserCredentialPasswordIp extends BunqModel {
 
     return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<UserCredentialPasswordIp> get() {
     return get(null, null, null);
   }

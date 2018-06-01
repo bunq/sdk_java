@@ -221,6 +221,7 @@ public class CardDebit extends BunqModel {
 
     return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE_POST);
   }
+
   public static BunqResponse<CardDebit> create() {
     return create(null, null, null, null, null, null, null);
   }

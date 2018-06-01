@@ -59,6 +59,7 @@ public class PermittedIp extends BunqModel {
 
     return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<PermittedIp> get() {
     return get(null, null, null, null);
   }
@@ -96,6 +97,7 @@ public class PermittedIp extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -151,10 +153,6 @@ public class PermittedIp extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), credentialPasswordIpId, permittedIpId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer credentialPasswordIpId) {

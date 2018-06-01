@@ -231,6 +231,7 @@ public class MasterCardAction extends BunqModel {
 
     return fromJson(MasterCardAction.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<MasterCardAction> get() {
     return get(null, null, null, null);
   }

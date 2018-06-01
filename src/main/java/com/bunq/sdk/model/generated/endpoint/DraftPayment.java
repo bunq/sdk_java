@@ -137,6 +137,7 @@ public class DraftPayment extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null);
   }
@@ -185,10 +186,6 @@ public class DraftPayment extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer draftPaymentId) {
@@ -242,6 +239,7 @@ public class DraftPayment extends BunqModel {
 
     return fromJson(DraftPayment.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<DraftPayment> get() {
     return get(null, null, null, null);
   }

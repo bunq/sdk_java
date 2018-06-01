@@ -34,6 +34,7 @@ public class TabQrCodeContent extends BunqModel {
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
+
   public static BunqResponse<byte[]> list() {
     return list(null, null, null, null, null);
   }

@@ -206,34 +206,34 @@ public class MonetaryAccountJoint extends BunqModel {
   private MonetaryAccountSetting setting;
 
   /**
-   * @param currency            The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency
-   *                            code.
-   * @param allCoOwner          The users the account will be joint with.
-   * @param description         The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
-   * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountJoint. Defaults to
-   *                            1000 EUR. Currency must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
-   * @param overdraftLimit      The maximum Amount the MonetaryAccountJoint can be 'in the red'. Must
-   *                            be 0 EUR or omitted.
-   * @param alias               The Aliases to add to MonetaryAccountJoint. Must all be confirmed first. Can
-   *                            mostly be ignored.
-   * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountJoint.
-   * @param status              The status of the MonetaryAccountJoint. Ignored in POST requests (always set to
-   *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-   *                            MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
-   *                            updated in the same request (and vice versa).
-   * @param subStatus           The sub-status of the MonetaryAccountJoint providing extra information
-   *                            regarding the status. Should be ignored for POST requests. In case of PUT requests with
-   *                            status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
-   *                            only be NONE. When updating the status and/or sub_status no other fields can be updated in
-   *                            the same request (and vice versa).
-   * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can
-   *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-   * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-   *                            the MonetaryAccountJoint. Can be any user provided message. Should only be specified if
-   *                            updating the status to CANCELLED.
+   * @param currency The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency
+   * code.
+   * @param allCoOwner The users the account will be joint with.
+   * @param description The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
+   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountJoint. Defaults to
+   * 1000 EUR. Currency must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
+   * @param overdraftLimit The maximum Amount the MonetaryAccountJoint can be 'in the red'. Must
+   * be 0 EUR or omitted.
+   * @param alias The Aliases to add to MonetaryAccountJoint. Must all be confirmed first. Can
+   * mostly be ignored.
+   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountJoint.
+   * @param status The status of the MonetaryAccountJoint. Ignored in POST requests (always set to
+   * ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   * @param subStatus The sub-status of the MonetaryAccountJoint providing extra information
+   * regarding the status. Should be ignored for POST requests. In case of PUT requests with
+   * status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+   * only be NONE. When updating the status and/or sub_status no other fields can be updated in
+   * the same request (and vice versa).
+   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can
+   * only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+   * the MonetaryAccountJoint. Can be any user provided message. Should only be specified if
+   * updating the status to CANCELLED.
    * @param notificationFilters The types of notifications that will result in a push notification
-   *                            or URL callback for this MonetaryAccountJoint.
-   * @param setting             The settings of the MonetaryAccountJoint.
+   * or URL callback for this MonetaryAccountJoint.
+   * @param setting The settings of the MonetaryAccountJoint.
    */
   public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -341,27 +341,27 @@ public class MonetaryAccountJoint extends BunqModel {
   }
 
   /**
-   * @param description         The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
-   * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountJoint. Defaults to
-   *                            1000 EUR. Currency must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
-   * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountJoint.
-   * @param status              The status of the MonetaryAccountJoint. Ignored in POST requests (always set to
-   *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-   *                            MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
-   *                            updated in the same request (and vice versa).
-   * @param subStatus           The sub-status of the MonetaryAccountJoint providing extra information
-   *                            regarding the status. Should be ignored for POST requests. In case of PUT requests with
-   *                            status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
-   *                            only be NONE. When updating the status and/or sub_status no other fields can be updated in
-   *                            the same request (and vice versa).
-   * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can
-   *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-   * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-   *                            the MonetaryAccountJoint. Can be any user provided message. Should only be specified if
-   *                            updating the status to CANCELLED.
+   * @param description The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
+   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountJoint. Defaults to
+   * 1000 EUR. Currency must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
+   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountJoint.
+   * @param status The status of the MonetaryAccountJoint. Ignored in POST requests (always set to
+   * ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   * @param subStatus The sub-status of the MonetaryAccountJoint providing extra information
+   * regarding the status. Should be ignored for POST requests. In case of PUT requests with
+   * status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+   * only be NONE. When updating the status and/or sub_status no other fields can be updated in
+   * the same request (and vice versa).
+   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can
+   * only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+   * the MonetaryAccountJoint. Can be any user provided message. Should only be specified if
+   * updating the status to CANCELLED.
    * @param notificationFilters The types of notifications that will result in a push notification
-   *                            or URL callback for this MonetaryAccountJoint.
-   * @param setting             The settings of the MonetaryAccountJoint.
+   * or URL callback for this MonetaryAccountJoint.
+   * @param setting The settings of the MonetaryAccountJoint.
    */
   public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -385,10 +385,6 @@ public class MonetaryAccountJoint extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountJointId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer monetaryAccountJointId) {

@@ -266,10 +266,6 @@ public class RequestResponse extends BunqModel {
     return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<RequestResponse> update() {
-    return update(null, null, null, null, null, null, null);
-  }
-
   public static BunqResponse<RequestResponse> update(Integer requestResponseId) {
     return update(requestResponseId, null, null, null, null, null, null);
   }
@@ -325,6 +321,7 @@ public class RequestResponse extends BunqModel {
 
     return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<RequestResponse> get() {
     return get(null, null, null, null);
   }

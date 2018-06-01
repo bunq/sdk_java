@@ -252,10 +252,6 @@ public class Card extends BunqModel {
     return fromJson(Card.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<Card> update() {
-    return update(null, null, null, null, null, null, null, null, null, null, null);
-  }
-
   public static BunqResponse<Card> update(Integer cardId) {
     return update(cardId, null, null, null, null, null, null, null, null, null, null);
   }
@@ -305,6 +301,7 @@ public class Card extends BunqModel {
 
     return fromJson(Card.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<Card> get() {
     return get(null, null, null);
   }

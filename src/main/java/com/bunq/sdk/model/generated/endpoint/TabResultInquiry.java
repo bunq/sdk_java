@@ -51,6 +51,7 @@ public class TabResultInquiry extends BunqModel {
 
     return fromJson(TabResultInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<TabResultInquiry> get() {
     return get(null, null, null, null, null, null);
   }

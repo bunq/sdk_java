@@ -281,6 +281,7 @@ requestMap.put(FIELD_SETTING, setting);
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null);
   }
@@ -334,6 +335,7 @@ requestMap.put(FIELD_SETTING, setting);
 
     return fromJson(MonetaryAccountLight.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<MonetaryAccountLight> get() {
     return get(null, null, null);
   }
@@ -391,10 +393,6 @@ requestMap.put(FIELD_SETTING, setting);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountLightId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer monetaryAccountLightId) {

@@ -168,6 +168,7 @@ public class InvoiceByUser extends BunqModel {
 
     return fromJson(InvoiceByUser.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<InvoiceByUser> get() {
     return get(null, null, null);
   }

@@ -112,6 +112,7 @@ requestMap.put(FIELD_EXPIRATION, expiration);
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -137,6 +138,7 @@ requestMap.put(FIELD_EXPIRATION, expiration);
 
     return fromJson(DraftShareInviteApiKey.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<DraftShareInviteApiKey> get() {
     return get(null, null, null);
   }
@@ -173,10 +175,6 @@ requestMap.put(FIELD_EXPIRATION, expiration);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteApiKeyId), requestBytes, customHeaders);
 
     return fromJson(DraftShareInviteApiKey.class, responseRaw, OBJECT_TYPE_PUT);
-  }
-
-  public static BunqResponse<DraftShareInviteApiKey> update() {
-    return update(null, null, null, null, null);
   }
 
   public static BunqResponse<DraftShareInviteApiKey> update(Integer draftShareInviteApiKeyId) {

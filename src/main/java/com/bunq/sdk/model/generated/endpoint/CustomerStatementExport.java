@@ -135,6 +135,7 @@ public class CustomerStatementExport extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null);
   }
@@ -167,6 +168,7 @@ public class CustomerStatementExport extends BunqModel {
 
     return fromJson(CustomerStatementExport.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<CustomerStatementExport> get() {
     return get(null, null, null, null);
   }
@@ -212,6 +214,7 @@ public class CustomerStatementExport extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
+
   public static BunqResponse<CustomerStatementExport> delete(Integer customerStatementExportId) {
     return delete(customerStatementExportId, null, null);
   }

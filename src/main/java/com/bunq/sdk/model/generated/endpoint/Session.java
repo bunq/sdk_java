@@ -27,6 +27,7 @@ public class Session extends BunqModel {
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
+
   public static BunqResponse<Session> delete(Integer sessionId) {
     return delete(sessionId, null);
   }

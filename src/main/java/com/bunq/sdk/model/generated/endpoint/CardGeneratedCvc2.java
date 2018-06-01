@@ -90,6 +90,7 @@ public class CardGeneratedCvc2 extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null);
   }
@@ -107,6 +108,7 @@ public class CardGeneratedCvc2 extends BunqModel {
 
     return fromJson(CardGeneratedCvc2.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<CardGeneratedCvc2> get() {
     return get(null, null, null, null);
   }

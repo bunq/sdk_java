@@ -49,6 +49,7 @@ requestMap.put(FIELD_TOKEN, token);
 
     return fromJson(TokenQrRequestSofort.class, responseRaw, OBJECT_TYPE_POST);
   }
+
   public static BunqResponse<TokenQrRequestSofort> create() {
     return create(null, null);
   }

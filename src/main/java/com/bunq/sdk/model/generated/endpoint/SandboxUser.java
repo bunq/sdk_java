@@ -49,6 +49,7 @@ public class SandboxUser extends BunqModel {
 
     return fromJson(SandboxUser.class, responseRaw, OBJECT_TYPE_POST);
   }
+
   public static BunqResponse<SandboxUser> create() {
     return create(null);
   }

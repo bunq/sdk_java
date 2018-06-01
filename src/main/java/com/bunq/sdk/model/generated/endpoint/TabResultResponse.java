@@ -60,6 +60,7 @@ public class TabResultResponse extends BunqModel {
 
     return fromJson(TabResultResponse.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<TabResultResponse> get() {
     return get(null, null, null, null);
   }

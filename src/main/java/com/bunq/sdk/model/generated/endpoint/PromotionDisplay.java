@@ -69,6 +69,7 @@ public class PromotionDisplay extends BunqModel {
 
     return fromJson(PromotionDisplay.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<PromotionDisplay> get() {
     return get(null, null, null);
   }
@@ -98,10 +99,6 @@ public class PromotionDisplay extends BunqModel {
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), promotionDisplayId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer promotionDisplayId) {

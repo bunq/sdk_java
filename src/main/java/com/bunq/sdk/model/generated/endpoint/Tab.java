@@ -92,6 +92,7 @@ public class Tab extends BunqModel {
 
     return fromJson(Tab.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<Tab> get() {
     return get(null, null, null);
   }

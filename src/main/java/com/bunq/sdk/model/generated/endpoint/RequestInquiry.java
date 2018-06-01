@@ -304,6 +304,7 @@ public class RequestInquiry extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
@@ -389,10 +390,6 @@ public class RequestInquiry extends BunqModel {
     return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<RequestInquiry> update() {
-    return update(null, null, null, null);
-  }
-
   public static BunqResponse<RequestInquiry> update(Integer requestInquiryId) {
     return update(requestInquiryId, null, null, null);
   }
@@ -436,6 +433,7 @@ public class RequestInquiry extends BunqModel {
 
     return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<RequestInquiry> get() {
     return get(null, null, null, null);
   }

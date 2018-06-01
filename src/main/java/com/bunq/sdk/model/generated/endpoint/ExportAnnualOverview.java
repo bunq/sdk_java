@@ -25,6 +25,7 @@ public class ExportAnnualOverview extends BunqModel {
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/export-annual-overview";
   protected static final String ENDPOINT_URL_READ = "user/%s/export-annual-overview/%s";
+  protected static final String ENDPOINT_URL_DELETE = "user/%s/export-annual-overview/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/export-annual-overview";
 
   /**
@@ -92,6 +93,7 @@ public class ExportAnnualOverview extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null);
   }
@@ -109,6 +111,7 @@ public class ExportAnnualOverview extends BunqModel {
 
     return fromJson(ExportAnnualOverview.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<ExportAnnualOverview> get() {
     return get(null, null, null);
   }
@@ -119,6 +122,19 @@ public class ExportAnnualOverview extends BunqModel {
 
   public static BunqResponse<ExportAnnualOverview> get(Integer exportAnnualOverviewId, Map<String, String> params) {
     return get(exportAnnualOverviewId, params, null);
+  }
+
+  /**
+   */
+  public static BunqResponse<ExportAnnualOverview> delete(Integer exportAnnualOverviewId, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), exportAnnualOverviewId), customHeaders);
+
+    return new BunqResponse<>(null, responseRaw.getHeaders());
+  }
+
+  public static BunqResponse<ExportAnnualOverview> delete(Integer exportAnnualOverviewId) {
+    return delete(exportAnnualOverviewId, null);
   }
 
   /**

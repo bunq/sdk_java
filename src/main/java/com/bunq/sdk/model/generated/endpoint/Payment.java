@@ -258,6 +258,7 @@ public class Payment extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null, null, null, null);
   }
@@ -295,6 +296,7 @@ public class Payment extends BunqModel {
 
     return fromJson(Payment.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<Payment> get() {
     return get(null, null, null, null);
   }

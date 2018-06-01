@@ -210,6 +210,7 @@ public class TokenQrRequestIdeal extends BunqModel {
 
     return fromJson(TokenQrRequestIdeal.class, responseRaw, OBJECT_TYPE_POST);
   }
+
   public static BunqResponse<TokenQrRequestIdeal> create() {
     return create(null, null);
   }

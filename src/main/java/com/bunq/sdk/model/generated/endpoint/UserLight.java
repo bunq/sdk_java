@@ -300,6 +300,7 @@ public class UserLight extends BunqModel {
 
     return fromJson(UserLight.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<UserLight> get() {
     return get(null, null, null);
   }

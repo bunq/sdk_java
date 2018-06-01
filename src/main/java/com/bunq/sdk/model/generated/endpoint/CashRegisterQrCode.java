@@ -104,6 +104,7 @@ public class CashRegisterQrCode extends BunqModel {
 
     return processForId(responseRaw);
   }
+
   public static BunqResponse<Integer> create() {
     return create(null, null, null, null);
   }
@@ -143,10 +144,6 @@ public class CashRegisterQrCode extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update() {
-    return update(null, null, null, null, null);
-  }
-
   public static BunqResponse<Integer> update(Integer cashRegisterId) {
     return update(cashRegisterId, null, null, null, null);
   }
@@ -173,6 +170,7 @@ public class CashRegisterQrCode extends BunqModel {
 
     return fromJson(CashRegisterQrCode.class, responseRaw, OBJECT_TYPE_GET);
   }
+
   public static BunqResponse<CashRegisterQrCode> get() {
     return get(null, null, null, null, null);
   }
