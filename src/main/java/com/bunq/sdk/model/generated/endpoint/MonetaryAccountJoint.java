@@ -1,7 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.CoOwner;
@@ -11,8 +13,7 @@ import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,14 @@ import java.util.Map;
  * The endpoint for joint monetary accounts.
  */
 public class MonetaryAccountJoint extends BunqModel {
+
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-joint";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-joint/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-joint/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-joint";
 
   /**
    * Field constants.
@@ -38,6 +47,11 @@ public class MonetaryAccountJoint extends BunqModel {
   public static final String FIELD_ALL_CO_OWNER = "all_co_owner";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
+
+  /**
+   * Object type.
+   */
+  protected static final String OBJECT_TYPE_GET = "MonetaryAccountJoint";
 
   /**
    * The id of the MonetaryAccountJoint.
@@ -190,6 +204,245 @@ public class MonetaryAccountJoint extends BunqModel {
   @Expose
   @SerializedName("setting")
   private MonetaryAccountSetting setting;
+
+  /**
+   * @param currency The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency
+   * code.
+   * @param allCoOwner The users the account will be joint with.
+   * @param description The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
+   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountJoint. Defaults to
+   * 1000 EUR. Currency must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
+   * @param overdraftLimit The maximum Amount the MonetaryAccountJoint can be 'in the red'. Must
+   * be 0 EUR or omitted.
+   * @param alias The Aliases to add to MonetaryAccountJoint. Must all be confirmed first. Can
+   * mostly be ignored.
+   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountJoint.
+   * @param status The status of the MonetaryAccountJoint. Ignored in POST requests (always set to
+   * ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   * @param subStatus The sub-status of the MonetaryAccountJoint providing extra information
+   * regarding the status. Should be ignored for POST requests. In case of PUT requests with
+   * status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+   * only be NONE. When updating the status and/or sub_status no other fields can be updated in
+   * the same request (and vice versa).
+   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can
+   * only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+   * the MonetaryAccountJoint. Can be any user provided message. Should only be specified if
+   * updating the status to CANCELLED.
+   * @param notificationFilters The types of notifications that will result in a push notification
+   * or URL callback for this MonetaryAccountJoint.
+   * @param setting The settings of the MonetaryAccountJoint.
+   */
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_CURRENCY, currency);
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
+    requestMap.put(FIELD_OVERDRAFT_LIMIT, overdraftLimit);
+    requestMap.put(FIELD_ALIAS, alias);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_REASON, reason);
+    requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
+    requestMap.put(FIELD_ALL_CO_OWNER, allCoOwner);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_SETTING, setting);
+
+    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
+
+    return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency) {
+    return create(currency, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner) {
+    return create(currency, allCoOwner, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description) {
+    return create(currency, allCoOwner, description, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit) {
+    return create(currency, allCoOwner, description, dailyLimit, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null);
+  }
+
+  /**
+   */
+  public static BunqResponse<MonetaryAccountJoint> get(Integer monetaryAccountJointId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), monetaryAccountJointId), params, customHeaders);
+
+    return fromJson(MonetaryAccountJoint.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<MonetaryAccountJoint> get() {
+    return get(null, null, null);
+  }
+
+  public static BunqResponse<MonetaryAccountJoint> get(Integer monetaryAccountJointId) {
+    return get(monetaryAccountJointId, null, null);
+  }
+
+  public static BunqResponse<MonetaryAccountJoint> get(Integer monetaryAccountJointId, Map<String, String> params) {
+    return get(monetaryAccountJointId, params, null);
+  }
+
+  /**
+   * @param description The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
+   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountJoint. Defaults to
+   * 1000 EUR. Currency must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
+   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountJoint.
+   * @param status The status of the MonetaryAccountJoint. Ignored in POST requests (always set to
+   * ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   * @param subStatus The sub-status of the MonetaryAccountJoint providing extra information
+   * regarding the status. Should be ignored for POST requests. In case of PUT requests with
+   * status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+   * only be NONE. When updating the status and/or sub_status no other fields can be updated in
+   * the same request (and vice versa).
+   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can
+   * only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+   * the MonetaryAccountJoint. Can be any user provided message. Should only be specified if
+   * updating the status to CANCELLED.
+   * @param notificationFilters The types of notifications that will result in a push notification
+   * or URL callback for this MonetaryAccountJoint.
+   * @param setting The settings of the MonetaryAccountJoint.
+   */
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_REASON, reason);
+    requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_SETTING, setting);
+
+    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountJointId), requestBytes, customHeaders);
+
+    return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId) {
+    return update(monetaryAccountJointId, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description) {
+    return update(monetaryAccountJointId, description, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit) {
+    return update(monetaryAccountJointId, description, dailyLimit, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null);
+  }
+
+  /**
+   */
+  public static BunqResponse<List<MonetaryAccountJoint>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
+
+    return fromJsonList(MonetaryAccountJoint.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<MonetaryAccountJoint>> list() {
+    return list(null, null);
+  }
+
+  public static BunqResponse<List<MonetaryAccountJoint>> list(Map<String, String> params) {
+    return list(params, null);
+  }
 
   /**
    * The id of the MonetaryAccountJoint.
