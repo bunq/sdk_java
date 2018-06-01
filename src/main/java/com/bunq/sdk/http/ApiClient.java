@@ -91,10 +91,10 @@ public class ApiClient {
   /**
    * Prefix for bunq's own headers.
    */
-  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.13.0";
-  public static final String LANGUAGE_EN_US = "en_US";
-  public static final String REGION_NL_NL = "nl_NL";
-  public static final String GEOLOCATION_ZERO = "0 0 0 0 000";
+  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.13.1";
+  private static final String LANGUAGE_EN_US = "en_US";
+  private static final String REGION_NL_NL = "nl_NL";
+  private static final String GEOLOCATION_ZERO = "0 0 0 0 000";
   private static final String SCHEME_HTTPS = "https";
 
   /**
