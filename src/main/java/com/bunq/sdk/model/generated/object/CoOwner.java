@@ -24,7 +24,7 @@ public class CoOwner extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public CoOwner(MonetaryAccountReference alias) {
+  public CoOwner(LabelUser alias) {
     this.alias = alias;
   }
 
