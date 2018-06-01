@@ -1,8 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.Config;
-import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -24,30 +23,24 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
   /**
    * Config values.
    */
-  private static final String contentType = Config.getContentType();
-  private static final String attachmentDescription = Config.getAttachmentDescription();
-  private static final String pathAttachmentIn = Config.getPathAttachmentIn();
-
-  private static final ApiContext apiContext = getApiContext();
-
-  private static byte[] getAttachmentPublicContentBytes(String uuid, ApiContext apiContext) {
+  private static byte[] getAttachmentPublicContentBytes(String uuid) {
     return AttachmentPublicContent.list(uuid).getValue();
   }
 
-  private static byte[] getRequestBytes(String path) {
+  private static byte[] getRequestBytes() {
     try {
-      return FileUtils.readFileToByteArray(new File(path));
+      return FileUtils.readFileToByteArray(new File(BunqSdkTestBase.ATTACHMENT_PATH_IN));
     } catch (IOException exception) {
-      return null;
+      throw new BunqException(exception.getMessage());
     }
   }
 
   private static String uploadFileAndGetUuid() {
     HashMap<String, String> customHeaders = new HashMap<>();
-    customHeaders.put(ApiClient.HEADER_CONTENT_TYPE, contentType);
-    customHeaders.put(ApiClient.HEADER_ATTACHMENT_DESCRIPTION, attachmentDescription);
+    customHeaders.put(ApiClient.HEADER_CONTENT_TYPE, CONTENT_TYPE);
+    customHeaders.put(ApiClient.HEADER_ATTACHMENT_DESCRIPTION, ATTACHMENT_DESCRIPTION);
 
-    byte[] RequestBytes = getRequestBytes(pathAttachmentIn);
+    byte[] RequestBytes = getRequestBytes();
 
     return AttachmentPublic.create(customHeaders, RequestBytes).getValue();
   }
@@ -56,13 +49,13 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
    * Tests if the file we upload is the file we are getting back with the received uuid
    */
   @Test
-  public void fileUploadAndRetrievalTest() throws Exception {
+  public void fileUploadAndRetrievalTest() {
     String uuidBefore = uploadFileAndGetUuid();
     AttachmentPublic uuidFromAttachmentPublic = AttachmentPublic.get(uuidBefore)
         .getValue();
 
-    byte[] requestBytes = getRequestBytes(pathAttachmentIn);
-    byte[] responseBytes = getAttachmentPublicContentBytes(uuidBefore, apiContext);
+    byte[] requestBytes = getRequestBytes();
+    byte[] responseBytes = getAttachmentPublicContentBytes(uuidBefore);
 
     assertArrayEquals(requestBytes, responseBytes);
     assertEquals(uuidBefore, uuidFromAttachmentPublic.getUuid());

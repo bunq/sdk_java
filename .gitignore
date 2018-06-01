@@ -73,3 +73,4 @@ context-save-restore-test.conf
 config.properties
 bunq-test.conf
 .idea/codeStyles/
+.idea

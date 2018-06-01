@@ -29,6 +29,7 @@ public class CardReplace extends BunqModel {
   /**
    * Field constants.
    */
+  public static final String FIELD_NAME_ON_CARD = "name_on_card";
   public static final String FIELD_PIN_CODE = "pin_code";
   public static final String FIELD_SECOND_LINE = "second_line";
 
@@ -41,10 +42,12 @@ public class CardReplace extends BunqModel {
 
   /**
    * Request a card replacement.
+   * @param nameOnCard The user's name as it will be on the card. Check 'card-name' for the
+   * available card names for a user.
    * @param pinCode The plaintext pin code. Requests require encryption to be enabled.
    * @param secondLine The second line on the card.
    */
-  public static BunqResponse<Integer> create(Integer cardId, String pinCode, String secondLine, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode, String secondLine, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -52,6 +55,7 @@ public class CardReplace extends BunqModel {
     }
 
     HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_NAME_ON_CARD, nameOnCard);
     requestMap.put(FIELD_PIN_CODE, pinCode);
     requestMap.put(FIELD_SECOND_LINE, secondLine);
 
@@ -63,19 +67,23 @@ public class CardReplace extends BunqModel {
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null);
+    return create(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Integer cardId) {
-    return create(cardId, null, null, null);
+    return create(cardId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String pinCode) {
-    return create(cardId, pinCode, null, null);
+  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard) {
+    return create(cardId, nameOnCard, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String pinCode, String secondLine) {
-    return create(cardId, pinCode, secondLine, null);
+  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode) {
+    return create(cardId, nameOnCard, pinCode, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode, String secondLine) {
+    return create(cardId, nameOnCard, pinCode, secondLine, null);
   }
 
   /**

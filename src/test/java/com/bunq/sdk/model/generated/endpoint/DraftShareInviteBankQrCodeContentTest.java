@@ -22,13 +22,6 @@ import java.util.HashMap;
  */
 public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
 
-  /**
-   * Config values.
-   */
-  private static final int userId = Config.getUserId();
-
-  private static final ApiContext apiContext = getApiContext();
-
   private static final int HOURS_TO_EXPIRY = 1;
   private static final String DRAFT_SHARE_INVITE_BANK_STATUS_CANCELLED = "CANCELLED";
   private static final String FILENAME_QR_CODE = "tmp/qrcode.jpg";
@@ -39,12 +32,17 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
   private static Integer draftId;
 
   @BeforeClass
-  public static void setUp() {
-    BunqSdkTestBase.setUp();
+  public static void setUpBeforeClass() {
+    BunqSdkTestBase.setUpBeforeClass();
+
     Calendar expiryDate = Calendar.getInstance();
     expiryDate.add(Calendar.HOUR, HOURS_TO_EXPIRY);
-
-    ShareDetailPayment shareDetailPayment = new ShareDetailPayment(true, true, true, true);
+    ShareDetailPayment shareDetailPayment = new ShareDetailPayment(
+        true,
+        true,
+        true,
+        true
+    );
     ShareDetail shareDetail = new ShareDetail();
     shareDetail.setPayment(shareDetailPayment);
     DraftShareInviteEntry draftShareInviteBankEntry = new DraftShareInviteEntry(
@@ -54,8 +52,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
   }
 
   @AfterClass
-  public static void tearDown() throws Exception {
-
+  public static void tearDown() {
     DraftShareInviteBank.update(draftId, DRAFT_SHARE_INVITE_BANK_STATUS_CANCELLED);
   }
 

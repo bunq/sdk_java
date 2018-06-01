@@ -208,6 +208,14 @@ public class MasterCardAction extends BunqModel {
   private Integer secureCodeId;
 
   /**
+   * The ID of the wallet provider as defined by MasterCard. 420 = bunq Android app with Tap&Pay;
+   * 103 = Apple Pay.
+   */
+  @Expose
+  @SerializedName("wallet_provider_id")
+  private String walletProviderId;
+
+  /**
    * The reference to the object used for split the bill. Can be RequestInquiry or
    * RequestInquiryBatch
    */
@@ -538,6 +546,18 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The ID of the wallet provider as defined by MasterCard. 420 = bunq Android app with Tap&Pay;
+   * 103 = Apple Pay.
+   */
+  public String getWalletProviderId() {
+    return this.walletProviderId;
+  }
+
+  public void setWalletProviderId(String walletProviderId) {
+    this.walletProviderId = walletProviderId;
+  }
+
+  /**
    * The reference to the object used for split the bill. Can be RequestInquiry or
    * RequestInquiryBatch
    */
@@ -649,6 +669,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.secureCodeId != null) {
+      return false;
+    }
+
+    if (this.walletProviderId != null) {
       return false;
     }
 

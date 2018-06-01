@@ -1,16 +1,14 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.Error;
 import com.bunq.sdk.model.generated.object.RequestInquiryReference;
+import com.bunq.sdk.model.generated.object.WhitelistResultViewAnchoredObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * Whitelist an SDD so that when one comes in, it is automatically accepted.
@@ -40,6 +38,13 @@ public class WhitelistResult extends BunqModel {
   private String status;
 
   /**
+   * The message when the whitelist result has failed due to user error.
+   */
+  @Expose
+  @SerializedName("error_message")
+  private List<Error> errorMessage;
+
+  /**
    * The corresponding whitelist.
    */
   @Expose
@@ -51,7 +56,7 @@ public class WhitelistResult extends BunqModel {
    */
   @Expose
   @SerializedName("object")
-  private BunqModel object;
+  private WhitelistResultViewAnchoredObject object;
 
   /**
    * The reference to the object used for split the bill. Can be RequestInquiry or
@@ -96,6 +101,17 @@ public class WhitelistResult extends BunqModel {
   }
 
   /**
+   * The message when the whitelist result has failed due to user error.
+   */
+  public List<Error> getErrorMessage() {
+    return this.errorMessage;
+  }
+
+  public void setErrorMessage(List<Error> errorMessage) {
+    this.errorMessage = errorMessage;
+  }
+
+  /**
    * The corresponding whitelist.
    */
   public Whitelist getWhitelist() {
@@ -109,11 +125,11 @@ public class WhitelistResult extends BunqModel {
   /**
    * The details of the external object the event was created for.
    */
-  public BunqModel getObject() {
+  public WhitelistResultViewAnchoredObject getObject() {
     return this.object;
   }
 
-  public void setObject(BunqModel object) {
+  public void setObject(WhitelistResultViewAnchoredObject object) {
     this.object = object;
   }
 
@@ -141,6 +157,10 @@ public class WhitelistResult extends BunqModel {
     }
 
     if (this.status != null) {
+      return false;
+    }
+
+    if (this.errorMessage != null) {
       return false;
     }
 
