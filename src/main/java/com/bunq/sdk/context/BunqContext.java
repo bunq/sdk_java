@@ -7,7 +7,7 @@ public final class BunqContext {
   /**
    * Error constatns.
    */
-  private static final String ERROR_API_CONTEXT_HAS_NOT_BEEN_SET = "Api context has not been set";
+  public static final String ERROR_API_CONTEXT_HAS_NOT_BEEN_SET = "Api context has not been set";
   private static final String ERROR_USER_CONTEXT_HAS_NOT_BEEN_SET = "UserContext has not been set";
 
   private static ApiContext apiContext;
