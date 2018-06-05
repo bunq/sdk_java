@@ -196,5 +196,5 @@ abstract public class BunqModel {
 
     return requestString.replaceAll(REGEX_FIELD_FOR_REQUEST, STRING_EMPTY).getBytes();
   }
-  
+
 }
