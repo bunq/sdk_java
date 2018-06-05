@@ -13,6 +13,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 abstract public class BunqModel {
@@ -29,6 +30,16 @@ abstract public class BunqModel {
    * Index of the very first item in an array.
    */
   private static final int INDEX_FIRST = 0;
+
+  /**
+   * String format consents.
+   */
+  private static final String STRING_EMPTY = "";
+
+  /**
+   * Regex constatns.
+   */
+  private static final String REGEX_FIELD_FOR_REQUEST = "(_field_for_request)";
 
   /**
    * Gson builder for serialization.
@@ -179,4 +190,11 @@ abstract public class BunqModel {
       return id;
     }
   }
+
+  protected static byte[] determineRequestByte(HashMap<String, Object> requestMap) {
+    String requestString = gson.toJson(requestMap).toString();
+
+    return requestString.replaceAll(REGEX_FIELD_FOR_REQUEST, STRING_EMPTY).getBytes();
+  }
+  
 }
