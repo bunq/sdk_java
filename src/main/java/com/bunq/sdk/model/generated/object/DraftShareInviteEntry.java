@@ -1,15 +1,9 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -36,10 +30,43 @@ public class DraftShareInviteEntry extends BunqModel {
   @SerializedName("end_date")
   private String endDate;
 
+  /**
+   * The share details. Only one of these objects may be passed.
+   */
+  @Expose
+  @SerializedName("share_detail_field_for_request")
+  private ShareDetail shareDetailFieldForRequest;
+
+  /**
+   * The start date of this share.
+   */
+  @Expose
+  @SerializedName("start_date_field_for_request")
+  private String startDateFieldForRequest;
+
+  /**
+   * The expiration date of this share.
+   */
+  @Expose
+  @SerializedName("end_date_field_for_request")
+  private String endDateFieldForRequest;
+
+  public DraftShareInviteEntry() {
+    this(null, null, null);
+  }
+
   public DraftShareInviteEntry(ShareDetail shareDetail) {
-    this.shareDetail = shareDetail;
-    this.startDate = startDate;
-    this.endDate = endDate;
+    this(shareDetail, null, null);
+  }
+
+  public DraftShareInviteEntry(ShareDetail shareDetail, String startDate) {
+    this(shareDetail, startDate, null);
+  }
+
+  public DraftShareInviteEntry(ShareDetail shareDetail, String startDate, String endDate) {
+    this.shareDetailFieldForRequest = shareDetail;
+    this.startDateFieldForRequest = startDate;
+    this.endDateFieldForRequest = endDate;
   }
 
   /**

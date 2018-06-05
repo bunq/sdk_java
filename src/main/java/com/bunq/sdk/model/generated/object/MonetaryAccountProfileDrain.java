@@ -1,15 +1,9 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -41,13 +35,57 @@ public class MonetaryAccountProfileDrain extends BunqModel {
    */
   @Expose
   @SerializedName("savings_account_alias")
-  private MonetaryAccountReference savingsAccountAlias;
+  private LabelMonetaryAccount savingsAccountAlias;
 
-  public MonetaryAccountProfileDrain(String status, Amount balancePreferred, Amount balanceThresholdHigh, MonetaryAccountReference savingsAccountAlias) {
-    this.status = status;
-    this.balancePreferred = balancePreferred;
-    this.balanceThresholdHigh = balanceThresholdHigh;
-    this.savingsAccountAlias = savingsAccountAlias;
+  /**
+   * The status of the profile.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The goal balance.
+   */
+  @Expose
+  @SerializedName("balance_preferred_field_for_request")
+  private Amount balancePreferredFieldForRequest;
+
+  /**
+   * The high threshold balance.
+   */
+  @Expose
+  @SerializedName("balance_threshold_high_field_for_request")
+  private Amount balanceThresholdHighFieldForRequest;
+
+  /**
+   * The savings monetary account.
+   */
+  @Expose
+  @SerializedName("savings_account_alias_field_for_request")
+  private Pointer savingsAccountAliasFieldForRequest;
+
+  public MonetaryAccountProfileDrain() {
+    this(null, null, null, null);
+  }
+
+  public MonetaryAccountProfileDrain(String status) {
+    this(status, null, null, null);
+  }
+
+  public MonetaryAccountProfileDrain(String status, Amount balancePreferred) {
+    this(status, balancePreferred, null, null);
+  }
+
+  public MonetaryAccountProfileDrain(String status, Amount balancePreferred, Amount balanceThresholdHigh) {
+    this(status, balancePreferred, balanceThresholdHigh, null);
+  }
+
+  public MonetaryAccountProfileDrain(String status, Amount balancePreferred, Amount balanceThresholdHigh, Pointer savingsAccountAlias) {
+    this.statusFieldForRequest = status;
+    this.balancePreferredFieldForRequest = balancePreferred;
+    this.balanceThresholdHighFieldForRequest = balanceThresholdHigh;
+    this.savingsAccountAliasFieldForRequest = savingsAccountAlias;
   }
 
   /**
@@ -86,11 +124,11 @@ public class MonetaryAccountProfileDrain extends BunqModel {
   /**
    * The savings monetary account.
    */
-  public MonetaryAccountReference getSavingsAccountAlias() {
+  public LabelMonetaryAccount getSavingsAccountAlias() {
     return this.savingsAccountAlias;
   }
 
-  public void setSavingsAccountAlias(MonetaryAccountReference savingsAccountAlias) {
+  public void setSavingsAccountAlias(LabelMonetaryAccount savingsAccountAlias) {
     this.savingsAccountAlias = savingsAccountAlias;
   }
 

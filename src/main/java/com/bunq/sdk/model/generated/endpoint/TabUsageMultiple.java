@@ -4,10 +4,10 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.BunqId;
 import com.bunq.sdk.model.generated.object.Geolocation;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.TabVisibility;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -158,7 +158,7 @@ public class TabUsageMultiple extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The location of the cash register that created this tab.
@@ -181,6 +181,164 @@ public class TabUsageMultiple extends BunqModel {
   @Expose
   @SerializedName("tab_attachment")
   private List<BunqId> tabAttachment;
+
+  /**
+   * The description of the TabUsageMultiple. Maximum 9000 characters. Field is required but can
+   * be an empty string.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The status of the TabUsageMultiple. On creation the status must be set to OPEN. You can
+   * change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status will
+   * remain PAYABLE.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The total amount of the Tab. Must be a positive amount. As long as the tab has the status
+   * OPEN you can change the total amount. This amount is not affected by the amounts of the
+   * TabItems. However, if you've created any TabItems for a Tab the sum of the amounts of these
+   * items must be equal to the total_amount of the Tab when you change its status to PAYABLE
+   */
+  @Expose
+  @SerializedName("amount_total_field_for_request")
+  private Amount amountTotalFieldForRequest;
+
+  /**
+   * [DEPRECATED] Whether or not a higher amount can be paid.
+   */
+  @Expose
+  @SerializedName("allow_amount_higher_field_for_request")
+  private Boolean allowAmountHigherFieldForRequest;
+
+  /**
+   * [DEPRECATED] Whether or not a lower amount can be paid.
+   */
+  @Expose
+  @SerializedName("allow_amount_lower_field_for_request")
+  private Boolean allowAmountLowerFieldForRequest;
+
+  /**
+   * [DEPRECATED] Whether or not the user paying the Tab should be asked if he wants to give a
+   * tip. When want_tip is set to true, allow_amount_higher must also be set to true and
+   * allow_amount_lower must be false.
+   */
+  @Expose
+  @SerializedName("want_tip_field_for_request")
+  private Boolean wantTipFieldForRequest;
+
+  /**
+   * The minimum age of the user paying the Tab.
+   */
+  @Expose
+  @SerializedName("minimum_age_field_for_request")
+  private Integer minimumAgeFieldForRequest;
+
+  /**
+   * Whether a billing and shipping address must be provided when paying the Tab. Possible values
+   * are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is NONE.
+   */
+  @Expose
+  @SerializedName("require_address_field_for_request")
+  private String requireAddressFieldForRequest;
+
+  /**
+   * The URL which the user is sent to after paying the Tab.
+   */
+  @Expose
+  @SerializedName("redirect_url_field_for_request")
+  private String redirectUrlFieldForRequest;
+
+  /**
+   * The visibility of a Tab. A Tab can be visible trough NearPay, the QR code of the CashRegister
+   * and its own QR code.
+   */
+  @Expose
+  @SerializedName("visibility_field_for_request")
+  private TabVisibility visibilityFieldForRequest;
+
+  /**
+   * The moment when this Tab expires. Can be at most 365 days into the future.
+   */
+  @Expose
+  @SerializedName("expiration_field_for_request")
+  private String expirationFieldForRequest;
+
+  /**
+   * An array of attachments that describe the tab. Uploaded through the POST
+   * /user/{userid}/attachment-tab endpoint.
+   */
+  @Expose
+  @SerializedName("tab_attachment_field_for_request")
+  private List<BunqId> tabAttachmentFieldForRequest;
+
+  public TabUsageMultiple() {
+    this(null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description) {
+    this(description, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status) {
+    this(description, status, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal) {
+    this(description, status, amountTotal, null, null, null, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher) {
+    this(description, status, amountTotal, allowAmountHigher, null, null, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, null, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, wantTip, null, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, wantTip, minimumAge, null, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, null, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, null, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, visibility, null, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility, String expiration) {
+    this(description, status, amountTotal, allowAmountHigher, allowAmountLower, wantTip, minimumAge, requireAddress, redirectUrl, visibility, expiration, null);
+  }
+
+  public TabUsageMultiple(String description, String status, Amount amountTotal, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility, String expiration, List<BunqId> tabAttachment) {
+    this.descriptionFieldForRequest = description;
+    this.statusFieldForRequest = status;
+    this.amountTotalFieldForRequest = amountTotal;
+    this.allowAmountHigherFieldForRequest = allowAmountHigher;
+    this.allowAmountLowerFieldForRequest = allowAmountLower;
+    this.wantTipFieldForRequest = wantTip;
+    this.minimumAgeFieldForRequest = minimumAge;
+    this.requireAddressFieldForRequest = requireAddress;
+    this.redirectUrlFieldForRequest = redirectUrl;
+    this.visibilityFieldForRequest = visibility;
+    this.expirationFieldForRequest = expiration;
+    this.tabAttachmentFieldForRequest = tabAttachment;
+  }
 
   /**
    * Create a TabUsageMultiple. On creation the status must be set to OPEN
@@ -231,7 +389,7 @@ public class TabUsageMultiple extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_TAB_ATTACHMENT, tabAttachment);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
@@ -330,7 +488,7 @@ public class TabUsageMultiple extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_TAB_ATTACHMENT, tabAttachment);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUsageMultipleUuid), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
@@ -594,11 +752,11 @@ public class TabUsageMultiple extends BunqModel {
   /**
    * The alias of the party that owns this tab.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 

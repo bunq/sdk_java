@@ -4,9 +4,9 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelCard;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -148,14 +148,14 @@ public class MasterCardAction extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The monetary account label of the counterparty.
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The label of the card.
@@ -448,22 +448,22 @@ public class MasterCardAction extends BunqModel {
   /**
    * The monetary account label of the account that this action is created for.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 
   /**
    * The monetary account label of the counterparty.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

@@ -66,6 +66,21 @@ public class RequestInquiryChat extends BunqModel {
   private Integer unreadMessageCount;
 
   /**
+   * The id of the last read message.
+   */
+  @Expose
+  @SerializedName("last_read_message_id_field_for_request")
+  private Integer lastReadMessageIdFieldForRequest;
+
+  public RequestInquiryChat() {
+    this(null);
+  }
+
+  public RequestInquiryChat(Integer lastReadMessageId) {
+    this.lastReadMessageIdFieldForRequest = lastReadMessageId;
+  }
+
+  /**
    * Create a chat for a specific request inquiry.
    * @param lastReadMessageId The id of the last read message.
    */
@@ -79,7 +94,7 @@ public class RequestInquiryChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -115,7 +130,7 @@ public class RequestInquiryChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId, requestInquiryChatId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

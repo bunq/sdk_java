@@ -53,6 +53,33 @@ public class SchedulePayment extends BunqModel {
   private Schedule schedule;
 
   /**
+   * The payment details.
+   */
+  @Expose
+  @SerializedName("payment_field_for_request")
+  private SchedulePaymentEntry paymentFieldForRequest;
+
+  /**
+   * The schedule details when creating or updating a scheduled payment.
+   */
+  @Expose
+  @SerializedName("schedule_field_for_request")
+  private Schedule scheduleFieldForRequest;
+
+  public SchedulePayment() {
+    this(null, null);
+  }
+
+  public SchedulePayment(SchedulePaymentEntry payment) {
+    this(payment, null);
+  }
+
+  public SchedulePayment(SchedulePaymentEntry payment, Schedule schedule) {
+    this.paymentFieldForRequest = payment;
+    this.scheduleFieldForRequest = schedule;
+  }
+
+  /**
    * @param payment The payment details.
    * @param schedule The schedule details when creating or updating a scheduled payment.
    */
@@ -67,7 +94,7 @@ public class SchedulePayment extends BunqModel {
     requestMap.put(FIELD_PAYMENT, payment);
     requestMap.put(FIELD_SCHEDULE, schedule);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -167,7 +194,7 @@ public class SchedulePayment extends BunqModel {
     requestMap.put(FIELD_PAYMENT, payment);
     requestMap.put(FIELD_SCHEDULE, schedule);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

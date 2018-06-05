@@ -63,6 +63,57 @@ public class RequestInquiryBatch extends BunqModel {
   private RequestReferenceSplitTheBillAnchorObject referenceSplitTheBill;
 
   /**
+   * The list of request inquiries we want to send in 1 batch.
+   */
+  @Expose
+  @SerializedName("request_inquiries_field_for_request")
+  private List<RequestInquiry> requestInquiriesFieldForRequest;
+
+  /**
+   * The status of the request.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The total amount originally inquired for this batch.
+   */
+  @Expose
+  @SerializedName("total_amount_inquired_field_for_request")
+  private Amount totalAmountInquiredFieldForRequest;
+
+  /**
+   * The ID of the associated event if the request batch was made using 'split the bill'.
+   */
+  @Expose
+  @SerializedName("event_id_field_for_request")
+  private Integer eventIdFieldForRequest;
+
+  public RequestInquiryBatch() {
+    this(null, null, null, null);
+  }
+
+  public RequestInquiryBatch(List<RequestInquiry> requestInquiries) {
+    this(requestInquiries, null, null, null);
+  }
+
+  public RequestInquiryBatch(List<RequestInquiry> requestInquiries, Amount totalAmountInquired) {
+    this(requestInquiries, totalAmountInquired, null, null);
+  }
+
+  public RequestInquiryBatch(List<RequestInquiry> requestInquiries, Amount totalAmountInquired, String status) {
+    this(requestInquiries, totalAmountInquired, status, null);
+  }
+
+  public RequestInquiryBatch(List<RequestInquiry> requestInquiries, Amount totalAmountInquired, String status, Integer eventId) {
+    this.requestInquiriesFieldForRequest = requestInquiries;
+    this.statusFieldForRequest = status;
+    this.totalAmountInquiredFieldForRequest = totalAmountInquired;
+    this.eventIdFieldForRequest = eventId;
+  }
+
+  /**
    * Create a request batch by sending an array of single request objects, that will become part
    * of the batch.
    * @param requestInquiries The list of request inquiries we want to send in 1 batch.
@@ -84,7 +135,7 @@ public class RequestInquiryBatch extends BunqModel {
     requestMap.put(FIELD_TOTAL_AMOUNT_INQUIRED, totalAmountInquired);
     requestMap.put(FIELD_EVENT_ID, eventId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -128,7 +179,7 @@ public class RequestInquiryBatch extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryBatchId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

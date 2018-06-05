@@ -1,19 +1,20 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
 public class CardLimit extends BunqModel {
+
+  /**
+   * The id of the card limit entry.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
 
   /**
    * The daily limit amount.
@@ -38,16 +39,43 @@ public class CardLimit extends BunqModel {
   private String type;
 
   /**
-   * The id of the card limit entry.
+   * The daily limit amount.
    */
   @Expose
-  @SerializedName("id")
-  private Integer id;
+  @SerializedName("daily_limit_field_for_request")
+  private String dailyLimitFieldForRequest;
+
+  /**
+   * Currency for the daily limit.
+   */
+  @Expose
+  @SerializedName("currency_field_for_request")
+  private String currencyFieldForRequest;
+
+  /**
+   * The type of transaction for the limit. Can be CARD_LIMIT_ATM, CARD_LIMIT_CONTACTLESS,
+   * CARD_LIMIT_DIPPING or CARD_LIMIT_POS_ICC.
+   */
+  @Expose
+  @SerializedName("type_field_for_request")
+  private String typeFieldForRequest;
+
+  public CardLimit() {
+    this(null, null, null);
+  }
+
+  public CardLimit(String dailyLimit) {
+    this(dailyLimit, null, null);
+  }
+
+  public CardLimit(String dailyLimit, String currency) {
+    this(dailyLimit, currency, null);
+  }
 
   public CardLimit(String dailyLimit, String currency, String type) {
-    this.dailyLimit = dailyLimit;
-    this.currency = currency;
-    this.type = type;
+    this.dailyLimitFieldForRequest = dailyLimit;
+    this.currencyFieldForRequest = currency;
+    this.typeFieldForRequest = type;
   }
 
   /**

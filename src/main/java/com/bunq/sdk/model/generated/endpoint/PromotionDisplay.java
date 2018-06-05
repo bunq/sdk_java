@@ -4,7 +4,7 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -45,7 +45,7 @@ public class PromotionDisplay extends BunqModel {
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The event description of the promotion appearing on time line.
@@ -60,6 +60,21 @@ public class PromotionDisplay extends BunqModel {
   @Expose
   @SerializedName("status")
   private String status;
+
+  /**
+   * The status of the promotion. User can set it to discarded.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  public PromotionDisplay() {
+    this(null);
+  }
+
+  public PromotionDisplay(String status) {
+    this.statusFieldForRequest = status;
+  }
 
   /**
    */
@@ -95,7 +110,7 @@ public class PromotionDisplay extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), promotionDisplayId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -123,11 +138,11 @@ public class PromotionDisplay extends BunqModel {
   /**
    * The alias of the user you received the promotion from.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

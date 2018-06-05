@@ -1,15 +1,9 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -38,6 +32,48 @@ public class ShareDetail extends BunqModel {
   @Expose
   @SerializedName("ShareDetailDraftPayment")
   private ShareDetailDraftPayment draftPayment;
+
+  /**
+   * The share details for a payment share. Remember to replace 'payment' with
+   * 'ShareDetailPayment' before sending a request.
+   */
+  @Expose
+  @SerializedName("ShareDetailPayment_field_for_request")
+  private ShareDetailPayment paymentFieldForRequest;
+
+  /**
+   * The share details for viewing a share. Remember to replace 'read_only' with
+   * 'ShareDetailReadOnly' before sending a request.
+   */
+  @Expose
+  @SerializedName("ShareDetailReadOnly_field_for_request")
+  private ShareDetailReadOnly readOnlyFieldForRequest;
+
+  /**
+   * The share details for a draft payment share. Remember to replace 'draft_payment' with
+   * 'ShareDetailDraftPayment' before sending a request.
+   */
+  @Expose
+  @SerializedName("ShareDetailDraftPayment_field_for_request")
+  private ShareDetailDraftPayment draftPaymentFieldForRequest;
+
+  public ShareDetail() {
+    this(null, null, null);
+  }
+
+  public ShareDetail(ShareDetailPayment payment) {
+    this(payment, null, null);
+  }
+
+  public ShareDetail(ShareDetailPayment payment, ShareDetailReadOnly readOnly) {
+    this(payment, readOnly, null);
+  }
+
+  public ShareDetail(ShareDetailPayment payment, ShareDetailReadOnly readOnly, ShareDetailDraftPayment draftPayment) {
+    this.paymentFieldForRequest = payment;
+    this.readOnlyFieldForRequest = readOnly;
+    this.draftPaymentFieldForRequest = draftPayment;
+  }
 
   /**
    * The share details for a payment share. In the response 'payment' is replaced by

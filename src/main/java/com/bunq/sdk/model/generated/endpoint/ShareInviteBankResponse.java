@@ -4,7 +4,7 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.ShareDetail;
 import com.google.gson.annotations.Expose;
@@ -43,7 +43,7 @@ public class ShareInviteBankResponse extends BunqModel {
    */
   @Expose
   @SerializedName("counter_alias")
-  private MonetaryAccountReference counterAlias;
+  private LabelMonetaryAccount counterAlias;
 
   /**
    * The user who cancelled the share if it has been revoked or rejected.
@@ -112,6 +112,24 @@ public class ShareInviteBankResponse extends BunqModel {
   private String description;
 
   /**
+   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
+   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects)
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  public ShareInviteBankResponse() {
+    this(null);
+  }
+
+  public ShareInviteBankResponse(String status) {
+    this.statusFieldForRequest = status;
+  }
+
+  /**
    * Return the details of a specific share a user was invited to.
    */
   public static BunqResponse<ShareInviteBankResponse> get(Integer shareInviteBankResponseId, Map<String, String> params, Map<String, String> customHeaders) {
@@ -150,7 +168,7 @@ public class ShareInviteBankResponse extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), shareInviteBankResponseId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -185,11 +203,11 @@ public class ShareInviteBankResponse extends BunqModel {
   /**
    * The monetary account and user who created the share.
    */
-  public MonetaryAccountReference getCounterAlias() {
+  public LabelMonetaryAccount getCounterAlias() {
     return this.counterAlias;
   }
 
-  public void setCounterAlias(MonetaryAccountReference counterAlias) {
+  public void setCounterAlias(LabelMonetaryAccount counterAlias) {
     this.counterAlias = counterAlias;
   }
 

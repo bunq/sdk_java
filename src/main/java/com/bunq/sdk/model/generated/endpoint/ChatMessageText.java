@@ -34,6 +34,21 @@ public class ChatMessageText extends BunqModel {
   private Integer id;
 
   /**
+   * The textual content of this message. Cannot be empty.
+   */
+  @Expose
+  @SerializedName("text_field_for_request")
+  private String textFieldForRequest;
+
+  public ChatMessageText() {
+    this(null);
+  }
+
+  public ChatMessageText(String text) {
+    this.textFieldForRequest = text;
+  }
+
+  /**
    * Add a new text message to a specific conversation.
    * @param text The textual content of this message. Cannot be empty.
    */
@@ -47,7 +62,7 @@ public class ChatMessageText extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_TEXT, text);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), chatConversationId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

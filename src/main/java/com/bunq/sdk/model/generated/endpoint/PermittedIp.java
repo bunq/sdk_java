@@ -52,6 +52,34 @@ public class PermittedIp extends BunqModel {
   private String status;
 
   /**
+   * The IP address.
+   */
+  @Expose
+  @SerializedName("ip_field_for_request")
+  private String ipFieldForRequest;
+
+  /**
+   * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
+   * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  public PermittedIp() {
+    this(null, null);
+  }
+
+  public PermittedIp(String ip) {
+    this(ip, null);
+  }
+
+  public PermittedIp(String ip, String status) {
+    this.ipFieldForRequest = ip;
+    this.statusFieldForRequest = status;
+  }
+
+  /**
    */
   public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -92,7 +120,7 @@ public class PermittedIp extends BunqModel {
     requestMap.put(FIELD_IP, ip);
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), credentialPasswordIpId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -149,7 +177,7 @@ public class PermittedIp extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), credentialPasswordIpId, permittedIpId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

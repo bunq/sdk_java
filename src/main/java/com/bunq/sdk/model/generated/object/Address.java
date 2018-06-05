@@ -58,13 +58,79 @@ public class Address extends BunqModel {
   @SerializedName("province")
   private String province;
 
+  /**
+   * The street.
+   */
+  @Expose
+  @SerializedName("street_field_for_request")
+  private String streetFieldForRequest;
+
+  /**
+   * The house number.
+   */
+  @Expose
+  @SerializedName("house_number_field_for_request")
+  private String houseNumberFieldForRequest;
+
+  /**
+   * The PO box.
+   */
+  @Expose
+  @SerializedName("po_box_field_for_request")
+  private String poBoxFieldForRequest;
+
+  /**
+   * The postal code.
+   */
+  @Expose
+  @SerializedName("postal_code_field_for_request")
+  private String postalCodeFieldForRequest;
+
+  /**
+   * The city.
+   */
+  @Expose
+  @SerializedName("city_field_for_request")
+  private String cityFieldForRequest;
+
+  /**
+   * The country as an ISO 3166-1 alpha-2 country code.
+   */
+  @Expose
+  @SerializedName("country_field_for_request")
+  private String countryFieldForRequest;
+
+  public Address() {
+    this(null, null, null, null, null, null);
+  }
+
+  public Address(String street) {
+    this(street, null, null, null, null, null);
+  }
+
+  public Address(String street, String houseNumber) {
+    this(street, houseNumber, null, null, null, null);
+  }
+
+  public Address(String street, String houseNumber, String postalCode) {
+    this(street, houseNumber, postalCode, null, null, null);
+  }
+
+  public Address(String street, String houseNumber, String postalCode, String city) {
+    this(street, houseNumber, postalCode, city, null, null);
+  }
+
   public Address(String street, String houseNumber, String postalCode, String city, String country) {
-    this.street = street;
-    this.houseNumber = houseNumber;
-    this.poBox = poBox;
-    this.postalCode = postalCode;
-    this.city = city;
-    this.country = country;
+    this(street, houseNumber, postalCode, city, country, null);
+  }
+
+  public Address(String street, String houseNumber, String postalCode, String city, String country, String poBox) {
+    this.streetFieldForRequest = street;
+    this.houseNumberFieldForRequest = houseNumber;
+    this.poBoxFieldForRequest = poBox;
+    this.postalCodeFieldForRequest = postalCode;
+    this.cityFieldForRequest = city;
+    this.countryFieldForRequest = country;
   }
 
   /**

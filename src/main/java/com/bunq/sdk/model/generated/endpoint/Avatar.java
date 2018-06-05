@@ -54,6 +54,21 @@ public class Avatar extends BunqModel {
   private List<Image> image;
 
   /**
+   * The public UUID of the public attachment from which an avatar image must be created.
+   */
+  @Expose
+  @SerializedName("attachment_public_uuid_field_for_request")
+  private String attachmentPublicUuidFieldForRequest;
+
+  public Avatar() {
+    this(null);
+  }
+
+  public Avatar(String attachmentPublicUuid) {
+    this.attachmentPublicUuidFieldForRequest = attachmentPublicUuid;
+  }
+
+  /**
    * @param attachmentPublicUuid The public UUID of the public attachment from which an avatar
    * image must be created.
    */
@@ -67,7 +82,7 @@ public class Avatar extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_ATTACHMENT_PUBLIC_UUID, attachmentPublicUuid);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
     return processForUuid(responseRaw);

@@ -89,6 +89,21 @@ public class ScheduleInstance extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   * Change the state of the scheduleInstance from FAILED_USER_ERROR to RETRY.
+   */
+  @Expose
+  @SerializedName("state_field_for_request")
+  private String stateFieldForRequest;
+
+  public ScheduleInstance() {
+    this(null);
+  }
+
+  public ScheduleInstance(String state) {
+    this.stateFieldForRequest = state;
+  }
+
+  /**
    */
   public static BunqResponse<ScheduleInstance> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -130,7 +145,7 @@ public class ScheduleInstance extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATE, state);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

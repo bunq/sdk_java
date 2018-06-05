@@ -74,6 +74,21 @@ public class ExportAnnualOverview extends BunqModel {
   private LabelUser aliasUser;
 
   /**
+   * The year for which the overview is.
+   */
+  @Expose
+  @SerializedName("year_field_for_request")
+  private Integer yearFieldForRequest;
+
+  public ExportAnnualOverview() {
+    this(null);
+  }
+
+  public ExportAnnualOverview(Integer year) {
+    this.yearFieldForRequest = year;
+  }
+
+  /**
    * Create a new annual overview for a specific year. An overview can be generated only for a
    * past year.
    * @param year The year for which the overview is.
@@ -88,7 +103,7 @@ public class ExportAnnualOverview extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_YEAR, year);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);

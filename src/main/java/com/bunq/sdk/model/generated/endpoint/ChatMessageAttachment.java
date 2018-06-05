@@ -35,6 +35,21 @@ public class ChatMessageAttachment extends BunqModel {
   private Integer id;
 
   /**
+   * The attachment contained in this message.
+   */
+  @Expose
+  @SerializedName("attachment_field_for_request")
+  private BunqId attachmentFieldForRequest;
+
+  public ChatMessageAttachment() {
+    this(null);
+  }
+
+  public ChatMessageAttachment(BunqId attachment) {
+    this.attachmentFieldForRequest = attachment;
+  }
+
+  /**
    * Create a new message holding a file attachment to a specific conversation.
    * @param attachment The attachment contained in this message.
    */
@@ -48,7 +63,7 @@ public class ChatMessageAttachment extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_ATTACHMENT, attachment);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), chatConversationId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

@@ -110,6 +110,60 @@ public class DraftPayment extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   * The status of the DraftPayment.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The list of entries in the DraftPayment. Each entry will result in a payment when the
+   * DraftPayment is accepted.
+   */
+  @Expose
+  @SerializedName("entries_field_for_request")
+  private List<DraftPaymentEntry> entriesFieldForRequest;
+
+  /**
+   * The last updated_timestamp that you received for this DraftPayment. This needs to be provided
+   * to prevent race conditions.
+   */
+  @Expose
+  @SerializedName("previous_updated_timestamp_field_for_request")
+  private String previousUpdatedTimestampFieldForRequest;
+
+  /**
+   * The number of accepts that are required for the draft payment to receive status ACCEPTED.
+   * Currently only 1 is valid.
+   */
+  @Expose
+  @SerializedName("number_of_required_accepts_field_for_request")
+  private Integer numberOfRequiredAcceptsFieldForRequest;
+
+  public DraftPayment() {
+    this(null, null, null, null);
+  }
+
+  public DraftPayment(List<DraftPaymentEntry> entries) {
+    this(entries, null, null, null);
+  }
+
+  public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts) {
+    this(entries, numberOfRequiredAccepts, null, null);
+  }
+
+  public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, String status) {
+    this(entries, numberOfRequiredAccepts, status, null);
+  }
+
+  public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, String status, String previousUpdatedTimestamp) {
+    this.statusFieldForRequest = status;
+    this.entriesFieldForRequest = entries;
+    this.previousUpdatedTimestampFieldForRequest = previousUpdatedTimestamp;
+    this.numberOfRequiredAcceptsFieldForRequest = numberOfRequiredAccepts;
+  }
+
+  /**
    * Create a new DraftPayment.
    * @param entries The list of entries in the DraftPayment. Each entry will result in a payment
    * when the DraftPayment is accepted.
@@ -132,7 +186,7 @@ public class DraftPayment extends BunqModel {
     requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
     requestMap.put(FIELD_NUMBER_OF_REQUIRED_ACCEPTS, numberOfRequiredAccepts);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -182,7 +236,7 @@ public class DraftPayment extends BunqModel {
     requestMap.put(FIELD_ENTRIES, entries);
     requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

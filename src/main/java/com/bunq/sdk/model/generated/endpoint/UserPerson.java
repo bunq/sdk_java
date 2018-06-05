@@ -292,6 +292,347 @@ public class UserPerson extends BunqModel {
   @Expose
   @SerializedName("notification_filters")
   private List<NotificationFilter> notificationFilters;
+  /**
+   * The person's first name.
+   */
+  @Expose
+  @SerializedName("first_name_field_for_request")
+  private String firstNameFieldForRequest;
+
+  /**
+   * The person's middle name.
+   */
+  @Expose
+  @SerializedName("middle_name_field_for_request")
+  private String middleNameFieldForRequest;
+
+  /**
+   * The person's last name.
+   */
+  @Expose
+  @SerializedName("last_name_field_for_request")
+  private String lastNameFieldForRequest;
+
+  /**
+   * The person's public nick name.
+   */
+  @Expose
+  @SerializedName("public_nick_name_field_for_request")
+  private String publicNickNameFieldForRequest;
+
+  /**
+   * The user's main address.
+   */
+  @Expose
+  @SerializedName("address_main_field_for_request")
+  private Address addressMainFieldForRequest;
+
+  /**
+   * The person's postal address.
+   */
+  @Expose
+  @SerializedName("address_postal_field_for_request")
+  private Address addressPostalFieldForRequest;
+
+  /**
+   * The public UUID of the user's avatar.
+   */
+  @Expose
+  @SerializedName("avatar_uuid_field_for_request")
+  private String avatarUuidFieldForRequest;
+
+  /**
+   * The user's tax residence numbers for different countries.
+   */
+  @Expose
+  @SerializedName("tax_resident_field_for_request")
+  private List<TaxResident> taxResidentFieldForRequest;
+
+  /**
+   * The type of identification document the person registered with.
+   */
+  @Expose
+  @SerializedName("document_type_field_for_request")
+  private String documentTypeFieldForRequest;
+
+  /**
+   * The identification document number the person registered with.
+   */
+  @Expose
+  @SerializedName("document_number_field_for_request")
+  private String documentNumberFieldForRequest;
+
+  /**
+   * The country which issued the identification document the person registered with.
+   */
+  @Expose
+  @SerializedName("document_country_of_issuance_field_for_request")
+  private String documentCountryOfIssuanceFieldForRequest;
+
+  /**
+   * The reference to the uploaded picture/scan of the front side of the identification document.
+   */
+  @Expose
+  @SerializedName("document_front_attachment_id_field_for_request")
+  private Integer documentFrontAttachmentIdFieldForRequest;
+
+  /**
+   * The reference to the uploaded picture/scan of the back side of the identification document.
+   */
+  @Expose
+  @SerializedName("document_back_attachment_id_field_for_request")
+  private Integer documentBackAttachmentIdFieldForRequest;
+
+  /**
+   * The person's date of birth. Accepts ISO8601 date formats.
+   */
+  @Expose
+  @SerializedName("date_of_birth_field_for_request")
+  private String dateOfBirthFieldForRequest;
+
+  /**
+   * The person's place of birth.
+   */
+  @Expose
+  @SerializedName("place_of_birth_field_for_request")
+  private String placeOfBirthFieldForRequest;
+
+  /**
+   * The person's country of birth. Formatted as a SO 3166-1 alpha-2 country code.
+   */
+  @Expose
+  @SerializedName("country_of_birth_field_for_request")
+  private String countryOfBirthFieldForRequest;
+
+  /**
+   * The person's nationality. Formatted as a SO 3166-1 alpha-2 country code.
+   */
+  @Expose
+  @SerializedName("nationality_field_for_request")
+  private String nationalityFieldForRequest;
+
+  /**
+   * The person's preferred language. Formatted as a ISO 639-1 language code plus a ISO 3166-1
+   * alpha-2 country code, seperated by an underscore.
+   */
+  @Expose
+  @SerializedName("language_field_for_request")
+  private String languageFieldForRequest;
+
+  /**
+   * The person's preferred region. Formatted as a ISO 639-1 language code plus a ISO 3166-1
+   * alpha-2 country code, seperated by an underscore.
+   */
+  @Expose
+  @SerializedName("region_field_for_request")
+  private String regionFieldForRequest;
+
+  /**
+   * The person's gender. Can be: MALE, FEMALE and UNKNOWN.
+   */
+  @Expose
+  @SerializedName("gender_field_for_request")
+  private String genderFieldForRequest;
+
+  /**
+   * The user status. You are not allowed to update the status via PUT.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The user sub-status. Can be updated to SUBMIT if status is RECOVERY.
+   */
+  @Expose
+  @SerializedName("sub_status_field_for_request")
+  private String subStatusFieldForRequest;
+
+  /**
+   * The legal guardian of the user. Required for minors.
+   */
+  @Expose
+  @SerializedName("legal_guardian_alias_field_for_request")
+  private Pointer legalGuardianAliasFieldForRequest;
+
+  /**
+   * The setting for the session timeout of the user in seconds.
+   */
+  @Expose
+  @SerializedName("session_timeout_field_for_request")
+  private Integer sessionTimeoutFieldForRequest;
+
+  /**
+   * Card ids used for centralized card limits.
+   */
+  @Expose
+  @SerializedName("card_ids_field_for_request")
+  private List<BunqId> cardIdsFieldForRequest;
+
+  /**
+   * The centralized limits for user's cards.
+   */
+  @Expose
+  @SerializedName("card_limits_field_for_request")
+  private List<CardLimit> cardLimitsFieldForRequest;
+
+  /**
+   * The amount the user can pay in the session without asking for credentials.
+   */
+  @Expose
+  @SerializedName("daily_limit_without_confirmation_login_field_for_request")
+  private Amount dailyLimitWithoutConfirmationLoginFieldForRequest;
+
+  /**
+   * The types of notifications that will result in a push notification or URL callback for this
+   * UserPerson.
+   */
+  @Expose
+  @SerializedName("notification_filters_field_for_request")
+  private List<NotificationFilter> notificationFiltersFieldForRequest;
+
+  public UserPerson() {
+    this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain) {
+    this(addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid) {
+    this(addressMain, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType) {
+    this(addressMain, avatarUuid, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber) {
+    this(addressMain, avatarUuid, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, null, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, null, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, null, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, null, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, null, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, null, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, null, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<BunqId> cardIds) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, cardIds, null, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<BunqId> cardIds, List<CardLimit> cardLimits) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, cardIds, cardLimits, null);
+  }
+
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<BunqId> cardIds, List<CardLimit> cardLimits, List<NotificationFilter> notificationFilters) {
+    this.firstNameFieldForRequest = firstName;
+    this.middleNameFieldForRequest = middleName;
+    this.lastNameFieldForRequest = lastName;
+    this.publicNickNameFieldForRequest = publicNickName;
+    this.addressMainFieldForRequest = addressMain;
+    this.addressPostalFieldForRequest = addressPostal;
+    this.avatarUuidFieldForRequest = avatarUuid;
+    this.taxResidentFieldForRequest = taxResident;
+    this.documentTypeFieldForRequest = documentType;
+    this.documentNumberFieldForRequest = documentNumber;
+    this.documentCountryOfIssuanceFieldForRequest = documentCountryOfIssuance;
+    this.documentFrontAttachmentIdFieldForRequest = documentFrontAttachmentId;
+    this.documentBackAttachmentIdFieldForRequest = documentBackAttachmentId;
+    this.dateOfBirthFieldForRequest = dateOfBirth;
+    this.placeOfBirthFieldForRequest = placeOfBirth;
+    this.countryOfBirthFieldForRequest = countryOfBirth;
+    this.nationalityFieldForRequest = nationality;
+    this.languageFieldForRequest = language;
+    this.regionFieldForRequest = region;
+    this.genderFieldForRequest = gender;
+    this.statusFieldForRequest = status;
+    this.subStatusFieldForRequest = subStatus;
+    this.legalGuardianAliasFieldForRequest = legalGuardianAlias;
+    this.sessionTimeoutFieldForRequest = sessionTimeout;
+    this.cardIdsFieldForRequest = cardIds;
+    this.cardLimitsFieldForRequest = cardLimits;
+    this.dailyLimitWithoutConfirmationLoginFieldForRequest = dailyLimitWithoutConfirmationLogin;
+    this.notificationFiltersFieldForRequest = notificationFilters;
+  }
 
   /**
    * Get a specific person.
@@ -387,7 +728,7 @@ public class UserPerson extends BunqModel {
     requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutConfirmationLogin);
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);

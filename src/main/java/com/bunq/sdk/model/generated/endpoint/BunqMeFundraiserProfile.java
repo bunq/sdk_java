@@ -1,18 +1,14 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.AttachmentPublic;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * bunq.me public profile of the user.
@@ -37,7 +33,7 @@ public class BunqMeFundraiserProfile extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The description of the bunq.me fundraiser profile.
@@ -58,7 +54,7 @@ public class BunqMeFundraiserProfile extends BunqModel {
    */
   @Expose
   @SerializedName("pointer")
-  private MonetaryAccountReference pointer;
+  private Pointer pointer;
 
   /**
    * The status of the bunq.me fundraiser profile, can be ACTIVE or DEACTIVATED.
@@ -75,6 +71,21 @@ public class BunqMeFundraiserProfile extends BunqModel {
   private String redirectUrl;
 
   /**
+   * The pointer (url) which will be used to access the bunq.me fundraiser profile.
+   */
+  @Expose
+  @SerializedName("pointer_field_for_request")
+  private Pointer pointerFieldForRequest;
+
+  public BunqMeFundraiserProfile() {
+    this(null);
+  }
+
+  public BunqMeFundraiserProfile(Pointer pointer) {
+    this.pointerFieldForRequest = pointer;
+  }
+
+  /**
    * The color chosen for the bunq.me fundraiser profile in hexadecimal format.
    */
   public String getColor() {
@@ -89,11 +100,11 @@ public class BunqMeFundraiserProfile extends BunqModel {
    * The LabelMonetaryAccount with the public information of the User and the MonetaryAccount that
    * created the bunq.me fundraiser profile.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 
@@ -122,11 +133,11 @@ public class BunqMeFundraiserProfile extends BunqModel {
   /**
    * The pointer (url) which will be used to access the bunq.me fundraiser profile.
    */
-  public MonetaryAccountReference getPointer() {
+  public Pointer getPointer() {
     return this.pointer;
   }
 
-  public void setPointer(MonetaryAccountReference pointer) {
+  public void setPointer(Pointer pointer) {
     this.pointer = pointer;
   }
 

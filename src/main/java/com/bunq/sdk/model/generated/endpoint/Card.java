@@ -4,11 +4,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardMagStripePermission;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -169,14 +169,14 @@ public class Card extends BunqModel {
    */
   @Expose
   @SerializedName("label_monetary_account_ordered")
-  private MonetaryAccountReference labelMonetaryAccountOrdered;
+  private LabelMonetaryAccount labelMonetaryAccountOrdered;
 
   /**
    * The monetary account that this card is currently linked to and the label user viewing it.
    */
   @Expose
   @SerializedName("label_monetary_account_current")
-  private MonetaryAccountReference labelMonetaryAccountCurrent;
+  private LabelMonetaryAccount labelMonetaryAccountCurrent;
 
   /**
    * Array of Types, PINs, account IDs assigned to the card.
@@ -199,6 +199,127 @@ public class Card extends BunqModel {
   @Expose
   @SerializedName("country")
   private String country;
+
+  /**
+   * The plaintext pin code. Requests require encryption to be enabled.
+   */
+  @Expose
+  @SerializedName("pin_code_field_for_request")
+  private String pinCodeFieldForRequest;
+
+  /**
+   * The activation code required to set status to ACTIVE initially. Can only set status to ACTIVE
+   * using activation code when order_status is ACCEPTED_FOR_PRODUCTION and status is DEACTIVATED.
+   */
+  @Expose
+  @SerializedName("activation_code_field_for_request")
+  private String activationCodeFieldForRequest;
+
+  /**
+   * The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or CANCELLED, and
+   * can only be set to LOST/STOLEN/CANCELLED when order status is
+   * ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
+   * Can only be set to DEACTIVATED after initial activation, i.e. order_status is
+   * DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED. Mind that
+   * all the possible choices (apart from ACTIVE and DEACTIVATED) are permanent and cannot be
+   * changed after.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The limits to define for the card, among CARD_LIMIT_CONTACTLESS, CARD_LIMIT_ATM,
+   * CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS). All the
+   * limits must be provided on update.
+   */
+  @Expose
+  @SerializedName("limit_field_for_request")
+  private List<CardLimit> limitFieldForRequest;
+
+  /**
+   * Whether or not it is allowed to use the mag stripe for the card.
+   */
+  @Expose
+  @SerializedName("mag_stripe_permission_field_for_request")
+  private CardMagStripePermission magStripePermissionFieldForRequest;
+
+  /**
+   * The countries for which to grant (temporary) permissions to use the card.
+   */
+  @Expose
+  @SerializedName("country_permission_field_for_request")
+  private List<CardCountryPermission> countryPermissionFieldForRequest;
+
+  /**
+   * The ID of the monetary account that card transactions will use.
+   */
+  @Expose
+  @SerializedName("monetary_account_current_id_field_for_request")
+  private Integer monetaryAccountCurrentIdFieldForRequest;
+
+  /**
+   * Array of Types, PINs, account IDs assigned to the card.
+   */
+  @Expose
+  @SerializedName("pin_code_assignment_field_for_request")
+  private List<CardPinAssignment> pinCodeAssignmentFieldForRequest;
+
+  /**
+   * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
+   * is removed if not supplied.
+   */
+  @Expose
+  @SerializedName("monetary_account_id_fallback_field_for_request")
+  private Integer monetaryAccountIdFallbackFieldForRequest;
+
+  public Card() {
+    this(null, null, null, null, null, null, null, null, null);
+  }
+
+  public Card(String pinCode) {
+    this(pinCode, null, null, null, null, null, null, null, null);
+  }
+
+  public Card(String pinCode, String activationCode) {
+    this(pinCode, activationCode, null, null, null, null, null, null, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status) {
+    this(pinCode, activationCode, status, null, null, null, null, null, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, List<CardLimit> limit) {
+    this(pinCode, activationCode, status, limit, null, null, null, null, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission) {
+    this(pinCode, activationCode, status, limit, magStripePermission, null, null, null, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
+    this(pinCode, activationCode, status, limit, magStripePermission, countryPermission, null, null, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId) {
+    this(pinCode, activationCode, status, limit, magStripePermission, countryPermission, monetaryAccountCurrentId, null, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId, List<CardPinAssignment> pinCodeAssignment) {
+    this(pinCode, activationCode, status, limit, magStripePermission, countryPermission, monetaryAccountCurrentId, pinCodeAssignment, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountCurrentId, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    this.pinCodeFieldForRequest = pinCode;
+    this.activationCodeFieldForRequest = activationCode;
+    this.statusFieldForRequest = status;
+    this.limitFieldForRequest = limit;
+    this.magStripePermissionFieldForRequest = magStripePermission;
+    this.countryPermissionFieldForRequest = countryPermission;
+    this.monetaryAccountCurrentIdFieldForRequest = monetaryAccountCurrentId;
+    this.pinCodeAssignmentFieldForRequest = pinCodeAssignment;
+    this.monetaryAccountIdFallbackFieldForRequest = monetaryAccountIdFallback;
+  }
 
   /**
    * Update the card details. Allow to change pin code, status, limits, country permissions and
@@ -245,7 +366,7 @@ public class Card extends BunqModel {
     requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
     requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), cardId), requestBytes, customHeaders);
 
@@ -514,22 +635,22 @@ public class Card extends BunqModel {
   /**
    * The monetary account this card was ordered on and the label user that owns the card.
    */
-  public MonetaryAccountReference getLabelMonetaryAccountOrdered() {
+  public LabelMonetaryAccount getLabelMonetaryAccountOrdered() {
     return this.labelMonetaryAccountOrdered;
   }
 
-  public void setLabelMonetaryAccountOrdered(MonetaryAccountReference labelMonetaryAccountOrdered) {
+  public void setLabelMonetaryAccountOrdered(LabelMonetaryAccount labelMonetaryAccountOrdered) {
     this.labelMonetaryAccountOrdered = labelMonetaryAccountOrdered;
   }
 
   /**
    * The monetary account that this card is currently linked to and the label user viewing it.
    */
-  public MonetaryAccountReference getLabelMonetaryAccountCurrent() {
+  public LabelMonetaryAccount getLabelMonetaryAccountCurrent() {
     return this.labelMonetaryAccountCurrent;
   }
 
-  public void setLabelMonetaryAccountCurrent(MonetaryAccountReference labelMonetaryAccountCurrent) {
+  public void setLabelMonetaryAccountCurrent(LabelMonetaryAccount labelMonetaryAccountCurrent) {
     this.labelMonetaryAccountCurrent = labelMonetaryAccountCurrent;
   }
 

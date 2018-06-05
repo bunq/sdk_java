@@ -102,6 +102,34 @@ public class BunqMeTab extends BunqModel {
   private List<BunqMeTabResultInquiry> resultInquiries;
 
   /**
+   * The bunq.me entry containing the payment information.
+   */
+  @Expose
+  @SerializedName("bunqme_tab_entry_field_for_request")
+  private BunqMeTabEntry bunqmeTabEntryFieldForRequest;
+
+  /**
+   * The status of the bunq.me. Ignored in POST requests but can be used for cancelling the
+   * bunq.me by setting status as CANCELLED with a PUT request.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  public BunqMeTab() {
+    this(null, null);
+  }
+
+  public BunqMeTab(BunqMeTabEntry bunqmeTabEntry) {
+    this(bunqmeTabEntry, null);
+  }
+
+  public BunqMeTab(BunqMeTabEntry bunqmeTabEntry, String status) {
+    this.bunqmeTabEntryFieldForRequest = bunqmeTabEntry;
+    this.statusFieldForRequest = status;
+  }
+
+  /**
    * @param bunqmeTabEntry The bunq.me entry containing the payment information.
    * @param status The status of the bunq.me. Ignored in POST requests but can be used for
    * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
@@ -117,7 +145,7 @@ public class BunqMeTab extends BunqModel {
     requestMap.put(FIELD_BUNQME_TAB_ENTRY, bunqmeTabEntry);
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -153,7 +181,7 @@ public class BunqMeTab extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

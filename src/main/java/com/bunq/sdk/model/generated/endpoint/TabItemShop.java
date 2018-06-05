@@ -100,6 +100,82 @@ public class TabItemShop extends BunqModel {
   private Amount amount;
 
   /**
+   * The TabItem's brief description. Can't be empty and must be no longer than 100 characters
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The TabItem's EAN code.
+   */
+  @Expose
+  @SerializedName("ean_code_field_for_request")
+  private String eanCodeFieldForRequest;
+
+  /**
+   * An AttachmentPublic UUID that used as an avatar for the TabItem.
+   */
+  @Expose
+  @SerializedName("avatar_attachment_uuid_field_for_request")
+  private String avatarAttachmentUuidFieldForRequest;
+
+  /**
+   * A list of AttachmentTab attached to the TabItem.
+   */
+  @Expose
+  @SerializedName("tab_attachment_field_for_request")
+  private List<Integer> tabAttachmentFieldForRequest;
+
+  /**
+   * The quantity of the TabItem. Formatted as a number containing up to 15 digits, up to 15
+   * decimals and using a dot.
+   */
+  @Expose
+  @SerializedName("quantity_field_for_request")
+  private String quantityFieldForRequest;
+
+  /**
+   * The money amount of the TabItem. Will not change the value of the corresponding Tab.
+   */
+  @Expose
+  @SerializedName("amount_field_for_request")
+  private Amount amountFieldForRequest;
+
+  public TabItemShop() {
+    this(null, null, null, null, null, null);
+  }
+
+  public TabItemShop(String description) {
+    this(description, null, null, null, null, null);
+  }
+
+  public TabItemShop(String description, String eanCode) {
+    this(description, eanCode, null, null, null, null);
+  }
+
+  public TabItemShop(String description, String eanCode, String avatarAttachmentUuid) {
+    this(description, eanCode, avatarAttachmentUuid, null, null, null);
+  }
+
+  public TabItemShop(String description, String eanCode, String avatarAttachmentUuid, List<Integer> tabAttachment) {
+    this(description, eanCode, avatarAttachmentUuid, tabAttachment, null, null);
+  }
+
+  public TabItemShop(String description, String eanCode, String avatarAttachmentUuid, List<Integer> tabAttachment, String quantity) {
+    this(description, eanCode, avatarAttachmentUuid, tabAttachment, quantity, null);
+  }
+
+  public TabItemShop(String description, String eanCode, String avatarAttachmentUuid, List<Integer> tabAttachment, String quantity, Amount amount) {
+    this.descriptionFieldForRequest = description;
+    this.eanCodeFieldForRequest = eanCode;
+    this.avatarAttachmentUuidFieldForRequest = avatarAttachmentUuid;
+    this.tabAttachmentFieldForRequest = tabAttachment;
+    this.quantityFieldForRequest = quantity;
+    this.amountFieldForRequest = amount;
+  }
+
+  /**
    * Create a new TabItem for a given Tab.
    * @param description The TabItem's brief description. Can't be empty and must be no longer than
    * 100 characters
@@ -126,7 +202,7 @@ public class TabItemShop extends BunqModel {
     requestMap.put(FIELD_QUANTITY, quantity);
     requestMap.put(FIELD_AMOUNT, amount);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -199,7 +275,7 @@ public class TabItemShop extends BunqModel {
     requestMap.put(FIELD_QUANTITY, quantity);
     requestMap.put(FIELD_AMOUNT, amount);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid, tabItemShopId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
