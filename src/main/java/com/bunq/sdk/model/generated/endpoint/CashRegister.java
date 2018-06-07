@@ -114,6 +114,84 @@ public class CashRegister extends BunqModel {
   private List<TabTextWaitingScreen> tabTextWaitingScreen;
 
   /**
+   * The name of the CashRegister. Must be unique for this MonetaryAccount.
+   */
+  @Expose
+  @SerializedName("name_field_for_request")
+  private String nameFieldForRequest;
+
+  /**
+   * The status of the CashRegister. Can only be created or updated with PENDING_APPROVAL or
+   * CLOSED.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The UUID of the avatar of the CashRegister. Use the calls /attachment-public and /avatar to
+   * create a new Avatar and get its UUID.
+   */
+  @Expose
+  @SerializedName("avatar_uuid_field_for_request")
+  private String avatarUuidFieldForRequest;
+
+  /**
+   * The geolocation of the CashRegister.
+   */
+  @Expose
+  @SerializedName("location_field_for_request")
+  private Geolocation locationFieldForRequest;
+
+  /**
+   * The types of notifications that will result in a push notification or URL callback for this
+   * CashRegister.
+   */
+  @Expose
+  @SerializedName("notification_filters_field_for_request")
+  private List<NotificationFilter> notificationFiltersFieldForRequest;
+
+  /**
+   * The tab text for waiting screen of CashRegister.
+   */
+  @Expose
+  @SerializedName("tab_text_waiting_screen_field_for_request")
+  private List<TabTextWaitingScreen> tabTextWaitingScreenFieldForRequest;
+
+  public CashRegister() {
+    this(null, null, null, null, null, null);
+  }
+
+  public CashRegister(String name) {
+    this(name, null, null, null, null, null);
+  }
+
+  public CashRegister(String name, String status) {
+    this(name, status, null, null, null, null);
+  }
+
+  public CashRegister(String name, String status, String avatarUuid) {
+    this(name, status, avatarUuid, null, null, null);
+  }
+
+  public CashRegister(String name, String status, String avatarUuid, Geolocation location) {
+    this(name, status, avatarUuid, location, null, null);
+  }
+
+  public CashRegister(String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters) {
+    this(name, status, avatarUuid, location, notificationFilters, null);
+  }
+
+  public CashRegister(String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen) {
+    this.nameFieldForRequest = name;
+    this.statusFieldForRequest = status;
+    this.avatarUuidFieldForRequest = avatarUuid;
+    this.locationFieldForRequest = location;
+    this.notificationFiltersFieldForRequest = notificationFilters;
+    this.tabTextWaitingScreenFieldForRequest = tabTextWaitingScreen;
+  }
+
+  /**
    * Create a new CashRegister. Only an UserCompany can create a CashRegisters. They need to be
    * created with status PENDING_APPROVAL, an bunq admin has to approve your CashRegister before
    * you can use it. In the sandbox testing environment an CashRegister will be automatically
@@ -143,7 +221,7 @@ public class CashRegister extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -236,7 +314,7 @@ public class CashRegister extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

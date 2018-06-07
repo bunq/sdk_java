@@ -4,11 +4,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.BunqId;
 import com.bunq.sdk.model.generated.object.Geolocation;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.RequestReferenceSplitTheBillAnchorObject;
@@ -137,7 +137,7 @@ public class RequestInquiry extends BunqModel {
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The description of the inquiry.
@@ -246,6 +246,189 @@ public class RequestInquiry extends BunqModel {
   private RequestReferenceSplitTheBillAnchorObject referenceSplitTheBill;
 
   /**
+   * The Amount requested to be paid by the person the RequestInquiry is sent to. Must be bigger
+   * than 0.
+   */
+  @Expose
+  @SerializedName("amount_inquired_field_for_request")
+  private Amount amountInquiredFieldForRequest;
+
+  /**
+   * The Alias of the party we are requesting the money from. Can be an Alias of type EMAIL,
+   * PHONE_NUMBER or IBAN. In case the EMAIL or PHONE_NUMBER Alias does not refer to a bunq
+   * monetary account, 'allow_bunqme' needs to be 'true' in order to trigger the creation of a
+   * bunq.me request. Otherwise no request inquiry will be sent.
+   */
+  @Expose
+  @SerializedName("counterparty_alias_field_for_request")
+  private Pointer counterpartyAliasFieldForRequest;
+
+  /**
+   * The description for the RequestInquiry. Maximum 9000 characters. Field is required but can be
+   * an empty string.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The Attachments to attach to the RequestInquiry.
+   */
+  @Expose
+  @SerializedName("attachment_field_for_request")
+  private List<BunqId> attachmentFieldForRequest;
+
+  /**
+   * Optional data to be included with the RequestInquiry specific to the merchant. Has to be
+   * unique for the same source MonetaryAccount.
+   */
+  @Expose
+  @SerializedName("merchant_reference_field_for_request")
+  private String merchantReferenceFieldForRequest;
+
+  /**
+   * The status of the RequestInquiry. Ignored in POST requests but can be used for revoking
+   * (cancelling) the RequestInquiry by setting REVOKED with a PUT request.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The minimum age the user accepting the RequestInquiry must have. Defaults to not checking. If
+   * set, must be between 12 and 100 inclusive.
+   */
+  @Expose
+  @SerializedName("minimum_age_field_for_request")
+  private Integer minimumAgeFieldForRequest;
+
+  /**
+   * Whether a billing and shipping address must be provided when paying the request. Possible
+   * values are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is NONE.
+   */
+  @Expose
+  @SerializedName("require_address_field_for_request")
+  private String requireAddressFieldForRequest;
+
+  /**
+   * [DEPRECATED] Whether or not the accepting user can give an extra tip on top of the requested
+   * Amount. Defaults to false.
+   */
+  @Expose
+  @SerializedName("want_tip_field_for_request")
+  private Boolean wantTipFieldForRequest;
+
+  /**
+   * [DEPRECATED] Whether or not the accepting user can choose to accept with a lower amount than
+   * requested. Defaults to false.
+   */
+  @Expose
+  @SerializedName("allow_amount_lower_field_for_request")
+  private Boolean allowAmountLowerFieldForRequest;
+
+  /**
+   * [DEPRECATED] Whether or not the accepting user can choose to accept with a higher amount than
+   * requested. Defaults to false.
+   */
+  @Expose
+  @SerializedName("allow_amount_higher_field_for_request")
+  private Boolean allowAmountHigherFieldForRequest;
+
+  /**
+   * Whether or not sending a bunq.me request is allowed.
+   */
+  @Expose
+  @SerializedName("allow_bunqme_field_for_request")
+  private Boolean allowBunqmeFieldForRequest;
+
+  /**
+   * The URL which the user is sent to after accepting or rejecting the Request.
+   */
+  @Expose
+  @SerializedName("redirect_url_field_for_request")
+  private String redirectUrlFieldForRequest;
+
+  /**
+   * The ID of the associated event if the request was made using 'split the bill'.
+   */
+  @Expose
+  @SerializedName("event_id_field_for_request")
+  private Integer eventIdFieldForRequest;
+
+  public RequestInquiry() {
+    this(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired) {
+    this(amountInquired, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias) {
+    this(amountInquired, counterpartyAlias, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description) {
+    this(amountInquired, counterpartyAlias, description, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, null, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, null, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, null, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, minimumAge, null, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, minimumAge, requireAddress, null, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, null, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, null, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, allowAmountHigher, null, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl) {
+    this(amountInquired, counterpartyAlias, description, allowBunqme, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, allowAmountHigher, redirectUrl, null);
+  }
+
+  public RequestInquiry(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl, Integer eventId) {
+    this.amountInquiredFieldForRequest = amountInquired;
+    this.counterpartyAliasFieldForRequest = counterpartyAlias;
+    this.descriptionFieldForRequest = description;
+    this.attachmentFieldForRequest = attachment;
+    this.merchantReferenceFieldForRequest = merchantReference;
+    this.statusFieldForRequest = status;
+    this.minimumAgeFieldForRequest = minimumAge;
+    this.requireAddressFieldForRequest = requireAddress;
+    this.wantTipFieldForRequest = wantTip;
+    this.allowAmountLowerFieldForRequest = allowAmountLower;
+    this.allowAmountHigherFieldForRequest = allowAmountHigher;
+    this.allowBunqmeFieldForRequest = allowBunqme;
+    this.redirectUrlFieldForRequest = redirectUrl;
+    this.eventIdFieldForRequest = eventId;
+  }
+
+  /**
    * Create a new payment request.
    * @param amountInquired The Amount requested to be paid by the person the RequestInquiry is
    * sent to. Must be bigger than 0.
@@ -299,7 +482,7 @@ public class RequestInquiry extends BunqModel {
     requestMap.put(FIELD_REDIRECT_URL, redirectUrl);
     requestMap.put(FIELD_EVENT_ID, eventId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -384,7 +567,7 @@ public class RequestInquiry extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId), requestBytes, customHeaders);
 
     return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE_PUT);
@@ -564,11 +747,11 @@ public class RequestInquiry extends BunqModel {
    * The LabelMonetaryAccount with the public information of the MonetaryAccount the money was
    * requested from.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

@@ -1,7 +1,6 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -21,12 +20,20 @@ public class SchedulePaymentEntry extends BunqModel {
   private Amount amount;
 
   /**
+   * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
+   * Payment.
+   */
+  @Expose
+  @SerializedName("alias")
+  private LabelMonetaryAccount alias;
+
+  /**
    * The LabelMonetaryAccount containing the public information of the other (counterparty) side
    * of the Payment.
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The description for the Payment. Maximum 140 characters for Payments to external IBANs, 9000
@@ -51,27 +58,82 @@ public class SchedulePaymentEntry extends BunqModel {
   private String merchantReference;
 
   /**
+   * The Amount to transfer with the Payment. Must be bigger 0 and smaller than the
+   * MonetaryAccount's balance.
+   */
+  @Expose
+  @SerializedName("amount_field_for_request")
+  private Amount amountFieldForRequest;
+
+  /**
+   * The Alias of the party we are transferring the money to. Can be an Alias of type EMAIL or
+   * PHONE (for bunq MonetaryAccounts) or IBAN (for external bank account).
+   */
+  @Expose
+  @SerializedName("counterparty_alias_field_for_request")
+  private Pointer counterpartyAliasFieldForRequest;
+
+  /**
+   * The description for the Payment. Maximum 140 characters for Payments to external IBANs, 9000
+   * characters for Payments to only other bunq MonetaryAccounts. Field is required but can be an
+   * empty string.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The Attachments to attach to the Payment.
+   */
+  @Expose
+  @SerializedName("attachment_field_for_request")
+  private List<BunqId> attachmentFieldForRequest;
+
+  /**
+   * Optional data to be included with the Payment specific to the merchant.
+   */
+  @Expose
+  @SerializedName("merchant_reference_field_for_request")
+  private String merchantReferenceFieldForRequest;
+
+  /**
    * Whether or not sending a bunq.to payment is allowed. Mandatory for publicApi.
    */
   @Expose
-  @SerializedName("allow_bunqto")
-  private Boolean allowBunqto;
+  @SerializedName("allow_bunqto_field_for_request")
+  private Boolean allowBunqtoFieldForRequest;
 
-  /**
-   * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
-   * Payment.
-   */
-  @Expose
-  @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  public SchedulePaymentEntry() {
+    this(null, null, null, null, null, null);
+  }
 
-  public SchedulePaymentEntry(Amount amount, MonetaryAccountReference counterpartyAlias, String description) {
-    this.amount = amount;
-    this.counterpartyAlias = counterpartyAlias;
-    this.description = description;
-    this.attachment = attachment;
-    this.merchantReference = merchantReference;
-    this.allowBunqto = allowBunqto;
+  public SchedulePaymentEntry(Amount amount) {
+    this(amount, null, null, null, null, null);
+  }
+
+  public SchedulePaymentEntry(Amount amount, Pointer counterpartyAlias) {
+    this(amount, counterpartyAlias, null, null, null, null);
+  }
+
+  public SchedulePaymentEntry(Amount amount, Pointer counterpartyAlias, String description) {
+    this(amount, counterpartyAlias, description, null, null, null);
+  }
+
+  public SchedulePaymentEntry(Amount amount, Pointer counterpartyAlias, String description, List<BunqId> attachment) {
+    this(amount, counterpartyAlias, description, attachment, null, null);
+  }
+
+  public SchedulePaymentEntry(Amount amount, Pointer counterpartyAlias, String description, List<BunqId> attachment, String merchantReference) {
+    this(amount, counterpartyAlias, description, attachment, merchantReference, null);
+  }
+
+  public SchedulePaymentEntry(Amount amount, Pointer counterpartyAlias, String description, List<BunqId> attachment, String merchantReference, Boolean allowBunqto) {
+    this.amountFieldForRequest = amount;
+    this.counterpartyAliasFieldForRequest = counterpartyAlias;
+    this.descriptionFieldForRequest = description;
+    this.attachmentFieldForRequest = attachment;
+    this.merchantReferenceFieldForRequest = merchantReference;
+    this.allowBunqtoFieldForRequest = allowBunqto;
   }
 
   /**
@@ -90,11 +152,11 @@ public class SchedulePaymentEntry extends BunqModel {
    * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
    * Payment.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 
@@ -102,11 +164,11 @@ public class SchedulePaymentEntry extends BunqModel {
    * The LabelMonetaryAccount containing the public information of the other (counterparty) side
    * of the Payment.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

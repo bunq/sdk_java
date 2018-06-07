@@ -4,7 +4,7 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.ShareDetail;
@@ -52,7 +52,7 @@ public class ShareInviteBankInquiry extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The user who created the share.
@@ -135,6 +135,96 @@ public class ShareInviteBankInquiry extends BunqModel {
   private Integer id;
 
   /**
+   * The pointer of the user to share with.
+   */
+  @Expose
+  @SerializedName("counter_user_alias_field_for_request")
+  private Pointer counterUserAliasFieldForRequest;
+
+  /**
+   * The id of the draft share invite bank.
+   */
+  @Expose
+  @SerializedName("draft_share_invite_bank_id_field_for_request")
+  private Integer draftShareInviteBankIdFieldForRequest;
+
+  /**
+   * The share details. Only one of these objects may be passed.
+   */
+  @Expose
+  @SerializedName("share_detail_field_for_request")
+  private ShareDetail shareDetailFieldForRequest;
+
+  /**
+   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
+   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   * connects).
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The share type, either STANDARD or MUTUAL.
+   */
+  @Expose
+  @SerializedName("share_type_field_for_request")
+  private String shareTypeFieldForRequest;
+
+  /**
+   * The start date of this share.
+   */
+  @Expose
+  @SerializedName("start_date_field_for_request")
+  private String startDateFieldForRequest;
+
+  /**
+   * The expiration date of this share.
+   */
+  @Expose
+  @SerializedName("end_date_field_for_request")
+  private String endDateFieldForRequest;
+
+  public ShareInviteBankInquiry() {
+    this(null, null, null, null, null, null, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias) {
+    this(counterUserAlias, null, null, null, null, null, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail) {
+    this(counterUserAlias, shareDetail, null, null, null, null, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
+    this(counterUserAlias, shareDetail, status, null, null, null, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId) {
+    this(counterUserAlias, shareDetail, status, draftShareInviteBankId, null, null, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType) {
+    this(counterUserAlias, shareDetail, status, draftShareInviteBankId, shareType, null, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate) {
+    this(counterUserAlias, shareDetail, status, draftShareInviteBankId, shareType, startDate, null);
+  }
+
+  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate, String endDate) {
+    this.counterUserAliasFieldForRequest = counterUserAlias;
+    this.draftShareInviteBankIdFieldForRequest = draftShareInviteBankId;
+    this.shareDetailFieldForRequest = shareDetail;
+    this.statusFieldForRequest = status;
+    this.shareTypeFieldForRequest = shareType;
+    this.startDateFieldForRequest = startDate;
+    this.endDateFieldForRequest = endDate;
+  }
+
+  /**
    * Create a new share inquiry for a monetary account, specifying the permission the other bunq
    * user will have on it.
    * @param counterUserAlias The pointer of the user to share with.
@@ -164,7 +254,7 @@ public class ShareInviteBankInquiry extends BunqModel {
     requestMap.put(FIELD_START_DATE, startDate);
     requestMap.put(FIELD_END_DATE, endDate);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -256,7 +346,7 @@ public class ShareInviteBankInquiry extends BunqModel {
     requestMap.put(FIELD_START_DATE, startDate);
     requestMap.put(FIELD_END_DATE, endDate);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -312,11 +402,11 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * The label of the monetary account that's being shared.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 

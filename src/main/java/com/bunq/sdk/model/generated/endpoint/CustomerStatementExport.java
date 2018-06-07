@@ -4,7 +4,7 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -108,7 +108,59 @@ public class CustomerStatementExport extends BunqModel {
    */
   @Expose
   @SerializedName("alias_monetary_account")
-  private MonetaryAccountReference aliasMonetaryAccount;
+  private LabelMonetaryAccount aliasMonetaryAccount;
+
+  /**
+   * The format type of statement. Allowed values: MT940, CSV, PDF.
+   */
+  @Expose
+  @SerializedName("statement_format_field_for_request")
+  private String statementFormatFieldForRequest;
+
+  /**
+   * The start date for making statements.
+   */
+  @Expose
+  @SerializedName("date_start_field_for_request")
+  private String dateStartFieldForRequest;
+
+  /**
+   * The end date for making statements.
+   */
+  @Expose
+  @SerializedName("date_end_field_for_request")
+  private String dateEndFieldForRequest;
+
+  /**
+   * Required for CSV exports. The regional format of the statement, can be UK_US
+   * (comma-separated) or EUROPEAN (semicolon-separated).
+   */
+  @Expose
+  @SerializedName("regional_format_field_for_request")
+  private String regionalFormatFieldForRequest;
+
+  public CustomerStatementExport() {
+    this(null, null, null, null);
+  }
+
+  public CustomerStatementExport(String statementFormat) {
+    this(statementFormat, null, null, null);
+  }
+
+  public CustomerStatementExport(String statementFormat, String dateStart) {
+    this(statementFormat, dateStart, null, null);
+  }
+
+  public CustomerStatementExport(String statementFormat, String dateStart, String dateEnd) {
+    this(statementFormat, dateStart, dateEnd, null);
+  }
+
+  public CustomerStatementExport(String statementFormat, String dateStart, String dateEnd, String regionalFormat) {
+    this.statementFormatFieldForRequest = statementFormat;
+    this.dateStartFieldForRequest = dateStart;
+    this.dateEndFieldForRequest = dateEnd;
+    this.regionalFormatFieldForRequest = regionalFormat;
+  }
 
   /**
    * @param statementFormat The format type of statement. Allowed values: MT940, CSV, PDF.
@@ -130,7 +182,7 @@ public class CustomerStatementExport extends BunqModel {
     requestMap.put(FIELD_DATE_END, dateEnd);
     requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -325,11 +377,11 @@ public class CustomerStatementExport extends BunqModel {
   /**
    * The monetary account for which this statement was created.
    */
-  public MonetaryAccountReference getAliasMonetaryAccount() {
+  public LabelMonetaryAccount getAliasMonetaryAccount() {
     return this.aliasMonetaryAccount;
   }
 
-  public void setAliasMonetaryAccount(MonetaryAccountReference aliasMonetaryAccount) {
+  public void setAliasMonetaryAccount(LabelMonetaryAccount aliasMonetaryAccount) {
     this.aliasMonetaryAccount = aliasMonetaryAccount;
   }
 

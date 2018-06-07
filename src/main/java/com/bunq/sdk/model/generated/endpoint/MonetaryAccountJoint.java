@@ -206,6 +206,178 @@ public class MonetaryAccountJoint extends BunqModel {
   private MonetaryAccountSetting setting;
 
   /**
+   * The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency code.
+   */
+  @Expose
+  @SerializedName("currency_field_for_request")
+  private String currencyFieldForRequest;
+
+  /**
+   * The description of the MonetaryAccountJoint. Defaults to 'bunq account'.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The daily spending limit Amount of the MonetaryAccountJoint. Defaults to 1000 EUR. Currency
+   * must match the MonetaryAccountJoint's currency. Limited to 10000 EUR.
+   */
+  @Expose
+  @SerializedName("daily_limit_field_for_request")
+  private Amount dailyLimitFieldForRequest;
+
+  /**
+   * The maximum Amount the MonetaryAccountJoint can be 'in the red'. Must be 0 EUR or omitted.
+   */
+  @Expose
+  @SerializedName("overdraft_limit_field_for_request")
+  private Amount overdraftLimitFieldForRequest;
+
+  /**
+   * The Aliases to add to MonetaryAccountJoint. Must all be confirmed first. Can mostly be
+   * ignored.
+   */
+  @Expose
+  @SerializedName("alias_field_for_request")
+  private List<Pointer> aliasFieldForRequest;
+
+  /**
+   * The UUID of the Avatar of the MonetaryAccountJoint.
+   */
+  @Expose
+  @SerializedName("avatar_uuid_field_for_request")
+  private String avatarUuidFieldForRequest;
+
+  /**
+   * The status of the MonetaryAccountJoint. Ignored in POST requests (always set to ACTIVE) can
+   * be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountJoint. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The sub-status of the MonetaryAccountJoint providing extra information regarding the status.
+   * Should be ignored for POST requests. In case of PUT requests with status CANCELLED it can
+   * only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can only be NONE. When
+   * updating the status and/or sub_status no other fields can be updated in the same request (and
+   * vice versa).
+   */
+  @Expose
+  @SerializedName("sub_status_field_for_request")
+  private String subStatusFieldForRequest;
+
+  /**
+   * The reason for voluntarily cancelling (closing) the MonetaryAccountJoint, can only be OTHER.
+   * Should only be specified if updating the status to CANCELLED.
+   */
+  @Expose
+  @SerializedName("reason_field_for_request")
+  private String reasonFieldForRequest;
+
+  /**
+   * The optional free-form reason for voluntarily cancelling (closing) the MonetaryAccountJoint.
+   * Can be any user provided message. Should only be specified if updating the status to
+   * CANCELLED.
+   */
+  @Expose
+  @SerializedName("reason_description_field_for_request")
+  private String reasonDescriptionFieldForRequest;
+
+  /**
+   * The users the account will be joint with.
+   */
+  @Expose
+  @SerializedName("all_co_owner_field_for_request")
+  private List<CoOwner> allCoOwnerFieldForRequest;
+
+  /**
+   * The types of notifications that will result in a push notification or URL callback for this
+   * MonetaryAccountJoint.
+   */
+  @Expose
+  @SerializedName("notification_filters_field_for_request")
+  private List<NotificationFilter> notificationFiltersFieldForRequest;
+
+  /**
+   * The settings of the MonetaryAccountJoint.
+   */
+  @Expose
+  @SerializedName("setting_field_for_request")
+  private MonetaryAccountSetting settingFieldForRequest;
+
+  public MonetaryAccountJoint() {
+    this(null, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency) {
+    this(currency, null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner) {
+    this(currency, allCoOwner, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description) {
+    this(currency, allCoOwner, description, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit) {
+    this(currency, allCoOwner, description, dailyLimit, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, null, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, null, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, null, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
+    this(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null);
+  }
+
+  public MonetaryAccountJoint(String currency, List<CoOwner> allCoOwner, String description, Amount dailyLimit, Amount overdraftLimit, List<Pointer> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    this.currencyFieldForRequest = currency;
+    this.descriptionFieldForRequest = description;
+    this.dailyLimitFieldForRequest = dailyLimit;
+    this.overdraftLimitFieldForRequest = overdraftLimit;
+    this.aliasFieldForRequest = alias;
+    this.avatarUuidFieldForRequest = avatarUuid;
+    this.statusFieldForRequest = status;
+    this.subStatusFieldForRequest = subStatus;
+    this.reasonFieldForRequest = reason;
+    this.reasonDescriptionFieldForRequest = reasonDescription;
+    this.allCoOwnerFieldForRequest = allCoOwner;
+    this.notificationFiltersFieldForRequest = notificationFilters;
+    this.settingFieldForRequest = setting;
+  }
+
+  /**
    * @param currency The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency
    * code.
    * @param allCoOwner The users the account will be joint with.
@@ -257,7 +429,7 @@ public class MonetaryAccountJoint extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -381,7 +553,7 @@ public class MonetaryAccountJoint extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountJointId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

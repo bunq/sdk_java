@@ -1,17 +1,14 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.Config;
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.Pagination;
 import com.bunq.sdk.model.generated.object.Amount;
-import com.bunq.sdk.model.generated.object.Pointer;
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,25 +21,19 @@ public class PaymentTest extends BunqSdkTestBase {
    * Payment field value constants.
    */
   private static final String AMOUNT_EUR = "0.01";
-  private static final String CURRENCY = "EUR";
   private static final String PAYMENT_DESCRIPTION = "Java test Payment";
   private static final int PAGE_SIZE = 100;
+  private static final int MAXIMUM_AMOUNT_OF_PAYMENT = 10;
 
   /**
    * Number constants.
    */
-  private static final int NUMBER_ZERO = 0;
-
-  /**
-   * Comparison constants.
-   */
-  private static final int COMPARE_EQUAL = 0;
+  private static final int INDEX_FIRST = 0;
 
   /**
    * String constants.
    */
   private static final String STRING_NULL = "null";
-  private static final int INDEX_FIRST = 0;
 
   /**
    * Tests making a payment to another sandbox user
@@ -51,7 +42,7 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   @Test
   public void makePaymentToOtherUser() {
-    Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
+    Amount amount = new Amount(AMOUNT_EUR, CURRENCY_EUR);
 
     BunqResponse<Integer> response = Payment.create(
         amount,
@@ -71,7 +62,7 @@ public class PaymentTest extends BunqSdkTestBase {
    */
   @Test
   public void makePaymentToOtherAccount() {
-    Amount amount = new Amount(AMOUNT_EUR, CURRENCY);
+    Amount amount = new Amount(AMOUNT_EUR, CURRENCY_EUR);
 
     BunqResponse<Integer> response = Payment.create(amount, getPointerBravo(),PAYMENT_DESCRIPTION);
 
@@ -94,6 +85,24 @@ public class PaymentTest extends BunqSdkTestBase {
       Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
       Assert.assertNotEquals(payment.getCounterpartyAlias().toString(), STRING_NULL);
     }
+  }
+
+  @Test
+  public void paymentBatchTest() {
+      BunqResponse<Integer> response = PaymentBatch.create(createPaymentForBatch());
+
+      Assert.assertNotNull(response);
+      Assert.assertNotNull(response.getValue());
+  }
+
+  private List<Payment> createPaymentForBatch() {
+    List<Payment> allPayment = new ArrayList<>();
+
+    while (allPayment.size() < MAXIMUM_AMOUNT_OF_PAYMENT) {
+      allPayment.add(new Payment(new Amount(AMOUNT_EUR, CURRENCY_EUR), getPointerBravo(), PAYMENT_DESCRIPTION));
+    }
+
+    return allPayment;
   }
 
 }

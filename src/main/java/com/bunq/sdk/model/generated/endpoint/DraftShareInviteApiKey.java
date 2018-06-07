@@ -90,6 +90,46 @@ public class DraftShareInviteApiKey extends BunqModel {
   private Integer id;
 
   /**
+   * The status of the draft share invite. Can be CANCELLED (the user cancels the draft share
+   * before it's used).
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The sub-status of the draft share invite. Can be NONE, ACCEPTED or REJECTED.
+   */
+  @Expose
+  @SerializedName("sub_status_field_for_request")
+  private String subStatusFieldForRequest;
+
+  /**
+   * The moment when this draft share invite expires.
+   */
+  @Expose
+  @SerializedName("expiration_field_for_request")
+  private String expirationFieldForRequest;
+
+  public DraftShareInviteApiKey() {
+    this(null, null, null);
+  }
+
+  public DraftShareInviteApiKey(String expiration) {
+    this(expiration, null, null);
+  }
+
+  public DraftShareInviteApiKey(String expiration, String status) {
+    this(expiration, status, null);
+  }
+
+  public DraftShareInviteApiKey(String expiration, String status, String subStatus) {
+    this.statusFieldForRequest = status;
+    this.subStatusFieldForRequest = subStatus;
+    this.expirationFieldForRequest = expiration;
+  }
+
+  /**
    * @param expiration The moment when this draft share invite expires.
    * @param status The status of the draft share invite. Can be CANCELLED (the user cancels the
    * draft share before it's used).
@@ -102,12 +142,12 @@ public class DraftShareInviteApiKey extends BunqModel {
       customHeaders = new HashMap<>();
     }
 
-  HashMap<String, Object> requestMap = new HashMap<>();
+    HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_SUB_STATUS, subStatus);
 requestMap.put(FIELD_EXPIRATION, expiration);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -171,7 +211,7 @@ requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_SUB_STATUS, subStatus);
 requestMap.put(FIELD_EXPIRATION, expiration);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteApiKeyId), requestBytes, customHeaders);
 
     return fromJson(DraftShareInviteApiKey.class, responseRaw, OBJECT_TYPE_PUT);

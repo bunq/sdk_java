@@ -4,8 +4,8 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -39,7 +39,7 @@ public class Tab extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The avatar of this tab.
@@ -119,11 +119,11 @@ public class Tab extends BunqModel {
   /**
    * The label of the party that owns this tab.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 

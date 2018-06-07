@@ -23,9 +23,31 @@ public class Issuer extends BunqModel {
   @SerializedName("name")
   private String name;
 
+  /**
+   * The BIC code.
+   */
+  @Expose
+  @SerializedName("bic_field_for_request")
+  private String bicFieldForRequest;
+
+  /**
+   * The name of the bank.
+   */
+  @Expose
+  @SerializedName("name_field_for_request")
+  private String nameFieldForRequest;
+
+  public Issuer() {
+    this(null, null);
+  }
+
   public Issuer(String bic) {
-    this.bic = bic;
-    this.name = name;
+    this(bic, null);
+  }
+
+  public Issuer(String bic, String name) {
+    this.bicFieldForRequest = bic;
+    this.nameFieldForRequest = name;
   }
 
   /**

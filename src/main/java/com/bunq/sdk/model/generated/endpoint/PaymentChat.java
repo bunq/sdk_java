@@ -63,6 +63,21 @@ public class PaymentChat extends BunqModel {
   private Integer unreadMessageCount;
 
   /**
+   * The id of the last read message.
+   */
+  @Expose
+  @SerializedName("last_read_message_id_field_for_request")
+  private Integer lastReadMessageIdFieldForRequest;
+
+  public PaymentChat() {
+    this(null);
+  }
+
+  public PaymentChat(Integer lastReadMessageId) {
+    this.lastReadMessageIdFieldForRequest = lastReadMessageId;
+  }
+
+  /**
    * Create a chat for a specific payment.
    * @param lastReadMessageId The id of the last read message.
    */
@@ -76,7 +91,7 @@ public class PaymentChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -112,7 +127,7 @@ public class PaymentChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentId, paymentChatId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

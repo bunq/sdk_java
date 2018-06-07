@@ -4,8 +4,8 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.LabelCard;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -48,7 +48,7 @@ public class CardPinChange extends BunqModel {
    */
   @Expose
   @SerializedName("label_monetary_account_current")
-  private MonetaryAccountReference labelMonetaryAccountCurrent;
+  private LabelMonetaryAccount labelMonetaryAccountCurrent;
 
   /**
    * The request date of the pin change.
@@ -142,11 +142,11 @@ public class CardPinChange extends BunqModel {
   /**
    * The monetary account this card was ordered on and the label user that owns the card.
    */
-  public MonetaryAccountReference getLabelMonetaryAccountCurrent() {
+  public LabelMonetaryAccount getLabelMonetaryAccountCurrent() {
     return this.labelMonetaryAccountCurrent;
   }
 
-  public void setLabelMonetaryAccountCurrent(MonetaryAccountReference labelMonetaryAccountCurrent) {
+  public void setLabelMonetaryAccountCurrent(LabelMonetaryAccount labelMonetaryAccountCurrent) {
     this.labelMonetaryAccountCurrent = labelMonetaryAccountCurrent;
   }
 

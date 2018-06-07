@@ -1,15 +1,9 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -21,6 +15,20 @@ public class LabelUser extends BunqModel {
   @Expose
   @SerializedName("uuid")
   private String uuid;
+
+  /**
+   * The current avatar of the user.
+   */
+  @Expose
+  @SerializedName("avatar")
+  private Avatar avatar;
+
+  /**
+   * The current nickname of the user.
+   */
+  @Expose
+  @SerializedName("public_nick_name")
+  private String publicNickName;
 
   /**
    * The name to be displayed for this user, as it was given on the request.
@@ -37,23 +45,42 @@ public class LabelUser extends BunqModel {
   private String country;
 
   /**
-   * The current avatar of the user.
+   * The public UUID of the label-user.
    */
   @Expose
-  @SerializedName("avatar")
-  private Avatar avatar;
+  @SerializedName("uuid_field_for_request")
+  private String uuidFieldForRequest;
 
   /**
-   * The current nickname of the user.
+   * The name to be displayed for this user, as it was given on the request.
    */
   @Expose
-  @SerializedName("public_nick_name")
-  private String publicNickName;
+  @SerializedName("display_name_field_for_request")
+  private String displayNameFieldForRequest;
+
+  /**
+   * The country of the user
+   */
+  @Expose
+  @SerializedName("country_field_for_request")
+  private String countryFieldForRequest;
+
+  public LabelUser() {
+    this(null, null, null);
+  }
+
+  public LabelUser(String uuid) {
+    this(uuid, null, null);
+  }
+
+  public LabelUser(String uuid, String displayName) {
+    this(uuid, displayName, null);
+  }
 
   public LabelUser(String uuid, String displayName, String country) {
-    this.uuid = uuid;
-    this.displayName = displayName;
-    this.country = country;
+    this.uuidFieldForRequest = uuid;
+    this.displayNameFieldForRequest = displayName;
+    this.countryFieldForRequest = country;
   }
 
   /**

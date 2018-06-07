@@ -91,6 +91,46 @@ public class DraftShareInviteBank extends BunqModel {
   private Integer id;
 
   /**
+   * The status of the draft share invite. Can be CANCELLED (the user cancels the draft share
+   * before it's used).
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The moment when this draft share invite expires.
+   */
+  @Expose
+  @SerializedName("expiration_field_for_request")
+  private String expirationFieldForRequest;
+
+  /**
+   * The draft share invite details.
+   */
+  @Expose
+  @SerializedName("draft_share_settings_field_for_request")
+  private DraftShareInviteEntry draftShareSettingsFieldForRequest;
+
+  public DraftShareInviteBank() {
+    this(null, null, null);
+  }
+
+  public DraftShareInviteBank(String expiration) {
+    this(expiration, null, null);
+  }
+
+  public DraftShareInviteBank(String expiration, DraftShareInviteEntry draftShareSettings) {
+    this(expiration, draftShareSettings, null);
+  }
+
+  public DraftShareInviteBank(String expiration, DraftShareInviteEntry draftShareSettings, String status) {
+    this.statusFieldForRequest = status;
+    this.expirationFieldForRequest = expiration;
+    this.draftShareSettingsFieldForRequest = draftShareSettings;
+  }
+
+  /**
    * @param expiration The moment when this draft share invite expires.
    * @param draftShareSettings The draft share invite details.
    * @param status The status of the draft share invite. Can be CANCELLED (the user cancels the
@@ -108,7 +148,7 @@ public class DraftShareInviteBank extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_DRAFT_SHARE_SETTINGS, draftShareSettings);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -172,7 +212,7 @@ public class DraftShareInviteBank extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_DRAFT_SHARE_SETTINGS, draftShareSettings);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteBankId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

@@ -35,6 +35,21 @@ public class TabItemShopBatch extends BunqModel {
   private List<TabItemShop> tabItems;
 
   /**
+   * The list of tab items we want to create in a single batch. Limited to 50 items per batch.
+   */
+  @Expose
+  @SerializedName("tab_items_field_for_request")
+  private List<TabItemShop> tabItemsFieldForRequest;
+
+  public TabItemShopBatch() {
+    this(null);
+  }
+
+  public TabItemShopBatch(List<TabItemShop> tabItems) {
+    this.tabItemsFieldForRequest = tabItems;
+  }
+
+  /**
    * Create tab items as a batch.
    * @param tabItems The list of tab items we want to create in a single batch. Limited to 50
    * items per batch.
@@ -49,7 +64,7 @@ public class TabItemShopBatch extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_TAB_ITEMS, tabItems);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid), requestBytes, customHeaders);
 
     return processForId(responseRaw);

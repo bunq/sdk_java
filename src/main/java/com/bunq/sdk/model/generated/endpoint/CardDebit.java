@@ -4,10 +4,10 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
 import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.security.SecurityUtils;
@@ -148,14 +148,14 @@ public class CardDebit extends BunqModel {
    */
   @Expose
   @SerializedName("label_monetary_account_ordered")
-  private MonetaryAccountReference labelMonetaryAccountOrdered;
+  private LabelMonetaryAccount labelMonetaryAccountOrdered;
 
   /**
    * The monetary account that this card is currently linked to and the label user viewing it.
    */
   @Expose
   @SerializedName("label_monetary_account_current")
-  private MonetaryAccountReference labelMonetaryAccountCurrent;
+  private LabelMonetaryAccount labelMonetaryAccountCurrent;
 
   /**
    * The label for the user who requested the card.
@@ -187,6 +187,86 @@ public class CardDebit extends BunqModel {
   private String country;
 
   /**
+   * The second line of text on the card, used as name/description for it. It can contain at most
+   * 17 characters and it can be empty.
+   */
+  @Expose
+  @SerializedName("second_line_field_for_request")
+  private String secondLineFieldForRequest;
+
+  /**
+   * The user's name as it will be on the card. Check 'card-name' for the available card names for
+   * a user.
+   */
+  @Expose
+  @SerializedName("name_on_card_field_for_request")
+  private String nameOnCardFieldForRequest;
+
+  /**
+   * The pointer to the monetary account that will be connected at first with the card. Its IBAN
+   * code is also the one that will be printed on the card itself. The pointer must be of type
+   * IBAN.
+   */
+  @Expose
+  @SerializedName("alias_field_for_request")
+  private Pointer aliasFieldForRequest;
+
+  /**
+   * The type of card to order. Can be MAESTRO or MASTERCARD.
+   */
+  @Expose
+  @SerializedName("type_field_for_request")
+  private String typeFieldForRequest;
+
+  /**
+   * Array of Types, PINs, account IDs assigned to the card.
+   */
+  @Expose
+  @SerializedName("pin_code_assignment_field_for_request")
+  private List<CardPinAssignment> pinCodeAssignmentFieldForRequest;
+
+  /**
+   * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
+   * is removed if not supplied.
+   */
+  @Expose
+  @SerializedName("monetary_account_id_fallback_field_for_request")
+  private Integer monetaryAccountIdFallbackFieldForRequest;
+
+  public CardDebit() {
+    this(null, null, null, null, null, null);
+  }
+
+  public CardDebit(String secondLine) {
+    this(secondLine, null, null, null, null, null);
+  }
+
+  public CardDebit(String secondLine, String nameOnCard) {
+    this(secondLine, nameOnCard, null, null, null, null);
+  }
+
+  public CardDebit(String secondLine, String nameOnCard, Pointer alias) {
+    this(secondLine, nameOnCard, alias, null, null, null);
+  }
+
+  public CardDebit(String secondLine, String nameOnCard, Pointer alias, String type) {
+    this(secondLine, nameOnCard, alias, type, null, null);
+  }
+
+  public CardDebit(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment) {
+    this(secondLine, nameOnCard, alias, type, pinCodeAssignment, null);
+  }
+
+  public CardDebit(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    this.secondLineFieldForRequest = secondLine;
+    this.nameOnCardFieldForRequest = nameOnCard;
+    this.aliasFieldForRequest = alias;
+    this.typeFieldForRequest = type;
+    this.pinCodeAssignmentFieldForRequest = pinCodeAssignment;
+    this.monetaryAccountIdFallbackFieldForRequest = monetaryAccountIdFallback;
+  }
+
+  /**
    * Create a new debit card request.
    * @param secondLine The second line of text on the card, used as name/description for it. It
    * can contain at most 17 characters and it can be empty.
@@ -215,7 +295,7 @@ public class CardDebit extends BunqModel {
     requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
     requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
@@ -407,22 +487,22 @@ public class CardDebit extends BunqModel {
   /**
    * The monetary account this card was ordered on and the label user that owns the card.
    */
-  public MonetaryAccountReference getLabelMonetaryAccountOrdered() {
+  public LabelMonetaryAccount getLabelMonetaryAccountOrdered() {
     return this.labelMonetaryAccountOrdered;
   }
 
-  public void setLabelMonetaryAccountOrdered(MonetaryAccountReference labelMonetaryAccountOrdered) {
+  public void setLabelMonetaryAccountOrdered(LabelMonetaryAccount labelMonetaryAccountOrdered) {
     this.labelMonetaryAccountOrdered = labelMonetaryAccountOrdered;
   }
 
   /**
    * The monetary account that this card is currently linked to and the label user viewing it.
    */
-  public MonetaryAccountReference getLabelMonetaryAccountCurrent() {
+  public LabelMonetaryAccount getLabelMonetaryAccountCurrent() {
     return this.labelMonetaryAccountCurrent;
   }
 
-  public void setLabelMonetaryAccountCurrent(MonetaryAccountReference labelMonetaryAccountCurrent) {
+  public void setLabelMonetaryAccountCurrent(LabelMonetaryAccount labelMonetaryAccountCurrent) {
     this.labelMonetaryAccountCurrent = labelMonetaryAccountCurrent;
   }
 

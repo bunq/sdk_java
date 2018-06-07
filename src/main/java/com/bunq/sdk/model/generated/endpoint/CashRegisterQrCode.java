@@ -83,6 +83,23 @@ public class CashRegisterQrCode extends BunqModel {
   private Tab tabObject;
 
   /**
+   * The status of the QR code. ACTIVE or INACTIVE. Only one QR code can be ACTIVE for a
+   * CashRegister at any time. Setting a QR code to ACTIVE will deactivate any other CashRegister
+   * QR codes.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  public CashRegisterQrCode() {
+    this(null);
+  }
+
+  public CashRegisterQrCode(String status) {
+    this.statusFieldForRequest = status;
+  }
+
+  /**
    * Create a new QR code for this CashRegister. You can only have one ACTIVE CashRegister QR code
    * at the time.
    * @param status The status of the QR code. ACTIVE or INACTIVE. Only one QR code can be ACTIVE
@@ -99,7 +116,7 @@ public class CashRegisterQrCode extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -138,7 +155,7 @@ public class CashRegisterQrCode extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, cashRegisterQrCodeId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

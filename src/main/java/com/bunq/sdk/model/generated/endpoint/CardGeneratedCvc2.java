@@ -84,7 +84,7 @@ public class CardGeneratedCvc2 extends BunqModel {
 
     HashMap<String, Object> requestMap = new HashMap<>();
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), cardId), requestBytes, customHeaders);
 

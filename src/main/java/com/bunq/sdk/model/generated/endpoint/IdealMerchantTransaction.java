@@ -4,8 +4,8 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -49,14 +49,14 @@ public class IdealMerchantTransaction extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The alias of the monetary account the money comes from.
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * In case of a successful transaction, the amount of money that will be transferred.
@@ -136,6 +136,33 @@ public class IdealMerchantTransaction extends BunqModel {
   private Boolean allowChat;
 
   /**
+   * The requested amount of money to add.
+   */
+  @Expose
+  @SerializedName("amount_requested_field_for_request")
+  private Amount amountRequestedFieldForRequest;
+
+  /**
+   * The BIC of the issuing bank to ask for money.
+   */
+  @Expose
+  @SerializedName("issuer_field_for_request")
+  private String issuerFieldForRequest;
+
+  public IdealMerchantTransaction() {
+    this(null, null);
+  }
+
+  public IdealMerchantTransaction(Amount amountRequested) {
+    this(amountRequested, null);
+  }
+
+  public IdealMerchantTransaction(Amount amountRequested, String issuer) {
+    this.amountRequestedFieldForRequest = amountRequested;
+    this.issuerFieldForRequest = issuer;
+  }
+
+  /**
    * @param amountRequested The requested amount of money to add.
    * @param issuer The BIC of the issuing bank to ask for money.
    */
@@ -150,7 +177,7 @@ public class IdealMerchantTransaction extends BunqModel {
     requestMap.put(FIELD_AMOUNT_REQUESTED, amountRequested);
     requestMap.put(FIELD_ISSUER, issuer);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -232,22 +259,22 @@ public class IdealMerchantTransaction extends BunqModel {
   /**
    * The alias of the monetary account to add money to.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 
   /**
    * The alias of the monetary account the money comes from.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

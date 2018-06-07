@@ -1,18 +1,14 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.BunqMeMerchantAvailable;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * bunq.me tabs allows you to create a payment request and share the link through e-mail, chat,
@@ -48,7 +44,7 @@ public class BunqMeTabEntry extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The description for the bunq.me. Maximum 9000 characters.
@@ -79,6 +75,46 @@ public class BunqMeTabEntry extends BunqModel {
   private List<BunqMeMerchantAvailable> merchantAvailable;
 
   /**
+   * The Amount requested to be paid. Can be optional.
+   */
+  @Expose
+  @SerializedName("amount_inquired_field_for_request")
+  private Amount amountInquiredFieldForRequest;
+
+  /**
+   * The description for the bunq.me. Maximum 9000 characters. Field is required but can be an
+   * empty string.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The URL which the user is sent to after making a payment.
+   */
+  @Expose
+  @SerializedName("redirect_url_field_for_request")
+  private String redirectUrlFieldForRequest;
+
+  public BunqMeTabEntry() {
+    this(null, null, null);
+  }
+
+  public BunqMeTabEntry(String description) {
+    this(description, null, null);
+  }
+
+  public BunqMeTabEntry(String description, Amount amountInquired) {
+    this(description, amountInquired, null);
+  }
+
+  public BunqMeTabEntry(String description, Amount amountInquired, String redirectUrl) {
+    this.amountInquiredFieldForRequest = amountInquired;
+    this.descriptionFieldForRequest = description;
+    this.redirectUrlFieldForRequest = redirectUrl;
+  }
+
+  /**
    * The uuid of the bunq.me.
    */
   public String getUuid() {
@@ -104,11 +140,11 @@ public class BunqMeTabEntry extends BunqModel {
    * The LabelMonetaryAccount with the public information of the User and the MonetaryAccount that
    * created the bunq.me link.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 

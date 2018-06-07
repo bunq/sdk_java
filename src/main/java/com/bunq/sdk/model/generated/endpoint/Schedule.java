@@ -80,6 +80,58 @@ public class Schedule extends BunqModel {
   private ScheduleAnchorObject object;
 
   /**
+   * The schedule start time (UTC).
+   */
+  @Expose
+  @SerializedName("time_start_field_for_request")
+  private String timeStartFieldForRequest;
+
+  /**
+   * The schedule end time (UTC).
+   */
+  @Expose
+  @SerializedName("time_end_field_for_request")
+  private String timeEndFieldForRequest;
+
+  /**
+   * The schedule recurrence unit, options: ONCE, HOURLY, DAILY, WEEKLY, MONTHLY, YEARLY
+   */
+  @Expose
+  @SerializedName("recurrence_unit_field_for_request")
+  private String recurrenceUnitFieldForRequest;
+
+  /**
+   * The schedule recurrence size. For example size 4 and unit WEEKLY means the recurrence is
+   * every 4 weeks.
+   */
+  @Expose
+  @SerializedName("recurrence_size_field_for_request")
+  private Integer recurrenceSizeFieldForRequest;
+
+  public Schedule() {
+    this(null, null, null, null);
+  }
+
+  public Schedule(String timeStart) {
+    this(timeStart, null, null, null);
+  }
+
+  public Schedule(String timeStart, String recurrenceUnit) {
+    this(timeStart, recurrenceUnit, null, null);
+  }
+
+  public Schedule(String timeStart, String recurrenceUnit, Integer recurrenceSize) {
+    this(timeStart, recurrenceUnit, recurrenceSize, null);
+  }
+
+  public Schedule(String timeStart, String recurrenceUnit, Integer recurrenceSize, String timeEnd) {
+    this.timeStartFieldForRequest = timeStart;
+    this.timeEndFieldForRequest = timeEnd;
+    this.recurrenceUnitFieldForRequest = recurrenceUnit;
+    this.recurrenceSizeFieldForRequest = recurrenceSize;
+  }
+
+  /**
    * Get a specific schedule definition for a given monetary account.
    */
   public static BunqResponse<Schedule> get(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {

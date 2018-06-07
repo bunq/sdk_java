@@ -1,15 +1,11 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
+
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -42,6 +38,57 @@ public class Geolocation extends BunqModel {
   @Expose
   @SerializedName("radius")
   private BigDecimal radius;
+
+  /**
+   * The latitude for a geolocation restriction.
+   */
+  @Expose
+  @SerializedName("latitude_field_for_request")
+  private String latitudeFieldForRequest;
+
+  /**
+   * The longitude for a geolocation restriction.
+   */
+  @Expose
+  @SerializedName("longitude_field_for_request")
+  private String longitudeFieldForRequest;
+
+  /**
+   * The altitude for a geolocation restriction.
+   */
+  @Expose
+  @SerializedName("altitude_field_for_request")
+  private String altitudeFieldForRequest;
+
+  /**
+   * The radius for a geolocation restriction.
+   */
+  @Expose
+  @SerializedName("radius_field_for_request")
+  private String radiusFieldForRequest;
+
+  public Geolocation() {
+    this(null, null, null, null);
+  }
+
+  public Geolocation(String latitude) {
+    this(latitude, null, null, null);
+  }
+
+  public Geolocation(String latitude, String longitude) {
+    this(latitude, longitude, null, null);
+  }
+
+  public Geolocation(String latitude, String longitude, String altitude) {
+    this(latitude, longitude, altitude, null);
+  }
+
+  public Geolocation(String latitude, String longitude, String altitude, String radius) {
+    this.latitudeFieldForRequest = latitude;
+    this.longitudeFieldForRequest = longitude;
+    this.altitudeFieldForRequest = altitude;
+    this.radiusFieldForRequest = radius;
+  }
 
   /**
    * The latitude for a geolocation restriction.

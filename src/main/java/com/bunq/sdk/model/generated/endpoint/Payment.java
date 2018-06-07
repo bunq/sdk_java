@@ -4,11 +4,11 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.AttachmentMonetaryAccountPayment;
 import com.bunq.sdk.model.generated.object.Geolocation;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
@@ -93,7 +93,7 @@ public class Payment extends BunqModel {
    */
   @Expose
   @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  private LabelMonetaryAccount alias;
 
   /**
    * The LabelMonetaryAccount containing the public information of the other (counterparty) side
@@ -101,7 +101,7 @@ public class Payment extends BunqModel {
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The description for the Payment. Maximum 140 characters for Payments to external IBANs, 9000
@@ -226,6 +226,74 @@ public class Payment extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   * The Amount to transfer with the Payment. Must be bigger than 0 and smaller than the
+   * MonetaryAccount's balance.
+   */
+  @Expose
+  @SerializedName("amount_field_for_request")
+  private Amount amountFieldForRequest;
+
+  /**
+   * The Alias of the party we are transferring the money to. Can be an Alias of type EMAIL or
+   * PHONE_NUMBER (for bunq MonetaryAccounts or bunq.to payments) or IBAN (for external bank
+   * account).
+   */
+  @Expose
+  @SerializedName("counterparty_alias_field_for_request")
+  private Pointer counterpartyAliasFieldForRequest;
+
+  /**
+   * The description for the Payment. Maximum 140 characters for Payments to external IBANs, 9000
+   * characters for Payments to only other bunq MonetaryAccounts. Field is required but can be an
+   * empty string.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The Attachments to attach to the Payment.
+   */
+  @Expose
+  @SerializedName("attachment_field_for_request")
+  private List<AttachmentMonetaryAccountPayment> attachmentFieldForRequest;
+
+  /**
+   * Optional data to be included with the Payment specific to the merchant.
+   */
+  @Expose
+  @SerializedName("merchant_reference_field_for_request")
+  private String merchantReferenceFieldForRequest;
+
+  public Payment() {
+    this(null, null, null, null, null);
+  }
+
+  public Payment(Amount amount) {
+    this(amount, null, null, null, null);
+  }
+
+  public Payment(Amount amount, Pointer counterpartyAlias) {
+    this(amount, counterpartyAlias, null, null, null);
+  }
+
+  public Payment(Amount amount, Pointer counterpartyAlias, String description) {
+    this(amount, counterpartyAlias, description, null, null);
+  }
+
+  public Payment(Amount amount, Pointer counterpartyAlias, String description, List<AttachmentMonetaryAccountPayment> attachment) {
+    this(amount, counterpartyAlias, description, attachment, null);
+  }
+
+  public Payment(Amount amount, Pointer counterpartyAlias, String description, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference) {
+    this.amountFieldForRequest = amount;
+    this.counterpartyAliasFieldForRequest = counterpartyAlias;
+    this.descriptionFieldForRequest = description;
+    this.attachmentFieldForRequest = attachment;
+    this.merchantReferenceFieldForRequest = merchantReference;
+  }
+
+  /**
    * Create a new Payment.
    * @param amount The Amount to transfer with the Payment. Must be bigger than 0 and smaller than
    * the MonetaryAccount's balance.
@@ -253,7 +321,7 @@ public class Payment extends BunqModel {
     requestMap.put(FIELD_ATTACHMENT, attachment);
     requestMap.put(FIELD_MERCHANT_REFERENCE, merchantReference);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -397,11 +465,11 @@ public class Payment extends BunqModel {
    * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
    * Payment.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 
@@ -409,11 +477,11 @@ public class Payment extends BunqModel {
    * The LabelMonetaryAccount containing the public information of the other (counterparty) side
    * of the Payment.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

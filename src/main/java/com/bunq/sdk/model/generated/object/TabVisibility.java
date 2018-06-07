@@ -31,10 +31,47 @@ public class TabVisibility extends BunqModel {
   @SerializedName("location")
   private Geolocation location;
 
+  /**
+   * When true the Tab will be linked to the ACTIVE cash registers QR code. If no cash register QR
+   * code exists, one will be created.
+   */
+  @Expose
+  @SerializedName("cash_register_qr_code_field_for_request")
+  private Boolean cashRegisterQrCodeFieldForRequest;
+
+  /**
+   * When true the Tab will be visible through its own QR code. Use
+   * ../tab/{tab-id}/qr-code-content to get the raw content of this QR code
+   */
+  @Expose
+  @SerializedName("tab_qr_code_field_for_request")
+  private Boolean tabQrCodeFieldForRequest;
+
+  /**
+   * The location on which this tab will be made visible in NearPay. This location must overlap
+   * with the location of the CashRegister. If no location is provided the location of the
+   * CashRegister will be used.
+   */
+  @Expose
+  @SerializedName("location_field_for_request")
+  private Geolocation locationFieldForRequest;
+
+  public TabVisibility() {
+    this(null, null, null);
+  }
+
+  public TabVisibility(Boolean cashRegisterQrCode) {
+    this(cashRegisterQrCode, null, null);
+  }
+
   public TabVisibility(Boolean cashRegisterQrCode, Boolean tabQrCode) {
-    this.cashRegisterQrCode = cashRegisterQrCode;
-    this.tabQrCode = tabQrCode;
-    this.location = location;
+    this(cashRegisterQrCode, tabQrCode, null);
+  }
+
+  public TabVisibility(Boolean cashRegisterQrCode, Boolean tabQrCode, Geolocation location) {
+    this.cashRegisterQrCodeFieldForRequest = cashRegisterQrCode;
+    this.tabQrCodeFieldForRequest = tabQrCode;
+    this.locationFieldForRequest = location;
   }
 
   /**

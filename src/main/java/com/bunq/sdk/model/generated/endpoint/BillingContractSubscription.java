@@ -98,6 +98,22 @@ public class BillingContractSubscription extends BunqModel {
   private String subStatus;
 
   /**
+   * The subscription type of the user. Can be one of PERSON_LIGHT_V1, PERSON_MORE_V1,
+   * PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
+   */
+  @Expose
+  @SerializedName("subscription_type_field_for_request")
+  private String subscriptionTypeFieldForRequest;
+
+  public BillingContractSubscription() {
+    this(null);
+  }
+
+  public BillingContractSubscription(String subscriptionType) {
+    this.subscriptionTypeFieldForRequest = subscriptionType;
+  }
+
+  /**
    * @param subscriptionType The subscription type of the user. Can be one of PERSON_LIGHT_V1,
    * PERSON_MORE_V1, PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
    */
@@ -111,7 +127,7 @@ public class BillingContractSubscription extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_SUBSCRIPTION_TYPE, subscriptionType);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);

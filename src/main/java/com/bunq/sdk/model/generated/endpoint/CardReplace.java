@@ -41,6 +41,46 @@ public class CardReplace extends BunqModel {
   private Integer id;
 
   /**
+   * The user's name as it will be on the card. Check 'card-name' for the available card names for
+   * a user.
+   */
+  @Expose
+  @SerializedName("name_on_card_field_for_request")
+  private String nameOnCardFieldForRequest;
+
+  /**
+   * The plaintext pin code. Requests require encryption to be enabled.
+   */
+  @Expose
+  @SerializedName("pin_code_field_for_request")
+  private String pinCodeFieldForRequest;
+
+  /**
+   * The second line on the card.
+   */
+  @Expose
+  @SerializedName("second_line_field_for_request")
+  private String secondLineFieldForRequest;
+
+  public CardReplace() {
+    this(null, null, null);
+  }
+
+  public CardReplace(String nameOnCard) {
+    this(nameOnCard, null, null);
+  }
+
+  public CardReplace(String nameOnCard, String pinCode) {
+    this(nameOnCard, pinCode, null);
+  }
+
+  public CardReplace(String nameOnCard, String pinCode, String secondLine) {
+    this.nameOnCardFieldForRequest = nameOnCard;
+    this.pinCodeFieldForRequest = pinCode;
+    this.secondLineFieldForRequest = secondLine;
+  }
+
+  /**
    * Request a card replacement.
    * @param nameOnCard The user's name as it will be on the card. Check 'card-name' for the
    * available card names for a user.
@@ -59,7 +99,7 @@ public class CardReplace extends BunqModel {
     requestMap.put(FIELD_PIN_CODE, pinCode);
     requestMap.put(FIELD_SECOND_LINE, secondLine);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), cardId), requestBytes, customHeaders);
 
