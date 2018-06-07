@@ -32,12 +32,12 @@ abstract public class BunqModel {
   private static final int INDEX_FIRST = 0;
 
   /**
-   * String format consents.
+   * String format constants.
    */
   private static final String STRING_EMPTY = "";
 
   /**
-   * Regex constatns.
+   * Regex constants.
    */
   private static final String REGEX_FIELD_FOR_REQUEST = "(_field_for_request)";
 
