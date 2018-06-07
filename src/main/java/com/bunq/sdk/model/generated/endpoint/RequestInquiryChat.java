@@ -94,7 +94,7 @@ public class RequestInquiryChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -130,7 +130,7 @@ public class RequestInquiryChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId, requestInquiryChatId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

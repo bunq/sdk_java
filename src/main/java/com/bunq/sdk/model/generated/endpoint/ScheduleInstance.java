@@ -145,7 +145,7 @@ public class ScheduleInstance extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATE, state);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

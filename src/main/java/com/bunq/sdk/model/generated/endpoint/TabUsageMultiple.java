@@ -389,7 +389,7 @@ public class TabUsageMultiple extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_TAB_ATTACHMENT, tabAttachment);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);
@@ -488,7 +488,7 @@ public class TabUsageMultiple extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_TAB_ATTACHMENT, tabAttachment);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUsageMultipleUuid), requestBytes, customHeaders);
 
     return processForUuid(responseRaw);

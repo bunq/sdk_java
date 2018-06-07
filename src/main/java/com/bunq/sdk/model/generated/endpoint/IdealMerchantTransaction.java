@@ -177,7 +177,7 @@ public class IdealMerchantTransaction extends BunqModel {
     requestMap.put(FIELD_AMOUNT_REQUESTED, amountRequested);
     requestMap.put(FIELD_ISSUER, issuer);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);

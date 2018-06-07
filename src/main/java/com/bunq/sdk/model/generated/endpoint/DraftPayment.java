@@ -186,7 +186,7 @@ public class DraftPayment extends BunqModel {
     requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
     requestMap.put(FIELD_NUMBER_OF_REQUIRED_ACCEPTS, numberOfRequiredAccepts);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -236,7 +236,7 @@ public class DraftPayment extends BunqModel {
     requestMap.put(FIELD_ENTRIES, entries);
     requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

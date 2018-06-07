@@ -202,7 +202,7 @@ public class TabItemShop extends BunqModel {
     requestMap.put(FIELD_QUANTITY, quantity);
     requestMap.put(FIELD_AMOUNT, amount);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -275,7 +275,7 @@ public class TabItemShop extends BunqModel {
     requestMap.put(FIELD_QUANTITY, quantity);
     requestMap.put(FIELD_AMOUNT, amount);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid, tabItemShopId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

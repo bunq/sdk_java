@@ -128,7 +128,7 @@ public class Customer extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_BILLING_ACCOUNT_ID, billingAccountId);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), customerId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

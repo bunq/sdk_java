@@ -110,7 +110,7 @@ public class PromotionDisplay extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), promotionDisplayId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

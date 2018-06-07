@@ -295,7 +295,7 @@ public class CardDebit extends BunqModel {
     requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
     requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 

@@ -147,7 +147,7 @@ requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_SUB_STATUS, subStatus);
 requestMap.put(FIELD_EXPIRATION, expiration);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -211,7 +211,7 @@ requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_SUB_STATUS, subStatus);
 requestMap.put(FIELD_EXPIRATION, expiration);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteApiKeyId), requestBytes, customHeaders);
 
     return fromJson(DraftShareInviteApiKey.class, responseRaw, OBJECT_TYPE_PUT);

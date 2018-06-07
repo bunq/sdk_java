@@ -182,7 +182,7 @@ public class CustomerStatementExport extends BunqModel {
     requestMap.put(FIELD_DATE_END, dateEnd);
     requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);

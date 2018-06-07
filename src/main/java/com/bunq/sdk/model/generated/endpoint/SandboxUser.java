@@ -44,7 +44,7 @@ public class SandboxUser extends BunqModel {
 
   HashMap<String, Object> requestMap = new HashMap<>();
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
     return fromJson(SandboxUser.class, responseRaw, OBJECT_TYPE_POST);

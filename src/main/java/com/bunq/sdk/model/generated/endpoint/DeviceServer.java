@@ -146,7 +146,7 @@ public class DeviceServer extends BunqModel {
     requestMap.put(FIELD_SECRET, secret);
     requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
     return processForId(responseRaw);

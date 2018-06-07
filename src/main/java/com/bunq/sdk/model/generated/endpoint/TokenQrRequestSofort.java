@@ -61,7 +61,7 @@ public class TokenQrRequestSofort extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_TOKEN, token);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return fromJson(TokenQrRequestSofort.class, responseRaw, OBJECT_TYPE_POST);

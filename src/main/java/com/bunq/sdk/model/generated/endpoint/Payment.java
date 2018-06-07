@@ -321,7 +321,7 @@ public class Payment extends BunqModel {
     requestMap.put(FIELD_ATTACHMENT, attachment);
     requestMap.put(FIELD_MERCHANT_REFERENCE, merchantReference);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);

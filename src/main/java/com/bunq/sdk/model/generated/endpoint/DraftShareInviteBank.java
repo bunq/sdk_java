@@ -148,7 +148,7 @@ public class DraftShareInviteBank extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_DRAFT_SHARE_SETTINGS, draftShareSettings);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -212,7 +212,7 @@ public class DraftShareInviteBank extends BunqModel {
     requestMap.put(FIELD_EXPIRATION, expiration);
     requestMap.put(FIELD_DRAFT_SHARE_SETTINGS, draftShareSettings);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteBankId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

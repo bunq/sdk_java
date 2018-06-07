@@ -482,7 +482,7 @@ public class RequestInquiry extends BunqModel {
     requestMap.put(FIELD_REDIRECT_URL, redirectUrl);
     requestMap.put(FIELD_EVENT_ID, eventId);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -567,7 +567,7 @@ public class RequestInquiry extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryId), requestBytes, customHeaders);
 
     return fromJson(RequestInquiry.class, responseRaw, OBJECT_TYPE_PUT);

@@ -221,7 +221,7 @@ public class CashRegister extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -314,7 +314,7 @@ public class CashRegister extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

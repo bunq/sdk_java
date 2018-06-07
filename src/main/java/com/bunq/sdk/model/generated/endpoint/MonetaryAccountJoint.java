@@ -429,7 +429,7 @@ public class MonetaryAccountJoint extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -553,7 +553,7 @@ public class MonetaryAccountJoint extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountJointId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

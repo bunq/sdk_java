@@ -82,7 +82,7 @@ public class Avatar extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_ATTACHMENT_PUBLIC_UUID, attachmentPublicUuid);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
     return processForUuid(responseRaw);

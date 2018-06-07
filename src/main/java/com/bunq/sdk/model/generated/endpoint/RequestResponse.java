@@ -313,7 +313,7 @@ public class RequestResponse extends BunqModel {
     requestMap.put(FIELD_ADDRESS_SHIPPING, addressShipping);
     requestMap.put(FIELD_ADDRESS_BILLING, addressBilling);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestResponseId), requestBytes, customHeaders);
 
     return fromJson(RequestResponse.class, responseRaw, OBJECT_TYPE_PUT);

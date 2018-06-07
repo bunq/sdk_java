@@ -91,7 +91,7 @@ public class PaymentChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -127,7 +127,7 @@ public class PaymentChat extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_LAST_READ_MESSAGE_ID, lastReadMessageId);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentId, paymentChatId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

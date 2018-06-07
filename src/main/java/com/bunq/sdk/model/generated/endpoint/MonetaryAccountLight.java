@@ -410,7 +410,7 @@ requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
 requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -523,7 +523,7 @@ requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
 requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountLightId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

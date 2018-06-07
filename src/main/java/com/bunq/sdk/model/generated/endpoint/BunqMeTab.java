@@ -145,7 +145,7 @@ public class BunqMeTab extends BunqModel {
     requestMap.put(FIELD_BUNQME_TAB_ENTRY, bunqmeTabEntry);
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -181,7 +181,7 @@ public class BunqMeTab extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_STATUS, status);
 
-    byte[] requestBytes = determineRequestByte(requestMap);
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
