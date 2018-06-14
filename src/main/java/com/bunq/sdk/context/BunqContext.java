@@ -15,7 +15,7 @@ public final class BunqContext {
 
   public static void loadApiContext(ApiContext apiContext) {
     BunqContext.apiContext = apiContext;
-    BunqContext.userContext = new UserContext(apiContext.getSessionContext().getUserId());
+    BunqContext.userContext = apiContext.getSessionContext().initUserContext();
     BunqContext.userContext.initMainMonetaryAccount();
   }
 
