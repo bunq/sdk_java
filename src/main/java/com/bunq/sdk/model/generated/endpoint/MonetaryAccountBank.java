@@ -1,5 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -48,6 +50,7 @@ public class MonetaryAccountBank extends BunqModel {
   public static final String FIELD_REASON_DESCRIPTION = "reason_description";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
+  private static final String MONETARY_ACCOUNT_STATUS_ACTIVE = "ACTIVE";
 
   /**
    * Object type.
@@ -405,13 +408,33 @@ public class MonetaryAccountBank extends BunqModel {
   }
 
   /**
+   * Gets the first active MonetaryAccountBank or null
+   */
+  public static MonetaryAccountBank getFirstActive(ApiContext apiContext) {
+    List<MonetaryAccountBank> allMonetaryAccount = list(apiContext, null,null).getValue();
+    for (MonetaryAccountBank monetaryAccountBank : allMonetaryAccount) {
+      if (monetaryAccountBank.getStatus().equals(MONETARY_ACCOUNT_STATUS_ACTIVE)) {
+        return monetaryAccountBank;
+      }
+    }
+    return null;
+  }
+
+  /**
    * Gets a listing of all MonetaryAccountBanks of a given user.
    */
-  public static BunqResponse<List<MonetaryAccountBank>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
+  private static BunqResponse<List<MonetaryAccountBank>> list(ApiContext apiContext, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
     return fromJsonList(MonetaryAccountBank.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  /**
+   * Gets a listing of all MonetaryAccountBanks of a given user.
+   */
+  public static BunqResponse<List<MonetaryAccountBank>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    return list(getApiContext(),params,customHeaders);
   }
 
   public static BunqResponse<List<MonetaryAccountBank>> list() {

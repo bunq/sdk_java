@@ -1,5 +1,6 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
@@ -72,10 +73,21 @@ public class User extends BunqModel implements AnchorObjectInterface {
   }
 
   /**
+   * Get first of all available users.
+   */
+  public static User getFirst(ApiContext apiContext) {
+    return list(apiContext,null,null).getValue().get(0);
+  }
+
+  /**
    * Get a collection of all available users.
    */
   public static BunqResponse<List<User>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
+    return list(getApiContext(),params,customHeaders);
+  }
+
+  private static BunqResponse<List<User>> list(ApiContext apiContext,Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(apiContext);
     BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
     return fromJsonList(User.class, responseRaw);

@@ -53,14 +53,10 @@ public class SessionContext implements java.io.Serializable {
   SessionContext(SessionServer sessionServer) {
     this.token = sessionServer.getSessionToken().getToken();
     this.expiryTime = calculateExpiryTime(sessionServer);
-    this.userId = getUserId(sessionServer.getReferencedObject());
-  }
-
-  private Integer getUserId(BunqModel user) {
-    if (user instanceof UserPerson) {
-      return ((UserPerson) user).getId();
-    } else if (user instanceof UserCompany) {
-      return  ((UserCompany) user).getId();
+    if (sessionServer.getUserPerson()!=null) {
+      this.userId = sessionServer.getUserPerson().getId();
+    } else if (sessionServer.getUserCompany()!=null) {
+      this.userId =  sessionServer.getUserCompany().getId();
     } else {
       throw new BunqException(ERROR_UNEXPECTED_USER_TYPE);
     }
@@ -70,23 +66,16 @@ public class SessionContext implements java.io.Serializable {
     Date expiryTime = new Date();
     long sessionTimeoutMilliseconds = getSessionTimeout(sessionServer) * MILLISECONDS_IN_SECOND;
     expiryTime.setTime(expiryTime.getTime() + sessionTimeoutMilliseconds);
-
     return expiryTime;
   }
 
   private static int getSessionTimeout(SessionServer sessionServer) {
-    UserCompany userCompany = sessionServer.getUserCompany();
-
-    if (userCompany != null) {
-      return userCompany.getSessionTimeout();
+    if (sessionServer.getUserCompany() != null) {
+      return sessionServer.getUserCompany().getSessionTimeout();
     }
-
-    UserPerson userPerson = sessionServer.getUserPerson();
-
-    if (userPerson != null) {
-      return userPerson.getSessionTimeout();
+    if (sessionServer.getUserPerson() != null) {
+      return sessionServer.getUserPerson().getSessionTimeout();
     }
-
     return SESSION_TIMEOUT_DEFAULT;
   }
 
@@ -100,9 +89,5 @@ public class SessionContext implements java.io.Serializable {
 
   public Integer getUserId() {
     return userId;
-  }
-
-  public UserContext initUserContext() {
-    return new UserContext(getUserId());
   }
 }
