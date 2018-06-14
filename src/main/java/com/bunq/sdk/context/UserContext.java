@@ -17,14 +17,14 @@ public class UserContext {
   private static final String ERROR_UNEXPECTED_USER_INSTANCE = "\"%s\" is unexpected user instance.";
   private static final String ERROR_NO_ACTIVE_MONETARY_ACCOUNT_FOUND = "No active monetary account found.";
 
+  private final ApiContext apiContext;
   private final UserCompany userCompany;
   private final UserPerson userPerson;
   private final MonetaryAccountBank primaryMonetaryAccountBank;
-  private final Integer userId;
 
   public UserContext(ApiContext apiContext) {
-    this.userId = apiContext.getSessionContext().getUserId();
-    User user = User.getFirst(apiContext);
+    this.apiContext = apiContext;
+    User user = User.getFirst(this.apiContext);
     if (user.getUserPerson()!=null) {
       this.userPerson = user.getUserPerson();
       this.userCompany = null;
@@ -34,7 +34,7 @@ public class UserContext {
     } else {
       throw new BunqException(ERROR_UNEXPECTED_USER_INSTANCE);
     }
-    MonetaryAccountBank monetaryAccountBank = MonetaryAccountBank.getFirstActive(apiContext);
+    MonetaryAccountBank monetaryAccountBank = MonetaryAccountBank.getFirstActive(this.apiContext);
     if(monetaryAccountBank!=null) {
       this.primaryMonetaryAccountBank = monetaryAccountBank;
     }
@@ -43,8 +43,12 @@ public class UserContext {
     }
   }
 
+  public ApiContext getApiContext() {
+    return apiContext;
+  }
+
   public Integer getUserId() {
-    return this.userId;
+    return this.apiContext.getSessionContext().getUserId();
   }
 
   public boolean isOnlyUserPersonSet() {
