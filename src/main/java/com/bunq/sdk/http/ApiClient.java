@@ -1,6 +1,7 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.context.ApiEnvironmentType;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.context.InstallationContext;
 import com.bunq.sdk.exception.ApiException;
@@ -98,12 +99,6 @@ public class ApiClient {
   private static final String SCHEME_HTTPS = "https";
 
   /**
-   * Pinned keys.
-   */
-  private static final String PINNED_KEY_SANDBOX = "sha256/GhNvDokiMyXzhGft+xXWFGchUmmh8R5dQEnO4xu81NY=";
-  private static final String PINNED_KEY_PRODUCTION = "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0=";
-
-  /**
    * Time out constants.
    */
   private static final int TIMEOUT_SECONDS = 30;
@@ -134,7 +129,7 @@ public class ApiClient {
     OkHttpClient.Builder clientBuilder;
 
     clientBuilder = new OkHttpClient().newBuilder()
-        .certificatePinner(determineCertificateToPin())
+        .certificatePinner(determineCertificateToPin(this.apiContext.getEnvironmentType()))
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -156,24 +151,15 @@ public class ApiClient {
     }
   }
 
-  /**
-   */
-  private CertificatePinner determineCertificateToPin() {
-    CertificatePinner.Builder certificateBuilder = new CertificatePinner.Builder();
-
-    switch (apiContext.getEnvironmentType()) {
-      case PRODUCTION:
-        return certificateBuilder.add(
-            apiContext.getBaseUri(), PINNED_KEY_PRODUCTION
-        ).build();
-      case SANDBOX:
-        return certificateBuilder.add(
-            apiContext.getBaseUri(), PINNED_KEY_SANDBOX
-        ).build();
-      default:
-        throw new BunqException(
-            String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, apiContext.getEnvironmentType().toString())
-        );
+  private static CertificatePinner determineCertificateToPin(ApiEnvironmentType environmentType) {
+    if(environmentType!=null && environmentType.getPinnedKey()!=null) {
+      return new CertificatePinner.Builder().add(
+              environmentType.getBaseUri(), environmentType.getPinnedKey()
+      ).build();
+    } else {
+      throw new BunqException(
+              String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, Objects.toString(environmentType,"<null>"))
+      );
     }
   }
 
