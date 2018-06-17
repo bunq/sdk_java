@@ -30,12 +30,7 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -127,7 +122,6 @@ public final class SecurityUtils {
    * Delimiter constants for building the data to sign.
    */
   private static final String DELIMITER_METHOD_PATH = " ";
-  private static final String DELIMITER_HEADER_NAME_AND_VALUE = ": ";
 
   /**
    * The index of the first item in an array.
@@ -386,16 +380,14 @@ public final class SecurityUtils {
   }
 
   private static String generateRequestHeadersSortedString(BunqRequestBuilder bunqRequestBuilder) {
-    return Arrays.stream(bunqRequestBuilder.getAllHeaderAsArray())
-        .filter(
+    return BunqBasicHeader.collectForSigning(bunqRequestBuilder.getAllHeader()
+            .stream()
+            .filter(
             header ->
                 header.getName().isBunq() ||
                     header.getName().equals(BunqHeader.cacheControl) ||
                     header.getName().equals(BunqHeader.userAgent)
-        )
-        .map(header -> header.getName() + DELIMITER_HEADER_NAME_AND_VALUE + header.getValue())
-        .sorted()
-        .collect(Collectors.joining(NEWLINE));
+        ));
   }
 
   /**
@@ -486,19 +478,14 @@ public final class SecurityUtils {
     List<BunqBasicHeader> allResponseHeader = new ArrayList<>();
 
     for (int i = INDEX_FIRST; i < allHeader.names().size(); i++) {
-      if (BunqHeader.serverSignature.getHeader().equals(allHeader.name(i))) {
-        continue;
+      Optional<BunqBasicHeader> header = BunqBasicHeader.get(allHeader.name(i),allHeader.get(allHeader.name(i)));
+      if(header.isPresent() && !BunqHeader.serverSignature.equals(header.get().getName())) {
+        allResponseHeader.add(header.get());
       }
-      allResponseHeader.add(new BunqBasicHeader(allHeader.name(i),allHeader.get(allHeader.name(i))));
     }
 
     try {
-      outputStream.write(
-          getResponseHeadBytes(
-              responseCode,
-              allResponseHeader.toArray(new BunqBasicHeader[allResponseHeader.size()])
-          )
-      );
+      outputStream.write(getResponseHeadBytes(responseCode,allResponseHeader));
       outputStream.write(responseBodyBytes);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
@@ -507,23 +494,20 @@ public final class SecurityUtils {
     return outputStream.toByteArray();
   }
 
-  private static byte[] getResponseHeadBytes(int responseCode, BunqBasicHeader[] responseHeaders) {
+  private static byte[] getResponseHeadBytes(int responseCode, List<BunqBasicHeader> responseHeaders) {
     String requestHeadString = responseCode + NEWLINE +
         generateResponseHeadersSortedString(responseHeaders) + NEWLINE + NEWLINE;
 
     return requestHeadString.getBytes();
   }
 
-  private static String generateResponseHeadersSortedString(BunqBasicHeader[] responseHeaders) {
-    return Arrays.stream(responseHeaders)
-        .filter(
-            header ->
-                header.getName().isBunq() &&
-                    !header.getName().equals(BunqHeader.serverSignature)
-        )
-        .map(header -> header.getName() + DELIMITER_HEADER_NAME_AND_VALUE + header.getValue())
-        .sorted()
-        .collect(Collectors.joining(NEWLINE));
+  private static String generateResponseHeadersSortedString(List<BunqBasicHeader> headers) {
+    return BunqBasicHeader.collectForSigning(headers
+            .stream()
+            .filter(
+                    header ->
+                            header.getName().isBunq() &&
+                                    !header.getName().equals(BunqHeader.serverSignature)
+            ));
   }
-
 }
