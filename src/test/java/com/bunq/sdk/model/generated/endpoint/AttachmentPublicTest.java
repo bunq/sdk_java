@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqHeader;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -37,11 +38,9 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
 
   private static String uploadFileAndGetUuid() {
     HashMap<String, String> customHeaders = new HashMap<>();
-    customHeaders.put(ApiClient.HEADER_CONTENT_TYPE, CONTENT_TYPE);
-    customHeaders.put(ApiClient.HEADER_ATTACHMENT_DESCRIPTION, ATTACHMENT_DESCRIPTION);
-
+    BunqHeader.contentType.addTo(customHeaders,CONTENT_TYPE);
+    BunqHeader.attachmentDescription.addTo(customHeaders,ATTACHMENT_DESCRIPTION);
     byte[] RequestBytes = getRequestBytes();
-
     return AttachmentPublic.create(customHeaders, RequestBytes).getValue();
   }
 

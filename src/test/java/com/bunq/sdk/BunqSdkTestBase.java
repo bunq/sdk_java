@@ -4,7 +4,7 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.ApiEnvironmentType;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.exception.BunqException;
-import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqHeader;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.model.generated.endpoint.CashRegister;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
@@ -121,11 +121,11 @@ public class BunqSdkTestBase {
             URL_PATH_SANDBOX_USER
         )
         .post(RequestBody.create(null, new byte[INDEX_FIRST]))
-        .addHeader(ApiClient.HEADER_REQUEST_ID, UUID.randomUUID().toString())
-        .addHeader(ApiClient.HEADER_CACHE_CONTROL, ApiClient.CACHE_CONTROL_NONE)
-        .addHeader(ApiClient.HEADER_GEOLOCATION, ApiClient.GEOLOCATION_ZERO)
-        .addHeader(ApiClient.HEADER_LANGUAGE, ApiClient.LANGUAGE_EN_US)
-        .addHeader(ApiClient.HEADER_REGION, ApiClient.REGION_NL_NL)
+        .addHeader(BunqHeader.clientRequestId.getHeader(), UUID.randomUUID().toString())
+        .addHeader(BunqHeader.cacheControl.getHeader(), BunqHeader.cacheControl.getDefaultValue())
+        .addHeader(BunqHeader.geolocation.getHeader(), BunqHeader.geolocation.getDefaultValue())
+        .addHeader(BunqHeader.language.getHeader(), BunqHeader.language.getDefaultValue())
+        .addHeader(BunqHeader.region.getHeader(), BunqHeader.region.getDefaultValue())
         .build();
 
     try {
