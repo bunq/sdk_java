@@ -101,5 +101,4 @@ public class SessionContext implements java.io.Serializable {
   public Integer getUserId() {
     return userId;
   }
-
 }
