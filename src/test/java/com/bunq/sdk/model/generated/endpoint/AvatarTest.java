@@ -54,9 +54,9 @@ public class AvatarTest extends BunqSdkTestBase {
   }
 
   private String uploadAvatar(byte[] file_contents) {
-    HashMap<String, String> customHeaders = new HashMap<>();
-    BunqHeader.attachmentDescription.addTo(customHeaders,ATTACHMENT_PATH_IN);
-    BunqHeader.contentType.addTo(customHeaders,CONTENT_TYPE);
-    return AttachmentPublic.create(customHeaders, file_contents).getValue();
+    HashMap<String, String> allCustomHeader = new HashMap<>();
+    BunqHeader.attachmentDescription.addTo(allCustomHeader, ATTACHMENT_PATH_IN);
+    BunqHeader.contentType.addTo(allCustomHeader, CONTENT_TYPE);
+    return AttachmentPublic.create(allCustomHeader, file_contents).getValue();
   }
 }

@@ -14,11 +14,11 @@ public class BunqBasicHeader {
   private final String value;
 
   public static BunqBasicHeader get(BunqHeader header,Response response) {
-    return new BunqBasicHeader(header,response.header(header.getHeader()));
+    return new BunqBasicHeader(header, response.header(header.getHeader()));
   }
 
   public static Optional<BunqBasicHeader> get(String header, String value) {
-    return BunqHeader.parse(header).map(h->new BunqBasicHeader(h,value));
+    return BunqHeader.parse(header).map(h -> new BunqBasicHeader(h,value));
   }
 
   public BunqBasicHeader(BunqHeader name, String value) {
