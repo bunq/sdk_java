@@ -40,7 +40,7 @@ public class UserContext {
   }
 
   private void initMainMonetaryAccount(MonetaryAccountBank monetaryAccountBank) {
-    if(monetaryAccountBank==null) {
+    if(monetaryAccountBank == null) {
       throw new BunqException(ERROR_NO_ACTIVE_MONETARY_ACCOUNT_FOUND);
     }
     this.primaryMonetaryAccountBank = monetaryAccountBank;

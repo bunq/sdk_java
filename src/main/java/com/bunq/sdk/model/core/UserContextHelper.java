@@ -11,7 +11,8 @@ import java.util.List;
 
 public class UserContextHelper extends BunqModel {
   private static final String MONETARY_ACCOUNT_STATUS_ACTIVE = "ACTIVE";
-  private static final int INDEX_FIRST = 0;
+  private static final String USER_ENDPOINT_URL_LISTING = "user";
+  private static final String MONETARY_ENDPOINT_URL_READ = "user/%s/monetary-account-bank/%s";
 
   private final ApiClient apiClient;
 
@@ -24,20 +25,21 @@ public class UserContextHelper extends BunqModel {
   }
 
   public User getFirstUser() {
-    BunqResponseRaw responseRaw = getRawResponse("user");
+    BunqResponseRaw responseRaw = getRawResponse(USER_ENDPOINT_URL_LISTING);
     BunqResponse<List<User>> response = fromJsonList(User.class, responseRaw);
-    return response.getValue().get(INDEX_FIRST);
+
+
+    return response.getValue().stream().findFirst().orElse(null);
   }
 
   public MonetaryAccountBank getFirstActiveMonetaryAccountBank(Integer userId) {
-    BunqResponseRaw responseRaw = getRawResponse(String.format("user/%s/monetary-account-bank", userId));
+    BunqResponseRaw responseRaw = getRawResponse(String.format(MONETARY_ENDPOINT_URL_READ, userId));
     BunqResponse<List<MonetaryAccountBank>> response = fromJsonList(MonetaryAccountBank.class, responseRaw, MonetaryAccountBank.class.getSimpleName());
-    for (MonetaryAccountBank monetaryAccountBank : response.getValue()) {
-      if (monetaryAccountBank.getStatus().equals(MONETARY_ACCOUNT_STATUS_ACTIVE)) {
-        return monetaryAccountBank;
-      }
-    }
-    return null;
+
+    return response.getValue().stream()
+            .filter(monetaryAccountBank->monetaryAccountBank.getStatus().equals(MONETARY_ACCOUNT_STATUS_ACTIVE))
+            .findFirst()
+            .orElse(null);
   }
 
   @Override

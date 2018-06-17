@@ -3,7 +3,7 @@ package com.bunq.sdk.context;
 import com.bunq.sdk.BunqSdkTestBase;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class UserContextTest extends BunqSdkTestBase {
     
