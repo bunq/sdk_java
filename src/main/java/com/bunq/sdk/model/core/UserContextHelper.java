@@ -12,7 +12,7 @@ import java.util.List;
 public class UserContextHelper extends BunqModel {
   private static final String MONETARY_ACCOUNT_STATUS_ACTIVE = "ACTIVE";
   private static final String USER_ENDPOINT_URL_LISTING = "user";
-  private static final String MONETARY_ENDPOINT_URL_READ = "user/%s/monetary-account-bank/%s";
+  private static final String MONETARY_ENDPOINT_URL_READ = "user/%s/monetary-account-bank";
 
   private final ApiClient apiClient;
 
