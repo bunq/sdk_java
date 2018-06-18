@@ -16,8 +16,7 @@ public class UserContext {
    * Error constants.
    */
   private static final String ERROR_UNEXPECTED_USER_INSTANCE = "\"%s\" is unexpected user instance.";
-  private static final String ERROR_NO_ACTIVE_MONETARY_ACCOUNT_FOUND = "No active monetary account found.";
-  private static final String ERROR_PRIMARY_MONETARY_ACCOUNT_IS_NOT_SET = "Primary monetaryAccount is not set.";
+  private static final String ERROR_PRIMARY_MONETARY_ACCOUNT_IS_NOT_SET = "Primary monetaryAccount is not set";
 
   private final ApiContext apiContext;
   private UserCompany userCompany;
@@ -30,9 +29,9 @@ public class UserContext {
   }
 
   private void initUser(User user) {
-    if (user.getUserPerson()!=null) {
+    if (user.getUserPerson() != null) {
       this.userPerson = user.getUserPerson();
-    } else if (user.getUserCompany()!=null) {
+    } else if (user.getUserCompany() != null) {
       this.userCompany = user.getUserCompany();
     } else {
       throw new BunqException(ERROR_UNEXPECTED_USER_INSTANCE);
@@ -40,16 +39,13 @@ public class UserContext {
   }
 
   private void initMainMonetaryAccount(MonetaryAccountBank monetaryAccountBank) {
-    if(monetaryAccountBank == null) {
-      throw new BunqException(ERROR_NO_ACTIVE_MONETARY_ACCOUNT_FOUND);
-    }
     this.primaryMonetaryAccountBank = monetaryAccountBank;
   }
 
   public void refreshContext() {
     UserContextHelper helper = new UserContextHelper(this.apiContext);
     this.initUser(helper.getFirstUser());
-    this.initMainMonetaryAccount(helper.getFirstActiveMonetaryAccountBank(getUserId()));
+    this.initMainMonetaryAccount(helper.getFirstActiveMonetaryAccountBankByUserId(getUserId()));
   }
 
   public Integer getUserId() {
