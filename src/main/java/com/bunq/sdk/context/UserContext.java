@@ -30,9 +30,9 @@ public class UserContext {
   }
 
   private void initUser(User user) {
-    if (user!=null && user.getUserPerson()!=null) {
+    if (user.getUserPerson()!=null) {
       this.userPerson = user.getUserPerson();
-    } else if (user!=null && user.getUserCompany()!=null) {
+    } else if (user.getUserCompany()!=null) {
       this.userCompany = user.getUserCompany();
     } else {
       throw new BunqException(ERROR_UNEXPECTED_USER_INSTANCE);

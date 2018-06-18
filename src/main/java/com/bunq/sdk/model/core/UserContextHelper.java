@@ -28,7 +28,6 @@ public class UserContextHelper extends BunqModel {
     BunqResponseRaw responseRaw = getRawResponse(USER_ENDPOINT_URL_LISTING);
     BunqResponse<List<User>> response = fromJsonList(User.class, responseRaw);
 
-
     return response.getValue().stream().findFirst().orElse(null);
   }
 
