@@ -102,3 +102,4 @@ public class SessionContext implements java.io.Serializable {
     return userId;
   }
 }
+
