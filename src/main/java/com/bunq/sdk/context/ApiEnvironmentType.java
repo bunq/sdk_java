@@ -5,8 +5,10 @@ package com.bunq.sdk.context;
  */
 public enum ApiEnvironmentType {
 
-  PRODUCTION("api.bunq.com", "v1", "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0="),
-  SANDBOX("public-api.sandbox.bunq.com", "v1", "sha256/GhNvDokiMyXzhGft+xXWFGchUmmh8R5dQEnO4xu81NY=");
+  PRODUCTION("api.bunq.com", "v1",
+          "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0="),
+  SANDBOX("public-api.sandbox.bunq.com", "v1",
+          "sha256/GhNvDokiMyXzhGft+xXWFGchUmmh8R5dQEnO4xu81NY=");
 
   /**
    * Base URI of each given environment.
@@ -36,3 +38,4 @@ public enum ApiEnvironmentType {
     return pinnedKey;
   }
 }
+

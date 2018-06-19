@@ -129,7 +129,8 @@ public class ApiClient {
     OkHttpClient.Builder clientBuilder;
 
     clientBuilder = new OkHttpClient().newBuilder()
-        .certificatePinner(determineCertificateToPin(this.apiContext.getEnvironmentType()))
+        .certificatePinner(
+                determineCertificateToPin(this.apiContext.getEnvironmentType()))
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -152,14 +153,13 @@ public class ApiClient {
   }
 
   private static CertificatePinner determineCertificateToPin(ApiEnvironmentType environmentType) {
-    if(environmentType != null && environmentType.getPinnedKey() != null) {
+    if (environmentType != null && environmentType.getPinnedKey() != null) {
       return new CertificatePinner.Builder().add(
               environmentType.getBaseUri(), environmentType.getPinnedKey()
       ).build();
     } else {
       throw new BunqException(
-              String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, 
-				  Objects.toString(environmentType, "<null>"))
+              String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, Objects.toString(environmentType, "<null>"))
       );
     }
   }
@@ -478,5 +478,5 @@ public class ApiClient {
       throw new UncaughtExceptionError(exception);
     }
   }
-
 }
+
