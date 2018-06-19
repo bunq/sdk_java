@@ -88,7 +88,7 @@ public class BunqRequestBuilder extends Request.Builder {
    */
   @Override
   public BunqRequestBuilder header(String name, String value) {
-    addToAllHeader(name,value);
+    addToAllHeader(name, value);
 
     return (BunqRequestBuilder) super.header(name, value);
   }
@@ -98,7 +98,7 @@ public class BunqRequestBuilder extends Request.Builder {
    */
   @Override
   public BunqRequestBuilder addHeader(String name, String value) {
-    addToAllHeader(name,value);
+    addToAllHeader(name, value);
 
     return (BunqRequestBuilder) super.addHeader(name, value);
   }

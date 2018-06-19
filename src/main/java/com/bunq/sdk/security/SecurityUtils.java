@@ -459,9 +459,9 @@ public final class SecurityUtils {
         response.headers()
     );
     Signature signature = getSignatureInstance();
-    BunqBasicHeader headerServerSignature = BunqBasicHeader.get(BunqHeader.serverSignature,response);
+    BunqBasicHeader serverSignature = BunqBasicHeader.get(BunqHeader.serverSignature,response);
 
-    byte[] serverSignatureBase64Bytes = headerServerSignature.getValue().getBytes();
+    byte[] serverSignatureBase64Bytes = serverSignature.getValue().getBytes();
     byte[] serverSignatureDecoded = Base64.getDecoder().decode(serverSignatureBase64Bytes);
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
   }

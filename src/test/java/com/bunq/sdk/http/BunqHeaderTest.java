@@ -3,8 +3,6 @@ package com.bunq.sdk.http;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.Assert.*;
 

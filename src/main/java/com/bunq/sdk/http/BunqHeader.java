@@ -13,12 +13,12 @@ public enum BunqHeader {
     clientEncryptionKey("X-Bunq-Client-Encryption-Key"),
     clientRequestId("X-Bunq-Client-Request-Id"),
     clientSignature("X-Bunq-Client-Signature"),
-    clientResponseId("X-Bunq-Client-Response-Id","Could not determine response id."),
-    geolocation("X-Bunq-Geolocation","0 0 0 0 000"),
-    language("X-Bunq-Language","en_US"),
-    region("X-Bunq-Region","nl_NL"),
+    clientResponseId("X-Bunq-Client-Response-Id", "Could not determine response id."),
+    geolocation("X-Bunq-Geolocation", "0 0 0 0 000"),
+    language("X-Bunq-Language", "en_US"),
+    region("X-Bunq-Region", "nl_NL"),
     serverSignature("X-Bunq-Server-Signature"),
-    userAgent("User-Agent","bunq-sdk-java/0.13.1");
+    userAgent("User-Agent", "bunq-sdk-java/0.13.1");
 
     private static final String PREFIX = "X-Bunq-";
 
@@ -77,8 +77,8 @@ public enum BunqHeader {
     }
 
     private String findKey(Collection<String> keys) {
-        for(String key:keys) {
-            if(this.equals(key)) {
+        for (String key:keys) {
+            if (this.equals(key)) {
                 return key;
             }
         }
