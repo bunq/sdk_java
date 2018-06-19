@@ -3,12 +3,14 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqHeader;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
@@ -36,13 +38,12 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
   }
 
   private static String uploadFileAndGetUuid() {
-    HashMap<String, String> customHeaders = new HashMap<>();
-    customHeaders.put(ApiClient.HEADER_CONTENT_TYPE, CONTENT_TYPE);
-    customHeaders.put(ApiClient.HEADER_ATTACHMENT_DESCRIPTION, ATTACHMENT_DESCRIPTION);
+    Map<String, String> customHeaders = new HashMap<>();
 
-    byte[] RequestBytes = getRequestBytes();
+    BunqHeader.contentType.addTo(customHeaders, CONTENT_TYPE);
+    BunqHeader.attachmentDescription.addTo(customHeaders, ATTACHMENT_DESCRIPTION);
 
-    return AttachmentPublic.create(customHeaders, RequestBytes).getValue();
+    return AttachmentPublic.create(customHeaders, getRequestBytes()).getValue();
   }
 
   /**

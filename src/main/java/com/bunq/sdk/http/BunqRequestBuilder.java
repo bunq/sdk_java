@@ -75,12 +75,20 @@ public class BunqRequestBuilder extends Request.Builder {
     return (BunqRequestBuilder) super.url(url);
   }
 
+  private void addToAllHeader(String name, String value) {
+    BunqHeader header = BunqHeader.parse(name);
+
+    if (header != null) {
+      this.allHeader.add(new BunqBasicHeader(header, value));
+    }
+  }
+
   /**
    * {@inheritDoc}
    */
   @Override
   public BunqRequestBuilder header(String name, String value) {
-    this.allHeader.add(new BunqBasicHeader(name, value));
+    addToAllHeader(name, value);
 
     return (BunqRequestBuilder) super.header(name, value);
   }
@@ -90,7 +98,7 @@ public class BunqRequestBuilder extends Request.Builder {
    */
   @Override
   public BunqRequestBuilder addHeader(String name, String value) {
-    this.allHeader.add(new BunqBasicHeader(name, value));
+    addToAllHeader(name, value);
 
     return (BunqRequestBuilder) super.addHeader(name, value);
   }
@@ -205,13 +213,7 @@ public class BunqRequestBuilder extends Request.Builder {
 
   /**
    */
-  public List<BunqBasicHeader> getAllHeaderAsList() {
+  public List<BunqBasicHeader> getAllHeader() {
     return this.allHeader;
-  }
-
-  /**
-   */
-  public BunqBasicHeader[] getAllHeaderAsArray() {
-    return this.allHeader.toArray(new BunqBasicHeader[this.allHeader.size()]);
   }
 }

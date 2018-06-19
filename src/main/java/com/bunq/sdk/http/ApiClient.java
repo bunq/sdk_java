@@ -47,7 +47,6 @@ public class ApiClient {
    * Error constants.
    */
   private static final String ERROR_AMI_ENVIRONMENT_NOT_EXPECTED = "ApiEnvironment type \"%s\" is unexpected";
-  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
 
   /**
    * Endpoints not requiring active session for the request to succeed.
@@ -62,39 +61,11 @@ public class ApiClient {
   );
 
   /**
-   * Header constants.
-   */
-  public static final String HEADER_ATTACHMENT_DESCRIPTION = "X-Bunq-Attachment-Description";
-  public static final String HEADER_CONTENT_TYPE = "Content-Type";
-  public static final String HEADER_USER_AGENT = "User-Agent";
-  public static final String HEADER_CACHE_CONTROL = "Cache-Control";
-  public static final String HEADER_LANGUAGE = "X-Bunq-Language";
-  public static final String HEADER_REGION = "X-Bunq-Region";
-  public static final String HEADER_REQUEST_ID = "X-Bunq-Client-Request-Id";
-  public static final String HEADER_GEOLOCATION = "X-Bunq-Geolocation";
-  private static final String HEADER_SIGNATURE = "X-Bunq-Client-Signature";
-  private static final String HEADER_AUTHENTICATION = "X-Bunq-Client-Authentication";
-  private static final String HEADER_RESPONSE_ID_LOWER_CASE = "x-bunq-client-response-id";
-  private static final String HEADER_RESPONSE_ID_UPPER_CASE = "X-Bunq-Client-Response-Id";
-
-  /**
    * Field constants.
    */
   private static final String FIELD_ERROR = "Error";
   private static final String FIELD_ERROR_DESCRIPTION = "error_description";
 
-  /**
-   * Header value to disable the cache control.
-   */
-  public static final String CACHE_CONTROL_NONE = "no-cache";
-
-  /**
-   * Prefix for bunq's own headers.
-   */
-  private static final String USER_AGENT_BUNQ = "bunq-sdk-java/0.13.1";
-  public static final String LANGUAGE_EN_US = "en_US";
-  public static final String REGION_NL_NL = "nl_NL";
-  public static final String GEOLOCATION_ZERO = "0 0 0 0 000";
   private static final String SCHEME_HTTPS = "https";
 
   /**
@@ -193,9 +164,9 @@ public class ApiClient {
 
     BunqRequestBody bunqRequestBody = BunqRequestBody.create(ContentType.JSON.getMediaType(), requestBodyBytes);
 
-    if (customHeaders.containsKey(HEADER_CONTENT_TYPE)) {
+    if (customHeaders.containsKey(BunqHeader.contentType.getHeader())) {
       bunqRequestBody = BunqRequestBody.create(
-          MediaType.parse(customHeaders.get(HEADER_CONTENT_TYPE)),
+          MediaType.parse(customHeaders.get(BunqHeader.contentType.getHeader())),
           requestBodyBytes
       );
     }
@@ -262,13 +233,13 @@ public class ApiClient {
 
   /**
    */
-  private void setDefaultHeaders(Request.Builder httpEntity) {
-    httpEntity.addHeader(HEADER_CACHE_CONTROL, CACHE_CONTROL_NONE);
-    httpEntity.addHeader(HEADER_USER_AGENT, getVersion());
-    httpEntity.addHeader(HEADER_LANGUAGE, LANGUAGE_EN_US);
-    httpEntity.addHeader(HEADER_REGION, REGION_NL_NL);
-    httpEntity.addHeader(HEADER_REQUEST_ID, UUID.randomUUID().toString());
-    httpEntity.addHeader(HEADER_GEOLOCATION, GEOLOCATION_ZERO);
+  private void setDefaultHeaders(BunqRequestBuilder httpEntity) {
+    BunqHeader.cacheControl.addTo(httpEntity);
+    BunqHeader.userAgent.addTo(httpEntity);
+    BunqHeader.language.addTo(httpEntity);
+    BunqHeader.region.addTo(httpEntity);
+    BunqHeader.clientRequestId.addTo(httpEntity, UUID.randomUUID().toString());
+    BunqHeader.geolocation.addTo(httpEntity);
   }
 
   /**
@@ -285,8 +256,8 @@ public class ApiClient {
     String sessionToken = apiContext.getSessionToken();
 
     if (sessionToken != null) {
-      requestBuilder.addHeader(HEADER_AUTHENTICATION, sessionToken);
-      requestBuilder.addHeader(HEADER_SIGNATURE, generateSignature(requestBuilder));
+      BunqHeader.clientAuthentication.addTo(requestBuilder, sessionToken);
+      BunqHeader.clientSignature.addTo(requestBuilder, generateSignature(requestBuilder));
     }
   }
 
@@ -295,12 +266,6 @@ public class ApiClient {
   private String generateSignature(BunqRequestBuilder requestBuilder) {
     return SecurityUtils.generateSignature(requestBuilder,
         apiContext.getInstallationContext().getKeyPairClient());
-  }
-
-  /**
-   */
-  private String getVersion() {
-    return USER_AGENT_BUNQ;
   }
 
   /**
@@ -321,9 +286,7 @@ public class ApiClient {
   private static String getResponseId(Response response) {
     Map<String, String> headerMap = getHeadersMap(response);
 
-    if (headerMap.containsKey(HEADER_RESPONSE_ID_LOWER_CASE)) {
-      return headerMap.get(HEADER_RESPONSE_ID_LOWER_CASE);
-    } else return headerMap.getOrDefault(HEADER_RESPONSE_ID_UPPER_CASE, ERROR_COULD_NOT_DETERMINE_RESPONSE_ID);
+    return BunqHeader.clientResponseId.getOrDefault(headerMap);
   }
 
   /**
