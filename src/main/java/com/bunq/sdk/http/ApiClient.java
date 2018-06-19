@@ -152,13 +152,14 @@ public class ApiClient {
   }
 
   private static CertificatePinner determineCertificateToPin(ApiEnvironmentType environmentType) {
-    if(environmentType!=null && environmentType.getPinnedKey()!=null) {
+    if(environmentType != null && environmentType.getPinnedKey() != null) {
       return new CertificatePinner.Builder().add(
               environmentType.getBaseUri(), environmentType.getPinnedKey()
       ).build();
     } else {
       throw new BunqException(
-              String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, Objects.toString(environmentType,"<null>"))
+              String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, 
+				  Objects.toString(environmentType, "<null>"))
       );
     }
   }
