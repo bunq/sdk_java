@@ -159,7 +159,10 @@ public class ApiClient {
       ).build();
     } else {
       throw new BunqException(
-              String.format(ERROR_AMI_ENVIRONMENT_NOT_EXPECTED, Objects.toString(environmentType, "<null>"))
+              String.format(
+                      ERROR_AMI_ENVIRONMENT_NOT_EXPECTED,
+                      Objects.toString(environmentType, "<null>")
+              )
       );
     }
   }
