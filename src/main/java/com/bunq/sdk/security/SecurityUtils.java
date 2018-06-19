@@ -284,7 +284,7 @@ public final class SecurityUtils {
       cipher.init(Cipher.ENCRYPT_MODE, apiContext.getInstallationContext().getPublicKeyServer());
       byte[] keyEncrypted = cipher.doFinal(key.getEncoded());
       String keyEncryptedEncoded = Base64.getEncoder().encodeToString(keyEncrypted);
-      BunqHeader.clientEncryptionKey.addTo(customHeaders,keyEncryptedEncoded);
+      BunqHeader.clientEncryptionKey.addTo(customHeaders, keyEncryptedEncoded);
     } catch (GeneralSecurityException exception) {
       throw new BunqException(exception.getMessage());
     }
@@ -293,7 +293,7 @@ public final class SecurityUtils {
   private static void addHeaderClientEncryptionIv(byte[] initializationVector, Map<String,
       String> customHeaders) {
     String initializationVectorEncoded = Base64.getEncoder().encodeToString(initializationVector);
-    BunqHeader.clientEncryptionIV.addTo(customHeaders,initializationVectorEncoded);
+    BunqHeader.clientEncryptionIV.addTo(customHeaders, initializationVectorEncoded);
   }
 
   private static byte[] encryptRequestBytes(byte[] requestBytes, SecretKey key,
@@ -326,7 +326,7 @@ public final class SecurityUtils {
       bufferedSink.close();
       byte[] hmac = mac.doFinal();
       String hmacEncoded = Base64.getEncoder().encodeToString(hmac);
-      BunqHeader.clientEncryptionHMAC.addTo(customHeaders,hmacEncoded);
+      BunqHeader.clientEncryptionHMAC.addTo(customHeaders, hmacEncoded);
     } catch (GeneralSecurityException | IOException exception) {
       throw new BunqException(exception.getMessage());
     }
