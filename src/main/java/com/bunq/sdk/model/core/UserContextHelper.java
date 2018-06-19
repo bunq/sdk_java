@@ -37,7 +37,9 @@ public class UserContextHelper extends BunqModel {
   }
 
   public MonetaryAccountBank getFirstActiveMonetaryAccountBankByUserId(Integer userId) {
-    BunqResponseRaw responseRaw = getRawResponse(String.format(ENDPOINT_MONETARY_ACCOUNT_BANK, userId));
+    BunqResponseRaw responseRaw = getRawResponse(
+            String.format(ENDPOINT_MONETARY_ACCOUNT_BANK, userId)
+    );
     String wrapper = MonetaryAccountBank.class.getSimpleName();
     BunqResponse<List<MonetaryAccountBank>> response = fromJsonList(
             MonetaryAccountBank.class, responseRaw, wrapper
