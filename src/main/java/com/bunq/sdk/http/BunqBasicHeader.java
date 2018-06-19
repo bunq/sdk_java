@@ -2,9 +2,10 @@ package com.bunq.sdk.http;
 
 import okhttp3.Response;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class BunqBasicHeader {
   /**
@@ -37,10 +38,33 @@ public class BunqBasicHeader {
     return getName().getHeader()+DELIMITER_HEADER_NAME_AND_VALUE+getValue();
   }
 
-  public static String collectForSigning(Stream<BunqBasicHeader> headers) {
-    return headers
-            .map(BunqBasicHeader::forSigning)
-            .sorted()
-            .collect(Collectors.joining(NEWLINE));
+  public static String collectForSigning(
+          Collection<BunqBasicHeader> headers,
+          BunqHeader exclude,
+          Collection<BunqHeader> includes) {
+    List<String> headersForSigning = new ArrayList<String>();
+
+    for (BunqBasicHeader header:headers) {
+      if (!header.getName().isBunq() && !includes.contains(header.getName())) {
+        continue;
+      }
+
+      if (exclude != null && exclude.equals(header.getName())) {
+        continue;
+      }
+
+      headersForSigning.add(header.forSigning());
+    }
+
+    Collections.sort(headersForSigning);
+
+    StringBuffer stringBuffer = new StringBuffer();
+
+    for (String header:headersForSigning) {
+      stringBuffer.append(header);
+      stringBuffer.append(NEWLINE);
+    }
+
+    return stringBuffer.toString();
   }
 }

@@ -12,15 +12,30 @@ public class BunqHeaderTest {
     @Test
     public void parse() {
         // parse works case-insensitive
-        assertEquals(BunqHeader.clientResponseId,BunqHeader.parse("X-Bunq-Client-Response-Id").get());
-        assertEquals(BunqHeader.clientResponseId,BunqHeader.parse("x-bunq-client-response-id").get());
+        assertEquals(BunqHeader.clientResponseId,BunqHeader.parse("X-Bunq-Client-Response-Id"));
+        assertEquals(BunqHeader.clientResponseId,BunqHeader.parse("x-bunq-client-response-id"));
     }
 
     @Test
     public void isBunq() {
-        List<BunqHeader> nonBunqHeaders = Arrays.asList(BunqHeader.cacheControl,BunqHeader.contentType,BunqHeader.userAgent);
+        assertFalse(BunqHeader.cacheControl.isBunq());
+        assertFalse(BunqHeader.contentType.isBunq());
+        assertFalse(BunqHeader.userAgent.isBunq());
 
-        assertEquals(nonBunqHeaders, Stream.of(BunqHeader.values()).filter(h->!h.isBunq()).collect(Collectors.toList()));
+        assertTrue(BunqHeader.attachmentDescription.isBunq());
+        assertTrue(BunqHeader.clientAuthentication.isBunq());
+        assertTrue(BunqHeader.clientEncryptionHMAC.isBunq());
+        assertTrue(BunqHeader.clientEncryptionIV.isBunq());
+        assertTrue(BunqHeader.clientEncryptionIV.isBunq());
+        assertTrue(BunqHeader.clientEncryptionKey.isBunq());
+        assertTrue(BunqHeader.clientRequestId.isBunq());
+        assertTrue(BunqHeader.clientSignature.isBunq());
+        assertTrue(BunqHeader.clientResponseId.isBunq());
+        assertTrue(BunqHeader.geolocation.isBunq());
+        assertTrue(BunqHeader.region.isBunq());
+        assertTrue(BunqHeader.serverSignature.isBunq());
+        assertTrue(BunqHeader.clientEncryptionKey.isBunq());
+        assertTrue(BunqHeader.clientRequestId.isBunq());
     }
 
     @Test

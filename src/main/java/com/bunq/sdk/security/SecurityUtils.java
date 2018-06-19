@@ -380,14 +380,11 @@ public final class SecurityUtils {
   }
 
   private static String generateRequestHeadersSortedString(BunqRequestBuilder bunqRequestBuilder) {
-    return BunqBasicHeader.collectForSigning(bunqRequestBuilder.getAllHeader()
-            .stream()
-            .filter(
-            header ->
-                header.getName().isBunq() ||
-                    header.getName().equals(BunqHeader.cacheControl) ||
-                    header.getName().equals(BunqHeader.userAgent)
-        ));
+    return BunqBasicHeader.collectForSigning(
+            bunqRequestBuilder.getAllHeader(),
+            null,
+            Arrays.asList(BunqHeader.cacheControl,BunqHeader.userAgent)
+    );
   }
 
   /**
@@ -478,9 +475,10 @@ public final class SecurityUtils {
     List<BunqBasicHeader> allResponseHeader = new ArrayList<>();
 
     for (int i = INDEX_FIRST; i < allHeader.names().size(); i++) {
-      Optional<BunqBasicHeader> header = BunqBasicHeader.get(allHeader.name(i),allHeader.get(allHeader.name(i)));
-      if(header.isPresent() && !BunqHeader.serverSignature.equals(header.get().getName())) {
-        allResponseHeader.add(header.get());
+      BunqHeader header = BunqHeader.parse(allHeader.name(i));
+
+      if (header != null && !BunqHeader.serverSignature.equals(header)) {
+        allResponseHeader.add(new BunqBasicHeader(header,allHeader.get(allHeader.name(i))));
       }
     }
 
@@ -502,12 +500,10 @@ public final class SecurityUtils {
   }
 
   private static String generateResponseHeadersSortedString(List<BunqBasicHeader> headers) {
-    return BunqBasicHeader.collectForSigning(headers
-            .stream()
-            .filter(
-                    header ->
-                            header.getName().isBunq() &&
-                                    !header.getName().equals(BunqHeader.serverSignature)
-            ));
+    return BunqBasicHeader.collectForSigning(
+            headers,
+            BunqHeader.serverSignature,
+            Collections.emptyList()
+    );
   }
 }

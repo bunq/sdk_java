@@ -2,8 +2,6 @@ package com.bunq.sdk.http;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 public enum BunqHeader {
     attachmentDescription("X-Bunq-Attachment-Description"),
