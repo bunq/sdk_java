@@ -5,7 +5,7 @@ import java.util.Map;
 
 public enum BunqHeader {
     attachmentDescription("X-Bunq-Attachment-Description"),
-    cacheControl("Cache-Control","no-cache"),
+    cacheControl("Cache-Control", "no-cache"),
     contentType("Content-Type"),
     clientAuthentication("X-Bunq-Client-Authentication"),
     clientEncryptionHMAC("X-Bunq-Client-Encryption-Hmac"),
@@ -26,7 +26,7 @@ public enum BunqHeader {
     private final String defaultValue;
 
     BunqHeader(String header) {
-        this(header,null);
+        this(header, null);
     }
 
     BunqHeader(String header, String defaultValue) {
@@ -53,15 +53,19 @@ public enum BunqHeader {
     }
 
     private String getOrDefault(String value) {
-        return value != null ? value : getDefaultValue();
+        if (value != null) {
+            return value;
+        }
+
+        return getDefaultValue();
     }
 
-    public void addTo(Map<String,String> headers, String value) {
+    public void addTo(Map<String, String> headers, String value) {
         headers.put(getHeader(), getOrDefault(value));
     }
 
     public void addTo(BunqRequestBuilder requestBuilder) {
-        addTo(requestBuilder,null);
+        addTo(requestBuilder, null);
     }
 
     public void addTo(BunqRequestBuilder requestBuilder, String value) {
@@ -86,7 +90,7 @@ public enum BunqHeader {
         return null;
     }
 
-    public String getOrDefault(Map<String,String> headers) {
+    public String getOrDefault(Map<String, String> headers) {
         String key = findKey(headers.keySet());
         if (key != null && headers.get(key) != null) {
             return headers.get(key);

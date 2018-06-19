@@ -1,10 +1,14 @@
 package com.bunq.sdk.http;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.HashMap;
+
 import org.junit.Test;
 
-import java.util.*;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BunqHeaderTest {
     @Test
@@ -40,9 +44,12 @@ public class BunqHeaderTest {
     public void getOrDefault() {
         BunqHeader h = BunqHeader.clientResponseId;
 
-        assertEquals("test-id", h.getOrDefault(Collections.singletonMap("x-bunq-client-response-id", "test-id")));
-        assertEquals("Could not determine response id.", h.getOrDefault(Collections.singletonMap("x-bunq-some-other-header", "test-id")));
-        assertEquals("Could not determine response id.", h.getOrDefault(Collections.<String,String>emptyMap()));
+        assertEquals("test-id",
+                h.getOrDefault(Collections.singletonMap("x-bunq-client-response-id", "test-id")));
+        assertEquals("Could not determine response id.",
+                h.getOrDefault(Collections.singletonMap("x-bunq-some-other-header", "test-id")));
+        assertEquals("Could not determine response id.",
+                h.getOrDefault(Collections.<String, String>emptyMap()));
     }
 
     @Test

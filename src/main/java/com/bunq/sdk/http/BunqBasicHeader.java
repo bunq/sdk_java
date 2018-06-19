@@ -17,7 +17,7 @@ public class BunqBasicHeader {
   private final BunqHeader name;
   private final String value;
 
-  public static BunqBasicHeader get(BunqHeader header,Response response) {
+  public static BunqBasicHeader get(BunqHeader header, Response response) {
     return new BunqBasicHeader(header, response.header(header.getHeader()));
   }
 
@@ -35,7 +35,7 @@ public class BunqBasicHeader {
   }
 
   private String forSigning() {
-    return getName().getHeader()+DELIMITER_HEADER_NAME_AND_VALUE+getValue();
+    return getName().getHeader() + DELIMITER_HEADER_NAME_AND_VALUE + getValue();
   }
 
   public static String collectForSigning(

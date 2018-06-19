@@ -3,7 +3,10 @@ package com.bunq.sdk.security;
 import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.UncaughtExceptionError;
-import com.bunq.sdk.http.*;
+import com.bunq.sdk.http.BunqBasicHeader;
+import com.bunq.sdk.http.BunqHeader;
+import com.bunq.sdk.http.BunqRequestBuilder;
+import com.bunq.sdk.http.HttpMethod;
 import okhttp3.Headers;
 import okhttp3.Response;
 import okio.BufferedSink;
@@ -30,7 +33,12 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -383,7 +391,7 @@ public final class SecurityUtils {
     return BunqBasicHeader.collectForSigning(
             bunqRequestBuilder.getAllHeader(),
             null,
-            Arrays.asList(BunqHeader.cacheControl,BunqHeader.userAgent)
+            Arrays.asList(BunqHeader.cacheControl, BunqHeader.userAgent)
     );
   }
 
@@ -459,7 +467,7 @@ public final class SecurityUtils {
         response.headers()
     );
     Signature signature = getSignatureInstance();
-    BunqBasicHeader serverSignature = BunqBasicHeader.get(BunqHeader.serverSignature,response);
+    BunqBasicHeader serverSignature = BunqBasicHeader.get(BunqHeader.serverSignature, response);
 
     byte[] serverSignatureBase64Bytes = serverSignature.getValue().getBytes();
     byte[] serverSignatureDecoded = Base64.getDecoder().decode(serverSignatureBase64Bytes);
@@ -478,12 +486,12 @@ public final class SecurityUtils {
       BunqHeader header = BunqHeader.parse(allHeader.name(i));
 
       if (header != null && !BunqHeader.serverSignature.equals(header)) {
-        allResponseHeader.add(new BunqBasicHeader(header,allHeader.get(allHeader.name(i))));
+        allResponseHeader.add(new BunqBasicHeader(header, allHeader.get(allHeader.name(i))));
       }
     }
 
     try {
-      outputStream.write(getResponseHeadBytes(responseCode,allResponseHeader));
+      outputStream.write(getResponseHeadBytes(responseCode, allResponseHeader));
       outputStream.write(responseBodyBytes);
     } catch (IOException exception) {
       throw new UncaughtExceptionError(exception);
@@ -492,9 +500,9 @@ public final class SecurityUtils {
     return outputStream.toByteArray();
   }
 
-  private static byte[] getResponseHeadBytes(int responseCode, List<BunqBasicHeader> responseHeaders) {
-    String requestHeadString = responseCode + NEWLINE +
-        generateResponseHeadersSortedString(responseHeaders) + NEWLINE + NEWLINE;
+  private static byte[] getResponseHeadBytes(int code, List<BunqBasicHeader> headers) {
+    String requestHeadString = code + NEWLINE +
+        generateResponseHeadersSortedString(headers) + NEWLINE + NEWLINE;
 
     return requestHeadString.getBytes();
   }

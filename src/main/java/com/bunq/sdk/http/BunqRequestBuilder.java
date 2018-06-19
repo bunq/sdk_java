@@ -75,7 +75,7 @@ public class BunqRequestBuilder extends Request.Builder {
     return (BunqRequestBuilder) super.url(url);
   }
 
-  private void addToAllHeader(String name,String value) {
+  private void addToAllHeader(String name, String value) {
     BunqHeader header = BunqHeader.parse(name);
 
     if (header != null) {
