@@ -1,5 +1,6 @@
 package com.bunq.sdk.http;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -35,8 +36,14 @@ public enum BunqHeader {
         this.defaultValue = defaultValue;
     }
 
-    public static Optional<BunqHeader> parse(String value) {
-        return Stream.of(values()).filter(h->h.equals(value)).findAny();
+    public static BunqHeader parse(String value) {
+        for (BunqHeader header:values()) {
+            if (header.equals(value)) {
+                return header;
+            }
+        }
+
+        return null;
     }
 
     public String getHeader() {
@@ -47,8 +54,12 @@ public enum BunqHeader {
         return defaultValue;
     }
 
+    private String getOrDefault(String value) {
+        return value != null ? value : getDefaultValue();
+    }
+
     public void addTo(Map<String,String> headers, String value) {
-        headers.put(getHeader(),value!=null?value:getDefaultValue());
+        headers.put(getHeader(), getOrDefault(value));
     }
 
     public void addTo(BunqRequestBuilder requestBuilder) {
@@ -56,7 +67,7 @@ public enum BunqHeader {
     }
 
     public void addTo(BunqRequestBuilder requestBuilder, String value) {
-        requestBuilder.addHeader(getHeader(),value!=null?value:getDefaultValue());
+        requestBuilder.addHeader(getHeader(), getOrDefault(value));
     }
 
     public boolean equals(String header) {
@@ -67,8 +78,21 @@ public enum BunqHeader {
         return getHeader().startsWith(PREFIX);
     }
 
+    private String findKey(Collection<String> keys) {
+        for(String key:keys) {
+            if(this.equals(key)) {
+                return key;
+            }
+        }
+
+        return null;
+    }
+
     public String getOrDefault(Map<String,String> headers) {
-        Optional<String> key = headers.keySet().stream().filter(this::equals).findAny();
-        return key.map(headers::get).orElse(getDefaultValue());
+        String key = findKey(headers.keySet());
+        if (key != null && headers.get(key) != null) {
+            return headers.get(key);
+        }
+        return getDefaultValue();
     }
 }

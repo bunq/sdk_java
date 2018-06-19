@@ -285,6 +285,7 @@ public class ApiClient {
    */
   private static String getResponseId(Response response) {
     Map<String, String> headerMap = getHeadersMap(response);
+
     return BunqHeader.clientResponseId.getOrDefault(headerMap);
   }
 

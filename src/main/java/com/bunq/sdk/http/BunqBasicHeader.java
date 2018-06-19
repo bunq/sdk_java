@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BunqBasicHeader {
+  /**
+   * String format constants for signing data
+   */
   private static final String DELIMITER_HEADER_NAME_AND_VALUE = ": ";
   private static final String NEWLINE = "\n";
 
@@ -15,10 +18,6 @@ public class BunqBasicHeader {
 
   public static BunqBasicHeader get(BunqHeader header,Response response) {
     return new BunqBasicHeader(header, response.header(header.getHeader()));
-  }
-
-  public static Optional<BunqBasicHeader> get(String header, String value) {
-    return BunqHeader.parse(header).map(h -> new BunqBasicHeader(h,value));
   }
 
   public BunqBasicHeader(BunqHeader name, String value) {
