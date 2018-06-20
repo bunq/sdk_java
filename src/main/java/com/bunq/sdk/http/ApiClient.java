@@ -238,7 +238,7 @@ public class ApiClient {
     BunqHeader.userAgent.addTo(httpEntity);
     BunqHeader.language.addTo(httpEntity);
     BunqHeader.region.addTo(httpEntity);
-    BunqHeader.clientRequestId.addTo(httpEntity,UUID.randomUUID().toString());
+    BunqHeader.clientRequestId.addTo(httpEntity, UUID.randomUUID().toString());
     BunqHeader.geolocation.addTo(httpEntity);
   }
 
@@ -256,8 +256,8 @@ public class ApiClient {
     String sessionToken = apiContext.getSessionToken();
 
     if (sessionToken != null) {
-      BunqHeader.clientAuthentication.addTo(requestBuilder,sessionToken);
-      BunqHeader.clientSignature.addTo(requestBuilder,generateSignature(requestBuilder));
+      BunqHeader.clientAuthentication.addTo(requestBuilder, sessionToken);
+      BunqHeader.clientSignature.addTo(requestBuilder, generateSignature(requestBuilder));
     }
   }
 
@@ -285,6 +285,7 @@ public class ApiClient {
    */
   private static String getResponseId(Response response) {
     Map<String, String> headerMap = getHeadersMap(response);
+
     return BunqHeader.clientResponseId.getOrDefault(headerMap);
   }
 

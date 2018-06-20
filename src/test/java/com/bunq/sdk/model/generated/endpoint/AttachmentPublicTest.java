@@ -38,10 +38,11 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
 
   private static String uploadFileAndGetUuid() {
     HashMap<String, String> customHeaders = new HashMap<>();
-    BunqHeader.contentType.addTo(customHeaders,CONTENT_TYPE);
-    BunqHeader.attachmentDescription.addTo(customHeaders,ATTACHMENT_DESCRIPTION);
-    byte[] RequestBytes = getRequestBytes();
-    return AttachmentPublic.create(customHeaders, RequestBytes).getValue();
+
+    BunqHeader.contentType.addTo(customHeaders, CONTENT_TYPE);
+    BunqHeader.attachmentDescription.addTo(customHeaders, ATTACHMENT_DESCRIPTION);
+
+    return AttachmentPublic.create(customHeaders, getRequestBytes()).getValue();
   }
 
   /**
