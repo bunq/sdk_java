@@ -11,13 +11,26 @@ import com.bunq.sdk.model.generated.endpoint.User;
 import java.util.List;
 
 public class UserContextHelper extends BunqModel {
+  /**
+   * Error constants.
+   */
   private static final String ERROR_NO_ACTIVE_MONETARY = "No active monetary account found.";
 
-  private static final String USER_URL = "user";
+  /**
+   * Endpoint constants.
+   */
+  private static final String ENDPOINT_USER = "user";
+  private static final String ENDPOINT_MONETARY_ACCOUNT_BANK = "user/%s/monetary-account-bank";
+
+  /**
+   * The index of the first item in an array.
+   */
   private static final Integer INDEX_FIRST = 0;
 
+  /**
+   * Status constants.
+   */
   private static final String STATUS_ACTIVE = "ACTIVE";
-  private static final String ENDPOINT_MONETARY_ACCOUNT_BANK = "user/%s/monetary-account-bank";
 
   private final ApiClient apiClient;
 
@@ -30,7 +43,7 @@ public class UserContextHelper extends BunqModel {
   }
 
   public User getFirstUser() {
-    BunqResponseRaw responseRaw = getRawResponse(USER_URL);
+    BunqResponseRaw responseRaw = getRawResponse(ENDPOINT_USER);
     BunqResponse<List<User>> response = fromJsonList(User.class, responseRaw);
 
     return response.getValue().get(INDEX_FIRST);
