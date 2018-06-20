@@ -14,7 +14,8 @@ public class UserContextHelper extends BunqModel {
   /**
    * Error constants.
    */
-  private static final String ERROR_NO_ACTIVE_MONETARY = "No active monetary account found.";
+  private static final String ERROR_NO_ACTIVE_MONETARY_ACCOUNT_BANK =
+          "No active monetary account found.";
 
   /**
    * Endpoint constants.
@@ -64,7 +65,7 @@ public class UserContextHelper extends BunqModel {
       }
     }
 
-    throw new BunqException(ERROR_NO_ACTIVE_MONETARY);
+    throw new BunqException(ERROR_NO_ACTIVE_MONETARY_ACCOUNT_BANK);
   }
 
   @Override
