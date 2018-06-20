@@ -1,14 +1,11 @@
 package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
-import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.UserContextHelper;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
 import com.bunq.sdk.model.generated.endpoint.User;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
-
-import java.util.List;
 
 public class UserContext {
 
@@ -83,4 +80,5 @@ public class UserContext {
   public MonetaryAccountBank getPrimaryMonetaryAccountBank() {
     return this.primaryMonetaryAccountBank;
   }
+
 }

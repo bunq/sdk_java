@@ -51,14 +51,14 @@ public class UserContextHelper extends BunqModel {
 
   public MonetaryAccountBank getFirstActiveMonetaryAccountBankByUserId(Integer userId) {
     BunqResponseRaw responseRaw = getRawResponse(
-            String.format(ENDPOINT_MONETARY_ACCOUNT_BANK, userId)
+        String.format(ENDPOINT_MONETARY_ACCOUNT_BANK, userId)
     );
     String wrapper = MonetaryAccountBank.class.getSimpleName();
     BunqResponse<List<MonetaryAccountBank>> response = fromJsonList(
-            MonetaryAccountBank.class, responseRaw, wrapper
+        MonetaryAccountBank.class, responseRaw, wrapper
     );
 
-    for (MonetaryAccountBank monetaryAccountBank:response.getValue()) {
+    for (MonetaryAccountBank monetaryAccountBank : response.getValue()) {
       if (STATUS_ACTIVE.equals(monetaryAccountBank.getStatus())) {
         return monetaryAccountBank;
       }
@@ -71,5 +71,5 @@ public class UserContextHelper extends BunqModel {
   public boolean isAllFieldNull() {
     return true;
   }
-}
 
+}
