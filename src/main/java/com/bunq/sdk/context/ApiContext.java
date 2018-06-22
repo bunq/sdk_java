@@ -5,21 +5,18 @@ import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.model.core.DeviceServerInternal;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.SessionServer;
-import com.bunq.sdk.model.generated.endpoint.DeviceServer;
 import com.bunq.sdk.model.generated.endpoint.Session;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import org.apache.commons.io.FileUtils;
 
 /**
  * The context to make the API calls in. Consists of:
@@ -228,7 +225,7 @@ public class ApiContext implements java.io.Serializable {
 
   public boolean isSessionActive() {
     return sessionContext != null &&
-      getTimeToSessionExpiryInSeconds() < TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
+      getTimeToSessionExpiryInSeconds() > TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
   }
 
   private long getTimeToSessionExpiryInSeconds() {
