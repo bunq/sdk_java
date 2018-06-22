@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.context.SessionContext;
+import com.bunq.sdk.exception.ApiException;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.exception.ForbiddenException;
 import org.junit.After;
@@ -30,9 +31,15 @@ public class SessionTest extends BunqSdkTestBase {
   public void deleteSessionTest() {
     SessionContext context = BunqContext.getApiContext().getSessionContext();
     Session.delete(SESSION_ID_DUMMY);
-    User.list();
+    ApiException bunqException = null;
 
-    Assert.assertNotEquals(context, BunqContext.getApiContext().getSessionContext());
+    try {
+      User.list();
+    } catch (ForbiddenException exception) {
+      bunqException = exception;
+    }
+
+    Assert.assertNotNull(bunqException);
   }
 
   /**
