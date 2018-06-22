@@ -11,11 +11,12 @@ import com.bunq.sdk.model.generated.endpoint.User;
 import java.util.List;
 
 public class UserContextHelper extends BunqModel {
+
   /**
    * Error constants.
    */
   private static final String ERROR_NO_ACTIVE_MONETARY_ACCOUNT_BANK =
-          "No active monetary account found.";
+      "No active monetary account found.";
 
   /**
    * Endpoint constants.
@@ -56,7 +57,9 @@ public class UserContextHelper extends BunqModel {
     );
     String wrapper = MonetaryAccountBank.class.getSimpleName();
     BunqResponse<List<MonetaryAccountBank>> response = fromJsonList(
-        MonetaryAccountBank.class, responseRaw, wrapper
+        MonetaryAccountBank.class,
+        responseRaw,
+        wrapper
     );
 
     for (MonetaryAccountBank monetaryAccountBank : response.getValue()) {
