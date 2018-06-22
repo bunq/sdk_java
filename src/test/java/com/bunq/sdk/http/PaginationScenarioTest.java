@@ -43,7 +43,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     List<Payment> allPayment = new ArrayList<>();
 
     for (int i = NUMBER_ZERO; i < paymentCount; ++i) {
-      allPayment.add(CreatePayment());
+      allPayment.add(createPayment());
     }
 
     PaymentBatch.create(allPayment);
@@ -64,7 +64,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     return Payment.list(null, urlParams);
   }
 
-  private static Payment CreatePayment() {
+  private static Payment createPayment() {
     return  new Payment(
         new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY),
         getPointerBravo(),
