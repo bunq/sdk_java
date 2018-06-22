@@ -47,7 +47,7 @@ public class ApiClient {
   /**
    * Error constants.
    */
-  private static final String ERROR_AMI_ENVIRONMENT_NOT_EXPECTED = "ApiEnvironment type \"%s\" is unexpected";
+  private static final String ERROR_COULD_NOT_DETERMINE_PINNED_KEY = "Could not determine pinned key.";
   private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
 
   /**
@@ -130,7 +130,8 @@ public class ApiClient {
 
     clientBuilder = new OkHttpClient().newBuilder()
         .certificatePinner(
-                determineCertificateToPin(this.apiContext.getEnvironmentType()))
+                determineCertificateToPin(this.apiContext.getEnvironmentType())
+        )
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -154,16 +155,14 @@ public class ApiClient {
 
   private static CertificatePinner determineCertificateToPin(ApiEnvironmentType environmentType) {
     if (environmentType != null && environmentType.getPinnedKey() != null) {
-      return new CertificatePinner.Builder().add(
-              environmentType.getBaseUri(), environmentType.getPinnedKey()
-      ).build();
+      return new CertificatePinner.Builder()
+          .add(
+              environmentType.getBaseUri(),
+              environmentType.getPinnedKey()
+          )
+          .build();
     } else {
-      throw new BunqException(
-              String.format(
-                      ERROR_AMI_ENVIRONMENT_NOT_EXPECTED,
-                      Objects.toString(environmentType, "<null>")
-              )
-      );
+      throw new BunqException(ERROR_COULD_NOT_DETERMINE_PINNED_KEY);
     }
   }
 
@@ -481,5 +480,5 @@ public class ApiClient {
       throw new UncaughtExceptionError(exception);
     }
   }
-}
 
+}
