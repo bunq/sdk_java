@@ -47,8 +47,10 @@ public class ApiClient {
   /**
    * Error constants.
    */
-  private static final String ERROR_COULD_NOT_DETERMINE_PINNED_KEY = "Could not determine pinned key.";
-  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
+  private static final String ERROR_COULD_NOT_DETERMINE_PINNED_KEY =
+      "Could not determine pinned key.";
+  private static final String ERROR_COULD_NOT_DETERMINE_RESPONSE_ID =
+      "Could not determine response id.";
 
   /**
    * Endpoints not requiring active session for the request to succeed.
