@@ -39,10 +39,10 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   private static Gson gson = BunqGsonBuilder.buildDefault().create();
 
   private static void EnsureEnoughPayments() {
-    int paymentCount = GetPaymentsMissingCount();
+    int missingPaymentCount = GetPaymentsMissingCount();
     List<Payment> allPayment = new ArrayList<>();
 
-    for (int i = NUMBER_ZERO; i < paymentCount; ++i) {
+    for (int i = NUMBER_ZERO; i < missingPaymentCount; ++i) {
       allPayment.add(createPayment());
     }
 
@@ -65,7 +65,7 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   }
 
   private static Payment createPayment() {
-    return  new Payment(
+    return new Payment(
         new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY),
         getPointerBravo(),
         PAYMENT_DESCRIPTION
@@ -93,4 +93,5 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
 
     Assert.assertEquals(allPaymentExpectedSerialized, allPaymentActualSerialized);
   }
+
 }
