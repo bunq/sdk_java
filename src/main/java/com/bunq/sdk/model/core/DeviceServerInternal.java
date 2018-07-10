@@ -17,7 +17,7 @@ public class DeviceServerInternal extends DeviceServer {
     requestMap.put(FIELD_SECRET, secret);
     requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
     byte[] requestBytes = gson.toJson(requestMap).getBytes();
-    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, new HashMap<>());
+    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, new HashMap<String, String>());
 
     return processForId(responseRaw);
   }

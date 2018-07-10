@@ -40,7 +40,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -505,8 +504,7 @@ public final class SecurityUtils {
         HEADER_SERVER_SIGNATURE,
         response.header(HEADER_SERVER_SIGNATURE)
     );
-    byte[] serverSignatureBase64Bytes = headerServerSignature.getValue().getBytes();
-    byte[] serverSignatureDecoded = DatatypeConverter.printBase64Binary(serverSignatureBase64Bytes).getBytes();
+    byte[] serverSignatureDecoded = DatatypeConverter.parseBase64Binary(headerServerSignature.getValue());
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
   }
 
