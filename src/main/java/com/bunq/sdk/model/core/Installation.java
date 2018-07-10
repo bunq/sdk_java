@@ -42,7 +42,11 @@ public class Installation extends BunqModel {
       String publicKeyClientString) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = generateRequestBodyBytes(publicKeyClientString);
-    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_POST, requestBytes, new HashMap<String, String>());
+    BunqResponseRaw responseRaw = apiClient.post(
+        ENDPOINT_URL_POST,
+        requestBytes,
+        new HashMap<String, String>()
+    );
 
     return fromJsonArrayNested(Installation.class, responseRaw);
   }

@@ -54,7 +54,11 @@ public class SessionServer extends BunqModel {
   public static BunqResponse<SessionServer> create(ApiContext apiContext) {
     ApiClient apiClient = new ApiClient(apiContext);
     byte[] requestBytes = generateRequestBodyBytes(apiContext.getApiKey());
-    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_POST, requestBytes, new HashMap<String, String>());
+    BunqResponseRaw responseRaw = apiClient.post(
+        ENDPOINT_URL_POST,
+        requestBytes,
+        new HashMap<String, String>()
+    );
 
     return fromJsonArrayNested(SessionServer.class, responseRaw);
   }

@@ -515,7 +515,9 @@ public final class SecurityUtils {
         HEADER_SERVER_SIGNATURE,
         response.header(HEADER_SERVER_SIGNATURE)
     );
-    byte[] serverSignatureDecoded = DatatypeConverter.parseBase64Binary(headerServerSignature.getValue());
+    byte[] serverSignatureDecoded = DatatypeConverter.parseBase64Binary(
+        headerServerSignature.getValue()
+    );
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
   }
 
