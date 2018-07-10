@@ -53,13 +53,81 @@ public class ShareDetailPayment extends BunqModel {
   @SerializedName("budget")
   private BudgetRestriction budget;
 
+  /**
+   * If set to true, the invited user will be able to make payments from the shared account.
+   */
+  @Expose
+  @SerializedName("make_payments_field_for_request")
+  private Boolean makePaymentsFieldForRequest;
+
+  /**
+   * If set to true, the invited user will be able to make draft payments from the shared account.
+   */
+  @Expose
+  @SerializedName("make_draft_payments_field_for_request")
+  private Boolean makeDraftPaymentsFieldForRequest;
+
+  /**
+   * If set to true, the invited user will be able to view the account balance.
+   */
+  @Expose
+  @SerializedName("view_balance_field_for_request")
+  private Boolean viewBalanceFieldForRequest;
+
+  /**
+   * If set to true, the invited user will be able to view events from before the share was
+   * active.
+   */
+  @Expose
+  @SerializedName("view_old_events_field_for_request")
+  private Boolean viewOldEventsFieldForRequest;
+
+  /**
+   * If set to true, the invited user will be able to view events starting from the time the share
+   * became active.
+   */
+  @Expose
+  @SerializedName("view_new_events_field_for_request")
+  private Boolean viewNewEventsFieldForRequest;
+
+  /**
+   * The budget restriction.
+   */
+  @Expose
+  @SerializedName("budget_field_for_request")
+  private BudgetRestriction budgetFieldForRequest;
+
+  public ShareDetailPayment() {
+    this(null, null, null, null, null, null);
+  }
+
+  public ShareDetailPayment(Boolean makePayments) {
+    this(makePayments, null, null, null, null, null);
+  }
+
+  public ShareDetailPayment(Boolean makePayments, Boolean viewBalance) {
+    this(makePayments, viewBalance, null, null, null, null);
+  }
+
+  public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents) {
+    this(makePayments, viewBalance, viewOldEvents, null, null, null);
+  }
+
   public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents, Boolean viewNewEvents) {
-    this.makePayments = makePayments;
-    this.makeDraftPayments = makeDraftPayments;
-    this.viewBalance = viewBalance;
-    this.viewOldEvents = viewOldEvents;
-    this.viewNewEvents = viewNewEvents;
-    this.budget = budget;
+    this(makePayments, viewBalance, viewOldEvents, viewNewEvents, null, null);
+  }
+
+  public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents, Boolean viewNewEvents, Boolean makeDraftPayments) {
+    this(makePayments, viewBalance, viewOldEvents, viewNewEvents, makeDraftPayments, null);
+  }
+
+  public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents, Boolean viewNewEvents, Boolean makeDraftPayments, BudgetRestriction budget) {
+    this.makePaymentsFieldForRequest = makePayments;
+    this.makeDraftPaymentsFieldForRequest = makeDraftPayments;
+    this.viewBalanceFieldForRequest = viewBalance;
+    this.viewOldEventsFieldForRequest = viewOldEvents;
+    this.viewNewEventsFieldForRequest = viewNewEvents;
+    this.budgetFieldForRequest = budget;
   }
 
   /**

@@ -4,6 +4,8 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 import java.util.HashMap;
@@ -31,6 +33,21 @@ public class TokenQrRequestSofort extends BunqModel {
   protected static final String OBJECT_TYPE_POST = "RequestResponse";
 
   /**
+   * The token passed from a site or read from a QR code.
+   */
+  @Expose
+  @SerializedName("token_field_for_request")
+  private String tokenFieldForRequest;
+
+  public TokenQrRequestSofort() {
+    this(null);
+  }
+
+  public TokenQrRequestSofort(String token) {
+    this.tokenFieldForRequest = token;
+  }
+
+  /**
    * Create a request from an SOFORT transaction.
    * @param token The token passed from a site or read from a QR code.
    */
@@ -41,10 +58,10 @@ public class TokenQrRequestSofort extends BunqModel {
       customHeaders = new HashMap<>();
     }
 
-  HashMap<String, Object> requestMap = new HashMap<>();
+    HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_TOKEN, token);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return fromJson(TokenQrRequestSofort.class, responseRaw, OBJECT_TYPE_POST);

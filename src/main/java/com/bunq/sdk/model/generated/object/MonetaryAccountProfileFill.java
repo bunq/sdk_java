@@ -45,12 +45,67 @@ public class MonetaryAccountProfileFill extends BunqModel {
   @SerializedName("issuer")
   private Issuer issuer;
 
+  /**
+   * The status of the profile.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The goal balance.
+   */
+  @Expose
+  @SerializedName("balance_preferred_field_for_request")
+  private Amount balancePreferredFieldForRequest;
+
+  /**
+   * The low threshold balance.
+   */
+  @Expose
+  @SerializedName("balance_threshold_low_field_for_request")
+  private Amount balanceThresholdLowFieldForRequest;
+
+  /**
+   * The method used to fill the monetary account. Currently IDEAL and SOFORT is supported.
+   */
+  @Expose
+  @SerializedName("method_fill_field_for_request")
+  private String methodFillFieldForRequest;
+
+  /**
+   * The bank the fill is supposed to happen from, with BIC and bank name.
+   */
+  @Expose
+  @SerializedName("issuer_field_for_request")
+  private Issuer issuerFieldForRequest;
+
+  public MonetaryAccountProfileFill() {
+    this(null, null, null, null, null);
+  }
+
+  public MonetaryAccountProfileFill(String status) {
+    this(status, null, null, null, null);
+  }
+
+  public MonetaryAccountProfileFill(String status, Amount balancePreferred) {
+    this(status, balancePreferred, null, null, null);
+  }
+
+  public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow) {
+    this(status, balancePreferred, balanceThresholdLow, null, null);
+  }
+
   public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow, String methodFill) {
-    this.status = status;
-    this.balancePreferred = balancePreferred;
-    this.balanceThresholdLow = balanceThresholdLow;
-    this.methodFill = methodFill;
-    this.issuer = issuer;
+    this(status, balancePreferred, balanceThresholdLow, methodFill, null);
+  }
+
+  public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow, String methodFill, Issuer issuer) {
+    this.statusFieldForRequest = status;
+    this.balancePreferredFieldForRequest = balancePreferred;
+    this.balanceThresholdLowFieldForRequest = balanceThresholdLow;
+    this.methodFillFieldForRequest = methodFill;
+    this.issuerFieldForRequest = issuer;
   }
 
   /**

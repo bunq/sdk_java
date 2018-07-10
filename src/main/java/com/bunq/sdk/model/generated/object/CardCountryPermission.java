@@ -10,6 +10,13 @@ import com.google.gson.stream.JsonReader;
 public class CardCountryPermission extends BunqModel {
 
   /**
+   * The id of the card country permission entry.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
    * The country to allow transactions in (e.g. NL, DE).
    */
   @Expose
@@ -24,15 +31,30 @@ public class CardCountryPermission extends BunqModel {
   private String expiryTime;
 
   /**
-   * The id of the card country permission entry.
+   * The country to allow transactions in (e.g. NL, DE).
    */
   @Expose
-  @SerializedName("id")
-  private Integer id;
+  @SerializedName("country_field_for_request")
+  private String countryFieldForRequest;
+
+  /**
+   * Expiry time of this rule.
+   */
+  @Expose
+  @SerializedName("expiry_time_field_for_request")
+  private String expiryTimeFieldForRequest;
+
+  public CardCountryPermission() {
+    this(null, null);
+  }
 
   public CardCountryPermission(String country) {
-    this.country = country;
-    this.expiryTime = expiryTime;
+    this(country, null);
+  }
+
+  public CardCountryPermission(String country, String expiryTime) {
+    this.countryFieldForRequest = country;
+    this.expiryTimeFieldForRequest = expiryTime;
   }
 
   /**

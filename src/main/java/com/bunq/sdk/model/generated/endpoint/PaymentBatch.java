@@ -43,6 +43,21 @@ public class PaymentBatch extends BunqModel {
   private List<Payment> payments;
 
   /**
+   * The list of payments we want to send in a single batch.
+   */
+  @Expose
+  @SerializedName("payments_field_for_request")
+  private List<Payment> paymentsFieldForRequest;
+
+  public PaymentBatch() {
+    this(null);
+  }
+
+  public PaymentBatch(List<Payment> payments) {
+    this.paymentsFieldForRequest = payments;
+  }
+
+  /**
    * Create a payment batch by sending an array of single payment objects, that will become part
    * of the batch.
    * @param payments The list of payments we want to send in a single batch.
@@ -57,7 +72,7 @@ public class PaymentBatch extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_PAYMENTS, payments);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -87,7 +102,7 @@ public class PaymentBatch extends BunqModel {
 
     HashMap<String, Object> requestMap = new HashMap<>();
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentBatchId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

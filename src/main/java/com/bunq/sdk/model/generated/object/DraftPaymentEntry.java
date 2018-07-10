@@ -1,7 +1,6 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -13,6 +12,13 @@ import java.util.List;
 public class DraftPaymentEntry extends BunqModel {
 
   /**
+   * The id of the draft payment entry.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
    * The amount of the payment.
    */
   @Expose
@@ -20,12 +26,20 @@ public class DraftPaymentEntry extends BunqModel {
   private Amount amount;
 
   /**
+   * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
+   * DraftPayment.
+   */
+  @Expose
+  @SerializedName("alias")
+  private LabelMonetaryAccount alias;
+
+  /**
    * The LabelMonetaryAccount containing the public information of the other (counterparty) side
    * of the DraftPayment.
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private MonetaryAccountReference counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The description for the DraftPayment. Maximum 140 characters for DraftPayments to external
@@ -43,6 +57,13 @@ public class DraftPaymentEntry extends BunqModel {
   private String merchantReference;
 
   /**
+   * The type of the draft payment entry.
+   */
+  @Expose
+  @SerializedName("type")
+  private String type;
+
+  /**
    * The Attachments attached to the DraftPayment.
    */
   @Expose
@@ -50,33 +71,70 @@ public class DraftPaymentEntry extends BunqModel {
   private List<AttachmentMonetaryAccountPayment> attachment;
 
   /**
-   * The id of the draft payment entry.
+   * The amount of the payment.
    */
   @Expose
-  @SerializedName("id")
-  private Integer id;
+  @SerializedName("amount_field_for_request")
+  private Amount amountFieldForRequest;
 
   /**
-   * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
-   * DraftPayment.
+   * The Alias of the party we are transferring the money to. Can be an Alias of type EMAIL or
+   * PHONE_NUMBER (for bunq MonetaryAccounts or bunq.to payments) or IBAN (for external bank
+   * account).
    */
   @Expose
-  @SerializedName("alias")
-  private MonetaryAccountReference alias;
+  @SerializedName("counterparty_alias_field_for_request")
+  private Pointer counterpartyAliasFieldForRequest;
 
   /**
-   * The type of the draft payment entry.
+   * The description for the DraftPayment. Maximum 140 characters for DraftPayments to external
+   * IBANs, 9000 characters for DraftPayments to only other bunq MonetaryAccounts. Field is
+   * required but can be an empty string.
    */
   @Expose
-  @SerializedName("type")
-  private String type;
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
 
-  public DraftPaymentEntry(Amount amount, MonetaryAccountReference counterpartyAlias, String description) {
-    this.amount = amount;
-    this.counterpartyAlias = counterpartyAlias;
-    this.description = description;
-    this.merchantReference = merchantReference;
-    this.attachment = attachment;
+  /**
+   * Optional data to be included with the Payment specific to the merchant.
+   */
+  @Expose
+  @SerializedName("merchant_reference_field_for_request")
+  private String merchantReferenceFieldForRequest;
+
+  /**
+   * The Attachments to attach to the DraftPayment.
+   */
+  @Expose
+  @SerializedName("attachment_field_for_request")
+  private List<AttachmentMonetaryAccountPayment> attachmentFieldForRequest;
+
+  public DraftPaymentEntry() {
+    this(null, null, null, null, null);
+  }
+
+  public DraftPaymentEntry(Amount amount) {
+    this(amount, null, null, null, null);
+  }
+
+  public DraftPaymentEntry(Amount amount, Pointer counterpartyAlias) {
+    this(amount, counterpartyAlias, null, null, null);
+  }
+
+  public DraftPaymentEntry(Amount amount, Pointer counterpartyAlias, String description) {
+    this(amount, counterpartyAlias, description, null, null);
+  }
+
+  public DraftPaymentEntry(Amount amount, Pointer counterpartyAlias, String description, String merchantReference) {
+    this(amount, counterpartyAlias, description, merchantReference, null);
+  }
+
+  public DraftPaymentEntry(Amount amount, Pointer counterpartyAlias, String description, String merchantReference, List<AttachmentMonetaryAccountPayment> attachment) {
+    this.amountFieldForRequest = amount;
+    this.counterpartyAliasFieldForRequest = counterpartyAlias;
+    this.descriptionFieldForRequest = description;
+    this.merchantReferenceFieldForRequest = merchantReference;
+    this.attachmentFieldForRequest = attachment;
   }
 
   /**
@@ -105,11 +163,11 @@ public class DraftPaymentEntry extends BunqModel {
    * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
    * DraftPayment.
    */
-  public MonetaryAccountReference getAlias() {
+  public LabelMonetaryAccount getAlias() {
     return this.alias;
   }
 
-  public void setAlias(MonetaryAccountReference alias) {
+  public void setAlias(LabelMonetaryAccount alias) {
     this.alias = alias;
   }
 
@@ -117,11 +175,11 @@ public class DraftPaymentEntry extends BunqModel {
    * The LabelMonetaryAccount containing the public information of the other (counterparty) side
    * of the DraftPayment.
    */
-  public MonetaryAccountReference getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(MonetaryAccountReference counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 

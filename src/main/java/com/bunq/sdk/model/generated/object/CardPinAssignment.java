@@ -17,23 +17,49 @@ public class CardPinAssignment extends BunqModel {
   private String type;
 
   /**
-   * The 4 digit PIN to be assigned to this account.
-   */
-  @Expose
-  @SerializedName("pin_code")
-  private String pinCode;
-
-  /**
    * The ID of the monetary account to assign to this pin for the card.
    */
   @Expose
   @SerializedName("monetary_account_id")
   private Integer monetaryAccountId;
 
+  /**
+   * PIN type. Can be PRIMARY, SECONDARY or TERTIARY
+   */
+  @Expose
+  @SerializedName("type_field_for_request")
+  private String typeFieldForRequest;
+
+  /**
+   * The 4 digit PIN to be assigned to this account.
+   */
+  @Expose
+  @SerializedName("pin_code_field_for_request")
+  private String pinCodeFieldForRequest;
+
+  /**
+   * The ID of the monetary account to assign to this pin for the card.
+   */
+  @Expose
+  @SerializedName("monetary_account_id_field_for_request")
+  private Integer monetaryAccountIdFieldForRequest;
+
+  public CardPinAssignment() {
+    this(null, null, null);
+  }
+
+  public CardPinAssignment(String type) {
+    this(type, null, null);
+  }
+
+  public CardPinAssignment(String type, String pinCode) {
+    this(type, pinCode, null);
+  }
+
   public CardPinAssignment(String type, String pinCode, Integer monetaryAccountId) {
-    this.type = type;
-    this.pinCode = pinCode;
-    this.monetaryAccountId = monetaryAccountId;
+    this.typeFieldForRequest = type;
+    this.pinCodeFieldForRequest = pinCode;
+    this.monetaryAccountIdFieldForRequest = monetaryAccountId;
   }
 
   /**

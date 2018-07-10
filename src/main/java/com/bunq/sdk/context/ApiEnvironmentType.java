@@ -5,18 +5,28 @@ package com.bunq.sdk.context;
  */
 public enum ApiEnvironmentType {
 
-  PRODUCTION("api.bunq.com", "v1"),
-  SANDBOX("public-api.sandbox.bunq.com", "v1");
+  PRODUCTION(
+      "api.bunq.com",
+      "v1",
+      "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0="
+  ),
+  SANDBOX(
+      "public-api.sandbox.bunq.com",
+      "v1",
+      "sha256/GhNvDokiMyXzhGft+xXWFGchUmmh8R5dQEnO4xu81NY="
+  );
 
   /**
    * Base URI of each given environment.
    */
-  private String baseUri;
-  private String apiVersion;
+  private final String baseUri;
+  private final String apiVersion;
+  private final String pinnedKey;
 
-  ApiEnvironmentType(String baseUri, String apiVersion) {
+  ApiEnvironmentType(String baseUri, String apiVersion, String pinnedKey) {
     this.baseUri = baseUri;
     this.apiVersion = apiVersion;
+    this.pinnedKey = pinnedKey;
   }
 
   /**
@@ -28,6 +38,10 @@ public enum ApiEnvironmentType {
 
   public String getApiVersion() {
     return this.apiVersion;
+  }
+
+  public String getPinnedKey() {
+    return pinnedKey;
   }
 
 }

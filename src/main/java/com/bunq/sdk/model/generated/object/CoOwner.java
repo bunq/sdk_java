@@ -1,7 +1,6 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -24,8 +23,19 @@ public class CoOwner extends BunqModel {
   @SerializedName("status")
   private String status;
 
-  public CoOwner(LabelUser alias) {
-    this.alias = alias;
+  /**
+   * The users the account will be joint with.
+   */
+  @Expose
+  @SerializedName("alias_field_for_request")
+  private Pointer aliasFieldForRequest;
+
+  public CoOwner() {
+    this(null);
+  }
+
+  public CoOwner(Pointer alias) {
+    this.aliasFieldForRequest = alias;
   }
 
   /**

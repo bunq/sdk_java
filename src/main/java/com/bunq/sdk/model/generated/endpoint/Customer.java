@@ -63,6 +63,21 @@ public class Customer extends BunqModel {
   private String billingAccountId;
 
   /**
+   * The primary billing account account's id.
+   */
+  @Expose
+  @SerializedName("billing_account_id_field_for_request")
+  private String billingAccountIdFieldForRequest;
+
+  public Customer() {
+    this(null);
+  }
+
+  public Customer(String billingAccountId) {
+    this.billingAccountIdFieldForRequest = billingAccountId;
+  }
+
+  /**
    */
   public static BunqResponse<List<Customer>> list(Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -113,7 +128,7 @@ public class Customer extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_BILLING_ACCOUNT_ID, billingAccountId);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), customerId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

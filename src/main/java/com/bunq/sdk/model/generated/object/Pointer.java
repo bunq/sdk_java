@@ -30,10 +30,44 @@ public class Pointer extends BunqModel {
   @SerializedName("name")
   private String name;
 
+  /**
+   * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
+   */
+  @Expose
+  @SerializedName("type_field_for_request")
+  private String typeFieldForRequest;
+
+  /**
+   * The alias value. Phone number are formatted conform E.123 without spaces (e.g.,
+   * +314211234567).
+   */
+  @Expose
+  @SerializedName("value_field_for_request")
+  private String valueFieldForRequest;
+
+  /**
+   * The alias name. Only required for IBANs.
+   */
+  @Expose
+  @SerializedName("name_field_for_request")
+  private String nameFieldForRequest;
+
+  public Pointer() {
+    this(null, null, null);
+  }
+
+  public Pointer(String type) {
+    this(type, null, null);
+  }
+
   public Pointer(String type, String value) {
-    this.type = type;
-    this.value = value;
-    this.name = name;
+    this(type, value, null);
+  }
+
+  public Pointer(String type, String value, String name) {
+    this.typeFieldForRequest = type;
+    this.valueFieldForRequest = value;
+    this.nameFieldForRequest = name;
   }
 
   /**

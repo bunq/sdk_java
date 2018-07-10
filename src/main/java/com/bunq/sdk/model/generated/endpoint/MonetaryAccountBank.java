@@ -200,6 +200,141 @@ public class MonetaryAccountBank extends BunqModel {
   private MonetaryAccountSetting setting;
 
   /**
+   * The currency of the MonetaryAccountBank as an ISO 4217 formatted currency code.
+   */
+  @Expose
+  @SerializedName("currency_field_for_request")
+  private String currencyFieldForRequest;
+
+  /**
+   * The description of the MonetaryAccountBank. Defaults to 'bunq account'.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The daily spending limit Amount of the MonetaryAccountBank. Defaults to 1000 EUR. Currency
+   * must match the MonetaryAccountBank's currency. Limited to 10000 EUR.
+   */
+  @Expose
+  @SerializedName("daily_limit_field_for_request")
+  private Amount dailyLimitFieldForRequest;
+
+  /**
+   * The UUID of the Avatar of the MonetaryAccountBank.
+   */
+  @Expose
+  @SerializedName("avatar_uuid_field_for_request")
+  private String avatarUuidFieldForRequest;
+
+  /**
+   * The status of the MonetaryAccountBank. Ignored in POST requests (always set to ACTIVE) can be
+   * CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountBank. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
+  /**
+   * The sub-status of the MonetaryAccountBank providing extra information regarding the status.
+   * Should be ignored for POST requests. In case of PUT requests with status CANCELLED it can
+   * only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can only be NONE. When
+   * updating the status and/or sub_status no other fields can be updated in the same request (and
+   * vice versa).
+   */
+  @Expose
+  @SerializedName("sub_status_field_for_request")
+  private String subStatusFieldForRequest;
+
+  /**
+   * The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can only be OTHER.
+   * Should only be specified if updating the status to CANCELLED.
+   */
+  @Expose
+  @SerializedName("reason_field_for_request")
+  private String reasonFieldForRequest;
+
+  /**
+   * The optional free-form reason for voluntarily cancelling (closing) the MonetaryAccountBank.
+   * Can be any user provided message. Should only be specified if updating the status to
+   * CANCELLED.
+   */
+  @Expose
+  @SerializedName("reason_description_field_for_request")
+  private String reasonDescriptionFieldForRequest;
+
+  /**
+   * The types of notifications that will result in a push notification or URL callback for this
+   * MonetaryAccountBank.
+   */
+  @Expose
+  @SerializedName("notification_filters_field_for_request")
+  private List<NotificationFilter> notificationFiltersFieldForRequest;
+
+  /**
+   * The settings of the MonetaryAccountBank.
+   */
+  @Expose
+  @SerializedName("setting_field_for_request")
+  private MonetaryAccountSetting settingFieldForRequest;
+
+  public MonetaryAccountBank() {
+    this(null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency) {
+    this(currency, null, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description) {
+    this(currency, description, null, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit) {
+    this(currency, description, dailyLimit, null, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid) {
+    this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
+    this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+    this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+    this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+    this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
+    this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null);
+  }
+
+  public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    this.currencyFieldForRequest = currency;
+    this.descriptionFieldForRequest = description;
+    this.dailyLimitFieldForRequest = dailyLimit;
+    this.avatarUuidFieldForRequest = avatarUuid;
+    this.statusFieldForRequest = status;
+    this.subStatusFieldForRequest = subStatus;
+    this.reasonFieldForRequest = reason;
+    this.reasonDescriptionFieldForRequest = reasonDescription;
+    this.notificationFiltersFieldForRequest = notificationFilters;
+    this.settingFieldForRequest = setting;
+  }
+
+  /**
    * Create new MonetaryAccountBank.
    * @param currency The currency of the MonetaryAccountBank as an ISO 4217 formatted currency
    * code.
@@ -244,7 +379,7 @@ public class MonetaryAccountBank extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);
@@ -358,7 +493,7 @@ public class MonetaryAccountBank extends BunqModel {
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     requestMap.put(FIELD_SETTING, setting);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountBankId), requestBytes, customHeaders);
 
     return processForId(responseRaw);

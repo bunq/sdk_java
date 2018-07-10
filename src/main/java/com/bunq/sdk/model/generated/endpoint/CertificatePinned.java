@@ -53,6 +53,21 @@ public class CertificatePinned extends BunqModel {
   private Integer id;
 
   /**
+   * The certificate chain in .PEM format.
+   */
+  @Expose
+  @SerializedName("certificate_chain_field_for_request")
+  private List<Certificate> certificateChainFieldForRequest;
+
+  public CertificatePinned() {
+    this(null);
+  }
+
+  public CertificatePinned(List<Certificate> certificateChain) {
+    this.certificateChainFieldForRequest = certificateChain;
+  }
+
+  /**
    * Pin the certificate chain.
    * @param certificateChain The certificate chain in .PEM format.
    */
@@ -66,7 +81,7 @@ public class CertificatePinned extends BunqModel {
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
     return processForId(responseRaw);

@@ -80,6 +80,47 @@ public class DeviceServer extends BunqModel {
   private String status;
 
   /**
+   * The description of the DeviceServer. This is only for your own reference when reading the
+   * DeviceServer again.
+   */
+  @Expose
+  @SerializedName("description_field_for_request")
+  private String descriptionFieldForRequest;
+
+  /**
+   * The API key. You can request an API key in the bunq app.
+   */
+  @Expose
+  @SerializedName("secret_field_for_request")
+  private String secretFieldForRequest;
+
+  /**
+   * An array of IPs (v4 or v6) this DeviceServer will be able to do calls from. These will be
+   * linked to the API key.
+   */
+  @Expose
+  @SerializedName("permitted_ips_field_for_request")
+  private List<String> permittedIpsFieldForRequest;
+
+  public DeviceServer() {
+    this(null, null, null);
+  }
+
+  public DeviceServer(String description) {
+    this(description, null, null);
+  }
+
+  public DeviceServer(String description, String secret) {
+    this(description, secret, null);
+  }
+
+  public DeviceServer(String description, String secret, List<String> permittedIps) {
+    this.descriptionFieldForRequest = description;
+    this.secretFieldForRequest = secret;
+    this.permittedIpsFieldForRequest = permittedIps;
+  }
+
+  /**
    * Create a new DeviceServer providing the installation token in the header and signing the
    * request with the private part of the key you used to create the installation. The API Key
    * that you are using will be bound to the IP address of the DeviceServer which you have
@@ -105,7 +146,7 @@ public class DeviceServer extends BunqModel {
     requestMap.put(FIELD_SECRET, secret);
     requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
 
-    byte[] requestBytes = gson.toJson(requestMap).getBytes();
+    byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
 
     return processForId(responseRaw);

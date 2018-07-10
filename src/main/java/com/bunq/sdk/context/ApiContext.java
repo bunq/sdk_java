@@ -10,14 +10,13 @@ import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.io.FileUtils;
 
 /**
  * The context to make the API calls in. Consists of:
@@ -229,7 +228,7 @@ public class ApiContext implements java.io.Serializable {
 
   public boolean isSessionActive() {
     return sessionContext != null &&
-      getTimeToSessionExpiryInSeconds() < TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
+      getTimeToSessionExpiryInSeconds() > TIME_TO_SESSION_EXPIRY_MINIMUM_SECONDS;
   }
 
   private long getTimeToSessionExpiryInSeconds() {
