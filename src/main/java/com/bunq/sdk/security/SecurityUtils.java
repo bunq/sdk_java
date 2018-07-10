@@ -416,16 +416,27 @@ public final class SecurityUtils {
   }
 
   private static String generateRequestHeadersSortedString(BunqRequestBuilder bunqRequestBuilder) {
-    return Arrays.stream(bunqRequestBuilder.getAllHeaderAsArray())
-        .filter(
-            header ->
-                header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) ||
-                    header.getName().equals(ApiClient.HEADER_CACHE_CONTROL) ||
-                    header.getName().equals(ApiClient.HEADER_USER_AGENT)
-        )
-        .map(header -> header.getName() + DELIMITER_HEADER_NAME_AND_VALUE + header.getValue())
-        .sorted()
-        .collect(Collectors.joining(NEWLINE));
+    StringBuilder stringBuilder = new StringBuilder();
+
+    BunqBasicHeader[] allHeadersAsArray = bunqRequestBuilder.getAllHeaderAsArray();
+    Arrays.sort(allHeadersAsArray);
+
+    for (BunqBasicHeader header : allHeadersAsArray) {
+      if (header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) ||
+          header.getName().equals(ApiClient.HEADER_CACHE_CONTROL) ||
+          header.getName().equals(ApiClient.HEADER_USER_AGENT)) {
+        if (stringBuilder.length() != 0) {
+          stringBuilder.append(NEWLINE);
+        }
+
+        stringBuilder
+            .append(header.getName())
+            .append(DELIMITER_HEADER_NAME_AND_VALUE)
+            .append(header.getValue());
+      }
+    }
+
+    return stringBuilder.toString();
   }
 
   /**
@@ -564,16 +575,25 @@ public final class SecurityUtils {
     return requestHeadString.getBytes();
   }
 
-  private static String generateResponseHeadersSortedString(BunqBasicHeader[] responseHeaders) {
-    return Arrays.stream(responseHeaders)
-        .filter(
-            header ->
-                header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) &&
-                    !header.getName().equals(HEADER_SERVER_SIGNATURE)
-        )
-        .map(header -> header.getName() + DELIMITER_HEADER_NAME_AND_VALUE + header.getValue())
-        .sorted()
-        .collect(Collectors.joining(NEWLINE));
+  private static String generateResponseHeadersSortedString(BunqBasicHeader[] allResponseHeader) {
+    StringBuilder stringBuilder = new StringBuilder();
+    Arrays.sort(allResponseHeader);
+
+    for (BunqBasicHeader header : allResponseHeader) {
+      if (header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) &&
+          !header.getName().equals(HEADER_SERVER_SIGNATURE)) {
+        if (stringBuilder.length() != 0) {
+          stringBuilder.append(NEWLINE);
+        }
+
+        stringBuilder
+            .append(header.getName())
+            .append(DELIMITER_HEADER_NAME_AND_VALUE)
+            .append(header.getValue());
+      }
+    }
+
+    return stringBuilder.toString();
   }
 
 }
