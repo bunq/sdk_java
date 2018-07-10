@@ -1,18 +1,15 @@
 package com.bunq.sdk.http;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.Config;
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.model.generated.endpoint.Payment;
+import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
 import com.bunq.sdk.model.generated.object.Amount;
-import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +39,14 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
   private static Gson gson = BunqGsonBuilder.buildDefault().create();
 
   private static void EnsureEnoughPayments() {
-    for (int i = NUMBER_ZERO; i < GetPaymentsMissingCount(); ++i) {
-      CreatePayment();
+    int missingPaymentCount = GetPaymentsMissingCount();
+    List<Payment> allPayment = new ArrayList<>();
+
+    for (int i = NUMBER_ZERO; i < missingPaymentCount; ++i) {
+      allPayment.add(createPayment());
     }
+
+    PaymentBatch.create(allPayment);
   }
 
   private static int GetPaymentsMissingCount() {
@@ -62,8 +64,12 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     return Payment.list(null, urlParams);
   }
 
-  private static void CreatePayment() {
-    Payment.create(new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY), getPointerBravo(), PAYMENT_DESCRIPTION);
+  private static Payment createPayment() {
+    return new Payment(
+        new Amount(PAYMENT_AMOUNT_EUR, PAYMENT_CURRENCY),
+        getPointerBravo(),
+        PAYMENT_DESCRIPTION
+    );
   }
 
   @Test
@@ -87,4 +93,5 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
 
     Assert.assertEquals(allPaymentExpectedSerialized, allPaymentActualSerialized);
   }
+
 }
