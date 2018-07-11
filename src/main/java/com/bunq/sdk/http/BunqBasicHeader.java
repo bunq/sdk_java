@@ -7,15 +7,19 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class BunqBasicHeader {
+public class BunqBasicHeader implements Comparable<BunqBasicHeader> {
   /**
    * String format constants for signing data
    */
   private static final String DELIMITER_HEADER_NAME_AND_VALUE = ": ";
   private static final String NEWLINE = "\n";
 
+//  private String name;
+  private String value;
+
+
   private final BunqHeader name;
-  private final String value;
+//  private final String value;
 
   public static BunqBasicHeader get(BunqHeader header, Response response) {
     return new BunqBasicHeader(header, response.header(header.getHeader()));
@@ -39,12 +43,12 @@ public class BunqBasicHeader {
   }
 
   public static String collectForSigning(
-          Collection<BunqBasicHeader> basicHeaders,
+          Collection<BunqBasicHeader> allBasicHeader,
           BunqHeader exclude,
           Collection<BunqHeader> includes) {
     List<String> headersForSigning = new ArrayList<String>();
 
-    for (BunqBasicHeader basicHeader:basicHeaders) {
+    for (BunqBasicHeader basicHeader:allBasicHeader) {
       BunqHeader header = basicHeader.getName();
 
       if (header.equals(exclude)) {
@@ -58,13 +62,21 @@ public class BunqBasicHeader {
 
     Collections.sort(headersForSigning);
 
-    StringBuffer stringBuffer = new StringBuffer();
+    StringBuilder stringBuilder = new StringBuilder();
 
     for (String header:headersForSigning) {
-      stringBuffer.append(header);
-      stringBuffer.append(NEWLINE);
+      stringBuilder.append(header);
+      stringBuilder.append(NEWLINE);
     }
 
-    return stringBuffer.toString();
+    stringBuilder.deleteCharAt(stringBuilder.lastIndexOf(NEWLINE));
+
+    return stringBuilder.toString();
   }
+
+  @Override
+  public int compareTo(BunqBasicHeader o) {
+    return getName().compareTo(o.getName());
+  }
+
 }
