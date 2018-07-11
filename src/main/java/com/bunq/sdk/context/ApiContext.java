@@ -93,9 +93,12 @@ public class ApiContext implements java.io.Serializable {
   /**
    * Create and initialize an API Context with current IP as permitted and no proxy.
    */
-  public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
-      String deviceDescription) {
-    return create(environmentType, apiKey, deviceDescription, new ArrayList<>());
+  public static ApiContext create(
+      ApiEnvironmentType environmentType,
+      String apiKey,
+      String deviceDescription
+  ) {
+    return create(environmentType, apiKey, deviceDescription, new ArrayList<String>());
   }
 
   /**
@@ -111,7 +114,7 @@ public class ApiContext implements java.io.Serializable {
    */
   public static ApiContext create(ApiEnvironmentType environmentType, String apiKey,
       String deviceDescription, String proxy) {
-    return create(environmentType, apiKey, deviceDescription, new ArrayList<>(), proxy);
+    return create(environmentType, apiKey, deviceDescription, new ArrayList<String>(), proxy);
   }
 
   /**

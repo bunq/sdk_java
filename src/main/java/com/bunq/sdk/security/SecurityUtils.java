@@ -17,6 +17,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -35,12 +36,10 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -189,9 +188,9 @@ public final class SecurityUtils {
    */
   private static String getPrivateKeyFormattedString(PrivateKey privateKey) {
     byte[] encodedPrivateKey = privateKey.getEncoded();
-    byte[] base64 = Base64.getEncoder().encode(encodedPrivateKey);
+    String privateKeyString = DatatypeConverter.printBase64Binary(encodedPrivateKey);
 
-    return String.format(PRIVATE_KEY_FORMAT, new String(base64));
+    return String.format(PRIVATE_KEY_FORMAT, privateKeyString);
   }
 
   /**
@@ -230,7 +229,7 @@ public final class SecurityUtils {
     publicKeyString = publicKeyString.replace(PUBLIC_KEY_END, STRING_EMPTY);
     publicKeyString = publicKeyString.replace(NEWLINE, STRING_EMPTY);
 
-    return Base64.getDecoder().decode(publicKeyString);
+    return DatatypeConverter.parseBase64Binary(publicKeyString);
   }
 
   /**
@@ -257,7 +256,7 @@ public final class SecurityUtils {
     privateKeyString = privateKeyString.replace(PRIVATE_KEY_END, STRING_EMPTY);
     privateKeyString = privateKeyString.replace(NEWLINE, STRING_EMPTY);
 
-    return Base64.getDecoder().decode(privateKeyString);
+    return DatatypeConverter.parseBase64Binary(privateKeyString);
   }
 
   public static String getPublicKeyFormattedString(KeyPair keyPair) {
@@ -269,9 +268,9 @@ public final class SecurityUtils {
    */
   public static String getPublicKeyFormattedString(PublicKey publicKey) {
     byte[] encodedPublicKey = publicKey.getEncoded();
-    byte[] base64 = Base64.getEncoder().encode(encodedPublicKey);
+    String publicKeyString = DatatypeConverter.printBase64Binary(encodedPublicKey);
 
-    return String.format(PUBLIC_KEY_FORMAT, new String(base64));
+    return String.format(PUBLIC_KEY_FORMAT, publicKeyString);
   }
 
   /**
@@ -308,22 +307,27 @@ public final class SecurityUtils {
     return initializationVector;
   }
 
-  private static void addHeaderClientEncryptionKey(ApiContext apiContext, SecretKey key,
-      Map<String, String> customHeaders) {
+  private static void addHeaderClientEncryptionKey(
+      ApiContext apiContext,
+      SecretKey key,
+      Map<String, String> customHeaders
+  ) {
     try {
       Cipher cipher = Cipher.getInstance(KEY_CIPHER_ALGORITHM);
       cipher.init(Cipher.ENCRYPT_MODE, apiContext.getInstallationContext().getPublicKeyServer());
       byte[] keyEncrypted = cipher.doFinal(key.getEncoded());
-      String keyEncryptedEncoded = Base64.getEncoder().encodeToString(keyEncrypted);
+      String keyEncryptedEncoded = DatatypeConverter.printBase64Binary(keyEncrypted);
       customHeaders.put(HEADER_CLIENT_ENCRYPTION_KEY, keyEncryptedEncoded);
     } catch (GeneralSecurityException exception) {
       throw new BunqException(exception.getMessage());
     }
   }
 
-  private static void addHeaderClientEncryptionIv(byte[] initializationVector, Map<String,
-      String> customHeaders) {
-    String initializationVectorEncoded = Base64.getEncoder().encodeToString(initializationVector);
+  private static void addHeaderClientEncryptionIv(
+      byte[] initializationVector,
+      Map<String, String> customHeaders
+  ) {
+    String initializationVectorEncoded = DatatypeConverter.printBase64Binary(initializationVector);
 
     customHeaders.put(HEADER_CLIENT_ENCRYPTION_IV, initializationVectorEncoded);
   }
@@ -357,7 +361,7 @@ public final class SecurityUtils {
       bufferedSink.flush();
       bufferedSink.close();
       byte[] hmac = mac.doFinal();
-      String hmacEncoded = Base64.getEncoder().encodeToString(hmac);
+      String hmacEncoded = DatatypeConverter.printBase64Binary(hmac);
       customHeaders.put(HEADER_CLIENT_ENCRYPTION_HMAC, hmacEncoded);
     } catch (GeneralSecurityException | IOException exception) {
       throw new BunqException(exception.getMessage());
@@ -412,16 +416,27 @@ public final class SecurityUtils {
   }
 
   private static String generateRequestHeadersSortedString(BunqRequestBuilder bunqRequestBuilder) {
-    return Arrays.stream(bunqRequestBuilder.getAllHeaderAsArray())
-        .filter(
-            header ->
-                header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) ||
-                    header.getName().equals(ApiClient.HEADER_CACHE_CONTROL) ||
-                    header.getName().equals(ApiClient.HEADER_USER_AGENT)
-        )
-        .map(header -> header.getName() + DELIMITER_HEADER_NAME_AND_VALUE + header.getValue())
-        .sorted()
-        .collect(Collectors.joining(NEWLINE));
+    StringBuilder stringBuilder = new StringBuilder();
+
+    BunqBasicHeader[] allHeadersAsArray = bunqRequestBuilder.getAllHeaderAsArray();
+    Arrays.sort(allHeadersAsArray);
+
+    for (BunqBasicHeader header : allHeadersAsArray) {
+      if (header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) ||
+          header.getName().equals(ApiClient.HEADER_CACHE_CONTROL) ||
+          header.getName().equals(ApiClient.HEADER_USER_AGENT)) {
+        if (stringBuilder.length() != 0) {
+          stringBuilder.append(NEWLINE);
+        }
+
+        stringBuilder
+            .append(header.getName())
+            .append(DELIMITER_HEADER_NAME_AND_VALUE)
+            .append(header.getValue());
+      }
+    }
+
+    return stringBuilder.toString();
   }
 
   /**
@@ -439,7 +454,7 @@ public final class SecurityUtils {
     byte[] dataBytesSigned = signDataWithSignature(signature, bytesToSign);
     verifyDataSigned(signature, keyPair.getPublic(), bytesToSign, dataBytesSigned);
 
-    return Base64.getEncoder().encodeToString(dataBytesSigned);
+    return DatatypeConverter.printBase64Binary(dataBytesSigned);
   }
 
   private static Signature getSignatureInstance() throws BunqException {
@@ -500,8 +515,9 @@ public final class SecurityUtils {
         HEADER_SERVER_SIGNATURE,
         response.header(HEADER_SERVER_SIGNATURE)
     );
-    byte[] serverSignatureBase64Bytes = headerServerSignature.getValue().getBytes();
-    byte[] serverSignatureDecoded = Base64.getDecoder().decode(serverSignatureBase64Bytes);
+    byte[] serverSignatureDecoded = DatatypeConverter.parseBase64Binary(
+        headerServerSignature.getValue()
+    );
     verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
   }
 
@@ -561,16 +577,25 @@ public final class SecurityUtils {
     return requestHeadString.getBytes();
   }
 
-  private static String generateResponseHeadersSortedString(BunqBasicHeader[] responseHeaders) {
-    return Arrays.stream(responseHeaders)
-        .filter(
-            header ->
-                header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) &&
-                    !header.getName().equals(HEADER_SERVER_SIGNATURE)
-        )
-        .map(header -> header.getName() + DELIMITER_HEADER_NAME_AND_VALUE + header.getValue())
-        .sorted()
-        .collect(Collectors.joining(NEWLINE));
+  private static String generateResponseHeadersSortedString(BunqBasicHeader[] allResponseHeader) {
+    StringBuilder stringBuilder = new StringBuilder();
+    Arrays.sort(allResponseHeader);
+
+    for (BunqBasicHeader header : allResponseHeader) {
+      if (header.getName().startsWith(HEADER_NAME_PREFIX_X_BUNQ) &&
+          !header.getName().equals(HEADER_SERVER_SIGNATURE)) {
+        if (stringBuilder.length() != 0) {
+          stringBuilder.append(NEWLINE);
+        }
+
+        stringBuilder
+            .append(header.getName())
+            .append(DELIMITER_HEADER_NAME_AND_VALUE)
+            .append(header.getValue());
+      }
+    }
+
+    return stringBuilder.toString();
   }
 
 }

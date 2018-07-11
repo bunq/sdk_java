@@ -1,6 +1,6 @@
 package com.bunq.sdk.http;
 
-public class BunqBasicHeader {
+public class BunqBasicHeader implements Comparable<BunqBasicHeader> {
   private String name;
   private String value;
 
@@ -21,6 +21,11 @@ public class BunqBasicHeader {
    */
   public String getValue() {
     return value;
+  }
+
+  @Override
+  public int compareTo(BunqBasicHeader o) {
+    return getName().compareTo(o.getName());
   }
 
 }

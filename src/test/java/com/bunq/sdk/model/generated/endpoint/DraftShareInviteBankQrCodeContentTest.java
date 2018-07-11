@@ -29,7 +29,7 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
   /**
    * The id of the created DraftShareInvite
    */
-  private static Integer draftId;
+  private static int draftId;
 
   @BeforeClass
   public static void setUpBeforeClass() {
@@ -49,11 +49,6 @@ public class DraftShareInviteBankQrCodeContentTest extends BunqSdkTestBase {
         shareDetail);
 
     draftId = DraftShareInviteBank.create(expiryDate.getTime().toString(), draftShareInviteBankEntry).getValue();
-  }
-
-  @AfterClass
-  public static void tearDown() {
-    DraftShareInviteBank.update(draftId, DRAFT_SHARE_INVITE_BANK_STATUS_CANCELLED);
   }
 
   /**

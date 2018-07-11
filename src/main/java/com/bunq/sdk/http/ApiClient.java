@@ -10,6 +10,7 @@ import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.security.SecurityUtils;
+import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -206,7 +207,7 @@ public class ApiClient {
   /**
    */
   private HttpUrl determineFullUri(String uri) {
-    return determineFullUri(uri, new HashMap<>());
+    return determineFullUri(uri, new HashMap<String, String>());
   }
 
   /**
@@ -314,7 +315,13 @@ public class ApiClient {
 
     if (headerMap.containsKey(HEADER_RESPONSE_ID_LOWER_CASE)) {
       return headerMap.get(HEADER_RESPONSE_ID_LOWER_CASE);
-    } else return headerMap.getOrDefault(HEADER_RESPONSE_ID_UPPER_CASE, ERROR_COULD_NOT_DETERMINE_RESPONSE_ID);
+    } else {
+      return BunqUtil.getValueFromMapOrDefault(
+          headerMap,
+          HEADER_RESPONSE_ID_UPPER_CASE,
+          ERROR_COULD_NOT_DETERMINE_RESPONSE_ID
+      );
+    }
   }
 
   /**
