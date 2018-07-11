@@ -1,5 +1,6 @@
 package com.bunq.sdk.http;
 
+import com.sun.org.apache.xpath.internal.functions.FuncBoolean;
 import okhttp3.Response;
 
 import java.util.ArrayList;
@@ -41,26 +42,34 @@ public class BunqBasicHeader implements Comparable<BunqBasicHeader> {
   public static String collectForSigning(
           Collection<BunqBasicHeader> allBasicHeader,
           BunqHeader exclude,
-          Collection<BunqHeader> includes) {
-    List<String> headersForSigning = new ArrayList<String>();
+          Collection<BunqHeader> allNonBunqHeaderToInclude) {
+    List<String> allHeaderForSigning = new ArrayList<String>();
 
     for (BunqBasicHeader basicHeader:allBasicHeader) {
-      BunqHeader header = basicHeader.getName();
-
-      if (header.equals(exclude)) {
-        continue;
-      }
-
-      if (header.isBunq() || includes.contains(header)) {
-        headersForSigning.add(basicHeader.forSigning());
-      }
+      addHeaderForSigningIfNeeded(basicHeader, allHeaderForSigning, allNonBunqHeaderToInclude);
     }
 
-    Collections.sort(headersForSigning);
+    Collections.sort(allHeaderForSigning);
 
+    return  formatAllHeaderForSigning(allHeaderForSigning);
+  }
+
+  private static void addHeaderForSigningIfNeeded(
+      BunqBasicHeader basicHeader,
+      List<String> allHeaderForSigning,
+      Collection<BunqHeader> allNonBunqHeaderToInclude
+  ) {
+    BunqHeader header = basicHeader.getName();
+
+    if (header.isBunq() || allNonBunqHeaderToInclude.contains(header)) {
+      allHeaderForSigning.add(basicHeader.forSigning());
+    }
+  }
+
+  private static String formatAllHeaderForSigning(List<String> allHeaderForSigning) {
     StringBuilder stringBuilder = new StringBuilder();
 
-    for (String header:headersForSigning) {
+    for (String header: allHeaderForSigning) {
       stringBuilder.append(header);
       stringBuilder.append(NEWLINE);
     }
