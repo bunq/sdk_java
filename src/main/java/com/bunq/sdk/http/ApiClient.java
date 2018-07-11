@@ -157,9 +157,9 @@ public class ApiClient {
         requestBodyBytes
     );
 
-    if (customHeaders.containsKey(BunqHeader.CONTENT_TYPE.getHeader())) {
+    if (customHeaders.containsKey(BunqHeader.CONTENT_TYPE.getHeaderName())) {
       bunqRequestBody = BunqRequestBody.create(
-          MediaType.parse(customHeaders.get(BunqHeader.CONTENT_TYPE.getHeader())),
+          MediaType.parse(customHeaders.get(BunqHeader.CONTENT_TYPE.getHeaderName())),
           requestBodyBytes
       );
     }
@@ -279,7 +279,7 @@ public class ApiClient {
   private static String getResponseId(Response response) {
     Map<String, String> headerMap = getHeadersMap(response);
 
-    return BunqHeader.CLIENT_RESPONSE_ID.getOrDefault(headerMap);
+    return BunqHeader.CLIENT_RESPONSE_ID.getHeaderValueOrDefault(headerMap);
   }
 
   /**

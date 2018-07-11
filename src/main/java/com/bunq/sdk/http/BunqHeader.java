@@ -34,7 +34,7 @@ public enum BunqHeader {
         this.defaultValue = defaultValue;
     }
 
-    public static BunqHeader parse(String value) {
+    public static BunqHeader parseHeaderOrNull(String value) {
         for (BunqHeader header:values()) {
             if (header.equals(value)) {
                 return header;
@@ -44,7 +44,7 @@ public enum BunqHeader {
         return null;
     }
 
-    public String getHeader() {
+    public String getHeaderName() {
         return header;
     }
 
@@ -52,7 +52,7 @@ public enum BunqHeader {
         return defaultValue;
     }
 
-    private String getOrDefault(String value) {
+    private String getHeaderValueOrDefault(String value) {
         if (value != null) {
             return value;
         }
@@ -61,7 +61,7 @@ public enum BunqHeader {
     }
 
     public void addTo(Map<String, String> headers, String value) {
-        headers.put(getHeader(), getOrDefault(value));
+        headers.put(getHeaderName(), getHeaderValueOrDefault(value));
     }
 
     public void addTo(BunqRequestBuilder requestBuilder) {
@@ -69,18 +69,18 @@ public enum BunqHeader {
     }
 
     public void addTo(BunqRequestBuilder requestBuilder, String value) {
-        requestBuilder.addHeader(getHeader(), getOrDefault(value));
+        requestBuilder.addHeader(getHeaderName(), getHeaderValueOrDefault(value));
     }
 
     public boolean equals(String header) {
-        return getHeader().equalsIgnoreCase(header);
+        return getHeaderName().equalsIgnoreCase(header);
     }
 
     public boolean isBunq() {
-        return getHeader().startsWith(PREFIX);
+        return getHeaderName().startsWith(PREFIX);
     }
 
-    private String findKey(Collection<String> keys) {
+    private String findKeyOrNull(Collection<String> keys) {
         for (String key:keys) {
             if (this.equals(key)) {
                 return key;
@@ -90,11 +90,13 @@ public enum BunqHeader {
         return null;
     }
 
-    public String getOrDefault(Map<String, String> headers) {
-        String key = findKey(headers.keySet());
+    public String getHeaderValueOrDefault(Map<String, String> headers) {
+        String key = findKeyOrNull(headers.keySet());
+
         if (key != null && headers.get(key) != null) {
             return headers.get(key);
         }
+
         return getDefaultValue();
     }
 }

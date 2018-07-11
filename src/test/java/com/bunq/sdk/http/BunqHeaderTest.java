@@ -1,69 +1,103 @@
 package com.bunq.sdk.http;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.HashMap;
-
 import org.junit.Test;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class BunqHeaderTest {
-    @Test
-    public void parse() {
-        // parse works case-insensitive
-        assertEquals(BunqHeader.CLIENT_RESPONSE_ID, BunqHeader.parse("X-Bunq-Client-Response-Id"));
-        assertEquals(BunqHeader.CLIENT_RESPONSE_ID, BunqHeader.parse("x-bunq-client-response-id"));
-    }
 
-    @Test
-    public void isBunq() {
-        assertFalse(BunqHeader.CACHE_CONTROL.isBunq());
-        assertFalse(BunqHeader.CONTENT_TYPE.isBunq());
-        assertFalse(BunqHeader.USER_AGENT.isBunq());
+  /**
+   * Expected error messages constatns.
+   */
+  private static final String ERROR_STRING_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
 
-        assertTrue(BunqHeader.ATTACHMENT_DESCRIPTION.isBunq());
-        assertTrue(BunqHeader.CLIENT_AUTHENTICATION.isBunq());
-        assertTrue(BunqHeader.CLIENT_ENCRYPTION_HMAC.isBunq());
-        assertTrue(BunqHeader.CLIENT_ENCRYPTION_IV.isBunq());
-        assertTrue(BunqHeader.CLIENT_ENCRYPTION_IV.isBunq());
-        assertTrue(BunqHeader.CLIENT_ENCRYPTION_KEY.isBunq());
-        assertTrue(BunqHeader.CLIENT_REQUEST_ID.isBunq());
-        assertTrue(BunqHeader.CLIENT_SIGNATURE.isBunq());
-        assertTrue(BunqHeader.CLIENT_RESPONSE_ID.isBunq());
-        assertTrue(BunqHeader.GEOLOCATION.isBunq());
-        assertTrue(BunqHeader.REGION.isBunq());
-        assertTrue(BunqHeader.SERVER_SIGNATURE.isBunq());
-        assertTrue(BunqHeader.CLIENT_ENCRYPTION_KEY.isBunq());
-        assertTrue(BunqHeader.CLIENT_REQUEST_ID.isBunq());
-    }
+  /**
+   * Header name constants.
+   */
+  private static final String HEADER_X_BUNQ_CLIENT_RESPONSE_ID = "X-Bunq-Client-Response-Id";
+  private static final String HEADER_LOWER_X_BUNQ_CLIENT_RESPONSE_ID = "x-bunq-client-response-id";
+  private static final String HEADER_X_BUNQ_SOME_OTHER_HEADER = "x-bunq-some-other-header";
 
-    @Test
-    public void getOrDefault() {
-        BunqHeader h = BunqHeader.CLIENT_RESPONSE_ID;
+  /**
+   * Header value constatns.
+   */
+  private static final String HEADER_VALUE_USER_AGENT = "test-agent";
+  private static final String HEADER_VALUE_LANGUAGE = "en_US";
+  private static final String HEADER_VALUE_GEOLOCATION = "0 0 0 0 000";
+  private static final String RESPONSE_ID = "test-id";
 
-        assertEquals("test-id",
-                h.getOrDefault(Collections.singletonMap("x-bunq-client-response-id", "test-id")));
-        assertEquals("Could not determine response id.",
-                h.getOrDefault(Collections.singletonMap("x-bunq-some-other-header", "test-id")));
-        assertEquals("Could not determine response id.",
-                h.getOrDefault(Collections.<String, String>emptyMap()));
-    }
+  @Test
+  public void testParseHeaderCaseInsensitive() {
+    assertEquals(
+        BunqHeader.CLIENT_RESPONSE_ID,
+        BunqHeader.parseHeaderOrNull(HEADER_X_BUNQ_CLIENT_RESPONSE_ID)
+    );
+    assertEquals(
+        BunqHeader.CLIENT_RESPONSE_ID,
+        BunqHeader.parseHeaderOrNull(HEADER_LOWER_X_BUNQ_CLIENT_RESPONSE_ID)
+    );
+  }
 
-    @Test
-    public void addToMap() {
-        Map<String, String> headers = new HashMap<>();
+  @Test
+  public void testIsBunq() {
+    assertFalse(BunqHeader.CACHE_CONTROL.isBunq());
+    assertFalse(BunqHeader.CONTENT_TYPE.isBunq());
+    assertFalse(BunqHeader.USER_AGENT.isBunq());
 
-        //sut
-        BunqHeader.LANGUAGE.addTo(headers, null);
-        BunqHeader.GEOLOCATION.addTo(headers, null);
-        BunqHeader.USER_AGENT.addTo(headers, "test-agent");
+    assertTrue(BunqHeader.ATTACHMENT_DESCRIPTION.isBunq());
+    assertTrue(BunqHeader.CLIENT_AUTHENTICATION.isBunq());
+    assertTrue(BunqHeader.CLIENT_ENCRYPTION_HMAC.isBunq());
+    assertTrue(BunqHeader.CLIENT_ENCRYPTION_IV.isBunq());
+    assertTrue(BunqHeader.CLIENT_ENCRYPTION_IV.isBunq());
+    assertTrue(BunqHeader.CLIENT_ENCRYPTION_KEY.isBunq());
+    assertTrue(BunqHeader.CLIENT_REQUEST_ID.isBunq());
+    assertTrue(BunqHeader.CLIENT_SIGNATURE.isBunq());
+    assertTrue(BunqHeader.CLIENT_RESPONSE_ID.isBunq());
+    assertTrue(BunqHeader.GEOLOCATION.isBunq());
+    assertTrue(BunqHeader.REGION.isBunq());
+    assertTrue(BunqHeader.SERVER_SIGNATURE.isBunq());
+    assertTrue(BunqHeader.CLIENT_ENCRYPTION_KEY.isBunq());
+    assertTrue(BunqHeader.CLIENT_REQUEST_ID.isBunq());
+  }
 
-        // verify
-        assertEquals("en_US", headers.get("X-Bunq-Language"));
-        assertEquals("0 0 0 0 000", headers.get("X-Bunq-Geolocation"));
-        assertEquals("test-agent", headers.get("User-Agent"));
-    }
+  @Test
+  public void getOrDefault() {
+    BunqHeader header = BunqHeader.CLIENT_RESPONSE_ID;
+
+    assertEquals(
+        RESPONSE_ID,
+        header.getHeaderValueOrDefault(
+            Collections.singletonMap(HEADER_LOWER_X_BUNQ_CLIENT_RESPONSE_ID, RESPONSE_ID)
+        )
+    );
+    assertEquals(
+        ERROR_STRING_COULD_NOT_DETERMINE_RESPONSE_ID,
+        header.getHeaderValueOrDefault(
+            Collections.singletonMap(HEADER_X_BUNQ_SOME_OTHER_HEADER, RESPONSE_ID)
+        )
+    );
+    assertEquals(
+        ERROR_STRING_COULD_NOT_DETERMINE_RESPONSE_ID,
+        header.getHeaderValueOrDefault(Collections.<String, String>emptyMap())
+    );
+  }
+
+  @Test
+  public void addToMap() {
+    Map<String, String> headers = new HashMap<>();
+
+    BunqHeader.LANGUAGE.addTo(headers, null);
+    BunqHeader.GEOLOCATION.addTo(headers, null);
+    BunqHeader.USER_AGENT.addTo(headers, HEADER_VALUE_USER_AGENT);
+
+    assertEquals(HEADER_VALUE_LANGUAGE, headers.get(BunqHeader.LANGUAGE.getHeaderName()));
+    assertEquals(HEADER_VALUE_GEOLOCATION, headers.get(BunqHeader.GEOLOCATION.getHeaderName()));
+    assertEquals(HEADER_VALUE_USER_AGENT, headers.get(BunqHeader.USER_AGENT.getHeaderName()));
+  }
 }

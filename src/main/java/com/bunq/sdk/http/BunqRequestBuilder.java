@@ -76,7 +76,7 @@ public class BunqRequestBuilder extends Request.Builder {
   }
 
   private void addToAllHeader(String name, String value) {
-    BunqHeader header = BunqHeader.parse(name);
+    BunqHeader header = BunqHeader.parseHeaderOrNull(name);
 
     if (header != null) {
       this.allHeader.add(new BunqBasicHeader(header, value));

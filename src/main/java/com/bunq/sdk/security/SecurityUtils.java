@@ -489,7 +489,7 @@ public final class SecurityUtils {
     List<BunqBasicHeader> allResponseHeader = new ArrayList<>();
 
     for (int i = INDEX_FIRST; i < allHeader.names().size(); i++) {
-      BunqHeader header = BunqHeader.parse(allHeader.name(i));
+      BunqHeader header = BunqHeader.parseHeaderOrNull(allHeader.name(i));
 
       if (header != null && !BunqHeader.SERVER_SIGNATURE.equals(header)) {
         allResponseHeader.add(new BunqBasicHeader(header, allHeader.get(allHeader.name(i))));

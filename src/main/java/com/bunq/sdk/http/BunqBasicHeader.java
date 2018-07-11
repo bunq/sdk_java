@@ -1,6 +1,5 @@
 package com.bunq.sdk.http;
 
-import com.sun.org.apache.xpath.internal.functions.FuncBoolean;
 import okhttp3.Response;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class BunqBasicHeader implements Comparable<BunqBasicHeader> {
   private final String value;
 
   public static BunqBasicHeader get(BunqHeader header, Response response) {
-    return new BunqBasicHeader(header, response.header(header.getHeader()));
+    return new BunqBasicHeader(header, response.header(header.getHeaderName()));
   }
 
   public BunqBasicHeader(BunqHeader name, String value) {
@@ -36,7 +35,7 @@ public class BunqBasicHeader implements Comparable<BunqBasicHeader> {
   }
 
   private String forSigning() {
-    return getName().getHeader() + DELIMITER_HEADER_NAME_AND_VALUE + getValue();
+    return getName().getHeaderName() + DELIMITER_HEADER_NAME_AND_VALUE + getValue();
   }
 
   public static String collectForSigning(
