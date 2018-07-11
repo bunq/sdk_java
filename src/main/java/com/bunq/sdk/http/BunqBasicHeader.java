@@ -14,12 +14,8 @@ public class BunqBasicHeader implements Comparable<BunqBasicHeader> {
   private static final String DELIMITER_HEADER_NAME_AND_VALUE = ": ";
   private static final String NEWLINE = "\n";
 
-//  private String name;
-  private String value;
-
-
   private final BunqHeader name;
-//  private final String value;
+  private final String value;
 
   public static BunqBasicHeader get(BunqHeader header, Response response) {
     return new BunqBasicHeader(header, response.header(header.getHeader()));
