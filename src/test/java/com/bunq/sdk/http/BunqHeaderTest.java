@@ -15,7 +15,8 @@ public class BunqHeaderTest {
   /**
    * Expected error messages constatns.
    */
-  private static final String ERROR_STRING_COULD_NOT_DETERMINE_RESPONSE_ID = "Could not determine response id.";
+  private static final String ERROR_STRING_COULD_NOT_DETERMINE_RESPONSE_ID =
+      "Could not determine response id.";
 
   /**
    * Header name constants.

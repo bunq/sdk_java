@@ -122,7 +122,9 @@ public class BunqSdkTestBase {
         )
         .post(RequestBody.create(null, new byte[INDEX_FIRST]))
         .addHeader(BunqHeader.CLIENT_REQUEST_ID.getHeaderName(), UUID.randomUUID().toString())
-        .addHeader(BunqHeader.CACHE_CONTROL.getHeaderName(), BunqHeader.CACHE_CONTROL.getDefaultValue())
+        .addHeader(
+            BunqHeader.CACHE_CONTROL.getHeaderName(), BunqHeader.CACHE_CONTROL.getDefaultValue()
+        )
         .addHeader(BunqHeader.GEOLOCATION.getHeaderName(), BunqHeader.GEOLOCATION.getDefaultValue())
         .addHeader(BunqHeader.LANGUAGE.getHeaderName(), BunqHeader.LANGUAGE.getDefaultValue())
         .addHeader(BunqHeader.REGION.getHeaderName(), BunqHeader.REGION.getDefaultValue())
@@ -141,7 +143,9 @@ public class BunqSdkTestBase {
 
         return SandboxUser.fromJsonReader(new JsonReader(new StringReader(apiKEy.toString())));
       } else {
-        throw new BunqException(String.format(ERROR_COULD_NOT_GENERATE_NEW_API_KEY, response.body().string()));
+        throw new BunqException(
+            String.format(ERROR_COULD_NOT_GENERATE_NEW_API_KEY, response.body().string())
+        );
       }
     } catch (IOException e) {
       throw new BunqException(e.getMessage());
@@ -155,7 +159,8 @@ public class BunqSdkTestBase {
   }
 
   /**
-   * To ensure that our test user has enough money on the account, we sent a request to suggerdaddy@bunq.com
+   * To ensure that our test user has enough money on the account,
+   * we sent a request to suggerdaddy@bunq.com
    * to top-up the account.
    */
   private static void requestSpendingMoney() {
