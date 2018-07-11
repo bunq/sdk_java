@@ -296,7 +296,7 @@ public final class SecurityUtils {
       byte[] keyEncrypted = cipher.doFinal(key.getEncoded());
 
       String keyEncryptedEncoded = DatatypeConverter.printBase64Binary(keyEncrypted);
-      BunqHeader.clientEncryptionKey.addTo(customHeaders, keyEncryptedEncoded);
+      BunqHeader.CLIENT_ENCRYPTION_KEY.addTo(customHeaders, keyEncryptedEncoded);
     } catch (GeneralSecurityException exception) {
       throw new BunqException(exception.getMessage());
     }
@@ -305,7 +305,7 @@ public final class SecurityUtils {
   private static void addHeaderClientEncryptionIv(byte[] initializationVector, Map<String,
       String> customHeaders) {
     String initializationVectorEncoded = DatatypeConverter.printBase64Binary(initializationVector);
-    BunqHeader.clientEncryptionIV.addTo(customHeaders, initializationVectorEncoded);
+    BunqHeader.CLIENT_ENCRYPTION_IV.addTo(customHeaders, initializationVectorEncoded);
   }
 
   private static byte[] encryptRequestBytes(byte[] requestBytes, SecretKey key,
@@ -339,7 +339,7 @@ public final class SecurityUtils {
       byte[] hmac = mac.doFinal();
 
       String hmacEncoded = DatatypeConverter.printBase64Binary(hmac);
-      BunqHeader.clientEncryptionHMAC.addTo(customHeaders, hmacEncoded);
+      BunqHeader.CLIENT_ENCRYPTION_HMAC.addTo(customHeaders, hmacEncoded);
     } catch (GeneralSecurityException | IOException exception) {
       throw new BunqException(exception.getMessage());
     }
@@ -396,7 +396,7 @@ public final class SecurityUtils {
     return BunqBasicHeader.collectForSigning(
             bunqRequestBuilder.getAllHeader(),
             null,
-            Arrays.asList(BunqHeader.cacheControl, BunqHeader.userAgent)
+            Arrays.asList(BunqHeader.CACHE_CONTROL, BunqHeader.USER_AGENT)
     );
   }
 
@@ -472,7 +472,7 @@ public final class SecurityUtils {
         response.headers()
     );
     Signature signature = getSignatureInstance();
-    BunqBasicHeader serverSignature = BunqBasicHeader.get(BunqHeader.serverSignature, response);
+    BunqBasicHeader serverSignature = BunqBasicHeader.get(BunqHeader.SERVER_SIGNATURE, response);
 
     byte[] serverSignatureDecoded = DatatypeConverter.parseBase64Binary(
         serverSignature.getValue()
@@ -491,7 +491,7 @@ public final class SecurityUtils {
     for (int i = INDEX_FIRST; i < allHeader.names().size(); i++) {
       BunqHeader header = BunqHeader.parse(allHeader.name(i));
 
-      if (header != null && !BunqHeader.serverSignature.equals(header)) {
+      if (header != null && !BunqHeader.SERVER_SIGNATURE.equals(header)) {
         allResponseHeader.add(new BunqBasicHeader(header, allHeader.get(allHeader.name(i))));
       }
     }
@@ -516,7 +516,7 @@ public final class SecurityUtils {
   private static String generateResponseHeadersSortedString(List<BunqBasicHeader> headers) {
     return BunqBasicHeader.collectForSigning(
             headers,
-            BunqHeader.serverSignature,
+            BunqHeader.SERVER_SIGNATURE,
         Collections.<BunqHeader>emptyList()
     );
   }

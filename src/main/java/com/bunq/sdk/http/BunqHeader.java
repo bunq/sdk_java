@@ -4,21 +4,21 @@ import java.util.Collection;
 import java.util.Map;
 
 public enum BunqHeader {
-    attachmentDescription("X-Bunq-Attachment-Description"),
-    cacheControl("Cache-Control", "no-cache"),
-    contentType("Content-Type"),
-    clientAuthentication("X-Bunq-Client-Authentication"),
-    clientEncryptionHMAC("X-Bunq-Client-Encryption-Hmac"),
-    clientEncryptionIV("X-Bunq-Client-Encryption-Iv"),
-    clientEncryptionKey("X-Bunq-Client-Encryption-Key"),
-    clientRequestId("X-Bunq-Client-Request-Id"),
-    clientSignature("X-Bunq-Client-Signature"),
-    clientResponseId("X-Bunq-Client-Response-Id", "Could not determine response id."),
-    geolocation("X-Bunq-Geolocation", "0 0 0 0 000"),
-    language("X-Bunq-Language", "en_US"),
-    region("X-Bunq-Region", "nl_NL"),
-    serverSignature("X-Bunq-Server-Signature"),
-    userAgent("User-Agent", "bunq-sdk-java/0.13.1");
+    ATTACHMENT_DESCRIPTION("X-Bunq-Attachment-Description"),
+    CACHE_CONTROL("Cache-Control", "no-cache"),
+    CLIENT_AUTHENTICATION("X-Bunq-Client-Authentication"),
+    CLIENT_ENCRYPTION_HMAC("X-Bunq-Client-Encryption-Hmac"),
+    CLIENT_ENCRYPTION_IV("X-Bunq-Client-Encryption-Iv"),
+    CLIENT_ENCRYPTION_KEY("X-Bunq-Client-Encryption-Key"),
+    CLIENT_REQUEST_ID("X-Bunq-Client-Request-Id"),
+    CLIENT_RESPONSE_ID("X-Bunq-Client-Response-Id", "Could not determine response id."),
+    CLIENT_SIGNATURE("X-Bunq-Client-Signature"),
+    CONTENT_TYPE("Content-Type"),
+    GEOLOCATION("X-Bunq-Geolocation", "0 0 0 0 000"),
+    LANGUAGE("X-Bunq-Language", "en_US"),
+    REGION("X-Bunq-Region", "nl_NL"),
+    SERVER_SIGNATURE("X-Bunq-Server-Signature"),
+    USER_AGENT("User-Agent", "bunq-sdk-java/0.13.1");
 
     private static final String PREFIX = "X-Bunq-";
 

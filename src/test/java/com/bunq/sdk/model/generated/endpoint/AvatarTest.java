@@ -1,9 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.exception.BunqException;
-import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqHeader;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -56,8 +54,8 @@ public class AvatarTest extends BunqSdkTestBase {
   private String uploadAvatar(byte[] file_contents) {
     HashMap<String, String> allCustomHeader = new HashMap<>();
 
-    BunqHeader.attachmentDescription.addTo(allCustomHeader, ATTACHMENT_PATH_IN);
-    BunqHeader.contentType.addTo(allCustomHeader, CONTENT_TYPE);
+    BunqHeader.ATTACHMENT_DESCRIPTION.addTo(allCustomHeader, ATTACHMENT_PATH_IN);
+    BunqHeader.CONTENT_TYPE.addTo(allCustomHeader, CONTENT_TYPE);
 
     return AttachmentPublic.create(allCustomHeader, file_contents).getValue();
   }

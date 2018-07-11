@@ -10,7 +10,6 @@ import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.security.SecurityUtils;
-import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -158,9 +157,9 @@ public class ApiClient {
         requestBodyBytes
     );
 
-    if (customHeaders.containsKey(BunqHeader.contentType.getHeader())) {
+    if (customHeaders.containsKey(BunqHeader.CONTENT_TYPE.getHeader())) {
       bunqRequestBody = BunqRequestBody.create(
-          MediaType.parse(customHeaders.get(BunqHeader.contentType.getHeader())),
+          MediaType.parse(customHeaders.get(BunqHeader.CONTENT_TYPE.getHeader())),
           requestBodyBytes
       );
     }
@@ -228,12 +227,12 @@ public class ApiClient {
   /**
    */
   private void setDefaultHeaders(BunqRequestBuilder httpEntity) {
-    BunqHeader.cacheControl.addTo(httpEntity);
-    BunqHeader.userAgent.addTo(httpEntity);
-    BunqHeader.language.addTo(httpEntity);
-    BunqHeader.region.addTo(httpEntity);
-    BunqHeader.clientRequestId.addTo(httpEntity, UUID.randomUUID().toString());
-    BunqHeader.geolocation.addTo(httpEntity);
+    BunqHeader.CACHE_CONTROL.addTo(httpEntity);
+    BunqHeader.USER_AGENT.addTo(httpEntity);
+    BunqHeader.LANGUAGE.addTo(httpEntity);
+    BunqHeader.REGION.addTo(httpEntity);
+    BunqHeader.CLIENT_REQUEST_ID.addTo(httpEntity, UUID.randomUUID().toString());
+    BunqHeader.GEOLOCATION.addTo(httpEntity);
   }
 
   /**
@@ -250,8 +249,8 @@ public class ApiClient {
     String sessionToken = apiContext.getSessionToken();
 
     if (sessionToken != null) {
-      BunqHeader.clientAuthentication.addTo(requestBuilder, sessionToken);
-      BunqHeader.clientSignature.addTo(requestBuilder, generateSignature(requestBuilder));
+      BunqHeader.CLIENT_AUTHENTICATION.addTo(requestBuilder, sessionToken);
+      BunqHeader.CLIENT_SIGNATURE.addTo(requestBuilder, generateSignature(requestBuilder));
     }
   }
 
@@ -280,7 +279,7 @@ public class ApiClient {
   private static String getResponseId(Response response) {
     Map<String, String> headerMap = getHeadersMap(response);
 
-    return BunqHeader.clientResponseId.getOrDefault(headerMap);
+    return BunqHeader.CLIENT_RESPONSE_ID.getOrDefault(headerMap);
   }
 
   /**

@@ -121,11 +121,11 @@ public class BunqSdkTestBase {
             URL_PATH_SANDBOX_USER
         )
         .post(RequestBody.create(null, new byte[INDEX_FIRST]))
-        .addHeader(BunqHeader.clientRequestId.getHeader(), UUID.randomUUID().toString())
-        .addHeader(BunqHeader.cacheControl.getHeader(), BunqHeader.cacheControl.getDefaultValue())
-        .addHeader(BunqHeader.geolocation.getHeader(), BunqHeader.geolocation.getDefaultValue())
-        .addHeader(BunqHeader.language.getHeader(), BunqHeader.language.getDefaultValue())
-        .addHeader(BunqHeader.region.getHeader(), BunqHeader.region.getDefaultValue())
+        .addHeader(BunqHeader.CLIENT_REQUEST_ID.getHeader(), UUID.randomUUID().toString())
+        .addHeader(BunqHeader.CACHE_CONTROL.getHeader(), BunqHeader.CACHE_CONTROL.getDefaultValue())
+        .addHeader(BunqHeader.GEOLOCATION.getHeader(), BunqHeader.GEOLOCATION.getDefaultValue())
+        .addHeader(BunqHeader.LANGUAGE.getHeader(), BunqHeader.LANGUAGE.getDefaultValue())
+        .addHeader(BunqHeader.REGION.getHeader(), BunqHeader.REGION.getDefaultValue())
         .build();
 
     try {
