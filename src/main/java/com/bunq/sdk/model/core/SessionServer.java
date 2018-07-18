@@ -100,15 +100,19 @@ public class SessionServer extends BunqModel {
       return false;
     }
 
-    if (this.sessionToken == null) {
+    if (this.sessionToken != null) {
       return false;
     }
 
-    if (this.userCompany == null) {
+    if (this.userCompany != null) {
       return false;
     }
 
-    if (this.userPerson == null) {
+    if (this.userPerson != null) {
+      return false;
+    }
+
+    if (this.userApiKey != null) {
       return false;
     }
 
