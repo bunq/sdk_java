@@ -1,9 +1,11 @@
 package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.UserContextHelper;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
 import com.bunq.sdk.model.generated.endpoint.User;
+import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 
@@ -18,6 +20,7 @@ public class UserContext {
   private final ApiContext apiContext;
   private UserCompany userCompany;
   private UserPerson userPerson;
+  private UserApiKey userApiKey;
   private MonetaryAccountBank primaryMonetaryAccountBank;
 
   public UserContext(ApiContext apiContext) {
@@ -25,11 +28,13 @@ public class UserContext {
     refreshContext();
   }
 
-  private void initUser(User user) {
-    if (user.getUserPerson() != null) {
-      this.userPerson = user.getUserPerson();
-    } else if (user.getUserCompany() != null) {
-      this.userCompany = user.getUserCompany();
+  private void initUser(BunqModel user) {
+    if (user instanceof UserPerson) {
+      this.userPerson = (UserPerson) user;
+    } else if (user instanceof UserCompany) {
+      this.userCompany = (UserCompany) user;
+    } else if (user instanceof UserApiKey) {
+      this.userApiKey = (UserApiKey) user;
     } else {
       throw new BunqException(ERROR_UNEXPECTED_USER_INSTANCE);
     }
@@ -50,15 +55,19 @@ public class UserContext {
   }
 
   public boolean isOnlyUserPersonSet() {
-    return this.userCompany == null && this.userPerson != null;
+    return this.userCompany == null && this.userApiKey == null &&this.userPerson != null;
   }
 
   public boolean isOnlyUserCompanySet() {
-    return this.userPerson == null && this.userCompany != null;
+    return this.userPerson == null && this.userApiKey == null &&this.userCompany != null;
   }
 
-  public boolean isBothUserTypeSet() {
-    return this.userPerson != null && this.userCompany != null;
+  public boolean isOnlyUserApiKeySet() {
+    return this.userPerson == null && this.userCompany == null && this.userApiKey != null;
+  }
+
+  public boolean areAllUserSet() {
+    return this.userPerson != null && this.userCompany != null && this.userApiKey != null;
   }
 
   public Integer getMainMonetaryAccountId() {
@@ -75,6 +84,10 @@ public class UserContext {
 
   public UserCompany getUserCompany() {
     return this.userCompany;
+  }
+
+  public UserApiKey getUserApiKey() {
+    return userApiKey;
   }
 
   public MonetaryAccountBank getPrimaryMonetaryAccountBank() {

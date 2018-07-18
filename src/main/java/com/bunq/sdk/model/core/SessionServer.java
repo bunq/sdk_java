@@ -5,6 +5,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class SessionServer extends BunqModel {
   private SessionToken sessionToken;
   private UserCompany userCompany;
   private UserPerson userPerson;
+  private UserApiKey userApiKey;
 
   public SessionServer(Id id, SessionToken sessionToken, UserCompany userCompany) {
     this.id = id;
@@ -107,12 +109,14 @@ public class SessionServer extends BunqModel {
     return true;
   }
 
-  public BunqModel getReferencedObject() {
-    if (this.userCompany == null) {
+  public BunqModel getReferencedUser() {
+    if (this.userCompany == null && this.userApiKey == null && this.userPerson != null) {
       return this.userPerson;
-    } else if (this.userPerson == null) {
+    } else if (this.userPerson == null && this.userApiKey == null && this.userCompany != null) {
       return this.userCompany;
-    } else {
+    } else if (this.userPerson == null && this.userCompany == null && this.userApiKey != null) {
+      return this.userApiKey;
+    }else {
       throw new BunqException(ERROR_ALL_FIELD_NULL);
     }
   }
