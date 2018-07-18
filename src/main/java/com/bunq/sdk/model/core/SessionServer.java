@@ -45,6 +45,12 @@ public class SessionServer extends BunqModel {
     this.userPerson = userPerson;
   }
 
+  public SessionServer(Id id, SessionToken sessionToken, UserApiKey userApiKey) {
+    this.id = id;
+    this.sessionToken = sessionToken;
+    this.userApiKey = userApiKey;
+  }
+
   /**
    * Create a new session for a DeviceServer. Provide the Installation token
    * in the "X-Bunq-Client-Authentication" header. And don't forget to create
@@ -116,7 +122,7 @@ public class SessionServer extends BunqModel {
       return this.userCompany;
     } else if (this.userPerson == null && this.userCompany == null && this.userApiKey != null) {
       return this.userApiKey;
-    }else {
+    } else {
       throw new BunqException(ERROR_ALL_FIELD_NULL);
     }
   }

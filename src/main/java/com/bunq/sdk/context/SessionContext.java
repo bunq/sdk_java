@@ -54,20 +54,12 @@ public class SessionContext implements java.io.Serializable {
   }
 
   private int getUserId(BunqModel user) {
-    if (user instanceof UserApiKey) {
-      BunqModel referencedUser = ((UserApiKey) user).getRequestedByUser().getReferencedObject();
-
-      return getUserIdFromUser(referencedUser);
-    } else {
-      return getUserIdFromUser(user);
-    }
-  }
-
-  private int getUserIdFromUser(BunqModel user) {
     if (user instanceof UserPerson) {
       return ((UserPerson) user).getId();
     } else if (user instanceof UserCompany) {
       return ((UserCompany) user).getId();
+    } else if (user instanceof UserApiKey) {
+      return ((UserApiKey) user).getId();
     } else {
       throw new BunqException(
           String.format(

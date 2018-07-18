@@ -36,7 +36,7 @@ public class UserContext {
     } else if (user instanceof UserApiKey) {
       this.userApiKey = (UserApiKey) user;
     } else {
-      throw new BunqException(ERROR_UNEXPECTED_USER_INSTANCE);
+      throw new BunqException(String.format(ERROR_UNEXPECTED_USER_INSTANCE, user.getClass().toString()));
     }
   }
 
@@ -46,7 +46,7 @@ public class UserContext {
 
   public void refreshContext() {
     UserContextHelper helper = new UserContextHelper(this.apiContext);
-    this.initUser(helper.getFirstUser());
+    this.initUser(helper.getFirstUser().getReferencedObject());
     this.initMainMonetaryAccount(helper.getFirstActiveMonetaryAccountBankByUserId(getUserId()));
   }
 
