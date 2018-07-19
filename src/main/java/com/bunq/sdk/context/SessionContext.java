@@ -79,6 +79,7 @@ public class SessionContext implements java.io.Serializable {
 
   private static int getSessionTimeout(SessionServer sessionServer) {
     BunqModel user = sessionServer.getReferencedUser();
+
     if (user instanceof UserApiKey) {
       BunqModel referencedUser = ((UserApiKey) user).getRequestedByUser().getReferencedObject();
 

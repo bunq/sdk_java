@@ -20,6 +20,10 @@ import java.lang.reflect.Type;
  * SessionServer POST response.
  */
 public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
+  /**
+   * Error constatns.
+   */
+  private static final String ERROR_COULD_NOT_DETERMINE_USER = "Could not determine user.";
 
   private static final int INDEX_ID = 0;
   private static final String FIELD_ID = "Id";
@@ -69,7 +73,7 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
 
       return new SessionServer(id, token, userApiKey);
     } else {
-      throw new BunqException("");
+      throw new BunqException(ERROR_COULD_NOT_DETERMINE_USER);
     }
   }
 
