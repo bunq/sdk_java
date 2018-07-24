@@ -1,26 +1,37 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.generated.object.Amount;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
+import java.util.List;
 import java.util.Map;
 
 /**
- * Used to read a single publicly visible tab.
+ * Once your CashRegister has been activated you can use it to create Tabs. A Tab is a template
+ * for a payment. In contrast to requests a Tab is not pointed towards a specific user. Any user
+ * can pay the Tab as long as it is made visible by you. The creation of a Tab happens with
+ * /tab-usage-single or /tab-usage-multiple. A TabUsageSingle is a Tab that can be paid once. A
+ * TabUsageMultiple is a Tab that can be paid multiple times by different users.
  */
-public class Tab extends BunqModel {
+public class Tab extends BunqModel implements AnchorObjectInterface {
+
+  /**
+   * Error constants.
+   */
+  protected static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
   /**
    * Endpoint constants.
    */
-  protected static final String ENDPOINT_URL_READ = "tab/%s";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab";
 
   /**
    * Object type.
@@ -28,203 +39,115 @@ public class Tab extends BunqModel {
   protected static final String OBJECT_TYPE_GET = "Tab";
 
   /**
-   * The uuid of the tab.
    */
   @Expose
-  @SerializedName("uuid")
-  private String uuid;
+  @SerializedName("TabUsageSingle")
+  private TabUsageSingle tabUsageSingle;
 
   /**
-   * The label of the party that owns this tab.
    */
   @Expose
-  @SerializedName("alias")
-  private LabelMonetaryAccount alias;
+  @SerializedName("TabUsageMultiple")
+  private TabUsageMultiple tabUsageMultiple;
 
   /**
-   * The avatar of this tab.
+   * Get a specific tab. This returns a TabUsageSingle or TabUsageMultiple.
    */
-  @Expose
-  @SerializedName("avatar")
-  private String avatar;
-
-  /**
-   * The reference of the tab, as defined by the owner.
-   */
-  @Expose
-  @SerializedName("reference")
-  private String reference;
-
-  /**
-   * The short description of the tab.
-   */
-  @Expose
-  @SerializedName("description")
-  private String description;
-
-  /**
-   * The status of the tab.
-   */
-  @Expose
-  @SerializedName("status")
-  private String status;
-
-  /**
-   * The moment when this tab expires.
-   */
-  @Expose
-  @SerializedName("expiration")
-  private String expiration;
-
-  /**
-   * The total amount of the tab.
-   */
-  @Expose
-  @SerializedName("amount_total")
-  private Amount amountTotal;
-
-  /**
-   * Get a publicly visible tab.
-   */
-  public static BunqResponse<Tab> get(String tabUuid, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<Tab> get(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, tabUuid), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid), params, customHeaders);
 
-    return fromJson(Tab.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJson(Tab.class, responseRaw);
   }
 
   public static BunqResponse<Tab> get() {
-    return get(null, null, null);
+    return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<Tab> get(String tabUuid) {
-    return get(tabUuid, null, null);
+  public static BunqResponse<Tab> get(Integer cashRegisterId) {
+    return get(cashRegisterId, null, null, null, null);
   }
 
-  public static BunqResponse<Tab> get(String tabUuid, Map<String, String> params) {
-    return get(tabUuid, params, null);
+  public static BunqResponse<Tab> get(Integer cashRegisterId, String tabUuid) {
+    return get(cashRegisterId, tabUuid, null, null, null);
   }
 
-  /**
-   * The uuid of the tab.
-   */
-  public String getUuid() {
-    return this.uuid;
+  public static BunqResponse<Tab> get(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId) {
+    return get(cashRegisterId, tabUuid, monetaryAccountId, null, null);
   }
 
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
+  public static BunqResponse<Tab> get(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId, Map<String, String> params) {
+    return get(cashRegisterId, tabUuid, monetaryAccountId, params, null);
   }
 
   /**
-   * The label of the party that owns this tab.
+   * Get a collection of tabs.
    */
-  public LabelMonetaryAccount getAlias() {
-    return this.alias;
+  public static BunqResponse<List<Tab>> list(Integer cashRegisterId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId), params, customHeaders);
+
+    return fromJsonList(Tab.class, responseRaw);
   }
 
-  public void setAlias(LabelMonetaryAccount alias) {
-    this.alias = alias;
+  public static BunqResponse<List<Tab>> list() {
+    return list(null, null, null, null);
+  }
+
+  public static BunqResponse<List<Tab>> list(Integer cashRegisterId) {
+    return list(cashRegisterId, null, null, null);
+  }
+
+  public static BunqResponse<List<Tab>> list(Integer cashRegisterId, Integer monetaryAccountId) {
+    return list(cashRegisterId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<Tab>> list(Integer cashRegisterId, Integer monetaryAccountId, Map<String, String> params) {
+    return list(cashRegisterId, monetaryAccountId, params, null);
   }
 
   /**
-   * The avatar of this tab.
    */
-  public String getAvatar() {
-    return this.avatar;
+  public TabUsageSingle getTabUsageSingle() {
+    return this.tabUsageSingle;
   }
 
-  public void setAvatar(String avatar) {
-    this.avatar = avatar;
+  public void setTabUsageSingle(TabUsageSingle tabUsageSingle) {
+    this.tabUsageSingle = tabUsageSingle;
   }
 
   /**
-   * The reference of the tab, as defined by the owner.
    */
-  public String getReference() {
-    return this.reference;
+  public TabUsageMultiple getTabUsageMultiple() {
+    return this.tabUsageMultiple;
   }
 
-  public void setReference(String reference) {
-    this.reference = reference;
+  public void setTabUsageMultiple(TabUsageMultiple tabUsageMultiple) {
+    this.tabUsageMultiple = tabUsageMultiple;
   }
 
   /**
-   * The short description of the tab.
    */
-  public String getDescription() {
-    return this.description;
-  }
+  public BunqModel getReferencedObject() {
+    if (this.tabUsageSingle != null) {
+      return this.tabUsageSingle;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    if (this.tabUsageMultiple != null) {
+      return this.tabUsageMultiple;
+    }
 
-  /**
-   * The status of the tab.
-   */
-  public String getStatus() {
-    return this.status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  /**
-   * The moment when this tab expires.
-   */
-  public String getExpiration() {
-    return this.expiration;
-  }
-
-  public void setExpiration(String expiration) {
-    this.expiration = expiration;
-  }
-
-  /**
-   * The total amount of the tab.
-   */
-  public Amount getAmountTotal() {
-    return this.amountTotal;
-  }
-
-  public void setAmountTotal(Amount amountTotal) {
-    this.amountTotal = amountTotal;
+    throw new BunqException(ERROR_NULL_FIELDS);
   }
 
   /**
    */
   public boolean isAllFieldNull() {
-    if (this.uuid != null) {
+    if (this.tabUsageSingle != null) {
       return false;
     }
 
-    if (this.alias != null) {
-      return false;
-    }
-
-    if (this.avatar != null) {
-      return false;
-    }
-
-    if (this.reference != null) {
-      return false;
-    }
-
-    if (this.description != null) {
-      return false;
-    }
-
-    if (this.status != null) {
-      return false;
-    }
-
-    if (this.expiration != null) {
-      return false;
-    }
-
-    if (this.amountTotal != null) {
+    if (this.tabUsageMultiple != null) {
       return false;
     }
 

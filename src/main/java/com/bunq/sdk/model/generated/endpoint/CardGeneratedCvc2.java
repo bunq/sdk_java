@@ -23,7 +23,12 @@ public class CardGeneratedCvc2 extends BunqModel {
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/generated-cvc2";
   protected static final String ENDPOINT_URL_READ = "user/%s/card/%s/generated-cvc2/%s";
+  /**
+   * Field constants.
+   */
+  public static final String FIELD_TYPE = "type";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/generated-cvc2";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s/generated-cvc2/%s";
 
   /**
    * Object type.
@@ -50,6 +55,12 @@ public class CardGeneratedCvc2 extends BunqModel {
   @Expose
   @SerializedName("updated")
   private String updated;
+  /**
+   * The type of generated cvc2. Can be STATIC or GENERATED.
+   */
+  @Expose
+  @SerializedName("type")
+  private String type;
 
   /**
    * The cvc2 code.
@@ -73,9 +84,25 @@ public class CardGeneratedCvc2 extends BunqModel {
   private String expiryTime;
 
   /**
-   * Generate a new CVC2 code for a card.
+   * The type of generated cvc2. Can be STATIC or GENERATED.
    */
-  public static BunqResponse<Integer> create(Integer cardId, Map<String, String> customHeaders) {
+  @Expose
+  @SerializedName("type_field_for_request")
+  private String typeFieldForRequest;
+
+  public CardGeneratedCvc2() {
+    this(null);
+  }
+
+  public CardGeneratedCvc2(String type) {
+    this.typeFieldForRequest = type;
+  }
+
+  /**
+   * Generate a new CVC2 code for a card.
+   * @param type The type of generated cvc2. Can be STATIC or GENERATED.
+   */
+  public static BunqResponse<Integer> create(Integer cardId, String type, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -83,6 +110,7 @@ public class CardGeneratedCvc2 extends BunqModel {
     }
 
     HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_TYPE, type);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
@@ -92,11 +120,15 @@ public class CardGeneratedCvc2 extends BunqModel {
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null);
+    return create(null, null, null);
   }
 
   public static BunqResponse<Integer> create(Integer cardId) {
-    return create(cardId, null);
+    return create(cardId, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Integer cardId, String type) {
+    return create(cardId, type, null);
   }
 
   /**
@@ -123,6 +155,38 @@ public class CardGeneratedCvc2 extends BunqModel {
 
   public static BunqResponse<CardGeneratedCvc2> get(Integer cardId, Integer cardGeneratedCvc2Id, Map<String, String> params) {
     return get(cardId, cardGeneratedCvc2Id, params, null);
+  }
+
+  /**
+   * @param type The type of generated cvc2. Can be STATIC or GENERATED.
+   */
+  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id, String type, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_TYPE, type);
+
+    byte[] requestBytes = determineAllRequestByte(requestMap);
+    requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), cardId, cardGeneratedCvc2Id), requestBytes, customHeaders);
+
+    return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update(Integer cardId) {
+    return update(cardId, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id) {
+    return update(cardId, cardGeneratedCvc2Id, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id, String type) {
+    return update(cardId, cardGeneratedCvc2Id, type, null);
   }
 
   /**
@@ -181,6 +245,17 @@ public class CardGeneratedCvc2 extends BunqModel {
   }
 
   /**
+   * The type of generated cvc2. Can be STATIC or GENERATED.
+   */
+  public String getType() {
+    return this.type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  /**
    * The cvc2 code.
    */
   public String getCvc2() {
@@ -225,6 +300,10 @@ public class CardGeneratedCvc2 extends BunqModel {
     }
 
     if (this.updated != null) {
+      return false;
+    }
+
+    if (this.type != null) {
       return false;
     }
 

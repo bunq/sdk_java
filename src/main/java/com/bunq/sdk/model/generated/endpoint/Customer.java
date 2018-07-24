@@ -28,6 +28,7 @@ public class Customer extends BunqModel {
    * Field constants.
    */
   public static final String FIELD_BILLING_ACCOUNT_ID = "billing_account_id";
+  public static final String FIELD_INVOICE_NOTIFICATION_PREFERENCE = "invoice_notification_preference";
 
   /**
    * Object type.
@@ -69,12 +70,24 @@ public class Customer extends BunqModel {
   @SerializedName("billing_account_id_field_for_request")
   private String billingAccountIdFieldForRequest;
 
+  /**
+   * The preferred notification type for invoices
+   */
+  @Expose
+  @SerializedName("invoice_notification_preference_field_for_request")
+  private String invoiceNotificationPreferenceFieldForRequest;
+
   public Customer() {
-    this(null);
+    this(null, null);
   }
 
   public Customer(String billingAccountId) {
+    this(billingAccountId, null);
+  }
+
+  public Customer(String billingAccountId, String invoiceNotificationPreference) {
     this.billingAccountIdFieldForRequest = billingAccountId;
+    this.invoiceNotificationPreferenceFieldForRequest = invoiceNotificationPreference;
   }
 
   /**
@@ -117,8 +130,9 @@ public class Customer extends BunqModel {
 
   /**
    * @param billingAccountId The primary billing account account's id.
+   * @param invoiceNotificationPreference The preferred notification type for invoices
    */
-  public static BunqResponse<Integer> update(Integer customerId, String billingAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(Integer customerId, String billingAccountId, String invoiceNotificationPreference, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -127,6 +141,7 @@ public class Customer extends BunqModel {
 
     HashMap<String, Object> requestMap = new HashMap<>();
     requestMap.put(FIELD_BILLING_ACCOUNT_ID, billingAccountId);
+    requestMap.put(FIELD_INVOICE_NOTIFICATION_PREFERENCE, invoiceNotificationPreference);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), customerId), requestBytes, customHeaders);
@@ -135,11 +150,15 @@ public class Customer extends BunqModel {
   }
 
   public static BunqResponse<Integer> update(Integer customerId) {
-    return update(customerId, null, null);
+    return update(customerId, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer customerId, String billingAccountId) {
-    return update(customerId, billingAccountId, null);
+    return update(customerId, billingAccountId, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer customerId, String billingAccountId, String invoiceNotificationPreference) {
+    return update(customerId, billingAccountId, invoiceNotificationPreference, null);
   }
 
   /**
