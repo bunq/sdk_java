@@ -4,7 +4,6 @@ import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.endpoint.BunqMeTab;
 import com.bunq.sdk.model.generated.endpoint.ChatMessage;
-import com.bunq.sdk.model.generated.endpoint.ChatMessageAnnouncement;
 import com.bunq.sdk.model.generated.endpoint.DraftPayment;
 import com.bunq.sdk.model.generated.endpoint.MasterCardAction;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccount;
@@ -153,20 +152,6 @@ public class NotificationUrlTest extends BunqSdkTestBase {
         JSON_PATH_BUNQ_ME_TAB_MODEL,
         BunqMeTab.class.getName(),
         GETTER_BUNQ_ME_TAB
-    );
-  }
-
-  @Test
-  public void chatMessageAnnouncementModelTest() throws InvocationTargetException, FileNotFoundException,
-      ClassNotFoundException,
-      IllegalAccessException,
-      NoSuchMethodException {
-    executeNotificationUrlTest(
-        JSON_PATH_CHAT_MESSAGE_ANNOUNCEMENT_MODEL,
-        ChatMessage.class.getName(),
-        GETTER_CHAT_MESSAGE,
-        ChatMessageAnnouncement.class.getName(),
-        GETTER_CHAT_MESSAGE_ANNOUNCEMENT
     );
   }
 
