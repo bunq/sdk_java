@@ -54,6 +54,12 @@ public class User extends BunqModel implements AnchorObjectInterface {
   private UserCompany userCompany;
 
   /**
+   */
+  @Expose
+  @SerializedName("UserApiKey")
+  private UserApiKey userApiKey;
+
+  /**
    * Get a specific user.
    */
   public static BunqResponse<User> get(Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
@@ -125,6 +131,16 @@ public class User extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
+  public UserApiKey getUserApiKey() {
+    return this.userApiKey;
+  }
+
+  public void setUserApiKey(UserApiKey userApiKey) {
+    this.userApiKey = userApiKey;
+  }
+
+  /**
+   */
   public BunqModel getReferencedObject() {
     if (this.userLight != null) {
       return this.userLight;
@@ -136,6 +152,10 @@ public class User extends BunqModel implements AnchorObjectInterface {
 
     if (this.userCompany != null) {
       return this.userCompany;
+    }
+
+    if (this.userApiKey != null) {
+      return this.userApiKey;
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
@@ -153,6 +173,10 @@ public class User extends BunqModel implements AnchorObjectInterface {
     }
 
     if (this.userCompany != null) {
+      return false;
+    }
+
+    if (this.userApiKey != null) {
       return false;
     }
 
