@@ -3,10 +3,12 @@ package com.bunq.sdk.context;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.SessionServer;
+import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 /**
@@ -17,12 +19,7 @@ public class SessionContext implements java.io.Serializable {
   /**
    * Error constants.
    */
-  private static final String ERROR_UNEXPECTED_USER_TYPE = "Unexpected user type.";
-
-  /**
-   * Default assumed value for session timeout.
-   */
-  private static final int SESSION_TIMEOUT_DEFAULT = 0;
+  private static final String ERROR_UNEXPECTED_USER_TYPE = "'%s' is an unexpected user type.";
 
   /**
    * Constant for converting milliseconds to seconds.
@@ -53,16 +50,22 @@ public class SessionContext implements java.io.Serializable {
   SessionContext(SessionServer sessionServer) {
     this.token = sessionServer.getSessionToken().getToken();
     this.expiryTime = calculateExpiryTime(sessionServer);
-    this.userId = getUserId(sessionServer.getReferencedObject());
+    this.userId = getUserId(sessionServer.getReferencedUser());
   }
 
-  private Integer getUserId(BunqModel user) {
+  private int getUserId(BunqModel user) {
     if (user instanceof UserPerson) {
       return ((UserPerson) user).getId();
     } else if (user instanceof UserCompany) {
-      return  ((UserCompany) user).getId();
+      return ((UserCompany) user).getId();
+    } else if (user instanceof UserApiKey) {
+      return ((UserApiKey) user).getId();
     } else {
-      throw new BunqException(ERROR_UNEXPECTED_USER_TYPE);
+      throw new BunqException(
+          String.format(
+              ERROR_UNEXPECTED_USER_TYPE, user.getClass().toString()
+          )
+      );
     }
   }
 
@@ -75,19 +78,25 @@ public class SessionContext implements java.io.Serializable {
   }
 
   private static int getSessionTimeout(SessionServer sessionServer) {
-    UserCompany userCompany = sessionServer.getUserCompany();
+    BunqModel user = sessionServer.getReferencedUser();
 
-    if (userCompany != null) {
-      return userCompany.getSessionTimeout();
+    if (user instanceof UserApiKey) {
+      BunqModel referencedUser = ((UserApiKey) user).getRequestedByUser().getReferencedObject();
+
+      return getSessionTimeOutFromUser(referencedUser);
+    } else {
+      return getSessionTimeOutFromUser(user);
     }
+  }
 
-    UserPerson userPerson = sessionServer.getUserPerson();
-
-    if (userPerson != null) {
-      return userPerson.getSessionTimeout();
+  private static int getSessionTimeOutFromUser(BunqModel user) {
+    if (user instanceof UserCompany) {
+      return ((UserCompany) user).getSessionTimeout();
+    } else if (user instanceof UserPerson) {
+      return ((UserPerson) user).getSessionTimeout();
+    } else {
+      throw new BunqException(ERROR_UNEXPECTED_USER_TYPE);
     }
-
-    return SESSION_TIMEOUT_DEFAULT;
   }
 
   String getToken() {

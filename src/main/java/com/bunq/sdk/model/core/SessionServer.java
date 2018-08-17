@@ -5,6 +5,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
+import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class SessionServer extends BunqModel {
   private SessionToken sessionToken;
   private UserCompany userCompany;
   private UserPerson userPerson;
+  private UserApiKey userApiKey;
 
   public SessionServer(Id id, SessionToken sessionToken, UserCompany userCompany) {
     this.id = id;
@@ -41,6 +43,12 @@ public class SessionServer extends BunqModel {
     this.id = id;
     this.sessionToken = sessionToken;
     this.userPerson = userPerson;
+  }
+
+  public SessionServer(Id id, SessionToken sessionToken, UserApiKey userApiKey) {
+    this.id = id;
+    this.sessionToken = sessionToken;
+    this.userApiKey = userApiKey;
   }
 
   /**
@@ -92,26 +100,32 @@ public class SessionServer extends BunqModel {
       return false;
     }
 
-    if (this.sessionToken == null) {
+    if (this.sessionToken != null) {
       return false;
     }
 
-    if (this.userCompany == null) {
+    if (this.userCompany != null) {
       return false;
     }
 
-    if (this.userPerson == null) {
+    if (this.userPerson != null) {
+      return false;
+    }
+
+    if (this.userApiKey != null) {
       return false;
     }
 
     return true;
   }
 
-  public BunqModel getReferencedObject() {
-    if (this.userCompany == null) {
+  public BunqModel getReferencedUser() {
+    if (this.userCompany == null && this.userApiKey == null && this.userPerson != null) {
       return this.userPerson;
-    } else if (this.userPerson == null) {
+    } else if (this.userPerson == null && this.userApiKey == null && this.userCompany != null) {
       return this.userCompany;
+    } else if (this.userPerson == null && this.userCompany == null && this.userApiKey != null) {
+      return this.userApiKey;
     } else {
       throw new BunqException(ERROR_ALL_FIELD_NULL);
     }

@@ -2,6 +2,7 @@ package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.object.UserApiKeyAnchoredUser;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -12,40 +13,47 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Manages user's support conversation.
+ * Used to view OAuth request detais in events.
  */
-public class ChatConversationSupportExternal extends BunqModel {
+public class UserApiKey extends BunqModel {
 
   /**
-   * The id of this conversation.
+   * The id of the user.
    */
   @Expose
   @SerializedName("id")
   private Integer id;
 
   /**
-   * The timestamp of the support conversation's creation.
+   * The timestamp of the user object's creation.
    */
   @Expose
   @SerializedName("created")
   private String created;
 
   /**
-   * The timestamp of the support conversation's last update.
+   * The timestamp of the user object's last update.
    */
   @Expose
   @SerializedName("updated")
   private String updated;
 
   /**
-   * The last message posted to this conversation if any.
+   * The user who requested access.
    */
   @Expose
-  @SerializedName("last_message")
-  private ChatMessage lastMessage;
+  @SerializedName("requested_by_user")
+  private UserApiKeyAnchoredUser requestedByUser;
 
   /**
-   * The id of this conversation.
+   * The user who granted access.
+   */
+  @Expose
+  @SerializedName("granted_by_user")
+  private UserApiKeyAnchoredUser grantedByUser;
+
+  /**
+   * The id of the user.
    */
   public Integer getId() {
     return this.id;
@@ -56,7 +64,7 @@ public class ChatConversationSupportExternal extends BunqModel {
   }
 
   /**
-   * The timestamp of the support conversation's creation.
+   * The timestamp of the user object's creation.
    */
   public String getCreated() {
     return this.created;
@@ -67,7 +75,7 @@ public class ChatConversationSupportExternal extends BunqModel {
   }
 
   /**
-   * The timestamp of the support conversation's last update.
+   * The timestamp of the user object's last update.
    */
   public String getUpdated() {
     return this.updated;
@@ -78,14 +86,25 @@ public class ChatConversationSupportExternal extends BunqModel {
   }
 
   /**
-   * The last message posted to this conversation if any.
+   * The user who requested access.
    */
-  public ChatMessage getLastMessage() {
-    return this.lastMessage;
+  public UserApiKeyAnchoredUser getRequestedByUser() {
+    return this.requestedByUser;
   }
 
-  public void setLastMessage(ChatMessage lastMessage) {
-    this.lastMessage = lastMessage;
+  public void setRequestedByUser(UserApiKeyAnchoredUser requestedByUser) {
+    this.requestedByUser = requestedByUser;
+  }
+
+  /**
+   * The user who granted access.
+   */
+  public UserApiKeyAnchoredUser getGrantedByUser() {
+    return this.grantedByUser;
+  }
+
+  public void setGrantedByUser(UserApiKeyAnchoredUser grantedByUser) {
+    this.grantedByUser = grantedByUser;
   }
 
   /**
@@ -103,7 +122,11 @@ public class ChatConversationSupportExternal extends BunqModel {
       return false;
     }
 
-    if (this.lastMessage != null) {
+    if (this.requestedByUser != null) {
+      return false;
+    }
+
+    if (this.grantedByUser != null) {
       return false;
     }
 
@@ -112,8 +135,8 @@ public class ChatConversationSupportExternal extends BunqModel {
 
   /**
    */
-  public static ChatConversationSupportExternal fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ChatConversationSupportExternal.class, reader);
+  public static UserApiKey fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserApiKey.class, reader);
   }
 
 }

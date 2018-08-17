@@ -38,7 +38,7 @@ public class CustomerStatementExport extends BunqModel {
   /**
    * Object type.
    */
-  protected static final String OBJECT_TYPE_GET = "CustomerStatementExport";
+  protected static final String OBJECT_TYPE_GET = "CustomerStatement";
 
   /**
    * The id of the customer statement model.

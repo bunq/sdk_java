@@ -1,20 +1,68 @@
 # Change Log
 
-## [0.13.1](https://github.com/bunq/sdk_java/tree/0.13.1)
+## [Unreleased](https://github.com/bunq/sdk_java/tree/1.0.0)
 
+[Full Changelog](https://github.com/bunq/sdk_java/compare/0.13.1...1.0.0)
+
+**Implemented enhancements:**
+
+- Add optional parameters to constructor  [\#50](https://github.com/bunq/sdk_java/issues/50)
+- Monetary account joint cannot be retrieved. [\#45](https://github.com/bunq/sdk_java/issues/45)
+- Add java 7 compatibility  [\#42](https://github.com/bunq/sdk_java/issues/42)
+
+**Fixed bugs:**
+
+- SDK build fails on jitpack [\#6](https://github.com/bunq/sdk_java/issues/6)
+
+**Closed issues:**
+
+- Add oauth support [\#107](https://github.com/bunq/sdk_java/issues/107)
+- Java 7 compatibility: java.util.Base64 [\#104](https://github.com/bunq/sdk_java/issues/104)
+- Please share code formatter [\#103](https://github.com/bunq/sdk_java/issues/103)
+- expose ApiEnvironmentType members and add pinnedKey [\#100](https://github.com/bunq/sdk_java/issues/100)
+- Update Sandbox API key procedure [\#96](https://github.com/bunq/sdk_java/issues/96)
+- Can not construct a BunqMeTabEntry to create a BunqMeTab [\#77](https://github.com/bunq/sdk_java/issues/77)
+
+**Merged pull requests:**
+
+- Oauth bunq/sdk\_java\#107 [\#108](https://github.com/bunq/sdk_java/pull/108) ([OGKevin](https://github.com/OGKevin))
+- Add java 7 support bunq/sdk\_java\#42 [\#106](https://github.com/bunq/sdk_java/pull/106) ([OGKevin](https://github.com/OGKevin))
+- \#100 moved pinnedKey to ApiEnvironmentType [\#101](https://github.com/bunq/sdk_java/pull/101) ([tubbynl](https://github.com/tubbynl))
+- UserContext building without static references. \(bunq/sdk\_java\#93\) [\#99](https://github.com/bunq/sdk_java/pull/99) ([tubbynl](https://github.com/tubbynl))
+- Update Sandbox API key procedure. \(bunq/sdk\_java\#96\) [\#97](https://github.com/bunq/sdk_java/pull/97) ([sandervdo](https://github.com/sandervdo))
+- Add constructor with request field bunq/sdk\_java\#50 [\#95](https://github.com/bunq/sdk_java/pull/95) ([OGKevin](https://github.com/OGKevin))
+- Fix monetary account joint retrieval bunq/sdk\_java\#45 [\#91](https://github.com/bunq/sdk_java/pull/91) ([OGKevin](https://github.com/OGKevin))
+
+## [0.13.1](https://github.com/bunq/sdk_java/tree/0.13.1) (2018-05-30)
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.13.0...0.13.1)
+
+**Implemented enhancements:**
+
+- \[Java\] Update examples in readme  [\#81](https://github.com/bunq/sdk_java/issues/81)
+- Add test CI [\#80](https://github.com/bunq/sdk_java/issues/80)
+- It is not possible to refresh userContext data [\#79](https://github.com/bunq/sdk_java/issues/79)
+- Optimise test framework [\#78](https://github.com/bunq/sdk_java/issues/78)
+- Add more example scripts [\#66](https://github.com/bunq/sdk_java/issues/66)
+- Auto save the session after automatic session reset has been executed  [\#60](https://github.com/bunq/sdk_java/issues/60)
+- Endpoint HTTP methods should not be static  [\#34](https://github.com/bunq/sdk_java/issues/34)
+- Remove the examples from the published artifacts  [\#2](https://github.com/bunq/sdk_java/issues/2)
 
 **Closed issues:**
 
 - Move to new sandbox [\#89](https://github.com/bunq/sdk_java/issues/89)
-
+- Android issue: HttpClient was deprecated in API Level 22 and removed in API Level 23 [\#69](https://github.com/bunq/sdk_java/issues/69)
 
 **Merged pull requests:**
 
-- Changed sandbox url and pinned key.  [\#92](https://github.com/bunq/sdk_java/pull/92) ([OGKevin](https://github.com/OGKevin))
+- Changed sandbox url and pinned key. \(bunq/sdk\_java\#89\) [\#92](https://github.com/bunq/sdk_java/pull/92) ([OGKevin](https://github.com/OGKevin))
+- Auto update bunq context bunq/sdk\_java\#60 [\#90](https://github.com/bunq/sdk_java/pull/90) ([OGKevin](https://github.com/OGKevin))
+- Add travis ci bunq/sdk\_java\#80 [\#87](https://github.com/bunq/sdk_java/pull/87) ([OGKevin](https://github.com/OGKevin))
+- Optimise test framework \(bunq/sdk\_java\#78\) [\#85](https://github.com/bunq/sdk_java/pull/85) ([OGKevin](https://github.com/OGKevin))
+- Updated read me to point to tinker for examples. \(bunq/sdk\_java\#81\) [\#84](https://github.com/bunq/sdk_java/pull/84) ([OGKevin](https://github.com/OGKevin))
+- Refresh user context bunq/sdk\_java\#79 [\#83](https://github.com/bunq/sdk_java/pull/83) ([OGKevin](https://github.com/OGKevin))
+- Replace examples with tinker bunq/sdk\_java\#66 [\#82](https://github.com/bunq/sdk_java/pull/82) ([OGKevin](https://github.com/OGKevin))
 
-## [0.13.0](https://github.com/bunq/sdk_java/tree/0.13.0) [(2017-12-21)](https://github.com/bunq/sdk_java/tree/0.13.0)
-
+## [0.13.0](https://github.com/bunq/sdk_java/tree/0.13.0) (2018-03-20)
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.4...0.13.0)
 
 **Implemented enhancements:**
@@ -153,7 +201,6 @@
 
 **Fixed bugs:**
 
-- SDK build fails on jitpack [\#6](https://github.com/bunq/sdk_java/issues/6)
 - Fix Jitpack build, add misssing fields, fix field types in generated \[\#6\] [\#8](https://github.com/bunq/sdk_java/pull/8) ([dnl-blkv](https://github.com/dnl-blkv))
 
 ## [0.9.1](https://github.com/bunq/sdk_java/tree/0.9.1) (2017-08-08)
