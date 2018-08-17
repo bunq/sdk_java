@@ -5,6 +5,17 @@ apply plugin: 'java'
 apply plugin: 'maven'
 sourceCompatibility = 1.7
 
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            exclude '**/examples/**'
+            exclude '**/test/**'
+        }
+    }
+}
+
 repositories {
     mavenCentral()
 }
