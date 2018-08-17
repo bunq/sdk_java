@@ -59,4 +59,5 @@ public class AvatarTest extends BunqSdkTestBase {
 
     return AttachmentPublic.create(allCustomHeader, file_contents).getValue();
   }
+
 }

@@ -101,4 +101,5 @@ public class BunqHeaderTest {
     assertEquals(HEADER_VALUE_GEOLOCATION, headers.get(BunqHeader.GEOLOCATION.getHeaderName()));
     assertEquals(HEADER_VALUE_USER_AGENT, headers.get(BunqHeader.USER_AGENT.getHeaderName()));
   }
+
 }

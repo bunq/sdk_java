@@ -216,4 +216,5 @@ public class BunqRequestBuilder extends Request.Builder {
   public List<BunqBasicHeader> getAllHeader() {
     return this.allHeader;
   }
+
 }
