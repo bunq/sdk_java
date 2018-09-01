@@ -62,7 +62,7 @@ public class User extends BunqModel implements AnchorObjectInterface {
   /**
    * Get a specific user.
    */
-  public static BunqResponse<User> get(Integer userId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<User> get(Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId()), params, customHeaders);
 
@@ -70,15 +70,11 @@ public class User extends BunqModel implements AnchorObjectInterface {
   }
 
   public static BunqResponse<User> get() {
-    return get(null, null, null);
+    return get(null, null);
   }
 
-  public static BunqResponse<User> get(Integer userId) {
-    return get(userId, null, null);
-  }
-
-  public static BunqResponse<User> get(Integer userId, Map<String, String> params) {
-    return get(userId, params, null);
+  public static BunqResponse<User> get(Map<String, String> params) {
+    return get(params, null);
   }
 
   /**
