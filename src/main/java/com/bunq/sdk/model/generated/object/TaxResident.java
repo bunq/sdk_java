@@ -24,6 +24,13 @@ public class TaxResident extends BunqModel {
   private String taxNumber;
 
   /**
+   * The status of the tax number. Either CONFIRMED or UNCONFIRMED.
+   */
+  @Expose
+  @SerializedName("status")
+  private String status;
+
+  /**
    * The country of the tax number.
    */
   @Expose
@@ -37,17 +44,29 @@ public class TaxResident extends BunqModel {
   @SerializedName("tax_number_field_for_request")
   private String taxNumberFieldForRequest;
 
+  /**
+   * The status of the tax number. Either CONFIRMED or UNCONFIRMED.
+   */
+  @Expose
+  @SerializedName("status_field_for_request")
+  private String statusFieldForRequest;
+
   public TaxResident() {
-    this(null, null);
+    this(null, null, null);
   }
 
   public TaxResident(String country) {
-    this(country, null);
+    this(country, null, null);
   }
 
   public TaxResident(String country, String taxNumber) {
+    this(country, taxNumber, null);
+  }
+
+  public TaxResident(String country, String taxNumber, String status) {
     this.countryFieldForRequest = country;
     this.taxNumberFieldForRequest = taxNumber;
+    this.statusFieldForRequest = status;
   }
 
   /**
@@ -73,6 +92,17 @@ public class TaxResident extends BunqModel {
   }
 
   /**
+   * The status of the tax number. Either CONFIRMED or UNCONFIRMED.
+   */
+  public String getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.country != null) {
@@ -80,6 +110,10 @@ public class TaxResident extends BunqModel {
     }
 
     if (this.taxNumber != null) {
+      return false;
+    }
+
+    if (this.status != null) {
       return false;
     }
 

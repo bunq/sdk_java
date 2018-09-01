@@ -23,12 +23,13 @@ public class CardGeneratedCvc2 extends BunqModel {
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/generated-cvc2";
   protected static final String ENDPOINT_URL_READ = "user/%s/card/%s/generated-cvc2/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s/generated-cvc2/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/generated-cvc2";
+
   /**
    * Field constants.
    */
   public static final String FIELD_TYPE = "type";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/generated-cvc2";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s/generated-cvc2/%s";
 
   /**
    * Object type.
@@ -55,6 +56,7 @@ public class CardGeneratedCvc2 extends BunqModel {
   @Expose
   @SerializedName("updated")
   private String updated;
+
   /**
    * The type of generated cvc2. Can be STATIC or GENERATED.
    */

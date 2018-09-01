@@ -64,6 +64,13 @@ public class Customer extends BunqModel {
   private String billingAccountId;
 
   /**
+   * The preferred notification type for invoices.
+   */
+  @Expose
+  @SerializedName("invoice_notification_preference")
+  private String invoiceNotificationPreference;
+
+  /**
    * The primary billing account account's id.
    */
   @Expose
@@ -206,6 +213,17 @@ public class Customer extends BunqModel {
   }
 
   /**
+   * The preferred notification type for invoices.
+   */
+  public String getInvoiceNotificationPreference() {
+    return this.invoiceNotificationPreference;
+  }
+
+  public void setInvoiceNotificationPreference(String invoiceNotificationPreference) {
+    this.invoiceNotificationPreference = invoiceNotificationPreference;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -221,6 +239,10 @@ public class Customer extends BunqModel {
     }
 
     if (this.billingAccountId != null) {
+      return false;
+    }
+
+    if (this.invoiceNotificationPreference != null) {
       return false;
     }
 
