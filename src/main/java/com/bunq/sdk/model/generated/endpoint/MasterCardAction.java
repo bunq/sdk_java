@@ -88,6 +88,13 @@ public class MasterCardAction extends BunqModel {
   private Amount amountFee;
 
   /**
+   * The response code by which authorised transaction can be identified as authorised by bunq.
+   */
+  @Expose
+  @SerializedName("card_authorisation_id_response")
+  private String cardAuthorisationIdResponse;
+
+  /**
    * Why the transaction was denied, if it was denied, or just ALLOWED.
    */
   @Expose
@@ -358,6 +365,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The response code by which authorised transaction can be identified as authorised by bunq.
+   */
+  public String getCardAuthorisationIdResponse() {
+    return this.cardAuthorisationIdResponse;
+  }
+
+  public void setCardAuthorisationIdResponse(String cardAuthorisationIdResponse) {
+    this.cardAuthorisationIdResponse = cardAuthorisationIdResponse;
+  }
+
+  /**
    * Why the transaction was denied, if it was denied, or just ALLOWED.
    */
   public String getDecision() {
@@ -601,6 +619,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.amountFee != null) {
+      return false;
+    }
+
+    if (this.cardAuthorisationIdResponse != null) {
       return false;
     }
 
