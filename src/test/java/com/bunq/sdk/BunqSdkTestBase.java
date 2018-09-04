@@ -4,7 +4,7 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.ApiEnvironmentType;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.exception.BunqException;
-import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqHeader;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.model.generated.endpoint.CashRegister;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
@@ -121,11 +121,13 @@ public class BunqSdkTestBase {
             URL_PATH_SANDBOX_USER
         )
         .post(RequestBody.create(null, new byte[INDEX_FIRST]))
-        .addHeader(ApiClient.HEADER_REQUEST_ID, UUID.randomUUID().toString())
-        .addHeader(ApiClient.HEADER_CACHE_CONTROL, ApiClient.CACHE_CONTROL_NONE)
-        .addHeader(ApiClient.HEADER_GEOLOCATION, ApiClient.GEOLOCATION_ZERO)
-        .addHeader(ApiClient.HEADER_LANGUAGE, ApiClient.LANGUAGE_EN_US)
-        .addHeader(ApiClient.HEADER_REGION, ApiClient.REGION_NL_NL)
+        .addHeader(BunqHeader.CLIENT_REQUEST_ID.getHeaderName(), UUID.randomUUID().toString())
+        .addHeader(
+            BunqHeader.CACHE_CONTROL.getHeaderName(), BunqHeader.CACHE_CONTROL.getDefaultValue()
+        )
+        .addHeader(BunqHeader.GEOLOCATION.getHeaderName(), BunqHeader.GEOLOCATION.getDefaultValue())
+        .addHeader(BunqHeader.LANGUAGE.getHeaderName(), BunqHeader.LANGUAGE.getDefaultValue())
+        .addHeader(BunqHeader.REGION.getHeaderName(), BunqHeader.REGION.getDefaultValue())
         .build();
 
     try {
@@ -141,7 +143,9 @@ public class BunqSdkTestBase {
 
         return SandboxUser.fromJsonReader(new JsonReader(new StringReader(apiKEy.toString())));
       } else {
-        throw new BunqException(String.format(ERROR_COULD_NOT_GENERATE_NEW_API_KEY, response.body().string()));
+        throw new BunqException(
+            String.format(ERROR_COULD_NOT_GENERATE_NEW_API_KEY, response.body().string())
+        );
       }
     } catch (IOException e) {
       throw new BunqException(e.getMessage());
@@ -155,7 +159,8 @@ public class BunqSdkTestBase {
   }
 
   /**
-   * To ensure that our test user has enough money on the account, we sent a request to suggerdaddy@bunq.com
+   * To ensure that our test user has enough money on the account,
+   * we sent a request to suggerdaddy@bunq.com
    * to top-up the account.
    */
   private static void requestSpendingMoney() {
