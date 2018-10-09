@@ -165,13 +165,14 @@ public class DraftPayment extends BunqModel {
 
   /**
    * Create a new DraftPayment.
-   * @param entries The list of entries in the DraftPayment. Each entry will result in a payment
-   * when the DraftPayment is accepted.
-   * @param numberOfRequiredAccepts The number of accepts that are required for the draft payment
-   * to receive status ACCEPTED. Currently only 1 is valid.
-   * @param status The status of the DraftPayment.
+   *
+   * @param entries                  The list of entries in the DraftPayment. Each entry will result in a payment
+   *                                 when the DraftPayment is accepted.
+   * @param numberOfRequiredAccepts  The number of accepts that are required for the draft payment
+   *                                 to receive status ACCEPTED. Currently only 1 is valid.
+   * @param status                   The status of the DraftPayment.
    * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
-   * DraftPayment. This needs to be provided to prevent race conditions.
+   *                                 DraftPayment. This needs to be provided to prevent race conditions.
    */
   public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -218,11 +219,12 @@ public class DraftPayment extends BunqModel {
 
   /**
    * Update a DraftPayment.
-   * @param status The status of the DraftPayment.
-   * @param entries The list of entries in the DraftPayment. Each entry will result in a payment
-   * when the DraftPayment is accepted.
+   *
+   * @param status                   The status of the DraftPayment.
+   * @param entries                  The list of entries in the DraftPayment. Each entry will result in a payment
+   *                                 when the DraftPayment is accepted.
    * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
-   * DraftPayment. This needs to be provided to prevent race conditions.
+   *                                 DraftPayment. This needs to be provided to prevent race conditions.
    */
   public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

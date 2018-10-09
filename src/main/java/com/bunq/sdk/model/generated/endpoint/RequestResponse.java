@@ -314,14 +314,15 @@ public class RequestResponse extends BunqModel {
 
   /**
    * Update the status to accept or reject the RequestResponse.
+   *
    * @param amountResponded The Amount the user decides to pay.
-   * @param status The responding status of the RequestResponse. Can be ACCEPTED or REJECTED.
+   * @param status          The responding status of the RequestResponse. Can be ACCEPTED or REJECTED.
    * @param addressShipping The shipping Address to return to the user who created the
-   * RequestInquiry. Should only be provided if 'require_address' is set to SHIPPING,
-   * BILLING_SHIPPING or OPTIONAL.
-   * @param addressBilling The billing Address to return to the user who created the
-   * RequestInquiry. Should only be provided if 'require_address' is set to BILLING,
-   * BILLING_SHIPPING or OPTIONAL.
+   *                        RequestInquiry. Should only be provided if 'require_address' is set to SHIPPING,
+   *                        BILLING_SHIPPING or OPTIONAL.
+   * @param addressBilling  The billing Address to return to the user who created the
+   *                        RequestInquiry. Should only be provided if 'require_address' is set to BILLING,
+   *                        BILLING_SHIPPING or OPTIONAL.
    */
   public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status, Address addressShipping, Address addressBilling, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

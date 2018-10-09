@@ -1,22 +1,18 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.AttachmentMonetaryAccountPayment;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Used to manage attachment notes.
@@ -100,19 +96,21 @@ public class NoteAttachmentScheduleInstance extends BunqModel {
   private Integer attachmentIdFieldForRequest;
 
   public NoteAttachmentScheduleInstance() {
-  this(null, null);
+    this(null, null);
   }
 
   public NoteAttachmentScheduleInstance(Integer attachmentId) {
-  this(attachmentId, null);
+    this(attachmentId, null);
   }
 
   public NoteAttachmentScheduleInstance(Integer attachmentId, String description) {
     this.descriptionFieldForRequest = description;
     this.attachmentIdFieldForRequest = attachmentId;
-  }  /**
+  }
+
+  /**
    * @param attachmentId The reference to the uploaded file to attach to this note.
-   * @param description Optional description of the attachment.
+   * @param description  Optional description of the attachment.
    */
   public static BunqResponse<Integer> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -121,9 +119,9 @@ public class NoteAttachmentScheduleInstance extends BunqModel {
       customHeaders = new HashMap<>();
     }
 
-  HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_DESCRIPTION, description);
-requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), requestBytes, customHeaders);
@@ -165,8 +163,8 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
       customHeaders = new HashMap<>();
     }
 
-  HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_DESCRIPTION, description);
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_DESCRIPTION, description);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId, noteAttachmentScheduleInstanceId), requestBytes, customHeaders);

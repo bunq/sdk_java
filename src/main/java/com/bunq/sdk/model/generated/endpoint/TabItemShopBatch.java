@@ -51,8 +51,9 @@ public class TabItemShopBatch extends BunqModel {
 
   /**
    * Create tab items as a batch.
+   *
    * @param tabItems The list of tab items we want to create in a single batch. Limited to 50
-   * items per batch.
+   *                 items per batch.
    */
   public static BunqResponse<Integer> create(Integer cashRegisterId, String tabUuid, List<TabItemShop> tabItems, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

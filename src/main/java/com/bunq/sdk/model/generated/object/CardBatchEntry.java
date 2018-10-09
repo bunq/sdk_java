@@ -70,31 +70,31 @@ public class CardBatchEntry extends BunqModel {
   private Integer monetaryAccountIdFallbackFieldForRequest;
 
   public CardBatchEntry() {
-  this(null, null, null, null, null, null, null);
+    this(null, null, null, null, null, null, null);
   }
 
   public CardBatchEntry(Integer id) {
-  this(id, null, null, null, null, null, null);
+    this(id, null, null, null, null, null, null);
   }
 
   public CardBatchEntry(Integer id, String activationCode) {
-  this(id, activationCode, null, null, null, null, null);
+    this(id, activationCode, null, null, null, null, null);
   }
 
   public CardBatchEntry(Integer id, String activationCode, String status) {
-  this(id, activationCode, status, null, null, null, null);
+    this(id, activationCode, status, null, null, null, null);
   }
 
   public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit) {
-  this(id, activationCode, status, limit, null, null, null);
+    this(id, activationCode, status, limit, null, null, null);
   }
 
   public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission) {
-  this(id, activationCode, status, limit, magStripePermission, null, null);
+    this(id, activationCode, status, limit, magStripePermission, null, null);
   }
 
   public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
-  this(id, activationCode, status, limit, magStripePermission, countryPermission, null);
+    this(id, activationCode, status, limit, magStripePermission, countryPermission, null);
   }
 
   public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountIdFallback) {

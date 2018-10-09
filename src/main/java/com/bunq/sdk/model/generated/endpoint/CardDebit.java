@@ -268,17 +268,18 @@ public class CardDebit extends BunqModel {
 
   /**
    * Create a new debit card request.
-   * @param secondLine The second line of text on the card, used as name/description for it. It
-   * can contain at most 17 characters and it can be empty.
-   * @param nameOnCard The user's name as it will be on the card. Check 'card-name' for the
-   * available card names for a user.
-   * @param alias The pointer to the monetary account that will be connected at first with the
-   * card. Its IBAN code is also the one that will be printed on the card itself. The pointer must
-   * be of type IBAN.
-   * @param type The type of card to order. Can be MAESTRO or MASTERCARD.
-   * @param pinCodeAssignment Array of Types, PINs, account IDs assigned to the card.
+   *
+   * @param secondLine                The second line of text on the card, used as name/description for it. It
+   *                                  can contain at most 17 characters and it can be empty.
+   * @param nameOnCard                The user's name as it will be on the card. Check 'card-name' for the
+   *                                  available card names for a user.
+   * @param alias                     The pointer to the monetary account that will be connected at first with the
+   *                                  card. Its IBAN code is also the one that will be printed on the card itself. The pointer must
+   *                                  be of type IBAN.
+   * @param type                      The type of card to order. Can be MAESTRO or MASTERCARD.
+   * @param pinCodeAssignment         Array of Types, PINs, account IDs assigned to the card.
    * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
-   * insufficient balance. Fallback account is removed if not supplied.
+   *                                  insufficient balance. Fallback account is removed if not supplied.
    */
   public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

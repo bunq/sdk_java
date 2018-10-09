@@ -333,27 +333,28 @@ public class Card extends BunqModel {
    * Update the card details. Allow to change pin code, status, limits, country permissions and
    * the monetary account connected to the card. When the card has been received, it can be also
    * activated through this endpoint.
-   * @param pinCode The plaintext pin code. Requests require encryption to be enabled.
-   * @param activationCode The activation code required to set status to ACTIVE initially. Can
-   * only set status to ACTIVE using activation code when order_status is ACCEPTED_FOR_PRODUCTION
-   * and status is DEACTIVATED.
-   * @param status The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or
-   * CANCELLED, and can only be set to LOST/STOLEN/CANCELLED when order status is
-   * ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
-   * Can only be set to DEACTIVATED after initial activation, i.e. order_status is
-   * DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED. Mind that
-   * all the possible choices (apart from ACTIVE and DEACTIVATED) are permanent and cannot be
-   * changed after.
-   * @param cardLimit The spending limit for the card.
-   * @param limit DEPRECATED: The limits to define for the card, among CARD_LIMIT_CONTACTLESS,
-   * CARD_LIMIT_ATM, CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for
-   * CARD_LIMIT_CONTACTLESS). All the limits must be provided on update.
-   * @param magStripePermission Whether or not it is allowed to use the mag stripe for the card.
-   * @param countryPermission The countries for which to grant (temporary) permissions to use the
-   * card.
-   * @param pinCodeAssignment Array of Types, PINs, account IDs assigned to the card.
+   *
+   * @param pinCode                   The plaintext pin code. Requests require encryption to be enabled.
+   * @param activationCode            The activation code required to set status to ACTIVE initially. Can
+   *                                  only set status to ACTIVE using activation code when order_status is ACCEPTED_FOR_PRODUCTION
+   *                                  and status is DEACTIVATED.
+   * @param status                    The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or
+   *                                  CANCELLED, and can only be set to LOST/STOLEN/CANCELLED when order status is
+   *                                  ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
+   *                                  Can only be set to DEACTIVATED after initial activation, i.e. order_status is
+   *                                  DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED. Mind that
+   *                                  all the possible choices (apart from ACTIVE and DEACTIVATED) are permanent and cannot be
+   *                                  changed after.
+   * @param cardLimit                 The spending limit for the card.
+   * @param limit                     DEPRECATED: The limits to define for the card, among CARD_LIMIT_CONTACTLESS,
+   *                                  CARD_LIMIT_ATM, CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for
+   *                                  CARD_LIMIT_CONTACTLESS). All the limits must be provided on update.
+   * @param magStripePermission       Whether or not it is allowed to use the mag stripe for the card.
+   * @param countryPermission         The countries for which to grant (temporary) permissions to use the
+   *                                  card.
+   * @param pinCodeAssignment         Array of Types, PINs, account IDs assigned to the card.
    * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
-   * insufficient balance. Fallback account is removed if not supplied.
+   *                                  insufficient balance. Fallback account is removed if not supplied.
    */
   public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

@@ -128,11 +128,12 @@ public class DeviceServer extends BunqModel {
    * the IP address has changed after the POST device-server.<br/><br/>Find out more at this link
    * <a href="https://bunq.com/en/apikey-dynamic-ip"
    * target="_blank">https://bunq.com/en/apikey-dynamic-ip</a>.
-   * @param description The description of the DeviceServer. This is only for your own reference
-   * when reading the DeviceServer again.
-   * @param secret The API key. You can request an API key in the bunq app.
+   *
+   * @param description  The description of the DeviceServer. This is only for your own reference
+   *                     when reading the DeviceServer again.
+   * @param secret       The API key. You can request an API key in the bunq app.
    * @param permittedIps An array of IPs (v4 or v6) this DeviceServer will be able to do calls
-   * from. These will be linked to the API key.
+   *                     from. These will be linked to the API key.
    */
   public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

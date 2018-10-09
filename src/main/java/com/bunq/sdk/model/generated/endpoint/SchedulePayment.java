@@ -80,7 +80,7 @@ public class SchedulePayment extends BunqModel {
   }
 
   /**
-   * @param payment The payment details.
+   * @param payment  The payment details.
    * @param schedule The schedule details when creating or updating a scheduled payment.
    */
   public static BunqResponse<Integer> create(SchedulePaymentEntry payment, Schedule schedule, Integer monetaryAccountId, Map<String, String> customHeaders) {
@@ -180,7 +180,7 @@ public class SchedulePayment extends BunqModel {
   }
 
   /**
-   * @param payment The payment details.
+   * @param payment  The payment details.
    * @param schedule The schedule details when creating or updating a scheduled payment.
    */
   public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment, Schedule schedule, Map<String, String> customHeaders) {

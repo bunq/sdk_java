@@ -208,6 +208,7 @@ public class TokenQrRequestIdeal extends BunqModel {
 
   /**
    * Create a request from an ideal transaction.
+   *
    * @param token The token passed from a site or read from a QR code.
    */
   public static BunqResponse<TokenQrRequestIdeal> create(String token, Map<String, String> customHeaders) {

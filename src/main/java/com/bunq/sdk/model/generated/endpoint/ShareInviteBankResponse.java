@@ -174,10 +174,11 @@ public class ShareInviteBankResponse extends BunqModel {
 
   /**
    * Accept or reject a share a user was invited to.
+   *
    * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
-   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects)
+   *               inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   *               CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   *               connects)
    */
   public static BunqResponse<Integer> update(Integer shareInviteBankResponseId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

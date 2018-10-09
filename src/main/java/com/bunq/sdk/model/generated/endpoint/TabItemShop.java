@@ -177,15 +177,16 @@ public class TabItemShop extends BunqModel {
 
   /**
    * Create a new TabItem for a given Tab.
-   * @param description The TabItem's brief description. Can't be empty and must be no longer than
-   * 100 characters
-   * @param eanCode The TabItem's EAN code.
+   *
+   * @param description          The TabItem's brief description. Can't be empty and must be no longer than
+   *                             100 characters
+   * @param eanCode              The TabItem's EAN code.
    * @param avatarAttachmentUuid An AttachmentPublic UUID that used as an avatar for the TabItem.
-   * @param tabAttachment A list of AttachmentTab attached to the TabItem.
-   * @param quantity The quantity of the TabItem. Formatted as a number containing up to 15
-   * digits, up to 15 decimals and using a dot.
-   * @param amount The money amount of the TabItem. Will not change the value of the corresponding
-   * Tab.
+   * @param tabAttachment        A list of AttachmentTab attached to the TabItem.
+   * @param quantity             The quantity of the TabItem. Formatted as a number containing up to 15
+   *                             digits, up to 15 decimals and using a dot.
+   * @param amount               The money amount of the TabItem. Will not change the value of the corresponding
+   *                             Tab.
    */
   public static BunqResponse<Integer> create(Integer cashRegisterId, String tabUuid, String description, Integer monetaryAccountId, String eanCode, String avatarAttachmentUuid, List<Integer> tabAttachment, String quantity, Amount amount, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -250,15 +251,16 @@ public class TabItemShop extends BunqModel {
 
   /**
    * Modify a TabItem from a given Tab.
-   * @param description The TabItem's brief description. Can't be empty and must be no longer than
-   * 100 characters
-   * @param eanCode The TabItem's EAN code.
+   *
+   * @param description          The TabItem's brief description. Can't be empty and must be no longer than
+   *                             100 characters
+   * @param eanCode              The TabItem's EAN code.
    * @param avatarAttachmentUuid An AttachmentPublic UUID that used as an avatar for the TabItem.
-   * @param tabAttachment A list of AttachmentTab attached to the TabItem.
-   * @param quantity The quantity of the TabItem. Formatted as a number containing up to 15
-   * digits, up to 15 decimals and using a dot.
-   * @param amount The money amount of the TabItem. Will not change the value of the corresponding
-   * Tab.
+   * @param tabAttachment        A list of AttachmentTab attached to the TabItem.
+   * @param quantity             The quantity of the TabItem. Formatted as a number containing up to 15
+   *                             digits, up to 15 decimals and using a dot.
+   * @param amount               The money amount of the TabItem. Will not change the value of the corresponding
+   *                             Tab.
    */
   public static BunqResponse<Integer> update(Integer cashRegisterId, String tabUuid, Integer tabItemShopId, Integer monetaryAccountId, String description, String eanCode, String avatarAttachmentUuid, List<Integer> tabAttachment, String quantity, Amount amount, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

@@ -131,8 +131,8 @@ public class BunqMeTab extends BunqModel {
 
   /**
    * @param bunqmeTabEntry The bunq.me entry containing the payment information.
-   * @param status The status of the bunq.me. Ignored in POST requests but can be used for
-   * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
+   * @param status         The status of the bunq.me. Ignored in POST requests but can be used for
+   *                       cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    */
   public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -169,7 +169,7 @@ public class BunqMeTab extends BunqModel {
 
   /**
    * @param status The status of the bunq.me. Ignored in POST requests but can be used for
-   * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
+   *               cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    */
   public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

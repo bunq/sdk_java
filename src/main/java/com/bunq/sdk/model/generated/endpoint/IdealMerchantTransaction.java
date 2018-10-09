@@ -94,7 +94,7 @@ public class IdealMerchantTransaction extends BunqModel {
   private String issuerName;
 
   /**
-   * The URL to visit to 
+   * The URL to visit to
    */
   @Expose
   @SerializedName("issuer_authentication_url")
@@ -164,7 +164,7 @@ public class IdealMerchantTransaction extends BunqModel {
 
   /**
    * @param amountRequested The requested amount of money to add.
-   * @param issuer The BIC of the issuing bank to ask for money.
+   * @param issuer          The BIC of the issuing bank to ask for money.
    */
   public static BunqResponse<Integer> create(Amount amountRequested, String issuer, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -334,7 +334,7 @@ public class IdealMerchantTransaction extends BunqModel {
   }
 
   /**
-   * The URL to visit to 
+   * The URL to visit to
    */
   public String getIssuerAuthenticationUrl() {
     return this.issuerAuthenticationUrl;
