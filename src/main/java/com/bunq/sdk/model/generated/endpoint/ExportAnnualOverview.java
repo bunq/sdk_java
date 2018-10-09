@@ -91,6 +91,7 @@ public class ExportAnnualOverview extends BunqModel {
   /**
    * Create a new annual overview for a specific year. An overview can be generated only for a
    * past year.
+   *
    * @param year The year for which the overview is.
    */
   public static BunqResponse<Integer> create(Integer year, Map<String, String> customHeaders) {

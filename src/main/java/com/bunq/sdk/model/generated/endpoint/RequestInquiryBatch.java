@@ -116,11 +116,12 @@ public class RequestInquiryBatch extends BunqModel {
   /**
    * Create a request batch by sending an array of single request objects, that will become part
    * of the batch.
-   * @param requestInquiries The list of request inquiries we want to send in 1 batch.
+   *
+   * @param requestInquiries    The list of request inquiries we want to send in 1 batch.
    * @param totalAmountInquired The total amount originally inquired for this batch.
-   * @param status The status of the request.
-   * @param eventId The ID of the associated event if the request batch was made using 'split the
-   * bill'.
+   * @param status              The status of the request.
+   * @param eventId             The ID of the associated event if the request batch was made using 'split the
+   *                            bill'.
    */
   public static BunqResponse<Integer> create(List<RequestInquiry> requestInquiries, Amount totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -167,6 +168,7 @@ public class RequestInquiryBatch extends BunqModel {
 
   /**
    * Revoke a request batch. The status of all the requests will be set to REVOKED.
+   *
    * @param status The status of the request.
    */
   public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {

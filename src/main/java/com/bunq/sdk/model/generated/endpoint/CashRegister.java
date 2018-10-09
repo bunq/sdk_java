@@ -196,14 +196,15 @@ public class CashRegister extends BunqModel {
    * created with status PENDING_APPROVAL, an bunq admin has to approve your CashRegister before
    * you can use it. In the sandbox testing environment an CashRegister will be automatically
    * approved immediately after creation.
-   * @param name The name of the CashRegister. Must be unique for this MonetaryAccount.
-   * @param status The status of the CashRegister. Can only be created or updated with
-   * PENDING_APPROVAL or CLOSED.
-   * @param avatarUuid The UUID of the avatar of the CashRegister. Use the calls
-   * /attachment-public and /avatar to create a new Avatar and get its UUID.
-   * @param location The geolocation of the CashRegister.
-   * @param notificationFilters The types of notifications that will result in a push notification
-   * or URL callback for this CashRegister.
+   *
+   * @param name                 The name of the CashRegister. Must be unique for this MonetaryAccount.
+   * @param status               The status of the CashRegister. Can only be created or updated with
+   *                             PENDING_APPROVAL or CLOSED.
+   * @param avatarUuid           The UUID of the avatar of the CashRegister. Use the calls
+   *                             /attachment-public and /avatar to create a new Avatar and get its UUID.
+   * @param location             The geolocation of the CashRegister.
+   * @param notificationFilters  The types of notifications that will result in a push notification
+   *                             or URL callback for this CashRegister.
    * @param tabTextWaitingScreen The tab text for waiting screen of CashRegister.
    */
   public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
@@ -289,14 +290,15 @@ public class CashRegister extends BunqModel {
    * Modify or close an existing CashRegister. You must set the status back to PENDING_APPROVAL if
    * you modify the name, avatar or location of a CashRegister. To close a cash register put its
    * status to CLOSED.
-   * @param name The name of the CashRegister. Must be unique for this MonetaryAccount.
-   * @param status The status of the CashRegister. Can only be created or updated with
-   * PENDING_APPROVAL or CLOSED.
-   * @param avatarUuid The UUID of the avatar of the CashRegister. Use the calls
-   * /attachment-public and /avatar to create a new Avatar and get its UUID.
-   * @param location The geolocation of the CashRegister.
-   * @param notificationFilters The types of notifications that will result in a push notification
-   * or URL callback for this CashRegister.
+   *
+   * @param name                 The name of the CashRegister. Must be unique for this MonetaryAccount.
+   * @param status               The status of the CashRegister. Can only be created or updated with
+   *                             PENDING_APPROVAL or CLOSED.
+   * @param avatarUuid           The UUID of the avatar of the CashRegister. Use the calls
+   *                             /attachment-public and /avatar to create a new Avatar and get its UUID.
+   * @param location             The geolocation of the CashRegister.
+   * @param notificationFilters  The types of notifications that will result in a push notification
+   *                             or URL callback for this CashRegister.
    * @param tabTextWaitingScreen The tab text for waiting screen of CashRegister.
    */
   public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {

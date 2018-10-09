@@ -655,42 +655,43 @@ public class UserPerson extends BunqModel {
 
   /**
    * Modify a specific person object's data.
-   * @param firstName The person's first name.
-   * @param middleName The person's middle name.
-   * @param lastName The person's last name.
-   * @param publicNickName The person's public nick name.
-   * @param addressMain The user's main address.
-   * @param addressPostal The person's postal address.
-   * @param avatarUuid The public UUID of the user's avatar.
-   * @param taxResident The user's tax residence numbers for different countries.
-   * @param documentType The type of identification document the person registered with.
-   * @param documentNumber The identification document number the person registered with.
-   * @param documentCountryOfIssuance The country which issued the identification document the
-   * person registered with.
-   * @param documentFrontAttachmentId The reference to the uploaded picture/scan of the front side
-   * of the identification document.
-   * @param documentBackAttachmentId The reference to the uploaded picture/scan of the back side
-   * of the identification document.
-   * @param dateOfBirth The person's date of birth. Accepts ISO8601 date formats.
-   * @param placeOfBirth The person's place of birth.
-   * @param countryOfBirth The person's country of birth. Formatted as a SO 3166-1 alpha-2 country
-   * code.
-   * @param nationality The person's nationality. Formatted as a SO 3166-1 alpha-2 country code.
-   * @param language The person's preferred language. Formatted as a ISO 639-1 language code plus
-   * a ISO 3166-1 alpha-2 country code, seperated by an underscore.
-   * @param region The person's preferred region. Formatted as a ISO 639-1 language code plus a
-   * ISO 3166-1 alpha-2 country code, seperated by an underscore.
-   * @param gender The person's gender. Can be: MALE, FEMALE and UNKNOWN.
-   * @param status The user status. You are not allowed to update the status via PUT.
-   * @param subStatus The user sub-status. Can be updated to SUBMIT if status is RECOVERY.
-   * @param legalGuardianAlias The legal guardian of the user. Required for minors.
-   * @param sessionTimeout The setting for the session timeout of the user in seconds.
-   * @param cardIds Card ids used for centralized card limits.
-   * @param cardLimits The centralized limits for user's cards.
+   *
+   * @param firstName                          The person's first name.
+   * @param middleName                         The person's middle name.
+   * @param lastName                           The person's last name.
+   * @param publicNickName                     The person's public nick name.
+   * @param addressMain                        The user's main address.
+   * @param addressPostal                      The person's postal address.
+   * @param avatarUuid                         The public UUID of the user's avatar.
+   * @param taxResident                        The user's tax residence numbers for different countries.
+   * @param documentType                       The type of identification document the person registered with.
+   * @param documentNumber                     The identification document number the person registered with.
+   * @param documentCountryOfIssuance          The country which issued the identification document the
+   *                                           person registered with.
+   * @param documentFrontAttachmentId          The reference to the uploaded picture/scan of the front side
+   *                                           of the identification document.
+   * @param documentBackAttachmentId           The reference to the uploaded picture/scan of the back side
+   *                                           of the identification document.
+   * @param dateOfBirth                        The person's date of birth. Accepts ISO8601 date formats.
+   * @param placeOfBirth                       The person's place of birth.
+   * @param countryOfBirth                     The person's country of birth. Formatted as a SO 3166-1 alpha-2 country
+   *                                           code.
+   * @param nationality                        The person's nationality. Formatted as a SO 3166-1 alpha-2 country code.
+   * @param language                           The person's preferred language. Formatted as a ISO 639-1 language code plus
+   *                                           a ISO 3166-1 alpha-2 country code, seperated by an underscore.
+   * @param region                             The person's preferred region. Formatted as a ISO 639-1 language code plus a
+   *                                           ISO 3166-1 alpha-2 country code, seperated by an underscore.
+   * @param gender                             The person's gender. Can be: MALE, FEMALE and UNKNOWN.
+   * @param status                             The user status. You are not allowed to update the status via PUT.
+   * @param subStatus                          The user sub-status. Can be updated to SUBMIT if status is RECOVERY.
+   * @param legalGuardianAlias                 The legal guardian of the user. Required for minors.
+   * @param sessionTimeout                     The setting for the session timeout of the user in seconds.
+   * @param cardIds                            Card ids used for centralized card limits.
+   * @param cardLimits                         The centralized limits for user's cards.
    * @param dailyLimitWithoutConfirmationLogin The amount the user can pay in the session without
-   * asking for credentials.
-   * @param notificationFilters The types of notifications that will result in a push notification
-   * or URL callback for this UserPerson.
+   *                                           asking for credentials.
+   * @param notificationFilters                The types of notifications that will result in a push notification
+   *                                           or URL callback for this UserPerson.
    */
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, List<BunqId> cardIds, List<CardLimit> cardLimits, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

@@ -69,6 +69,7 @@ public class CertificatePinned extends BunqModel {
 
   /**
    * Pin the certificate chain.
+   *
    * @param certificateChain The certificate chain in .PEM format.
    */
   public static BunqResponse<Integer> create(List<Certificate> certificateChain, Map<String, String> customHeaders) {

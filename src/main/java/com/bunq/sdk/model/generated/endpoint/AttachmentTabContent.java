@@ -37,12 +37,15 @@ public class AttachmentTabContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer attachmentTabId) {
     return list(attachmentTabId, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer attachmentTabId, Integer monetaryAccountId) {
     return list(attachmentTabId, monetaryAccountId, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer attachmentTabId, Integer monetaryAccountId, Map<String, String> params) {
     return list(attachmentTabId, monetaryAccountId, params, null);
   }

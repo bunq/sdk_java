@@ -37,12 +37,15 @@ public class CustomerStatementExportContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer customerStatementId) {
     return list(customerStatementId, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer customerStatementId, Integer monetaryAccountId) {
     return list(customerStatementId, monetaryAccountId, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer customerStatementId, Integer monetaryAccountId, Map<String, String> params) {
     return list(customerStatementId, monetaryAccountId, params, null);
   }

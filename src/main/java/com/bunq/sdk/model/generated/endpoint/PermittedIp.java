@@ -105,9 +105,9 @@ public class PermittedIp extends BunqModel {
   }
 
   /**
-   * @param ip The IP address.
+   * @param ip     The IP address.
    * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
-   * make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+   *               make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
    */
   public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -165,7 +165,7 @@ public class PermittedIp extends BunqModel {
 
   /**
    * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
-   * make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+   *               make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
    */
   public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

@@ -39,9 +39,11 @@ public class DraftShareInviteApiKeyQrCodeContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer draftShareInviteApiKeyId) {
     return list(draftShareInviteApiKeyId, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer draftShareInviteApiKeyId, Map<String, String> params) {
     return list(draftShareInviteApiKeyId, params, null);
   }

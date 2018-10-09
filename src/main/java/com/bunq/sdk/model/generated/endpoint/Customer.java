@@ -136,7 +136,7 @@ public class Customer extends BunqModel {
   }
 
   /**
-   * @param billingAccountId The primary billing account account's id.
+   * @param billingAccountId              The primary billing account account's id.
    * @param invoiceNotificationPreference The preferred notification type for invoices
    */
   public static BunqResponse<Integer> update(Integer customerId, String billingAccountId, String invoiceNotificationPreference, Map<String, String> customHeaders) {

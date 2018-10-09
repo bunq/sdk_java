@@ -37,9 +37,11 @@ public class ExportAnnualOverviewContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer exportAnnualOverviewId) {
     return list(exportAnnualOverviewId, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer exportAnnualOverviewId, Map<String, String> params) {
     return list(exportAnnualOverviewId, params, null);
   }

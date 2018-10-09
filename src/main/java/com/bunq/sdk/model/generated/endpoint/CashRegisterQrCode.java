@@ -102,9 +102,10 @@ public class CashRegisterQrCode extends BunqModel {
   /**
    * Create a new QR code for this CashRegister. You can only have one ACTIVE CashRegister QR code
    * at the time.
+   *
    * @param status The status of the QR code. ACTIVE or INACTIVE. Only one QR code can be ACTIVE
-   * for a CashRegister at any time. Setting a QR code to ACTIVE will deactivate any other
-   * CashRegister QR codes.
+   *               for a CashRegister at any time. Setting a QR code to ACTIVE will deactivate any other
+   *               CashRegister QR codes.
    */
   public static BunqResponse<Integer> create(Integer cashRegisterId, String status, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -141,9 +142,10 @@ public class CashRegisterQrCode extends BunqModel {
   /**
    * Modify a QR code in a given CashRegister. You can only have one ACTIVE CashRegister QR code
    * at the time.
+   *
    * @param status The status of the QR code. ACTIVE or INACTIVE. Only one QR code can be ACTIVE
-   * for a CashRegister at any time. Setting a QR code to ACTIVE will deactivate any other
-   * CashRegister QR codes.
+   *               for a CashRegister at any time. Setting a QR code to ACTIVE will deactivate any other
+   *               CashRegister QR codes.
    */
   public static BunqResponse<Integer> update(Integer cashRegisterId, Integer cashRegisterQrCodeId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

@@ -102,6 +102,7 @@ public class CardGeneratedCvc2 extends BunqModel {
 
   /**
    * Generate a new CVC2 code for a card.
+   *
    * @param type The type of generated cvc2. Can be STATIC or GENERATED.
    */
   public static BunqResponse<Integer> create(Integer cardId, String type, Map<String, String> customHeaders) {

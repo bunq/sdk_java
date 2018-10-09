@@ -70,7 +70,7 @@ public class Avatar extends BunqModel {
 
   /**
    * @param attachmentPublicUuid The public UUID of the public attachment from which an avatar
-   * image must be created.
+   *                             image must be created.
    */
   public static BunqResponse<String> create(String attachmentPublicUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

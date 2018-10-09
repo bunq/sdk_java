@@ -39,9 +39,11 @@ public class DraftShareInviteBankQrCodeContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer draftShareInviteBankId) {
     return list(draftShareInviteBankId, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer draftShareInviteBankId, Map<String, String> params) {
     return list(draftShareInviteBankId, params, null);
   }

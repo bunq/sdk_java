@@ -37,9 +37,11 @@ public class AttachmentPublicContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
+
   public static BunqResponse<byte[]> list(String attachmentPublicUuid) {
     return list(attachmentPublicUuid, null, null);
   }
+
   public static BunqResponse<byte[]> list(String attachmentPublicUuid, Map<String, String> params) {
     return list(attachmentPublicUuid, params, null);
   }
