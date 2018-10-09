@@ -1,15 +1,11 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  */
@@ -44,8 +40,7 @@ public class CardBatchEntry extends BunqModel {
   private String statusFieldForRequest;
 
   /**
-   * The limits to define for the card, among CARD_LIMIT_CONTACTLESS, CARD_LIMIT_ATM,
-   * CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS). All the
+   * The limits to define for the card, among CARD_LIMIT_ATM and CARD_LIMIT_POS_ICC. All the
    * limits must be provided on update.
    */
   @Expose

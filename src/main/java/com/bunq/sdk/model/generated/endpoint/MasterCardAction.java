@@ -144,6 +144,13 @@ public class MasterCardAction extends BunqModel {
   private String panEntryModeUser;
 
   /**
+   * The setlement status in the authorisation process.
+   */
+  @Expose
+  @SerializedName("settlement_status")
+  private String settlementStatus;
+
+  /**
    * The city where the message originates from as announced by the terminal.
    */
   @Expose
@@ -453,6 +460,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The setlement status in the authorisation process.
+   */
+  public String getSettlementStatus() {
+    return this.settlementStatus;
+  }
+
+  public void setSettlementStatus(String settlementStatus) {
+    this.settlementStatus = settlementStatus;
+  }
+
+  /**
    * The city where the message originates from as announced by the terminal.
    */
   public String getCity() {
@@ -651,6 +669,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.panEntryModeUser != null) {
+      return false;
+    }
+
+    if (this.settlementStatus != null) {
       return false;
     }
 

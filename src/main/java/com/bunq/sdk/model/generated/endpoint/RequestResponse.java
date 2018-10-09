@@ -9,6 +9,7 @@ import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Attachment;
 import com.bunq.sdk.model.generated.object.Geolocation;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
+import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -84,6 +85,27 @@ public class RequestResponse extends BunqModel {
   private String timeExpiry;
 
   /**
+   * The timestamp of when a refund request for the RequestResponse was claimed.
+   */
+  @Expose
+  @SerializedName("time_refund_requested")
+  private String timeRefundRequested;
+
+  /**
+   * The timestamp of when the RequestResponse was refunded.
+   */
+  @Expose
+  @SerializedName("time_refunded")
+  private String timeRefunded;
+
+  /**
+   * The label of the user that requested the refund.
+   */
+  @Expose
+  @SerializedName("user_refund_requested")
+  private LabelUser userRefundRequested;
+
+  /**
    * The id of the MonetaryAccount the RequestResponse was received on.
    */
   @Expose
@@ -105,7 +127,8 @@ public class RequestResponse extends BunqModel {
   private Amount amountResponded;
 
   /**
-   * The status of the RequestResponse. Can be ACCEPTED, PENDING, REJECTED or REVOKED.
+   * The status of the RequestResponse. Can be ACCEPTED, PENDING, REJECTED, REFUND_REQUESTED,
+   * REFUNDED or REVOKED.
    */
   @Expose
   @SerializedName("status")
@@ -448,6 +471,39 @@ public class RequestResponse extends BunqModel {
   }
 
   /**
+   * The timestamp of when a refund request for the RequestResponse was claimed.
+   */
+  public String getTimeRefundRequested() {
+    return this.timeRefundRequested;
+  }
+
+  public void setTimeRefundRequested(String timeRefundRequested) {
+    this.timeRefundRequested = timeRefundRequested;
+  }
+
+  /**
+   * The timestamp of when the RequestResponse was refunded.
+   */
+  public String getTimeRefunded() {
+    return this.timeRefunded;
+  }
+
+  public void setTimeRefunded(String timeRefunded) {
+    this.timeRefunded = timeRefunded;
+  }
+
+  /**
+   * The label of the user that requested the refund.
+   */
+  public LabelUser getUserRefundRequested() {
+    return this.userRefundRequested;
+  }
+
+  public void setUserRefundRequested(LabelUser userRefundRequested) {
+    this.userRefundRequested = userRefundRequested;
+  }
+
+  /**
    * The id of the MonetaryAccount the RequestResponse was received on.
    */
   public Integer getMonetaryAccountId() {
@@ -481,7 +537,8 @@ public class RequestResponse extends BunqModel {
   }
 
   /**
-   * The status of the RequestResponse. Can be ACCEPTED, PENDING, REJECTED or REVOKED.
+   * The status of the RequestResponse. Can be ACCEPTED, PENDING, REJECTED, REFUND_REQUESTED,
+   * REFUNDED or REVOKED.
    */
   public String getStatus() {
     return this.status;
@@ -704,6 +761,18 @@ public class RequestResponse extends BunqModel {
     }
 
     if (this.timeExpiry != null) {
+      return false;
+    }
+
+    if (this.timeRefundRequested != null) {
+      return false;
+    }
+
+    if (this.timeRefunded != null) {
+      return false;
+    }
+
+    if (this.userRefundRequested != null) {
       return false;
     }
 

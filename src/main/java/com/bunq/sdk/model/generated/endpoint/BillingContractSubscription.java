@@ -84,6 +84,14 @@ public class BillingContractSubscription extends BunqModel {
   private String subscriptionType;
 
   /**
+   * The subscription type the user will have after a subscription downgrade. Will be null if
+   * downgrading is not possible.
+   */
+  @Expose
+  @SerializedName("subscription_type_downgrade")
+  private String subscriptionTypeDowngrade;
+
+  /**
    * The subscription status.
    */
   @Expose
@@ -238,6 +246,18 @@ public class BillingContractSubscription extends BunqModel {
   }
 
   /**
+   * The subscription type the user will have after a subscription downgrade. Will be null if
+   * downgrading is not possible.
+   */
+  public String getSubscriptionTypeDowngrade() {
+    return this.subscriptionTypeDowngrade;
+  }
+
+  public void setSubscriptionTypeDowngrade(String subscriptionTypeDowngrade) {
+    this.subscriptionTypeDowngrade = subscriptionTypeDowngrade;
+  }
+
+  /**
    * The subscription status.
    */
   public String getStatus() {
@@ -287,6 +307,10 @@ public class BillingContractSubscription extends BunqModel {
     }
 
     if (this.subscriptionType != null) {
+      return false;
+    }
+
+    if (this.subscriptionTypeDowngrade != null) {
       return false;
     }
 

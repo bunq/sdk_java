@@ -39,6 +39,27 @@ public class ShareInviteBankResponse extends BunqModel {
   protected static final String OBJECT_TYPE_GET = "ShareInviteBankResponse";
 
   /**
+   * The id of the ShareInviteBankResponse.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
+   * The timestamp of the ShareInviteBankResponse creation.
+   */
+  @Expose
+  @SerializedName("created")
+  private String created;
+
+  /**
+   * The timestamp of the ShareInviteBankResponse last update.
+   */
+  @Expose
+  @SerializedName("updated")
+  private String updated;
+
+  /**
    * The monetary account and user who created the share.
    */
   @Expose
@@ -201,6 +222,39 @@ public class ShareInviteBankResponse extends BunqModel {
   }
 
   /**
+   * The id of the ShareInviteBankResponse.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  /**
+   * The timestamp of the ShareInviteBankResponse creation.
+   */
+  public String getCreated() {
+    return this.created;
+  }
+
+  public void setCreated(String created) {
+    this.created = created;
+  }
+
+  /**
+   * The timestamp of the ShareInviteBankResponse last update.
+   */
+  public String getUpdated() {
+    return this.updated;
+  }
+
+  public void setUpdated(String updated) {
+    this.updated = updated;
+  }
+
+  /**
    * The monetary account and user who created the share.
    */
   public LabelMonetaryAccount getCounterAlias() {
@@ -316,6 +370,18 @@ public class ShareInviteBankResponse extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
+    if (this.created != null) {
+      return false;
+    }
+
+    if (this.updated != null) {
+      return false;
+    }
+
     if (this.counterAlias != null) {
       return false;
     }
