@@ -60,6 +60,7 @@ public class PaymentBatch extends BunqModel {
   /**
    * Create a payment batch by sending an array of single payment objects, that will become part
    * of the batch.
+   *
    * @param payments The list of payments we want to send in a single batch.
    */
   public static BunqResponse<Integer> create(List<Payment> payments, Integer monetaryAccountId, Map<String, String> customHeaders) {

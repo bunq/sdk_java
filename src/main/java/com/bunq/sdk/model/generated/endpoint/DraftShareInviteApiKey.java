@@ -131,9 +131,9 @@ public class DraftShareInviteApiKey extends BunqModel {
 
   /**
    * @param expiration The moment when this draft share invite expires.
-   * @param status The status of the draft share invite. Can be CANCELLED (the user cancels the
-   * draft share before it's used).
-   * @param subStatus The sub-status of the draft share invite. Can be NONE, ACCEPTED or REJECTED.
+   * @param status     The status of the draft share invite. Can be CANCELLED (the user cancels the
+   *                   draft share before it's used).
+   * @param subStatus  The sub-status of the draft share invite. Can be NONE, ACCEPTED or REJECTED.
    */
   public static BunqResponse<Integer> create(String expiration, String status, String subStatus, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -143,9 +143,9 @@ public class DraftShareInviteApiKey extends BunqModel {
     }
 
     HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_STATUS, status);
-requestMap.put(FIELD_SUB_STATUS, subStatus);
-requestMap.put(FIELD_EXPIRATION, expiration);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_EXPIRATION, expiration);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
@@ -194,9 +194,10 @@ requestMap.put(FIELD_EXPIRATION, expiration);
   /**
    * Update a draft share invite. When sending status CANCELLED it is possible to cancel the draft
    * share invite.
-   * @param status The status of the draft share invite. Can be CANCELLED (the user cancels the
-   * draft share before it's used).
-   * @param subStatus The sub-status of the draft share invite. Can be NONE, ACCEPTED or REJECTED.
+   *
+   * @param status     The status of the draft share invite. Can be CANCELLED (the user cancels the
+   *                   draft share before it's used).
+   * @param subStatus  The sub-status of the draft share invite. Can be NONE, ACCEPTED or REJECTED.
    * @param expiration The moment when this draft share invite expires.
    */
   public static BunqResponse<DraftShareInviteApiKey> update(Integer draftShareInviteApiKeyId, String status, String subStatus, String expiration, Map<String, String> customHeaders) {
@@ -206,10 +207,10 @@ requestMap.put(FIELD_EXPIRATION, expiration);
       customHeaders = new HashMap<>();
     }
 
-  HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_STATUS, status);
-requestMap.put(FIELD_SUB_STATUS, subStatus);
-requestMap.put(FIELD_EXPIRATION, expiration);
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_EXPIRATION, expiration);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), draftShareInviteApiKeyId), requestBytes, customHeaders);

@@ -342,31 +342,32 @@ public class TabUsageMultiple extends BunqModel {
 
   /**
    * Create a TabUsageMultiple. On creation the status must be set to OPEN
-   * @param description The description of the TabUsageMultiple. Maximum 9000 characters. Field is
-   * required but can be an empty string.
-   * @param status The status of the TabUsageMultiple. On creation the status must be set to OPEN.
-   * You can change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status
-   * will remain PAYABLE.
-   * @param amountTotal The total amount of the Tab. Must be a positive amount. As long as the tab
-   * has the status OPEN you can change the total amount. This amount is not affected by the
-   * amounts of the TabItems. However, if you've created any TabItems for a Tab the sum of the
-   * amounts of these items must be equal to the total_amount of the Tab when you change its
-   * status to PAYABLE
+   *
+   * @param description       The description of the TabUsageMultiple. Maximum 9000 characters. Field is
+   *                          required but can be an empty string.
+   * @param status            The status of the TabUsageMultiple. On creation the status must be set to OPEN.
+   *                          You can change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status
+   *                          will remain PAYABLE.
+   * @param amountTotal       The total amount of the Tab. Must be a positive amount. As long as the tab
+   *                          has the status OPEN you can change the total amount. This amount is not affected by the
+   *                          amounts of the TabItems. However, if you've created any TabItems for a Tab the sum of the
+   *                          amounts of these items must be equal to the total_amount of the Tab when you change its
+   *                          status to PAYABLE
    * @param allowAmountHigher [DEPRECATED] Whether or not a higher amount can be paid.
-   * @param allowAmountLower [DEPRECATED] Whether or not a lower amount can be paid.
-   * @param wantTip [DEPRECATED] Whether or not the user paying the Tab should be asked if he
-   * wants to give a tip. When want_tip is set to true, allow_amount_higher must also be set to
-   * true and allow_amount_lower must be false.
-   * @param minimumAge The minimum age of the user paying the Tab.
-   * @param requireAddress Whether a billing and shipping address must be provided when paying the
-   * Tab. Possible values are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is
-   * NONE.
-   * @param redirectUrl The URL which the user is sent to after paying the Tab.
-   * @param visibility The visibility of a Tab. A Tab can be visible trough NearPay, the QR code
-   * of the CashRegister and its own QR code.
-   * @param expiration The moment when this Tab expires. Can be at most 365 days into the future.
-   * @param tabAttachment An array of attachments that describe the tab. Uploaded through the POST
-   * /user/{userid}/attachment-tab endpoint.
+   * @param allowAmountLower  [DEPRECATED] Whether or not a lower amount can be paid.
+   * @param wantTip           [DEPRECATED] Whether or not the user paying the Tab should be asked if he
+   *                          wants to give a tip. When want_tip is set to true, allow_amount_higher must also be set to
+   *                          true and allow_amount_lower must be false.
+   * @param minimumAge        The minimum age of the user paying the Tab.
+   * @param requireAddress    Whether a billing and shipping address must be provided when paying the
+   *                          Tab. Possible values are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is
+   *                          NONE.
+   * @param redirectUrl       The URL which the user is sent to after paying the Tab.
+   * @param visibility        The visibility of a Tab. A Tab can be visible trough NearPay, the QR code
+   *                          of the CashRegister and its own QR code.
+   * @param expiration        The moment when this Tab expires. Can be at most 365 days into the future.
+   * @param tabAttachment     An array of attachments that describe the tab. Uploaded through the POST
+   *                          /user/{userid}/attachment-tab endpoint.
    */
   public static BunqResponse<String> create(Integer cashRegisterId, String description, String status, Amount amountTotal, Integer monetaryAccountId, Boolean allowAmountHigher, Boolean allowAmountLower, Boolean wantTip, Integer minimumAge, String requireAddress, String redirectUrl, TabVisibility visibility, String expiration, List<BunqId> tabAttachment, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -460,19 +461,20 @@ public class TabUsageMultiple extends BunqModel {
    * Once you change the status to PAYABLE the TabUsageMultiple will expire after a year
    * (default). If you've created any TabItems for a Tab the sum of the amounts of these items
    * must be equal to the total_amount of the Tab when you change its status to PAYABLE.
-   * @param status The status of the TabUsageMultiple. On creation the status must be set to OPEN.
-   * You can change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status
-   * will remain PAYABLE.
-   * @param amountTotal The total amount of the Tab. Must be a positive amount. As long as the tab
-   * has the status OPEN you can change the total amount. This amount is not affected by the
-   * amounts of the TabItems. However, if you've created any TabItems for a Tab the sum of the
-   * amounts of these items must be equal to the total_amount of the Tab when you change its
-   * status to PAYABLE
-   * @param visibility The visibility of a Tab. A Tab can be visible trough NearPay, the QR code
-   * of the CashRegister and its own QR code.
-   * @param expiration The moment when this Tab expires. Can be at most 365 days into the future.
+   *
+   * @param status        The status of the TabUsageMultiple. On creation the status must be set to OPEN.
+   *                      You can change the status from OPEN to PAYABLE. If the TabUsageMultiple gets paid the status
+   *                      will remain PAYABLE.
+   * @param amountTotal   The total amount of the Tab. Must be a positive amount. As long as the tab
+   *                      has the status OPEN you can change the total amount. This amount is not affected by the
+   *                      amounts of the TabItems. However, if you've created any TabItems for a Tab the sum of the
+   *                      amounts of these items must be equal to the total_amount of the Tab when you change its
+   *                      status to PAYABLE
+   * @param visibility    The visibility of a Tab. A Tab can be visible trough NearPay, the QR code
+   *                      of the CashRegister and its own QR code.
+   * @param expiration    The moment when this Tab expires. Can be at most 365 days into the future.
    * @param tabAttachment An array of attachments that describe the tab. Uploaded through the POST
-   * /user/{userid}/attachment-tab endpoint.
+   *                      /user/{userid}/attachment-tab endpoint.
    */
   public static BunqResponse<String> update(Integer cashRegisterId, String tabUsageMultipleUuid, Integer monetaryAccountId, String status, Amount amountTotal, TabVisibility visibility, String expiration, List<BunqId> tabAttachment, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

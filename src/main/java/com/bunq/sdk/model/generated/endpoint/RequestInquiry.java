@@ -430,34 +430,35 @@ public class RequestInquiry extends BunqModel {
 
   /**
    * Create a new payment request.
-   * @param amountInquired The Amount requested to be paid by the person the RequestInquiry is
-   * sent to. Must be bigger than 0.
+   *
+   * @param amountInquired    The Amount requested to be paid by the person the RequestInquiry is
+   *                          sent to. Must be bigger than 0.
    * @param counterpartyAlias The Alias of the party we are requesting the money from. Can be an
-   * Alias of type EMAIL, PHONE_NUMBER or IBAN. In case the EMAIL or PHONE_NUMBER Alias does not
-   * refer to a bunq monetary account, 'allow_bunqme' needs to be 'true' in order to trigger the
-   * creation of a bunq.me request. Otherwise no request inquiry will be sent.
-   * @param description The description for the RequestInquiry. Maximum 9000 characters. Field is
-   * required but can be an empty string.
-   * @param allowBunqme Whether or not sending a bunq.me request is allowed.
-   * @param attachment The Attachments to attach to the RequestInquiry.
+   *                          Alias of type EMAIL, PHONE_NUMBER or IBAN. In case the EMAIL or PHONE_NUMBER Alias does not
+   *                          refer to a bunq monetary account, 'allow_bunqme' needs to be 'true' in order to trigger the
+   *                          creation of a bunq.me request. Otherwise no request inquiry will be sent.
+   * @param description       The description for the RequestInquiry. Maximum 9000 characters. Field is
+   *                          required but can be an empty string.
+   * @param allowBunqme       Whether or not sending a bunq.me request is allowed.
+   * @param attachment        The Attachments to attach to the RequestInquiry.
    * @param merchantReference Optional data to be included with the RequestInquiry specific to the
-   * merchant. Has to be unique for the same source MonetaryAccount.
-   * @param status The status of the RequestInquiry. Ignored in POST requests but can be used for
-   * revoking (cancelling) the RequestInquiry by setting REVOKED with a PUT request.
-   * @param minimumAge The minimum age the user accepting the RequestInquiry must have. Defaults
-   * to not checking. If set, must be between 12 and 100 inclusive.
-   * @param requireAddress Whether a billing and shipping address must be provided when paying the
-   * request. Possible values are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is
-   * NONE.
-   * @param wantTip [DEPRECATED] Whether or not the accepting user can give an extra tip on top of
-   * the requested Amount. Defaults to false.
-   * @param allowAmountLower [DEPRECATED] Whether or not the accepting user can choose to accept
-   * with a lower amount than requested. Defaults to false.
+   *                          merchant. Has to be unique for the same source MonetaryAccount.
+   * @param status            The status of the RequestInquiry. Ignored in POST requests but can be used for
+   *                          revoking (cancelling) the RequestInquiry by setting REVOKED with a PUT request.
+   * @param minimumAge        The minimum age the user accepting the RequestInquiry must have. Defaults
+   *                          to not checking. If set, must be between 12 and 100 inclusive.
+   * @param requireAddress    Whether a billing and shipping address must be provided when paying the
+   *                          request. Possible values are: BILLING, SHIPPING, BILLING_SHIPPING, NONE, OPTIONAL. Default is
+   *                          NONE.
+   * @param wantTip           [DEPRECATED] Whether or not the accepting user can give an extra tip on top of
+   *                          the requested Amount. Defaults to false.
+   * @param allowAmountLower  [DEPRECATED] Whether or not the accepting user can choose to accept
+   *                          with a lower amount than requested. Defaults to false.
    * @param allowAmountHigher [DEPRECATED] Whether or not the accepting user can choose to accept
-   * with a higher amount than requested. Defaults to false.
-   * @param redirectUrl The URL which the user is sent to after accepting or rejecting the
-   * Request.
-   * @param eventId The ID of the associated event if the request was made using 'split the bill'.
+   *                          with a higher amount than requested. Defaults to false.
+   * @param redirectUrl       The URL which the user is sent to after accepting or rejecting the
+   *                          Request.
+   * @param eventId           The ID of the associated event if the request was made using 'split the bill'.
    */
   public static BunqResponse<Integer> create(Amount amountInquired, Pointer counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqId> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl, Integer eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -554,8 +555,9 @@ public class RequestInquiry extends BunqModel {
 
   /**
    * Revoke a request for payment, by updating the status to REVOKED.
+   *
    * @param status The status of the RequestInquiry. Ignored in POST requests but can be used for
-   * revoking (cancelling) the RequestInquiry by setting REVOKED with a PUT request.
+   *               revoking (cancelling) the RequestInquiry by setting REVOKED with a PUT request.
    */
   public static BunqResponse<RequestInquiry> update(Integer requestInquiryId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

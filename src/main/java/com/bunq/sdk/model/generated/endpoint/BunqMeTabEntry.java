@@ -100,15 +100,15 @@ public class BunqMeTabEntry extends BunqModel {
     this(null, null, null);
   }
 
-  public BunqMeTabEntry(String description) {
-    this(description, null, null);
+  public BunqMeTabEntry(Amount amountInquired) {
+    this(amountInquired, null, null);
   }
 
-  public BunqMeTabEntry(String description, Amount amountInquired) {
-    this(description, amountInquired, null);
+  public BunqMeTabEntry(Amount amountInquired, String description) {
+    this(amountInquired, description, null);
   }
 
-  public BunqMeTabEntry(String description, Amount amountInquired, String redirectUrl) {
+  public BunqMeTabEntry(Amount amountInquired, String description, String redirectUrl) {
     this.amountInquiredFieldForRequest = amountInquired;
     this.descriptionFieldForRequest = description;
     this.redirectUrlFieldForRequest = redirectUrl;

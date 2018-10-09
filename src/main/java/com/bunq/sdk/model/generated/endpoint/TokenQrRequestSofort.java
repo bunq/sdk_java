@@ -49,6 +49,7 @@ public class TokenQrRequestSofort extends BunqModel {
 
   /**
    * Create a request from an SOFORT transaction.
+   *
    * @param token The token passed from a site or read from a QR code.
    */
   public static BunqResponse<TokenQrRequestSofort> create(String token, Map<String, String> customHeaders) {
@@ -59,7 +60,7 @@ public class TokenQrRequestSofort extends BunqModel {
     }
 
     HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_TOKEN, token);
+    requestMap.put(FIELD_TOKEN, token);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);

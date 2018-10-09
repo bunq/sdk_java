@@ -295,17 +295,18 @@ public class Payment extends BunqModel {
 
   /**
    * Create a new Payment.
-   * @param amount The Amount to transfer with the Payment. Must be bigger than 0 and smaller than
-   * the MonetaryAccount's balance.
+   *
+   * @param amount            The Amount to transfer with the Payment. Must be bigger than 0 and smaller than
+   *                          the MonetaryAccount's balance.
    * @param counterpartyAlias The Alias of the party we are transferring the money to. Can be an
-   * Alias of type EMAIL or PHONE_NUMBER (for bunq MonetaryAccounts or bunq.to payments) or IBAN
-   * (for external bank account).
-   * @param description The description for the Payment. Maximum 140 characters for Payments to
-   * external IBANs, 9000 characters for Payments to only other bunq MonetaryAccounts. Field is
-   * required but can be an empty string.
-   * @param attachment The Attachments to attach to the Payment.
+   *                          Alias of type EMAIL or PHONE_NUMBER (for bunq MonetaryAccounts or bunq.to payments) or IBAN
+   *                          (for external bank account).
+   * @param description       The description for the Payment. Maximum 140 characters for Payments to
+   *                          external IBANs, 9000 characters for Payments to only other bunq MonetaryAccounts. Field is
+   *                          required but can be an empty string.
+   * @param attachment        The Attachments to attach to the Payment.
    * @param merchantReference Optional data to be included with the Payment specific to the
-   * merchant.
+   *                          merchant.
    */
   public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

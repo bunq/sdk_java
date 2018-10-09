@@ -368,28 +368,29 @@ public class MonetaryAccountLight extends BunqModel {
 
   /**
    * Create new MonetaryAccountLight.
-   * @param currency The currency of the MonetaryAccountLight as an ISO 4217 formatted currency
-   * code.
-   * @param description The description of the MonetaryAccountLight. Defaults to 'bunq account'.
-   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountLight. Defaults to
-   * 1000 EUR. Currency must match the MonetaryAccountLight's currency. Limited to 10000 EUR.
-   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountLight.
-   * @param status The status of the MonetaryAccountLight. Ignored in POST requests (always set to
-   * ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-   * MonetaryAccountLight. When updating the status and/or sub_status no other fields can be
-   * updated in the same request (and vice versa).
-   * @param subStatus The sub-status of the MonetaryAccountLight providing extra information
-   * regarding the status. Should be ignored for POST requests and can only be
-   * REDEMPTION_VOLUNTARY for PUT requests with status CANCELLED. When updating the status and/or
-   * sub_status no other fields can be updated in the same request (and vice versa).
-   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
-   * only be OTHER. Should only be specified if updating the status to CANCELLED.
-   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
-   * the MonetaryAccountBank. Can be any user provided message. Should only be specified if
-   * updating the status to CANCELLED.
+   *
+   * @param currency            The currency of the MonetaryAccountLight as an ISO 4217 formatted currency
+   *                            code.
+   * @param description         The description of the MonetaryAccountLight. Defaults to 'bunq account'.
+   * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountLight. Defaults to
+   *                            1000 EUR. Currency must match the MonetaryAccountLight's currency. Limited to 10000 EUR.
+   * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountLight.
+   * @param status              The status of the MonetaryAccountLight. Ignored in POST requests (always set to
+   *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   *                            MonetaryAccountLight. When updating the status and/or sub_status no other fields can be
+   *                            updated in the same request (and vice versa).
+   * @param subStatus           The sub-status of the MonetaryAccountLight providing extra information
+   *                            regarding the status. Should be ignored for POST requests and can only be
+   *                            REDEMPTION_VOLUNTARY for PUT requests with status CANCELLED. When updating the status and/or
+   *                            sub_status no other fields can be updated in the same request (and vice versa).
+   * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
+   *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
+   *                            the MonetaryAccountBank. Can be any user provided message. Should only be specified if
+   *                            updating the status to CANCELLED.
    * @param notificationFilters The types of notifications that will result in a push notification
-   * or URL callback for this MonetaryAccountLight.
-   * @param setting The settings of the MonetaryAccountLight.
+   *                            or URL callback for this MonetaryAccountLight.
+   * @param setting             The settings of the MonetaryAccountLight.
    */
   public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -399,16 +400,16 @@ public class MonetaryAccountLight extends BunqModel {
     }
 
     HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_CURRENCY, currency);
-requestMap.put(FIELD_DESCRIPTION, description);
-requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
-requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
-requestMap.put(FIELD_STATUS, status);
-requestMap.put(FIELD_SUB_STATUS, subStatus);
-requestMap.put(FIELD_REASON, reason);
-requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
-requestMap.put(FIELD_SETTING, setting);
+    requestMap.put(FIELD_CURRENCY, currency);
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_REASON, reason);
+    requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_SETTING, setting);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
@@ -484,26 +485,27 @@ requestMap.put(FIELD_SETTING, setting);
 
   /**
    * Update a specific existing MonetaryAccountLight.
-   * @param description The description of the MonetaryAccountLight. Defaults to 'bunq account'.
-   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountLight. Defaults to
-   * 1000 EUR. Currency must match the MonetaryAccountLight's currency. Limited to 10000 EUR.
-   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountLight.
-   * @param status The status of the MonetaryAccountLight. Ignored in POST requests (always set to
-   * ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-   * MonetaryAccountLight. When updating the status and/or sub_status no other fields can be
-   * updated in the same request (and vice versa).
-   * @param subStatus The sub-status of the MonetaryAccountLight providing extra information
-   * regarding the status. Should be ignored for POST requests and can only be
-   * REDEMPTION_VOLUNTARY for PUT requests with status CANCELLED. When updating the status and/or
-   * sub_status no other fields can be updated in the same request (and vice versa).
-   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
-   * only be OTHER. Should only be specified if updating the status to CANCELLED.
-   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
-   * the MonetaryAccountBank. Can be any user provided message. Should only be specified if
-   * updating the status to CANCELLED.
+   *
+   * @param description         The description of the MonetaryAccountLight. Defaults to 'bunq account'.
+   * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountLight. Defaults to
+   *                            1000 EUR. Currency must match the MonetaryAccountLight's currency. Limited to 10000 EUR.
+   * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountLight.
+   * @param status              The status of the MonetaryAccountLight. Ignored in POST requests (always set to
+   *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   *                            MonetaryAccountLight. When updating the status and/or sub_status no other fields can be
+   *                            updated in the same request (and vice versa).
+   * @param subStatus           The sub-status of the MonetaryAccountLight providing extra information
+   *                            regarding the status. Should be ignored for POST requests and can only be
+   *                            REDEMPTION_VOLUNTARY for PUT requests with status CANCELLED. When updating the status and/or
+   *                            sub_status no other fields can be updated in the same request (and vice versa).
+   * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
+   *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
+   *                            the MonetaryAccountBank. Can be any user provided message. Should only be specified if
+   *                            updating the status to CANCELLED.
    * @param notificationFilters The types of notifications that will result in a push notification
-   * or URL callback for this MonetaryAccountLight.
-   * @param setting The settings of the MonetaryAccountLight.
+   *                            or URL callback for this MonetaryAccountLight.
+   * @param setting             The settings of the MonetaryAccountLight.
    */
   public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -512,16 +514,16 @@ requestMap.put(FIELD_SETTING, setting);
       customHeaders = new HashMap<>();
     }
 
-  HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_DESCRIPTION, description);
-requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
-requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
-requestMap.put(FIELD_STATUS, status);
-requestMap.put(FIELD_SUB_STATUS, subStatus);
-requestMap.put(FIELD_REASON, reason);
-requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
-requestMap.put(FIELD_SETTING, setting);
+    HashMap<String, Object> requestMap = new HashMap<>();
+    requestMap.put(FIELD_DESCRIPTION, description);
+    requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
+    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+    requestMap.put(FIELD_STATUS, status);
+    requestMap.put(FIELD_SUB_STATUS, subStatus);
+    requestMap.put(FIELD_REASON, reason);
+    requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
+    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_SETTING, setting);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountLightId), requestBytes, customHeaders);

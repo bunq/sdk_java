@@ -227,16 +227,17 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * Create a new share inquiry for a monetary account, specifying the permission the other bunq
    * user will have on it.
-   * @param counterUserAlias The pointer of the user to share with.
-   * @param shareDetail The share details. Only one of these objects may be passed.
-   * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
-   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects).
+   *
+   * @param counterUserAlias       The pointer of the user to share with.
+   * @param shareDetail            The share details. Only one of these objects may be passed.
+   * @param status                 The status of the share. Can be PENDING, REVOKED (the user deletes the share
+   *                               inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   *                               CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   *                               connects).
    * @param draftShareInviteBankId The id of the draft share invite bank.
-   * @param shareType The share type, either STANDARD or MUTUAL.
-   * @param startDate The start date of this share.
-   * @param endDate The expiration date of this share.
+   * @param shareType              The share type, either STANDARD or MUTUAL.
+   * @param startDate              The start date of this share.
+   * @param endDate                The expiration date of this share.
    */
   public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -325,13 +326,14 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * Update the details of a share. This includes updating status (revoking or cancelling it),
    * granted permission and validity period of this share.
+   *
    * @param shareDetail The share details. Only one of these objects may be passed.
-   * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
-   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects).
-   * @param startDate The start date of this share.
-   * @param endDate The expiration date of this share.
+   * @param status      The status of the share. Can be PENDING, REVOKED (the user deletes the share
+   *                    inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
+   *                    CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
+   *                    connects).
+   * @param startDate   The start date of this share.
+   * @param endDate     The expiration date of this share.
    */
   public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

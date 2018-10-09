@@ -164,10 +164,10 @@ public class CustomerStatementExport extends BunqModel {
 
   /**
    * @param statementFormat The format type of statement. Allowed values: MT940, CSV, PDF.
-   * @param dateStart The start date for making statements.
-   * @param dateEnd The end date for making statements.
-   * @param regionalFormat Required for CSV exports. The regional format of the statement, can be
-   * UK_US (comma-separated) or EUROPEAN (semicolon-separated).
+   * @param dateStart       The start date for making statements.
+   * @param dateEnd         The end date for making statements.
+   * @param regionalFormat  Required for CSV exports. The regional format of the statement, can be
+   *                        UK_US (comma-separated) or EUROPEAN (semicolon-separated).
    */
   public static BunqResponse<Integer> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

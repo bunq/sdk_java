@@ -131,10 +131,10 @@ public class DraftShareInviteBank extends BunqModel {
   }
 
   /**
-   * @param expiration The moment when this draft share invite expires.
+   * @param expiration         The moment when this draft share invite expires.
    * @param draftShareSettings The draft share invite details.
-   * @param status The status of the draft share invite. Can be CANCELLED (the user cancels the
-   * draft share before it's used).
+   * @param status             The status of the draft share invite. Can be CANCELLED (the user cancels the
+   *                           draft share before it's used).
    */
   public static BunqResponse<Integer> create(String expiration, DraftShareInviteEntry draftShareSettings, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -195,9 +195,10 @@ public class DraftShareInviteBank extends BunqModel {
   /**
    * Update a draft share invite. When sending status CANCELLED it is possible to cancel the draft
    * share invite.
-   * @param status The status of the draft share invite. Can be CANCELLED (the user cancels the
-   * draft share before it's used).
-   * @param expiration The moment when this draft share invite expires.
+   *
+   * @param status             The status of the draft share invite. Can be CANCELLED (the user cancels the
+   *                           draft share before it's used).
+   * @param expiration         The moment when this draft share invite expires.
    * @param draftShareSettings The draft share invite details.
    */
   public static BunqResponse<Integer> update(Integer draftShareInviteBankId, String status, String expiration, DraftShareInviteEntry draftShareSettings, Map<String, String> customHeaders) {

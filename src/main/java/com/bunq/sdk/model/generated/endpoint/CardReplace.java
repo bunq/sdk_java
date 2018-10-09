@@ -82,9 +82,10 @@ public class CardReplace extends BunqModel {
 
   /**
    * Request a card replacement.
+   *
    * @param nameOnCard The user's name as it will be on the card. Check 'card-name' for the
-   * available card names for a user.
-   * @param pinCode The plaintext pin code. Requests require encryption to be enabled.
+   *                   available card names for a user.
+   * @param pinCode    The plaintext pin code. Requests require encryption to be enabled.
    * @param secondLine The second line on the card.
    */
   public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode, String secondLine, Map<String, String> customHeaders) {

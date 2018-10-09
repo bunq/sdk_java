@@ -4,6 +4,7 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.generated.object.Amount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -60,6 +61,27 @@ public class CustomerLimit extends BunqModel {
   @Expose
   @SerializedName("limit_card_debit_replacement")
   private Integer limitCardDebitReplacement;
+
+  /**
+   * The number of "PREMIUM_LIMITED" invites the user has remaining.
+   */
+  @Expose
+  @SerializedName("limit_invite_user_premium_limited")
+  private Integer limitInviteUserPremiumLimited;
+
+  /**
+   * The maximum amount a user is allowed to spend in a month.
+   */
+  @Expose
+  @SerializedName("limit_amount_monthly")
+  private Amount limitAmountMonthly;
+
+  /**
+   * The amount the user has spent in the last month.
+   */
+  @Expose
+  @SerializedName("spent_amount_monthly")
+  private Amount spentAmountMonthly;
 
   /**
    * Get all limits for the authenticated user.
@@ -135,6 +157,39 @@ public class CustomerLimit extends BunqModel {
   }
 
   /**
+   * The number of "PREMIUM_LIMITED" invites the user has remaining.
+   */
+  public Integer getLimitInviteUserPremiumLimited() {
+    return this.limitInviteUserPremiumLimited;
+  }
+
+  public void setLimitInviteUserPremiumLimited(Integer limitInviteUserPremiumLimited) {
+    this.limitInviteUserPremiumLimited = limitInviteUserPremiumLimited;
+  }
+
+  /**
+   * The maximum amount a user is allowed to spend in a month.
+   */
+  public Amount getLimitAmountMonthly() {
+    return this.limitAmountMonthly;
+  }
+
+  public void setLimitAmountMonthly(Amount limitAmountMonthly) {
+    this.limitAmountMonthly = limitAmountMonthly;
+  }
+
+  /**
+   * The amount the user has spent in the last month.
+   */
+  public Amount getSpentAmountMonthly() {
+    return this.spentAmountMonthly;
+  }
+
+  public void setSpentAmountMonthly(Amount spentAmountMonthly) {
+    this.spentAmountMonthly = spentAmountMonthly;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.limitMonetaryAccount != null) {
@@ -154,6 +209,18 @@ public class CustomerLimit extends BunqModel {
     }
 
     if (this.limitCardDebitReplacement != null) {
+      return false;
+    }
+
+    if (this.limitInviteUserPremiumLimited != null) {
+      return false;
+    }
+
+    if (this.limitAmountMonthly != null) {
+      return false;
+    }
+
+    if (this.spentAmountMonthly != null) {
       return false;
     }
 

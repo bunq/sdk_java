@@ -84,6 +84,14 @@ public class BillingContractSubscription extends BunqModel {
   private String subscriptionType;
 
   /**
+   * The subscription type the user will have after a subscription downgrade. Will be null if
+   * downgrading is not possible.
+   */
+  @Expose
+  @SerializedName("subscription_type_downgrade")
+  private String subscriptionTypeDowngrade;
+
+  /**
    * The subscription status.
    */
   @Expose
@@ -115,7 +123,7 @@ public class BillingContractSubscription extends BunqModel {
 
   /**
    * @param subscriptionType The subscription type of the user. Can be one of PERSON_LIGHT_V1,
-   * PERSON_MORE_V1, PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
+   *                         PERSON_MORE_V1, PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
    */
   public static BunqResponse<Integer> create(String subscriptionType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -238,6 +246,18 @@ public class BillingContractSubscription extends BunqModel {
   }
 
   /**
+   * The subscription type the user will have after a subscription downgrade. Will be null if
+   * downgrading is not possible.
+   */
+  public String getSubscriptionTypeDowngrade() {
+    return this.subscriptionTypeDowngrade;
+  }
+
+  public void setSubscriptionTypeDowngrade(String subscriptionTypeDowngrade) {
+    this.subscriptionTypeDowngrade = subscriptionTypeDowngrade;
+  }
+
+  /**
    * The subscription status.
    */
   public String getStatus() {
@@ -287,6 +307,10 @@ public class BillingContractSubscription extends BunqModel {
     }
 
     if (this.subscriptionType != null) {
+      return false;
+    }
+
+    if (this.subscriptionTypeDowngrade != null) {
       return false;
     }
 

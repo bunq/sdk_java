@@ -37,15 +37,19 @@ public class CashRegisterQrCodeContent extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer cashRegisterId) {
     return list(cashRegisterId, null, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer cashRegisterId, Integer qrCodeId) {
     return list(cashRegisterId, qrCodeId, null, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer cashRegisterId, Integer qrCodeId, Integer monetaryAccountId) {
     return list(cashRegisterId, qrCodeId, monetaryAccountId, null, null);
   }
+
   public static BunqResponse<byte[]> list(Integer cashRegisterId, Integer qrCodeId, Integer monetaryAccountId, Map<String, String> params) {
     return list(cashRegisterId, qrCodeId, monetaryAccountId, params, null);
   }
