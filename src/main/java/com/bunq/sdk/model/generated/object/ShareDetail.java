@@ -26,8 +26,8 @@ public class ShareDetail extends BunqModel {
   private ShareDetailReadOnly readOnly;
 
   /**
-   * The share details for a draft payment share. Remember to replace 'draft_payment' with
-   * 'ShareDetailDraftPayment' before sending a request.
+   * The share details for a draft payment share. In the response 'draft_payment' is replaced by
+   * 'ShareDetailDraftPayment'.
    */
   @Expose
   @SerializedName("ShareDetailDraftPayment")
@@ -100,8 +100,8 @@ public class ShareDetail extends BunqModel {
   }
 
   /**
-   * The share details for a draft payment share. Remember to replace 'draft_payment' with
-   * 'ShareDetailDraftPayment' before sending a request.
+   * The share details for a draft payment share. In the response 'draft_payment' is replaced by
+   * 'ShareDetailDraftPayment'.
    */
   public ShareDetailDraftPayment getDraftPayment() {
     return this.draftPayment;

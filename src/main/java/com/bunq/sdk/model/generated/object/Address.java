@@ -59,6 +59,20 @@ public class Address extends BunqModel {
   private String province;
 
   /**
+   * The appartment, building or other extra information for addresses.
+   */
+  @Expose
+  @SerializedName("extra")
+  private String extra;
+
+  /**
+   * The name on the mailbox (only used for Postal addresses).
+   */
+  @Expose
+  @SerializedName("mailbox_name")
+  private String mailboxName;
+
+  /**
    * The street.
    */
   @Expose
@@ -100,37 +114,61 @@ public class Address extends BunqModel {
   @SerializedName("country_field_for_request")
   private String countryFieldForRequest;
 
+  /**
+   * The appartment, building or other extra information for addresses.
+   */
+  @Expose
+  @SerializedName("extra_field_for_request")
+  private String extraFieldForRequest;
+
+  /**
+   * The name on the mailbox (only used for Postal addresses).
+   */
+  @Expose
+  @SerializedName("mailbox_name_field_for_request")
+  private String mailboxNameFieldForRequest;
+
   public Address() {
-    this(null, null, null, null, null, null);
+    this(null, null, null, null, null, null, null, null);
   }
 
   public Address(String street) {
-    this(street, null, null, null, null, null);
+    this(street, null, null, null, null, null, null, null);
   }
 
   public Address(String street, String houseNumber) {
-    this(street, houseNumber, null, null, null, null);
+    this(street, houseNumber, null, null, null, null, null, null);
   }
 
   public Address(String street, String houseNumber, String postalCode) {
-    this(street, houseNumber, postalCode, null, null, null);
+    this(street, houseNumber, postalCode, null, null, null, null, null);
   }
 
   public Address(String street, String houseNumber, String postalCode, String city) {
-    this(street, houseNumber, postalCode, city, null, null);
+    this(street, houseNumber, postalCode, city, null, null, null, null);
   }
 
   public Address(String street, String houseNumber, String postalCode, String city, String country) {
-    this(street, houseNumber, postalCode, city, country, null);
+    this(street, houseNumber, postalCode, city, country, null, null, null);
   }
 
   public Address(String street, String houseNumber, String postalCode, String city, String country, String poBox) {
+    this(street, houseNumber, postalCode, city, country, poBox, null, null);
+  }
+
+  public Address(String street, String houseNumber, String postalCode, String city, String country, String poBox, String extra) {
+    this(street, houseNumber, postalCode, city, country, poBox, extra, null);
+  }
+
+  public Address(String street, String houseNumber, String postalCode, String city, String country, String poBox, String extra, String mailboxName) {
     this.streetFieldForRequest = street;
     this.houseNumberFieldForRequest = houseNumber;
     this.poBoxFieldForRequest = poBox;
     this.postalCodeFieldForRequest = postalCode;
     this.cityFieldForRequest = city;
     this.countryFieldForRequest = country;
+    this.extraFieldForRequest = extra;
+    this.mailboxNameFieldForRequest = mailboxName;
   }
 
   /**
@@ -211,6 +249,28 @@ public class Address extends BunqModel {
   }
 
   /**
+   * The appartment, building or other extra information for addresses.
+   */
+  public String getExtra() {
+    return this.extra;
+  }
+
+  public void setExtra(String extra) {
+    this.extra = extra;
+  }
+
+  /**
+   * The name on the mailbox (only used for Postal addresses).
+   */
+  public String getMailboxName() {
+    return this.mailboxName;
+  }
+
+  public void setMailboxName(String mailboxName) {
+    this.mailboxName = mailboxName;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.street != null) {
@@ -238,6 +298,14 @@ public class Address extends BunqModel {
     }
 
     if (this.province != null) {
+      return false;
+    }
+
+    if (this.extra != null) {
+      return false;
+    }
+
+    if (this.mailboxName != null) {
       return false;
     }
 

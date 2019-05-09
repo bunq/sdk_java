@@ -43,6 +43,7 @@ public class Payment extends BunqModel {
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_ATTACHMENT = "attachment";
   public static final String FIELD_MERCHANT_REFERENCE = "merchant_reference";
+  public static final String FIELD_ALLOW_BUNQTO = "allow_bunqto";
 
   /**
    * Object type.
@@ -226,6 +227,13 @@ public class Payment extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   * The new balance of the monetary account after the mutation.
+   */
+  @Expose
+  @SerializedName("balance_after_mutation")
+  private Amount balanceAfterMutation;
+
+  /**
    * The Amount to transfer with the Payment. Must be bigger than 0 and smaller than the
    * MonetaryAccount's balance.
    */
@@ -265,32 +273,44 @@ public class Payment extends BunqModel {
   @SerializedName("merchant_reference_field_for_request")
   private String merchantReferenceFieldForRequest;
 
+  /**
+   * Whether or not sending a bunq.to payment is allowed.
+   */
+  @Expose
+  @SerializedName("allow_bunqto_field_for_request")
+  private Boolean allowBunqtoFieldForRequest;
+
   public Payment() {
-    this(null, null, null, null, null);
+    this(null, null, null, null, null, null);
   }
 
   public Payment(Amount amount) {
-    this(amount, null, null, null, null);
+    this(amount, null, null, null, null, null);
   }
 
   public Payment(Amount amount, Pointer counterpartyAlias) {
-    this(amount, counterpartyAlias, null, null, null);
+    this(amount, counterpartyAlias, null, null, null, null);
   }
 
   public Payment(Amount amount, Pointer counterpartyAlias, String description) {
-    this(amount, counterpartyAlias, description, null, null);
+    this(amount, counterpartyAlias, description, null, null, null);
   }
 
   public Payment(Amount amount, Pointer counterpartyAlias, String description, List<AttachmentMonetaryAccountPayment> attachment) {
-    this(amount, counterpartyAlias, description, attachment, null);
+    this(amount, counterpartyAlias, description, attachment, null, null);
   }
 
   public Payment(Amount amount, Pointer counterpartyAlias, String description, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference) {
+    this(amount, counterpartyAlias, description, attachment, merchantReference, null);
+  }
+
+  public Payment(Amount amount, Pointer counterpartyAlias, String description, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference, Boolean allowBunqto) {
     this.amountFieldForRequest = amount;
     this.counterpartyAliasFieldForRequest = counterpartyAlias;
     this.descriptionFieldForRequest = description;
     this.attachmentFieldForRequest = attachment;
     this.merchantReferenceFieldForRequest = merchantReference;
+    this.allowBunqtoFieldForRequest = allowBunqto;
   }
 
   /**
@@ -307,8 +327,9 @@ public class Payment extends BunqModel {
    * @param attachment        The Attachments to attach to the Payment.
    * @param merchantReference Optional data to be included with the Payment specific to the
    *                          merchant.
+   * @param allowBunqto       Whether or not sending a bunq.to payment is allowed.
    */
-  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference, Boolean allowBunqto, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -321,6 +342,7 @@ public class Payment extends BunqModel {
     requestMap.put(FIELD_DESCRIPTION, description);
     requestMap.put(FIELD_ATTACHMENT, attachment);
     requestMap.put(FIELD_MERCHANT_REFERENCE, merchantReference);
+    requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
@@ -329,31 +351,35 @@ public class Payment extends BunqModel {
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null, null, null, null);
+    return create(null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount) {
-    return create(amount, null, null, null, null, null, null);
+    return create(amount, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias) {
-    return create(amount, counterpartyAlias, null, null, null, null, null);
+    return create(amount, counterpartyAlias, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description) {
-    return create(amount, counterpartyAlias, description, null, null, null, null);
+    return create(amount, counterpartyAlias, description, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId) {
-    return create(amount, counterpartyAlias, description, monetaryAccountId, null, null, null);
+    return create(amount, counterpartyAlias, description, monetaryAccountId, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment) {
-    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, null, null);
+    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference) {
-    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, null);
+    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, Pointer counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPayment> attachment, String merchantReference, Boolean allowBunqto) {
+    return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, allowBunqto, null);
   }
 
   /**
@@ -677,6 +703,17 @@ public class Payment extends BunqModel {
   }
 
   /**
+   * The new balance of the monetary account after the mutation.
+   */
+  public Amount getBalanceAfterMutation() {
+    return this.balanceAfterMutation;
+  }
+
+  public void setBalanceAfterMutation(Amount balanceAfterMutation) {
+    this.balanceAfterMutation = balanceAfterMutation;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -772,6 +809,10 @@ public class Payment extends BunqModel {
     }
 
     if (this.requestReferenceSplitTheBill != null) {
+      return false;
+    }
+
+    if (this.balanceAfterMutation != null) {
       return false;
     }
 

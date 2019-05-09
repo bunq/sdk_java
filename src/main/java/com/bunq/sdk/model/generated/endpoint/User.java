@@ -60,6 +60,12 @@ public class User extends BunqModel implements AnchorObjectInterface {
   private UserApiKey userApiKey;
 
   /**
+   */
+  @Expose
+  @SerializedName("UserPaymentServiceProvider")
+  private UserPaymentServiceProvider userPaymentServiceProvider;
+
+  /**
    * Get a specific user.
    */
   public static BunqResponse<User> get(Map<String, String> params, Map<String, String> customHeaders) {
@@ -137,6 +143,16 @@ public class User extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
+  public UserPaymentServiceProvider getUserPaymentServiceProvider() {
+    return this.userPaymentServiceProvider;
+  }
+
+  public void setUserPaymentServiceProvider(UserPaymentServiceProvider userPaymentServiceProvider) {
+    this.userPaymentServiceProvider = userPaymentServiceProvider;
+  }
+
+  /**
+   */
   public BunqModel getReferencedObject() {
     if (this.userLight != null) {
       return this.userLight;
@@ -152,6 +168,10 @@ public class User extends BunqModel implements AnchorObjectInterface {
 
     if (this.userApiKey != null) {
       return this.userApiKey;
+    }
+
+    if (this.userPaymentServiceProvider != null) {
+      return this.userPaymentServiceProvider;
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
@@ -173,6 +193,10 @@ public class User extends BunqModel implements AnchorObjectInterface {
     }
 
     if (this.userApiKey != null) {
+      return false;
+    }
+
+    if (this.userPaymentServiceProvider != null) {
       return false;
     }
 

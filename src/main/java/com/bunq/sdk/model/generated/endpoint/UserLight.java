@@ -1,8 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.http.ApiClient;
-import com.bunq.sdk.http.BunqResponse;
-import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
@@ -15,17 +12,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Show the authenticated user, if it is a light user.
  */
 public class UserLight extends BunqModel {
-
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user-light/%s";
 
   /**
    * Field constants.
@@ -57,11 +48,6 @@ public class UserLight extends BunqModel {
   public static final String FIELD_SESSION_TIMEOUT = "session_timeout";
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
-
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "UserPerson";
 
   /**
    * The id of the user.
@@ -619,28 +605,6 @@ public class UserLight extends BunqModel {
     this.sessionTimeoutFieldForRequest = sessionTimeout;
     this.dailyLimitWithoutConfirmationLoginFieldForRequest = dailyLimitWithoutConfirmationLogin;
     this.notificationFiltersFieldForRequest = notificationFilters;
-  }
-
-  /**
-   * Get a specific bunq light user.
-   */
-  public static BunqResponse<UserLight> get(Integer userLightId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userLightId), params, customHeaders);
-
-    return fromJson(UserLight.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<UserLight> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<UserLight> get(Integer userLightId) {
-    return get(userLightId, null, null);
-  }
-
-  public static BunqResponse<UserLight> get(Integer userLightId, Map<String, String> params) {
-    return get(userLightId, params, null);
   }
 
   /**
