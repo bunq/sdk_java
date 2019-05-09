@@ -7,8 +7,6 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Address;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
-import com.bunq.sdk.model.generated.object.BunqId;
-import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.TaxResident;
@@ -28,8 +26,11 @@ import java.util.Map;
  */
 public class UserPerson extends BunqModel {
 
-  public static final String FIELD_CARD_IDS = "card_ids";
-  public static final String FIELD_CARD_LIMITS = "card_limits";
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user-person/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user-person/%s";
 
   /**
    * Field constants.
@@ -58,13 +59,9 @@ public class UserPerson extends BunqModel {
   public static final String FIELD_SUB_STATUS = "sub_status";
   public static final String FIELD_LEGAL_GUARDIAN_ALIAS = "legal_guardian_alias";
   public static final String FIELD_SESSION_TIMEOUT = "session_timeout";
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user-person/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user-person/%s";
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
+  public static final String FIELD_DISPLAY_NAME = "display_name";
 
   /**
    * Object type.
@@ -464,20 +461,6 @@ public class UserPerson extends BunqModel {
   private Integer sessionTimeoutFieldForRequest;
 
   /**
-   * Card ids used for centralized card limits.
-   */
-  @Expose
-  @SerializedName("card_ids_field_for_request")
-  private List<BunqId> cardIdsFieldForRequest;
-
-  /**
-   * The centralized limits for user's cards.
-   */
-  @Expose
-  @SerializedName("card_limits_field_for_request")
-  private List<CardLimit> cardLimitsFieldForRequest;
-
-  /**
    * The amount the user can pay in the session without asking for credentials.
    */
   @Expose
@@ -492,119 +475,123 @@ public class UserPerson extends BunqModel {
   @SerializedName("notification_filters_field_for_request")
   private List<NotificationFilter> notificationFiltersFieldForRequest;
 
+  /**
+   * The person's legal name. Available legal names can be listed via the
+   * 'user/{user_id}/legal-name' endpoint.
+   */
+  @Expose
+  @SerializedName("display_name_field_for_request")
+  private String displayNameFieldForRequest;
+
   public UserPerson() {
-    this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain) {
-    this(addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid) {
-    this(addressMain, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType) {
-    this(addressMain, avatarUuid, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber) {
-    this(addressMain, avatarUuid, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, null, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, null, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, null, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, null, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, null, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, null, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, null, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, null, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, null, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, null, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, null, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, null, null, null);
   }
 
   public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, null, null, null);
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<BunqId> cardIds) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, cardIds, null, null);
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<NotificationFilter> notificationFilters) {
+    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, notificationFilters, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<BunqId> cardIds, List<CardLimit> cardLimits) {
-    this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, cardIds, cardLimits, null);
-  }
-
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<BunqId> cardIds, List<CardLimit> cardLimits, List<NotificationFilter> notificationFilters) {
+  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, List<NotificationFilter> notificationFilters, String displayName) {
     this.firstNameFieldForRequest = firstName;
     this.middleNameFieldForRequest = middleName;
     this.lastNameFieldForRequest = lastName;
@@ -629,10 +616,9 @@ public class UserPerson extends BunqModel {
     this.subStatusFieldForRequest = subStatus;
     this.legalGuardianAliasFieldForRequest = legalGuardianAlias;
     this.sessionTimeoutFieldForRequest = sessionTimeout;
-    this.cardIdsFieldForRequest = cardIds;
-    this.cardLimitsFieldForRequest = cardLimits;
     this.dailyLimitWithoutConfirmationLoginFieldForRequest = dailyLimitWithoutConfirmationLogin;
     this.notificationFiltersFieldForRequest = notificationFilters;
+    this.displayNameFieldForRequest = displayName;
   }
 
   /**
@@ -686,14 +672,14 @@ public class UserPerson extends BunqModel {
    * @param subStatus                          The user sub-status. Can be updated to SUBMIT if status is RECOVERY.
    * @param legalGuardianAlias                 The legal guardian of the user. Required for minors.
    * @param sessionTimeout                     The setting for the session timeout of the user in seconds.
-   * @param cardIds                            Card ids used for centralized card limits.
-   * @param cardLimits                         The centralized limits for user's cards.
    * @param dailyLimitWithoutConfirmationLogin The amount the user can pay in the session without
    *                                           asking for credentials.
    * @param notificationFilters                The types of notifications that will result in a push notification
    *                                           or URL callback for this UserPerson.
+   * @param displayName                        The person's legal name. Available legal names can be listed via the
+   *                                           'user/{user_id}/legal-name' endpoint.
    */
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, List<BunqId> cardIds, List<CardLimit> cardLimits, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters, String displayName, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -725,10 +711,9 @@ public class UserPerson extends BunqModel {
     requestMap.put(FIELD_SUB_STATUS, subStatus);
     requestMap.put(FIELD_LEGAL_GUARDIAN_ALIAS, legalGuardianAlias);
     requestMap.put(FIELD_SESSION_TIMEOUT, sessionTimeout);
-    requestMap.put(FIELD_CARD_IDS, cardIds);
-    requestMap.put(FIELD_CARD_LIMITS, cardLimits);
     requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutConfirmationLogin);
     requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+    requestMap.put(FIELD_DISPLAY_NAME, displayName);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId()), requestBytes, customHeaders);
@@ -737,115 +722,111 @@ public class UserPerson extends BunqModel {
   }
 
   public static BunqResponse<Integer> update(String firstName) {
-    return update(firstName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName) {
-    return update(firstName, middleName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName) {
-    return update(firstName, middleName, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName) {
-    return update(firstName, middleName, lastName, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, null, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, null, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, null, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, null, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null, null, null);
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, List<BunqId> cardIds) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, cardIds, null, null, null, null);
+  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, List<BunqId> cardIds, List<CardLimit> cardLimits) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, cardIds, cardLimits, null, null, null);
+  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters) {
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, notificationFilters, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, List<BunqId> cardIds, List<CardLimit> cardLimits, Amount dailyLimitWithoutConfirmationLogin) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, cardIds, cardLimits, dailyLimitWithoutConfirmationLogin, null, null);
-  }
-
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, List<BunqId> cardIds, List<CardLimit> cardLimits, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters) {
-    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, cardIds, cardLimits, dailyLimitWithoutConfirmationLogin, notificationFilters, null);
+  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters, String displayName) {
+    return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, notificationFilters, displayName, null);
   }
 
   /**

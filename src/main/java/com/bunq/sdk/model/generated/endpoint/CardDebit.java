@@ -5,7 +5,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
-import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
@@ -128,13 +127,6 @@ public class CardDebit extends BunqModel {
   @Expose
   @SerializedName("expiry_date")
   private String expiryDate;
-
-  /**
-   * The limits to define for the card (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS).
-   */
-  @Expose
-  @SerializedName("limit")
-  private List<CardLimit> limit;
 
   /**
    * The countries for which to grant (temporary) permissions to use the card.
@@ -464,17 +456,6 @@ public class CardDebit extends BunqModel {
   }
 
   /**
-   * The limits to define for the card (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS).
-   */
-  public List<CardLimit> getLimit() {
-    return this.limit;
-  }
-
-  public void setLimit(List<CardLimit> limit) {
-    this.limit = limit;
-  }
-
-  /**
    * The countries for which to grant (temporary) permissions to use the card.
    */
   public List<CardCountryPermission> getCountryPermission() {
@@ -600,10 +581,6 @@ public class CardDebit extends BunqModel {
     }
 
     if (this.expiryDate != null) {
-      return false;
-    }
-
-    if (this.limit != null) {
       return false;
     }
 

@@ -6,9 +6,9 @@ import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.CardCountryPermission;
-import com.bunq.sdk.model.generated.object.CardLimit;
 import com.bunq.sdk.model.generated.object.CardMagStripePermission;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
+import com.bunq.sdk.model.generated.object.CardVirtualPrimaryAccountNumber;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
@@ -38,10 +38,11 @@ public class Card extends BunqModel {
   public static final String FIELD_ACTIVATION_CODE = "activation_code";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_CARD_LIMIT = "card_limit";
-  public static final String FIELD_LIMIT = "limit";
+  public static final String FIELD_CARD_LIMIT_ATM = "card_limit_atm";
   public static final String FIELD_MAG_STRIPE_PERMISSION = "mag_stripe_permission";
   public static final String FIELD_COUNTRY_PERMISSION = "country_permission";
   public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
+  public static final String FIELD_PRIMARY_ACCOUNT_NUMBERS_VIRTUAL = "primary_account_numbers_virtual";
   public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
 
   /**
@@ -144,26 +145,25 @@ public class Card extends BunqModel {
   private String primaryAccountNumberFourDigit;
 
   /**
-   * The spending limit for the cards
+   * Array of PANs, status, description and account id for online cards.
+   */
+  @Expose
+  @SerializedName("primary_account_numbers_virtual")
+  private List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual;
+
+  /**
+   * The spending limit for the card.
    */
   @Expose
   @SerializedName("card_limit")
   private Amount cardLimit;
 
   /**
-   * DEPRECATED: The limits to define for the card, among CARD_LIMIT_CONTACTLESS, CARD_LIMIT_ATM,
-   * CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS)
+   * The ATM spending limit for the card.
    */
   @Expose
-  @SerializedName("limit")
-  private List<CardLimit> limit;
-
-  /**
-   * The countries for which to grant (temporary) permissions to use the card.
-   */
-  @Expose
-  @SerializedName("mag_stripe_permission")
-  private CardMagStripePermission magStripePermission;
+  @SerializedName("card_limit_atm")
+  private Amount cardLimitAtm;
 
   /**
    * The countries for which to grant (temporary) permissions to use the card.
@@ -216,8 +216,8 @@ public class Card extends BunqModel {
   private String pinCodeFieldForRequest;
 
   /**
-   * The activation code required to set status to ACTIVE initially. Can only set status to ACTIVE
-   * using activation code when order_status is ACCEPTED_FOR_PRODUCTION and status is DEACTIVATED.
+   * DEPRECATED: Activate a card by setting status to ACTIVE when the order_status is
+   * ACCEPTED_FOR_PRODUCTION.
    */
   @Expose
   @SerializedName("activation_code_field_for_request")
@@ -244,16 +244,14 @@ public class Card extends BunqModel {
   private Amount cardLimitFieldForRequest;
 
   /**
-   * DEPRECATED: The limits to define for the card, among CARD_LIMIT_CONTACTLESS, CARD_LIMIT_ATM,
-   * CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS). All the
-   * limits must be provided on update.
+   * The ATM spending limit for the card.
    */
   @Expose
-  @SerializedName("limit_field_for_request")
-  private List<CardLimit> limitFieldForRequest;
+  @SerializedName("card_limit_atm_field_for_request")
+  private Amount cardLimitAtmFieldForRequest;
 
   /**
-   * Whether or not it is allowed to use the mag stripe for the card.
+   * DEPRECATED: Whether or not it is allowed to use the mag stripe for the card.
    */
   @Expose
   @SerializedName("mag_stripe_permission_field_for_request")
@@ -274,6 +272,13 @@ public class Card extends BunqModel {
   private List<CardPinAssignment> pinCodeAssignmentFieldForRequest;
 
   /**
+   * Array of PANs, status, description and account id for online cards.
+   */
+  @Expose
+  @SerializedName("primary_account_numbers_virtual_field_for_request")
+  private List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtualFieldForRequest;
+
+  /**
    * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
    * is removed if not supplied.
    */
@@ -282,50 +287,55 @@ public class Card extends BunqModel {
   private Integer monetaryAccountIdFallbackFieldForRequest;
 
   public Card() {
-    this(null, null, null, null, null, null, null, null, null);
+    this(null, null, null, null, null, null, null, null, null, null);
   }
 
   public Card(String pinCode) {
-    this(pinCode, null, null, null, null, null, null, null, null);
+    this(pinCode, null, null, null, null, null, null, null, null, null);
   }
 
   public Card(String pinCode, String activationCode) {
-    this(pinCode, activationCode, null, null, null, null, null, null, null);
+    this(pinCode, activationCode, null, null, null, null, null, null, null, null);
   }
 
   public Card(String pinCode, String activationCode, String status) {
-    this(pinCode, activationCode, status, null, null, null, null, null, null);
+    this(pinCode, activationCode, status, null, null, null, null, null, null, null);
   }
 
   public Card(String pinCode, String activationCode, String status, Amount cardLimit) {
-    this(pinCode, activationCode, status, cardLimit, null, null, null, null, null);
+    this(pinCode, activationCode, status, cardLimit, null, null, null, null, null, null);
   }
 
-  public Card(String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit) {
-    this(pinCode, activationCode, status, cardLimit, limit, null, null, null, null);
+  public Card(String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm) {
+    this(pinCode, activationCode, status, cardLimit, cardLimitAtm, null, null, null, null, null);
   }
 
-  public Card(String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission) {
-    this(pinCode, activationCode, status, cardLimit, limit, magStripePermission, null, null, null);
+  public Card(String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission) {
+    this(pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, null, null, null, null);
   }
 
-  public Card(String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
-    this(pinCode, activationCode, status, cardLimit, limit, magStripePermission, countryPermission, null, null);
+  public Card(String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
+    this(pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, null, null, null);
   }
 
-  public Card(String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment) {
-    this(pinCode, activationCode, status, cardLimit, limit, magStripePermission, countryPermission, pinCodeAssignment, null);
+  public Card(String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment) {
+    this(pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, pinCodeAssignment, null, null);
   }
 
-  public Card(String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+  public Card(String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual) {
+    this(pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, pinCodeAssignment, primaryAccountNumbersVirtual, null);
+  }
+
+  public Card(String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual, Integer monetaryAccountIdFallback) {
     this.pinCodeFieldForRequest = pinCode;
     this.activationCodeFieldForRequest = activationCode;
     this.statusFieldForRequest = status;
     this.cardLimitFieldForRequest = cardLimit;
-    this.limitFieldForRequest = limit;
+    this.cardLimitAtmFieldForRequest = cardLimitAtm;
     this.magStripePermissionFieldForRequest = magStripePermission;
     this.countryPermissionFieldForRequest = countryPermission;
     this.pinCodeAssignmentFieldForRequest = pinCodeAssignment;
+    this.primaryAccountNumbersVirtualFieldForRequest = primaryAccountNumbersVirtual;
     this.monetaryAccountIdFallbackFieldForRequest = monetaryAccountIdFallback;
   }
 
@@ -334,29 +344,29 @@ public class Card extends BunqModel {
    * the monetary account connected to the card. When the card has been received, it can be also
    * activated through this endpoint.
    *
-   * @param pinCode                   The plaintext pin code. Requests require encryption to be enabled.
-   * @param activationCode            The activation code required to set status to ACTIVE initially. Can
-   *                                  only set status to ACTIVE using activation code when order_status is ACCEPTED_FOR_PRODUCTION
-   *                                  and status is DEACTIVATED.
-   * @param status                    The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or
-   *                                  CANCELLED, and can only be set to LOST/STOLEN/CANCELLED when order status is
-   *                                  ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
-   *                                  Can only be set to DEACTIVATED after initial activation, i.e. order_status is
-   *                                  DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED. Mind that
-   *                                  all the possible choices (apart from ACTIVE and DEACTIVATED) are permanent and cannot be
-   *                                  changed after.
-   * @param cardLimit                 The spending limit for the card.
-   * @param limit                     DEPRECATED: The limits to define for the card, among CARD_LIMIT_CONTACTLESS,
-   *                                  CARD_LIMIT_ATM, CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for
-   *                                  CARD_LIMIT_CONTACTLESS). All the limits must be provided on update.
-   * @param magStripePermission       Whether or not it is allowed to use the mag stripe for the card.
-   * @param countryPermission         The countries for which to grant (temporary) permissions to use the
-   *                                  card.
-   * @param pinCodeAssignment         Array of Types, PINs, account IDs assigned to the card.
-   * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
-   *                                  insufficient balance. Fallback account is removed if not supplied.
+   * @param pinCode                      The plaintext pin code. Requests require encryption to be enabled.
+   * @param activationCode               DEPRECATED: Activate a card by setting status to ACTIVE when the
+   *                                     order_status is ACCEPTED_FOR_PRODUCTION.
+   * @param status                       The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or
+   *                                     CANCELLED, and can only be set to LOST/STOLEN/CANCELLED when order status is
+   *                                     ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
+   *                                     Can only be set to DEACTIVATED after initial activation, i.e. order_status is
+   *                                     DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED. Mind that
+   *                                     all the possible choices (apart from ACTIVE and DEACTIVATED) are permanent and cannot be
+   *                                     changed after.
+   * @param cardLimit                    The spending limit for the card.
+   * @param cardLimitAtm                 The ATM spending limit for the card.
+   * @param magStripePermission          DEPRECATED: Whether or not it is allowed to use the mag stripe for
+   *                                     the card.
+   * @param countryPermission            The countries for which to grant (temporary) permissions to use the
+   *                                     card.
+   * @param pinCodeAssignment            Array of Types, PINs, account IDs assigned to the card.
+   * @param primaryAccountNumbersVirtual Array of PANs, status, description and account id for
+   *                                     online cards.
+   * @param monetaryAccountIdFallback    ID of the MA to be used as fallback for this card if
+   *                                     insufficient balance. Fallback account is removed if not supplied.
    */
-  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -368,10 +378,11 @@ public class Card extends BunqModel {
     requestMap.put(FIELD_ACTIVATION_CODE, activationCode);
     requestMap.put(FIELD_STATUS, status);
     requestMap.put(FIELD_CARD_LIMIT, cardLimit);
-    requestMap.put(FIELD_LIMIT, limit);
+    requestMap.put(FIELD_CARD_LIMIT_ATM, cardLimitAtm);
     requestMap.put(FIELD_MAG_STRIPE_PERMISSION, magStripePermission);
     requestMap.put(FIELD_COUNTRY_PERMISSION, countryPermission);
     requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
+    requestMap.put(FIELD_PRIMARY_ACCOUNT_NUMBERS_VIRTUAL, primaryAccountNumbersVirtual);
     requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -382,43 +393,47 @@ public class Card extends BunqModel {
   }
 
   public static BunqResponse<Card> update(Integer cardId) {
-    return update(cardId, null, null, null, null, null, null, null, null, null, null);
+    return update(cardId, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Card> update(Integer cardId, String pinCode) {
-    return update(cardId, pinCode, null, null, null, null, null, null, null, null, null);
+    return update(cardId, pinCode, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode) {
-    return update(cardId, pinCode, activationCode, null, null, null, null, null, null, null, null);
+    return update(cardId, pinCode, activationCode, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status) {
-    return update(cardId, pinCode, activationCode, status, null, null, null, null, null, null, null);
+    return update(cardId, pinCode, activationCode, status, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit) {
-    return update(cardId, pinCode, activationCode, status, cardLimit, null, null, null, null, null, null);
+    return update(cardId, pinCode, activationCode, status, cardLimit, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit) {
-    return update(cardId, pinCode, activationCode, status, cardLimit, limit, null, null, null, null, null);
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm) {
+    return update(cardId, pinCode, activationCode, status, cardLimit, cardLimitAtm, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission) {
-    return update(cardId, pinCode, activationCode, status, cardLimit, limit, magStripePermission, null, null, null, null);
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission) {
+    return update(cardId, pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, null, null, null, null, null);
   }
 
-  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
-    return update(cardId, pinCode, activationCode, status, cardLimit, limit, magStripePermission, countryPermission, null, null, null);
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
+    return update(cardId, pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, null, null, null, null);
   }
 
-  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment) {
-    return update(cardId, pinCode, activationCode, status, cardLimit, limit, magStripePermission, countryPermission, pinCodeAssignment, null, null);
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment) {
+    return update(cardId, pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, pinCodeAssignment, null, null, null);
   }
 
-  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
-    return update(cardId, pinCode, activationCode, status, cardLimit, limit, magStripePermission, countryPermission, pinCodeAssignment, monetaryAccountIdFallback, null);
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual) {
+    return update(cardId, pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, pinCodeAssignment, primaryAccountNumbersVirtual, null, null);
+  }
+
+  public static BunqResponse<Card> update(Integer cardId, String pinCode, String activationCode, String status, Amount cardLimit, Amount cardLimitAtm, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, List<CardPinAssignment> pinCodeAssignment, List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual, Integer monetaryAccountIdFallback) {
+    return update(cardId, pinCode, activationCode, status, cardLimit, cardLimitAtm, magStripePermission, countryPermission, pinCodeAssignment, primaryAccountNumbersVirtual, monetaryAccountIdFallback, null);
   }
 
   /**
@@ -607,7 +622,18 @@ public class Card extends BunqModel {
   }
 
   /**
-   * The spending limit for the cards
+   * Array of PANs, status, description and account id for online cards.
+   */
+  public List<CardVirtualPrimaryAccountNumber> getPrimaryAccountNumbersVirtual() {
+    return this.primaryAccountNumbersVirtual;
+  }
+
+  public void setPrimaryAccountNumbersVirtual(List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual) {
+    this.primaryAccountNumbersVirtual = primaryAccountNumbersVirtual;
+  }
+
+  /**
+   * The spending limit for the card.
    */
   public Amount getCardLimit() {
     return this.cardLimit;
@@ -618,26 +644,14 @@ public class Card extends BunqModel {
   }
 
   /**
-   * DEPRECATED: The limits to define for the card, among CARD_LIMIT_CONTACTLESS, CARD_LIMIT_ATM,
-   * CARD_LIMIT_DIPPING and CARD_LIMIT_POS_ICC (e.g. 25 EUR for CARD_LIMIT_CONTACTLESS)
+   * The ATM spending limit for the card.
    */
-  public List<CardLimit> getLimit() {
-    return this.limit;
+  public Amount getCardLimitAtm() {
+    return this.cardLimitAtm;
   }
 
-  public void setLimit(List<CardLimit> limit) {
-    this.limit = limit;
-  }
-
-  /**
-   * The countries for which to grant (temporary) permissions to use the card.
-   */
-  public CardMagStripePermission getMagStripePermission() {
-    return this.magStripePermission;
-  }
-
-  public void setMagStripePermission(CardMagStripePermission magStripePermission) {
-    this.magStripePermission = magStripePermission;
+  public void setCardLimitAtm(Amount cardLimitAtm) {
+    this.cardLimitAtm = cardLimitAtm;
   }
 
   /**
@@ -762,15 +776,15 @@ public class Card extends BunqModel {
       return false;
     }
 
+    if (this.primaryAccountNumbersVirtual != null) {
+      return false;
+    }
+
     if (this.cardLimit != null) {
       return false;
     }
 
-    if (this.limit != null) {
-      return false;
-    }
-
-    if (this.magStripePermission != null) {
+    if (this.cardLimitAtm != null) {
       return false;
     }
 

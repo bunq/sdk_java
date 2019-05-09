@@ -17,9 +17,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Used to share a monetary account with another bunq user, as in the 'Connect' feature in the
- * bunq app. Allow the creation of share inquiries that, in the same way as request inquiries,
- * can be revoked by the user creating them or accepted/rejected by the other party.
+ * [DEPRECATED - use /share-invite-monetary-account-inquiry] Used to share a monetary account
+ * with another bunq user, as in the 'Connect' feature in the bunq app. Allow the creation of
+ * share inquiries that, in the same way as request inquiries, can be revoked by the user
+ * creating them or accepted/rejected by the other party.
  */
 public class ShareInviteBankInquiry extends BunqModel {
 
@@ -225,8 +226,8 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
-   * Create a new share inquiry for a monetary account, specifying the permission the other bunq
-   * user will have on it.
+   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Create a new share inquiry for a
+   * monetary account, specifying the permission the other bunq user will have on it.
    *
    * @param counterUserAlias       The pointer of the user to share with.
    * @param shareDetail            The share details. Only one of these objects may be passed.
@@ -298,7 +299,8 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
-   * Get the details of a specific share inquiry.
+   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Get the details of a specific share
+   * inquiry.
    */
   public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -324,8 +326,9 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
-   * Update the details of a share. This includes updating status (revoking or cancelling it),
-   * granted permission and validity period of this share.
+   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Update the details of a share. This
+   * includes updating status (revoking or cancelling it), granted permission and validity period
+   * of this share.
    *
    * @param shareDetail The share details. Only one of these objects may be passed.
    * @param status      The status of the share. Can be PENDING, REVOKED (the user deletes the share
@@ -379,8 +382,9 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
-   * Get a list with all the share inquiries for a monetary account, only if the requesting user
-   * has permission to change the details of the various ones.
+   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Get a list with all the share
+   * inquiries for a monetary account, only if the requesting user has permission to change the
+   * details of the various ones.
    */
   public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());

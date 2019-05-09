@@ -56,6 +56,12 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
   private MonetaryAccountLight monetaryAccountLight;
 
   /**
+   */
+  @Expose
+  @SerializedName("MonetaryAccountSavings")
+  private MonetaryAccountSavings monetaryAccountSavings;
+
+  /**
    * Get a specific MonetaryAccount.
    */
   public static BunqResponse<MonetaryAccount> get(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
@@ -127,6 +133,16 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
 
   /**
    */
+  public MonetaryAccountSavings getMonetaryAccountSavings() {
+    return this.monetaryAccountSavings;
+  }
+
+  public void setMonetaryAccountSavings(MonetaryAccountSavings monetaryAccountSavings) {
+    this.monetaryAccountSavings = monetaryAccountSavings;
+  }
+
+  /**
+   */
   public BunqModel getReferencedObject() {
     if (this.monetaryAccountBank != null) {
       return this.monetaryAccountBank;
@@ -138,6 +154,10 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
 
     if (this.monetaryAccountLight != null) {
       return this.monetaryAccountLight;
+    }
+
+    if (this.monetaryAccountSavings != null) {
+      return this.monetaryAccountSavings;
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
@@ -155,6 +175,10 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
     }
 
     if (this.monetaryAccountLight != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountSavings != null) {
       return false;
     }
 

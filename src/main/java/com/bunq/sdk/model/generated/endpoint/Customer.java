@@ -1,16 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.http.ApiClient;
-import com.bunq.sdk.http.BunqResponse;
-import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Used to view a customer.
@@ -18,22 +11,10 @@ import java.util.Map;
 public class Customer extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/customer";
-  protected static final String ENDPOINT_URL_READ = "user/%s/customer/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/customer/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_BILLING_ACCOUNT_ID = "billing_account_id";
   public static final String FIELD_INVOICE_NOTIFICATION_PREFERENCE = "invoice_notification_preference";
-
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "Customer";
 
   /**
    * The id of the customer.
@@ -95,77 +76,6 @@ public class Customer extends BunqModel {
   public Customer(String billingAccountId, String invoiceNotificationPreference) {
     this.billingAccountIdFieldForRequest = billingAccountId;
     this.invoiceNotificationPreferenceFieldForRequest = invoiceNotificationPreference;
-  }
-
-  /**
-   */
-  public static BunqResponse<List<Customer>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
-
-    return fromJsonList(Customer.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<Customer>> list() {
-    return list(null, null);
-  }
-
-  public static BunqResponse<List<Customer>> list(Map<String, String> params) {
-    return list(params, null);
-  }
-
-  /**
-   */
-  public static BunqResponse<Customer> get(Integer customerId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), customerId), params, customHeaders);
-
-    return fromJson(Customer.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<Customer> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<Customer> get(Integer customerId) {
-    return get(customerId, null, null);
-  }
-
-  public static BunqResponse<Customer> get(Integer customerId, Map<String, String> params) {
-    return get(customerId, params, null);
-  }
-
-  /**
-   * @param billingAccountId              The primary billing account account's id.
-   * @param invoiceNotificationPreference The preferred notification type for invoices
-   */
-  public static BunqResponse<Integer> update(Integer customerId, String billingAccountId, String invoiceNotificationPreference, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
-    }
-
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_BILLING_ACCOUNT_ID, billingAccountId);
-    requestMap.put(FIELD_INVOICE_NOTIFICATION_PREFERENCE, invoiceNotificationPreference);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), customerId), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update(Integer customerId) {
-    return update(customerId, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer customerId, String billingAccountId) {
-    return update(customerId, billingAccountId, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer customerId, String billingAccountId, String invoiceNotificationPreference) {
-    return update(customerId, billingAccountId, invoiceNotificationPreference, null);
   }
 
   /**
