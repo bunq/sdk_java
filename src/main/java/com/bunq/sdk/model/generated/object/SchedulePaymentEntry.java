@@ -97,7 +97,7 @@ public class SchedulePaymentEntry extends BunqModel {
   private String merchantReferenceFieldForRequest;
 
   /**
-   * Whether or not sending a bunq.to payment is allowed. Mandatory for publicApi.
+   * Whether or not sending a bunq.to payment is allowed.
    */
   @Expose
   @SerializedName("allow_bunqto_field_for_request")

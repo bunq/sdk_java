@@ -60,6 +60,13 @@ public class MasterCardAction extends BunqModel {
   private Amount amountLocal;
 
   /**
+   * The amount of the transaction in local currency.
+   */
+  @Expose
+  @SerializedName("amount_converted")
+  private Amount amountConverted;
+
+  /**
    * The amount of the transaction in the monetary account's currency.
    */
   @Expose
@@ -208,13 +215,6 @@ public class MasterCardAction extends BunqModel {
   private Boolean allowChat;
 
   /**
-   * The whitelist id for this mastercard action or null.
-   */
-  @Expose
-  @SerializedName("eligible_whitelist_id")
-  private Integer eligibleWhitelistId;
-
-  /**
    * The secure code id for this mastercard action or null.
    */
   @Expose
@@ -325,6 +325,17 @@ public class MasterCardAction extends BunqModel {
 
   public void setAmountLocal(Amount amountLocal) {
     this.amountLocal = amountLocal;
+  }
+
+  /**
+   * The amount of the transaction in local currency.
+   */
+  public Amount getAmountConverted() {
+    return this.amountConverted;
+  }
+
+  public void setAmountConverted(Amount amountConverted) {
+    this.amountConverted = amountConverted;
   }
 
   /**
@@ -560,17 +571,6 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
-   * The whitelist id for this mastercard action or null.
-   */
-  public Integer getEligibleWhitelistId() {
-    return this.eligibleWhitelistId;
-  }
-
-  public void setEligibleWhitelistId(Integer eligibleWhitelistId) {
-    this.eligibleWhitelistId = eligibleWhitelistId;
-  }
-
-  /**
    * The secure code id for this mastercard action or null.
    */
   public Integer getSecureCodeId() {
@@ -621,6 +621,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.amountLocal != null) {
+      return false;
+    }
+
+    if (this.amountConverted != null) {
       return false;
     }
 
@@ -705,10 +709,6 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.allowChat != null) {
-      return false;
-    }
-
-    if (this.eligibleWhitelistId != null) {
       return false;
     }
 

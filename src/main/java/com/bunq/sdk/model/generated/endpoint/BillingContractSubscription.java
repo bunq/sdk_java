@@ -8,7 +8,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +19,6 @@ public class BillingContractSubscription extends BunqModel {
   /**
    * Endpoint constants.
    */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/billing-contract-subscription";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/billing-contract-subscription";
 
   /**
@@ -119,34 +117,6 @@ public class BillingContractSubscription extends BunqModel {
 
   public BillingContractSubscription(String subscriptionType) {
     this.subscriptionTypeFieldForRequest = subscriptionType;
-  }
-
-  /**
-   * @param subscriptionType The subscription type of the user. Can be one of PERSON_LIGHT_V1,
-   *                         PERSON_MORE_V1, PERSON_FREE_V1, PERSON_PREMIUM_V1, COMPANY_V1, or COMPANY_V2.
-   */
-  public static BunqResponse<Integer> create(String subscriptionType, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
-    }
-
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_SUBSCRIPTION_TYPE, subscriptionType);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> create() {
-    return create(null, null);
-  }
-
-  public static BunqResponse<Integer> create(String subscriptionType) {
-    return create(subscriptionType, null);
   }
 
   /**

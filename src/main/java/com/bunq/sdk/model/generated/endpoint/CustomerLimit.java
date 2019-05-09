@@ -35,6 +35,13 @@ public class CustomerLimit extends BunqModel {
   private Integer limitMonetaryAccount;
 
   /**
+   * The amount of additional monetary accounts you can create.
+   */
+  @Expose
+  @SerializedName("limit_monetary_account_remaining")
+  private Integer limitMonetaryAccountRemaining;
+
+  /**
    * The limit of Maestro cards.
    */
   @Expose
@@ -61,13 +68,6 @@ public class CustomerLimit extends BunqModel {
   @Expose
   @SerializedName("limit_card_debit_replacement")
   private Integer limitCardDebitReplacement;
-
-  /**
-   * The number of "PREMIUM_LIMITED" invites the user has remaining.
-   */
-  @Expose
-  @SerializedName("limit_invite_user_premium_limited")
-  private Integer limitInviteUserPremiumLimited;
 
   /**
    * The maximum amount a user is allowed to spend in a month.
@@ -110,6 +110,17 @@ public class CustomerLimit extends BunqModel {
 
   public void setLimitMonetaryAccount(Integer limitMonetaryAccount) {
     this.limitMonetaryAccount = limitMonetaryAccount;
+  }
+
+  /**
+   * The amount of additional monetary accounts you can create.
+   */
+  public Integer getLimitMonetaryAccountRemaining() {
+    return this.limitMonetaryAccountRemaining;
+  }
+
+  public void setLimitMonetaryAccountRemaining(Integer limitMonetaryAccountRemaining) {
+    this.limitMonetaryAccountRemaining = limitMonetaryAccountRemaining;
   }
 
   /**
@@ -157,17 +168,6 @@ public class CustomerLimit extends BunqModel {
   }
 
   /**
-   * The number of "PREMIUM_LIMITED" invites the user has remaining.
-   */
-  public Integer getLimitInviteUserPremiumLimited() {
-    return this.limitInviteUserPremiumLimited;
-  }
-
-  public void setLimitInviteUserPremiumLimited(Integer limitInviteUserPremiumLimited) {
-    this.limitInviteUserPremiumLimited = limitInviteUserPremiumLimited;
-  }
-
-  /**
    * The maximum amount a user is allowed to spend in a month.
    */
   public Amount getLimitAmountMonthly() {
@@ -196,6 +196,10 @@ public class CustomerLimit extends BunqModel {
       return false;
     }
 
+    if (this.limitMonetaryAccountRemaining != null) {
+      return false;
+    }
+
     if (this.limitCardDebitMaestro != null) {
       return false;
     }
@@ -209,10 +213,6 @@ public class CustomerLimit extends BunqModel {
     }
 
     if (this.limitCardDebitReplacement != null) {
-      return false;
-    }
-
-    if (this.limitInviteUserPremiumLimited != null) {
       return false;
     }
 

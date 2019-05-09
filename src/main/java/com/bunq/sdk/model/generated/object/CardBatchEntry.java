@@ -19,14 +19,6 @@ public class CardBatchEntry extends BunqModel {
   private Integer idFieldForRequest;
 
   /**
-   * The activation code required to set status to ACTIVE initially. Can only set status to ACTIVE
-   * using activation code when order_status is ACCEPTED_FOR_PRODUCTION and status is DEACTIVATED.
-   */
-  @Expose
-  @SerializedName("activation_code_field_for_request")
-  private String activationCodeFieldForRequest;
-
-  /**
    * The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or CANCELLED, and
    * can only be set to LOST/STOLEN/CANCELLED when order status is
    * ACCEPTED_FOR_PRODUCTION/DELIVERED_TO_CUSTOMER/CARD_UPDATE_REQUESTED/CARD_UPDATE_SENT/CARD_UPDATE_ACCEPTED.
@@ -40,19 +32,18 @@ public class CardBatchEntry extends BunqModel {
   private String statusFieldForRequest;
 
   /**
-   * The limits to define for the card, among CARD_LIMIT_ATM and CARD_LIMIT_POS_ICC. All the
-   * limits must be provided on update.
+   * The spending limit for the card.
    */
   @Expose
-  @SerializedName("limit_field_for_request")
-  private List<CardLimit> limitFieldForRequest;
+  @SerializedName("card_limit_field_for_request")
+  private Amount cardLimitFieldForRequest;
 
   /**
-   * Whether or not it is allowed to use the mag stripe for the card.
+   * The ATM spending limit for the card.
    */
   @Expose
-  @SerializedName("mag_stripe_permission_field_for_request")
-  private CardMagStripePermission magStripePermissionFieldForRequest;
+  @SerializedName("card_limit_atm_field_for_request")
+  private Amount cardLimitAtmFieldForRequest;
 
   /**
    * The countries for which to grant (temporary) permissions to use the card.
@@ -70,39 +61,34 @@ public class CardBatchEntry extends BunqModel {
   private Integer monetaryAccountIdFallbackFieldForRequest;
 
   public CardBatchEntry() {
-    this(null, null, null, null, null, null, null);
+    this(null, null, null, null, null, null);
   }
 
   public CardBatchEntry(Integer id) {
-    this(id, null, null, null, null, null, null);
+    this(id, null, null, null, null, null);
   }
 
-  public CardBatchEntry(Integer id, String activationCode) {
-    this(id, activationCode, null, null, null, null, null);
+  public CardBatchEntry(Integer id, String status) {
+    this(id, status, null, null, null, null);
   }
 
-  public CardBatchEntry(Integer id, String activationCode, String status) {
-    this(id, activationCode, status, null, null, null, null);
+  public CardBatchEntry(Integer id, String status, Amount cardLimit) {
+    this(id, status, cardLimit, null, null, null);
   }
 
-  public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit) {
-    this(id, activationCode, status, limit, null, null, null);
+  public CardBatchEntry(Integer id, String status, Amount cardLimit, Amount cardLimitAtm) {
+    this(id, status, cardLimit, cardLimitAtm, null, null);
   }
 
-  public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission) {
-    this(id, activationCode, status, limit, magStripePermission, null, null);
+  public CardBatchEntry(Integer id, String status, Amount cardLimit, Amount cardLimitAtm, List<CardCountryPermission> countryPermission) {
+    this(id, status, cardLimit, cardLimitAtm, countryPermission, null);
   }
 
-  public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission) {
-    this(id, activationCode, status, limit, magStripePermission, countryPermission, null);
-  }
-
-  public CardBatchEntry(Integer id, String activationCode, String status, List<CardLimit> limit, CardMagStripePermission magStripePermission, List<CardCountryPermission> countryPermission, Integer monetaryAccountIdFallback) {
+  public CardBatchEntry(Integer id, String status, Amount cardLimit, Amount cardLimitAtm, List<CardCountryPermission> countryPermission, Integer monetaryAccountIdFallback) {
     this.idFieldForRequest = id;
-    this.activationCodeFieldForRequest = activationCode;
     this.statusFieldForRequest = status;
-    this.limitFieldForRequest = limit;
-    this.magStripePermissionFieldForRequest = magStripePermission;
+    this.cardLimitFieldForRequest = cardLimit;
+    this.cardLimitAtmFieldForRequest = cardLimitAtm;
     this.countryPermissionFieldForRequest = countryPermission;
     this.monetaryAccountIdFallbackFieldForRequest = monetaryAccountIdFallback;
   }

@@ -1,8 +1,5 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.http.ApiClient;
-import com.bunq.sdk.http.BunqResponse;
-import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
@@ -13,9 +10,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * With MonetaryAccountLight is a monetary account for bunq light users. Through this endpoint
@@ -24,14 +19,6 @@ import java.util.Map;
  * are the description, the daily limit and the avatar of the account.
  */
 public class MonetaryAccountLight extends BunqModel {
-
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-light";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-light/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-light/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-light";
 
   /**
    * Field constants.
@@ -46,11 +33,6 @@ public class MonetaryAccountLight extends BunqModel {
   public static final String FIELD_REASON_DESCRIPTION = "reason_description";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
-
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "MonetaryAccountLight";
 
   /**
    * The id of the MonetaryAccountLight.
@@ -364,229 +346,6 @@ public class MonetaryAccountLight extends BunqModel {
     this.reasonDescriptionFieldForRequest = reasonDescription;
     this.notificationFiltersFieldForRequest = notificationFilters;
     this.settingFieldForRequest = setting;
-  }
-
-  /**
-   * Create new MonetaryAccountLight.
-   *
-   * @param currency            The currency of the MonetaryAccountLight as an ISO 4217 formatted currency
-   *                            code.
-   * @param description         The description of the MonetaryAccountLight. Defaults to 'bunq account'.
-   * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountLight. Defaults to
-   *                            1000 EUR. Currency must match the MonetaryAccountLight's currency. Limited to 10000 EUR.
-   * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountLight.
-   * @param status              The status of the MonetaryAccountLight. Ignored in POST requests (always set to
-   *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-   *                            MonetaryAccountLight. When updating the status and/or sub_status no other fields can be
-   *                            updated in the same request (and vice versa).
-   * @param subStatus           The sub-status of the MonetaryAccountLight providing extra information
-   *                            regarding the status. Should be ignored for POST requests and can only be
-   *                            REDEMPTION_VOLUNTARY for PUT requests with status CANCELLED. When updating the status and/or
-   *                            sub_status no other fields can be updated in the same request (and vice versa).
-   * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
-   *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-   * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-   *                            the MonetaryAccountBank. Can be any user provided message. Should only be specified if
-   *                            updating the status to CANCELLED.
-   * @param notificationFilters The types of notifications that will result in a push notification
-   *                            or URL callback for this MonetaryAccountLight.
-   * @param setting             The settings of the MonetaryAccountLight.
-   */
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
-    }
-
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_CURRENCY, currency);
-    requestMap.put(FIELD_DESCRIPTION, description);
-    requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
-    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
-    requestMap.put(FIELD_STATUS, status);
-    requestMap.put(FIELD_SUB_STATUS, subStatus);
-    requestMap.put(FIELD_REASON, reason);
-    requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
-    requestMap.put(FIELD_SETTING, setting);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> create() {
-    return create(null, null, null, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency) {
-    return create(currency, null, null, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description) {
-    return create(currency, description, null, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit) {
-    return create(currency, description, dailyLimit, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid) {
-    return create(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
-    return create(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-    return create(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-    return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-    return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-    return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null);
-  }
-
-  public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-    return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null);
-  }
-
-  /**
-   * Get a specific MonetaryAccountLight.
-   */
-  public static BunqResponse<MonetaryAccountLight> get(Integer monetaryAccountLightId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), monetaryAccountLightId), params, customHeaders);
-
-    return fromJson(MonetaryAccountLight.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<MonetaryAccountLight> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<MonetaryAccountLight> get(Integer monetaryAccountLightId) {
-    return get(monetaryAccountLightId, null, null);
-  }
-
-  public static BunqResponse<MonetaryAccountLight> get(Integer monetaryAccountLightId, Map<String, String> params) {
-    return get(monetaryAccountLightId, params, null);
-  }
-
-  /**
-   * Update a specific existing MonetaryAccountLight.
-   *
-   * @param description         The description of the MonetaryAccountLight. Defaults to 'bunq account'.
-   * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountLight. Defaults to
-   *                            1000 EUR. Currency must match the MonetaryAccountLight's currency. Limited to 10000 EUR.
-   * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountLight.
-   * @param status              The status of the MonetaryAccountLight. Ignored in POST requests (always set to
-   *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-   *                            MonetaryAccountLight. When updating the status and/or sub_status no other fields can be
-   *                            updated in the same request (and vice versa).
-   * @param subStatus           The sub-status of the MonetaryAccountLight providing extra information
-   *                            regarding the status. Should be ignored for POST requests and can only be
-   *                            REDEMPTION_VOLUNTARY for PUT requests with status CANCELLED. When updating the status and/or
-   *                            sub_status no other fields can be updated in the same request (and vice versa).
-   * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
-   *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-   * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-   *                            the MonetaryAccountBank. Can be any user provided message. Should only be specified if
-   *                            updating the status to CANCELLED.
-   * @param notificationFilters The types of notifications that will result in a push notification
-   *                            or URL callback for this MonetaryAccountLight.
-   * @param setting             The settings of the MonetaryAccountLight.
-   */
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
-    }
-
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_DESCRIPTION, description);
-    requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
-    requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
-    requestMap.put(FIELD_STATUS, status);
-    requestMap.put(FIELD_SUB_STATUS, subStatus);
-    requestMap.put(FIELD_REASON, reason);
-    requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-    requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
-    requestMap.put(FIELD_SETTING, setting);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountLightId), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId) {
-    return update(monetaryAccountLightId, null, null, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description) {
-    return update(monetaryAccountLightId, description, null, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit) {
-    return update(monetaryAccountLightId, description, dailyLimit, null, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer monetaryAccountLightId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-    return update(monetaryAccountLightId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null);
-  }
-
-  /**
-   * Gets a listing of all MonetaryAccountLights of a given user.
-   */
-  public static BunqResponse<List<MonetaryAccountLight>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
-
-    return fromJsonList(MonetaryAccountLight.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<MonetaryAccountLight>> list() {
-    return list(null, null);
-  }
-
-  public static BunqResponse<List<MonetaryAccountLight>> list(Map<String, String> params) {
-    return list(params, null);
   }
 
   /**

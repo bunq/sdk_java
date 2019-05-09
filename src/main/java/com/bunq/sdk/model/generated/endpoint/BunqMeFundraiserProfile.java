@@ -71,6 +71,13 @@ public class BunqMeFundraiserProfile extends BunqModel {
   private String redirectUrl;
 
   /**
+   * Provided if the user has enabled their invite link.
+   */
+  @Expose
+  @SerializedName("invite_profile_name")
+  private String inviteProfileName;
+
+  /**
    * The pointer (url) which will be used to access the bunq.me fundraiser profile.
    */
   @Expose
@@ -164,6 +171,17 @@ public class BunqMeFundraiserProfile extends BunqModel {
   }
 
   /**
+   * Provided if the user has enabled their invite link.
+   */
+  public String getInviteProfileName() {
+    return this.inviteProfileName;
+  }
+
+  public void setInviteProfileName(String inviteProfileName) {
+    this.inviteProfileName = inviteProfileName;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.color != null) {
@@ -191,6 +209,10 @@ public class BunqMeFundraiserProfile extends BunqModel {
     }
 
     if (this.redirectUrl != null) {
+      return false;
+    }
+
+    if (this.inviteProfileName != null) {
       return false;
     }
 

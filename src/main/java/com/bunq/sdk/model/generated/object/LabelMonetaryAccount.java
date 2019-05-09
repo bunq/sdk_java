@@ -73,6 +73,20 @@ public class LabelMonetaryAccount extends BunqModel {
   private String swiftAccountNumber;
 
   /**
+   * The account number used for a Transferwise payment. May or may not be an IBAN.
+   */
+  @Expose
+  @SerializedName("transferwise_account_number")
+  private String transferwiseAccountNumber;
+
+  /**
+   * The bank code used for a Transferwise payment. May or may not be a BIC.
+   */
+  @Expose
+  @SerializedName("transferwise_bank_code")
+  private String transferwiseBankCode;
+
+  /**
    * The IBAN of the monetary account.
    */
   public String getIban() {
@@ -172,6 +186,28 @@ public class LabelMonetaryAccount extends BunqModel {
   }
 
   /**
+   * The account number used for a Transferwise payment. May or may not be an IBAN.
+   */
+  public String getTransferwiseAccountNumber() {
+    return this.transferwiseAccountNumber;
+  }
+
+  public void setTransferwiseAccountNumber(String transferwiseAccountNumber) {
+    this.transferwiseAccountNumber = transferwiseAccountNumber;
+  }
+
+  /**
+   * The bank code used for a Transferwise payment. May or may not be a BIC.
+   */
+  public String getTransferwiseBankCode() {
+    return this.transferwiseBankCode;
+  }
+
+  public void setTransferwiseBankCode(String transferwiseBankCode) {
+    this.transferwiseBankCode = transferwiseBankCode;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.iban != null) {
@@ -207,6 +243,14 @@ public class LabelMonetaryAccount extends BunqModel {
     }
 
     if (this.swiftAccountNumber != null) {
+      return false;
+    }
+
+    if (this.transferwiseAccountNumber != null) {
+      return false;
+    }
+
+    if (this.transferwiseBankCode != null) {
       return false;
     }
 

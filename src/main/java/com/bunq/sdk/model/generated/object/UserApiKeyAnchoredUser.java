@@ -4,6 +4,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -32,6 +33,12 @@ public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInt
 
   /**
    */
+  @Expose
+  @SerializedName("UserPaymentServiceProvider")
+  private UserPaymentServiceProvider userPaymentServiceProvider;
+
+  /**
+   */
   public UserPerson getUserPerson() {
     return this.userPerson;
   }
@@ -52,6 +59,16 @@ public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInt
 
   /**
    */
+  public UserPaymentServiceProvider getUserPaymentServiceProvider() {
+    return this.userPaymentServiceProvider;
+  }
+
+  public void setUserPaymentServiceProvider(UserPaymentServiceProvider userPaymentServiceProvider) {
+    this.userPaymentServiceProvider = userPaymentServiceProvider;
+  }
+
+  /**
+   */
   public BunqModel getReferencedObject() {
     if (this.userPerson != null) {
       return this.userPerson;
@@ -59,6 +76,10 @@ public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInt
 
     if (this.userCompany != null) {
       return this.userCompany;
+    }
+
+    if (this.userPaymentServiceProvider != null) {
+      return this.userPaymentServiceProvider;
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
@@ -72,6 +93,10 @@ public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInt
     }
 
     if (this.userCompany != null) {
+      return false;
+    }
+
+    if (this.userPaymentServiceProvider != null) {
       return false;
     }
 

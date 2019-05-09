@@ -17,20 +17,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * [DEPRECATED - use /share-invite-monetary-account-inquiry] Used to share a monetary account
+ * [DEPRECATED - use /share-invite-monetary-account-response] Used to share a monetary account
  * with another bunq user, as in the 'Connect' feature in the bunq app. Allow the creation of
  * share inquiries that, in the same way as request inquiries, can be revoked by the user
  * creating them or accepted/rejected by the other party.
  */
-public class ShareInviteBankInquiry extends BunqModel {
+public class ShareInviteMonetaryAccountInquiry extends BunqModel {
 
   /**
    * Endpoint constants.
    */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-monetary-account-inquiry";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-monetary-account-inquiry/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-monetary-account-inquiry/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-monetary-account-inquiry";
 
   /**
    * Field constants.
@@ -46,7 +46,7 @@ public class ShareInviteBankInquiry extends BunqModel {
   /**
    * Object type.
    */
-  protected static final String OBJECT_TYPE_GET = "ShareInviteBankInquiry";
+  protected static final String OBJECT_TYPE_GET = "ShareInviteMonetaryAccountInquiry";
 
   /**
    * The label of the monetary account that's being shared.
@@ -187,35 +187,35 @@ public class ShareInviteBankInquiry extends BunqModel {
   @SerializedName("end_date_field_for_request")
   private String endDateFieldForRequest;
 
-  public ShareInviteBankInquiry() {
+  public ShareInviteMonetaryAccountInquiry() {
     this(null, null, null, null, null, null, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias) {
     this(counterUserAlias, null, null, null, null, null, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail) {
     this(counterUserAlias, shareDetail, null, null, null, null, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
     this(counterUserAlias, shareDetail, status, null, null, null, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId) {
     this(counterUserAlias, shareDetail, status, draftShareInviteBankId, null, null, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType) {
     this(counterUserAlias, shareDetail, status, draftShareInviteBankId, shareType, null, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate) {
     this(counterUserAlias, shareDetail, status, draftShareInviteBankId, shareType, startDate, null);
   }
 
-  public ShareInviteBankInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate, String endDate) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate, String endDate) {
     this.counterUserAliasFieldForRequest = counterUserAlias;
     this.draftShareInviteBankIdFieldForRequest = draftShareInviteBankId;
     this.shareDetailFieldForRequest = shareDetail;
@@ -226,7 +226,7 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
-   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Create a new share inquiry for a
+   * [DEPRECATED - use /share-invite-monetary-account-response] Create a new share inquiry for a
    * monetary account, specifying the permission the other bunq user will have on it.
    *
    * @param counterUserAlias       The pointer of the user to share with.
@@ -299,36 +299,36 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
-   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Get the details of a specific share
-   * inquiry.
+   * [DEPRECATED - use /share-invite-monetary-account-response] Get the details of a specific
+   * share inquiry.
    */
-  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ShareInviteMonetaryAccountInquiry> get(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteMonetaryAccountInquiryId), params, customHeaders);
 
-    return fromJson(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJson(ShareInviteMonetaryAccountInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<ShareInviteBankInquiry> get() {
+  public static BunqResponse<ShareInviteMonetaryAccountInquiry> get() {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId) {
-    return get(shareInviteBankInquiryId, null, null, null);
+  public static BunqResponse<ShareInviteMonetaryAccountInquiry> get(Integer shareInviteMonetaryAccountInquiryId) {
+    return get(shareInviteMonetaryAccountInquiryId, null, null, null);
   }
 
-  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId) {
-    return get(shareInviteBankInquiryId, monetaryAccountId, null, null);
+  public static BunqResponse<ShareInviteMonetaryAccountInquiry> get(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
+    return get(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ShareInviteBankInquiry> get(Integer shareInviteBankInquiryId, Integer monetaryAccountId, Map<String, String> params) {
-    return get(shareInviteBankInquiryId, monetaryAccountId, params, null);
+  public static BunqResponse<ShareInviteMonetaryAccountInquiry> get(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(shareInviteMonetaryAccountInquiryId, monetaryAccountId, params, null);
   }
 
   /**
-   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Update the details of a share. This
-   * includes updating status (revoking or cancelling it), granted permission and validity period
-   * of this share.
+   * [DEPRECATED - use /share-invite-monetary-account-response] Update the details of a share.
+   * This includes updating status (revoking or cancelling it), granted permission and validity
+   * period of this share.
    *
    * @param shareDetail The share details. Only one of these objects may be passed.
    * @param status      The status of the share. Can be PENDING, REVOKED (the user deletes the share
@@ -338,7 +338,7 @@ public class ShareInviteBankInquiry extends BunqModel {
    * @param startDate   The start date of this share.
    * @param endDate     The expiration date of this share.
    */
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -352,56 +352,56 @@ public class ShareInviteBankInquiry extends BunqModel {
     requestMap.put(FIELD_END_DATE, endDate);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId), requestBytes, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteMonetaryAccountInquiryId), requestBytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId) {
-    return update(shareInviteBankInquiryId, null, null, null, null, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId) {
+    return update(shareInviteMonetaryAccountInquiryId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId) {
-    return update(shareInviteBankInquiryId, monetaryAccountId, null, null, null, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail) {
-    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, null, null, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status) {
-    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, status, null, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, status, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate) {
-    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, status, startDate, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, status, startDate, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteBankInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate) {
-    return update(shareInviteBankInquiryId, monetaryAccountId, shareDetail, status, startDate, endDate, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, status, startDate, endDate, null);
   }
 
   /**
-   * [DEPRECATED - use /share-invite-monetary-account-inquiry] Get a list with all the share
+   * [DEPRECATED - use /share-invite-monetary-account-response] Get a list with all the share
    * inquiries for a monetary account, only if the requesting user has permission to change the
    * details of the various ones.
    */
-  public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiry>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
-    return fromJsonList(ShareInviteBankInquiry.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJsonList(ShareInviteMonetaryAccountInquiry.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<ShareInviteBankInquiry>> list() {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiry>> list() {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiry>> list(Integer monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<ShareInviteBankInquiry>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiry>> list(Integer monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
@@ -596,8 +596,8 @@ public class ShareInviteBankInquiry extends BunqModel {
 
   /**
    */
-  public static ShareInviteBankInquiry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteBankInquiry.class, reader);
+  public static ShareInviteMonetaryAccountInquiry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareInviteMonetaryAccountInquiry.class, reader);
   }
 
 }
