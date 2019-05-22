@@ -75,6 +75,12 @@ public class InvoiceItem extends BunqModel {
   private Amount totalVatInclusive;
 
   /**
+   */
+  public static InvoiceItem fromJsonReader(JsonReader reader) {
+    return fromJsonReader(InvoiceItem.class, reader);
+  }
+
+  /**
    * The billing date of the item.
    */
   public String getBillingDate() {
@@ -213,12 +219,6 @@ public class InvoiceItem extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static InvoiceItem fromJsonReader(JsonReader reader) {
-    return fromJsonReader(InvoiceItem.class, reader);
   }
 
 }

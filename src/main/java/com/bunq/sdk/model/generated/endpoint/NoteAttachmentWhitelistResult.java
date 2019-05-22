@@ -20,6 +20,11 @@ import java.util.Map;
 public class NoteAttachmentWhitelistResult extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_DESCRIPTION = "description";
+  public static final String FIELD_ATTACHMENT_ID = "attachment_id";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/whitelist/%s/whitelist-result/%s/note-attachment";
@@ -27,13 +32,6 @@ public class NoteAttachmentWhitelistResult extends BunqModel {
   protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/whitelist/%s/whitelist-result/%s/note-attachment/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/whitelist/%s/whitelist-result/%s/note-attachment";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/whitelist/%s/whitelist-result/%s/note-attachment/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_DESCRIPTION = "description";
-  public static final String FIELD_ATTACHMENT_ID = "attachment_id";
-
   /**
    * Object type.
    */
@@ -281,6 +279,12 @@ public class NoteAttachmentWhitelistResult extends BunqModel {
   }
 
   /**
+   */
+  public static NoteAttachmentWhitelistResult fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NoteAttachmentWhitelistResult.class, reader);
+  }
+
+  /**
    * The id of the note.
    */
   public Integer getId() {
@@ -374,12 +378,6 @@ public class NoteAttachmentWhitelistResult extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static NoteAttachmentWhitelistResult fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NoteAttachmentWhitelistResult.class, reader);
   }
 
 }

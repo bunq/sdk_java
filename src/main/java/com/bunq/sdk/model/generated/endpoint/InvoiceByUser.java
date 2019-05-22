@@ -182,6 +182,12 @@ public class InvoiceByUser extends BunqModel {
   }
 
   /**
+   */
+  public static InvoiceByUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(InvoiceByUser.class, reader);
+  }
+
+  /**
    * The id of the invoice object.
    */
   public Integer getId() {
@@ -425,12 +431,6 @@ public class InvoiceByUser extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static InvoiceByUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(InvoiceByUser.class, reader);
   }
 
 }

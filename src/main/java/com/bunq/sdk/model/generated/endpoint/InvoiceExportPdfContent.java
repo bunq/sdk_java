@@ -46,14 +46,14 @@ public class InvoiceExportPdfContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static InvoiceExportPdfContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(InvoiceExportPdfContent.class, reader);
   }
 
   /**
    */
-  public static InvoiceExportPdfContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(InvoiceExportPdfContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

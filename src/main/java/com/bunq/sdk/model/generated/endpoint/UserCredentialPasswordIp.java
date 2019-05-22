@@ -117,6 +117,12 @@ public class UserCredentialPasswordIp extends BunqModel {
   }
 
   /**
+   */
+  public static UserCredentialPasswordIp fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserCredentialPasswordIp.class, reader);
+  }
+
+  /**
    * The id of the credential.
    */
   public Integer getId() {
@@ -225,12 +231,6 @@ public class UserCredentialPasswordIp extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserCredentialPasswordIp fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserCredentialPasswordIp.class, reader);
   }
 
 }

@@ -70,6 +70,12 @@ public class MonetaryAccountSetting extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountSetting fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountSetting.class, reader);
+  }
+
+  /**
    * The color chosen for the MonetaryAccount.
    */
   public String getColor() {
@@ -118,12 +124,6 @@ public class MonetaryAccountSetting extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountSetting fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountSetting.class, reader);
   }
 
 }

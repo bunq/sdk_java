@@ -141,6 +141,12 @@ public class TransferwiseQuote extends BunqModel {
   }
 
   /**
+   */
+  public static TransferwiseQuote fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TransferwiseQuote.class, reader);
+  }
+
+  /**
    * The id of the quote.
    */
   public Integer getId() {
@@ -294,12 +300,6 @@ public class TransferwiseQuote extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TransferwiseQuote fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TransferwiseQuote.class, reader);
   }
 
 }

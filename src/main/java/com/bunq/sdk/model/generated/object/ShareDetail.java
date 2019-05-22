@@ -76,6 +76,12 @@ public class ShareDetail extends BunqModel {
   }
 
   /**
+   */
+  public static ShareDetail fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareDetail.class, reader);
+  }
+
+  /**
    * The share details for a payment share. In the response 'payment' is replaced by
    * 'ShareDetailPayment'.
    */
@@ -127,12 +133,6 @@ public class ShareDetail extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareDetail fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareDetail.class, reader);
   }
 
 }

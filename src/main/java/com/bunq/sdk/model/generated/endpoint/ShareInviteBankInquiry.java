@@ -25,14 +25,6 @@ import java.util.Map;
 public class ShareInviteBankInquiry extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_COUNTER_USER_ALIAS = "counter_user_alias";
@@ -42,7 +34,13 @@ public class ShareInviteBankInquiry extends BunqModel {
   public static final String FIELD_SHARE_TYPE = "share_type";
   public static final String FIELD_START_DATE = "start_date";
   public static final String FIELD_END_DATE = "end_date";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/share-invite-bank-inquiry";
   /**
    * Object type.
    */
@@ -406,6 +404,12 @@ public class ShareInviteBankInquiry extends BunqModel {
   }
 
   /**
+   */
+  public static ShareInviteBankInquiry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareInviteBankInquiry.class, reader);
+  }
+
+  /**
    * The label of the monetary account that's being shared.
    */
   public LabelMonetaryAccount getAlias() {
@@ -592,12 +596,6 @@ public class ShareInviteBankInquiry extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareInviteBankInquiry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteBankInquiry.class, reader);
   }
 
 }

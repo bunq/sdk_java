@@ -20,18 +20,16 @@ import java.util.Map;
 public class CashRegisterQrCode extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/qr-code";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/qr-code/%s";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/qr-code/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/qr-code";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-
   /**
    * Object type.
    */
@@ -237,6 +235,12 @@ public class CashRegisterQrCode extends BunqModel {
   }
 
   /**
+   */
+  public static CashRegisterQrCode fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CashRegisterQrCode.class, reader);
+  }
+
+  /**
    * The id of the created QR code. Use this id to get the RAW content of the QR code with:
    * ../qr-code/{id}/content
    */
@@ -333,12 +337,6 @@ public class CashRegisterQrCode extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CashRegisterQrCode fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CashRegisterQrCode.class, reader);
   }
 
 }

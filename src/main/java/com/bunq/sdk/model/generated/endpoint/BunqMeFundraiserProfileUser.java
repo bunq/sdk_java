@@ -20,12 +20,6 @@ import java.util.Map;
 public class BunqMeFundraiserProfileUser extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/bunqme-fundraiser-profile/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/bunqme-fundraiser-profile";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_MONETARY_ACCOUNT_ID = "monetary_account_id";
@@ -35,7 +29,11 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
   public static final String FIELD_POINTER = "pointer";
   public static final String FIELD_REDIRECT_URL = "redirect_url";
   public static final String FIELD_STATUS = "status";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user/%s/bunqme-fundraiser-profile/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/bunqme-fundraiser-profile";
   /**
    * Object type.
    */
@@ -225,6 +223,12 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
   }
 
   /**
+   */
+  public static BunqMeFundraiserProfileUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeFundraiserProfileUser.class, reader);
+  }
+
+  /**
    * Id of the monetary account on which you want to receive bunq.me payments.
    */
   public Integer getMonetaryAccountId() {
@@ -349,12 +353,6 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeFundraiserProfileUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeFundraiserProfileUser.class, reader);
   }
 
 }

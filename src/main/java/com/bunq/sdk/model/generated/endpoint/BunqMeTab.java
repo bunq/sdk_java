@@ -20,19 +20,17 @@ import java.util.Map;
 public class BunqMeTab extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_BUNQME_TAB_ENTRY = "bunqme_tab_entry";
+  public static final String FIELD_STATUS = "status";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/bunqme-tab";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/bunqme-tab/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/bunqme-tab";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/bunqme-tab/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_BUNQME_TAB_ENTRY = "bunqme_tab_entry";
-  public static final String FIELD_STATUS = "status";
-
   /**
    * Object type.
    */
@@ -246,6 +244,12 @@ public class BunqMeTab extends BunqModel {
   }
 
   /**
+   */
+  public static BunqMeTab fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeTab.class, reader);
+  }
+
+  /**
    * The id of the created bunq.me.
    */
   public Integer getId() {
@@ -384,12 +388,6 @@ public class BunqMeTab extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeTab fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeTab.class, reader);
   }
 
 }

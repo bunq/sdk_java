@@ -54,6 +54,12 @@ public class CardName extends BunqModel {
   }
 
   /**
+   */
+  public static CardName fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardName.class, reader);
+  }
+
+  /**
    * All possible variations (of suitable length) of user's legal name for the debit card.
    */
   public List<String> getPossibleCardNameArray() {
@@ -72,12 +78,6 @@ public class CardName extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardName fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardName.class, reader);
   }
 
 }

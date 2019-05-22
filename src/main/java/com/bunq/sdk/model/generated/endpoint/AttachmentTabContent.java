@@ -52,14 +52,14 @@ public class AttachmentTabContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static AttachmentTabContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentTabContent.class, reader);
   }
 
   /**
    */
-  public static AttachmentTabContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentTabContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

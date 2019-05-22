@@ -27,12 +27,6 @@ import java.util.Map;
 public class UserPerson extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user-person/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user-person/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_FIRST_NAME = "first_name";
@@ -62,7 +56,11 @@ public class UserPerson extends BunqModel {
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_DISPLAY_NAME = "display_name";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user-person/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user-person/%s";
   /**
    * Object type.
    */
@@ -830,6 +828,12 @@ public class UserPerson extends BunqModel {
   }
 
   /**
+   */
+  public static UserPerson fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserPerson.class, reader);
+  }
+
+  /**
    * The id of the modified person object.
    */
   public Integer getId() {
@@ -1303,12 +1307,6 @@ public class UserPerson extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserPerson fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserPerson.class, reader);
   }
 
 }

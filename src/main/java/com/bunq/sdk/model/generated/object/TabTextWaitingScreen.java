@@ -51,6 +51,12 @@ public class TabTextWaitingScreen extends BunqModel {
   }
 
   /**
+   */
+  public static TabTextWaitingScreen fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabTextWaitingScreen.class, reader);
+  }
+
+  /**
    * Language of tab text
    */
   public String getLanguage() {
@@ -84,12 +90,6 @@ public class TabTextWaitingScreen extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabTextWaitingScreen fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabTextWaitingScreen.class, reader);
   }
 
 }

@@ -87,6 +87,12 @@ public class LabelMonetaryAccount extends BunqModel {
   private String transferwiseBankCode;
 
   /**
+   */
+  public static LabelMonetaryAccount fromJsonReader(JsonReader reader) {
+    return fromJsonReader(LabelMonetaryAccount.class, reader);
+  }
+
+  /**
    * The IBAN of the monetary account.
    */
   public String getIban() {
@@ -255,12 +261,6 @@ public class LabelMonetaryAccount extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static LabelMonetaryAccount fromJsonReader(JsonReader reader) {
-    return fromJsonReader(LabelMonetaryAccount.class, reader);
   }
 
 }

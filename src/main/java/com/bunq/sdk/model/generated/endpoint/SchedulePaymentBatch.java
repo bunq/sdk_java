@@ -19,18 +19,16 @@ import java.util.Map;
 public class SchedulePaymentBatch extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_PAYMENTS = "payments";
+  public static final String FIELD_SCHEDULE = "schedule";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment-batch";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
   protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_PAYMENTS = "payments";
-  public static final String FIELD_SCHEDULE = "schedule";
-
   /**
    * The payment details.
    */
@@ -164,6 +162,12 @@ public class SchedulePaymentBatch extends BunqModel {
   }
 
   /**
+   */
+  public static SchedulePaymentBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(SchedulePaymentBatch.class, reader);
+  }
+
+  /**
    * The payment details.
    */
   public List<SchedulePaymentEntry> getPayments() {
@@ -197,12 +201,6 @@ public class SchedulePaymentBatch extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static SchedulePaymentBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(SchedulePaymentBatch.class, reader);
   }
 
 }

@@ -102,6 +102,12 @@ public class CustomerLimit extends BunqModel {
   }
 
   /**
+   */
+  public static CustomerLimit fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CustomerLimit.class, reader);
+  }
+
+  /**
    * The limit of monetary accounts.
    */
   public Integer getLimitMonetaryAccount() {
@@ -225,12 +231,6 @@ public class CustomerLimit extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CustomerLimit fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CustomerLimit.class, reader);
   }
 
 }

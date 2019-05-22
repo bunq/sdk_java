@@ -69,6 +69,12 @@ public class FeatureAnnouncement extends BunqModel {
   }
 
   /**
+   */
+  public static FeatureAnnouncement fromJsonReader(JsonReader reader) {
+    return fromJsonReader(FeatureAnnouncement.class, reader);
+  }
+
+  /**
    * The Avatar of the event overview.
    */
   public Avatar getAvatar() {
@@ -117,12 +123,6 @@ public class FeatureAnnouncement extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static FeatureAnnouncement fromJsonReader(JsonReader reader) {
-    return fromJsonReader(FeatureAnnouncement.class, reader);
   }
 
 }

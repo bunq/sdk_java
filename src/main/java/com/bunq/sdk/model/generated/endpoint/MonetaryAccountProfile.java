@@ -61,6 +61,12 @@ public class MonetaryAccountProfile extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountProfile fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountProfile.class, reader);
+  }
+
+  /**
    * The profile settings for triggering the fill of a monetary account.
    */
   public MonetaryAccountProfileFill getProfileFill() {
@@ -94,12 +100,6 @@ public class MonetaryAccountProfile extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountProfile fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountProfile.class, reader);
   }
 
 }

@@ -55,6 +55,12 @@ public class SandboxUser extends BunqModel {
   }
 
   /**
+   */
+  public static SandboxUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(SandboxUser.class, reader);
+  }
+
+  /**
    * The API key of the newly created sandbox user.
    */
   public String getApiKey() {
@@ -73,12 +79,6 @@ public class SandboxUser extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static SandboxUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(SandboxUser.class, reader);
   }
 
 }

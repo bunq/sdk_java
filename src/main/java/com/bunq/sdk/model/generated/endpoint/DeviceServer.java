@@ -19,19 +19,17 @@ import java.util.Map;
 public class DeviceServer extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "device-server";
-  protected static final String ENDPOINT_URL_READ = "device-server/%s";
-  protected static final String ENDPOINT_URL_LISTING = "device-server";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_SECRET = "secret";
   public static final String FIELD_PERMITTED_IPS = "permitted_ips";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "device-server";
+  protected static final String ENDPOINT_URL_READ = "device-server/%s";
+  protected static final String ENDPOINT_URL_LISTING = "device-server";
   /**
    * Object type.
    */
@@ -210,6 +208,12 @@ public class DeviceServer extends BunqModel {
   }
 
   /**
+   */
+  public static DeviceServer fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DeviceServer.class, reader);
+  }
+
+  /**
    * The id of the DeviceServer as created on the server.
    */
   public Integer getId() {
@@ -303,12 +307,6 @@ public class DeviceServer extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DeviceServer fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DeviceServer.class, reader);
   }
 
 }

@@ -1,7 +1,14 @@
 # Change Log
 
-## [1.10.0](https://github.com/bunq/sdk_java/tree/1.10.0) (2019-05-09)
+## [Unreleased](https://github.com/bunq/sdk_java/tree/HEAD)
 
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.0...HEAD)
+
+**Closed issues:**
+
+- Support for MonetaryAccountBankSavings is missing [\#113](https://github.com/bunq/sdk_java/issues/113)
+
+## [1.10.0](https://github.com/bunq/sdk_java/tree/1.10.0) (2019-05-09)
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.1.0...1.10.0)
 
 **Closed issues:**

@@ -25,11 +25,6 @@ import java.util.Map;
 public class CardDebit extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_SECOND_LINE = "second_line";
@@ -38,7 +33,10 @@ public class CardDebit extends BunqModel {
   public static final String FIELD_TYPE = "type";
   public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
   public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
   /**
    * Object type.
    */
@@ -321,6 +319,12 @@ public class CardDebit extends BunqModel {
 
   public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, Pointer alias, String type, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
     return create(secondLine, nameOnCard, alias, type, pinCodeAssignment, monetaryAccountIdFallback, null);
+  }
+
+  /**
+   */
+  public static CardDebit fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardDebit.class, reader);
   }
 
   /**
@@ -613,12 +617,6 @@ public class CardDebit extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardDebit fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardDebit.class, reader);
   }
 
 }

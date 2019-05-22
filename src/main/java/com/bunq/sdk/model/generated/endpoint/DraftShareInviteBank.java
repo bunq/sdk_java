@@ -22,20 +22,18 @@ import java.util.Map;
 public class DraftShareInviteBank extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_EXPIRATION = "expiration";
+  public static final String FIELD_DRAFT_SHARE_SETTINGS = "draft_share_settings";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/draft-share-invite-bank";
   protected static final String ENDPOINT_URL_READ = "user/%s/draft-share-invite-bank/%s";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/draft-share-invite-bank/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/draft-share-invite-bank";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_EXPIRATION = "expiration";
-  public static final String FIELD_DRAFT_SHARE_SETTINGS = "draft_share_settings";
-
   /**
    * Object type.
    */
@@ -253,6 +251,12 @@ public class DraftShareInviteBank extends BunqModel {
   }
 
   /**
+   */
+  public static DraftShareInviteBank fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftShareInviteBank.class, reader);
+  }
+
+  /**
    * The user who created the draft share invite.
    */
   public LabelUser getUserAliasCreated() {
@@ -361,12 +365,6 @@ public class DraftShareInviteBank extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftShareInviteBank fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftShareInviteBank.class, reader);
   }
 
 }

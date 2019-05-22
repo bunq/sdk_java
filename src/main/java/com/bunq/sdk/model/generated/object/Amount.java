@@ -51,6 +51,12 @@ public class Amount extends BunqModel {
   }
 
   /**
+   */
+  public static Amount fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Amount.class, reader);
+  }
+
+  /**
    * The amount formatted to two decimal places.
    */
   public String getValue() {
@@ -84,12 +90,6 @@ public class Amount extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Amount fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Amount.class, reader);
   }
 
 }

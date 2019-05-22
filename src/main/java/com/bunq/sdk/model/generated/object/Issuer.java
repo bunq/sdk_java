@@ -51,6 +51,12 @@ public class Issuer extends BunqModel {
   }
 
   /**
+   */
+  public static Issuer fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Issuer.class, reader);
+  }
+
+  /**
    * The BIC code.
    */
   public String getBic() {
@@ -84,12 +90,6 @@ public class Issuer extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Issuer fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Issuer.class, reader);
   }
 
 }

@@ -22,18 +22,16 @@ import java.util.Map;
 public class Invoice extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_EXTERNAL_URL = "external_url";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
   /**
    * Object type.
    */
@@ -242,6 +240,12 @@ public class Invoice extends BunqModel {
 
   public static BunqResponse<Invoice> get(Integer invoiceId, Integer monetaryAccountId, Map<String, String> params) {
     return get(invoiceId, monetaryAccountId, params, null);
+  }
+
+  /**
+   */
+  public static Invoice fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Invoice.class, reader);
   }
 
   /**
@@ -504,12 +508,6 @@ public class Invoice extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Invoice fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Invoice.class, reader);
   }
 
 }

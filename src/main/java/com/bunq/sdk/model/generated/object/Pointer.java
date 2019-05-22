@@ -71,6 +71,12 @@ public class Pointer extends BunqModel {
   }
 
   /**
+   */
+  public static Pointer fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Pointer.class, reader);
+  }
+
+  /**
    * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
    */
   public String getType() {
@@ -119,12 +125,6 @@ public class Pointer extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Pointer fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Pointer.class, reader);
   }
 
 }

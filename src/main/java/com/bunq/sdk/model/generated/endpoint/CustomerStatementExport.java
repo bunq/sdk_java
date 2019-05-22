@@ -20,21 +20,19 @@ import java.util.Map;
 public class CustomerStatementExport extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/customer-statement";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/customer-statement/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/customer-statement";
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/customer-statement/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_STATEMENT_FORMAT = "statement_format";
   public static final String FIELD_DATE_START = "date_start";
   public static final String FIELD_DATE_END = "date_end";
   public static final String FIELD_REGIONAL_FORMAT = "regional_format";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/customer-statement";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/customer-statement/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/customer-statement";
+  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/customer-statement/%s";
   /**
    * Object type.
    */
@@ -276,6 +274,12 @@ public class CustomerStatementExport extends BunqModel {
   }
 
   /**
+   */
+  public static CustomerStatementExport fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CustomerStatementExport.class, reader);
+  }
+
+  /**
    * The id of the customer statement model.
    */
   public Integer getId() {
@@ -429,12 +433,6 @@ public class CustomerStatementExport extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CustomerStatementExport fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CustomerStatementExport.class, reader);
   }
 
 }

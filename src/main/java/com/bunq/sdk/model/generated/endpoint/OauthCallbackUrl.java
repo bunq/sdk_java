@@ -18,6 +18,10 @@ import java.util.Map;
 public class OauthCallbackUrl extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_URL = "url";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_READ = "user/%s/oauth-client/%s/callback-url/%s";
@@ -25,12 +29,6 @@ public class OauthCallbackUrl extends BunqModel {
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/oauth-client/%s/callback-url/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/oauth-client/%s/callback-url";
   protected static final String ENDPOINT_URL_DELETE = "user/%s/oauth-client/%s/callback-url/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_URL = "url";
-
   /**
    * Object type.
    */
@@ -184,6 +182,12 @@ public class OauthCallbackUrl extends BunqModel {
   }
 
   /**
+   */
+  public static OauthCallbackUrl fromJsonReader(JsonReader reader) {
+    return fromJsonReader(OauthCallbackUrl.class, reader);
+  }
+
+  /**
    * The URL for this callback.
    */
   public String getUrl() {
@@ -202,12 +206,6 @@ public class OauthCallbackUrl extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static OauthCallbackUrl fromJsonReader(JsonReader reader) {
-    return fromJsonReader(OauthCallbackUrl.class, reader);
   }
 
 }

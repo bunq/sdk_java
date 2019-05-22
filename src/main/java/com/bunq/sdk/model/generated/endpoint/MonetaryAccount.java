@@ -103,6 +103,12 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
 
   /**
    */
+  public static MonetaryAccount fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccount.class, reader);
+  }
+
+  /**
+   */
   public MonetaryAccountBank getMonetaryAccountBank() {
     return this.monetaryAccountBank;
   }
@@ -183,12 +189,6 @@ public class MonetaryAccount extends BunqModel implements AnchorObjectInterface 
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccount fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccount.class, reader);
   }
 
 }

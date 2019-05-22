@@ -18,15 +18,13 @@ import java.util.Map;
 public class TabItemShopBatch extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item-batch";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_TAB_ITEMS = "tab_items";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item-batch";
   /**
    * The list of tab items in the batch.
    */
@@ -92,6 +90,12 @@ public class TabItemShopBatch extends BunqModel {
   }
 
   /**
+   */
+  public static TabItemShopBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabItemShopBatch.class, reader);
+  }
+
+  /**
    * The list of tab items in the batch.
    */
   public List<TabItemShop> getTabItems() {
@@ -110,12 +114,6 @@ public class TabItemShopBatch extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabItemShopBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabItemShopBatch.class, reader);
   }
 
 }

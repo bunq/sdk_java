@@ -58,6 +58,12 @@ public class AttachmentMonetaryAccount extends BunqModel {
   }
 
   /**
+   */
+  public static AttachmentMonetaryAccount fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentMonetaryAccount.class, reader);
+  }
+
+  /**
    * The attachment.
    */
   public Attachment getAttachment() {
@@ -91,12 +97,6 @@ public class AttachmentMonetaryAccount extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static AttachmentMonetaryAccount fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentMonetaryAccount.class, reader);
   }
 
 }

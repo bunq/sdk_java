@@ -50,14 +50,14 @@ public class DraftShareInviteApiKeyQrCodeContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static DraftShareInviteApiKeyQrCodeContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftShareInviteApiKeyQrCodeContent.class, reader);
   }
 
   /**
    */
-  public static DraftShareInviteApiKeyQrCodeContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftShareInviteApiKeyQrCodeContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

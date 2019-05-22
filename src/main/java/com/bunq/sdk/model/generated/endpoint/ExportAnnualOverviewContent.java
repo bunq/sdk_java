@@ -48,14 +48,14 @@ public class ExportAnnualOverviewContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static ExportAnnualOverviewContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ExportAnnualOverviewContent.class, reader);
   }
 
   /**
    */
-  public static ExportAnnualOverviewContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ExportAnnualOverviewContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

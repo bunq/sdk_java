@@ -57,6 +57,12 @@ public class UserCompanyName extends BunqModel {
   }
 
   /**
+   */
+  public static UserCompanyName fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserCompanyName.class, reader);
+  }
+
+  /**
    * All known (trade) names for a user company.
    */
   public List<String> getNameArray() {
@@ -75,12 +81,6 @@ public class UserCompanyName extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserCompanyName fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserCompanyName.class, reader);
   }
 
 }

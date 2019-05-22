@@ -22,17 +22,15 @@ import java.util.Map;
 public class ScheduleInstance extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATE = "state";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule/%s/schedule-instance/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule/%s/schedule-instance";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATE = "state";
-
   /**
    * Object type.
    */
@@ -193,6 +191,12 @@ public class ScheduleInstance extends BunqModel {
   }
 
   /**
+   */
+  public static ScheduleInstance fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ScheduleInstance.class, reader);
+  }
+
+  /**
    * The state of the scheduleInstance. (FINISHED_SUCCESSFULLY, RETRY, FAILED_USER_ERROR)
    */
   public String getState() {
@@ -302,12 +306,6 @@ public class ScheduleInstance extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ScheduleInstance fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ScheduleInstance.class, reader);
   }
 
 }

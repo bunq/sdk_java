@@ -29,13 +29,6 @@ import java.util.Map;
 public class Payment extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT = "amount";
@@ -44,7 +37,12 @@ public class Payment extends BunqModel {
   public static final String FIELD_ATTACHMENT = "attachment";
   public static final String FIELD_MERCHANT_REFERENCE = "merchant_reference";
   public static final String FIELD_ALLOW_BUNQTO = "allow_bunqto";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment";
   /**
    * Object type.
    */
@@ -428,6 +426,12 @@ public class Payment extends BunqModel {
 
   public static BunqResponse<List<Payment>> list(Integer monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
+  }
+
+  /**
+   */
+  public static Payment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Payment.class, reader);
   }
 
   /**
@@ -817,12 +821,6 @@ public class Payment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Payment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Payment.class, reader);
   }
 
 }

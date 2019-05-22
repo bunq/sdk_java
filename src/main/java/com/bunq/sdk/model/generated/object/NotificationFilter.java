@@ -84,6 +84,12 @@ public class NotificationFilter extends BunqModel {
   }
 
   /**
+   */
+  public static NotificationFilter fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationFilter.class, reader);
+  }
+
+  /**
    * The delivery method via which notifications that match this notification filter will be
    * delivered. Possible choices are PUSH for delivery via push notification and URL for delivery
    * via URL callback.
@@ -139,12 +145,6 @@ public class NotificationFilter extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static NotificationFilter fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationFilter.class, reader);
   }
 
 }

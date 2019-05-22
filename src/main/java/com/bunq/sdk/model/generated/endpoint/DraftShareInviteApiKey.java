@@ -20,20 +20,18 @@ import java.util.Map;
 public class DraftShareInviteApiKey extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_SUB_STATUS = "sub_status";
+  public static final String FIELD_EXPIRATION = "expiration";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/draft-share-invite-api-key";
   protected static final String ENDPOINT_URL_READ = "user/%s/draft-share-invite-api-key/%s";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/draft-share-invite-api-key/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/draft-share-invite-api-key";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_SUB_STATUS = "sub_status";
-  public static final String FIELD_EXPIRATION = "expiration";
-
   /**
    * Object type.
    */
@@ -252,6 +250,12 @@ public class DraftShareInviteApiKey extends BunqModel {
   }
 
   /**
+   */
+  public static DraftShareInviteApiKey fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftShareInviteApiKey.class, reader);
+  }
+
+  /**
    * The user who created the draft share invite.
    */
   public LabelUser getUserAliasCreated() {
@@ -360,12 +364,6 @@ public class DraftShareInviteApiKey extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftShareInviteApiKey fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftShareInviteApiKey.class, reader);
   }
 
 }

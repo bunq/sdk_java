@@ -31,6 +31,12 @@ public class ShareInviteBankInquiryBatch extends BunqModel {
   private LabelMonetaryAccount alias;
 
   /**
+   */
+  public static ShareInviteBankInquiryBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareInviteBankInquiryBatch.class, reader);
+  }
+
+  /**
    * The list of share invite bank inquiries that were made.
    */
   public List<ShareInviteBankInquiry> getShareInviteBankInquiries() {
@@ -65,12 +71,6 @@ public class ShareInviteBankInquiryBatch extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareInviteBankInquiryBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteBankInquiryBatch.class, reader);
   }
 
 }

@@ -93,6 +93,12 @@ public class BunqMeFundraiserProfile extends BunqModel {
   }
 
   /**
+   */
+  public static BunqMeFundraiserProfile fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeFundraiserProfile.class, reader);
+  }
+
+  /**
    * The color chosen for the bunq.me fundraiser profile in hexadecimal format.
    */
   public String getColor() {
@@ -217,12 +223,6 @@ public class BunqMeFundraiserProfile extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeFundraiserProfile fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeFundraiserProfile.class, reader);
   }
 
 }

@@ -59,6 +59,12 @@ public class InvoiceItemGroup extends BunqModel {
   private InvoiceItem item;
 
   /**
+   */
+  public static InvoiceItemGroup fromJsonReader(JsonReader reader) {
+    return fromJsonReader(InvoiceItemGroup.class, reader);
+  }
+
+  /**
    * The type of the invoice item group.
    */
   public String getType() {
@@ -167,12 +173,6 @@ public class InvoiceItemGroup extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static InvoiceItemGroup fromJsonReader(JsonReader reader) {
-    return fromJsonReader(InvoiceItemGroup.class, reader);
   }
 
 }

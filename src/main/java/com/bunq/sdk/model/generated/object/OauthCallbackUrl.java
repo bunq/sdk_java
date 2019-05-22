@@ -38,6 +38,12 @@ public class OauthCallbackUrl extends BunqModel {
   private String updated;
 
   /**
+   */
+  public static OauthCallbackUrl fromJsonReader(JsonReader reader) {
+    return fromJsonReader(OauthCallbackUrl.class, reader);
+  }
+
+  /**
    * The Callback URL.
    */
   public String getUrl() {
@@ -101,12 +107,6 @@ public class OauthCallbackUrl extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static OauthCallbackUrl fromJsonReader(JsonReader reader) {
-    return fromJsonReader(OauthCallbackUrl.class, reader);
   }
 
 }

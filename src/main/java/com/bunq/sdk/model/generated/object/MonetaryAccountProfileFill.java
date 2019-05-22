@@ -109,6 +109,12 @@ public class MonetaryAccountProfileFill extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountProfileFill fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountProfileFill.class, reader);
+  }
+
+  /**
    * The status of the profile.
    */
   public String getStatus() {
@@ -188,12 +194,6 @@ public class MonetaryAccountProfileFill extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountProfileFill fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountProfileFill.class, reader);
   }
 
 }

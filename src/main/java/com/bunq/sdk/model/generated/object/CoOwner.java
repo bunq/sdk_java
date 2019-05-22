@@ -39,6 +39,12 @@ public class CoOwner extends BunqModel {
   }
 
   /**
+   */
+  public static CoOwner fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CoOwner.class, reader);
+  }
+
+  /**
    * The Alias of the co-owner.
    */
   public LabelUser getAlias() {
@@ -72,12 +78,6 @@ public class CoOwner extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CoOwner fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CoOwner.class, reader);
   }
 
 }

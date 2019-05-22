@@ -51,14 +51,14 @@ public class ExportRibContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static ExportRibContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ExportRibContent.class, reader);
   }
 
   /**
    */
-  public static ExportRibContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ExportRibContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

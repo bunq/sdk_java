@@ -57,6 +57,12 @@ public class InstallationServerPublicKey extends BunqModel {
   }
 
   /**
+   */
+  public static InstallationServerPublicKey fromJsonReader(JsonReader reader) {
+    return fromJsonReader(InstallationServerPublicKey.class, reader);
+  }
+
+  /**
    * The server's public key for this Installation.
    */
   public String getServerPublicKey() {
@@ -75,12 +81,6 @@ public class InstallationServerPublicKey extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static InstallationServerPublicKey fromJsonReader(JsonReader reader) {
-    return fromJsonReader(InstallationServerPublicKey.class, reader);
   }
 
 }

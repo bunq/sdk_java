@@ -24,6 +24,12 @@ public class PermittedDevice extends BunqModel {
   private String ip;
 
   /**
+   */
+  public static PermittedDevice fromJsonReader(JsonReader reader) {
+    return fromJsonReader(PermittedDevice.class, reader);
+  }
+
+  /**
    * The description of the device that may use the credential.
    */
   public String getDescription() {
@@ -57,12 +63,6 @@ public class PermittedDevice extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static PermittedDevice fromJsonReader(JsonReader reader) {
-    return fromJsonReader(PermittedDevice.class, reader);
   }
 
 }

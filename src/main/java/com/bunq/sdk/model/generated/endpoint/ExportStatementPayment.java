@@ -25,7 +25,7 @@ public class ExportStatementPayment extends BunqModel {
   /**
    * Object type.
    */
-  protected static final String OBJECT_TYPE_GET = "Id";
+  protected static final String OBJECT_TYPE_GET = "ExportStatementPayment";
 
   /**
    * The id of the single payment statement model.
@@ -114,6 +114,12 @@ public class ExportStatementPayment extends BunqModel {
   }
 
   /**
+   */
+  public static ExportStatementPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ExportStatementPayment.class, reader);
+  }
+
+  /**
    * The id of the single payment statement model.
    */
   public Integer getId() {
@@ -177,12 +183,6 @@ public class ExportStatementPayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ExportStatementPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ExportStatementPayment.class, reader);
   }
 
 }

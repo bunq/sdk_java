@@ -103,6 +103,12 @@ public class User extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
+  public static User fromJsonReader(JsonReader reader) {
+    return fromJsonReader(User.class, reader);
+  }
+
+  /**
+   */
   public UserLight getUserLight() {
     return this.userLight;
   }
@@ -201,12 +207,6 @@ public class User extends BunqModel implements AnchorObjectInterface {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static User fromJsonReader(JsonReader reader) {
-    return fromJsonReader(User.class, reader);
   }
 
 }

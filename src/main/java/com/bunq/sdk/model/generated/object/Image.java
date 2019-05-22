@@ -38,6 +38,12 @@ public class Image extends BunqModel {
   private Integer width;
 
   /**
+   */
+  public static Image fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Image.class, reader);
+  }
+
+  /**
    * The public UUID of the public attachment containing the image.
    */
   public String getAttachmentPublicUuid() {
@@ -101,12 +107,6 @@ public class Image extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Image fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Image.class, reader);
   }
 
 }
