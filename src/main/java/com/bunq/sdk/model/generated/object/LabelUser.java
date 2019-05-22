@@ -84,6 +84,12 @@ public class LabelUser extends BunqModel {
   }
 
   /**
+   */
+  public static LabelUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(LabelUser.class, reader);
+  }
+
+  /**
    * The public UUID of the label-user.
    */
   public String getUuid() {
@@ -162,12 +168,6 @@ public class LabelUser extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static LabelUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(LabelUser.class, reader);
   }
 
 }

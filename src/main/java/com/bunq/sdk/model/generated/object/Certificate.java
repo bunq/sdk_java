@@ -32,6 +32,12 @@ public class Certificate extends BunqModel {
   }
 
   /**
+   */
+  public static Certificate fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Certificate.class, reader);
+  }
+
+  /**
    * A single certificate in the chain in .PEM format.
    */
   public String getCertificate() {
@@ -50,12 +56,6 @@ public class Certificate extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Certificate fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Certificate.class, reader);
   }
 
 }

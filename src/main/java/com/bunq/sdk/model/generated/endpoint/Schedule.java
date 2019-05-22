@@ -18,19 +18,17 @@ import java.util.Map;
 public class Schedule extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_TIME_START = "time_start";
   public static final String FIELD_TIME_END = "time_end";
   public static final String FIELD_RECURRENCE_UNIT = "recurrence_unit";
   public static final String FIELD_RECURRENCE_SIZE = "recurrence_size";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule";
   /**
    * Object type.
    */
@@ -183,6 +181,12 @@ public class Schedule extends BunqModel {
   }
 
   /**
+   */
+  public static Schedule fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Schedule.class, reader);
+  }
+
+  /**
    * The schedule start time (UTC).
    */
   public String getTimeStart() {
@@ -277,12 +281,6 @@ public class Schedule extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Schedule fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Schedule.class, reader);
   }
 
 }

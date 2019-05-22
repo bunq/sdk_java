@@ -136,6 +136,12 @@ public class Event extends BunqModel {
   }
 
   /**
+   */
+  public static Event fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Event.class, reader);
+  }
+
+  /**
    * The id of the event.
    */
   public Integer getId() {
@@ -260,12 +266,6 @@ public class Event extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Event fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Event.class, reader);
   }
 
 }

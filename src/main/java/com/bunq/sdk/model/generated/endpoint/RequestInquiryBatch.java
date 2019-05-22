@@ -20,21 +20,19 @@ import java.util.Map;
 public class RequestInquiryBatch extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry-batch";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry-batch/%s";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry-batch/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry-batch";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_REQUEST_INQUIRIES = "request_inquiries";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_TOTAL_AMOUNT_INQUIRED = "total_amount_inquired";
   public static final String FIELD_EVENT_ID = "event_id";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry-batch";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry-batch/%s";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry-batch/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry-batch";
   /**
    * Object type.
    */
@@ -248,6 +246,12 @@ public class RequestInquiryBatch extends BunqModel {
   }
 
   /**
+   */
+  public static RequestInquiryBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestInquiryBatch.class, reader);
+  }
+
+  /**
    * The list of requests that were made.
    */
   public List<RequestInquiry> getRequestInquiries() {
@@ -297,12 +301,6 @@ public class RequestInquiryBatch extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static RequestInquiryBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(RequestInquiryBatch.class, reader);
   }
 
 }

@@ -46,14 +46,14 @@ public class ShareInviteMonetaryAccountAmountUsed extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static ShareInviteMonetaryAccountAmountUsed fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareInviteMonetaryAccountAmountUsed.class, reader);
   }
 
   /**
    */
-  public static ShareInviteMonetaryAccountAmountUsed fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteMonetaryAccountAmountUsed.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

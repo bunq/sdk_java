@@ -75,6 +75,12 @@ public class TabVisibility extends BunqModel {
   }
 
   /**
+   */
+  public static TabVisibility fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabVisibility.class, reader);
+  }
+
+  /**
    * When true the tab will be linked to the ACTIVE cash registers QR code.
    */
   public Boolean getCashRegisterQrCode() {
@@ -124,12 +130,6 @@ public class TabVisibility extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabVisibility fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabVisibility.class, reader);
   }
 
 }

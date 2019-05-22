@@ -19,18 +19,16 @@ import java.util.Map;
 public class CardGeneratedCvc2 extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_TYPE = "type";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/generated-cvc2";
   protected static final String ENDPOINT_URL_READ = "user/%s/card/%s/generated-cvc2/%s";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/card/%s/generated-cvc2/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/generated-cvc2";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_TYPE = "type";
-
   /**
    * Object type.
    */
@@ -215,6 +213,12 @@ public class CardGeneratedCvc2 extends BunqModel {
   }
 
   /**
+   */
+  public static CardGeneratedCvc2 fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardGeneratedCvc2.class, reader);
+  }
+
+  /**
    * The id of the cvc code.
    */
   public Integer getId() {
@@ -323,12 +327,6 @@ public class CardGeneratedCvc2 extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardGeneratedCvc2 fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardGeneratedCvc2.class, reader);
   }
 
 }

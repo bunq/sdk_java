@@ -153,6 +153,12 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
   }
 
   /**
+   */
+  public static BankSwitchServiceNetherlandsIncoming fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BankSwitchServiceNetherlandsIncoming.class, reader);
+  }
+
+  /**
    * The label of the user creator of this switch service.
    */
   public LabelUser getUserAlias() {
@@ -291,12 +297,6 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BankSwitchServiceNetherlandsIncoming fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BankSwitchServiceNetherlandsIncoming.class, reader);
   }
 
 }

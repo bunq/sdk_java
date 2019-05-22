@@ -108,6 +108,12 @@ public class Tab extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
+  public static Tab fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Tab.class, reader);
+  }
+
+  /**
+   */
   public TabUsageSingle getTabUsageSingle() {
     return this.tabUsageSingle;
   }
@@ -152,12 +158,6 @@ public class Tab extends BunqModel implements AnchorObjectInterface {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Tab fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Tab.class, reader);
   }
 
 }

@@ -24,21 +24,19 @@ import java.util.Map;
 public class DraftPayment extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/draft-payment";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/draft-payment/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/draft-payment";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/draft-payment/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_ENTRIES = "entries";
   public static final String FIELD_PREVIOUS_UPDATED_TIMESTAMP = "previous_updated_timestamp";
   public static final String FIELD_NUMBER_OF_REQUIRED_ACCEPTS = "number_of_required_accepts";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/draft-payment";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/draft-payment/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/draft-payment";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/draft-payment/%s";
   /**
    * Object type.
    */
@@ -313,6 +311,12 @@ public class DraftPayment extends BunqModel {
   }
 
   /**
+   */
+  public static DraftPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftPayment.class, reader);
+  }
+
+  /**
    * The id of the created DrafPayment.
    */
   public Integer getId() {
@@ -453,12 +457,6 @@ public class DraftPayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftPayment.class, reader);
   }
 
 }

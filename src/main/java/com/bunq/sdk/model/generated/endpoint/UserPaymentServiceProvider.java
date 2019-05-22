@@ -150,6 +150,12 @@ public class UserPaymentServiceProvider extends BunqModel {
   }
 
   /**
+   */
+  public static UserPaymentServiceProvider fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserPaymentServiceProvider.class, reader);
+  }
+
+  /**
    * The id of the user.
    */
   public Integer getId() {
@@ -365,12 +371,6 @@ public class UserPaymentServiceProvider extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserPaymentServiceProvider fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserPaymentServiceProvider.class, reader);
   }
 
 }

@@ -80,6 +80,12 @@ public class AttachmentUser extends BunqModel {
   }
 
   /**
+   */
+  public static AttachmentUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentUser.class, reader);
+  }
+
+  /**
    * The id of the attachment.
    */
   public Integer getId() {
@@ -143,12 +149,6 @@ public class AttachmentUser extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static AttachmentUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentUser.class, reader);
   }
 
 }

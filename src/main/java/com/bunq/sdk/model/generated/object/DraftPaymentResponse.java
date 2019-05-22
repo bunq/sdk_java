@@ -24,6 +24,12 @@ public class DraftPaymentResponse extends BunqModel {
   private LabelUser userAliasCreated;
 
   /**
+   */
+  public static DraftPaymentResponse fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftPaymentResponse.class, reader);
+  }
+
+  /**
    * The status with which was responded.
    */
   public String getStatus() {
@@ -57,12 +63,6 @@ public class DraftPaymentResponse extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftPaymentResponse fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftPaymentResponse.class, reader);
   }
 
 }

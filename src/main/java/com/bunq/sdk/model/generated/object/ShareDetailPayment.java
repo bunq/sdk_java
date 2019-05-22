@@ -131,6 +131,12 @@ public class ShareDetailPayment extends BunqModel {
   }
 
   /**
+   */
+  public static ShareDetailPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareDetailPayment.class, reader);
+  }
+
+  /**
    * If set to true, the invited user will be able to make payments from the shared account.
    */
   public Boolean getMakePayments() {
@@ -226,12 +232,6 @@ public class ShareDetailPayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareDetailPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareDetailPayment.class, reader);
   }
 
 }

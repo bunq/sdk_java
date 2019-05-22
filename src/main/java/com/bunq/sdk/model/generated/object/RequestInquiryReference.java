@@ -24,6 +24,12 @@ public class RequestInquiryReference extends BunqModel {
   private Integer id;
 
   /**
+   */
+  public static RequestInquiryReference fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestInquiryReference.class, reader);
+  }
+
+  /**
    * The type of request inquiry. Can be RequestInquiry or RequestInquiryBatch.
    */
   public String getType() {
@@ -57,12 +63,6 @@ public class RequestInquiryReference extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static RequestInquiryReference fromJsonReader(JsonReader reader) {
-    return fromJsonReader(RequestInquiryReference.class, reader);
   }
 
 }

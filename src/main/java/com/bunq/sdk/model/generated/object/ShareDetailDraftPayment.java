@@ -93,6 +93,12 @@ public class ShareDetailDraftPayment extends BunqModel {
   }
 
   /**
+   */
+  public static ShareDetailDraftPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareDetailDraftPayment.class, reader);
+  }
+
+  /**
    * If set to true, the invited user will be able to make draft payments from the shared account.
    */
   public Boolean getMakeDraftPayments() {
@@ -158,12 +164,6 @@ public class ShareDetailDraftPayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareDetailDraftPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareDetailDraftPayment.class, reader);
   }
 
 }

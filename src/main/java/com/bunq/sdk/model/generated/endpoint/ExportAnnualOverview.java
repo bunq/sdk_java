@@ -21,18 +21,16 @@ import java.util.Map;
 public class ExportAnnualOverview extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_YEAR = "year";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/export-annual-overview";
   protected static final String ENDPOINT_URL_READ = "user/%s/export-annual-overview/%s";
   protected static final String ENDPOINT_URL_DELETE = "user/%s/export-annual-overview/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/export-annual-overview";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_YEAR = "year";
-
   /**
    * Object type.
    */
@@ -172,6 +170,12 @@ public class ExportAnnualOverview extends BunqModel {
   }
 
   /**
+   */
+  public static ExportAnnualOverview fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ExportAnnualOverview.class, reader);
+  }
+
+  /**
    * The id of the annual overview as created on the server.
    */
   public Integer getId() {
@@ -250,12 +254,6 @@ public class ExportAnnualOverview extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ExportAnnualOverview fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ExportAnnualOverview.class, reader);
   }
 
 }

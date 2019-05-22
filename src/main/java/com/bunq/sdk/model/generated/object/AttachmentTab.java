@@ -31,6 +31,12 @@ public class AttachmentTab extends BunqModel {
   private String contentType;
 
   /**
+   */
+  public static AttachmentTab fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentTab.class, reader);
+  }
+
+  /**
    * The id of the attachment.
    */
   public Integer getId() {
@@ -79,12 +85,6 @@ public class AttachmentTab extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static AttachmentTab fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentTab.class, reader);
   }
 
 }

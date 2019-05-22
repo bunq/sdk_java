@@ -87,6 +87,12 @@ public class BunqMeFundraiserResult extends BunqModel {
   }
 
   /**
+   */
+  public static BunqMeFundraiserResult fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeFundraiserResult.class, reader);
+  }
+
+  /**
    * The id of the bunq.me.
    */
   public Integer getId() {
@@ -165,12 +171,6 @@ public class BunqMeFundraiserResult extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeFundraiserResult fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeFundraiserResult.class, reader);
   }
 
 }

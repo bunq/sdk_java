@@ -137,6 +137,12 @@ public class SchedulePaymentEntry extends BunqModel {
   }
 
   /**
+   */
+  public static SchedulePaymentEntry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(SchedulePaymentEntry.class, reader);
+  }
+
+  /**
    * The Amount transferred by the Payment. Will be negative for outgoing Payments and positive
    * for incoming Payments (relative to the MonetaryAccount indicated by monetary_account_id).
    */
@@ -234,12 +240,6 @@ public class SchedulePaymentEntry extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static SchedulePaymentEntry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(SchedulePaymentEntry.class, reader);
   }
 
 }

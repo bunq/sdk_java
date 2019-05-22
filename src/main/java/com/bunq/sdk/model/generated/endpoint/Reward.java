@@ -124,6 +124,12 @@ public class Reward extends BunqModel {
   }
 
   /**
+   */
+  public static Reward fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Reward.class, reader);
+  }
+
+  /**
    * The id of the reward.
    */
   public Integer getId() {
@@ -247,12 +253,6 @@ public class Reward extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Reward fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Reward.class, reader);
   }
 
 }

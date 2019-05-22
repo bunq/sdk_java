@@ -10,14 +10,14 @@ public class Whitelist extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static Whitelist fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Whitelist.class, reader);
   }
 
   /**
    */
-  public static Whitelist fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Whitelist.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

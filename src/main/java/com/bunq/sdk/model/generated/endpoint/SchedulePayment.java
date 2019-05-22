@@ -19,6 +19,11 @@ import java.util.Map;
 public class SchedulePayment extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_PAYMENT = "payment";
+  public static final String FIELD_SCHEDULE = "schedule";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment";
@@ -26,13 +31,6 @@ public class SchedulePayment extends BunqModel {
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule-payment/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/schedule-payment";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule-payment/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_PAYMENT = "payment";
-  public static final String FIELD_SCHEDULE = "schedule";
-
   /**
    * Object type.
    */
@@ -217,6 +215,12 @@ public class SchedulePayment extends BunqModel {
   }
 
   /**
+   */
+  public static SchedulePayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(SchedulePayment.class, reader);
+  }
+
+  /**
    * The payment details.
    */
   public SchedulePaymentEntry getPayment() {
@@ -250,12 +254,6 @@ public class SchedulePayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static SchedulePayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(SchedulePayment.class, reader);
   }
 
 }

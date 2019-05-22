@@ -70,6 +70,12 @@ public class TaxResident extends BunqModel {
   }
 
   /**
+   */
+  public static TaxResident fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TaxResident.class, reader);
+  }
+
+  /**
    * The country of the tax number.
    */
   public String getCountry() {
@@ -118,12 +124,6 @@ public class TaxResident extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TaxResident fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TaxResident.class, reader);
   }
 
 }

@@ -31,6 +31,12 @@ public class AttachmentPublic extends BunqModel {
   private String contentType;
 
   /**
+   */
+  public static AttachmentPublic fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentPublic.class, reader);
+  }
+
+  /**
    * The uuid of the attachment.
    */
   public String getUuid() {
@@ -79,12 +85,6 @@ public class AttachmentPublic extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static AttachmentPublic fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentPublic.class, reader);
   }
 
 }

@@ -57,14 +57,14 @@ public class TabQrCodeContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static TabQrCodeContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabQrCodeContent.class, reader);
   }
 
   /**
    */
-  public static TabQrCodeContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabQrCodeContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

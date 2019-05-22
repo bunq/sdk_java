@@ -81,6 +81,12 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
 
   /**
    */
+  public static RequestReferenceSplitTheBillAnchorObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestReferenceSplitTheBillAnchorObject.class, reader);
+  }
+
+  /**
+   */
   public Invoice getBillingInvoice() {
     return this.billingInvoice;
   }
@@ -251,12 +257,6 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static RequestReferenceSplitTheBillAnchorObject fromJsonReader(JsonReader reader) {
-    return fromJsonReader(RequestReferenceSplitTheBillAnchorObject.class, reader);
   }
 
 }

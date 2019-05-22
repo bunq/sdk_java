@@ -70,6 +70,12 @@ public class Ubo extends BunqModel {
   }
 
   /**
+   */
+  public static Ubo fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Ubo.class, reader);
+  }
+
+  /**
    * The name of the ultimate beneficiary owner.
    */
   public String getName() {
@@ -118,12 +124,6 @@ public class Ubo extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Ubo fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Ubo.class, reader);
   }
 
 }

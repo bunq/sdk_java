@@ -143,6 +143,12 @@ public class ExportRib extends BunqModel {
   }
 
   /**
+   */
+  public static ExportRib fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ExportRib.class, reader);
+  }
+
+  /**
    * The id of the rib as created on the server.
    */
   public Integer getId() {
@@ -191,12 +197,6 @@ public class ExportRib extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ExportRib fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ExportRib.class, reader);
   }
 
 }

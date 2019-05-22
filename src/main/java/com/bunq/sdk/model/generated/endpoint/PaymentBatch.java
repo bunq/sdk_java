@@ -18,18 +18,16 @@ import java.util.Map;
 public class PaymentBatch extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_PAYMENTS = "payments";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/payment-batch";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/payment-batch/%s";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/payment-batch/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/payment-batch";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_PAYMENTS = "payments";
-
   /**
    * Object type.
    */
@@ -166,6 +164,12 @@ public class PaymentBatch extends BunqModel {
   }
 
   /**
+   */
+  public static PaymentBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(PaymentBatch.class, reader);
+  }
+
+  /**
    * The list of mutations that were made.
    */
   public List<Payment> getPayments() {
@@ -184,12 +188,6 @@ public class PaymentBatch extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static PaymentBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(PaymentBatch.class, reader);
   }
 
 }

@@ -19,18 +19,16 @@ import java.util.Map;
 public class OauthClient extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_READ = "user/%s/oauth-client/%s";
   protected static final String ENDPOINT_URL_CREATE = "user/%s/oauth-client";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/oauth-client/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/oauth-client";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-
   /**
    * Object type.
    */
@@ -179,6 +177,12 @@ public class OauthClient extends BunqModel {
   }
 
   /**
+   */
+  public static OauthClient fromJsonReader(JsonReader reader) {
+    return fromJsonReader(OauthClient.class, reader);
+  }
+
+  /**
    * Id of the client.
    */
   public Integer getId() {
@@ -257,12 +261,6 @@ public class OauthClient extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static OauthClient fromJsonReader(JsonReader reader) {
-    return fromJsonReader(OauthClient.class, reader);
   }
 
 }

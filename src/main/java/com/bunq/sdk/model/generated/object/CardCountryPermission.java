@@ -58,6 +58,12 @@ public class CardCountryPermission extends BunqModel {
   }
 
   /**
+   */
+  public static CardCountryPermission fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardCountryPermission.class, reader);
+  }
+
+  /**
    * The id of the card country permission entry.
    */
   public Integer getId() {
@@ -106,12 +112,6 @@ public class CardCountryPermission extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardCountryPermission fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardCountryPermission.class, reader);
   }
 
 }

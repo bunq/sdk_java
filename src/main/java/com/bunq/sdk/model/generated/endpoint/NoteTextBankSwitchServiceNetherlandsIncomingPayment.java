@@ -19,6 +19,10 @@ import java.util.Map;
 public class NoteTextBankSwitchServiceNetherlandsIncomingPayment extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_CONTENT = "content";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/switch-service-payment/%s/note-text";
@@ -26,12 +30,6 @@ public class NoteTextBankSwitchServiceNetherlandsIncomingPayment extends BunqMod
   protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/switch-service-payment/%s/note-text/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/switch-service-payment/%s/note-text";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/switch-service-payment/%s/note-text/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_CONTENT = "content";
-
   /**
    * Object type.
    */
@@ -234,6 +232,12 @@ public class NoteTextBankSwitchServiceNetherlandsIncomingPayment extends BunqMod
   }
 
   /**
+   */
+  public static NoteTextBankSwitchServiceNetherlandsIncomingPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NoteTextBankSwitchServiceNetherlandsIncomingPayment.class, reader);
+  }
+
+  /**
    * The id of the note.
    */
   public Integer getId() {
@@ -312,12 +316,6 @@ public class NoteTextBankSwitchServiceNetherlandsIncomingPayment extends BunqMod
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static NoteTextBankSwitchServiceNetherlandsIncomingPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NoteTextBankSwitchServiceNetherlandsIncomingPayment.class, reader);
   }
 
 }

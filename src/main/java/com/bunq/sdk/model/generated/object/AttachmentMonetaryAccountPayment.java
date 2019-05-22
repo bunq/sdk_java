@@ -39,6 +39,12 @@ public class AttachmentMonetaryAccountPayment extends BunqModel {
   }
 
   /**
+   */
+  public static AttachmentMonetaryAccountPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentMonetaryAccountPayment.class, reader);
+  }
+
+  /**
    * The id of the attached Attachment.
    */
   public Integer getId() {
@@ -72,12 +78,6 @@ public class AttachmentMonetaryAccountPayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static AttachmentMonetaryAccountPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentMonetaryAccountPayment.class, reader);
   }
 
 }

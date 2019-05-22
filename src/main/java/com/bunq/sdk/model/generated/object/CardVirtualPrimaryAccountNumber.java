@@ -103,6 +103,12 @@ public class CardVirtualPrimaryAccountNumber extends BunqModel {
   }
 
   /**
+   */
+  public static CardVirtualPrimaryAccountNumber fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardVirtualPrimaryAccountNumber.class, reader);
+  }
+
+  /**
    * The ID for this Virtual PAN.
    */
   public Integer getId() {
@@ -196,12 +202,6 @@ public class CardVirtualPrimaryAccountNumber extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardVirtualPrimaryAccountNumber fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardVirtualPrimaryAccountNumber.class, reader);
   }
 
 }

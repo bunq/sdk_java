@@ -27,15 +27,6 @@ import java.util.Map;
 public class TabItemShop extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_DESCRIPTION = "description";
@@ -44,7 +35,14 @@ public class TabItemShop extends BunqModel {
   public static final String FIELD_TAB_ATTACHMENT = "tab_attachment";
   public static final String FIELD_QUANTITY = "quantity";
   public static final String FIELD_AMOUNT = "amount";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
+  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/tab-item/%s";
   /**
    * Object type.
    */
@@ -414,6 +412,12 @@ public class TabItemShop extends BunqModel {
   }
 
   /**
+   */
+  public static TabItemShop fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabItemShop.class, reader);
+  }
+
+  /**
    * The id of the created TabItem.
    */
   public Integer getId() {
@@ -522,12 +526,6 @@ public class TabItemShop extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabItemShop fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabItemShop.class, reader);
   }
 
 }

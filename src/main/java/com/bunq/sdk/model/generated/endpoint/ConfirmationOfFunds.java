@@ -19,16 +19,14 @@ import java.util.Map;
 public class ConfirmationOfFunds extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/confirmation-of-funds";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_POINTER_IBAN = "pointer_iban";
   public static final String FIELD_AMOUNT = "amount";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/confirmation-of-funds";
   /**
    * Object type.
    */
@@ -102,6 +100,12 @@ public class ConfirmationOfFunds extends BunqModel {
   }
 
   /**
+   */
+  public static ConfirmationOfFunds fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ConfirmationOfFunds.class, reader);
+  }
+
+  /**
    * Whether the account has sufficient funds.
    */
   public Boolean getHasSufficientFunds() {
@@ -120,12 +124,6 @@ public class ConfirmationOfFunds extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ConfirmationOfFunds fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ConfirmationOfFunds.class, reader);
   }
 
 }

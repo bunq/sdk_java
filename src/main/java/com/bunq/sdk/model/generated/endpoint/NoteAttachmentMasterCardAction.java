@@ -20,6 +20,11 @@ import java.util.Map;
 public class NoteAttachmentMasterCardAction extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_DESCRIPTION = "description";
+  public static final String FIELD_ATTACHMENT_ID = "attachment_id";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/mastercard-action/%s/note-attachment";
@@ -27,13 +32,6 @@ public class NoteAttachmentMasterCardAction extends BunqModel {
   protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/mastercard-action/%s/note-attachment/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/mastercard-action/%s/note-attachment";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/mastercard-action/%s/note-attachment/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_DESCRIPTION = "description";
-  public static final String FIELD_ATTACHMENT_ID = "attachment_id";
-
   /**
    * Object type.
    */
@@ -261,6 +259,12 @@ public class NoteAttachmentMasterCardAction extends BunqModel {
   }
 
   /**
+   */
+  public static NoteAttachmentMasterCardAction fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NoteAttachmentMasterCardAction.class, reader);
+  }
+
+  /**
    * The id of the note.
    */
   public Integer getId() {
@@ -354,12 +358,6 @@ public class NoteAttachmentMasterCardAction extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static NoteAttachmentMasterCardAction fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NoteAttachmentMasterCardAction.class, reader);
   }
 
 }

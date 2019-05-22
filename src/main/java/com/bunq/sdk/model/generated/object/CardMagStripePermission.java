@@ -32,6 +32,12 @@ public class CardMagStripePermission extends BunqModel {
   }
 
   /**
+   */
+  public static CardMagStripePermission fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardMagStripePermission.class, reader);
+  }
+
+  /**
    * Expiry time of this rule.
    */
   public String getExpiryTime() {
@@ -50,12 +56,6 @@ public class CardMagStripePermission extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardMagStripePermission fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardMagStripePermission.class, reader);
   }
 
 }

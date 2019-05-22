@@ -115,6 +115,12 @@ public class BunqMeTabEntry extends BunqModel {
   }
 
   /**
+   */
+  public static BunqMeTabEntry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeTabEntry.class, reader);
+  }
+
+  /**
    * The uuid of the bunq.me.
    */
   public String getUuid() {
@@ -224,12 +230,6 @@ public class BunqMeTabEntry extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeTabEntry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeTabEntry.class, reader);
   }
 
 }

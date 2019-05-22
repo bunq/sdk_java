@@ -32,6 +32,12 @@ public class BunqId extends BunqModel {
   }
 
   /**
+   */
+  public static BunqId fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqId.class, reader);
+  }
+
+  /**
    * An integer ID of an object. Unique per object type.
    */
   public Integer getId() {
@@ -50,12 +56,6 @@ public class BunqId extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqId fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqId.class, reader);
   }
 
 }

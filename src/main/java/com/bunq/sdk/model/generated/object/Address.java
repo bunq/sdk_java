@@ -172,6 +172,12 @@ public class Address extends BunqModel {
   }
 
   /**
+   */
+  public static Address fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Address.class, reader);
+  }
+
+  /**
    * The street.
    */
   public String getStreet() {
@@ -310,12 +316,6 @@ public class Address extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Address fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Address.class, reader);
   }
 
 }

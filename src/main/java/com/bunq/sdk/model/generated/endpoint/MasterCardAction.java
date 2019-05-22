@@ -284,6 +284,12 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   */
+  public static MasterCardAction fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MasterCardAction.class, reader);
+  }
+
+  /**
    * The id of the MastercardAction.
    */
   public Integer getId() {
@@ -725,12 +731,6 @@ public class MasterCardAction extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MasterCardAction fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MasterCardAction.class, reader);
   }
 
 }

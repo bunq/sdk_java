@@ -91,6 +91,12 @@ public class Geolocation extends BunqModel {
   }
 
   /**
+   */
+  public static Geolocation fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Geolocation.class, reader);
+  }
+
+  /**
    * The latitude for a geolocation restriction.
    */
   public BigDecimal getLatitude() {
@@ -154,12 +160,6 @@ public class Geolocation extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Geolocation fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Geolocation.class, reader);
   }
 
 }

@@ -66,6 +66,12 @@ public class TabItem extends BunqModel {
   private Amount amount;
 
   /**
+   */
+  public static TabItem fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabItem.class, reader);
+  }
+
+  /**
    * The id of the tab item.
    */
   public Integer getId() {
@@ -175,12 +181,6 @@ public class TabItem extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabItem fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabItem.class, reader);
   }
 
 }

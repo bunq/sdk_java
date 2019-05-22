@@ -83,6 +83,12 @@ public class Device extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
+  public static Device fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Device.class, reader);
+  }
+
+  /**
+   */
   public DeviceServer getDeviceServer() {
     return this.deviceServer;
   }
@@ -109,12 +115,6 @@ public class Device extends BunqModel implements AnchorObjectInterface {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Device fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Device.class, reader);
   }
 
 }

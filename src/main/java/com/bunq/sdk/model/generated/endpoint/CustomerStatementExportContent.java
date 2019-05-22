@@ -52,14 +52,14 @@ public class CustomerStatementExportContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static CustomerStatementExportContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CustomerStatementExportContent.class, reader);
   }
 
   /**
    */
-  public static CustomerStatementExportContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CustomerStatementExportContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

@@ -30,14 +30,6 @@ import java.util.Map;
 public class RequestInquiry extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT_INQUIRED = "amount_inquired";
@@ -54,7 +46,13 @@ public class RequestInquiry extends BunqModel {
   public static final String FIELD_ALLOW_BUNQME = "allow_bunqme";
   public static final String FIELD_REDIRECT_URL = "redirect_url";
   public static final String FIELD_EVENT_ID = "event_id";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/request-inquiry";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-inquiry/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-inquiry";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-inquiry/%s";
   /**
    * Object type.
    */
@@ -636,6 +634,12 @@ public class RequestInquiry extends BunqModel {
   }
 
   /**
+   */
+  public static RequestInquiry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestInquiry.class, reader);
+  }
+
+  /**
    * The id of the created RequestInquiry.
    */
   public Integer getId() {
@@ -1031,12 +1035,6 @@ public class RequestInquiry extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static RequestInquiry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(RequestInquiry.class, reader);
   }
 
 }

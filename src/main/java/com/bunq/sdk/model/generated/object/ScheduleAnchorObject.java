@@ -32,6 +32,12 @@ public class ScheduleAnchorObject extends BunqModel implements AnchorObjectInter
 
   /**
    */
+  public static ScheduleAnchorObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ScheduleAnchorObject.class, reader);
+  }
+
+  /**
+   */
   public Payment getPayment() {
     return this.payment;
   }
@@ -76,12 +82,6 @@ public class ScheduleAnchorObject extends BunqModel implements AnchorObjectInter
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ScheduleAnchorObject fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ScheduleAnchorObject.class, reader);
   }
 
 }

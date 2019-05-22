@@ -18,15 +18,13 @@ import java.util.Map;
 public class TokenQrRequestSofort extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-sofort";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_TOKEN = "token";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-sofort";
   /**
    * Object type.
    */
@@ -78,14 +76,14 @@ public class TokenQrRequestSofort extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static TokenQrRequestSofort fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TokenQrRequestSofort.class, reader);
   }
 
   /**
    */
-  public static TokenQrRequestSofort fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TokenQrRequestSofort.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }
