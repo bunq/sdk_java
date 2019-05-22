@@ -63,6 +63,12 @@ public class CardPinAssignment extends BunqModel {
   }
 
   /**
+   */
+  public static CardPinAssignment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardPinAssignment.class, reader);
+  }
+
+  /**
    * PIN type. Can be PRIMARY, SECONDARY or TERTIARY
    */
   public String getType() {
@@ -96,12 +102,6 @@ public class CardPinAssignment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardPinAssignment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardPinAssignment.class, reader);
   }
 
 }

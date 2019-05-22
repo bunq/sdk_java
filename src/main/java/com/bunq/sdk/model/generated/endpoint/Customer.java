@@ -79,6 +79,12 @@ public class Customer extends BunqModel {
   }
 
   /**
+   */
+  public static Customer fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Customer.class, reader);
+  }
+
+  /**
    * The id of the customer.
    */
   public Integer getId() {
@@ -157,12 +163,6 @@ public class Customer extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Customer fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Customer.class, reader);
   }
 
 }

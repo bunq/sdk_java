@@ -24,6 +24,12 @@ public class BunqMeMerchantAvailable extends BunqModel {
   private Boolean available;
 
   /**
+   */
+  public static BunqMeMerchantAvailable fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeMerchantAvailable.class, reader);
+  }
+
+  /**
    * A merchant type supported by bunq.me.
    */
   public String getMerchantType() {
@@ -57,12 +63,6 @@ public class BunqMeMerchantAvailable extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeMerchantAvailable fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeMerchantAvailable.class, reader);
   }
 
 }

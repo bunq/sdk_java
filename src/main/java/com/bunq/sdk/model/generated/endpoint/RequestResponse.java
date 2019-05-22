@@ -28,20 +28,18 @@ import java.util.Map;
 public class RequestResponse extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-response/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-response";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-response/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_AMOUNT_RESPONDED = "amount_responded";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_ADDRESS_SHIPPING = "address_shipping";
   public static final String FIELD_ADDRESS_BILLING = "address_billing";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/request-response/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/request-response";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/request-response/%s";
   /**
    * Object type.
    */
@@ -413,6 +411,12 @@ public class RequestResponse extends BunqModel {
 
   public static BunqResponse<RequestResponse> get(Integer requestResponseId, Integer monetaryAccountId, Map<String, String> params) {
     return get(requestResponseId, monetaryAccountId, params, null);
+  }
+
+  /**
+   */
+  public static RequestResponse fromJsonReader(JsonReader reader) {
+    return fromJsonReader(RequestResponse.class, reader);
   }
 
   /**
@@ -862,12 +866,6 @@ public class RequestResponse extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static RequestResponse fromJsonReader(JsonReader reader) {
-    return fromJsonReader(RequestResponse.class, reader);
   }
 
 }

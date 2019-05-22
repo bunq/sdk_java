@@ -214,6 +214,12 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
+  public static EventObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(EventObject.class, reader);
+  }
+
+  /**
+   */
   public BunqMeTab getBunqMeTab() {
     return this.bunqMeTab;
   }
@@ -726,12 +732,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static EventObject fromJsonReader(JsonReader reader) {
-    return fromJsonReader(EventObject.class, reader);
   }
 
 }

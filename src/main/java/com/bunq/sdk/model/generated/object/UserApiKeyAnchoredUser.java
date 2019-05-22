@@ -39,6 +39,12 @@ public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInt
 
   /**
    */
+  public static UserApiKeyAnchoredUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserApiKeyAnchoredUser.class, reader);
+  }
+
+  /**
+   */
   public UserPerson getUserPerson() {
     return this.userPerson;
   }
@@ -101,12 +107,6 @@ public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInt
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserApiKeyAnchoredUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserApiKeyAnchoredUser.class, reader);
   }
 
 }

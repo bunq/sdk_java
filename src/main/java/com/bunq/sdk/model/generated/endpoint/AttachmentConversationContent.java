@@ -52,14 +52,14 @@ public class AttachmentConversationContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static AttachmentConversationContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentConversationContent.class, reader);
   }
 
   /**
    */
-  public static AttachmentConversationContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentConversationContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

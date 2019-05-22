@@ -27,15 +27,13 @@ import java.util.Map;
 public class TokenQrRequestIdeal extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-ideal";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_TOKEN = "token";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-ideal";
   /**
    * Object type.
    */
@@ -233,6 +231,12 @@ public class TokenQrRequestIdeal extends BunqModel {
 
   public static BunqResponse<TokenQrRequestIdeal> create(String token) {
     return create(token, null);
+  }
+
+  /**
+   */
+  public static TokenQrRequestIdeal fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TokenQrRequestIdeal.class, reader);
   }
 
   /**
@@ -557,12 +561,6 @@ public class TokenQrRequestIdeal extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TokenQrRequestIdeal fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TokenQrRequestIdeal.class, reader);
   }
 
 }

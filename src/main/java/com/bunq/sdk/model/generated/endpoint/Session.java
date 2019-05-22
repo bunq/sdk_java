@@ -34,14 +34,14 @@ public class Session extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static Session fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Session.class, reader);
   }
 
   /**
    */
-  public static Session fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Session.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

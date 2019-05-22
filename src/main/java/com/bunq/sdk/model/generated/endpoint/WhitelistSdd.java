@@ -21,6 +21,12 @@ import java.util.Map;
 public class WhitelistSdd extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_MONETARY_ACCOUNT_PAYING_ID = "monetary_account_paying_id";
+  public static final String FIELD_REQUEST_ID = "request_id";
+  public static final String FIELD_MAXIMUM_AMOUNT_PER_MONTH = "maximum_amount_per_month";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_READ = "user/%s/whitelist-sdd/%s";
@@ -28,14 +34,6 @@ public class WhitelistSdd extends BunqModel {
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/whitelist-sdd/%s";
   protected static final String ENDPOINT_URL_DELETE = "user/%s/whitelist-sdd/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/whitelist-sdd";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_MONETARY_ACCOUNT_PAYING_ID = "monetary_account_paying_id";
-  public static final String FIELD_REQUEST_ID = "request_id";
-  public static final String FIELD_MAXIMUM_AMOUNT_PER_MONTH = "maximum_amount_per_month";
-
   /**
    * Object type.
    */
@@ -282,6 +280,12 @@ public class WhitelistSdd extends BunqModel {
   }
 
   /**
+   */
+  public static WhitelistSdd fromJsonReader(JsonReader reader) {
+    return fromJsonReader(WhitelistSdd.class, reader);
+  }
+
+  /**
    * The ID of the whitelist entry.
    */
   public Integer getId() {
@@ -437,12 +441,6 @@ public class WhitelistSdd extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static WhitelistSdd fromJsonReader(JsonReader reader) {
-    return fromJsonReader(WhitelistSdd.class, reader);
   }
 
 }

@@ -23,16 +23,14 @@ import java.util.Map;
 public class Avatar extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_ATTACHMENT_PUBLIC_UUID = "attachment_public_uuid";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "avatar";
   protected static final String ENDPOINT_URL_READ = "avatar/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_ATTACHMENT_PUBLIC_UUID = "attachment_public_uuid";
-
   /**
    * Object type.
    */
@@ -118,6 +116,12 @@ public class Avatar extends BunqModel {
   }
 
   /**
+   */
+  public static Avatar fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Avatar.class, reader);
+  }
+
+  /**
    * The UUID of the created avatar.
    */
   public String getUuid() {
@@ -151,12 +155,6 @@ public class Avatar extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Avatar fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Avatar.class, reader);
   }
 
 }

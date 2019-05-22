@@ -66,6 +66,12 @@ public class BankSwitchServiceNetherlandsIncomingPayment extends BunqModel {
   }
 
   /**
+   */
+  public static BankSwitchServiceNetherlandsIncomingPayment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BankSwitchServiceNetherlandsIncomingPayment.class, reader);
+  }
+
+  /**
    * The bank switch service details.
    */
   public BankSwitchServiceNetherlandsIncoming getBankSwitchService() {
@@ -99,12 +105,6 @@ public class BankSwitchServiceNetherlandsIncomingPayment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BankSwitchServiceNetherlandsIncomingPayment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BankSwitchServiceNetherlandsIncomingPayment.class, reader);
   }
 
 }

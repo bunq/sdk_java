@@ -51,6 +51,12 @@ public class BudgetRestriction extends BunqModel {
   }
 
   /**
+   */
+  public static BudgetRestriction fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BudgetRestriction.class, reader);
+  }
+
+  /**
    * The amount of the budget given to the invited user.
    */
   public Amount getAmount() {
@@ -84,12 +90,6 @@ public class BudgetRestriction extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BudgetRestriction fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BudgetRestriction.class, reader);
   }
 
 }

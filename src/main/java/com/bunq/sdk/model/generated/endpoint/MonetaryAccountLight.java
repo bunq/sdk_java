@@ -349,6 +349,12 @@ public class MonetaryAccountLight extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountLight fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountLight.class, reader);
+  }
+
+  /**
    * The id of the MonetaryAccountLight.
    */
   public Integer getId() {
@@ -732,12 +738,6 @@ public class MonetaryAccountLight extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountLight fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountLight.class, reader);
   }
 
 }

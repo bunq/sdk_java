@@ -35,6 +35,12 @@ public class NotificationUrl extends BunqModel {
 
   /**
    */
+  public static NotificationUrl fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationUrl.class, reader);
+  }
+
+  /**
+   */
   public String getTargetUrl() {
     return this.targetUrl;
   }
@@ -93,12 +99,6 @@ public class NotificationUrl extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static NotificationUrl fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationUrl.class, reader);
   }
 
 }

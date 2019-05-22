@@ -18,16 +18,14 @@ import java.util.Map;
 public class TransferwiseTransfer extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/transferwise-quote/%s/transferwise-transfer/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_MONETARY_ACCOUNT_ID = "monetary_account_id";
   public static final String FIELD_RECIPIENT_ID = "recipient_id";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user/%s/transferwise-quote/%s/transferwise-transfer/%s";
   /**
    * Object type.
    */
@@ -177,6 +175,12 @@ public class TransferwiseTransfer extends BunqModel {
 
   public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId, Map<String, String> params) {
     return get(transferwiseQuoteId, transferwiseTransferId, params, null);
+  }
+
+  /**
+   */
+  public static TransferwiseTransfer fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TransferwiseTransfer.class, reader);
   }
 
   /**
@@ -381,12 +385,6 @@ public class TransferwiseTransfer extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TransferwiseTransfer fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TransferwiseTransfer.class, reader);
   }
 
 }

@@ -74,6 +74,12 @@ public class ShareDetailReadOnly extends BunqModel {
   }
 
   /**
+   */
+  public static ShareDetailReadOnly fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareDetailReadOnly.class, reader);
+  }
+
+  /**
    * If set to true, the invited user will be able to view the account balance.
    */
   public Boolean getViewBalance() {
@@ -124,12 +130,6 @@ public class ShareDetailReadOnly extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareDetailReadOnly fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareDetailReadOnly.class, reader);
   }
 
 }

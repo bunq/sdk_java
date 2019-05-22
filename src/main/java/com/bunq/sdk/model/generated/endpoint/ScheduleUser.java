@@ -47,14 +47,14 @@ public class ScheduleUser extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static ScheduleUser fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ScheduleUser.class, reader);
   }
 
   /**
    */
-  public static ScheduleUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ScheduleUser.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

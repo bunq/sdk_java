@@ -17,15 +17,13 @@ import java.util.Map;
 public class BillingContractSubscription extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/billing-contract-subscription";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_SUBSCRIPTION_TYPE = "subscription_type";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/billing-contract-subscription";
   /**
    * Object type.
    */
@@ -135,6 +133,12 @@ public class BillingContractSubscription extends BunqModel {
 
   public static BunqResponse<List<BillingContractSubscription>> list(Map<String, String> params) {
     return list(params, null);
+  }
+
+  /**
+   */
+  public static BillingContractSubscription fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BillingContractSubscription.class, reader);
   }
 
   /**
@@ -293,12 +297,6 @@ public class BillingContractSubscription extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BillingContractSubscription fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BillingContractSubscription.class, reader);
   }
 
 }

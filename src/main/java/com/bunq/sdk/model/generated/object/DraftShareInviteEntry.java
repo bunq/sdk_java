@@ -70,6 +70,12 @@ public class DraftShareInviteEntry extends BunqModel {
   }
 
   /**
+   */
+  public static DraftShareInviteEntry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftShareInviteEntry.class, reader);
+  }
+
+  /**
    * The share details. Only one of these objects is returned.
    */
   public ShareDetail getShareDetail() {
@@ -118,12 +124,6 @@ public class DraftShareInviteEntry extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftShareInviteEntry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftShareInviteEntry.class, reader);
   }
 
 }

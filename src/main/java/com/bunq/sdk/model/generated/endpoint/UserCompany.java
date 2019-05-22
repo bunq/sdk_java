@@ -28,12 +28,6 @@ import java.util.Map;
 public class UserCompany extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user-company/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user-company/%s";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_NAME = "name";
@@ -52,7 +46,11 @@ public class UserCompany extends BunqModel {
   public static final String FIELD_SESSION_TIMEOUT = "session_timeout";
   public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user-company/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user-company/%s";
   /**
    * Object type.
    */
@@ -612,6 +610,12 @@ public class UserCompany extends BunqModel {
   }
 
   /**
+   */
+  public static UserCompany fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserCompany.class, reader);
+  }
+
+  /**
    * The id of the modified company.
    */
   public Integer getId() {
@@ -1069,12 +1073,6 @@ public class UserCompany extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserCompany fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserCompany.class, reader);
   }
 
 }

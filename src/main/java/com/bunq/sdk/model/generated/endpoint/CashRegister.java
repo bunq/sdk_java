@@ -27,14 +27,6 @@ import java.util.Map;
 public class CashRegister extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_NAME = "name";
@@ -43,7 +35,13 @@ public class CashRegister extends BunqModel {
   public static final String FIELD_LOCATION = "location";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_TAB_TEXT_WAITING_SCREEN = "tab_text_waiting_screen";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register";
   /**
    * Object type.
    */
@@ -377,6 +375,12 @@ public class CashRegister extends BunqModel {
   }
 
   /**
+   */
+  public static CashRegister fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CashRegister.class, reader);
+  }
+
+  /**
    * The id of the created CashRegister.
    */
   public Integer getId() {
@@ -516,12 +520,6 @@ public class CashRegister extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CashRegister fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CashRegister.class, reader);
   }
 
 }

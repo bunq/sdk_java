@@ -24,6 +24,12 @@ public class Attachment extends BunqModel {
   private String contentType;
 
   /**
+   */
+  public static Attachment fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Attachment.class, reader);
+  }
+
+  /**
    * The description of the attachment.
    */
   public String getDescription() {
@@ -57,12 +63,6 @@ public class Attachment extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Attachment fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Attachment.class, reader);
   }
 
 }

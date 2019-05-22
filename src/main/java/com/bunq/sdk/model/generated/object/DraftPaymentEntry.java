@@ -138,6 +138,12 @@ public class DraftPaymentEntry extends BunqModel {
   }
 
   /**
+   */
+  public static DraftPaymentEntry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftPaymentEntry.class, reader);
+  }
+
+  /**
    * The id of the draft payment entry.
    */
   public Integer getId() {
@@ -264,12 +270,6 @@ public class DraftPaymentEntry extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftPaymentEntry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftPaymentEntry.class, reader);
   }
 
 }

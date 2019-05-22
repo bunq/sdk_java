@@ -32,6 +32,12 @@ public class DraftPaymentAnchorObject extends BunqModel implements AnchorObjectI
 
   /**
    */
+  public static DraftPaymentAnchorObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(DraftPaymentAnchorObject.class, reader);
+  }
+
+  /**
+   */
   public Payment getPayment() {
     return this.payment;
   }
@@ -76,12 +82,6 @@ public class DraftPaymentAnchorObject extends BunqModel implements AnchorObjectI
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static DraftPaymentAnchorObject fromJsonReader(JsonReader reader) {
-    return fromJsonReader(DraftPaymentAnchorObject.class, reader);
   }
 
 }

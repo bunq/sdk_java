@@ -67,6 +67,12 @@ public class WhitelistResult extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   */
+  public static WhitelistResult fromJsonReader(JsonReader reader) {
+    return fromJsonReader(WhitelistResult.class, reader);
+  }
+
+  /**
    * The ID of the whitelist entry.
    */
   public Integer getId() {
@@ -177,12 +183,6 @@ public class WhitelistResult extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static WhitelistResult fromJsonReader(JsonReader reader) {
-    return fromJsonReader(WhitelistResult.class, reader);
   }
 
 }

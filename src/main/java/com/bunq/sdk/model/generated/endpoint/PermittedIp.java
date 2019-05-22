@@ -18,19 +18,17 @@ import java.util.Map;
 public class PermittedIp extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_IP = "ip";
+  public static final String FIELD_STATUS = "status";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_READ = "user/%s/credential-password-ip/%s/ip/%s";
   protected static final String ENDPOINT_URL_CREATE = "user/%s/credential-password-ip/%s/ip";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/credential-password-ip/%s/ip";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/credential-password-ip/%s/ip/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_IP = "ip";
-  public static final String FIELD_STATUS = "status";
-
   /**
    * Object type.
    */
@@ -196,6 +194,12 @@ public class PermittedIp extends BunqModel {
   }
 
   /**
+   */
+  public static PermittedIp fromJsonReader(JsonReader reader) {
+    return fromJsonReader(PermittedIp.class, reader);
+  }
+
+  /**
    * The IP address.
    */
   public String getIp() {
@@ -230,12 +234,6 @@ public class PermittedIp extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static PermittedIp fromJsonReader(JsonReader reader) {
-    return fromJsonReader(PermittedIp.class, reader);
   }
 
 }

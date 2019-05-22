@@ -20,15 +20,13 @@ import java.util.Map;
 public class CardBatch extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/card-batch";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_CARDS = "cards";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/card-batch";
   /**
    * Object type.
    */
@@ -84,6 +82,12 @@ public class CardBatch extends BunqModel {
   }
 
   /**
+   */
+  public static CardBatch fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardBatch.class, reader);
+  }
+
+  /**
    * The ids of the cards that have been updated.
    */
   public List<BunqId> getUpdatedCardIds() {
@@ -102,12 +106,6 @@ public class CardBatch extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardBatch.class, reader);
   }
 
 }

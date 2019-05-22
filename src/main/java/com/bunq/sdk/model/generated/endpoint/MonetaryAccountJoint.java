@@ -24,14 +24,6 @@ import java.util.Map;
 public class MonetaryAccountJoint extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-joint";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-joint/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-joint/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-joint";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_CURRENCY = "currency";
@@ -47,7 +39,13 @@ public class MonetaryAccountJoint extends BunqModel {
   public static final String FIELD_ALL_CO_OWNER = "all_co_owner";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-joint";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-joint/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-joint/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-joint";
   /**
    * Object type.
    */
@@ -617,6 +615,12 @@ public class MonetaryAccountJoint extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountJoint fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountJoint.class, reader);
+  }
+
+  /**
    * The id of the MonetaryAccountJoint.
    */
   public Integer getId() {
@@ -940,12 +944,6 @@ public class MonetaryAccountJoint extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountJoint fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountJoint.class, reader);
   }
 
 }

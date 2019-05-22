@@ -22,18 +22,16 @@ import java.util.Map;
 public class ShareInviteMonetaryAccountResponse extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_CARD_ID = "card_id";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_READ = "user/%s/share-invite-monetary-account-response/%s";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/share-invite-monetary-account-response/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/share-invite-monetary-account-response";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_CARD_ID = "card_id";
-
   /**
    * Object type.
    */
@@ -244,6 +242,12 @@ public class ShareInviteMonetaryAccountResponse extends BunqModel {
   }
 
   /**
+   */
+  public static ShareInviteMonetaryAccountResponse fromJsonReader(JsonReader reader) {
+    return fromJsonReader(ShareInviteMonetaryAccountResponse.class, reader);
+  }
+
+  /**
    * The id of the ShareInviteBankResponse.
    */
   public Integer getId() {
@@ -445,12 +449,6 @@ public class ShareInviteMonetaryAccountResponse extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static ShareInviteMonetaryAccountResponse fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteMonetaryAccountResponse.class, reader);
   }
 
 }

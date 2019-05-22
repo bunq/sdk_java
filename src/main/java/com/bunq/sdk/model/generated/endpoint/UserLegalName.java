@@ -51,6 +51,12 @@ public class UserLegalName extends BunqModel {
   }
 
   /**
+   */
+  public static UserLegalName fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserLegalName.class, reader);
+  }
+
+  /**
    * All legal names that can be used by the user
    */
   public List<String> getLegalNames() {
@@ -69,12 +75,6 @@ public class UserLegalName extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserLegalName fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserLegalName.class, reader);
   }
 
 }

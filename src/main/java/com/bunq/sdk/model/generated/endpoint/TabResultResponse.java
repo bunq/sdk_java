@@ -100,6 +100,12 @@ public class TabResultResponse extends BunqModel {
   }
 
   /**
+   */
+  public static TabResultResponse fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabResultResponse.class, reader);
+  }
+
+  /**
    * The Tab details.
    */
   public Tab getTab() {
@@ -149,12 +155,6 @@ public class TabResultResponse extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabResultResponse fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabResultResponse.class, reader);
   }
 
 }

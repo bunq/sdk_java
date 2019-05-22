@@ -172,6 +172,12 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
 
   /**
    */
+  public static NotificationAnchorObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationAnchorObject.class, reader);
+  }
+
+  /**
+   */
   public BunqMeFundraiserResult getBunqMeFundraiserResult() {
     return this.bunqMeFundraiserResult;
   }
@@ -576,12 +582,6 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static NotificationAnchorObject fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationAnchorObject.class, reader);
   }
 
 }

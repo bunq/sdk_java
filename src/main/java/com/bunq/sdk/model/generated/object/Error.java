@@ -24,6 +24,12 @@ public class Error extends BunqModel {
   private String errorDescriptionTranslated;
 
   /**
+   */
+  public static Error fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Error.class, reader);
+  }
+
+  /**
    * The error description (in English).
    */
   public String getErrorDescription() {
@@ -57,12 +63,6 @@ public class Error extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Error fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Error.class, reader);
   }
 
 }

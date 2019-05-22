@@ -20,18 +20,16 @@ import java.util.Map;
 public class IdealMerchantTransaction extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
+  public static final String FIELD_ISSUER = "issuer";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/ideal-merchant-transaction";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/ideal-merchant-transaction/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/ideal-merchant-transaction";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_AMOUNT_REQUESTED = "amount_requested";
-  public static final String FIELD_ISSUER = "issuer";
-
   /**
    * Object type.
    */
@@ -243,6 +241,12 @@ public class IdealMerchantTransaction extends BunqModel {
 
   public static BunqResponse<List<IdealMerchantTransaction>> list(Integer monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
+  }
+
+  /**
+   */
+  public static IdealMerchantTransaction fromJsonReader(JsonReader reader) {
+    return fromJsonReader(IdealMerchantTransaction.class, reader);
   }
 
   /**
@@ -459,12 +463,6 @@ public class IdealMerchantTransaction extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static IdealMerchantTransaction fromJsonReader(JsonReader reader) {
-    return fromJsonReader(IdealMerchantTransaction.class, reader);
   }
 
 }

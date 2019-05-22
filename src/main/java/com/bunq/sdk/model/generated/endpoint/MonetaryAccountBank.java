@@ -28,14 +28,6 @@ import java.util.Map;
 public class MonetaryAccountBank extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-bank";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-bank/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-bank/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-bank";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_CURRENCY = "currency";
@@ -48,7 +40,13 @@ public class MonetaryAccountBank extends BunqModel {
   public static final String FIELD_REASON_DESCRIPTION = "reason_description";
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-bank";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-bank/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-bank/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-bank";
   /**
    * Object type.
    */
@@ -560,6 +558,12 @@ public class MonetaryAccountBank extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountBank fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountBank.class, reader);
+  }
+
+  /**
    * The id of the MonetaryAccountBank.
    */
   public Integer getId() {
@@ -868,12 +872,6 @@ public class MonetaryAccountBank extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountBank fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountBank.class, reader);
   }
 
 }

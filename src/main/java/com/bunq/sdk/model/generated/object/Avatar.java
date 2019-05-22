@@ -48,6 +48,12 @@ public class Avatar extends BunqModel {
   }
 
   /**
+   */
+  public static Avatar fromJsonReader(JsonReader reader) {
+    return fromJsonReader(Avatar.class, reader);
+  }
+
+  /**
    * The public UUID of the avatar.
    */
   public String getUuid() {
@@ -96,12 +102,6 @@ public class Avatar extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static Avatar fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Avatar.class, reader);
   }
 
 }

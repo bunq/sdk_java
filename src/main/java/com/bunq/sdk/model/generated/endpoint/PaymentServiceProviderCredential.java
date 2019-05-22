@@ -18,18 +18,16 @@ import java.util.Map;
 public class PaymentServiceProviderCredential extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "payment-service-provider-credential/%s";
-  protected static final String ENDPOINT_URL_CREATE = "payment-service-provider-credential";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_CLIENT_PAYMENT_SERVICE_PROVIDER_CERTIFICATE = "client_payment_service_provider_certificate";
   public static final String FIELD_CLIENT_PAYMENT_SERVICE_PROVIDER_CERTIFICATE_CHAIN = "client_payment_service_provider_certificate_chain";
   public static final String FIELD_CLIENT_PUBLIC_KEY_SIGNATURE = "client_public_key_signature";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "payment-service-provider-credential/%s";
+  protected static final String ENDPOINT_URL_CREATE = "payment-service-provider-credential";
   /**
    * Object type.
    */
@@ -190,6 +188,12 @@ public class PaymentServiceProviderCredential extends BunqModel {
   }
 
   /**
+   */
+  public static PaymentServiceProviderCredential fromJsonReader(JsonReader reader) {
+    return fromJsonReader(PaymentServiceProviderCredential.class, reader);
+  }
+
+  /**
    * The id of the credential.
    */
   public Integer getId() {
@@ -298,12 +302,6 @@ public class PaymentServiceProviderCredential extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static PaymentServiceProviderCredential fromJsonReader(JsonReader reader) {
-    return fromJsonReader(PaymentServiceProviderCredential.class, reader);
   }
 
 }

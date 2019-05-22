@@ -33,6 +33,12 @@ public class WhitelistResultViewAnchoredObject extends BunqModel {
   private DraftPayment draftPayment;
 
   /**
+   */
+  public static WhitelistResultViewAnchoredObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(WhitelistResultViewAnchoredObject.class, reader);
+  }
+
+  /**
    * The ID of the whitelist entry.
    */
   public Integer getId() {
@@ -81,12 +87,6 @@ public class WhitelistResultViewAnchoredObject extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static WhitelistResultViewAnchoredObject fromJsonReader(JsonReader reader) {
-    return fromJsonReader(WhitelistResultViewAnchoredObject.class, reader);
   }
 
 }

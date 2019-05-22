@@ -95,14 +95,14 @@ public class CardBatchEntry extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static CardBatchEntry fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardBatchEntry.class, reader);
   }
 
   /**
    */
-  public static CardBatchEntry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardBatchEntry.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

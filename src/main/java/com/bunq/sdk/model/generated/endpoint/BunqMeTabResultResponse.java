@@ -59,6 +59,12 @@ public class BunqMeTabResultResponse extends BunqModel {
   }
 
   /**
+   */
+  public static BunqMeTabResultResponse fromJsonReader(JsonReader reader) {
+    return fromJsonReader(BunqMeTabResultResponse.class, reader);
+  }
+
+  /**
    * The payment made for the bunq.me tab.
    */
   public Payment getPayment() {
@@ -77,12 +83,6 @@ public class BunqMeTabResultResponse extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static BunqMeTabResultResponse fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeTabResultResponse.class, reader);
   }
 
 }

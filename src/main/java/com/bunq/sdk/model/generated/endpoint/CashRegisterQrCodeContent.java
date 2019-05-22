@@ -56,14 +56,14 @@ public class CashRegisterQrCodeContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static CashRegisterQrCodeContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CashRegisterQrCodeContent.class, reader);
   }
 
   /**
    */
-  public static CashRegisterQrCodeContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CashRegisterQrCodeContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

@@ -608,6 +608,12 @@ public class UserLight extends BunqModel {
   }
 
   /**
+   */
+  public static UserLight fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserLight.class, reader);
+  }
+
+  /**
    * The id of the user.
    */
   public Integer getId() {
@@ -1095,12 +1101,6 @@ public class UserLight extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserLight fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserLight.class, reader);
   }
 
 }

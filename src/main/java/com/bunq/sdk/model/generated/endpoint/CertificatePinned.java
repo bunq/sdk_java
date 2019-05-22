@@ -21,18 +21,16 @@ import java.util.Map;
 public class CertificatePinned extends BunqModel {
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_CERTIFICATE_CHAIN = "certificate_chain";
+  /**
    * Endpoint constants.
    */
   protected static final String ENDPOINT_URL_CREATE = "user/%s/certificate-pinned";
   protected static final String ENDPOINT_URL_DELETE = "user/%s/certificate-pinned/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/certificate-pinned";
   protected static final String ENDPOINT_URL_READ = "user/%s/certificate-pinned/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_CERTIFICATE_CHAIN = "certificate_chain";
-
   /**
    * Object type.
    */
@@ -151,6 +149,12 @@ public class CertificatePinned extends BunqModel {
   }
 
   /**
+   */
+  public static CertificatePinned fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CertificatePinned.class, reader);
+  }
+
+  /**
    * The certificate chain in .PEM format. Certificates are glued with newline characters.
    */
   public String getCertificateChain() {
@@ -184,12 +188,6 @@ public class CertificatePinned extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CertificatePinned fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CertificatePinned.class, reader);
   }
 
 }

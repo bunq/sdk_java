@@ -29,15 +29,6 @@ import java.util.Map;
 public class TabUsageSingle extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_MERCHANT_REFERENCE = "merchant_reference";
@@ -53,7 +44,14 @@ public class TabUsageSingle extends BunqModel {
   public static final String FIELD_VISIBILITY = "visibility";
   public static final String FIELD_EXPIRATION = "expiration";
   public static final String FIELD_TAB_ATTACHMENT = "tab_attachment";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
+  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab-usage-single";
   /**
    * Object type.
    */
@@ -641,6 +639,12 @@ public class TabUsageSingle extends BunqModel {
   }
 
   /**
+   */
+  public static TabUsageSingle fromJsonReader(JsonReader reader) {
+    return fromJsonReader(TabUsageSingle.class, reader);
+  }
+
+  /**
    * The uuid of the created TabUsageSingle.
    */
   public String getUuid() {
@@ -932,12 +936,6 @@ public class TabUsageSingle extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static TabUsageSingle fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabUsageSingle.class, reader);
   }
 
 }

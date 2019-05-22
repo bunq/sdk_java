@@ -48,14 +48,14 @@ public class AttachmentPublicContent extends BunqModel {
 
   /**
    */
-  public boolean isAllFieldNull() {
-    return true;
+  public static AttachmentPublicContent fromJsonReader(JsonReader reader) {
+    return fromJsonReader(AttachmentPublicContent.class, reader);
   }
 
   /**
    */
-  public static AttachmentPublicContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentPublicContent.class, reader);
+  public boolean isAllFieldNull() {
+    return true;
   }
 
 }

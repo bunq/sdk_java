@@ -47,6 +47,12 @@ public class UserApiKey extends BunqModel {
   private UserApiKeyAnchoredUser grantedByUser;
 
   /**
+   */
+  public static UserApiKey fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserApiKey.class, reader);
+  }
+
+  /**
    * The id of the user.
    */
   public Integer getId() {
@@ -125,12 +131,6 @@ public class UserApiKey extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static UserApiKey fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserApiKey.class, reader);
   }
 
 }

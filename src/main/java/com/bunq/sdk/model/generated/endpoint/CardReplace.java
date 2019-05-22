@@ -22,17 +22,15 @@ import java.util.Map;
 public class CardReplace extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/replace";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_NAME_ON_CARD = "name_on_card";
   public static final String FIELD_PIN_CODE = "pin_code";
   public static final String FIELD_SECOND_LINE = "second_line";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/replace";
   /**
    * The id of the new card.
    */
@@ -128,6 +126,12 @@ public class CardReplace extends BunqModel {
   }
 
   /**
+   */
+  public static CardReplace fromJsonReader(JsonReader reader) {
+    return fromJsonReader(CardReplace.class, reader);
+  }
+
+  /**
    * The id of the new card.
    */
   public Integer getId() {
@@ -146,12 +150,6 @@ public class CardReplace extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static CardReplace fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardReplace.class, reader);
   }
 
 }

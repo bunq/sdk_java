@@ -25,14 +25,6 @@ import java.util.Map;
 public class MonetaryAccountSavings extends BunqModel {
 
   /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-savings";
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-savings/%s";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-savings/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-savings";
-
-  /**
    * Field constants.
    */
   public static final String FIELD_CURRENCY = "currency";
@@ -47,7 +39,13 @@ public class MonetaryAccountSavings extends BunqModel {
   public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
   public static final String FIELD_SETTING = "setting";
   public static final String FIELD_SAVINGS_GOAL = "savings_goal";
-
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-savings";
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-savings/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-savings/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-savings";
   /**
    * Object type.
    */
@@ -624,6 +622,12 @@ public class MonetaryAccountSavings extends BunqModel {
   }
 
   /**
+   */
+  public static MonetaryAccountSavings fromJsonReader(JsonReader reader) {
+    return fromJsonReader(MonetaryAccountSavings.class, reader);
+  }
+
+  /**
    * The id of the MonetaryAccountSavings.
    */
   public Integer getId() {
@@ -979,12 +983,6 @@ public class MonetaryAccountSavings extends BunqModel {
     }
 
     return true;
-  }
-
-  /**
-   */
-  public static MonetaryAccountSavings fromJsonReader(JsonReader reader) {
-    return fromJsonReader(MonetaryAccountSavings.class, reader);
   }
 
 }
