@@ -8,16 +8,18 @@ import com.google.gson.stream.JsonReader;
  */
 public class ChatMessage extends BunqModel {
 
-  /**
-   */
-  public static ChatMessage fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ChatMessage.class, reader);
-  }
+    /**
+     *
+     */
+    public static ChatMessage fromJsonReader(JsonReader reader) {
+        return fromJsonReader(ChatMessage.class, reader);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }

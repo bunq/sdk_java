@@ -18,66 +18,68 @@ import java.util.Map;
  */
 public class CardName extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/card-name";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/card-name";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "CardUserNameArray";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "CardUserNameArray";
 
-  /**
-   * All possible variations (of suitable length) of user's legal name for the debit card.
-   */
-  @Expose
-  @SerializedName("possible_card_name_array")
-  private List<String> possibleCardNameArray;
+    /**
+     * All possible variations (of suitable length) of user's legal name for the debit card.
+     */
+    @Expose
+    @SerializedName("possible_card_name_array")
+    private List<String> possibleCardNameArray;
 
-  /**
-   * Return all the accepted card names for a specific user.
-   */
-  public static BunqResponse<List<CardName>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
+    /**
+     * Return all the accepted card names for a specific user.
+     */
+    public static BunqResponse<List<CardName>> list(Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-    return fromJsonList(CardName.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<CardName>> list() {
-    return list(null, null);
-  }
-
-  public static BunqResponse<List<CardName>> list(Map<String, String> params) {
-    return list(params, null);
-  }
-
-  /**
-   */
-  public static CardName fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardName.class, reader);
-  }
-
-  /**
-   * All possible variations (of suitable length) of user's legal name for the debit card.
-   */
-  public List<String> getPossibleCardNameArray() {
-    return this.possibleCardNameArray;
-  }
-
-  public void setPossibleCardNameArray(List<String> possibleCardNameArray) {
-    this.possibleCardNameArray = possibleCardNameArray;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.possibleCardNameArray != null) {
-      return false;
+        return fromJsonList(CardName.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    return true;
-  }
+    public static BunqResponse<List<CardName>> list() {
+        return list(null, null);
+    }
+
+    public static BunqResponse<List<CardName>> list(Map<String, String> params) {
+        return list(params, null);
+    }
+
+    /**
+     *
+     */
+    public static CardName fromJsonReader(JsonReader reader) {
+        return fromJsonReader(CardName.class, reader);
+    }
+
+    /**
+     * All possible variations (of suitable length) of user's legal name for the debit card.
+     */
+    public List<String> getPossibleCardNameArray() {
+        return this.possibleCardNameArray;
+    }
+
+    public void setPossibleCardNameArray(List<String> possibleCardNameArray) {
+        this.possibleCardNameArray = possibleCardNameArray;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.possibleCardNameArray != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

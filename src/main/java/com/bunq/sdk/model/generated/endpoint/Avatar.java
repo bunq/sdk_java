@@ -22,139 +22,142 @@ import java.util.Map;
  */
 public class Avatar extends BunqModel {
 
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_ATTACHMENT_PUBLIC_UUID = "attachment_public_uuid";
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "avatar";
-  protected static final String ENDPOINT_URL_READ = "avatar/%s";
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_POST = "Uuid";
-  protected static final String OBJECT_TYPE_GET = "Avatar";
+    /**
+     * Field constants.
+     */
+    public static final String FIELD_ATTACHMENT_PUBLIC_UUID = "attachment_public_uuid";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "avatar";
+    protected static final String ENDPOINT_URL_READ = "avatar/%s";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_POST = "Uuid";
+    protected static final String OBJECT_TYPE_GET = "Avatar";
 
-  /**
-   * The UUID of the created avatar.
-   */
-  @Expose
-  @SerializedName("uuid")
-  private String uuid;
+    /**
+     * The UUID of the created avatar.
+     */
+    @Expose
+    @SerializedName("uuid")
+    private String uuid;
 
-  /**
-   * The content type of the image.
-   */
-  @Expose
-  @SerializedName("image")
-  private List<Image> image;
+    /**
+     * The content type of the image.
+     */
+    @Expose
+    @SerializedName("image")
+    private List<Image> image;
 
-  /**
-   * The public UUID of the public attachment from which an avatar image must be created.
-   */
-  @Expose
-  @SerializedName("attachment_public_uuid_field_for_request")
-  private String attachmentPublicUuidFieldForRequest;
+    /**
+     * The public UUID of the public attachment from which an avatar image must be created.
+     */
+    @Expose
+    @SerializedName("attachment_public_uuid_field_for_request")
+    private String attachmentPublicUuidFieldForRequest;
 
-  public Avatar() {
-    this(null);
-  }
-
-  public Avatar(String attachmentPublicUuid) {
-    this.attachmentPublicUuidFieldForRequest = attachmentPublicUuid;
-  }
-
-  /**
-   * @param attachmentPublicUuid The public UUID of the public attachment from which an avatar
-   *                             image must be created.
-   */
-  public static BunqResponse<String> create(String attachmentPublicUuid, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
+    public Avatar() {
+        this(null);
     }
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_ATTACHMENT_PUBLIC_UUID, attachmentPublicUuid);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
-
-    return processForUuid(responseRaw);
-  }
-
-  public static BunqResponse<String> create() {
-    return create(null, null);
-  }
-
-  public static BunqResponse<String> create(String attachmentPublicUuid) {
-    return create(attachmentPublicUuid, null);
-  }
-
-  /**
-   */
-  public static BunqResponse<Avatar> get(String avatarUuid, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, avatarUuid), params, customHeaders);
-
-    return fromJson(Avatar.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<Avatar> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<Avatar> get(String avatarUuid) {
-    return get(avatarUuid, null, null);
-  }
-
-  public static BunqResponse<Avatar> get(String avatarUuid, Map<String, String> params) {
-    return get(avatarUuid, params, null);
-  }
-
-  /**
-   */
-  public static Avatar fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Avatar.class, reader);
-  }
-
-  /**
-   * The UUID of the created avatar.
-   */
-  public String getUuid() {
-    return this.uuid;
-  }
-
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
-  }
-
-  /**
-   * The content type of the image.
-   */
-  public List<Image> getImage() {
-    return this.image;
-  }
-
-  public void setImage(List<Image> image) {
-    this.image = image;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.uuid != null) {
-      return false;
+    public Avatar(String attachmentPublicUuid) {
+        this.attachmentPublicUuidFieldForRequest = attachmentPublicUuid;
     }
 
-    if (this.image != null) {
-      return false;
+    /**
+     * @param attachmentPublicUuid The public UUID of the public attachment from which an avatar
+     *                             image must be created.
+     */
+    public static BunqResponse<String> create(String attachmentPublicUuid, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
+
+        HashMap<String, Object> requestMap = new HashMap<>();
+        requestMap.put(FIELD_ATTACHMENT_PUBLIC_UUID, attachmentPublicUuid);
+
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
+
+        return processForUuid(responseRaw);
     }
 
-    return true;
-  }
+    public static BunqResponse<String> create() {
+        return create(null, null);
+    }
+
+    public static BunqResponse<String> create(String attachmentPublicUuid) {
+        return create(attachmentPublicUuid, null);
+    }
+
+    /**
+     *
+     */
+    public static BunqResponse<Avatar> get(String avatarUuid, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, avatarUuid), params, customHeaders);
+
+        return fromJson(Avatar.class, responseRaw, OBJECT_TYPE_GET);
+    }
+
+    public static BunqResponse<Avatar> get() {
+        return get(null, null, null);
+    }
+
+    public static BunqResponse<Avatar> get(String avatarUuid) {
+        return get(avatarUuid, null, null);
+    }
+
+    public static BunqResponse<Avatar> get(String avatarUuid, Map<String, String> params) {
+        return get(avatarUuid, params, null);
+    }
+
+    /**
+     *
+     */
+    public static Avatar fromJsonReader(JsonReader reader) {
+        return fromJsonReader(Avatar.class, reader);
+    }
+
+    /**
+     * The UUID of the created avatar.
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * The content type of the image.
+     */
+    public List<Image> getImage() {
+        return this.image;
+    }
+
+    public void setImage(List<Image> image) {
+        this.image = image;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.uuid != null) {
+            return false;
+        }
+
+        if (this.image != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

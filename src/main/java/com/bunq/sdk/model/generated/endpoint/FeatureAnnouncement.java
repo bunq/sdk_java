@@ -16,113 +16,116 @@ import java.util.Map;
  */
 public class FeatureAnnouncement extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/feature-announcement/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_READ = "user/%s/feature-announcement/%s";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "FeatureAnnouncement";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "FeatureAnnouncement";
 
-  /**
-   * The Avatar of the event overview.
-   */
-  @Expose
-  @SerializedName("avatar")
-  private Avatar avatar;
+    /**
+     * The Avatar of the event overview.
+     */
+    @Expose
+    @SerializedName("avatar")
+    private Avatar avatar;
 
-  /**
-   * The event overview title of the feature display
-   */
-  @Expose
-  @SerializedName("title")
-  private String title;
+    /**
+     * The event overview title of the feature display
+     */
+    @Expose
+    @SerializedName("title")
+    private String title;
 
-  /**
-   * The event overview subtitle of the feature display
-   */
-  @Expose
-  @SerializedName("sub_title")
-  private String subTitle;
+    /**
+     * The event overview subtitle of the feature display
+     */
+    @Expose
+    @SerializedName("sub_title")
+    private String subTitle;
 
-  /**
-   */
-  public static BunqResponse<FeatureAnnouncement> get(Integer featureAnnouncementId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), featureAnnouncementId), params, customHeaders);
+    /**
+     *
+     */
+    public static BunqResponse<FeatureAnnouncement> get(Integer featureAnnouncementId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), featureAnnouncementId), params, customHeaders);
 
-    return fromJson(FeatureAnnouncement.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<FeatureAnnouncement> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<FeatureAnnouncement> get(Integer featureAnnouncementId) {
-    return get(featureAnnouncementId, null, null);
-  }
-
-  public static BunqResponse<FeatureAnnouncement> get(Integer featureAnnouncementId, Map<String, String> params) {
-    return get(featureAnnouncementId, params, null);
-  }
-
-  /**
-   */
-  public static FeatureAnnouncement fromJsonReader(JsonReader reader) {
-    return fromJsonReader(FeatureAnnouncement.class, reader);
-  }
-
-  /**
-   * The Avatar of the event overview.
-   */
-  public Avatar getAvatar() {
-    return this.avatar;
-  }
-
-  public void setAvatar(Avatar avatar) {
-    this.avatar = avatar;
-  }
-
-  /**
-   * The event overview title of the feature display
-   */
-  public String getTitle() {
-    return this.title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  /**
-   * The event overview subtitle of the feature display
-   */
-  public String getSubTitle() {
-    return this.subTitle;
-  }
-
-  public void setSubTitle(String subTitle) {
-    this.subTitle = subTitle;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.avatar != null) {
-      return false;
+        return fromJson(FeatureAnnouncement.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    if (this.title != null) {
-      return false;
+    public static BunqResponse<FeatureAnnouncement> get() {
+        return get(null, null, null);
     }
 
-    if (this.subTitle != null) {
-      return false;
+    public static BunqResponse<FeatureAnnouncement> get(Integer featureAnnouncementId) {
+        return get(featureAnnouncementId, null, null);
     }
 
-    return true;
-  }
+    public static BunqResponse<FeatureAnnouncement> get(Integer featureAnnouncementId, Map<String, String> params) {
+        return get(featureAnnouncementId, params, null);
+    }
+
+    /**
+     *
+     */
+    public static FeatureAnnouncement fromJsonReader(JsonReader reader) {
+        return fromJsonReader(FeatureAnnouncement.class, reader);
+    }
+
+    /**
+     * The Avatar of the event overview.
+     */
+    public Avatar getAvatar() {
+        return this.avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    /**
+     * The event overview title of the feature display
+     */
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * The event overview subtitle of the feature display
+     */
+    public String getSubTitle() {
+        return this.subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.avatar != null) {
+            return false;
+        }
+
+        if (this.title != null) {
+            return false;
+        }
+
+        if (this.subTitle != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

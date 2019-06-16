@@ -18,137 +18,139 @@ import java.util.Map;
  */
 public class AttachmentUser extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/attachment/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_READ = "user/%s/attachment/%s";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "AttachmentUser";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "AttachmentUser";
 
-  /**
-   * The id of the attachment.
-   */
-  @Expose
-  @SerializedName("id")
-  private Integer id;
+    /**
+     * The id of the attachment.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-  /**
-   * The timestamp of the attachment's creation.
-   */
-  @Expose
-  @SerializedName("created")
-  private String created;
+    /**
+     * The timestamp of the attachment's creation.
+     */
+    @Expose
+    @SerializedName("created")
+    private String created;
 
-  /**
-   * The timestamp of the attachment's last update.
-   */
-  @Expose
-  @SerializedName("updated")
-  private String updated;
+    /**
+     * The timestamp of the attachment's last update.
+     */
+    @Expose
+    @SerializedName("updated")
+    private String updated;
 
-  /**
-   * The attachment.
-   */
-  @Expose
-  @SerializedName("attachment")
-  private Attachment attachment;
+    /**
+     * The attachment.
+     */
+    @Expose
+    @SerializedName("attachment")
+    private Attachment attachment;
 
-  /**
-   * Get a specific attachment. The header of the response contains the content-type of the
-   * attachment.
-   */
-  public static BunqResponse<AttachmentUser> get(Integer attachmentUserId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), attachmentUserId), params, customHeaders);
+    /**
+     * Get a specific attachment. The header of the response contains the content-type of the
+     * attachment.
+     */
+    public static BunqResponse<AttachmentUser> get(Integer attachmentUserId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), attachmentUserId), params, customHeaders);
 
-    return fromJson(AttachmentUser.class, responseRaw);
-  }
-
-  public static BunqResponse<AttachmentUser> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<AttachmentUser> get(Integer attachmentUserId) {
-    return get(attachmentUserId, null, null);
-  }
-
-  public static BunqResponse<AttachmentUser> get(Integer attachmentUserId, Map<String, String> params) {
-    return get(attachmentUserId, params, null);
-  }
-
-  /**
-   */
-  public static AttachmentUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentUser.class, reader);
-  }
-
-  /**
-   * The id of the attachment.
-   */
-  public Integer getId() {
-    return this.id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   * The timestamp of the attachment's creation.
-   */
-  public String getCreated() {
-    return this.created;
-  }
-
-  public void setCreated(String created) {
-    this.created = created;
-  }
-
-  /**
-   * The timestamp of the attachment's last update.
-   */
-  public String getUpdated() {
-    return this.updated;
-  }
-
-  public void setUpdated(String updated) {
-    this.updated = updated;
-  }
-
-  /**
-   * The attachment.
-   */
-  public Attachment getAttachment() {
-    return this.attachment;
-  }
-
-  public void setAttachment(Attachment attachment) {
-    this.attachment = attachment;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.id != null) {
-      return false;
+        return fromJson(AttachmentUser.class, responseRaw);
     }
 
-    if (this.created != null) {
-      return false;
+    public static BunqResponse<AttachmentUser> get() {
+        return get(null, null, null);
     }
 
-    if (this.updated != null) {
-      return false;
+    public static BunqResponse<AttachmentUser> get(Integer attachmentUserId) {
+        return get(attachmentUserId, null, null);
     }
 
-    if (this.attachment != null) {
-      return false;
+    public static BunqResponse<AttachmentUser> get(Integer attachmentUserId, Map<String, String> params) {
+        return get(attachmentUserId, params, null);
     }
 
-    return true;
-  }
+    /**
+     *
+     */
+    public static AttachmentUser fromJsonReader(JsonReader reader) {
+        return fromJsonReader(AttachmentUser.class, reader);
+    }
+
+    /**
+     * The id of the attachment.
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * The timestamp of the attachment's creation.
+     */
+    public String getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * The timestamp of the attachment's last update.
+     */
+    public String getUpdated() {
+        return this.updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    /**
+     * The attachment.
+     */
+    public Attachment getAttachment() {
+        return this.attachment;
+    }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.id != null) {
+            return false;
+        }
+
+        if (this.created != null) {
+            return false;
+        }
+
+        if (this.updated != null) {
+            return false;
+        }
+
+        if (this.attachment != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

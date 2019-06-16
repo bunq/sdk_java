@@ -6,56 +6,59 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class CardMagStripePermission extends BunqModel {
 
-  /**
-   * Expiry time of this rule.
-   */
-  @Expose
-  @SerializedName("expiry_time")
-  private String expiryTime;
+    /**
+     * Expiry time of this rule.
+     */
+    @Expose
+    @SerializedName("expiry_time")
+    private String expiryTime;
 
-  /**
-   * Expiry time of this rule.
-   */
-  @Expose
-  @SerializedName("expiry_time_field_for_request")
-  private String expiryTimeFieldForRequest;
+    /**
+     * Expiry time of this rule.
+     */
+    @Expose
+    @SerializedName("expiry_time_field_for_request")
+    private String expiryTimeFieldForRequest;
 
-  public CardMagStripePermission() {
-    this(null);
-  }
-
-  public CardMagStripePermission(String expiryTime) {
-    this.expiryTimeFieldForRequest = expiryTime;
-  }
-
-  /**
-   */
-  public static CardMagStripePermission fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CardMagStripePermission.class, reader);
-  }
-
-  /**
-   * Expiry time of this rule.
-   */
-  public String getExpiryTime() {
-    return this.expiryTime;
-  }
-
-  public void setExpiryTime(String expiryTime) {
-    this.expiryTime = expiryTime;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.expiryTime != null) {
-      return false;
+    public CardMagStripePermission() {
+        this(null);
     }
 
-    return true;
-  }
+    public CardMagStripePermission(String expiryTime) {
+        this.expiryTimeFieldForRequest = expiryTime;
+    }
+
+    /**
+     *
+     */
+    public static CardMagStripePermission fromJsonReader(JsonReader reader) {
+        return fromJsonReader(CardMagStripePermission.class, reader);
+    }
+
+    /**
+     * Expiry time of this rule.
+     */
+    public String getExpiryTime() {
+        return this.expiryTime;
+    }
+
+    public void setExpiryTime(String expiryTime) {
+        this.expiryTime = expiryTime;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.expiryTime != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

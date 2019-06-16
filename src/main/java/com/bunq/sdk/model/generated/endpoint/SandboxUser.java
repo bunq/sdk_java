@@ -16,69 +16,72 @@ import java.util.Map;
  */
 public class SandboxUser extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "sandbox-user";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "sandbox-user";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_POST = "ApiKey";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_POST = "ApiKey";
 
-  /**
-   * The API key of the newly created sandbox user.
-   */
-  @Expose
-  @SerializedName("api_key")
-  private String apiKey;
+    /**
+     * The API key of the newly created sandbox user.
+     */
+    @Expose
+    @SerializedName("api_key")
+    private String apiKey;
 
-  /**
-   */
-  public static BunqResponse<SandboxUser> create(Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
+    /**
+     *
+     */
+    public static BunqResponse<SandboxUser> create(Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
 
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
+
+        HashMap<String, Object> requestMap = new HashMap<>();
+
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
+
+        return fromJson(SandboxUser.class, responseRaw, OBJECT_TYPE_POST);
     }
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, requestBytes, customHeaders);
-
-    return fromJson(SandboxUser.class, responseRaw, OBJECT_TYPE_POST);
-  }
-
-  public static BunqResponse<SandboxUser> create() {
-    return create(null);
-  }
-
-  /**
-   */
-  public static SandboxUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(SandboxUser.class, reader);
-  }
-
-  /**
-   * The API key of the newly created sandbox user.
-   */
-  public String getApiKey() {
-    return this.apiKey;
-  }
-
-  public void setApiKey(String apiKey) {
-    this.apiKey = apiKey;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.apiKey != null) {
-      return false;
+    public static BunqResponse<SandboxUser> create() {
+        return create(null);
     }
 
-    return true;
-  }
+    /**
+     *
+     */
+    public static SandboxUser fromJsonReader(JsonReader reader) {
+        return fromJsonReader(SandboxUser.class, reader);
+    }
+
+    /**
+     * The API key of the newly created sandbox user.
+     */
+    public String getApiKey() {
+        return this.apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.apiKey != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

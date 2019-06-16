@@ -6,125 +6,128 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class Pointer extends BunqModel {
 
-  /**
-   * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
-   */
-  @Expose
-  @SerializedName("type")
-  private String type;
+    /**
+     * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
+     */
+    @Expose
+    @SerializedName("type")
+    private String type;
 
-  /**
-   * The alias value.
-   */
-  @Expose
-  @SerializedName("value")
-  private String value;
+    /**
+     * The alias value.
+     */
+    @Expose
+    @SerializedName("value")
+    private String value;
 
-  /**
-   * The alias name.
-   */
-  @Expose
-  @SerializedName("name")
-  private String name;
+    /**
+     * The alias name.
+     */
+    @Expose
+    @SerializedName("name")
+    private String name;
 
-  /**
-   * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
-   */
-  @Expose
-  @SerializedName("type_field_for_request")
-  private String typeFieldForRequest;
+    /**
+     * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
+     */
+    @Expose
+    @SerializedName("type_field_for_request")
+    private String typeFieldForRequest;
 
-  /**
-   * The alias value. Phone number are formatted conform E.123 without spaces (e.g.,
-   * +314211234567).
-   */
-  @Expose
-  @SerializedName("value_field_for_request")
-  private String valueFieldForRequest;
+    /**
+     * The alias value. Phone number are formatted conform E.123 without spaces (e.g.,
+     * +314211234567).
+     */
+    @Expose
+    @SerializedName("value_field_for_request")
+    private String valueFieldForRequest;
 
-  /**
-   * The alias name. Only required for IBANs.
-   */
-  @Expose
-  @SerializedName("name_field_for_request")
-  private String nameFieldForRequest;
+    /**
+     * The alias name. Only required for IBANs.
+     */
+    @Expose
+    @SerializedName("name_field_for_request")
+    private String nameFieldForRequest;
 
-  public Pointer() {
-    this(null, null, null);
-  }
-
-  public Pointer(String type) {
-    this(type, null, null);
-  }
-
-  public Pointer(String type, String value) {
-    this(type, value, null);
-  }
-
-  public Pointer(String type, String value, String name) {
-    this.typeFieldForRequest = type;
-    this.valueFieldForRequest = value;
-    this.nameFieldForRequest = name;
-  }
-
-  /**
-   */
-  public static Pointer fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Pointer.class, reader);
-  }
-
-  /**
-   * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
-   */
-  public String getType() {
-    return this.type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  /**
-   * The alias value.
-   */
-  public String getValue() {
-    return this.value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
-  }
-
-  /**
-   * The alias name.
-   */
-  public String getName() {
-    return this.name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.type != null) {
-      return false;
+    public Pointer() {
+        this(null, null, null);
     }
 
-    if (this.value != null) {
-      return false;
+    public Pointer(String type) {
+        this(type, null, null);
     }
 
-    if (this.name != null) {
-      return false;
+    public Pointer(String type, String value) {
+        this(type, value, null);
     }
 
-    return true;
-  }
+    public Pointer(String type, String value, String name) {
+        this.typeFieldForRequest = type;
+        this.valueFieldForRequest = value;
+        this.nameFieldForRequest = name;
+    }
+
+    /**
+     *
+     */
+    public static Pointer fromJsonReader(JsonReader reader) {
+        return fromJsonReader(Pointer.class, reader);
+    }
+
+    /**
+     * The alias type, can be: EMAIL|PHONE_NUMBER|IBAN.
+     */
+    public String getType() {
+        return this.type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    /**
+     * The alias value.
+     */
+    public String getValue() {
+        return this.value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    /**
+     * The alias name.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.type != null) {
+            return false;
+        }
+
+        if (this.value != null) {
+            return false;
+        }
+
+        if (this.name != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

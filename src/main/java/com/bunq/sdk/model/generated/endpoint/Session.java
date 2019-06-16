@@ -13,35 +13,37 @@ import java.util.Map;
  */
 public class Session extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_DELETE = "session/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_DELETE = "session/%s";
 
-  /**
-   * Deletes the current session.
-   */
-  public static BunqResponse<Session> delete(Integer sessionId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, sessionId), customHeaders);
+    /**
+     * Deletes the current session.
+     */
+    public static BunqResponse<Session> delete(Integer sessionId, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, sessionId), customHeaders);
 
-    return new BunqResponse<>(null, responseRaw.getHeaders());
-  }
+        return new BunqResponse<>(null, responseRaw.getHeaders());
+    }
 
-  public static BunqResponse<Session> delete(Integer sessionId) {
-    return delete(sessionId, null);
-  }
+    public static BunqResponse<Session> delete(Integer sessionId) {
+        return delete(sessionId, null);
+    }
 
-  /**
-   */
-  public static Session fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Session.class, reader);
-  }
+    /**
+     *
+     */
+    public static Session fromJsonReader(JsonReader reader) {
+        return fromJsonReader(Session.class, reader);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }

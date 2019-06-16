@@ -16,44 +16,46 @@ import java.util.Map;
  */
 public class ShareInviteMonetaryAccountAmountUsed extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/share-invite-monetary-account-inquiry/%s/amount-used/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/share-invite-monetary-account-inquiry/%s/amount-used/%s";
 
-  /**
-   * Reset the available budget for an account share. To be called without any ID at the end of
-   * the path.
-   */
-  public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId, Integer shareInviteMonetaryAccountAmountUsedId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteMonetaryAccountInquiryId, shareInviteMonetaryAccountAmountUsedId), customHeaders);
+    /**
+     * Reset the available budget for an account share. To be called without any ID at the end of
+     * the path.
+     */
+    public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId, Integer shareInviteMonetaryAccountAmountUsedId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteMonetaryAccountInquiryId, shareInviteMonetaryAccountAmountUsedId), customHeaders);
 
-    return new BunqResponse<>(null, responseRaw.getHeaders());
-  }
+        return new BunqResponse<>(null, responseRaw.getHeaders());
+    }
 
-  public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId) {
-    return delete(shareInviteMonetaryAccountInquiryId, null, null, null);
-  }
+    public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId) {
+        return delete(shareInviteMonetaryAccountInquiryId, null, null, null);
+    }
 
-  public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId, Integer shareInviteMonetaryAccountAmountUsedId) {
-    return delete(shareInviteMonetaryAccountInquiryId, shareInviteMonetaryAccountAmountUsedId, null, null);
-  }
+    public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId, Integer shareInviteMonetaryAccountAmountUsedId) {
+        return delete(shareInviteMonetaryAccountInquiryId, shareInviteMonetaryAccountAmountUsedId, null, null);
+    }
 
-  public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId, Integer shareInviteMonetaryAccountAmountUsedId, Integer monetaryAccountId) {
-    return delete(shareInviteMonetaryAccountInquiryId, shareInviteMonetaryAccountAmountUsedId, monetaryAccountId, null);
-  }
+    public static BunqResponse<ShareInviteMonetaryAccountAmountUsed> delete(Integer shareInviteMonetaryAccountInquiryId, Integer shareInviteMonetaryAccountAmountUsedId, Integer monetaryAccountId) {
+        return delete(shareInviteMonetaryAccountInquiryId, shareInviteMonetaryAccountAmountUsedId, monetaryAccountId, null);
+    }
 
-  /**
-   */
-  public static ShareInviteMonetaryAccountAmountUsed fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteMonetaryAccountAmountUsed.class, reader);
-  }
+    /**
+     *
+     */
+    public static ShareInviteMonetaryAccountAmountUsed fromJsonReader(JsonReader reader) {
+        return fromJsonReader(ShareInviteMonetaryAccountAmountUsed.class, reader);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }

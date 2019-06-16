@@ -6,63 +6,66 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class BunqMeMerchantAvailable extends BunqModel {
 
-  /**
-   * A merchant type supported by bunq.me.
-   */
-  @Expose
-  @SerializedName("merchant_type")
-  private String merchantType;
+    /**
+     * A merchant type supported by bunq.me.
+     */
+    @Expose
+    @SerializedName("merchant_type")
+    private String merchantType;
 
-  /**
-   * Whether or not the merchant is available for the user.
-   */
-  @Expose
-  @SerializedName("available")
-  private Boolean available;
+    /**
+     * Whether or not the merchant is available for the user.
+     */
+    @Expose
+    @SerializedName("available")
+    private Boolean available;
 
-  /**
-   */
-  public static BunqMeMerchantAvailable fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeMerchantAvailable.class, reader);
-  }
-
-  /**
-   * A merchant type supported by bunq.me.
-   */
-  public String getMerchantType() {
-    return this.merchantType;
-  }
-
-  public void setMerchantType(String merchantType) {
-    this.merchantType = merchantType;
-  }
-
-  /**
-   * Whether or not the merchant is available for the user.
-   */
-  public Boolean getAvailable() {
-    return this.available;
-  }
-
-  public void setAvailable(Boolean available) {
-    this.available = available;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.merchantType != null) {
-      return false;
+    /**
+     *
+     */
+    public static BunqMeMerchantAvailable fromJsonReader(JsonReader reader) {
+        return fromJsonReader(BunqMeMerchantAvailable.class, reader);
     }
 
-    if (this.available != null) {
-      return false;
+    /**
+     * A merchant type supported by bunq.me.
+     */
+    public String getMerchantType() {
+        return this.merchantType;
     }
 
-    return true;
-  }
+    public void setMerchantType(String merchantType) {
+        this.merchantType = merchantType;
+    }
+
+    /**
+     * Whether or not the merchant is available for the user.
+     */
+    public Boolean getAvailable() {
+        return this.available;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.merchantType != null) {
+            return false;
+        }
+
+        if (this.available != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

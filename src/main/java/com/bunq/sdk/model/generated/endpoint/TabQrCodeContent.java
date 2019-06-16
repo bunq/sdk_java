@@ -14,57 +14,59 @@ import java.util.Map;
  */
 public class TabQrCodeContent extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/qr-code-content";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/cash-register/%s/tab/%s/qr-code-content";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "TabQrCodeContent";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "TabQrCodeContent";
 
-  /**
-   * Returns the raw content of the QR code that links to this Tab. The raw content is the binary
-   * representation of a file, without any JSON wrapping.
-   */
-  public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid), params, customHeaders);
+    /**
+     * Returns the raw content of the QR code that links to this Tab. The raw content is the binary
+     * representation of a file, without any JSON wrapping.
+     */
+    public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), cashRegisterId, tabUuid), params, customHeaders);
 
-    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
-  }
+        return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
+    }
 
-  public static BunqResponse<byte[]> list() {
-    return list(null, null, null, null, null);
-  }
+    public static BunqResponse<byte[]> list() {
+        return list(null, null, null, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer cashRegisterId) {
-    return list(cashRegisterId, null, null, null, null);
-  }
+    public static BunqResponse<byte[]> list(Integer cashRegisterId) {
+        return list(cashRegisterId, null, null, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid) {
-    return list(cashRegisterId, tabUuid, null, null, null);
-  }
+    public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid) {
+        return list(cashRegisterId, tabUuid, null, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId) {
-    return list(cashRegisterId, tabUuid, monetaryAccountId, null, null);
-  }
+    public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId) {
+        return list(cashRegisterId, tabUuid, monetaryAccountId, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId, Map<String, String> params) {
-    return list(cashRegisterId, tabUuid, monetaryAccountId, params, null);
-  }
+    public static BunqResponse<byte[]> list(Integer cashRegisterId, String tabUuid, Integer monetaryAccountId, Map<String, String> params) {
+        return list(cashRegisterId, tabUuid, monetaryAccountId, params, null);
+    }
 
-  /**
-   */
-  public static TabQrCodeContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TabQrCodeContent.class, reader);
-  }
+    /**
+     *
+     */
+    public static TabQrCodeContent fromJsonReader(JsonReader reader) {
+        return fromJsonReader(TabQrCodeContent.class, reader);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }
