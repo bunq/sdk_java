@@ -6,85 +6,88 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class AttachmentTab extends BunqModel {
 
-  /**
-   * The id of the attachment.
-   */
-  @Expose
-  @SerializedName("id")
-  private Integer id;
+    /**
+     * The id of the attachment.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-  /**
-   * The description of the attachment.
-   */
-  @Expose
-  @SerializedName("description")
-  private String description;
+    /**
+     * The description of the attachment.
+     */
+    @Expose
+    @SerializedName("description")
+    private String description;
 
-  /**
-   * The content type of the attachment's file.
-   */
-  @Expose
-  @SerializedName("content_type")
-  private String contentType;
+    /**
+     * The content type of the attachment's file.
+     */
+    @Expose
+    @SerializedName("content_type")
+    private String contentType;
 
-  /**
-   */
-  public static AttachmentTab fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentTab.class, reader);
-  }
-
-  /**
-   * The id of the attachment.
-   */
-  public Integer getId() {
-    return this.id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   * The description of the attachment.
-   */
-  public String getDescription() {
-    return this.description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  /**
-   * The content type of the attachment's file.
-   */
-  public String getContentType() {
-    return this.contentType;
-  }
-
-  public void setContentType(String contentType) {
-    this.contentType = contentType;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.id != null) {
-      return false;
+    /**
+     *
+     */
+    public static AttachmentTab fromJsonReader(JsonReader reader) {
+        return fromJsonReader(AttachmentTab.class, reader);
     }
 
-    if (this.description != null) {
-      return false;
+    /**
+     * The id of the attachment.
+     */
+    public Integer getId() {
+        return this.id;
     }
 
-    if (this.contentType != null) {
-      return false;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    return true;
-  }
+    /**
+     * The description of the attachment.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * The content type of the attachment's file.
+     */
+    public String getContentType() {
+        return this.contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.id != null) {
+            return false;
+        }
+
+        if (this.description != null) {
+            return false;
+        }
+
+        if (this.contentType != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

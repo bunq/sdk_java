@@ -6,99 +6,110 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class NotificationUrl extends BunqModel {
 
-  /**
-   */
-  @Expose
-  @SerializedName("target_url")
-  private String targetUrl;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("target_url")
+    private String targetUrl;
 
-  /**
-   */
-  @Expose
-  @SerializedName("category")
-  private String category;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("category")
+    private String category;
 
-  /**
-   */
-  @Expose
-  @SerializedName("event_type")
-  private String eventType;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("event_type")
+    private String eventType;
 
-  /**
-   */
-  @Expose
-  @SerializedName("object")
-  private NotificationAnchorObject object;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("object")
+    private NotificationAnchorObject object;
 
-  /**
-   */
-  public static NotificationUrl fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationUrl.class, reader);
-  }
-
-  /**
-   */
-  public String getTargetUrl() {
-    return this.targetUrl;
-  }
-
-  public void setTargetUrl(String targetUrl) {
-    this.targetUrl = targetUrl;
-  }
-
-  /**
-   */
-  public String getCategory() {
-    return this.category;
-  }
-
-  public void setCategory(String category) {
-    this.category = category;
-  }
-
-  /**
-   */
-  public String getEventType() {
-    return this.eventType;
-  }
-
-  public void setEventType(String eventType) {
-    this.eventType = eventType;
-  }
-
-  /**
-   */
-  public NotificationAnchorObject getObject() {
-    return this.object;
-  }
-
-  public void setObject(NotificationAnchorObject object) {
-    this.object = object;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.targetUrl != null) {
-      return false;
+    /**
+     *
+     */
+    public static NotificationUrl fromJsonReader(JsonReader reader) {
+        return fromJsonReader(NotificationUrl.class, reader);
     }
 
-    if (this.category != null) {
-      return false;
+    /**
+     *
+     */
+    public String getTargetUrl() {
+        return this.targetUrl;
     }
 
-    if (this.eventType != null) {
-      return false;
+    public void setTargetUrl(String targetUrl) {
+        this.targetUrl = targetUrl;
     }
 
-    if (this.object != null) {
-      return false;
+    /**
+     *
+     */
+    public String getCategory() {
+        return this.category;
     }
 
-    return true;
-  }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
+     *
+     */
+    public String getEventType() {
+        return this.eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    /**
+     *
+     */
+    public NotificationAnchorObject getObject() {
+        return this.object;
+    }
+
+    public void setObject(NotificationAnchorObject object) {
+        this.object = object;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.targetUrl != null) {
+            return false;
+        }
+
+        if (this.category != null) {
+            return false;
+        }
+
+        if (this.eventType != null) {
+            return false;
+        }
+
+        if (this.object != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

@@ -17,70 +17,72 @@ import java.util.Map;
  */
 public class InstallationServerPublicKey extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "installation/%s/server-public-key";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_LISTING = "installation/%s/server-public-key";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "ServerPublicKey";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "ServerPublicKey";
 
-  /**
-   * The server's public key for this Installation.
-   */
-  @Expose
-  @SerializedName("server_public_key")
-  private String serverPublicKey;
+    /**
+     * The server's public key for this Installation.
+     */
+    @Expose
+    @SerializedName("server_public_key")
+    private String serverPublicKey;
 
-  /**
-   * Show the ServerPublicKey for this Installation.
-   */
-  public static BunqResponse<List<InstallationServerPublicKey>> list(Integer installationId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
+    /**
+     * Show the ServerPublicKey for this Installation.
+     */
+    public static BunqResponse<List<InstallationServerPublicKey>> list(Integer installationId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
 
-    return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<InstallationServerPublicKey>> list() {
-    return list(null, null, null);
-  }
-
-  public static BunqResponse<List<InstallationServerPublicKey>> list(Integer installationId) {
-    return list(installationId, null, null);
-  }
-
-  public static BunqResponse<List<InstallationServerPublicKey>> list(Integer installationId, Map<String, String> params) {
-    return list(installationId, params, null);
-  }
-
-  /**
-   */
-  public static InstallationServerPublicKey fromJsonReader(JsonReader reader) {
-    return fromJsonReader(InstallationServerPublicKey.class, reader);
-  }
-
-  /**
-   * The server's public key for this Installation.
-   */
-  public String getServerPublicKey() {
-    return this.serverPublicKey;
-  }
-
-  public void setServerPublicKey(String serverPublicKey) {
-    this.serverPublicKey = serverPublicKey;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.serverPublicKey != null) {
-      return false;
+        return fromJsonList(InstallationServerPublicKey.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    return true;
-  }
+    public static BunqResponse<List<InstallationServerPublicKey>> list() {
+        return list(null, null, null);
+    }
+
+    public static BunqResponse<List<InstallationServerPublicKey>> list(Integer installationId) {
+        return list(installationId, null, null);
+    }
+
+    public static BunqResponse<List<InstallationServerPublicKey>> list(Integer installationId, Map<String, String> params) {
+        return list(installationId, params, null);
+    }
+
+    /**
+     *
+     */
+    public static InstallationServerPublicKey fromJsonReader(JsonReader reader) {
+        return fromJsonReader(InstallationServerPublicKey.class, reader);
+    }
+
+    /**
+     * The server's public key for this Installation.
+     */
+    public String getServerPublicKey() {
+        return this.serverPublicKey;
+    }
+
+    public void setServerPublicKey(String serverPublicKey) {
+        this.serverPublicKey = serverPublicKey;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.serverPublicKey != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

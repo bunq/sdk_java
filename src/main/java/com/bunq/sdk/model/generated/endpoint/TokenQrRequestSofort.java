@@ -17,73 +17,75 @@ import java.util.Map;
  */
 public class TokenQrRequestSofort extends BunqModel {
 
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_TOKEN = "token";
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-sofort";
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_POST = "RequestResponse";
+    /**
+     * Field constants.
+     */
+    public static final String FIELD_TOKEN = "token";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/token-qr-request-sofort";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_POST = "RequestResponse";
 
-  /**
-   * The token passed from a site or read from a QR code.
-   */
-  @Expose
-  @SerializedName("token_field_for_request")
-  private String tokenFieldForRequest;
+    /**
+     * The token passed from a site or read from a QR code.
+     */
+    @Expose
+    @SerializedName("token_field_for_request")
+    private String tokenFieldForRequest;
 
-  public TokenQrRequestSofort() {
-    this(null);
-  }
-
-  public TokenQrRequestSofort(String token) {
-    this.tokenFieldForRequest = token;
-  }
-
-  /**
-   * Create a request from an SOFORT transaction.
-   *
-   * @param token The token passed from a site or read from a QR code.
-   */
-  public static BunqResponse<TokenQrRequestSofort> create(String token, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
+    public TokenQrRequestSofort() {
+        this(null);
     }
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_TOKEN, token);
+    public TokenQrRequestSofort(String token) {
+        this.tokenFieldForRequest = token;
+    }
 
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
+    /**
+     * Create a request from an SOFORT transaction.
+     *
+     * @param token The token passed from a site or read from a QR code.
+     */
+    public static BunqResponse<TokenQrRequestSofort> create(String token, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
 
-    return fromJson(TokenQrRequestSofort.class, responseRaw, OBJECT_TYPE_POST);
-  }
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
 
-  public static BunqResponse<TokenQrRequestSofort> create() {
-    return create(null, null);
-  }
+        HashMap<String, Object> requestMap = new HashMap<>();
+        requestMap.put(FIELD_TOKEN, token);
 
-  public static BunqResponse<TokenQrRequestSofort> create(String token) {
-    return create(token, null);
-  }
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
-  /**
-   */
-  public static TokenQrRequestSofort fromJsonReader(JsonReader reader) {
-    return fromJsonReader(TokenQrRequestSofort.class, reader);
-  }
+        return fromJson(TokenQrRequestSofort.class, responseRaw, OBJECT_TYPE_POST);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    public static BunqResponse<TokenQrRequestSofort> create() {
+        return create(null, null);
+    }
+
+    public static BunqResponse<TokenQrRequestSofort> create(String token) {
+        return create(token, null);
+    }
+
+    /**
+     *
+     */
+    public static TokenQrRequestSofort fromJsonReader(JsonReader reader) {
+        return fromJsonReader(TokenQrRequestSofort.class, reader);
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }

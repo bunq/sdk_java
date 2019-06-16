@@ -15,174 +15,176 @@ import java.util.List;
  */
 public class WhitelistResult extends BunqModel {
 
-  /**
-   * The ID of the whitelist entry.
-   */
-  @Expose
-  @SerializedName("id")
-  private Integer id;
+    /**
+     * The ID of the whitelist entry.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-  /**
-   * The account from which payments will be deducted when a transaction is matched with this
-   * whitelist.
-   */
-  @Expose
-  @SerializedName("monetary_account_paying_id")
-  private Integer monetaryAccountPayingId;
+    /**
+     * The account from which payments will be deducted when a transaction is matched with this
+     * whitelist.
+     */
+    @Expose
+    @SerializedName("monetary_account_paying_id")
+    private Integer monetaryAccountPayingId;
 
-  /**
-   * The status of the WhitelistResult.
-   */
-  @Expose
-  @SerializedName("status")
-  private String status;
+    /**
+     * The status of the WhitelistResult.
+     */
+    @Expose
+    @SerializedName("status")
+    private String status;
 
-  /**
-   * The message when the whitelist result has failed due to user error.
-   */
-  @Expose
-  @SerializedName("error_message")
-  private List<Error> errorMessage;
+    /**
+     * The message when the whitelist result has failed due to user error.
+     */
+    @Expose
+    @SerializedName("error_message")
+    private List<Error> errorMessage;
 
-  /**
-   * The corresponding whitelist.
-   */
-  @Expose
-  @SerializedName("whitelist")
-  private Whitelist whitelist;
+    /**
+     * The corresponding whitelist.
+     */
+    @Expose
+    @SerializedName("whitelist")
+    private Whitelist whitelist;
 
-  /**
-   * The details of the external object the event was created for.
-   */
-  @Expose
-  @SerializedName("object")
-  private WhitelistResultViewAnchoredObject object;
+    /**
+     * The details of the external object the event was created for.
+     */
+    @Expose
+    @SerializedName("object")
+    private WhitelistResultViewAnchoredObject object;
 
-  /**
-   * The reference to the object used for split the bill. Can be RequestInquiry or
-   * RequestInquiryBatch
-   */
-  @Expose
-  @SerializedName("request_reference_split_the_bill")
-  private List<RequestInquiryReference> requestReferenceSplitTheBill;
+    /**
+     * The reference to the object used for split the bill. Can be RequestInquiry or
+     * RequestInquiryBatch
+     */
+    @Expose
+    @SerializedName("request_reference_split_the_bill")
+    private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
-  /**
-   */
-  public static WhitelistResult fromJsonReader(JsonReader reader) {
-    return fromJsonReader(WhitelistResult.class, reader);
-  }
-
-  /**
-   * The ID of the whitelist entry.
-   */
-  public Integer getId() {
-    return this.id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   * The account from which payments will be deducted when a transaction is matched with this
-   * whitelist.
-   */
-  public Integer getMonetaryAccountPayingId() {
-    return this.monetaryAccountPayingId;
-  }
-
-  public void setMonetaryAccountPayingId(Integer monetaryAccountPayingId) {
-    this.monetaryAccountPayingId = monetaryAccountPayingId;
-  }
-
-  /**
-   * The status of the WhitelistResult.
-   */
-  public String getStatus() {
-    return this.status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  /**
-   * The message when the whitelist result has failed due to user error.
-   */
-  public List<Error> getErrorMessage() {
-    return this.errorMessage;
-  }
-
-  public void setErrorMessage(List<Error> errorMessage) {
-    this.errorMessage = errorMessage;
-  }
-
-  /**
-   * The corresponding whitelist.
-   */
-  public Whitelist getWhitelist() {
-    return this.whitelist;
-  }
-
-  public void setWhitelist(Whitelist whitelist) {
-    this.whitelist = whitelist;
-  }
-
-  /**
-   * The details of the external object the event was created for.
-   */
-  public WhitelistResultViewAnchoredObject getObject() {
-    return this.object;
-  }
-
-  public void setObject(WhitelistResultViewAnchoredObject object) {
-    this.object = object;
-  }
-
-  /**
-   * The reference to the object used for split the bill. Can be RequestInquiry or
-   * RequestInquiryBatch
-   */
-  public List<RequestInquiryReference> getRequestReferenceSplitTheBill() {
-    return this.requestReferenceSplitTheBill;
-  }
-
-  public void setRequestReferenceSplitTheBill(List<RequestInquiryReference> requestReferenceSplitTheBill) {
-    this.requestReferenceSplitTheBill = requestReferenceSplitTheBill;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.id != null) {
-      return false;
+    /**
+     *
+     */
+    public static WhitelistResult fromJsonReader(JsonReader reader) {
+        return fromJsonReader(WhitelistResult.class, reader);
     }
 
-    if (this.monetaryAccountPayingId != null) {
-      return false;
+    /**
+     * The ID of the whitelist entry.
+     */
+    public Integer getId() {
+        return this.id;
     }
 
-    if (this.status != null) {
-      return false;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    if (this.errorMessage != null) {
-      return false;
+    /**
+     * The account from which payments will be deducted when a transaction is matched with this
+     * whitelist.
+     */
+    public Integer getMonetaryAccountPayingId() {
+        return this.monetaryAccountPayingId;
     }
 
-    if (this.whitelist != null) {
-      return false;
+    public void setMonetaryAccountPayingId(Integer monetaryAccountPayingId) {
+        this.monetaryAccountPayingId = monetaryAccountPayingId;
     }
 
-    if (this.object != null) {
-      return false;
+    /**
+     * The status of the WhitelistResult.
+     */
+    public String getStatus() {
+        return this.status;
     }
 
-    if (this.requestReferenceSplitTheBill != null) {
-      return false;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    return true;
-  }
+    /**
+     * The message when the whitelist result has failed due to user error.
+     */
+    public List<Error> getErrorMessage() {
+        return this.errorMessage;
+    }
+
+    public void setErrorMessage(List<Error> errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    /**
+     * The corresponding whitelist.
+     */
+    public Whitelist getWhitelist() {
+        return this.whitelist;
+    }
+
+    public void setWhitelist(Whitelist whitelist) {
+        this.whitelist = whitelist;
+    }
+
+    /**
+     * The details of the external object the event was created for.
+     */
+    public WhitelistResultViewAnchoredObject getObject() {
+        return this.object;
+    }
+
+    public void setObject(WhitelistResultViewAnchoredObject object) {
+        this.object = object;
+    }
+
+    /**
+     * The reference to the object used for split the bill. Can be RequestInquiry or
+     * RequestInquiryBatch
+     */
+    public List<RequestInquiryReference> getRequestReferenceSplitTheBill() {
+        return this.requestReferenceSplitTheBill;
+    }
+
+    public void setRequestReferenceSplitTheBill(List<RequestInquiryReference> requestReferenceSplitTheBill) {
+        this.requestReferenceSplitTheBill = requestReferenceSplitTheBill;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.id != null) {
+            return false;
+        }
+
+        if (this.monetaryAccountPayingId != null) {
+            return false;
+        }
+
+        if (this.status != null) {
+            return false;
+        }
+
+        if (this.errorMessage != null) {
+            return false;
+        }
+
+        if (this.whitelist != null) {
+            return false;
+        }
+
+        if (this.object != null) {
+            return false;
+        }
+
+        if (this.requestReferenceSplitTheBill != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

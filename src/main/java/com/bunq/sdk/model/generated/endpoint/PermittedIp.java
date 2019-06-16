@@ -17,223 +17,227 @@ import java.util.Map;
  */
 public class PermittedIp extends BunqModel {
 
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_IP = "ip";
-  public static final String FIELD_STATUS = "status";
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/credential-password-ip/%s/ip/%s";
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/credential-password-ip/%s/ip";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/credential-password-ip/%s/ip";
-  protected static final String ENDPOINT_URL_UPDATE = "user/%s/credential-password-ip/%s/ip/%s";
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "PermittedIp";
+    /**
+     * Field constants.
+     */
+    public static final String FIELD_IP = "ip";
+    public static final String FIELD_STATUS = "status";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_READ = "user/%s/credential-password-ip/%s/ip/%s";
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/credential-password-ip/%s/ip";
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/credential-password-ip/%s/ip";
+    protected static final String ENDPOINT_URL_UPDATE = "user/%s/credential-password-ip/%s/ip/%s";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "PermittedIp";
 
-  /**
-   * The IP address.
-   */
-  @Expose
-  @SerializedName("ip")
-  private String ip;
+    /**
+     * The IP address.
+     */
+    @Expose
+    @SerializedName("ip")
+    private String ip;
 
-  /**
-   * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
-   * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
-   */
-  @Expose
-  @SerializedName("status")
-  private String status;
+    /**
+     * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
+     * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+     */
+    @Expose
+    @SerializedName("status")
+    private String status;
 
-  /**
-   * The IP address.
-   */
-  @Expose
-  @SerializedName("ip_field_for_request")
-  private String ipFieldForRequest;
+    /**
+     * The IP address.
+     */
+    @Expose
+    @SerializedName("ip_field_for_request")
+    private String ipFieldForRequest;
 
-  /**
-   * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
-   * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
-   */
-  @Expose
-  @SerializedName("status_field_for_request")
-  private String statusFieldForRequest;
+    /**
+     * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
+     * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+     */
+    @Expose
+    @SerializedName("status_field_for_request")
+    private String statusFieldForRequest;
 
-  public PermittedIp() {
-    this(null, null);
-  }
-
-  public PermittedIp(String ip) {
-    this(ip, null);
-  }
-
-  public PermittedIp(String ip, String status) {
-    this.ipFieldForRequest = ip;
-    this.statusFieldForRequest = status;
-  }
-
-  /**
-   */
-  public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), credentialPasswordIpId, permittedIpId), params, customHeaders);
-
-    return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<PermittedIp> get() {
-    return get(null, null, null, null);
-  }
-
-  public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId) {
-    return get(credentialPasswordIpId, null, null, null);
-  }
-
-  public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId) {
-    return get(credentialPasswordIpId, permittedIpId, null, null);
-  }
-
-  public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId, Map<String, String> params) {
-    return get(credentialPasswordIpId, permittedIpId, params, null);
-  }
-
-  /**
-   * @param ip     The IP address.
-   * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
-   *               make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
-   */
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
+    public PermittedIp() {
+        this(null, null);
     }
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_IP, ip);
-    requestMap.put(FIELD_STATUS, status);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), credentialPasswordIpId), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> create() {
-    return create(null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId) {
-    return create(credentialPasswordIpId, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip) {
-    return create(credentialPasswordIpId, ip, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status) {
-    return create(credentialPasswordIpId, ip, status, null);
-  }
-
-  /**
-   */
-  public static BunqResponse<List<PermittedIp>> list(Integer credentialPasswordIpId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), credentialPasswordIpId), params, customHeaders);
-
-    return fromJsonList(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<PermittedIp>> list() {
-    return list(null, null, null);
-  }
-
-  public static BunqResponse<List<PermittedIp>> list(Integer credentialPasswordIpId) {
-    return list(credentialPasswordIpId, null, null);
-  }
-
-  public static BunqResponse<List<PermittedIp>> list(Integer credentialPasswordIpId, Map<String, String> params) {
-    return list(credentialPasswordIpId, params, null);
-  }
-
-  /**
-   * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
-   *               make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
-   */
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
+    public PermittedIp(String ip) {
+        this(ip, null);
     }
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_STATUS, status);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), credentialPasswordIpId, permittedIpId), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId) {
-    return update(credentialPasswordIpId, null, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId) {
-    return update(credentialPasswordIpId, permittedIpId, null, null);
-  }
-
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status) {
-    return update(credentialPasswordIpId, permittedIpId, status, null);
-  }
-
-  /**
-   */
-  public static PermittedIp fromJsonReader(JsonReader reader) {
-    return fromJsonReader(PermittedIp.class, reader);
-  }
-
-  /**
-   * The IP address.
-   */
-  public String getIp() {
-    return this.ip;
-  }
-
-  public void setIp(String ip) {
-    this.ip = ip;
-  }
-
-  /**
-   * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
-   * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
-   */
-  public String getStatus() {
-    return this.status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.ip != null) {
-      return false;
+    public PermittedIp(String ip, String status) {
+        this.ipFieldForRequest = ip;
+        this.statusFieldForRequest = status;
     }
 
-    if (this.status != null) {
-      return false;
+    /**
+     *
+     */
+    public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), credentialPasswordIpId, permittedIpId), params, customHeaders);
+
+        return fromJson(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    return true;
-  }
+    public static BunqResponse<PermittedIp> get() {
+        return get(null, null, null, null);
+    }
+
+    public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId) {
+        return get(credentialPasswordIpId, null, null, null);
+    }
+
+    public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId) {
+        return get(credentialPasswordIpId, permittedIpId, null, null);
+    }
+
+    public static BunqResponse<PermittedIp> get(Integer credentialPasswordIpId, Integer permittedIpId, Map<String, String> params) {
+        return get(credentialPasswordIpId, permittedIpId, params, null);
+    }
+
+    /**
+     * @param ip     The IP address.
+     * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
+     *               make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+     */
+    public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
+
+        HashMap<String, Object> requestMap = new HashMap<>();
+        requestMap.put(FIELD_IP, ip);
+        requestMap.put(FIELD_STATUS, status);
+
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), credentialPasswordIpId), requestBytes, customHeaders);
+
+        return processForId(responseRaw);
+    }
+
+    public static BunqResponse<Integer> create() {
+        return create(null, null, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Integer credentialPasswordIpId) {
+        return create(credentialPasswordIpId, null, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip) {
+        return create(credentialPasswordIpId, ip, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status) {
+        return create(credentialPasswordIpId, ip, status, null);
+    }
+
+    /**
+     *
+     */
+    public static BunqResponse<List<PermittedIp>> list(Integer credentialPasswordIpId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), credentialPasswordIpId), params, customHeaders);
+
+        return fromJsonList(PermittedIp.class, responseRaw, OBJECT_TYPE_GET);
+    }
+
+    public static BunqResponse<List<PermittedIp>> list() {
+        return list(null, null, null);
+    }
+
+    public static BunqResponse<List<PermittedIp>> list(Integer credentialPasswordIpId) {
+        return list(credentialPasswordIpId, null, null);
+    }
+
+    public static BunqResponse<List<PermittedIp>> list(Integer credentialPasswordIpId, Map<String, String> params) {
+        return list(credentialPasswordIpId, params, null);
+    }
+
+    /**
+     * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
+     *               make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+     */
+    public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
+
+        HashMap<String, Object> requestMap = new HashMap<>();
+        requestMap.put(FIELD_STATUS, status);
+
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), credentialPasswordIpId, permittedIpId), requestBytes, customHeaders);
+
+        return processForId(responseRaw);
+    }
+
+    public static BunqResponse<Integer> update(Integer credentialPasswordIpId) {
+        return update(credentialPasswordIpId, null, null, null);
+    }
+
+    public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId) {
+        return update(credentialPasswordIpId, permittedIpId, null, null);
+    }
+
+    public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status) {
+        return update(credentialPasswordIpId, permittedIpId, status, null);
+    }
+
+    /**
+     *
+     */
+    public static PermittedIp fromJsonReader(JsonReader reader) {
+        return fromJsonReader(PermittedIp.class, reader);
+    }
+
+    /**
+     * The IP address.
+     */
+    public String getIp() {
+        return this.ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    /**
+     * The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to make requests
+     * from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.ip != null) {
+            return false;
+        }
+
+        if (this.status != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

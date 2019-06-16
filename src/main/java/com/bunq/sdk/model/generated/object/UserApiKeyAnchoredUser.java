@@ -11,102 +11,112 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class UserApiKeyAnchoredUser extends BunqModel implements AnchorObjectInterface {
 
-  /**
-   * Error constants.
-   */
-  protected static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
+    /**
+     * Error constants.
+     */
+    protected static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
-  /**
-   */
-  @Expose
-  @SerializedName("UserPerson")
-  private UserPerson userPerson;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("UserPerson")
+    private UserPerson userPerson;
 
-  /**
-   */
-  @Expose
-  @SerializedName("UserCompany")
-  private UserCompany userCompany;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("UserCompany")
+    private UserCompany userCompany;
 
-  /**
-   */
-  @Expose
-  @SerializedName("UserPaymentServiceProvider")
-  private UserPaymentServiceProvider userPaymentServiceProvider;
+    /**
+     *
+     */
+    @Expose
+    @SerializedName("UserPaymentServiceProvider")
+    private UserPaymentServiceProvider userPaymentServiceProvider;
 
-  /**
-   */
-  public static UserApiKeyAnchoredUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserApiKeyAnchoredUser.class, reader);
-  }
-
-  /**
-   */
-  public UserPerson getUserPerson() {
-    return this.userPerson;
-  }
-
-  public void setUserPerson(UserPerson userPerson) {
-    this.userPerson = userPerson;
-  }
-
-  /**
-   */
-  public UserCompany getUserCompany() {
-    return this.userCompany;
-  }
-
-  public void setUserCompany(UserCompany userCompany) {
-    this.userCompany = userCompany;
-  }
-
-  /**
-   */
-  public UserPaymentServiceProvider getUserPaymentServiceProvider() {
-    return this.userPaymentServiceProvider;
-  }
-
-  public void setUserPaymentServiceProvider(UserPaymentServiceProvider userPaymentServiceProvider) {
-    this.userPaymentServiceProvider = userPaymentServiceProvider;
-  }
-
-  /**
-   */
-  public BunqModel getReferencedObject() {
-    if (this.userPerson != null) {
-      return this.userPerson;
+    /**
+     *
+     */
+    public static UserApiKeyAnchoredUser fromJsonReader(JsonReader reader) {
+        return fromJsonReader(UserApiKeyAnchoredUser.class, reader);
     }
 
-    if (this.userCompany != null) {
-      return this.userCompany;
+    /**
+     *
+     */
+    public UserPerson getUserPerson() {
+        return this.userPerson;
     }
 
-    if (this.userPaymentServiceProvider != null) {
-      return this.userPaymentServiceProvider;
+    public void setUserPerson(UserPerson userPerson) {
+        this.userPerson = userPerson;
     }
 
-    throw new BunqException(ERROR_NULL_FIELDS);
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.userPerson != null) {
-      return false;
+    /**
+     *
+     */
+    public UserCompany getUserCompany() {
+        return this.userCompany;
     }
 
-    if (this.userCompany != null) {
-      return false;
+    public void setUserCompany(UserCompany userCompany) {
+        this.userCompany = userCompany;
     }
 
-    if (this.userPaymentServiceProvider != null) {
-      return false;
+    /**
+     *
+     */
+    public UserPaymentServiceProvider getUserPaymentServiceProvider() {
+        return this.userPaymentServiceProvider;
     }
 
-    return true;
-  }
+    public void setUserPaymentServiceProvider(UserPaymentServiceProvider userPaymentServiceProvider) {
+        this.userPaymentServiceProvider = userPaymentServiceProvider;
+    }
+
+    /**
+     *
+     */
+    public BunqModel getReferencedObject() {
+        if (this.userPerson != null) {
+            return this.userPerson;
+        }
+
+        if (this.userCompany != null) {
+            return this.userCompany;
+        }
+
+        if (this.userPaymentServiceProvider != null) {
+            return this.userPaymentServiceProvider;
+        }
+
+        throw new BunqException(ERROR_NULL_FIELDS);
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.userPerson != null) {
+            return false;
+        }
+
+        if (this.userCompany != null) {
+            return false;
+        }
+
+        if (this.userPaymentServiceProvider != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

@@ -15,62 +15,64 @@ import java.util.List;
  */
 public class ShareInviteBankInquiryBatch extends BunqModel {
 
-  /**
-   * The list of share invite bank inquiries that were made.
-   */
-  @Expose
-  @SerializedName("share_invite_bank_inquiries")
-  private List<ShareInviteBankInquiry> shareInviteBankInquiries;
+    /**
+     * The list of share invite bank inquiries that were made.
+     */
+    @Expose
+    @SerializedName("share_invite_bank_inquiries")
+    private List<ShareInviteBankInquiry> shareInviteBankInquiries;
 
-  /**
-   * The LabelMonetaryAccount containing the public information of this share invite inquiry
-   * batch.
-   */
-  @Expose
-  @SerializedName("alias")
-  private LabelMonetaryAccount alias;
+    /**
+     * The LabelMonetaryAccount containing the public information of this share invite inquiry
+     * batch.
+     */
+    @Expose
+    @SerializedName("alias")
+    private LabelMonetaryAccount alias;
 
-  /**
-   */
-  public static ShareInviteBankInquiryBatch fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteBankInquiryBatch.class, reader);
-  }
-
-  /**
-   * The list of share invite bank inquiries that were made.
-   */
-  public List<ShareInviteBankInquiry> getShareInviteBankInquiries() {
-    return this.shareInviteBankInquiries;
-  }
-
-  public void setShareInviteBankInquiries(List<ShareInviteBankInquiry> shareInviteBankInquiries) {
-    this.shareInviteBankInquiries = shareInviteBankInquiries;
-  }
-
-  /**
-   * The LabelMonetaryAccount containing the public information of this share invite inquiry
-   * batch.
-   */
-  public LabelMonetaryAccount getAlias() {
-    return this.alias;
-  }
-
-  public void setAlias(LabelMonetaryAccount alias) {
-    this.alias = alias;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.shareInviteBankInquiries != null) {
-      return false;
+    /**
+     *
+     */
+    public static ShareInviteBankInquiryBatch fromJsonReader(JsonReader reader) {
+        return fromJsonReader(ShareInviteBankInquiryBatch.class, reader);
     }
 
-    if (this.alias != null) {
-      return false;
+    /**
+     * The list of share invite bank inquiries that were made.
+     */
+    public List<ShareInviteBankInquiry> getShareInviteBankInquiries() {
+        return this.shareInviteBankInquiries;
     }
 
-    return true;
-  }
+    public void setShareInviteBankInquiries(List<ShareInviteBankInquiry> shareInviteBankInquiries) {
+        this.shareInviteBankInquiries = shareInviteBankInquiries;
+    }
+
+    /**
+     * The LabelMonetaryAccount containing the public information of this share invite inquiry
+     * batch.
+     */
+    public LabelMonetaryAccount getAlias() {
+        return this.alias;
+    }
+
+    public void setAlias(LabelMonetaryAccount alias) {
+        this.alias = alias;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.shareInviteBankInquiries != null) {
+            return false;
+        }
+
+        if (this.alias != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

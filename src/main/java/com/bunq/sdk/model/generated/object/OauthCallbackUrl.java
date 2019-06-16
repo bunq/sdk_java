@@ -6,107 +6,110 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class OauthCallbackUrl extends BunqModel {
 
-  /**
-   * The Callback URL.
-   */
-  @Expose
-  @SerializedName("url")
-  private String url;
+    /**
+     * The id of the callback URL.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-  /**
-   * The id of the callback URL.
-   */
-  @Expose
-  @SerializedName("id")
-  private Integer id;
+    /**
+     * The timestamp of the callback URL's creation.
+     */
+    @Expose
+    @SerializedName("created")
+    private String created;
 
-  /**
-   * The timestamp of the callback URL's creation.
-   */
-  @Expose
-  @SerializedName("created")
-  private String created;
+    /**
+     * The timestamp of the callback URL's last update.
+     */
+    @Expose
+    @SerializedName("updated")
+    private String updated;
 
-  /**
-   * The timestamp of the callback URL's last update.
-   */
-  @Expose
-  @SerializedName("updated")
-  private String updated;
+    /**
+     * The Callback URL.
+     */
+    @Expose
+    @SerializedName("url")
+    private String url;
 
-  /**
-   */
-  public static OauthCallbackUrl fromJsonReader(JsonReader reader) {
-    return fromJsonReader(OauthCallbackUrl.class, reader);
-  }
-
-  /**
-   * The Callback URL.
-   */
-  public String getUrl() {
-    return this.url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
-  /**
-   * The id of the callback URL.
-   */
-  public Integer getId() {
-    return this.id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   * The timestamp of the callback URL's creation.
-   */
-  public String getCreated() {
-    return this.created;
-  }
-
-  public void setCreated(String created) {
-    this.created = created;
-  }
-
-  /**
-   * The timestamp of the callback URL's last update.
-   */
-  public String getUpdated() {
-    return this.updated;
-  }
-
-  public void setUpdated(String updated) {
-    this.updated = updated;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.url != null) {
-      return false;
+    /**
+     *
+     */
+    public static OauthCallbackUrl fromJsonReader(JsonReader reader) {
+        return fromJsonReader(OauthCallbackUrl.class, reader);
     }
 
-    if (this.id != null) {
-      return false;
+    /**
+     * The id of the callback URL.
+     */
+    public Integer getId() {
+        return this.id;
     }
 
-    if (this.created != null) {
-      return false;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    if (this.updated != null) {
-      return false;
+    /**
+     * The timestamp of the callback URL's creation.
+     */
+    public String getCreated() {
+        return this.created;
     }
 
-    return true;
-  }
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * The timestamp of the callback URL's last update.
+     */
+    public String getUpdated() {
+        return this.updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    /**
+     * The Callback URL.
+     */
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.id != null) {
+            return false;
+        }
+
+        if (this.created != null) {
+            return false;
+        }
+
+        if (this.updated != null) {
+            return false;
+        }
+
+        if (this.url != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }
