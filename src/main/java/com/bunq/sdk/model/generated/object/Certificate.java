@@ -6,56 +6,59 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 /**
+ *
  */
 public class Certificate extends BunqModel {
 
-  /**
-   * A single certificate in the chain in .PEM format.
-   */
-  @Expose
-  @SerializedName("certificate")
-  private String certificate;
+    /**
+     * A single certificate in the chain in .PEM format.
+     */
+    @Expose
+    @SerializedName("certificate")
+    private String certificate;
 
-  /**
-   * A single certificate in the chain in .PEM format.
-   */
-  @Expose
-  @SerializedName("certificate_field_for_request")
-  private String certificateFieldForRequest;
+    /**
+     * A single certificate in the chain in .PEM format.
+     */
+    @Expose
+    @SerializedName("certificate_field_for_request")
+    private String certificateFieldForRequest;
 
-  public Certificate() {
-    this(null);
-  }
-
-  public Certificate(String certificate) {
-    this.certificateFieldForRequest = certificate;
-  }
-
-  /**
-   */
-  public static Certificate fromJsonReader(JsonReader reader) {
-    return fromJsonReader(Certificate.class, reader);
-  }
-
-  /**
-   * A single certificate in the chain in .PEM format.
-   */
-  public String getCertificate() {
-    return this.certificate;
-  }
-
-  public void setCertificate(String certificate) {
-    this.certificate = certificate;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.certificate != null) {
-      return false;
+    public Certificate() {
+        this(null);
     }
 
-    return true;
-  }
+    public Certificate(String certificate) {
+        this.certificateFieldForRequest = certificate;
+    }
+
+    /**
+     *
+     */
+    public static Certificate fromJsonReader(JsonReader reader) {
+        return fromJsonReader(Certificate.class, reader);
+    }
+
+    /**
+     * A single certificate in the chain in .PEM format.
+     */
+    public String getCertificate() {
+        return this.certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.certificate != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

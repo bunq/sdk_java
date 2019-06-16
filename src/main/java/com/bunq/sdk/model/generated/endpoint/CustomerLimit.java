@@ -17,220 +17,266 @@ import java.util.Map;
  */
 public class CustomerLimit extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/limit";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/limit";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "CustomerLimit";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "CustomerLimit";
 
-  /**
-   * The limit of monetary accounts.
-   */
-  @Expose
-  @SerializedName("limit_monetary_account")
-  private Integer limitMonetaryAccount;
+    /**
+     * The limit of monetary accounts.
+     */
+    @Expose
+    @SerializedName("limit_monetary_account")
+    private Integer limitMonetaryAccount;
 
-  /**
-   * The amount of additional monetary accounts you can create.
-   */
-  @Expose
-  @SerializedName("limit_monetary_account_remaining")
-  private Integer limitMonetaryAccountRemaining;
+    /**
+     * The amount of additional monetary accounts you can create.
+     */
+    @Expose
+    @SerializedName("limit_monetary_account_remaining")
+    private Integer limitMonetaryAccountRemaining;
 
-  /**
-   * The limit of Maestro cards.
-   */
-  @Expose
-  @SerializedName("limit_card_debit_maestro")
-  private Integer limitCardDebitMaestro;
+    /**
+     * The limit of Maestro cards.
+     */
+    @Expose
+    @SerializedName("limit_card_debit_maestro")
+    private Integer limitCardDebitMaestro;
 
-  /**
-   * The limit of MasterCard cards.
-   */
-  @Expose
-  @SerializedName("limit_card_debit_mastercard")
-  private Integer limitCardDebitMastercard;
+    /**
+     * The limit of MasterCard cards.
+     */
+    @Expose
+    @SerializedName("limit_card_debit_mastercard")
+    private Integer limitCardDebitMastercard;
 
-  /**
-   * The limit of wildcards, e.g. Maestro or MasterCard cards.
-   */
-  @Expose
-  @SerializedName("limit_card_debit_wildcard")
-  private Integer limitCardDebitWildcard;
+    /**
+     * DEPRECTATED: The limit of wildcards, e.g. Maestro or MasterCard cards.
+     */
+    @Expose
+    @SerializedName("limit_card_debit_wildcard")
+    private Integer limitCardDebitWildcard;
 
-  /**
-   * The limit of free replacement cards.
-   */
-  @Expose
-  @SerializedName("limit_card_debit_replacement")
-  private Integer limitCardDebitReplacement;
+    /**
+     * The limit of wildcards, e.g. Maestro or MasterCard cards.
+     */
+    @Expose
+    @SerializedName("limit_card_wildcard")
+    private Integer limitCardWildcard;
 
-  /**
-   * The maximum amount a user is allowed to spend in a month.
-   */
-  @Expose
-  @SerializedName("limit_amount_monthly")
-  private Amount limitAmountMonthly;
+    /**
+     * DEPRECTATED: The limit of free replacement debit cards, replaced by: limit_card_replacement
+     */
+    @Expose
+    @SerializedName("limit_card_debit_replacement")
+    private Integer limitCardDebitReplacement;
 
-  /**
-   * The amount the user has spent in the last month.
-   */
-  @Expose
-  @SerializedName("spent_amount_monthly")
-  private Amount spentAmountMonthly;
+    /**
+     * The limit of free replacement cards.
+     */
+    @Expose
+    @SerializedName("limit_card_replacement")
+    private Integer limitCardReplacement;
 
-  /**
-   * Get all limits for the authenticated user.
-   */
-  public static BunqResponse<List<CustomerLimit>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
+    /**
+     * The maximum amount a user is allowed to spend in a month.
+     */
+    @Expose
+    @SerializedName("limit_amount_monthly")
+    private Amount limitAmountMonthly;
 
-    return fromJsonList(CustomerLimit.class, responseRaw, OBJECT_TYPE_GET);
-  }
+    /**
+     * The amount the user has spent in the last month.
+     */
+    @Expose
+    @SerializedName("spent_amount_monthly")
+    private Amount spentAmountMonthly;
 
-  public static BunqResponse<List<CustomerLimit>> list() {
-    return list(null, null);
-  }
+    /**
+     * Get all limits for the authenticated user.
+     */
+    public static BunqResponse<List<CustomerLimit>> list(Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-  public static BunqResponse<List<CustomerLimit>> list(Map<String, String> params) {
-    return list(params, null);
-  }
-
-  /**
-   */
-  public static CustomerLimit fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CustomerLimit.class, reader);
-  }
-
-  /**
-   * The limit of monetary accounts.
-   */
-  public Integer getLimitMonetaryAccount() {
-    return this.limitMonetaryAccount;
-  }
-
-  public void setLimitMonetaryAccount(Integer limitMonetaryAccount) {
-    this.limitMonetaryAccount = limitMonetaryAccount;
-  }
-
-  /**
-   * The amount of additional monetary accounts you can create.
-   */
-  public Integer getLimitMonetaryAccountRemaining() {
-    return this.limitMonetaryAccountRemaining;
-  }
-
-  public void setLimitMonetaryAccountRemaining(Integer limitMonetaryAccountRemaining) {
-    this.limitMonetaryAccountRemaining = limitMonetaryAccountRemaining;
-  }
-
-  /**
-   * The limit of Maestro cards.
-   */
-  public Integer getLimitCardDebitMaestro() {
-    return this.limitCardDebitMaestro;
-  }
-
-  public void setLimitCardDebitMaestro(Integer limitCardDebitMaestro) {
-    this.limitCardDebitMaestro = limitCardDebitMaestro;
-  }
-
-  /**
-   * The limit of MasterCard cards.
-   */
-  public Integer getLimitCardDebitMastercard() {
-    return this.limitCardDebitMastercard;
-  }
-
-  public void setLimitCardDebitMastercard(Integer limitCardDebitMastercard) {
-    this.limitCardDebitMastercard = limitCardDebitMastercard;
-  }
-
-  /**
-   * The limit of wildcards, e.g. Maestro or MasterCard cards.
-   */
-  public Integer getLimitCardDebitWildcard() {
-    return this.limitCardDebitWildcard;
-  }
-
-  public void setLimitCardDebitWildcard(Integer limitCardDebitWildcard) {
-    this.limitCardDebitWildcard = limitCardDebitWildcard;
-  }
-
-  /**
-   * The limit of free replacement cards.
-   */
-  public Integer getLimitCardDebitReplacement() {
-    return this.limitCardDebitReplacement;
-  }
-
-  public void setLimitCardDebitReplacement(Integer limitCardDebitReplacement) {
-    this.limitCardDebitReplacement = limitCardDebitReplacement;
-  }
-
-  /**
-   * The maximum amount a user is allowed to spend in a month.
-   */
-  public Amount getLimitAmountMonthly() {
-    return this.limitAmountMonthly;
-  }
-
-  public void setLimitAmountMonthly(Amount limitAmountMonthly) {
-    this.limitAmountMonthly = limitAmountMonthly;
-  }
-
-  /**
-   * The amount the user has spent in the last month.
-   */
-  public Amount getSpentAmountMonthly() {
-    return this.spentAmountMonthly;
-  }
-
-  public void setSpentAmountMonthly(Amount spentAmountMonthly) {
-    this.spentAmountMonthly = spentAmountMonthly;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.limitMonetaryAccount != null) {
-      return false;
+        return fromJsonList(CustomerLimit.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    if (this.limitMonetaryAccountRemaining != null) {
-      return false;
+    public static BunqResponse<List<CustomerLimit>> list() {
+        return list(null, null);
     }
 
-    if (this.limitCardDebitMaestro != null) {
-      return false;
+    public static BunqResponse<List<CustomerLimit>> list(Map<String, String> params) {
+        return list(params, null);
     }
 
-    if (this.limitCardDebitMastercard != null) {
-      return false;
+    /**
+     *
+     */
+    public static CustomerLimit fromJsonReader(JsonReader reader) {
+        return fromJsonReader(CustomerLimit.class, reader);
     }
 
-    if (this.limitCardDebitWildcard != null) {
-      return false;
+    /**
+     * The limit of monetary accounts.
+     */
+    public Integer getLimitMonetaryAccount() {
+        return this.limitMonetaryAccount;
     }
 
-    if (this.limitCardDebitReplacement != null) {
-      return false;
+    public void setLimitMonetaryAccount(Integer limitMonetaryAccount) {
+        this.limitMonetaryAccount = limitMonetaryAccount;
     }
 
-    if (this.limitAmountMonthly != null) {
-      return false;
+    /**
+     * The amount of additional monetary accounts you can create.
+     */
+    public Integer getLimitMonetaryAccountRemaining() {
+        return this.limitMonetaryAccountRemaining;
     }
 
-    if (this.spentAmountMonthly != null) {
-      return false;
+    public void setLimitMonetaryAccountRemaining(Integer limitMonetaryAccountRemaining) {
+        this.limitMonetaryAccountRemaining = limitMonetaryAccountRemaining;
     }
 
-    return true;
-  }
+    /**
+     * The limit of Maestro cards.
+     */
+    public Integer getLimitCardDebitMaestro() {
+        return this.limitCardDebitMaestro;
+    }
+
+    public void setLimitCardDebitMaestro(Integer limitCardDebitMaestro) {
+        this.limitCardDebitMaestro = limitCardDebitMaestro;
+    }
+
+    /**
+     * The limit of MasterCard cards.
+     */
+    public Integer getLimitCardDebitMastercard() {
+        return this.limitCardDebitMastercard;
+    }
+
+    public void setLimitCardDebitMastercard(Integer limitCardDebitMastercard) {
+        this.limitCardDebitMastercard = limitCardDebitMastercard;
+    }
+
+    /**
+     * DEPRECTATED: The limit of wildcards, e.g. Maestro or MasterCard cards.
+     */
+    public Integer getLimitCardDebitWildcard() {
+        return this.limitCardDebitWildcard;
+    }
+
+    public void setLimitCardDebitWildcard(Integer limitCardDebitWildcard) {
+        this.limitCardDebitWildcard = limitCardDebitWildcard;
+    }
+
+    /**
+     * The limit of wildcards, e.g. Maestro or MasterCard cards.
+     */
+    public Integer getLimitCardWildcard() {
+        return this.limitCardWildcard;
+    }
+
+    public void setLimitCardWildcard(Integer limitCardWildcard) {
+        this.limitCardWildcard = limitCardWildcard;
+    }
+
+    /**
+     * DEPRECTATED: The limit of free replacement debit cards, replaced by: limit_card_replacement
+     */
+    public Integer getLimitCardDebitReplacement() {
+        return this.limitCardDebitReplacement;
+    }
+
+    public void setLimitCardDebitReplacement(Integer limitCardDebitReplacement) {
+        this.limitCardDebitReplacement = limitCardDebitReplacement;
+    }
+
+    /**
+     * The limit of free replacement cards.
+     */
+    public Integer getLimitCardReplacement() {
+        return this.limitCardReplacement;
+    }
+
+    public void setLimitCardReplacement(Integer limitCardReplacement) {
+        this.limitCardReplacement = limitCardReplacement;
+    }
+
+    /**
+     * The maximum amount a user is allowed to spend in a month.
+     */
+    public Amount getLimitAmountMonthly() {
+        return this.limitAmountMonthly;
+    }
+
+    public void setLimitAmountMonthly(Amount limitAmountMonthly) {
+        this.limitAmountMonthly = limitAmountMonthly;
+    }
+
+    /**
+     * The amount the user has spent in the last month.
+     */
+    public Amount getSpentAmountMonthly() {
+        return this.spentAmountMonthly;
+    }
+
+    public void setSpentAmountMonthly(Amount spentAmountMonthly) {
+        this.spentAmountMonthly = spentAmountMonthly;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.limitMonetaryAccount != null) {
+            return false;
+        }
+
+        if (this.limitMonetaryAccountRemaining != null) {
+            return false;
+        }
+
+        if (this.limitCardDebitMaestro != null) {
+            return false;
+        }
+
+        if (this.limitCardDebitMastercard != null) {
+            return false;
+        }
+
+        if (this.limitCardDebitWildcard != null) {
+            return false;
+        }
+
+        if (this.limitCardWildcard != null) {
+            return false;
+        }
+
+        if (this.limitCardDebitReplacement != null) {
+            return false;
+        }
+
+        if (this.limitCardReplacement != null) {
+            return false;
+        }
+
+        if (this.limitAmountMonthly != null) {
+            return false;
+        }
+
+        if (this.spentAmountMonthly != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

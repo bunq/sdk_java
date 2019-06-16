@@ -14,52 +14,54 @@ import java.util.Map;
  */
 public class AttachmentConversationContent extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/chat-conversation/%s/attachment/%s/content";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/chat-conversation/%s/attachment/%s/content";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "AttachmentConversationContent";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "AttachmentConversationContent";
 
-  /**
-   * Get the raw content of a specific attachment.
-   */
-  public static BunqResponse<byte[]> list(Integer chatConversationId, Integer attachmentId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), chatConversationId, attachmentId), params, customHeaders);
+    /**
+     * Get the raw content of a specific attachment.
+     */
+    public static BunqResponse<byte[]> list(Integer chatConversationId, Integer attachmentId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), chatConversationId, attachmentId), params, customHeaders);
 
-    return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
-  }
+        return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
+    }
 
-  public static BunqResponse<byte[]> list() {
-    return list(null, null, null, null);
-  }
+    public static BunqResponse<byte[]> list() {
+        return list(null, null, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer chatConversationId) {
-    return list(chatConversationId, null, null, null);
-  }
+    public static BunqResponse<byte[]> list(Integer chatConversationId) {
+        return list(chatConversationId, null, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer chatConversationId, Integer attachmentId) {
-    return list(chatConversationId, attachmentId, null, null);
-  }
+    public static BunqResponse<byte[]> list(Integer chatConversationId, Integer attachmentId) {
+        return list(chatConversationId, attachmentId, null, null);
+    }
 
-  public static BunqResponse<byte[]> list(Integer chatConversationId, Integer attachmentId, Map<String, String> params) {
-    return list(chatConversationId, attachmentId, params, null);
-  }
+    public static BunqResponse<byte[]> list(Integer chatConversationId, Integer attachmentId, Map<String, String> params) {
+        return list(chatConversationId, attachmentId, params, null);
+    }
 
-  /**
-   */
-  public static AttachmentConversationContent fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentConversationContent.class, reader);
-  }
+    /**
+     *
+     */
+    public static AttachmentConversationContent fromJsonReader(JsonReader reader) {
+        return fromJsonReader(AttachmentConversationContent.class, reader);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }

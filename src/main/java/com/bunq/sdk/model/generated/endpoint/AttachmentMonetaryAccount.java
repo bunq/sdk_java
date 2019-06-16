@@ -17,86 +17,88 @@ import java.util.Map;
  */
 public class AttachmentMonetaryAccount extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/attachment";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/attachment";
 
-  /**
-   * The attachment.
-   */
-  @Expose
-  @SerializedName("attachment")
-  private Attachment attachment;
+    /**
+     * The attachment.
+     */
+    @Expose
+    @SerializedName("attachment")
+    private Attachment attachment;
 
-  /**
-   * The ID of the attachment created.
-   */
-  @Expose
-  @SerializedName("id")
-  private Integer id;
+    /**
+     * The ID of the attachment created.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-  /**
-   * Create a new monetary account attachment. Create a POST request with a payload that contains
-   * the binary representation of the file, without any JSON wrapping. Make sure you define the
-   * MIME type (i.e. image/jpeg) in the Content-Type header. You are required to provide a
-   * description of the attachment using the X-Bunq-Attachment-Description header.
-   */
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, Map<String, String> customHeaders, byte[] bytes) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), bytes, customHeaders);
+    /**
+     * Create a new monetary account attachment. Create a POST request with a payload that contains
+     * the binary representation of the file, without any JSON wrapping. Make sure you define the
+     * MIME type (i.e. image/jpeg) in the Content-Type header. You are required to provide a
+     * description of the attachment using the X-Bunq-Attachment-Description header.
+     */
+    public static BunqResponse<Integer> create(Integer monetaryAccountId, Map<String, String> customHeaders, byte[] bytes) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), bytes, customHeaders);
 
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> create(byte[] bytes) {
-    return create(null, null, bytes);
-  }
-
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, byte[] bytes) {
-    return create(monetaryAccountId, null, bytes);
-  }
-
-  /**
-   */
-  public static AttachmentMonetaryAccount fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentMonetaryAccount.class, reader);
-  }
-
-  /**
-   * The attachment.
-   */
-  public Attachment getAttachment() {
-    return this.attachment;
-  }
-
-  public void setAttachment(Attachment attachment) {
-    this.attachment = attachment;
-  }
-
-  /**
-   * The ID of the attachment created.
-   */
-  public Integer getId() {
-    return this.id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.attachment != null) {
-      return false;
+        return processForId(responseRaw);
     }
 
-    if (this.id != null) {
-      return false;
+    public static BunqResponse<Integer> create(byte[] bytes) {
+        return create(null, null, bytes);
     }
 
-    return true;
-  }
+    public static BunqResponse<Integer> create(Integer monetaryAccountId, byte[] bytes) {
+        return create(monetaryAccountId, null, bytes);
+    }
+
+    /**
+     *
+     */
+    public static AttachmentMonetaryAccount fromJsonReader(JsonReader reader) {
+        return fromJsonReader(AttachmentMonetaryAccount.class, reader);
+    }
+
+    /**
+     * The attachment.
+     */
+    public Attachment getAttachment() {
+        return this.attachment;
+    }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    /**
+     * The ID of the attachment created.
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.attachment != null) {
+            return false;
+        }
+
+        if (this.id != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

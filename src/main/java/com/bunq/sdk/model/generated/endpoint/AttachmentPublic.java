@@ -17,156 +17,158 @@ import java.util.Map;
  */
 public class AttachmentPublic extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "attachment-public";
-  protected static final String ENDPOINT_URL_READ = "attachment-public/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "attachment-public";
+    protected static final String ENDPOINT_URL_READ = "attachment-public/%s";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_POST = "Uuid";
-  protected static final String OBJECT_TYPE_GET = "AttachmentPublic";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_POST = "Uuid";
+    protected static final String OBJECT_TYPE_GET = "AttachmentPublic";
 
-  /**
-   * The UUID of the attachment.
-   */
-  @Expose
-  @SerializedName("uuid")
-  private String uuid;
+    /**
+     * The UUID of the attachment.
+     */
+    @Expose
+    @SerializedName("uuid")
+    private String uuid;
 
-  /**
-   * The timestamp of the attachment's creation.
-   */
-  @Expose
-  @SerializedName("created")
-  private String created;
+    /**
+     * The timestamp of the attachment's creation.
+     */
+    @Expose
+    @SerializedName("created")
+    private String created;
 
-  /**
-   * The timestamp of the attachment's last update.
-   */
-  @Expose
-  @SerializedName("updated")
-  private String updated;
+    /**
+     * The timestamp of the attachment's last update.
+     */
+    @Expose
+    @SerializedName("updated")
+    private String updated;
 
-  /**
-   * The attachment.
-   */
-  @Expose
-  @SerializedName("attachment")
-  private Attachment attachment;
+    /**
+     * The attachment.
+     */
+    @Expose
+    @SerializedName("attachment")
+    private Attachment attachment;
 
-  /**
-   * Create a new public attachment. Create a POST request with a payload that contains a binary
-   * representation of the file, without any JSON wrapping. Make sure you define the MIME type
-   * (i.e. image/jpeg, or image/png) in the Content-Type header. You are required to provide a
-   * description of the attachment using the X-Bunq-Attachment-Description header.
-   */
-  public static BunqResponse<String> create(Map<String, String> customHeaders, byte[] bytes) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, bytes, customHeaders);
+    /**
+     * Create a new public attachment. Create a POST request with a payload that contains a binary
+     * representation of the file, without any JSON wrapping. Make sure you define the MIME type
+     * (i.e. image/jpeg, or image/png) in the Content-Type header. You are required to provide a
+     * description of the attachment using the X-Bunq-Attachment-Description header.
+     */
+    public static BunqResponse<String> create(Map<String, String> customHeaders, byte[] bytes) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.post(ENDPOINT_URL_CREATE, bytes, customHeaders);
 
-    return processForUuid(responseRaw);
-  }
-
-  public static BunqResponse<String> create(byte[] bytes) {
-    return create(null, bytes);
-  }
-
-  /**
-   * Get a specific attachment's metadata through its UUID. The Content-Type header of the
-   * response will describe the MIME type of the attachment file.
-   */
-  public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), params, customHeaders);
-
-    return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<AttachmentPublic> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid) {
-    return get(attachmentPublicUuid, null, null);
-  }
-
-  public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid, Map<String, String> params) {
-    return get(attachmentPublicUuid, params, null);
-  }
-
-  /**
-   */
-  public static AttachmentPublic fromJsonReader(JsonReader reader) {
-    return fromJsonReader(AttachmentPublic.class, reader);
-  }
-
-  /**
-   * The UUID of the attachment.
-   */
-  public String getUuid() {
-    return this.uuid;
-  }
-
-  public void setUuid(String uuid) {
-    this.uuid = uuid;
-  }
-
-  /**
-   * The timestamp of the attachment's creation.
-   */
-  public String getCreated() {
-    return this.created;
-  }
-
-  public void setCreated(String created) {
-    this.created = created;
-  }
-
-  /**
-   * The timestamp of the attachment's last update.
-   */
-  public String getUpdated() {
-    return this.updated;
-  }
-
-  public void setUpdated(String updated) {
-    this.updated = updated;
-  }
-
-  /**
-   * The attachment.
-   */
-  public Attachment getAttachment() {
-    return this.attachment;
-  }
-
-  public void setAttachment(Attachment attachment) {
-    this.attachment = attachment;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.uuid != null) {
-      return false;
+        return processForUuid(responseRaw);
     }
 
-    if (this.created != null) {
-      return false;
+    public static BunqResponse<String> create(byte[] bytes) {
+        return create(null, bytes);
     }
 
-    if (this.updated != null) {
-      return false;
+    /**
+     * Get a specific attachment's metadata through its UUID. The Content-Type header of the
+     * response will describe the MIME type of the attachment file.
+     */
+    public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, attachmentPublicUuid), params, customHeaders);
+
+        return fromJson(AttachmentPublic.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    if (this.attachment != null) {
-      return false;
+    public static BunqResponse<AttachmentPublic> get() {
+        return get(null, null, null);
     }
 
-    return true;
-  }
+    public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid) {
+        return get(attachmentPublicUuid, null, null);
+    }
+
+    public static BunqResponse<AttachmentPublic> get(String attachmentPublicUuid, Map<String, String> params) {
+        return get(attachmentPublicUuid, params, null);
+    }
+
+    /**
+     *
+     */
+    public static AttachmentPublic fromJsonReader(JsonReader reader) {
+        return fromJsonReader(AttachmentPublic.class, reader);
+    }
+
+    /**
+     * The UUID of the attachment.
+     */
+    public String getUuid() {
+        return this.uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * The timestamp of the attachment's creation.
+     */
+    public String getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * The timestamp of the attachment's last update.
+     */
+    public String getUpdated() {
+        return this.updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    /**
+     * The attachment.
+     */
+    public Attachment getAttachment() {
+        return this.attachment;
+    }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.uuid != null) {
+            return false;
+        }
+
+        if (this.created != null) {
+            return false;
+        }
+
+        if (this.updated != null) {
+            return false;
+        }
+
+        if (this.attachment != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

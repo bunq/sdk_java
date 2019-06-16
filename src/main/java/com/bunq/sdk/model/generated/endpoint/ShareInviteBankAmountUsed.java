@@ -17,44 +17,46 @@ import java.util.Map;
  */
 public class ShareInviteBankAmountUsed extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s/amount-used/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/share-invite-bank-inquiry/%s/amount-used/%s";
 
-  /**
-   * [DEPRECATED - use /share-invite-monetary-account-inquiry/ID/amount-used] Reset the available
-   * budget for a bank account share. To be called without any ID at the end of the path.
-   */
-  public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId, Integer monetaryAccountId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId, shareInviteBankAmountUsedId), customHeaders);
+    /**
+     * [DEPRECATED - use /share-invite-monetary-account-inquiry/ID/amount-used] Reset the available
+     * budget for a bank account share. To be called without any ID at the end of the path.
+     */
+    public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteBankInquiryId, shareInviteBankAmountUsedId), customHeaders);
 
-    return new BunqResponse<>(null, responseRaw.getHeaders());
-  }
+        return new BunqResponse<>(null, responseRaw.getHeaders());
+    }
 
-  public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId) {
-    return delete(shareInviteBankInquiryId, null, null, null);
-  }
+    public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId) {
+        return delete(shareInviteBankInquiryId, null, null, null);
+    }
 
-  public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId) {
-    return delete(shareInviteBankInquiryId, shareInviteBankAmountUsedId, null, null);
-  }
+    public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId) {
+        return delete(shareInviteBankInquiryId, shareInviteBankAmountUsedId, null, null);
+    }
 
-  public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId, Integer monetaryAccountId) {
-    return delete(shareInviteBankInquiryId, shareInviteBankAmountUsedId, monetaryAccountId, null);
-  }
+    public static BunqResponse<ShareInviteBankAmountUsed> delete(Integer shareInviteBankInquiryId, Integer shareInviteBankAmountUsedId, Integer monetaryAccountId) {
+        return delete(shareInviteBankInquiryId, shareInviteBankAmountUsedId, monetaryAccountId, null);
+    }
 
-  /**
-   */
-  public static ShareInviteBankAmountUsed fromJsonReader(JsonReader reader) {
-    return fromJsonReader(ShareInviteBankAmountUsed.class, reader);
-  }
+    /**
+     *
+     */
+    public static ShareInviteBankAmountUsed fromJsonReader(JsonReader reader) {
+        return fromJsonReader(ShareInviteBankAmountUsed.class, reader);
+    }
 
-  /**
-   */
-  public boolean isAllFieldNull() {
-    return true;
-  }
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        return true;
+    }
 
 }

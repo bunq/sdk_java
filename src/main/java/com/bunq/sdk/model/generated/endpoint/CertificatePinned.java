@@ -20,174 +20,176 @@ import java.util.Map;
  */
 public class CertificatePinned extends BunqModel {
 
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_CERTIFICATE_CHAIN = "certificate_chain";
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/certificate-pinned";
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/certificate-pinned/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/certificate-pinned";
-  protected static final String ENDPOINT_URL_READ = "user/%s/certificate-pinned/%s";
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "CertificatePinned";
+    /**
+     * Field constants.
+     */
+    public static final String FIELD_CERTIFICATE_CHAIN = "certificate_chain";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/certificate-pinned";
+    protected static final String ENDPOINT_URL_DELETE = "user/%s/certificate-pinned/%s";
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/certificate-pinned";
+    protected static final String ENDPOINT_URL_READ = "user/%s/certificate-pinned/%s";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "CertificatePinned";
 
-  /**
-   * The certificate chain in .PEM format. Certificates are glued with newline characters.
-   */
-  @Expose
-  @SerializedName("certificate_chain")
-  private String certificateChain;
+    /**
+     * The certificate chain in .PEM format. Certificates are glued with newline characters.
+     */
+    @Expose
+    @SerializedName("certificate_chain")
+    private String certificateChain;
 
-  /**
-   * The id generated for the pinned certificate chain.
-   */
-  @Expose
-  @SerializedName("id")
-  private Integer id;
+    /**
+     * The id generated for the pinned certificate chain.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
 
-  /**
-   * The certificate chain in .PEM format.
-   */
-  @Expose
-  @SerializedName("certificate_chain_field_for_request")
-  private List<Certificate> certificateChainFieldForRequest;
+    /**
+     * The certificate chain in .PEM format.
+     */
+    @Expose
+    @SerializedName("certificate_chain_field_for_request")
+    private List<Certificate> certificateChainFieldForRequest;
 
-  public CertificatePinned() {
-    this(null);
-  }
-
-  public CertificatePinned(List<Certificate> certificateChain) {
-    this.certificateChainFieldForRequest = certificateChain;
-  }
-
-  /**
-   * Pin the certificate chain.
-   *
-   * @param certificateChain The certificate chain in .PEM format.
-   */
-  public static BunqResponse<Integer> create(List<Certificate> certificateChain, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
+    public CertificatePinned() {
+        this(null);
     }
 
-    HashMap<String, Object> requestMap = new HashMap<>();
-    requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> create() {
-    return create(null, null);
-  }
-
-  public static BunqResponse<Integer> create(List<Certificate> certificateChain) {
-    return create(certificateChain, null);
-  }
-
-  /**
-   * Remove the pinned certificate chain with the specific ID.
-   */
-  public static BunqResponse<CertificatePinned> delete(Integer certificatePinnedId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), certificatePinnedId), customHeaders);
-
-    return new BunqResponse<>(null, responseRaw.getHeaders());
-  }
-
-  public static BunqResponse<CertificatePinned> delete(Integer certificatePinnedId) {
-    return delete(certificatePinnedId, null);
-  }
-
-  /**
-   * List all the pinned certificate chain for the given user.
-   */
-  public static BunqResponse<List<CertificatePinned>> list(Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
-
-    return fromJsonList(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<CertificatePinned>> list() {
-    return list(null, null);
-  }
-
-  public static BunqResponse<List<CertificatePinned>> list(Map<String, String> params) {
-    return list(params, null);
-  }
-
-  /**
-   * Get the pinned certificate chain with the specified ID.
-   */
-  public static BunqResponse<CertificatePinned> get(Integer certificatePinnedId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), certificatePinnedId), params, customHeaders);
-
-    return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<CertificatePinned> get() {
-    return get(null, null, null);
-  }
-
-  public static BunqResponse<CertificatePinned> get(Integer certificatePinnedId) {
-    return get(certificatePinnedId, null, null);
-  }
-
-  public static BunqResponse<CertificatePinned> get(Integer certificatePinnedId, Map<String, String> params) {
-    return get(certificatePinnedId, params, null);
-  }
-
-  /**
-   */
-  public static CertificatePinned fromJsonReader(JsonReader reader) {
-    return fromJsonReader(CertificatePinned.class, reader);
-  }
-
-  /**
-   * The certificate chain in .PEM format. Certificates are glued with newline characters.
-   */
-  public String getCertificateChain() {
-    return this.certificateChain;
-  }
-
-  public void setCertificateChain(String certificateChain) {
-    this.certificateChain = certificateChain;
-  }
-
-  /**
-   * The id generated for the pinned certificate chain.
-   */
-  public Integer getId() {
-    return this.id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.certificateChain != null) {
-      return false;
+    public CertificatePinned(List<Certificate> certificateChain) {
+        this.certificateChainFieldForRequest = certificateChain;
     }
 
-    if (this.id != null) {
-      return false;
+    /**
+     * Pin the certificate chain.
+     *
+     * @param certificateChain The certificate chain in .PEM format.
+     */
+    public static BunqResponse<Integer> create(List<Certificate> certificateChain, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
+
+        HashMap<String, Object> requestMap = new HashMap<>();
+        requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
+
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
+
+        return processForId(responseRaw);
     }
 
-    return true;
-  }
+    public static BunqResponse<Integer> create() {
+        return create(null, null);
+    }
+
+    public static BunqResponse<Integer> create(List<Certificate> certificateChain) {
+        return create(certificateChain, null);
+    }
+
+    /**
+     * Remove the pinned certificate chain with the specific ID.
+     */
+    public static BunqResponse<CertificatePinned> delete(Integer certificatePinnedId, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), certificatePinnedId), customHeaders);
+
+        return new BunqResponse<>(null, responseRaw.getHeaders());
+    }
+
+    public static BunqResponse<CertificatePinned> delete(Integer certificatePinnedId) {
+        return delete(certificatePinnedId, null);
+    }
+
+    /**
+     * List all the pinned certificate chain for the given user.
+     */
+    public static BunqResponse<List<CertificatePinned>> list(Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
+
+        return fromJsonList(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
+    }
+
+    public static BunqResponse<List<CertificatePinned>> list() {
+        return list(null, null);
+    }
+
+    public static BunqResponse<List<CertificatePinned>> list(Map<String, String> params) {
+        return list(params, null);
+    }
+
+    /**
+     * Get the pinned certificate chain with the specified ID.
+     */
+    public static BunqResponse<CertificatePinned> get(Integer certificatePinnedId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), certificatePinnedId), params, customHeaders);
+
+        return fromJson(CertificatePinned.class, responseRaw, OBJECT_TYPE_GET);
+    }
+
+    public static BunqResponse<CertificatePinned> get() {
+        return get(null, null, null);
+    }
+
+    public static BunqResponse<CertificatePinned> get(Integer certificatePinnedId) {
+        return get(certificatePinnedId, null, null);
+    }
+
+    public static BunqResponse<CertificatePinned> get(Integer certificatePinnedId, Map<String, String> params) {
+        return get(certificatePinnedId, params, null);
+    }
+
+    /**
+     *
+     */
+    public static CertificatePinned fromJsonReader(JsonReader reader) {
+        return fromJsonReader(CertificatePinned.class, reader);
+    }
+
+    /**
+     * The certificate chain in .PEM format. Certificates are glued with newline characters.
+     */
+    public String getCertificateChain() {
+        return this.certificateChain;
+    }
+
+    public void setCertificateChain(String certificateChain) {
+        this.certificateChain = certificateChain;
+    }
+
+    /**
+     * The id generated for the pinned certificate chain.
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.certificateChain != null) {
+            return false;
+        }
+
+        if (this.id != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

@@ -16,73 +16,76 @@ import java.util.Map;
  */
 public class BunqMeTabResultResponse extends BunqModel {
 
-  /**
-   * Endpoint constants.
-   */
-  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/bunqme-tab-result-response/%s";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/bunqme-tab-result-response/%s";
 
-  /**
-   * Object type.
-   */
-  protected static final String OBJECT_TYPE_GET = "BunqMeTabResultResponse";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "BunqMeTabResultResponse";
 
-  /**
-   * The payment made for the bunq.me tab.
-   */
-  @Expose
-  @SerializedName("payment")
-  private Payment payment;
+    /**
+     * The payment made for the bunq.me tab.
+     */
+    @Expose
+    @SerializedName("payment")
+    private Payment payment;
 
-  /**
-   */
-  public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabResultResponseId), params, customHeaders);
+    /**
+     *
+     */
+    public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabResultResponseId), params, customHeaders);
 
-    return fromJson(BunqMeTabResultResponse.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<BunqMeTabResultResponse> get() {
-    return get(null, null, null, null);
-  }
-
-  public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId) {
-    return get(bunqMeTabResultResponseId, null, null, null);
-  }
-
-  public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId) {
-    return get(bunqMeTabResultResponseId, monetaryAccountId, null, null);
-  }
-
-  public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId, Map<String, String> params) {
-    return get(bunqMeTabResultResponseId, monetaryAccountId, params, null);
-  }
-
-  /**
-   */
-  public static BunqMeTabResultResponse fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeTabResultResponse.class, reader);
-  }
-
-  /**
-   * The payment made for the bunq.me tab.
-   */
-  public Payment getPayment() {
-    return this.payment;
-  }
-
-  public void setPayment(Payment payment) {
-    this.payment = payment;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.payment != null) {
-      return false;
+        return fromJson(BunqMeTabResultResponse.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    return true;
-  }
+    public static BunqResponse<BunqMeTabResultResponse> get() {
+        return get(null, null, null, null);
+    }
+
+    public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId) {
+        return get(bunqMeTabResultResponseId, null, null, null);
+    }
+
+    public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId) {
+        return get(bunqMeTabResultResponseId, monetaryAccountId, null, null);
+    }
+
+    public static BunqResponse<BunqMeTabResultResponse> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId, Map<String, String> params) {
+        return get(bunqMeTabResultResponseId, monetaryAccountId, params, null);
+    }
+
+    /**
+     *
+     */
+    public static BunqMeTabResultResponse fromJsonReader(JsonReader reader) {
+        return fromJsonReader(BunqMeTabResultResponse.class, reader);
+    }
+
+    /**
+     * The payment made for the bunq.me tab.
+     */
+    public Payment getPayment() {
+        return this.payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.payment != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }

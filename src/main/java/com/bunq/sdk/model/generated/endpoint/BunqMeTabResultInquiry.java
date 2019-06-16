@@ -11,60 +11,62 @@ import com.google.gson.stream.JsonReader;
  */
 public class BunqMeTabResultInquiry extends BunqModel {
 
-  /**
-   * The payment made for the Tab.
-   */
-  @Expose
-  @SerializedName("payment")
-  private Payment payment;
+    /**
+     * The payment made for the Tab.
+     */
+    @Expose
+    @SerializedName("payment")
+    private Payment payment;
 
-  /**
-   * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
-   */
-  @Expose
-  @SerializedName("bunq_me_tab_id")
-  private Integer bunqMeTabId;
+    /**
+     * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
+     */
+    @Expose
+    @SerializedName("bunq_me_tab_id")
+    private Integer bunqMeTabId;
 
-  /**
-   */
-  public static BunqMeTabResultInquiry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(BunqMeTabResultInquiry.class, reader);
-  }
-
-  /**
-   * The payment made for the Tab.
-   */
-  public Payment getPayment() {
-    return this.payment;
-  }
-
-  public void setPayment(Payment payment) {
-    this.payment = payment;
-  }
-
-  /**
-   * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
-   */
-  public Integer getBunqMeTabId() {
-    return this.bunqMeTabId;
-  }
-
-  public void setBunqMeTabId(Integer bunqMeTabId) {
-    this.bunqMeTabId = bunqMeTabId;
-  }
-
-  /**
-   */
-  public boolean isAllFieldNull() {
-    if (this.payment != null) {
-      return false;
+    /**
+     *
+     */
+    public static BunqMeTabResultInquiry fromJsonReader(JsonReader reader) {
+        return fromJsonReader(BunqMeTabResultInquiry.class, reader);
     }
 
-    if (this.bunqMeTabId != null) {
-      return false;
+    /**
+     * The payment made for the Tab.
+     */
+    public Payment getPayment() {
+        return this.payment;
     }
 
-    return true;
-  }
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    /**
+     * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
+     */
+    public Integer getBunqMeTabId() {
+        return this.bunqMeTabId;
+    }
+
+    public void setBunqMeTabId(Integer bunqMeTabId) {
+        this.bunqMeTabId = bunqMeTabId;
+    }
+
+    /**
+     *
+     */
+    public boolean isAllFieldNull() {
+        if (this.payment != null) {
+            return false;
+        }
+
+        if (this.bunqMeTabId != null) {
+            return false;
+        }
+
+        return true;
+    }
 
 }
