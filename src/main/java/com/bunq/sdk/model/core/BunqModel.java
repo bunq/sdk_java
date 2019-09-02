@@ -150,7 +150,7 @@ abstract public class BunqModel {
     return new BunqResponse<>(objects, responseRaw.getHeaders(), pagination);
   }
 
-  private static JsonObject deserializeResponseObject(BunqResponseRaw responseRaw) {
+  protected static JsonObject deserializeResponseObject(BunqResponseRaw responseRaw) {
     String json = new String(responseRaw.getBodyBytes());
 
     return gson.fromJson(json, JsonObject.class);

@@ -7,10 +7,13 @@ import com.bunq.sdk.http.BunqBasicHeader;
 import com.bunq.sdk.http.BunqHeader;
 import com.bunq.sdk.http.BunqRequestBuilder;
 import com.bunq.sdk.http.HttpMethod;
+import com.bunq.sdk.model.generated.object.Certificate;
+import com.bunq.sdk.util.BunqUtil;
 import okhttp3.Headers;
 import okhttp3.Response;
 import okio.BufferedSink;
 import okio.Okio;
+import org.apache.commons.io.FileUtils;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -19,6 +22,8 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
@@ -34,11 +39,7 @@ import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Static lib containing methods for handling encryption.
@@ -120,6 +121,8 @@ public final class SecurityUtils {
   private static final String PRIVATE_KEY_START = "-----BEGIN PRIVATE KEY-----\n";
   private static final String PRIVATE_KEY_END = "\n-----END PRIVATE KEY-----\n";
   private static final String PRIVATE_KEY_FORMAT = PRIVATE_KEY_START + "%s" + PRIVATE_KEY_END;
+
+  private static final int KEY_ENCODED_LINE_LENGTH = 64;
 
   /**
    * Length of an empty array.
@@ -213,7 +216,7 @@ public final class SecurityUtils {
   /**
    * @param privateKeyString PKCS8 Private Key string
    */
-  private static PrivateKey createPrivateKeyFromFormattedString(String privateKeyString) {
+  public static PrivateKey createPrivateKeyFromFormattedString(String privateKeyString) {
     try {
       PKCS8EncodedKeySpec spec =
           new PKCS8EncodedKeySpec(getAllPrivateKeyByteFromFormattedString(privateKeyString));
@@ -247,6 +250,9 @@ public final class SecurityUtils {
   public static String getPublicKeyFormattedString(PublicKey publicKey) {
     byte[] encodedPublicKey = publicKey.getEncoded();
     String publicKeyString = DatatypeConverter.printBase64Binary(encodedPublicKey);
+
+    List<String> encodedKeyLines = BunqUtil.getChunksFromString(publicKeyString, KEY_ENCODED_LINE_LENGTH);
+    publicKeyString = String.join(NEWLINE, encodedKeyLines);
 
     return String.format(PUBLIC_KEY_FORMAT, publicKeyString);
   }
@@ -351,6 +357,18 @@ public final class SecurityUtils {
     return SecurityUtils.signBase64(requestBytes, keyPairClient);
   }
 
+  public static String generateSignature(String stringToSign, KeyPair keyPairClient) {
+    byte[] rawBytes = stringToSign.getBytes();
+
+    return SecurityUtils.signBase64(rawBytes, keyPairClient);
+  }
+
+  public static String generateSignature(String stringToSign, PrivateKey privateKey) {
+    byte[] rawBytes = stringToSign.getBytes();
+
+    return SecurityUtils.signBase64(rawBytes, privateKey);
+  }
+
   private static byte[] getRequestBytes(BunqRequestBuilder requestBuilder) {
     ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
@@ -418,6 +436,14 @@ public final class SecurityUtils {
     return DatatypeConverter.printBase64Binary(dataBytesSigned);
   }
 
+  private static String signBase64(byte[] bytesToSign, PrivateKey privateKey) throws BunqException {
+    Signature signature = getSignatureInstance();
+    initializeSignature(signature, privateKey);
+    byte[] dataBytesSigned = signDataWithSignature(signature, bytesToSign);
+
+    return DatatypeConverter.printBase64Binary(dataBytesSigned);
+  }
+
   private static Signature getSignatureInstance() throws BunqException {
     try {
       return Signature.getInstance(SIGNATURE_ALGORITHM);
@@ -428,8 +454,13 @@ public final class SecurityUtils {
 
   private static void initializeSignature(Signature signature,
       KeyPair keyPair) throws BunqException {
+    initializeSignature(signature, keyPair.getPrivate());
+  }
+
+  private static void initializeSignature(Signature signature,
+      PrivateKey privateKey) throws BunqException {
     try {
-      signature.initSign(keyPair.getPrivate());
+      signature.initSign(privateKey);
     } catch (InvalidKeyException exception) {
       throw new BunqException(ERROR_KEY_PAIR_INVALID, exception);
     }
@@ -506,6 +537,25 @@ public final class SecurityUtils {
     return outputStream.toByteArray();
   }
 
+  public static String getCertificateChainString(Certificate[] allChainCertificate) {
+    StringBuilder chainString = new StringBuilder();
+    for (Certificate certificate : allChainCertificate) {
+      chainString.append(certificate.getCertificate());
+      chainString.append(NEWLINE);
+    }
+    return chainString.toString();
+  }
+
+  public static Certificate getCertificateFromFile(String path) throws IOException {
+    File certificateFile = new File(path);
+    if (certificateFile.exists()) {
+      Certificate certificate = new Certificate();
+      certificate.setCertificate(FileUtils.readFileToString(certificateFile));
+      return certificate;
+    }
+    throw new FileNotFoundException();
+  }
+
   private static byte[] getResponseHeadBytes(int code, List<BunqBasicHeader> headers) {
     String requestHeadString = code + NEWLINE +
         generateResponseHeadersSortedString(headers) + NEWLINE + NEWLINE;
@@ -520,5 +570,4 @@ public final class SecurityUtils {
         Collections.<BunqHeader>emptyList()
     );
   }
-
 }

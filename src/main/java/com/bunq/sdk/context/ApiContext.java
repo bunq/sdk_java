@@ -1,19 +1,25 @@
 package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.model.core.DeviceServerInternal;
 import com.bunq.sdk.model.core.Installation;
+import com.bunq.sdk.model.core.PaymentServiceProviderCredentialInternal;
 import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.generated.endpoint.Session;
+import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIp;
+import com.bunq.sdk.model.generated.object.Certificate;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.security.KeyPair;
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,7 +74,7 @@ public class ApiContext implements java.io.Serializable {
 
   @Expose
   @SerializedName("api_key")
-  private final String apiKey;
+  private String apiKey;
 
   @Expose
   @SerializedName("installation_context")
@@ -83,10 +89,17 @@ public class ApiContext implements java.io.Serializable {
   private String proxy;
 
   /**
+   * Create empty API context without apiKey.
+   */
+  private ApiContext(ApiEnvironmentType environmentType) {
+    this.environmentType = environmentType;
+  }
+
+  /**
    * Create an empty API context.
    */
   private ApiContext(ApiEnvironmentType environmentType, String apiKey) {
-    this.environmentType = environmentType;
+    this(environmentType);
     this.apiKey = apiKey;
   }
 
@@ -127,6 +140,60 @@ public class ApiContext implements java.io.Serializable {
     apiContext.initialize(deviceDescription, permittedIps);
 
     return apiContext;
+  }
+
+  public static ApiContext createForPsd2(
+          ApiEnvironmentType environmentType,
+          Certificate certificate,
+          PrivateKey privateKey,
+          Certificate[] allChainCertificate,
+          String description,
+          List<String> allPermittedIp
+  ) {
+    try {
+
+      ApiContext apiContext = new ApiContext(environmentType);
+
+      apiContext.initializeInstallation();
+      UserCredentialPasswordIp serviceProviderCredential = apiContext.initializePsd2Credential(
+              certificate,
+              privateKey,
+              allChainCertificate
+      );
+
+      apiContext.apiKey = serviceProviderCredential.getTokenValue();
+
+      System.out.println("Received token: " + apiContext.apiKey);
+
+      apiContext.initializeDeviceRegistration(description, allPermittedIp);
+      apiContext.initializeSession();
+
+      return apiContext;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+
+  }
+
+  /**
+   * Set up a PSD2 ApiContext.
+   * @return ApiContext
+   */
+  public static ApiContext createForPsd2(
+          ApiEnvironmentType environmentType,
+          Certificate certificate,
+          PrivateKey privateKey,
+          Certificate[] allChainCertificate,
+          String description,
+          List<String> allPermittedIp,
+          String proxy
+  ) {
+      ApiContext context = createForPsd2(environmentType, certificate, privateKey, allChainCertificate, description, allPermittedIp);
+      context.proxy = proxy;
+
+      return context;
   }
 
   /**
@@ -175,6 +242,31 @@ public class ApiContext implements java.io.Serializable {
         SecurityUtils.getPublicKeyFormattedString(keyPairClient.getPublic())
     ).getValue();
     installationContext = new InstallationContext(installation, keyPairClient);
+  }
+
+  /**
+   *  Initialize the context with Psd2 credentials.
+   */
+  private UserCredentialPasswordIp initializePsd2Credential(
+    Certificate certificate,
+    PrivateKey privateKey,
+    Certificate[] allChainCertificate
+  ) {
+
+    String sessionToken = installationContext.getToken();
+    KeyPair clientKeyPair = installationContext.getKeyPairClient();
+
+    String stringToSign = SecurityUtils.getPublicKeyFormattedString(clientKeyPair.getPublic()) + sessionToken;
+    String encodedSignature = SecurityUtils.generateSignature(stringToSign, privateKey);
+
+    BunqResponse<UserCredentialPasswordIp> paymentProviderResponse = PaymentServiceProviderCredentialInternal.createWithApiContext(
+            certificate.getCertificate(),
+            allChainCertificate[0].getCertificate(),
+            encodedSignature,
+            this
+    );
+
+    return paymentProviderResponse.getValue();
   }
 
   private void initializeDeviceRegistration(String deviceDescription, List<String> permittedIps) {
@@ -308,5 +400,4 @@ public class ApiContext implements java.io.Serializable {
   public String getProxy() {
     return proxy;
   }
-
 }
