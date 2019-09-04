@@ -91,7 +91,7 @@ public class Psd2ContextTest {
     private ApiContext createApiContext() throws IOException
     {
         ApiContext apiContext = ApiContext.createForPsd2(
-                ApiEnvironmentType.LOCAL,
+                ApiEnvironmentType.SANDBOX,
                 SecurityUtils.getCertificateFromFile(FILE_TEST_CERTIFICATE),
                 SecurityUtils.getPrivateKeyFromFile(FILE_TEST_PRIVATE_KEY),
                 new Certificate[]{
