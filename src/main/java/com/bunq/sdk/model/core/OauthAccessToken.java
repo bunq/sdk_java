@@ -66,14 +66,14 @@ public class OauthAccessToken extends BunqModel {
     /**
      */
     public static OauthAccessToken create(
-        String grantType,
+        OauthGrantType grantType,
         String authCode,
         String redirectUri,
         OauthClient client
     ) {
         ApiClient apiClient = new AnonymousApiClient(BunqContext.getApiContext());
         BunqResponseRaw responseRaw = apiClient.post(
-                createTokenUri(grantType, authCode, redirectUri, client),
+                createTokenUri(grantType.toString(), authCode, redirectUri, client),
                 new byte[0],
                 new HashMap<String, String>()
         );

@@ -10,6 +10,7 @@ import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.security.SecurityUtils;
+import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -106,10 +107,13 @@ public class ApiClient {
     clientBuilder = new OkHttpClient().newBuilder()
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
-        .certificatePinner(
+        .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+    if (shouldEnableCertificatePinning()) {
+      clientBuilder.certificatePinner(
               determineCertificateToPin(this.apiContext.getEnvironmentType())
-        );
+      );
+    }
 
     setProxyIfNeeded(clientBuilder);
 
@@ -126,6 +130,13 @@ public class ApiClient {
       Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(url.getHost(), url.getPort()));
       httpClientBuilder.proxy(proxy);
     }
+  }
+
+  /**
+   */
+  private boolean shouldEnableCertificatePinning()
+  {
+    return this.apiContext.getEnvironmentType().getPinnedKey() != null;
   }
 
   private static CertificatePinner determineCertificateToPin(ApiEnvironmentType environmentType) {
@@ -450,5 +461,4 @@ public class ApiClient {
       throw new UncaughtExceptionError(exception);
     }
   }
-
 }

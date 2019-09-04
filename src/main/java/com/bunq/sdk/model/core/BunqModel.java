@@ -192,7 +192,7 @@ abstract public class BunqModel {
   }
 
   protected static byte[] determineAllRequestByte(HashMap<String, Object> requestMap) {
-    String requestString = gson.toJson(requestMap).toString();
+    String requestString = gson.toJson(requestMap);
 
     return requestString.replaceAll(REGEX_FIELD_FOR_REQUEST, STRING_EMPTY).getBytes();
   }

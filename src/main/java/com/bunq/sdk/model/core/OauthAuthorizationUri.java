@@ -39,7 +39,7 @@ public class OauthAuthorizationUri extends BunqModel {
     /**
      */
     public static OauthAuthorizationUri create(
-            final String responseType,
+            final OauthResponseType responseType,
             final String redirectUri,
             final OauthClient client
     ) {
@@ -47,7 +47,7 @@ public class OauthAuthorizationUri extends BunqModel {
         {
             {
                 put(FIELD_REDIRECT_URI, redirectUri);
-                put(FIELD_RESPONSE_TYPE, responseType);
+                put(FIELD_RESPONSE_TYPE, responseType.toString());
                 put(FIELD_CLIENT_ID, client.getClientId());
             }
         };
@@ -60,7 +60,7 @@ public class OauthAuthorizationUri extends BunqModel {
     /**
      */
     public static OauthAuthorizationUri create(
-            String responseType,
+            OauthResponseType responseType,
             String redirectUri,
             OauthClient client,
             final String state

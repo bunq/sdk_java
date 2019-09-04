@@ -150,8 +150,6 @@ public class ApiContext implements java.io.Serializable {
           String description,
           List<String> allPermittedIp
   ) {
-    try {
-
       ApiContext apiContext = new ApiContext(environmentType);
 
       apiContext.initializeInstallation();
@@ -163,18 +161,10 @@ public class ApiContext implements java.io.Serializable {
 
       apiContext.apiKey = serviceProviderCredential.getTokenValue();
 
-      System.out.println("Received token: " + apiContext.apiKey);
-
       apiContext.initializeDeviceRegistration(description, allPermittedIp);
       apiContext.initializeSession();
 
       return apiContext;
-
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
-
   }
 
   /**

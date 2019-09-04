@@ -77,6 +77,18 @@ Payment.create(
 ##### Example
 See [`tinker/make_payment`](https://github.com/bunq/tinker_java/blob/cc41ff072d01e61b44bb53169edb80bde9620dc5/src/main/java/com/bunq/tinker/MakePayment.java#L46)
 
+##### NotificationFilters / Callbacks
+**Note!** Due to an in internal change in the way we handle `NotificationFilters` (Callbacks), you should not use the default classes included in this SDK. 
+Please make sure you make use of the associated `Internal`-classes. For example when you need `NotificationFilterUrlUser`, make use of `NotificationFilterUrlUserInternal`.
+You can use every method of these classes, except for the `create()` method. **Always use `createWithListResponse()` instead.**
+
+##### Example
+```java
+NotificationFilterPushUserInternal.createWithListResponse(...)
+NotificationFilterUrlUserInternal.createWithListResponse(...)
+NotificationFilterUrlMonetaryAccountInternal.createWithListResponse(...)
+```
+
 #### Reading objects
 
 Reading objects can be done via the `get` or `list` method.

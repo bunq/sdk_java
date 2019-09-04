@@ -57,6 +57,8 @@ public final class SecurityUtils {
       "Could not create a public key from \"%s\".";
   private static final String ERROR_COULD_NOT_INITIALIZE_SIGNATURE =
       "Could not initialize Signature.";
+  private static final String ERROR_COULD_NOT_READ_FROM_FILE =
+      "Could not read from file %s.";
   private static final String ERROR_KEY_PAIR_INVALID = "KeyPair seems to be invalid.";
   private static final String ERROR_COULD_NOT_SIGN_DATA = "Could not sign data.";
   private static final String ERROR_COULD_NOT_VERIFY_DATA = "Could not verify signed data.";
@@ -226,6 +228,22 @@ public final class SecurityUtils {
     } catch (NoSuchAlgorithmException | InvalidKeySpecException exception) {
       throw new BunqException(String.format(ERROR_PRIVATE_KEY_FORMAT_INVALID, privateKeyString),
           exception);
+    }
+  }
+  /**
+   * @param path File path to the private key file.
+   */
+  public static PrivateKey getPrivateKeyFromFile(String path) {
+    try {
+      File keyFile = new File(path);
+      String keyString = FileUtils.readFileToString(keyFile);
+
+      return createPrivateKeyFromFormattedString(keyString);
+    } catch (IOException exception) {
+      throw new BunqException(
+              String.format(ERROR_COULD_NOT_READ_FROM_FILE, path),
+              exception
+      );
     }
   }
 
