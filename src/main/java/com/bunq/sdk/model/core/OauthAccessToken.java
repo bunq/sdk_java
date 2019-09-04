@@ -1,6 +1,8 @@
 package com.bunq.sdk.model.core;
 
+import com.bunq.sdk.context.ApiEnvironmentType;
 import com.bunq.sdk.context.BunqContext;
+import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.AnonymousApiClient;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
@@ -16,6 +18,16 @@ import java.util.Map;
 
 public class OauthAccessToken extends BunqModel {
     /**
+     * URI map.
+     */
+    protected static final Map<ApiEnvironmentType, String> AUTH_URI_ENVIRONMENT_MAP = new HashMap<ApiEnvironmentType, String>() {
+        {
+            put(ApiEnvironmentType.SANDBOX, TOKEN_URI_FORMAT_SANDBOX);
+            put(ApiEnvironmentType.PRODUCTION, TOKEN_URI_FORMAT_PRODUCTION);
+        }
+    };
+
+    /**
      * Field constants.
      */
     protected static final String FIELD_GRANT_TYPE = "grant_type";
@@ -27,7 +39,13 @@ public class OauthAccessToken extends BunqModel {
     /**
      * Token constants.
      */
-    protected static final String TOKEN_URI_BASE = "https://oauth.api.bunq.com/v1/token?";
+    protected static final String TOKEN_URI_FORMAT_SANDBOX = "https://api.oauth.bunq.com/v1/token?%s";
+    protected static final String TOKEN_URI_FORMAT_PRODUCTION = "https://api.oauth.sandbox.bunq.com/v1/token?%s";
+
+    /**
+     * Error constants.
+     */
+    protected static final String ERROR_ENVIRONMENT_TYPE_NOT_SUPPORTED = "You are trying to use an unsupported environment type.";
 
     @Expose(serialize = false)
     @SerializedName("access_token")
@@ -99,7 +117,7 @@ public class OauthAccessToken extends BunqModel {
             }
         };
 
-        return TOKEN_URI_BASE + HttpUtil.createQueryString(allTokenParameter);
+        return String.format(determineTokenUriFormat(), HttpUtil.createQueryString(allTokenParameter));
     }
 
     @Override
@@ -121,5 +139,16 @@ public class OauthAccessToken extends BunqModel {
         T responseValue = gson.fromJson(responseItemObject, classOfObject);
 
         return new BunqResponse<>(responseValue, responseRaw.getHeaders());
+    }
+
+    /**
+     */
+    private static String determineTokenUriFormat()
+    {
+        ApiEnvironmentType environmentType = BunqContext.getApiContext().getEnvironmentType();
+        if (AUTH_URI_ENVIRONMENT_MAP.containsKey(environmentType)) {
+            return AUTH_URI_ENVIRONMENT_MAP.get(environmentType);
+        }
+        throw new BunqException(ERROR_ENVIRONMENT_TYPE_NOT_SUPPORTED);
     }
 }

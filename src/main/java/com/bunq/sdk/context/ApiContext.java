@@ -251,7 +251,7 @@ public class ApiContext implements java.io.Serializable {
 
     BunqResponse<UserCredentialPasswordIp> paymentProviderResponse = PaymentServiceProviderCredentialInternal.createWithApiContext(
             certificate.getCertificate(),
-            allChainCertificate[0].getCertificate(),
+            SecurityUtils.getCertificateChainString(allChainCertificate),
             encodedSignature,
             this
     );

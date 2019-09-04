@@ -20,9 +20,9 @@ public class Psd2ContextTest {
     private static final String FILE_TEST_CONFIGURATION = "src/test/Resource/bunq-psd2-test.conf";
     private static final String FILE_TEST_OAUTH = "src/test/Resource/bunq-oauth-test.conf";
 
-    private static final String FILE_TEST_CERTIFICATE = "src/test/Resource/certificate.cert";
-    private static final String FILE_TEST_CERTIFICATE_CHAIN = "src/test/Resource/certificate.cert";
-    private static final String FILE_TEST_PRIVATE_KEY = "src/test/Resource/private.pem";
+    private static final String FILE_TEST_CERTIFICATE = "src/test/Resource/certificate.pem";
+    private static final String FILE_TEST_CERTIFICATE_CHAIN = "src/test/Resource/certificate.pem";
+    private static final String FILE_TEST_PRIVATE_KEY = "src/test/Resource/key.pem";
 
     private static final String TEST_DEVICE_DESCRIPTION = "PSD2TestDevice";
 

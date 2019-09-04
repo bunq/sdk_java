@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HttpUtil {
-
     /**
      * Query constants.
      */
@@ -23,5 +22,4 @@ public class HttpUtil {
 
         return String.join(QUERY_DELIMITER, encodedParameters);
     }
-
 }
