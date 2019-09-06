@@ -50,6 +50,32 @@ BunqContext.loadApiContext(apiContext);
 #### Example
 See [`tinker/load_api_context`](https://github.com/bunq/tinker_java/blob/b03cbc2b84f35de9721a4083843c4015665d67f8/src/main/java/com/bunq/tinker/libs/BunqLib.java#L96-L101)
 
+##### PSD2
+
+It is possible to create an ApiContext as PSD2 Service Provider. Although this might seem a complex task, we wrote some helper implementations to get you started.
+You need to create a certificate and private key to get you started. Our sandbox environment currently accepts all certificates, if these criteria are met:
+- Up to 64 characters
+- PISP and/or AISP used in the end.
+ 
+Make sure you have your unique eIDAS certificate number and certificates ready when you want to perform these tasks on our production environment. 
+
+Creating a PSD2 context is very easy:
+```java
+ApiContext apiContext = ApiContext.createForPsd2(
+    ENVIRONMENT_TYPE,
+    SecurityUtils.getCertificateFromFile(PATH_TO_CERTIFICATE),
+    SecurityUtils.getPrivateKeyFromFile(PATH_TO_PRIVATE_KEY),
+    new Certificate[]{
+            SecurityUtils.getCertificateFromFile(PATH_TO_CERTIFICATE_CHAIN)
+    },
+    DESCRIPTION
+)
+```
+
+This context can be saved the same way as a normal ApiContext. After creating this context, create an OAuth client to get your users to grant you access.
+For a more detailed example, check the [tinker_java](https://github.com/bunq/tinker_java/) repository.
+
+
 #### Safety considerations
 The file storing the context details (i.e. `bunq.conf`) is a key to your account. Anyone having
 access to it is able to perform any Public API actions with your account. Therefore, we recommend
