@@ -12,7 +12,6 @@ import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import java.util.HashMap;
 
 public class SessionServer extends BunqModel {
-
   /**
    * Error constants.
    */
@@ -46,7 +45,6 @@ public class SessionServer extends BunqModel {
     this.sessionToken = sessionToken;
     this.userPerson = userPerson;
   }
-
 
   public SessionServer(Id id, SessionToken sessionToken, UserPaymentServiceProvider userPaymentServiceProvider) {
     this.id = id;

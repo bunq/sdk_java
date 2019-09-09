@@ -51,7 +51,6 @@ BunqContext.loadApiContext(apiContext);
 See [`tinker/load_api_context`](https://github.com/bunq/tinker_java/blob/b03cbc2b84f35de9721a4083843c4015665d67f8/src/main/java/com/bunq/tinker/libs/BunqLib.java#L96-L101)
 
 ##### PSD2
-
 It is possible to create an ApiContext as PSD2 Service Provider. Although this might seem a complex task, we wrote some helper implementations to get you started.
 You need to create a certificate and private key to get you started. Our sandbox environment currently accepts all certificates, if these criteria are met:
 - Up to 64 characters
@@ -114,7 +113,6 @@ NotificationFilterPushUserInternal.createWithListResponse(...)
 NotificationFilterUrlUserInternal.createWithListResponse(...)
 NotificationFilterUrlMonetaryAccountInternal.createWithListResponse(...)
 ```
-
 #### Reading objects
 
 Reading objects can be done via the `get` or `list` method.

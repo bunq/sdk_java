@@ -46,9 +46,11 @@ public class UserContext {
   public void refreshContext() {
     UserContextHelper helper = new UserContextHelper(this.apiContext);
     this.initUser(helper.getFirstUser().getReferencedObject());
+
     if (this.userPaymentServiceProvider != null) {
       return;
     }
+
     this.initMainMonetaryAccount(helper.getFirstActiveMonetaryAccountBankByUserId(getUserId()));
   }
 

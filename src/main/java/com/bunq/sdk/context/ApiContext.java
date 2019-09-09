@@ -142,6 +142,9 @@ public class ApiContext implements java.io.Serializable {
     return apiContext;
   }
 
+  /**
+   * Create and initialize a PSD2 API Context.
+   */
   public static ApiContext createForPsd2(
           ApiEnvironmentType environmentType,
           Certificate certificate,
@@ -242,7 +245,6 @@ public class ApiContext implements java.io.Serializable {
     PrivateKey privateKey,
     Certificate[] allChainCertificate
   ) {
-
     String sessionToken = installationContext.getToken();
     KeyPair clientKeyPair = installationContext.getKeyPairClient();
 

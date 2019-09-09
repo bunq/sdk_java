@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PaymentServiceProviderCredentialInternal extends PaymentServiceProviderCredential {
-
     /**
      * Object types.
      */
@@ -54,5 +53,4 @@ public class PaymentServiceProviderCredentialInternal extends PaymentServiceProv
 
         return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
     }
-
 }
