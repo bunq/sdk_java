@@ -122,7 +122,6 @@ public class OauthAccessToken extends BunqModel {
 
     @Override
     public boolean isAllFieldNull() {
-
         if (token != null) {
             return false;
         } else if (type != null) {
@@ -146,9 +145,11 @@ public class OauthAccessToken extends BunqModel {
     private static String determineTokenUriFormat()
     {
         ApiEnvironmentType environmentType = BunqContext.getApiContext().getEnvironmentType();
+
         if (AUTH_URI_ENVIRONMENT_MAP.containsKey(environmentType)) {
             return AUTH_URI_ENVIRONMENT_MAP.get(environmentType);
         }
+
         throw new BunqException(ERROR_ENVIRONMENT_TYPE_NOT_SUPPORTED);
     }
 }

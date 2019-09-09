@@ -39,7 +39,10 @@ public class OauthAuthorizationUri extends BunqModel {
      */
     protected static final String ERROR_ENVIRONMENT_TYPE_NOT_SUPPORTED = "You are trying to use an unsupported environment type.";
 
-    protected String authorizationUri;
+    /**
+     * Private variables.
+     */
+    private String authorizationUri;
 
     /**
      */
@@ -112,9 +115,11 @@ public class OauthAuthorizationUri extends BunqModel {
     private static String determineAuthUriFormat()
     {
         ApiEnvironmentType environmentType = BunqContext.getApiContext().getEnvironmentType();
+
         if (AUTH_URI_ENVIRONMENT_MAP.containsKey(environmentType)) {
             return AUTH_URI_ENVIRONMENT_MAP.get(environmentType);
         }
+
         throw new BunqException(ERROR_ENVIRONMENT_TYPE_NOT_SUPPORTED);
     }
 }

@@ -23,6 +23,9 @@ public class PaymentServiceProviderCredentialInternal extends PaymentServiceProv
     protected static final String FIELD_CLIENT_PAYMENT_SERVICE_PROVIDER_CERTIFICATE_CHAIN = "client_payment_service_provider_certificate_chain";
     protected static final String FIELD_CLIENT_PUBLIC_KEY_SIGNATURE = "client_public_key_signature";
 
+    /**
+     * Create PSD2 Service Provider credential.
+     */
     public static BunqResponse<UserCredentialPasswordIp> createWithApiContext(
             String clientPaymentServiceProviderCertificate,
             String clientPaymentServiceProviderCertificateChain,
@@ -32,6 +35,9 @@ public class PaymentServiceProviderCredentialInternal extends PaymentServiceProv
         return createWithApiContext(clientPaymentServiceProviderCertificate, clientPaymentServiceProviderCertificateChain, clientPublicKeySignature, apiContext, new HashMap<String, String>());
     }
 
+    /**
+     * Create PSD2 Service Provider credential.
+     */
     public static BunqResponse<UserCredentialPasswordIp> createWithApiContext(
             String clientPaymentServiceProviderCertificate,
             String clientPaymentServiceProviderCertificateChain,

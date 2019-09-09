@@ -4,7 +4,6 @@ package com.bunq.sdk.model.core;
  * Enum for the OAuth authorization grant.
  */
 public enum OauthGrantType {
-
   AUTHORIZATION_CODE(
       "authorization_code"
   );
@@ -18,5 +17,4 @@ public enum OauthGrantType {
   public String toString() {
     return this.grantType;
   }
-
 }

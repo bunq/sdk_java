@@ -11,7 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AnonymousApiClient extends ApiClient {
-
+    /**
+     * Private variables.
+     */
     private OkHttpClient httpClient;
 
     /**

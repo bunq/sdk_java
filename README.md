@@ -74,7 +74,6 @@ ApiContext apiContext = ApiContext.createForPsd2(
 This context can be saved the same way as a normal ApiContext. After creating this context, create an OAuth client to get your users to grant you access.
 For a more detailed example, check the [tinker_java](https://github.com/bunq/tinker_java/) repository.
 
-
 #### Safety considerations
 The file storing the context details (i.e. `bunq.conf`) is a key to your account. Anyone having
 access to it is able to perform any Public API actions with your account. Therefore, we recommend

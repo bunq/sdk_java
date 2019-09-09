@@ -4,7 +4,6 @@ package com.bunq.sdk.model.core;
  * Enum for the OAuth response type.
  */
 public enum OauthResponseType {
-
   CODE(
       "code"
   );
@@ -18,5 +17,4 @@ public enum OauthResponseType {
   public String toString() {
     return this.responseType;
   }
-
 }
