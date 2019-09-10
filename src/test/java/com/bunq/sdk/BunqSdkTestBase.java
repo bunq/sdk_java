@@ -58,7 +58,6 @@ public class BunqSdkTestBase {
   protected static final String EMAIL_BRAVO = "bravo@bunq.com";
   protected static final String CASH_REGISTER_DESCRIPTION = "java cash register test";
 
-
   /**
    * Individual properties.
    */
@@ -196,7 +195,6 @@ public class BunqSdkTestBase {
 
     return cashRegister;
   }
-
   private static boolean shouldMoneyBeRequested(MonetaryAccountBank monetaryAccountBank) {
     return Float.parseFloat(monetaryAccountBank.getBalance().getValue()) < 10;
   }

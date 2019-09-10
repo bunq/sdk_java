@@ -10,6 +10,7 @@ import com.bunq.sdk.exception.ExceptionFactory;
 import com.bunq.sdk.exception.UncaughtExceptionError;
 import com.bunq.sdk.json.BunqGsonBuilder;
 import com.bunq.sdk.security.SecurityUtils;
+import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -56,10 +57,13 @@ public class ApiClient {
   private static final String DEVICE_SERVER_URL = "device-server";
   private static final String INSTALLATION_URL = "installation";
   private static final String SESSION_SERVER_URL = "session-server";
+  private static final String PAYMENT_SERVICE_PROVIDER_CREDENTIAL_URL = "payment-service-provider-credential";
+
   private static final List<String> URIS_NOT_REQUIRING_ACTIVE_SESSION = Arrays.asList(
       DEVICE_SERVER_URL,
       INSTALLATION_URL,
-      SESSION_SERVER_URL
+      SESSION_SERVER_URL,
+      PAYMENT_SERVICE_PROVIDER_CREDENTIAL_URL
   );
 
   /**
@@ -101,12 +105,15 @@ public class ApiClient {
     OkHttpClient.Builder clientBuilder;
 
     clientBuilder = new OkHttpClient().newBuilder()
-        .certificatePinner(
-                determineCertificateToPin(this.apiContext.getEnvironmentType())
-        )
         .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .writeTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS);
+
+    if (shouldEnableCertificatePinning()) {
+      clientBuilder.certificatePinner(
+              determineCertificateToPin(this.apiContext.getEnvironmentType())
+      );
+    }
 
     setProxyIfNeeded(clientBuilder);
 
@@ -123,6 +130,13 @@ public class ApiClient {
       Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(url.getHost(), url.getPort()));
       httpClientBuilder.proxy(proxy);
     }
+  }
+
+  /**
+   */
+  private boolean shouldEnableCertificatePinning()
+  {
+    return this.apiContext.getEnvironmentType().getPinnedKey() != null;
   }
 
   private static CertificatePinner determineCertificateToPin(ApiEnvironmentType environmentType) {
@@ -360,7 +374,7 @@ public class ApiClient {
 
   /**
    */
-  private static Map<String, String> getHeadersMap(Response response) {
+  protected static Map<String, String> getHeadersMap(Response response) {
     HashMap<String, String> headersMap = new HashMap<>();
 
     for (String headerName : response.headers().names()) {
@@ -447,5 +461,4 @@ public class ApiClient {
       throw new UncaughtExceptionError(exception);
     }
   }
-
 }

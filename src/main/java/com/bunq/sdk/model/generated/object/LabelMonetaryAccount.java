@@ -88,6 +88,13 @@ public class LabelMonetaryAccount extends BunqModel {
     private String transferwiseBankCode;
 
     /**
+     * The merchant category code.
+     */
+    @Expose
+    @SerializedName("merchant_category_code")
+    private String merchantCategoryCode;
+
+    /**
      *
      */
     public static LabelMonetaryAccount fromJsonReader(JsonReader reader) {
@@ -216,6 +223,17 @@ public class LabelMonetaryAccount extends BunqModel {
     }
 
     /**
+     * The merchant category code.
+     */
+    public String getMerchantCategoryCode() {
+        return this.merchantCategoryCode;
+    }
+
+    public void setMerchantCategoryCode(String merchantCategoryCode) {
+        this.merchantCategoryCode = merchantCategoryCode;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -260,6 +278,10 @@ public class LabelMonetaryAccount extends BunqModel {
         }
 
         if (this.transferwiseBankCode != null) {
+            return false;
+        }
+
+        if (this.merchantCategoryCode != null) {
             return false;
         }
 

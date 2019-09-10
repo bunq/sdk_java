@@ -26,6 +26,7 @@ public class DraftPayment extends BunqModel {
     public static final String FIELD_ENTRIES = "entries";
     public static final String FIELD_PREVIOUS_UPDATED_TIMESTAMP = "previous_updated_timestamp";
     public static final String FIELD_NUMBER_OF_REQUIRED_ACCEPTS = "number_of_required_accepts";
+    public static final String FIELD_SCHEDULE = "schedule";
     /**
      * Endpoint constants.
      */
@@ -104,6 +105,13 @@ public class DraftPayment extends BunqModel {
     private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
     /**
+     * The schedule details.
+     */
+    @Expose
+    @SerializedName("schedule")
+    private Schedule schedule;
+
+    /**
      * The status of the DraftPayment.
      */
     @Expose
@@ -134,27 +142,39 @@ public class DraftPayment extends BunqModel {
     @SerializedName("number_of_required_accepts_field_for_request")
     private Integer numberOfRequiredAcceptsFieldForRequest;
 
+    /**
+     * The schedule details when creating or updating a scheduled payment.
+     */
+    @Expose
+    @SerializedName("schedule_field_for_request")
+    private Schedule scheduleFieldForRequest;
+
     public DraftPayment() {
-        this(null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     public DraftPayment(List<DraftPaymentEntry> entries) {
-        this(entries, null, null, null);
+        this(entries, null, null, null, null);
     }
 
     public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts) {
-        this(entries, numberOfRequiredAccepts, null, null);
+        this(entries, numberOfRequiredAccepts, null, null, null);
     }
 
     public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, String status) {
-        this(entries, numberOfRequiredAccepts, status, null);
+        this(entries, numberOfRequiredAccepts, status, null, null);
     }
 
     public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, String status, String previousUpdatedTimestamp) {
+        this(entries, numberOfRequiredAccepts, status, previousUpdatedTimestamp, null);
+    }
+
+    public DraftPayment(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, String status, String previousUpdatedTimestamp, Schedule schedule) {
         this.statusFieldForRequest = status;
         this.entriesFieldForRequest = entries;
         this.previousUpdatedTimestampFieldForRequest = previousUpdatedTimestamp;
         this.numberOfRequiredAcceptsFieldForRequest = numberOfRequiredAccepts;
+        this.scheduleFieldForRequest = schedule;
     }
 
     /**
@@ -167,8 +187,9 @@ public class DraftPayment extends BunqModel {
      * @param status                   The status of the DraftPayment.
      * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
      *                                 DraftPayment. This needs to be provided to prevent race conditions.
+     * @param schedule                 The schedule details when creating or updating a scheduled payment.
      */
-    public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, Schedule schedule, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -180,6 +201,7 @@ public class DraftPayment extends BunqModel {
         requestMap.put(FIELD_ENTRIES, entries);
         requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
         requestMap.put(FIELD_NUMBER_OF_REQUIRED_ACCEPTS, numberOfRequiredAccepts);
+        requestMap.put(FIELD_SCHEDULE, schedule);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
@@ -188,27 +210,31 @@ public class DraftPayment extends BunqModel {
     }
 
     public static BunqResponse<Integer> create() {
-        return create(null, null, null, null, null, null);
+        return create(null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries) {
-        return create(entries, null, null, null, null, null);
+        return create(entries, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts) {
-        return create(entries, numberOfRequiredAccepts, null, null, null, null);
+        return create(entries, numberOfRequiredAccepts, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId) {
-        return create(entries, numberOfRequiredAccepts, monetaryAccountId, null, null, null);
+        return create(entries, numberOfRequiredAccepts, monetaryAccountId, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status) {
-        return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, null, null);
+        return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, null, null, null);
     }
 
     public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
-        return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, null);
+        return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, null, null);
+    }
+
+    public static BunqResponse<Integer> create(List<DraftPaymentEntry> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, Schedule schedule) {
+        return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null);
     }
 
     /**
@@ -219,8 +245,9 @@ public class DraftPayment extends BunqModel {
      *                                 when the DraftPayment is accepted.
      * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
      *                                 DraftPayment. This needs to be provided to prevent race conditions.
+     * @param schedule                 The schedule details when creating or updating a scheduled payment.
      */
-    public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp, Schedule schedule, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -231,6 +258,7 @@ public class DraftPayment extends BunqModel {
         requestMap.put(FIELD_STATUS, status);
         requestMap.put(FIELD_ENTRIES, entries);
         requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
+        requestMap.put(FIELD_SCHEDULE, schedule);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
         BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), requestBytes, customHeaders);
@@ -239,23 +267,27 @@ public class DraftPayment extends BunqModel {
     }
 
     public static BunqResponse<Integer> update(Integer draftPaymentId) {
-        return update(draftPaymentId, null, null, null, null, null);
+        return update(draftPaymentId, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId) {
-        return update(draftPaymentId, monetaryAccountId, null, null, null, null);
+        return update(draftPaymentId, monetaryAccountId, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status) {
-        return update(draftPaymentId, monetaryAccountId, status, null, null, null);
+        return update(draftPaymentId, monetaryAccountId, status, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries) {
-        return update(draftPaymentId, monetaryAccountId, status, entries, null, null);
+        return update(draftPaymentId, monetaryAccountId, status, entries, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp) {
-        return update(draftPaymentId, monetaryAccountId, status, entries, previousUpdatedTimestamp, null);
+        return update(draftPaymentId, monetaryAccountId, status, entries, previousUpdatedTimestamp, null, null);
+    }
+
+    public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, List<DraftPaymentEntry> entries, String previousUpdatedTimestamp, Schedule schedule) {
+        return update(draftPaymentId, monetaryAccountId, status, entries, previousUpdatedTimestamp, schedule, null);
     }
 
     /**
@@ -415,6 +447,17 @@ public class DraftPayment extends BunqModel {
     }
 
     /**
+     * The schedule details.
+     */
+    public Schedule getSchedule() {
+        return this.schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -451,6 +494,10 @@ public class DraftPayment extends BunqModel {
         }
 
         if (this.requestReferenceSplitTheBill != null) {
+            return false;
+        }
+
+        if (this.schedule != null) {
             return false;
         }
 

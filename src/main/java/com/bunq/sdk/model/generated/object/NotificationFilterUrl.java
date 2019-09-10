@@ -11,6 +11,27 @@ import com.google.gson.stream.JsonReader;
 public class NotificationFilterUrl extends BunqModel {
 
     /**
+     * The id of the NotificationFilterUrl.
+     */
+    @Expose
+    @SerializedName("id")
+    private Integer id;
+
+    /**
+     * The timestamp of the NotificationFilterUrl's creation.
+     */
+    @Expose
+    @SerializedName("created")
+    private String created;
+
+    /**
+     * The timestamp of the NotificationFilterUrl's last update.
+     */
+    @Expose
+    @SerializedName("updated")
+    private String updated;
+
+    /**
      * The notification category that will match this notification filter.
      */
     @Expose
@@ -59,6 +80,39 @@ public class NotificationFilterUrl extends BunqModel {
     }
 
     /**
+     * The id of the NotificationFilterUrl.
+     */
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    /**
+     * The timestamp of the NotificationFilterUrl's creation.
+     */
+    public String getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    /**
+     * The timestamp of the NotificationFilterUrl's last update.
+     */
+    public String getUpdated() {
+        return this.updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    /**
      * The notification category that will match this notification filter.
      */
     public String getCategory() {
@@ -84,6 +138,18 @@ public class NotificationFilterUrl extends BunqModel {
      *
      */
     public boolean isAllFieldNull() {
+        if (this.id != null) {
+            return false;
+        }
+
+        if (this.created != null) {
+            return false;
+        }
+
+        if (this.updated != null) {
+            return false;
+        }
+
         if (this.category != null) {
             return false;
         }

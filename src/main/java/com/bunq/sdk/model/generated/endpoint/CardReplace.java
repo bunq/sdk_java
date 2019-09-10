@@ -4,12 +4,14 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.generated.object.CardPinAssignment;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +27,7 @@ public class CardReplace extends BunqModel {
      * Field constants.
      */
     public static final String FIELD_NAME_ON_CARD = "name_on_card";
-    public static final String FIELD_PIN_CODE = "pin_code";
+    public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
     public static final String FIELD_SECOND_LINE = "second_line";
     /**
      * Endpoint constants.
@@ -47,11 +49,11 @@ public class CardReplace extends BunqModel {
     private String nameOnCardFieldForRequest;
 
     /**
-     * The plaintext pin code. Requests require encryption to be enabled.
+     * Array of Types, PINs, account IDs assigned to the card.
      */
     @Expose
-    @SerializedName("pin_code_field_for_request")
-    private String pinCodeFieldForRequest;
+    @SerializedName("pin_code_assignment_field_for_request")
+    private List<CardPinAssignment> pinCodeAssignmentFieldForRequest;
 
     /**
      * The second line on the card.
@@ -68,25 +70,25 @@ public class CardReplace extends BunqModel {
         this(nameOnCard, null, null);
     }
 
-    public CardReplace(String nameOnCard, String pinCode) {
-        this(nameOnCard, pinCode, null);
+    public CardReplace(String nameOnCard, List<CardPinAssignment> pinCodeAssignment) {
+        this(nameOnCard, pinCodeAssignment, null);
     }
 
-    public CardReplace(String nameOnCard, String pinCode, String secondLine) {
+    public CardReplace(String nameOnCard, List<CardPinAssignment> pinCodeAssignment, String secondLine) {
         this.nameOnCardFieldForRequest = nameOnCard;
-        this.pinCodeFieldForRequest = pinCode;
+        this.pinCodeAssignmentFieldForRequest = pinCodeAssignment;
         this.secondLineFieldForRequest = secondLine;
     }
 
     /**
      * Request a card replacement.
      *
-     * @param nameOnCard The user's name as it will be on the card. Check 'card-name' for the
-     *                   available card names for a user.
-     * @param pinCode    The plaintext pin code. Requests require encryption to be enabled.
-     * @param secondLine The second line on the card.
+     * @param nameOnCard        The user's name as it will be on the card. Check 'card-name' for the
+     *                          available card names for a user.
+     * @param pinCodeAssignment Array of Types, PINs, account IDs assigned to the card.
+     * @param secondLine        The second line on the card.
      */
-    public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode, String secondLine, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, List<CardPinAssignment> pinCodeAssignment, String secondLine, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -95,7 +97,7 @@ public class CardReplace extends BunqModel {
 
         HashMap<String, Object> requestMap = new HashMap<>();
         requestMap.put(FIELD_NAME_ON_CARD, nameOnCard);
-        requestMap.put(FIELD_PIN_CODE, pinCode);
+        requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
         requestMap.put(FIELD_SECOND_LINE, secondLine);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -117,12 +119,12 @@ public class CardReplace extends BunqModel {
         return create(cardId, nameOnCard, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode) {
-        return create(cardId, nameOnCard, pinCode, null, null);
+    public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, List<CardPinAssignment> pinCodeAssignment) {
+        return create(cardId, nameOnCard, pinCodeAssignment, null, null);
     }
 
-    public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String pinCode, String secondLine) {
-        return create(cardId, nameOnCard, pinCode, secondLine, null);
+    public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, List<CardPinAssignment> pinCodeAssignment, String secondLine) {
+        return create(cardId, nameOnCard, pinCodeAssignment, secondLine, null);
     }
 
     /**

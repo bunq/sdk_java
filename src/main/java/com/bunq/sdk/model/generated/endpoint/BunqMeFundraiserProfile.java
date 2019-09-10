@@ -8,8 +8,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
-import java.util.List;
-
 /**
  * bunq.me public profile of the user.
  */
@@ -43,11 +41,11 @@ public class BunqMeFundraiserProfile extends BunqModel {
     private String description;
 
     /**
-     * The attachments attached to the fundraiser profile.
+     * The attachment attached to the fundraiser profile.
      */
     @Expose
     @SerializedName("attachment")
-    private List<AttachmentPublic> attachment;
+    private AttachmentPublic attachment;
 
     /**
      * The pointer (url) which will be used to access the bunq.me fundraiser profile.
@@ -134,13 +132,13 @@ public class BunqMeFundraiserProfile extends BunqModel {
     }
 
     /**
-     * The attachments attached to the fundraiser profile.
+     * The attachment attached to the fundraiser profile.
      */
-    public List<AttachmentPublic> getAttachment() {
+    public AttachmentPublic getAttachment() {
         return this.attachment;
     }
 
-    public void setAttachment(List<AttachmentPublic> attachment) {
+    public void setAttachment(AttachmentPublic attachment) {
         this.attachment = attachment;
     }
 

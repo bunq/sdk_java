@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * With bunq it is possible to order debit cards that can then be connected with each one of the
- * monetary accounts the user has access to (including connected accounts).
+ * With bunq it is possible to order credit cards that can then be connected with each one of
+ * the monetary accounts the user has access to (including connected accounts).
  */
-public class CardDebit extends BunqModel {
+public class CardCredit extends BunqModel {
 
     /**
      * Field constants.
@@ -32,11 +32,11 @@ public class CardDebit extends BunqModel {
     /**
      * Endpoint constants.
      */
-    protected static final String ENDPOINT_URL_CREATE = "user/%s/card-debit";
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/card-credit";
     /**
      * Object type.
      */
-    protected static final String OBJECT_TYPE_POST = "CardDebit";
+    protected static final String OBJECT_TYPE_POST = "CardCredit";
 
     /**
      * The id of the card.
@@ -46,14 +46,14 @@ public class CardDebit extends BunqModel {
     private Integer id;
 
     /**
-     * The timestamp when the card was crated.
+     * The timestamp of the card's creation.
      */
     @Expose
     @SerializedName("created")
     private String created;
 
     /**
-     * The timestamp when the card was last updated.
+     * The timestamp of the card's last update.
      */
     @Expose
     @SerializedName("updated")
@@ -67,14 +67,14 @@ public class CardDebit extends BunqModel {
     private String publicUuid;
 
     /**
-     * The type of the card. Can be MAESTRO, MASTERCARD.
+     * The type of the card. Can is MASTERCARD.
      */
     @Expose
     @SerializedName("type")
     private String type;
 
     /**
-     * The sub_type of card.
+     * The sub-type of the card.
      */
     @Expose
     @SerializedName("sub_type")
@@ -88,7 +88,37 @@ public class CardDebit extends BunqModel {
     private String secondLine;
 
     /**
-     * The user's name as will be on the card
+     * The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN, CANCELLED, EXPIRED
+     * or PIN_TRIES_EXCEEDED.
+     */
+    @Expose
+    @SerializedName("status")
+    private String status;
+
+    /**
+     * The sub-status of the card. Can be NONE or REPLACED.
+     */
+    @Expose
+    @SerializedName("sub_status")
+    private String subStatus;
+
+    /**
+     * The order status of the card. Can be CARD_UPDATE_REQUESTED, CARD_UPDATE_SENT,
+     * CARD_UPDATE_ACCEPTED, ACCEPTED_FOR_PRODUCTION or DELIVERED_TO_CUSTOMER.
+     */
+    @Expose
+    @SerializedName("order_status")
+    private String orderStatus;
+
+    /**
+     * Expiry date of the card.
+     */
+    @Expose
+    @SerializedName("expiry_date")
+    private String expiryDate;
+
+    /**
+     * The user's name on the card.
      */
     @Expose
     @SerializedName("name_on_card")
@@ -102,25 +132,25 @@ public class CardDebit extends BunqModel {
     private String primaryAccountNumberFourDigit;
 
     /**
-     * The status to set for the card. After ordering the card it will be DEACTIVATED.
+     * Array of PANs, status, description and account id for online cards.
      */
     @Expose
-    @SerializedName("status")
-    private String status;
+    @SerializedName("primary_account_numbers_virtual")
+    private List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual;
 
     /**
-     * The order status of the card. After ordering the card it will be NEW_CARD_REQUEST_RECEIVED.
+     * The spending limit for the card.
      */
     @Expose
-    @SerializedName("order_status")
-    private String orderStatus;
+    @SerializedName("card_limit")
+    private Amount cardLimit;
 
     /**
-     * The expiry date of the card.
+     * The ATM spending limit for the card.
      */
     @Expose
-    @SerializedName("expiry_date")
-    private String expiryDate;
+    @SerializedName("card_limit_atm")
+    private Amount cardLimitAtm;
 
     /**
      * The countries for which to grant (temporary) permissions to use the card.
@@ -142,13 +172,6 @@ public class CardDebit extends BunqModel {
     @Expose
     @SerializedName("label_monetary_account_current")
     private LabelMonetaryAccount labelMonetaryAccountCurrent;
-
-    /**
-     * The label for the user who requested the card.
-     */
-    @Expose
-    @SerializedName("alias")
-    private LabelUser alias;
 
     /**
      * Array of Types, PINs, account IDs assigned to the card.
@@ -198,7 +221,7 @@ public class CardDebit extends BunqModel {
     private Pointer aliasFieldForRequest;
 
     /**
-     * The type of card to order. Can be MAESTRO or MASTERCARD.
+     * The type of card to order. Can be MASTERCARD.
      */
     @Expose
     @SerializedName("type_field_for_request")
@@ -219,31 +242,31 @@ public class CardDebit extends BunqModel {
     @SerializedName("monetary_account_id_fallback_field_for_request")
     private Integer monetaryAccountIdFallbackFieldForRequest;
 
-    public CardDebit() {
+    public CardCredit() {
         this(null, null, null, null, null, null);
     }
 
-    public CardDebit(String secondLine) {
+    public CardCredit(String secondLine) {
         this(secondLine, null, null, null, null, null);
     }
 
-    public CardDebit(String secondLine, String nameOnCard) {
+    public CardCredit(String secondLine, String nameOnCard) {
         this(secondLine, nameOnCard, null, null, null, null);
     }
 
-    public CardDebit(String secondLine, String nameOnCard, String type) {
+    public CardCredit(String secondLine, String nameOnCard, String type) {
         this(secondLine, nameOnCard, type, null, null, null);
     }
 
-    public CardDebit(String secondLine, String nameOnCard, String type, Pointer alias) {
+    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias) {
         this(secondLine, nameOnCard, type, alias, null, null);
     }
 
-    public CardDebit(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
+    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
         this(secondLine, nameOnCard, type, alias, pinCodeAssignment, null);
     }
 
-    public CardDebit(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
         this.secondLineFieldForRequest = secondLine;
         this.nameOnCardFieldForRequest = nameOnCard;
         this.aliasFieldForRequest = alias;
@@ -253,13 +276,13 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * Create a new debit card request.
+     * Create a new credit card request.
      *
      * @param secondLine                The second line of text on the card, used as name/description for it. It
      *                                  can contain at most 17 characters and it can be empty.
      * @param nameOnCard                The user's name as it will be on the card. Check 'card-name' for the
      *                                  available card names for a user.
-     * @param type                      The type of card to order. Can be MAESTRO or MASTERCARD.
+     * @param type                      The type of card to order. Can be MASTERCARD.
      * @param alias                     The pointer to the monetary account that will be connected at first with the
      *                                  card. Its IBAN code is also the one that will be printed on the card itself. The pointer must
      *                                  be of type IBAN.
@@ -267,7 +290,7 @@ public class CardDebit extends BunqModel {
      * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
      *                                  insufficient balance. Fallback account is removed if not supplied.
      */
-    public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -286,42 +309,42 @@ public class CardDebit extends BunqModel {
         requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
-        return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE_POST);
+        return fromJson(CardCredit.class, responseRaw, OBJECT_TYPE_POST);
     }
 
-    public static BunqResponse<CardDebit> create() {
+    public static BunqResponse<CardCredit> create() {
         return create(null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<CardDebit> create(String secondLine) {
+    public static BunqResponse<CardCredit> create(String secondLine) {
         return create(secondLine, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard) {
         return create(secondLine, nameOnCard, null, null, null, null, null);
     }
 
-    public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, String type) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type) {
         return create(secondLine, nameOnCard, type, null, null, null, null);
     }
 
-    public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, String type, Pointer alias) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias) {
         return create(secondLine, nameOnCard, type, alias, null, null, null);
     }
 
-    public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
         return create(secondLine, nameOnCard, type, alias, pinCodeAssignment, null, null);
     }
 
-    public static BunqResponse<CardDebit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
         return create(secondLine, nameOnCard, type, alias, pinCodeAssignment, monetaryAccountIdFallback, null);
     }
 
     /**
      *
      */
-    public static CardDebit fromJsonReader(JsonReader reader) {
-        return fromJsonReader(CardDebit.class, reader);
+    public static CardCredit fromJsonReader(JsonReader reader) {
+        return fromJsonReader(CardCredit.class, reader);
     }
 
     /**
@@ -336,7 +359,7 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The timestamp when the card was crated.
+     * The timestamp of the card's creation.
      */
     public String getCreated() {
         return this.created;
@@ -347,7 +370,7 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The timestamp when the card was last updated.
+     * The timestamp of the card's last update.
      */
     public String getUpdated() {
         return this.updated;
@@ -369,7 +392,7 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The type of the card. Can be MAESTRO, MASTERCARD.
+     * The type of the card. Can is MASTERCARD.
      */
     public String getType() {
         return this.type;
@@ -380,7 +403,7 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The sub_type of card.
+     * The sub-type of the card.
      */
     public String getSubType() {
         return this.subType;
@@ -402,7 +425,53 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The user's name as will be on the card
+     * The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN, CANCELLED, EXPIRED
+     * or PIN_TRIES_EXCEEDED.
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * The sub-status of the card. Can be NONE or REPLACED.
+     */
+    public String getSubStatus() {
+        return this.subStatus;
+    }
+
+    public void setSubStatus(String subStatus) {
+        this.subStatus = subStatus;
+    }
+
+    /**
+     * The order status of the card. Can be CARD_UPDATE_REQUESTED, CARD_UPDATE_SENT,
+     * CARD_UPDATE_ACCEPTED, ACCEPTED_FOR_PRODUCTION or DELIVERED_TO_CUSTOMER.
+     */
+    public String getOrderStatus() {
+        return this.orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    /**
+     * Expiry date of the card.
+     */
+    public String getExpiryDate() {
+        return this.expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    /**
+     * The user's name on the card.
      */
     public String getNameOnCard() {
         return this.nameOnCard;
@@ -424,36 +493,36 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The status to set for the card. After ordering the card it will be DEACTIVATED.
+     * Array of PANs, status, description and account id for online cards.
      */
-    public String getStatus() {
-        return this.status;
+    public List<CardVirtualPrimaryAccountNumber> getPrimaryAccountNumbersVirtual() {
+        return this.primaryAccountNumbersVirtual;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setPrimaryAccountNumbersVirtual(List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual) {
+        this.primaryAccountNumbersVirtual = primaryAccountNumbersVirtual;
     }
 
     /**
-     * The order status of the card. After ordering the card it will be NEW_CARD_REQUEST_RECEIVED.
+     * The spending limit for the card.
      */
-    public String getOrderStatus() {
-        return this.orderStatus;
+    public Amount getCardLimit() {
+        return this.cardLimit;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setCardLimit(Amount cardLimit) {
+        this.cardLimit = cardLimit;
     }
 
     /**
-     * The expiry date of the card.
+     * The ATM spending limit for the card.
      */
-    public String getExpiryDate() {
-        return this.expiryDate;
+    public Amount getCardLimitAtm() {
+        return this.cardLimitAtm;
     }
 
-    public void setExpiryDate(String expiryDate) {
-        this.expiryDate = expiryDate;
+    public void setCardLimitAtm(Amount cardLimitAtm) {
+        this.cardLimitAtm = cardLimitAtm;
     }
 
     /**
@@ -487,17 +556,6 @@ public class CardDebit extends BunqModel {
 
     public void setLabelMonetaryAccountCurrent(LabelMonetaryAccount labelMonetaryAccountCurrent) {
         this.labelMonetaryAccountCurrent = labelMonetaryAccountCurrent;
-    }
-
-    /**
-     * The label for the user who requested the card.
-     */
-    public LabelUser getAlias() {
-        return this.alias;
-    }
-
-    public void setAlias(LabelUser alias) {
-        this.alias = alias;
     }
 
     /**
@@ -566,15 +624,11 @@ public class CardDebit extends BunqModel {
             return false;
         }
 
-        if (this.nameOnCard != null) {
-            return false;
-        }
-
-        if (this.primaryAccountNumberFourDigit != null) {
-            return false;
-        }
-
         if (this.status != null) {
+            return false;
+        }
+
+        if (this.subStatus != null) {
             return false;
         }
 
@@ -583,6 +637,26 @@ public class CardDebit extends BunqModel {
         }
 
         if (this.expiryDate != null) {
+            return false;
+        }
+
+        if (this.nameOnCard != null) {
+            return false;
+        }
+
+        if (this.primaryAccountNumberFourDigit != null) {
+            return false;
+        }
+
+        if (this.primaryAccountNumbersVirtual != null) {
+            return false;
+        }
+
+        if (this.cardLimit != null) {
+            return false;
+        }
+
+        if (this.cardLimitAtm != null) {
             return false;
         }
 
@@ -595,10 +669,6 @@ public class CardDebit extends BunqModel {
         }
 
         if (this.labelMonetaryAccountCurrent != null) {
-            return false;
-        }
-
-        if (this.alias != null) {
             return false;
         }
 

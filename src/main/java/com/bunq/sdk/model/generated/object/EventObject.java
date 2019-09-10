@@ -211,8 +211,8 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
      *
      */
     @Expose
-    @SerializedName("TransferwiseTransfer")
-    private TransferwiseTransfer transferwiseTransfer;
+    @SerializedName("TransferwisePayment")
+    private TransferwiseTransfer transferwisePayment;
 
     /**
      *
@@ -521,12 +521,12 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
     /**
      *
      */
-    public TransferwiseTransfer getTransferwiseTransfer() {
-        return this.transferwiseTransfer;
+    public TransferwiseTransfer getTransferwisePayment() {
+        return this.transferwisePayment;
     }
 
-    public void setTransferwiseTransfer(TransferwiseTransfer transferwiseTransfer) {
-        this.transferwiseTransfer = transferwiseTransfer;
+    public void setTransferwisePayment(TransferwiseTransfer transferwisePayment) {
+        this.transferwisePayment = transferwisePayment;
     }
 
     /**
@@ -641,8 +641,8 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
             return this.tabResultResponse;
         }
 
-        if (this.transferwiseTransfer != null) {
-            return this.transferwiseTransfer;
+        if (this.transferwisePayment != null) {
+            return this.transferwisePayment;
         }
 
         throw new BunqException(ERROR_NULL_FIELDS);
@@ -760,7 +760,7 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
             return false;
         }
 
-        if (this.transferwiseTransfer != null) {
+        if (this.transferwisePayment != null) {
             return false;
         }
 

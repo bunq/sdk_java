@@ -6,6 +6,7 @@ import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.core.SessionToken;
 import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -35,6 +36,7 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
   private static final String FIELD_USER_COMPANY = "UserCompany";
   private static final String FIELD_USER_PERSON = "UserPerson";
   private static final String FIELD_USER_API_KEY = "UserApiKey";
+  private static final String FIELD_USER_PAYMENT_SERVER_PROVIDER = "UserPaymentServiceProvider";
 
   @Override
   public SessionServer deserialize(JsonElement json, Type typeOfT,
@@ -72,6 +74,13 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
       );
 
       return new SessionServer(id, token, userApiKey);
+    } else if (userBody.has(FIELD_USER_PAYMENT_SERVER_PROVIDER)) {
+      UserPaymentServiceProvider userPaymentServiceProvider = context.deserialize(
+          userBody.get(FIELD_USER_PAYMENT_SERVER_PROVIDER),
+          UserPaymentServiceProvider.class
+      );
+
+      return new SessionServer(id, token, userPaymentServiceProvider);
     } else {
       throw new BunqException(ERROR_COULD_NOT_DETERMINE_USER);
     }

@@ -35,6 +35,7 @@ public class SchedulePayment extends BunqModel {
      * Object type.
      */
     protected static final String OBJECT_TYPE_GET = "ScheduledPayment";
+    protected static final String OBJECT_TYPE_PUT = "ScheduledPayment";
 
     /**
      * The payment details.
@@ -49,6 +50,13 @@ public class SchedulePayment extends BunqModel {
     @Expose
     @SerializedName("schedule")
     private Schedule schedule;
+
+    /**
+     * The schedule status, options: ACTIVE, FINISHED, CANCELLED.
+     */
+    @Expose
+    @SerializedName("status")
+    private String status;
 
     /**
      * The payment details.
@@ -184,7 +192,7 @@ public class SchedulePayment extends BunqModel {
      * @param payment  The payment details.
      * @param schedule The schedule details when creating or updating a scheduled payment.
      */
-    public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment, Schedule schedule, Map<String, String> customHeaders) {
+    public static BunqResponse<SchedulePayment> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment, Schedule schedule, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -198,22 +206,22 @@ public class SchedulePayment extends BunqModel {
         byte[] requestBytes = determineAllRequestByte(requestMap);
         BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentId), requestBytes, customHeaders);
 
-        return processForId(responseRaw);
+        return fromJson(SchedulePayment.class, responseRaw, OBJECT_TYPE_PUT);
     }
 
-    public static BunqResponse<Integer> update(Integer schedulePaymentId) {
+    public static BunqResponse<SchedulePayment> update(Integer schedulePaymentId) {
         return update(schedulePaymentId, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer monetaryAccountId) {
+    public static BunqResponse<SchedulePayment> update(Integer schedulePaymentId, Integer monetaryAccountId) {
         return update(schedulePaymentId, monetaryAccountId, null, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment) {
+    public static BunqResponse<SchedulePayment> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment) {
         return update(schedulePaymentId, monetaryAccountId, payment, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment, Schedule schedule) {
+    public static BunqResponse<SchedulePayment> update(Integer schedulePaymentId, Integer monetaryAccountId, SchedulePaymentEntry payment, Schedule schedule) {
         return update(schedulePaymentId, monetaryAccountId, payment, schedule, null);
     }
 
@@ -247,6 +255,17 @@ public class SchedulePayment extends BunqModel {
     }
 
     /**
+     * The schedule status, options: ACTIVE, FINISHED, CANCELLED.
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -255,6 +274,10 @@ public class SchedulePayment extends BunqModel {
         }
 
         if (this.schedule != null) {
+            return false;
+        }
+
+        if (this.status != null) {
             return false;
         }
 

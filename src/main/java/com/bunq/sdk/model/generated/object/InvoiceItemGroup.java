@@ -5,6 +5,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 
+import java.util.List;
+
 /**
  *
  */
@@ -57,7 +59,7 @@ public class InvoiceItemGroup extends BunqModel {
      */
     @Expose
     @SerializedName("item")
-    private InvoiceItem item;
+    private List<InvoiceItem> item;
 
     /**
      *
@@ -135,11 +137,11 @@ public class InvoiceItemGroup extends BunqModel {
     /**
      * The invoice items in the group.
      */
-    public InvoiceItem getItem() {
+    public List<InvoiceItem> getItem() {
         return this.item;
     }
 
-    public void setItem(InvoiceItem item) {
+    public void setItem(List<InvoiceItem> item) {
         this.item = item;
     }
 

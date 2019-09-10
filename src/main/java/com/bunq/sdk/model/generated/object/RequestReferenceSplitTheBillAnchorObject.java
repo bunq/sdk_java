@@ -84,6 +84,13 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
     /**
      *
      */
+    @Expose
+    @SerializedName("TransferwisePayment")
+    private TransferwiseTransfer transferwisePayment;
+
+    /**
+     *
+     */
     public static RequestReferenceSplitTheBillAnchorObject fromJsonReader(JsonReader reader) {
         return fromJsonReader(RequestReferenceSplitTheBillAnchorObject.class, reader);
     }
@@ -190,6 +197,17 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
     /**
      *
      */
+    public TransferwiseTransfer getTransferwisePayment() {
+        return this.transferwisePayment;
+    }
+
+    public void setTransferwisePayment(TransferwiseTransfer transferwisePayment) {
+        this.transferwisePayment = transferwisePayment;
+    }
+
+    /**
+     *
+     */
     public BunqModel getReferencedObject() {
         if (this.billingInvoice != null) {
             return this.billingInvoice;
@@ -225,6 +243,10 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
 
         if (this.whitelistResult != null) {
             return this.whitelistResult;
+        }
+
+        if (this.transferwisePayment != null) {
+            return this.transferwisePayment;
         }
 
         throw new BunqException(ERROR_NULL_FIELDS);
@@ -267,6 +289,10 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
         }
 
         if (this.whitelistResult != null) {
+            return false;
+        }
+
+        if (this.transferwisePayment != null) {
             return false;
         }
 

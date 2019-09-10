@@ -5,6 +5,7 @@ import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -60,6 +61,8 @@ public class SessionContext implements java.io.Serializable {
       return ((UserCompany) user).getId();
     } else if (user instanceof UserApiKey) {
       return ((UserApiKey) user).getId();
+    } else if (user instanceof UserPaymentServiceProvider) {
+      return ((UserPaymentServiceProvider) user).getId();
     } else {
       throw new BunqException(
           String.format(
@@ -94,6 +97,8 @@ public class SessionContext implements java.io.Serializable {
       return ((UserCompany) user).getSessionTimeout();
     } else if (user instanceof UserPerson) {
       return ((UserPerson) user).getSessionTimeout();
+    } else if (user instanceof UserPaymentServiceProvider) {
+      return ((UserPaymentServiceProvider) user).getSessionTimeout();
     } else {
       throw new BunqException(ERROR_UNEXPECTED_USER_TYPE);
     }

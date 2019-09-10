@@ -200,6 +200,20 @@ public class MonetaryAccountJoint extends BunqModel {
     private MonetaryAccountSetting setting;
 
     /**
+     * The id of the AutoSave.
+     */
+    @Expose
+    @SerializedName("auto_save_id")
+    private Integer autoSaveId;
+
+    /**
+     * The ids of the AutoSave.
+     */
+    @Expose
+    @SerializedName("all_auto_save_id")
+    private List<BunqId> allAutoSaveId;
+
+    /**
      * The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency code.
      */
     @Expose
@@ -856,6 +870,28 @@ public class MonetaryAccountJoint extends BunqModel {
     }
 
     /**
+     * The id of the AutoSave.
+     */
+    public Integer getAutoSaveId() {
+        return this.autoSaveId;
+    }
+
+    public void setAutoSaveId(Integer autoSaveId) {
+        this.autoSaveId = autoSaveId;
+    }
+
+    /**
+     * The ids of the AutoSave.
+     */
+    public List<BunqId> getAllAutoSaveId() {
+        return this.allAutoSaveId;
+    }
+
+    public void setAllAutoSaveId(List<BunqId> allAutoSaveId) {
+        this.allAutoSaveId = allAutoSaveId;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -940,6 +976,14 @@ public class MonetaryAccountJoint extends BunqModel {
         }
 
         if (this.setting != null) {
+            return false;
+        }
+
+        if (this.autoSaveId != null) {
+            return false;
+        }
+
+        if (this.allAutoSaveId != null) {
             return false;
         }
 

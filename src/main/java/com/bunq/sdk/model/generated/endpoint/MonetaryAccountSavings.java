@@ -216,6 +216,20 @@ public class MonetaryAccountSavings extends BunqModel {
     private BigDecimal savingsGoalProgress;
 
     /**
+     * The id of the AutoSave.
+     */
+    @Expose
+    @SerializedName("auto_save_id")
+    private Integer autoSaveId;
+
+    /**
+     * The ids of the AutoSave.
+     */
+    @Expose
+    @SerializedName("all_auto_save_id")
+    private List<BunqId> allAutoSaveId;
+
+    /**
      * The currency of the MonetaryAccountSavings as an ISO 4217 formatted currency code.
      */
     @Expose
@@ -319,47 +333,47 @@ public class MonetaryAccountSavings extends BunqModel {
         this(currency, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal) {
-        this(currency, savingsGoal, null, null, null, null, null, null, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description) {
+        this(currency, description, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description) {
-        this(currency, savingsGoal, description, null, null, null, null, null, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit) {
+        this(currency, description, dailyLimit, null, null, null, null, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit) {
-        this(currency, savingsGoal, description, dailyLimit, null, null, null, null, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid) {
+        this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
+        this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters) {
-        this(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, null);
     }
 
-    public MonetaryAccountSavings(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal) {
         this.currencyFieldForRequest = currency;
         this.descriptionFieldForRequest = description;
         this.dailyLimitFieldForRequest = dailyLimit;
@@ -379,7 +393,6 @@ public class MonetaryAccountSavings extends BunqModel {
      *
      * @param currency            The currency of the MonetaryAccountSavings as an ISO 4217 formatted currency
      *                            code.
-     * @param savingsGoal         The Savings Goal set for this MonetaryAccountSavings.
      * @param description         The description of the MonetaryAccountSavings. Defaults to 'bunq account'.
      * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountSavings. Defaults to
      *                            1000 EUR. Currency must match the MonetaryAccountSavings's currency. Limited to 10000 EUR.
@@ -402,8 +415,9 @@ public class MonetaryAccountSavings extends BunqModel {
      * @param notificationFilters The types of notifications that will result in a push notification
      *                            or URL callback for this MonetaryAccountSavings.
      * @param setting             The settings of the MonetaryAccountSavings.
+     * @param savingsGoal         The Savings Goal set for this MonetaryAccountSavings.
      */
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -438,48 +452,48 @@ public class MonetaryAccountSavings extends BunqModel {
         return create(currency, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal) {
-        return create(currency, savingsGoal, null, null, null, null, null, null, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description) {
+        return create(currency, description, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description) {
-        return create(currency, savingsGoal, description, null, null, null, null, null, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit) {
+        return create(currency, description, dailyLimit, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit) {
-        return create(currency, savingsGoal, description, dailyLimit, null, null, null, null, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid) {
+        return create(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
+        return create(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, Amount savingsGoal, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-        return create(currency, savingsGoal, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, savingsGoal, null);
     }
 
     /**
@@ -885,6 +899,28 @@ public class MonetaryAccountSavings extends BunqModel {
     }
 
     /**
+     * The id of the AutoSave.
+     */
+    public Integer getAutoSaveId() {
+        return this.autoSaveId;
+    }
+
+    public void setAutoSaveId(Integer autoSaveId) {
+        this.autoSaveId = autoSaveId;
+    }
+
+    /**
+     * The ids of the AutoSave.
+     */
+    public List<BunqId> getAllAutoSaveId() {
+        return this.allAutoSaveId;
+    }
+
+    public void setAllAutoSaveId(List<BunqId> allAutoSaveId) {
+        this.allAutoSaveId = allAutoSaveId;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -977,6 +1013,14 @@ public class MonetaryAccountSavings extends BunqModel {
         }
 
         if (this.savingsGoalProgress != null) {
+            return false;
+        }
+
+        if (this.autoSaveId != null) {
+            return false;
+        }
+
+        if (this.allAutoSaveId != null) {
             return false;
         }
 

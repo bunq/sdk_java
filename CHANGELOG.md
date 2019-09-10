@@ -1,5 +1,20 @@
 # Change Log
 
+## [Unreleased](https://github.com/bunq/sdk_java/tree/HEAD)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.16...HEAD)
+
+**Closed issues:**
+
+- NullPointerException on creating NotificationFilterUrlUser [\#117](https://github.com/bunq/sdk_java/issues/117)
+
+**Merged pull requests:**
+
+- Fix NotificationFilter and implement PSD2 [\#118](https://github.com/bunq/sdk_java/pull/118) ([NickvandeGroes](https://github.com/NickvandeGroes))
+
+## [1.10.16](https://github.com/bunq/sdk_java/tree/1.10.16) (2019-06-16)
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.1...1.10.16)
+
 ## [1.10.1](https://github.com/bunq/sdk_java/tree/1.10.1) (2019-05-22)
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.0...1.10.1)
 

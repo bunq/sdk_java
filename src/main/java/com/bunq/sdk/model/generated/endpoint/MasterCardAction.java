@@ -158,6 +158,14 @@ public class MasterCardAction extends BunqModel {
     private String settlementStatus;
 
     /**
+     * The clearing status of the authorisation. Can be 'PENDING', 'FIRST_PRESENTMENT_COMPLETE' or
+     * 'REFUND_LENIENCY'.
+     */
+    @Expose
+    @SerializedName("clearing_status")
+    private String clearingStatus;
+
+    /**
      * The maturity date.
      */
     @Expose
@@ -205,6 +213,13 @@ public class MasterCardAction extends BunqModel {
     @Expose
     @SerializedName("reservation_expiry_time")
     private String reservationExpiryTime;
+
+    /**
+     * The time when the processing of the clearing is expired, refunding the authorisation.
+     */
+    @Expose
+    @SerializedName("clearing_expiry_time")
+    private String clearingExpiryTime;
 
     /**
      * The type of the limit applied to validate if this MasterCardAction was within the spending
@@ -498,6 +513,18 @@ public class MasterCardAction extends BunqModel {
     }
 
     /**
+     * The clearing status of the authorisation. Can be 'PENDING', 'FIRST_PRESENTMENT_COMPLETE' or
+     * 'REFUND_LENIENCY'.
+     */
+    public String getClearingStatus() {
+        return this.clearingStatus;
+    }
+
+    public void setClearingStatus(String clearingStatus) {
+        this.clearingStatus = clearingStatus;
+    }
+
+    /**
      * The maturity date.
      */
     public String getMaturityDate() {
@@ -572,6 +599,17 @@ public class MasterCardAction extends BunqModel {
 
     public void setReservationExpiryTime(String reservationExpiryTime) {
         this.reservationExpiryTime = reservationExpiryTime;
+    }
+
+    /**
+     * The time when the processing of the clearing is expired, refunding the authorisation.
+     */
+    public String getClearingExpiryTime() {
+        return this.clearingExpiryTime;
+    }
+
+    public void setClearingExpiryTime(String clearingExpiryTime) {
+        this.clearingExpiryTime = clearingExpiryTime;
     }
 
     /**
@@ -708,6 +746,10 @@ public class MasterCardAction extends BunqModel {
             return false;
         }
 
+        if (this.clearingStatus != null) {
+            return false;
+        }
+
         if (this.maturityDate != null) {
             return false;
         }
@@ -733,6 +775,10 @@ public class MasterCardAction extends BunqModel {
         }
 
         if (this.reservationExpiryTime != null) {
+            return false;
+        }
+
+        if (this.clearingExpiryTime != null) {
             return false;
         }
 

@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/src/main/main.iml" filepath="$PROJECT_DIR$/src/main/main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk_java.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk_java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk_java.main.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk_java.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk_java.test.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk_java.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/src/test/test.iml" filepath="$PROJECT_DIR$/src/test/test.iml" />
     </modules>
   </component>

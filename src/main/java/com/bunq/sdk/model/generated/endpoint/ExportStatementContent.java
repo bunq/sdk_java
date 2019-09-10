@@ -13,7 +13,7 @@ import java.util.Map;
  * PDF depending on the statement format specified during the statement creation. The doc won't
  * display the response of a request to get the content of a statement export.
  */
-public class CustomerStatementExportContent extends BunqModel {
+public class ExportStatementContent extends BunqModel {
 
     /**
      * Endpoint constants.
@@ -23,7 +23,7 @@ public class CustomerStatementExportContent extends BunqModel {
     /**
      * Object type.
      */
-    protected static final String OBJECT_TYPE_GET = "CustomerStatementExportContent";
+    protected static final String OBJECT_TYPE_GET = "ExportStatementContent";
 
     /**
      *
@@ -54,8 +54,8 @@ public class CustomerStatementExportContent extends BunqModel {
     /**
      *
      */
-    public static CustomerStatementExportContent fromJsonReader(JsonReader reader) {
-        return fromJsonReader(CustomerStatementExportContent.class, reader);
+    public static ExportStatementContent fromJsonReader(JsonReader reader) {
+        return fromJsonReader(ExportStatementContent.class, reader);
     }
 
     /**
