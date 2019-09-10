@@ -18,7 +18,7 @@ public enum BunqHeader {
   LANGUAGE("X-Bunq-Language", "en_US"),
   REGION("X-Bunq-Region", "nl_NL"),
   SERVER_SIGNATURE("X-Bunq-Server-Signature"),
-  USER_AGENT("User-Agent", "bunq-sdk-java/1.10.16");
+  USER_AGENT("User-Agent", "bunq-sdk-java/1.12.0");
 
   private static final String PREFIX = "X-Bunq-";
 
