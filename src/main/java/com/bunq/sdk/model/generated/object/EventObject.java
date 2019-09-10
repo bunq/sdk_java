@@ -3,768 +3,741 @@ package com.bunq.sdk.model.generated.object;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.generated.endpoint.*;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.endpoint.BankSwitchServiceNetherlandsIncomingPayment;
+import com.bunq.sdk.model.generated.endpoint.BunqMeFundraiserResult;
+import com.bunq.sdk.model.generated.endpoint.BunqMeTab;
+import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultResponse;
+import com.bunq.sdk.model.generated.endpoint.Card;
+import com.bunq.sdk.model.generated.endpoint.CardDebit;
+import com.bunq.sdk.model.generated.endpoint.DraftPayment;
+import com.bunq.sdk.model.generated.endpoint.FeatureAnnouncement;
+import com.bunq.sdk.model.generated.endpoint.IdealMerchantTransaction;
+import com.bunq.sdk.model.generated.endpoint.Invoice;
+import com.bunq.sdk.model.generated.endpoint.MasterCardAction;
+import com.bunq.sdk.model.generated.endpoint.Payment;
+import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
+import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
+import com.bunq.sdk.model.generated.endpoint.RequestInquiryBatch;
+import com.bunq.sdk.model.generated.endpoint.RequestResponse;
+import com.bunq.sdk.model.generated.endpoint.RewardRecipient;
+import com.bunq.sdk.model.generated.endpoint.RewardSender;
+import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
+import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
+import com.bunq.sdk.model.generated.endpoint.SchedulePaymentBatch;
+import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiry;
+import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiryBatch;
+import com.bunq.sdk.model.generated.endpoint.ShareInviteBankResponse;
+import com.bunq.sdk.model.generated.endpoint.SofortMerchantTransaction;
+import com.bunq.sdk.model.generated.endpoint.TabResultInquiry;
+import com.bunq.sdk.model.generated.endpoint.TabResultResponse;
+import com.bunq.sdk.model.generated.endpoint.TransferwiseTransfer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- *
  */
 public class EventObject extends BunqModel implements AnchorObjectInterface {
 
-    /**
-     * Error constants.
-     */
-    protected static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
+  /**
+   * Error constants.
+   */
+  protected static final String ERROR_NULL_FIELDS = "All fields of an extended model or object are null.";
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("BunqMeTab")
-    private BunqMeTab bunqMeTab;
+  /**
+   */
+  @Expose
+  @SerializedName("BunqMeTab")
+  private BunqMeTab bunqMeTab;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("BunqMeTabResultResponse")
-    private BunqMeTabResultResponse bunqMeTabResultResponse;
+  /**
+   */
+  @Expose
+  @SerializedName("BunqMeTabResultResponse")
+  private BunqMeTabResultResponse bunqMeTabResultResponse;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("BunqMeFundraiserResult")
-    private BunqMeFundraiserResult bunqMeFundraiserResult;
+  /**
+   */
+  @Expose
+  @SerializedName("BunqMeFundraiserResult")
+  private BunqMeFundraiserResult bunqMeFundraiserResult;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("Card")
-    private Card card;
+  /**
+   */
+  @Expose
+  @SerializedName("Card")
+  private Card card;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("CardDebit")
-    private CardDebit cardDebit;
+  /**
+   */
+  @Expose
+  @SerializedName("CardDebit")
+  private CardDebit cardDebit;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("DraftPayment")
-    private DraftPayment draftPayment;
+  /**
+   */
+  @Expose
+  @SerializedName("DraftPayment")
+  private DraftPayment draftPayment;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("FeatureAnnouncement")
-    private FeatureAnnouncement featureAnnouncement;
+  /**
+   */
+  @Expose
+  @SerializedName("FeatureAnnouncement")
+  private FeatureAnnouncement featureAnnouncement;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("IdealMerchantTransaction")
-    private IdealMerchantTransaction idealMerchantTransaction;
+  /**
+   */
+  @Expose
+  @SerializedName("IdealMerchantTransaction")
+  private IdealMerchantTransaction idealMerchantTransaction;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("Invoice")
-    private Invoice invoice;
+  /**
+   */
+  @Expose
+  @SerializedName("Invoice")
+  private Invoice invoice;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("ScheduledPayment")
-    private SchedulePayment scheduledPayment;
+  /**
+   */
+  @Expose
+  @SerializedName("ScheduledPayment")
+  private SchedulePayment scheduledPayment;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("ScheduledPaymentBatch")
-    private SchedulePaymentBatch scheduledPaymentBatch;
+  /**
+   */
+  @Expose
+  @SerializedName("ScheduledPaymentBatch")
+  private SchedulePaymentBatch scheduledPaymentBatch;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("ScheduledInstance")
-    private ScheduleInstance scheduledInstance;
+  /**
+   */
+  @Expose
+  @SerializedName("ScheduledInstance")
+  private ScheduleInstance scheduledInstance;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("MasterCardAction")
-    private MasterCardAction masterCardAction;
+  /**
+   */
+  @Expose
+  @SerializedName("MasterCardAction")
+  private MasterCardAction masterCardAction;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("BankSwitchServiceNetherlandsIncomingPayment")
-    private BankSwitchServiceNetherlandsIncomingPayment bankSwitchServiceNetherlandsIncomingPayment;
+  /**
+   */
+  @Expose
+  @SerializedName("BankSwitchServiceNetherlandsIncomingPayment")
+  private BankSwitchServiceNetherlandsIncomingPayment bankSwitchServiceNetherlandsIncomingPayment;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("Payment")
-    private Payment payment;
+  /**
+   */
+  @Expose
+  @SerializedName("Payment")
+  private Payment payment;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("PaymentBatch")
-    private PaymentBatch paymentBatch;
+  /**
+   */
+  @Expose
+  @SerializedName("PaymentBatch")
+  private PaymentBatch paymentBatch;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("RequestInquiryBatch")
-    private RequestInquiryBatch requestInquiryBatch;
+  /**
+   */
+  @Expose
+  @SerializedName("RequestInquiryBatch")
+  private RequestInquiryBatch requestInquiryBatch;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("RequestInquiry")
-    private RequestInquiry requestInquiry;
+  /**
+   */
+  @Expose
+  @SerializedName("RequestInquiry")
+  private RequestInquiry requestInquiry;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("RequestResponse")
-    private RequestResponse requestResponse;
+  /**
+   */
+  @Expose
+  @SerializedName("RequestResponse")
+  private RequestResponse requestResponse;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("RewardRecipient")
-    private RewardRecipient rewardRecipient;
+  /**
+   */
+  @Expose
+  @SerializedName("RewardRecipient")
+  private RewardRecipient rewardRecipient;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("RewardSender")
-    private RewardSender rewardSender;
+  /**
+   */
+  @Expose
+  @SerializedName("RewardSender")
+  private RewardSender rewardSender;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("ShareInviteBankInquiryBatch")
-    private ShareInviteBankInquiryBatch shareInviteBankInquiryBatch;
+  /**
+   */
+  @Expose
+  @SerializedName("ShareInviteBankInquiryBatch")
+  private ShareInviteBankInquiryBatch shareInviteBankInquiryBatch;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("ShareInviteBankInquiry")
-    private ShareInviteBankInquiry shareInviteBankInquiry;
+  /**
+   */
+  @Expose
+  @SerializedName("ShareInviteBankInquiry")
+  private ShareInviteBankInquiry shareInviteBankInquiry;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("ShareInviteBankResponse")
-    private ShareInviteBankResponse shareInviteBankResponse;
+  /**
+   */
+  @Expose
+  @SerializedName("ShareInviteBankResponse")
+  private ShareInviteBankResponse shareInviteBankResponse;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("SofortMerchantTransaction")
-    private SofortMerchantTransaction sofortMerchantTransaction;
+  /**
+   */
+  @Expose
+  @SerializedName("SofortMerchantTransaction")
+  private SofortMerchantTransaction sofortMerchantTransaction;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("TabResultInquiry")
-    private TabResultInquiry tabResultInquiry;
+  /**
+   */
+  @Expose
+  @SerializedName("TabResultInquiry")
+  private TabResultInquiry tabResultInquiry;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("TabResultResponse")
-    private TabResultResponse tabResultResponse;
+  /**
+   */
+  @Expose
+  @SerializedName("TabResultResponse")
+  private TabResultResponse tabResultResponse;
 
-    /**
-     *
-     */
-    @Expose
-    @SerializedName("TransferwiseTransfer")
-    private TransferwiseTransfer transferwiseTransfer;
+  /**
+   */
+  @Expose
+  @SerializedName("TransferwisePayment")
+  private TransferwiseTransfer transferwisePayment;
 
-    /**
-     *
-     */
-    public static EventObject fromJsonReader(JsonReader reader) {
-        return fromJsonReader(EventObject.class, reader);
+  /**
+   */
+  public BunqMeTab getBunqMeTab() {
+    return this.bunqMeTab;
+  }
+
+  public void setBunqMeTab(BunqMeTab bunqMeTab) {
+    this.bunqMeTab = bunqMeTab;
+  }
+
+  /**
+   */
+  public BunqMeTabResultResponse getBunqMeTabResultResponse() {
+    return this.bunqMeTabResultResponse;
+  }
+
+  public void setBunqMeTabResultResponse(BunqMeTabResultResponse bunqMeTabResultResponse) {
+    this.bunqMeTabResultResponse = bunqMeTabResultResponse;
+  }
+
+  /**
+   */
+  public BunqMeFundraiserResult getBunqMeFundraiserResult() {
+    return this.bunqMeFundraiserResult;
+  }
+
+  public void setBunqMeFundraiserResult(BunqMeFundraiserResult bunqMeFundraiserResult) {
+    this.bunqMeFundraiserResult = bunqMeFundraiserResult;
+  }
+
+  /**
+   */
+  public Card getCard() {
+    return this.card;
+  }
+
+  public void setCard(Card card) {
+    this.card = card;
+  }
+
+  /**
+   */
+  public CardDebit getCardDebit() {
+    return this.cardDebit;
+  }
+
+  public void setCardDebit(CardDebit cardDebit) {
+    this.cardDebit = cardDebit;
+  }
+
+  /**
+   */
+  public DraftPayment getDraftPayment() {
+    return this.draftPayment;
+  }
+
+  public void setDraftPayment(DraftPayment draftPayment) {
+    this.draftPayment = draftPayment;
+  }
+
+  /**
+   */
+  public FeatureAnnouncement getFeatureAnnouncement() {
+    return this.featureAnnouncement;
+  }
+
+  public void setFeatureAnnouncement(FeatureAnnouncement featureAnnouncement) {
+    this.featureAnnouncement = featureAnnouncement;
+  }
+
+  /**
+   */
+  public IdealMerchantTransaction getIdealMerchantTransaction() {
+    return this.idealMerchantTransaction;
+  }
+
+  public void setIdealMerchantTransaction(IdealMerchantTransaction idealMerchantTransaction) {
+    this.idealMerchantTransaction = idealMerchantTransaction;
+  }
+
+  /**
+   */
+  public Invoice getInvoice() {
+    return this.invoice;
+  }
+
+  public void setInvoice(Invoice invoice) {
+    this.invoice = invoice;
+  }
+
+  /**
+   */
+  public SchedulePayment getScheduledPayment() {
+    return this.scheduledPayment;
+  }
+
+  public void setScheduledPayment(SchedulePayment scheduledPayment) {
+    this.scheduledPayment = scheduledPayment;
+  }
+
+  /**
+   */
+  public SchedulePaymentBatch getScheduledPaymentBatch() {
+    return this.scheduledPaymentBatch;
+  }
+
+  public void setScheduledPaymentBatch(SchedulePaymentBatch scheduledPaymentBatch) {
+    this.scheduledPaymentBatch = scheduledPaymentBatch;
+  }
+
+  /**
+   */
+  public ScheduleInstance getScheduledInstance() {
+    return this.scheduledInstance;
+  }
+
+  public void setScheduledInstance(ScheduleInstance scheduledInstance) {
+    this.scheduledInstance = scheduledInstance;
+  }
+
+  /**
+   */
+  public MasterCardAction getMasterCardAction() {
+    return this.masterCardAction;
+  }
+
+  public void setMasterCardAction(MasterCardAction masterCardAction) {
+    this.masterCardAction = masterCardAction;
+  }
+
+  /**
+   */
+  public BankSwitchServiceNetherlandsIncomingPayment getBankSwitchServiceNetherlandsIncomingPayment() {
+    return this.bankSwitchServiceNetherlandsIncomingPayment;
+  }
+
+  public void setBankSwitchServiceNetherlandsIncomingPayment(BankSwitchServiceNetherlandsIncomingPayment bankSwitchServiceNetherlandsIncomingPayment) {
+    this.bankSwitchServiceNetherlandsIncomingPayment = bankSwitchServiceNetherlandsIncomingPayment;
+  }
+
+  /**
+   */
+  public Payment getPayment() {
+    return this.payment;
+  }
+
+  public void setPayment(Payment payment) {
+    this.payment = payment;
+  }
+
+  /**
+   */
+  public PaymentBatch getPaymentBatch() {
+    return this.paymentBatch;
+  }
+
+  public void setPaymentBatch(PaymentBatch paymentBatch) {
+    this.paymentBatch = paymentBatch;
+  }
+
+  /**
+   */
+  public RequestInquiryBatch getRequestInquiryBatch() {
+    return this.requestInquiryBatch;
+  }
+
+  public void setRequestInquiryBatch(RequestInquiryBatch requestInquiryBatch) {
+    this.requestInquiryBatch = requestInquiryBatch;
+  }
+
+  /**
+   */
+  public RequestInquiry getRequestInquiry() {
+    return this.requestInquiry;
+  }
+
+  public void setRequestInquiry(RequestInquiry requestInquiry) {
+    this.requestInquiry = requestInquiry;
+  }
+
+  /**
+   */
+  public RequestResponse getRequestResponse() {
+    return this.requestResponse;
+  }
+
+  public void setRequestResponse(RequestResponse requestResponse) {
+    this.requestResponse = requestResponse;
+  }
+
+  /**
+   */
+  public RewardRecipient getRewardRecipient() {
+    return this.rewardRecipient;
+  }
+
+  public void setRewardRecipient(RewardRecipient rewardRecipient) {
+    this.rewardRecipient = rewardRecipient;
+  }
+
+  /**
+   */
+  public RewardSender getRewardSender() {
+    return this.rewardSender;
+  }
+
+  public void setRewardSender(RewardSender rewardSender) {
+    this.rewardSender = rewardSender;
+  }
+
+  /**
+   */
+  public ShareInviteBankInquiryBatch getShareInviteBankInquiryBatch() {
+    return this.shareInviteBankInquiryBatch;
+  }
+
+  public void setShareInviteBankInquiryBatch(ShareInviteBankInquiryBatch shareInviteBankInquiryBatch) {
+    this.shareInviteBankInquiryBatch = shareInviteBankInquiryBatch;
+  }
+
+  /**
+   */
+  public ShareInviteBankInquiry getShareInviteBankInquiry() {
+    return this.shareInviteBankInquiry;
+  }
+
+  public void setShareInviteBankInquiry(ShareInviteBankInquiry shareInviteBankInquiry) {
+    this.shareInviteBankInquiry = shareInviteBankInquiry;
+  }
+
+  /**
+   */
+  public ShareInviteBankResponse getShareInviteBankResponse() {
+    return this.shareInviteBankResponse;
+  }
+
+  public void setShareInviteBankResponse(ShareInviteBankResponse shareInviteBankResponse) {
+    this.shareInviteBankResponse = shareInviteBankResponse;
+  }
+
+  /**
+   */
+  public SofortMerchantTransaction getSofortMerchantTransaction() {
+    return this.sofortMerchantTransaction;
+  }
+
+  public void setSofortMerchantTransaction(SofortMerchantTransaction sofortMerchantTransaction) {
+    this.sofortMerchantTransaction = sofortMerchantTransaction;
+  }
+
+  /**
+   */
+  public TabResultInquiry getTabResultInquiry() {
+    return this.tabResultInquiry;
+  }
+
+  public void setTabResultInquiry(TabResultInquiry tabResultInquiry) {
+    this.tabResultInquiry = tabResultInquiry;
+  }
+
+  /**
+   */
+  public TabResultResponse getTabResultResponse() {
+    return this.tabResultResponse;
+  }
+
+  public void setTabResultResponse(TabResultResponse tabResultResponse) {
+    this.tabResultResponse = tabResultResponse;
+  }
+
+  /**
+   */
+  public TransferwiseTransfer getTransferwisePayment() {
+    return this.transferwisePayment;
+  }
+
+  public void setTransferwisePayment(TransferwiseTransfer transferwisePayment) {
+    this.transferwisePayment = transferwisePayment;
+  }
+
+  /**
+   */
+  public BunqModel getReferencedObject() {
+    if (this.bunqMeTab != null) {
+      return this.bunqMeTab;
     }
 
-    /**
-     *
-     */
-    public BunqMeTab getBunqMeTab() {
-        return this.bunqMeTab;
+    if (this.bunqMeTabResultResponse != null) {
+      return this.bunqMeTabResultResponse;
     }
 
-    public void setBunqMeTab(BunqMeTab bunqMeTab) {
-        this.bunqMeTab = bunqMeTab;
+    if (this.bunqMeFundraiserResult != null) {
+      return this.bunqMeFundraiserResult;
     }
 
-    /**
-     *
-     */
-    public BunqMeTabResultResponse getBunqMeTabResultResponse() {
-        return this.bunqMeTabResultResponse;
+    if (this.card != null) {
+      return this.card;
     }
 
-    public void setBunqMeTabResultResponse(BunqMeTabResultResponse bunqMeTabResultResponse) {
-        this.bunqMeTabResultResponse = bunqMeTabResultResponse;
+    if (this.cardDebit != null) {
+      return this.cardDebit;
     }
 
-    /**
-     *
-     */
-    public BunqMeFundraiserResult getBunqMeFundraiserResult() {
-        return this.bunqMeFundraiserResult;
+    if (this.draftPayment != null) {
+      return this.draftPayment;
     }
 
-    public void setBunqMeFundraiserResult(BunqMeFundraiserResult bunqMeFundraiserResult) {
-        this.bunqMeFundraiserResult = bunqMeFundraiserResult;
+    if (this.featureAnnouncement != null) {
+      return this.featureAnnouncement;
     }
 
-    /**
-     *
-     */
-    public Card getCard() {
-        return this.card;
+    if (this.idealMerchantTransaction != null) {
+      return this.idealMerchantTransaction;
     }
 
-    public void setCard(Card card) {
-        this.card = card;
+    if (this.invoice != null) {
+      return this.invoice;
     }
 
-    /**
-     *
-     */
-    public CardDebit getCardDebit() {
-        return this.cardDebit;
+    if (this.scheduledPayment != null) {
+      return this.scheduledPayment;
     }
 
-    public void setCardDebit(CardDebit cardDebit) {
-        this.cardDebit = cardDebit;
+    if (this.scheduledPaymentBatch != null) {
+      return this.scheduledPaymentBatch;
     }
 
-    /**
-     *
-     */
-    public DraftPayment getDraftPayment() {
-        return this.draftPayment;
+    if (this.scheduledInstance != null) {
+      return this.scheduledInstance;
     }
 
-    public void setDraftPayment(DraftPayment draftPayment) {
-        this.draftPayment = draftPayment;
+    if (this.masterCardAction != null) {
+      return this.masterCardAction;
     }
 
-    /**
-     *
-     */
-    public FeatureAnnouncement getFeatureAnnouncement() {
-        return this.featureAnnouncement;
+    if (this.bankSwitchServiceNetherlandsIncomingPayment != null) {
+      return this.bankSwitchServiceNetherlandsIncomingPayment;
     }
 
-    public void setFeatureAnnouncement(FeatureAnnouncement featureAnnouncement) {
-        this.featureAnnouncement = featureAnnouncement;
+    if (this.payment != null) {
+      return this.payment;
     }
 
-    /**
-     *
-     */
-    public IdealMerchantTransaction getIdealMerchantTransaction() {
-        return this.idealMerchantTransaction;
+    if (this.paymentBatch != null) {
+      return this.paymentBatch;
     }
 
-    public void setIdealMerchantTransaction(IdealMerchantTransaction idealMerchantTransaction) {
-        this.idealMerchantTransaction = idealMerchantTransaction;
+    if (this.requestInquiryBatch != null) {
+      return this.requestInquiryBatch;
     }
 
-    /**
-     *
-     */
-    public Invoice getInvoice() {
-        return this.invoice;
+    if (this.requestInquiry != null) {
+      return this.requestInquiry;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    if (this.requestResponse != null) {
+      return this.requestResponse;
     }
 
-    /**
-     *
-     */
-    public SchedulePayment getScheduledPayment() {
-        return this.scheduledPayment;
+    if (this.rewardRecipient != null) {
+      return this.rewardRecipient;
     }
 
-    public void setScheduledPayment(SchedulePayment scheduledPayment) {
-        this.scheduledPayment = scheduledPayment;
+    if (this.rewardSender != null) {
+      return this.rewardSender;
     }
 
-    /**
-     *
-     */
-    public SchedulePaymentBatch getScheduledPaymentBatch() {
-        return this.scheduledPaymentBatch;
+    if (this.shareInviteBankInquiryBatch != null) {
+      return this.shareInviteBankInquiryBatch;
     }
 
-    public void setScheduledPaymentBatch(SchedulePaymentBatch scheduledPaymentBatch) {
-        this.scheduledPaymentBatch = scheduledPaymentBatch;
+    if (this.shareInviteBankInquiry != null) {
+      return this.shareInviteBankInquiry;
     }
 
-    /**
-     *
-     */
-    public ScheduleInstance getScheduledInstance() {
-        return this.scheduledInstance;
+    if (this.shareInviteBankResponse != null) {
+      return this.shareInviteBankResponse;
     }
 
-    public void setScheduledInstance(ScheduleInstance scheduledInstance) {
-        this.scheduledInstance = scheduledInstance;
+    if (this.sofortMerchantTransaction != null) {
+      return this.sofortMerchantTransaction;
     }
 
-    /**
-     *
-     */
-    public MasterCardAction getMasterCardAction() {
-        return this.masterCardAction;
+    if (this.tabResultInquiry != null) {
+      return this.tabResultInquiry;
     }
 
-    public void setMasterCardAction(MasterCardAction masterCardAction) {
-        this.masterCardAction = masterCardAction;
+    if (this.tabResultResponse != null) {
+      return this.tabResultResponse;
     }
 
-    /**
-     *
-     */
-    public BankSwitchServiceNetherlandsIncomingPayment getBankSwitchServiceNetherlandsIncomingPayment() {
-        return this.bankSwitchServiceNetherlandsIncomingPayment;
+    if (this.transferwisePayment != null) {
+      return this.transferwisePayment;
     }
 
-    public void setBankSwitchServiceNetherlandsIncomingPayment(BankSwitchServiceNetherlandsIncomingPayment bankSwitchServiceNetherlandsIncomingPayment) {
-        this.bankSwitchServiceNetherlandsIncomingPayment = bankSwitchServiceNetherlandsIncomingPayment;
+    throw new BunqException(ERROR_NULL_FIELDS);
+  }
+
+  /**
+   */
+  public boolean isAllFieldNull() {
+    if (this.bunqMeTab != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public Payment getPayment() {
-        return this.payment;
+    if (this.bunqMeTabResultResponse != null) {
+      return false;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    if (this.bunqMeFundraiserResult != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public PaymentBatch getPaymentBatch() {
-        return this.paymentBatch;
+    if (this.card != null) {
+      return false;
     }
 
-    public void setPaymentBatch(PaymentBatch paymentBatch) {
-        this.paymentBatch = paymentBatch;
+    if (this.cardDebit != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public RequestInquiryBatch getRequestInquiryBatch() {
-        return this.requestInquiryBatch;
+    if (this.draftPayment != null) {
+      return false;
     }
 
-    public void setRequestInquiryBatch(RequestInquiryBatch requestInquiryBatch) {
-        this.requestInquiryBatch = requestInquiryBatch;
+    if (this.featureAnnouncement != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public RequestInquiry getRequestInquiry() {
-        return this.requestInquiry;
+    if (this.idealMerchantTransaction != null) {
+      return false;
     }
 
-    public void setRequestInquiry(RequestInquiry requestInquiry) {
-        this.requestInquiry = requestInquiry;
+    if (this.invoice != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public RequestResponse getRequestResponse() {
-        return this.requestResponse;
+    if (this.scheduledPayment != null) {
+      return false;
     }
 
-    public void setRequestResponse(RequestResponse requestResponse) {
-        this.requestResponse = requestResponse;
+    if (this.scheduledPaymentBatch != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public RewardRecipient getRewardRecipient() {
-        return this.rewardRecipient;
+    if (this.scheduledInstance != null) {
+      return false;
     }
 
-    public void setRewardRecipient(RewardRecipient rewardRecipient) {
-        this.rewardRecipient = rewardRecipient;
+    if (this.masterCardAction != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public RewardSender getRewardSender() {
-        return this.rewardSender;
+    if (this.bankSwitchServiceNetherlandsIncomingPayment != null) {
+      return false;
     }
 
-    public void setRewardSender(RewardSender rewardSender) {
-        this.rewardSender = rewardSender;
+    if (this.payment != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public ShareInviteBankInquiryBatch getShareInviteBankInquiryBatch() {
-        return this.shareInviteBankInquiryBatch;
+    if (this.paymentBatch != null) {
+      return false;
     }
 
-    public void setShareInviteBankInquiryBatch(ShareInviteBankInquiryBatch shareInviteBankInquiryBatch) {
-        this.shareInviteBankInquiryBatch = shareInviteBankInquiryBatch;
+    if (this.requestInquiryBatch != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public ShareInviteBankInquiry getShareInviteBankInquiry() {
-        return this.shareInviteBankInquiry;
+    if (this.requestInquiry != null) {
+      return false;
     }
 
-    public void setShareInviteBankInquiry(ShareInviteBankInquiry shareInviteBankInquiry) {
-        this.shareInviteBankInquiry = shareInviteBankInquiry;
+    if (this.requestResponse != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public ShareInviteBankResponse getShareInviteBankResponse() {
-        return this.shareInviteBankResponse;
+    if (this.rewardRecipient != null) {
+      return false;
     }
 
-    public void setShareInviteBankResponse(ShareInviteBankResponse shareInviteBankResponse) {
-        this.shareInviteBankResponse = shareInviteBankResponse;
+    if (this.rewardSender != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public SofortMerchantTransaction getSofortMerchantTransaction() {
-        return this.sofortMerchantTransaction;
+    if (this.shareInviteBankInquiryBatch != null) {
+      return false;
     }
 
-    public void setSofortMerchantTransaction(SofortMerchantTransaction sofortMerchantTransaction) {
-        this.sofortMerchantTransaction = sofortMerchantTransaction;
+    if (this.shareInviteBankInquiry != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public TabResultInquiry getTabResultInquiry() {
-        return this.tabResultInquiry;
+    if (this.shareInviteBankResponse != null) {
+      return false;
     }
 
-    public void setTabResultInquiry(TabResultInquiry tabResultInquiry) {
-        this.tabResultInquiry = tabResultInquiry;
+    if (this.sofortMerchantTransaction != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public TabResultResponse getTabResultResponse() {
-        return this.tabResultResponse;
+    if (this.tabResultInquiry != null) {
+      return false;
     }
 
-    public void setTabResultResponse(TabResultResponse tabResultResponse) {
-        this.tabResultResponse = tabResultResponse;
+    if (this.tabResultResponse != null) {
+      return false;
     }
 
-    /**
-     *
-     */
-    public TransferwiseTransfer getTransferwiseTransfer() {
-        return this.transferwiseTransfer;
+    if (this.transferwisePayment != null) {
+      return false;
     }
 
-    public void setTransferwiseTransfer(TransferwiseTransfer transferwiseTransfer) {
-        this.transferwiseTransfer = transferwiseTransfer;
-    }
+    return true;
+  }
 
-    /**
-     *
-     */
-    public BunqModel getReferencedObject() {
-        if (this.bunqMeTab != null) {
-            return this.bunqMeTab;
-        }
-
-        if (this.bunqMeTabResultResponse != null) {
-            return this.bunqMeTabResultResponse;
-        }
-
-        if (this.bunqMeFundraiserResult != null) {
-            return this.bunqMeFundraiserResult;
-        }
-
-        if (this.card != null) {
-            return this.card;
-        }
-
-        if (this.cardDebit != null) {
-            return this.cardDebit;
-        }
-
-        if (this.draftPayment != null) {
-            return this.draftPayment;
-        }
-
-        if (this.featureAnnouncement != null) {
-            return this.featureAnnouncement;
-        }
-
-        if (this.idealMerchantTransaction != null) {
-            return this.idealMerchantTransaction;
-        }
-
-        if (this.invoice != null) {
-            return this.invoice;
-        }
-
-        if (this.scheduledPayment != null) {
-            return this.scheduledPayment;
-        }
-
-        if (this.scheduledPaymentBatch != null) {
-            return this.scheduledPaymentBatch;
-        }
-
-        if (this.scheduledInstance != null) {
-            return this.scheduledInstance;
-        }
-
-        if (this.masterCardAction != null) {
-            return this.masterCardAction;
-        }
-
-        if (this.bankSwitchServiceNetherlandsIncomingPayment != null) {
-            return this.bankSwitchServiceNetherlandsIncomingPayment;
-        }
-
-        if (this.payment != null) {
-            return this.payment;
-        }
-
-        if (this.paymentBatch != null) {
-            return this.paymentBatch;
-        }
-
-        if (this.requestInquiryBatch != null) {
-            return this.requestInquiryBatch;
-        }
-
-        if (this.requestInquiry != null) {
-            return this.requestInquiry;
-        }
-
-        if (this.requestResponse != null) {
-            return this.requestResponse;
-        }
-
-        if (this.rewardRecipient != null) {
-            return this.rewardRecipient;
-        }
-
-        if (this.rewardSender != null) {
-            return this.rewardSender;
-        }
-
-        if (this.shareInviteBankInquiryBatch != null) {
-            return this.shareInviteBankInquiryBatch;
-        }
-
-        if (this.shareInviteBankInquiry != null) {
-            return this.shareInviteBankInquiry;
-        }
-
-        if (this.shareInviteBankResponse != null) {
-            return this.shareInviteBankResponse;
-        }
-
-        if (this.sofortMerchantTransaction != null) {
-            return this.sofortMerchantTransaction;
-        }
-
-        if (this.tabResultInquiry != null) {
-            return this.tabResultInquiry;
-        }
-
-        if (this.tabResultResponse != null) {
-            return this.tabResultResponse;
-        }
-
-        if (this.transferwiseTransfer != null) {
-            return this.transferwiseTransfer;
-        }
-
-        throw new BunqException(ERROR_NULL_FIELDS);
-    }
-
-    /**
-     *
-     */
-    public boolean isAllFieldNull() {
-        if (this.bunqMeTab != null) {
-            return false;
-        }
-
-        if (this.bunqMeTabResultResponse != null) {
-            return false;
-        }
-
-        if (this.bunqMeFundraiserResult != null) {
-            return false;
-        }
-
-        if (this.card != null) {
-            return false;
-        }
-
-        if (this.cardDebit != null) {
-            return false;
-        }
-
-        if (this.draftPayment != null) {
-            return false;
-        }
-
-        if (this.featureAnnouncement != null) {
-            return false;
-        }
-
-        if (this.idealMerchantTransaction != null) {
-            return false;
-        }
-
-        if (this.invoice != null) {
-            return false;
-        }
-
-        if (this.scheduledPayment != null) {
-            return false;
-        }
-
-        if (this.scheduledPaymentBatch != null) {
-            return false;
-        }
-
-        if (this.scheduledInstance != null) {
-            return false;
-        }
-
-        if (this.masterCardAction != null) {
-            return false;
-        }
-
-        if (this.bankSwitchServiceNetherlandsIncomingPayment != null) {
-            return false;
-        }
-
-        if (this.payment != null) {
-            return false;
-        }
-
-        if (this.paymentBatch != null) {
-            return false;
-        }
-
-        if (this.requestInquiryBatch != null) {
-            return false;
-        }
-
-        if (this.requestInquiry != null) {
-            return false;
-        }
-
-        if (this.requestResponse != null) {
-            return false;
-        }
-
-        if (this.rewardRecipient != null) {
-            return false;
-        }
-
-        if (this.rewardSender != null) {
-            return false;
-        }
-
-        if (this.shareInviteBankInquiryBatch != null) {
-            return false;
-        }
-
-        if (this.shareInviteBankInquiry != null) {
-            return false;
-        }
-
-        if (this.shareInviteBankResponse != null) {
-            return false;
-        }
-
-        if (this.sofortMerchantTransaction != null) {
-            return false;
-        }
-
-        if (this.tabResultInquiry != null) {
-            return false;
-        }
-
-        if (this.tabResultResponse != null) {
-            return false;
-        }
-
-        if (this.transferwiseTransfer != null) {
-            return false;
-        }
-
-        return true;
-    }
+  /**
+   */
+  public static EventObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(EventObject.class, reader);
+  }
 
 }

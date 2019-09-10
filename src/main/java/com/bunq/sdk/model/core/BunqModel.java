@@ -150,7 +150,7 @@ abstract public class BunqModel {
     return new BunqResponse<>(objects, responseRaw.getHeaders(), pagination);
   }
 
-  private static JsonObject deserializeResponseObject(BunqResponseRaw responseRaw) {
+  protected static JsonObject deserializeResponseObject(BunqResponseRaw responseRaw) {
     String json = new String(responseRaw.getBodyBytes());
 
     return gson.fromJson(json, JsonObject.class);
@@ -192,7 +192,7 @@ abstract public class BunqModel {
   }
 
   protected static byte[] determineAllRequestByte(HashMap<String, Object> requestMap) {
-    String requestString = gson.toJson(requestMap).toString();
+    String requestString = gson.toJson(requestMap);
 
     return requestString.replaceAll(REGEX_FIELD_FOR_REQUEST, STRING_EMPTY).getBytes();
   }

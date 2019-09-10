@@ -3,11 +3,7 @@ package com.bunq.sdk.context;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.UserContextHelper;
-import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
-import com.bunq.sdk.model.generated.endpoint.User;
-import com.bunq.sdk.model.generated.endpoint.UserApiKey;
-import com.bunq.sdk.model.generated.endpoint.UserCompany;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.*;
 
 public class UserContext {
 
@@ -21,6 +17,7 @@ public class UserContext {
   private UserCompany userCompany;
   private UserPerson userPerson;
   private UserApiKey userApiKey;
+  private UserPaymentServiceProvider userPaymentServiceProvider;
   private MonetaryAccountBank primaryMonetaryAccountBank;
 
   public UserContext(ApiContext apiContext) {
@@ -35,6 +32,8 @@ public class UserContext {
       this.userCompany = (UserCompany) user;
     } else if (user instanceof UserApiKey) {
       this.userApiKey = (UserApiKey) user;
+    } else if (user instanceof UserPaymentServiceProvider) {
+      this.userPaymentServiceProvider = (UserPaymentServiceProvider) user;
     } else {
       throw new BunqException(String.format(ERROR_UNEXPECTED_USER_INSTANCE, user.getClass().toString()));
     }
@@ -47,6 +46,11 @@ public class UserContext {
   public void refreshContext() {
     UserContextHelper helper = new UserContextHelper(this.apiContext);
     this.initUser(helper.getFirstUser().getReferencedObject());
+
+    if (this.userPaymentServiceProvider != null) {
+      return;
+    }
+
     this.initMainMonetaryAccount(helper.getFirstActiveMonetaryAccountBankByUserId(getUserId()));
   }
 
