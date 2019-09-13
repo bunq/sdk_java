@@ -6,6 +6,7 @@ import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.core.SessionServer;
+import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultInquiry;
 import com.bunq.sdk.model.generated.object.Geolocation;
 import com.google.gson.GsonBuilder;
 import java.math.BigDecimal;
@@ -35,6 +36,7 @@ public class BunqGsonBuilder {
         )
         .registerTypeAdapter(InstallationContext.class, new InstallationContextAdapter())
         .registerTypeAdapter(Pagination.class, new PaginationAdapter())
+        .registerTypeAdapter(BunqMeTabResultInquiry.class, new BunqMeTabResultInquiryDeserializer())
         .registerTypeHierarchyAdapter(AnchorObjectInterface.class, new AnchorObjectAdapter());
   }
 
