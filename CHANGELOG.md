@@ -1,7 +1,18 @@
 # Change Log
 
-## [1.12.0](https://github.com/bunq/sdk_java/tree/1.12.0) (2019-09-10)
+## [Unreleased](https://github.com/bunq/sdk_java/tree/HEAD)
 
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.12.0...HEAD)
+
+**Closed issues:**
+
+- No payment details in the result inquiries of a bunq me tab in the api [\#114](https://github.com/bunq/sdk_java/issues/114)
+
+**Merged pull requests:**
+
+- Feature/object wrapping fix [\#119](https://github.com/bunq/sdk_java/pull/119) ([NickvandeGroes](https://github.com/NickvandeGroes))
+
+## [1.12.0](https://github.com/bunq/sdk_java/tree/1.12.0) (2019-09-10)
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.16...1.12.0)
 
 **Closed issues:**
