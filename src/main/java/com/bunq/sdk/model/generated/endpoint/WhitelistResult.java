@@ -38,6 +38,13 @@ public class WhitelistResult extends BunqModel {
     private String status;
 
     /**
+     * The subStatus of the WhitelistResult.
+     */
+    @Expose
+    @SerializedName("sub_status")
+    private String subStatus;
+
+    /**
      * The message when the whitelist result has failed due to user error.
      */
     @Expose
@@ -108,6 +115,17 @@ public class WhitelistResult extends BunqModel {
     }
 
     /**
+     * The subStatus of the WhitelistResult.
+     */
+    public String getSubStatus() {
+        return this.subStatus;
+    }
+
+    public void setSubStatus(String subStatus) {
+        this.subStatus = subStatus;
+    }
+
+    /**
      * The message when the whitelist result has failed due to user error.
      */
     public List<Error> getErrorMessage() {
@@ -165,6 +183,10 @@ public class WhitelistResult extends BunqModel {
         }
 
         if (this.status != null) {
+            return false;
+        }
+
+        if (this.subStatus != null) {
             return false;
         }
 

@@ -1,16 +1,11 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.http.ApiClient;
-import com.bunq.sdk.http.BunqResponse;
-import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-
-import java.util.Map;
 
 /**
  * Used to create Transferwise payments.
@@ -22,14 +17,6 @@ public class TransferwiseTransfer extends BunqModel {
      */
     public static final String FIELD_MONETARY_ACCOUNT_ID = "monetary_account_id";
     public static final String FIELD_RECIPIENT_ID = "recipient_id";
-    /**
-     * Endpoint constants.
-     */
-    protected static final String ENDPOINT_URL_READ = "user/%s/transferwise-quote/%s/transferwise-transfer/%s";
-    /**
-     * Object type.
-     */
-    protected static final String OBJECT_TYPE_GET = "TransferwisePayment";
 
     /**
      * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
@@ -150,32 +137,6 @@ public class TransferwiseTransfer extends BunqModel {
     public TransferwiseTransfer(String monetaryAccountId, String recipientId) {
         this.monetaryAccountIdFieldForRequest = monetaryAccountId;
         this.recipientIdFieldForRequest = recipientId;
-    }
-
-    /**
-     *
-     */
-    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId, Map<String, String> params, Map<String, String> customHeaders) {
-        ApiClient apiClient = new ApiClient(getApiContext());
-        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteId, transferwiseTransferId), params, customHeaders);
-
-        return fromJson(TransferwiseTransfer.class, responseRaw, OBJECT_TYPE_GET);
-    }
-
-    public static BunqResponse<TransferwiseTransfer> get() {
-        return get(null, null, null, null);
-    }
-
-    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId) {
-        return get(transferwiseQuoteId, null, null, null);
-    }
-
-    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId) {
-        return get(transferwiseQuoteId, transferwiseTransferId, null, null);
-    }
-
-    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId, Map<String, String> params) {
-        return get(transferwiseQuoteId, transferwiseTransferId, params, null);
     }
 
     /**

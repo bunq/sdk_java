@@ -1,8 +1,10 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Avatar;
-import com.bunq.sdk.model.generated.object.*;
+import com.bunq.sdk.model.generated.object.MonetaryAccountSetting;
+import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -28,7 +30,6 @@ public class MonetaryAccountLight extends BunqModel {
     public static final String FIELD_SUB_STATUS = "sub_status";
     public static final String FIELD_REASON = "reason";
     public static final String FIELD_REASON_DESCRIPTION = "reason_description";
-    public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
     public static final String FIELD_SETTING = "setting";
 
     /**
@@ -80,13 +81,6 @@ public class MonetaryAccountLight extends BunqModel {
     @Expose
     @SerializedName("daily_limit")
     private Amount dailyLimit;
-
-    /**
-     * Total Amount of money spent today. Timezone aware.
-     */
-    @Expose
-    @SerializedName("daily_spent")
-    private Amount dailySpent;
 
     /**
      * The current available balance Amount of the MonetaryAccountLight.
@@ -204,14 +198,6 @@ public class MonetaryAccountLight extends BunqModel {
     private Amount budgetWithdrawalYearMaximum;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountLight.
-     */
-    @Expose
-    @SerializedName("notification_filters")
-    private List<NotificationFilter> notificationFilters;
-
-    /**
      * The settings of the MonetaryAccountLight.
      */
     @Expose
@@ -285,14 +271,6 @@ public class MonetaryAccountLight extends BunqModel {
     private String reasonDescriptionFieldForRequest;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountLight.
-     */
-    @Expose
-    @SerializedName("notification_filters_field_for_request")
-    private List<NotificationFilter> notificationFiltersFieldForRequest;
-
-    /**
      * The settings of the MonetaryAccountLight.
      */
     @Expose
@@ -300,46 +278,42 @@ public class MonetaryAccountLight extends BunqModel {
     private MonetaryAccountSetting settingFieldForRequest;
 
     public MonetaryAccountLight() {
-        this(null, null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountLight(String currency) {
-        this(currency, null, null, null, null, null, null, null, null, null);
+        this(currency, null, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description) {
-        this(currency, description, null, null, null, null, null, null, null, null);
+        this(currency, description, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description, Amount dailyLimit) {
-        this(currency, description, dailyLimit, null, null, null, null, null, null, null);
+        this(currency, description, dailyLimit, null, null, null, null, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid) {
-        this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
-        this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null);
     }
 
     public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null);
     }
 
-    public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null);
-    }
-
-    public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    public MonetaryAccountLight(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSetting setting) {
         this.currencyFieldForRequest = currency;
         this.descriptionFieldForRequest = description;
         this.dailyLimitFieldForRequest = dailyLimit;
@@ -348,7 +322,6 @@ public class MonetaryAccountLight extends BunqModel {
         this.subStatusFieldForRequest = subStatus;
         this.reasonFieldForRequest = reason;
         this.reasonDescriptionFieldForRequest = reasonDescription;
-        this.notificationFiltersFieldForRequest = notificationFilters;
         this.settingFieldForRequest = setting;
     }
 
@@ -435,17 +408,6 @@ public class MonetaryAccountLight extends BunqModel {
 
     public void setDailyLimit(Amount dailyLimit) {
         this.dailyLimit = dailyLimit;
-    }
-
-    /**
-     * Total Amount of money spent today. Timezone aware.
-     */
-    public Amount getDailySpent() {
-        return this.dailySpent;
-    }
-
-    public void setDailySpent(Amount dailySpent) {
-        this.dailySpent = dailySpent;
     }
 
     /**
@@ -628,18 +590,6 @@ public class MonetaryAccountLight extends BunqModel {
     }
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountLight.
-     */
-    public List<NotificationFilter> getNotificationFilters() {
-        return this.notificationFilters;
-    }
-
-    public void setNotificationFilters(List<NotificationFilter> notificationFilters) {
-        this.notificationFilters = notificationFilters;
-    }
-
-    /**
      * The settings of the MonetaryAccountLight.
      */
     public MonetaryAccountSetting getSetting() {
@@ -679,10 +629,6 @@ public class MonetaryAccountLight extends BunqModel {
         }
 
         if (this.dailyLimit != null) {
-            return false;
-        }
-
-        if (this.dailySpent != null) {
             return false;
         }
 
@@ -747,10 +693,6 @@ public class MonetaryAccountLight extends BunqModel {
         }
 
         if (this.budgetWithdrawalYearMaximum != null) {
-            return false;
-        }
-
-        if (this.notificationFilters != null) {
             return false;
         }
 

@@ -6,7 +6,6 @@ import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Avatar;
 import com.bunq.sdk.model.generated.object.Geolocation;
-import com.bunq.sdk.model.generated.object.NotificationFilter;
 import com.bunq.sdk.model.generated.object.TabTextWaitingScreen;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -33,7 +32,6 @@ public class CashRegister extends BunqModel {
     public static final String FIELD_STATUS = "status";
     public static final String FIELD_AVATAR_UUID = "avatar_uuid";
     public static final String FIELD_LOCATION = "location";
-    public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
     public static final String FIELD_TAB_TEXT_WAITING_SCREEN = "tab_text_waiting_screen";
     /**
      * Endpoint constants.
@@ -97,14 +95,6 @@ public class CashRegister extends BunqModel {
     private Geolocation location;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * CashRegister.
-     */
-    @Expose
-    @SerializedName("notification_filters")
-    private List<NotificationFilter> notificationFilters;
-
-    /**
      * The tab text for waiting screen of CashRegister.
      */
     @Expose
@@ -142,14 +132,6 @@ public class CashRegister extends BunqModel {
     private Geolocation locationFieldForRequest;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * CashRegister.
-     */
-    @Expose
-    @SerializedName("notification_filters_field_for_request")
-    private List<NotificationFilter> notificationFiltersFieldForRequest;
-
-    /**
      * The tab text for waiting screen of CashRegister.
      */
     @Expose
@@ -157,35 +139,30 @@ public class CashRegister extends BunqModel {
     private List<TabTextWaitingScreen> tabTextWaitingScreenFieldForRequest;
 
     public CashRegister() {
-        this(null, null, null, null, null, null);
+        this(null, null, null, null, null);
     }
 
     public CashRegister(String name) {
-        this(name, null, null, null, null, null);
+        this(name, null, null, null, null);
     }
 
     public CashRegister(String name, String status) {
-        this(name, status, null, null, null, null);
+        this(name, status, null, null, null);
     }
 
     public CashRegister(String name, String status, String avatarUuid) {
-        this(name, status, avatarUuid, null, null, null);
+        this(name, status, avatarUuid, null, null);
     }
 
     public CashRegister(String name, String status, String avatarUuid, Geolocation location) {
-        this(name, status, avatarUuid, location, null, null);
+        this(name, status, avatarUuid, location, null);
     }
 
-    public CashRegister(String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters) {
-        this(name, status, avatarUuid, location, notificationFilters, null);
-    }
-
-    public CashRegister(String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen) {
+    public CashRegister(String name, String status, String avatarUuid, Geolocation location, List<TabTextWaitingScreen> tabTextWaitingScreen) {
         this.nameFieldForRequest = name;
         this.statusFieldForRequest = status;
         this.avatarUuidFieldForRequest = avatarUuid;
         this.locationFieldForRequest = location;
-        this.notificationFiltersFieldForRequest = notificationFilters;
         this.tabTextWaitingScreenFieldForRequest = tabTextWaitingScreen;
     }
 
@@ -201,11 +178,9 @@ public class CashRegister extends BunqModel {
      * @param avatarUuid           The UUID of the avatar of the CashRegister. Use the calls
      *                             /attachment-public and /avatar to create a new Avatar and get its UUID.
      * @param location             The geolocation of the CashRegister.
-     * @param notificationFilters  The types of notifications that will result in a push notification
-     *                             or URL callback for this CashRegister.
      * @param tabTextWaitingScreen The tab text for waiting screen of CashRegister.
      */
-    public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -217,7 +192,6 @@ public class CashRegister extends BunqModel {
         requestMap.put(FIELD_STATUS, status);
         requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
         requestMap.put(FIELD_LOCATION, location);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
         requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -227,35 +201,31 @@ public class CashRegister extends BunqModel {
     }
 
     public static BunqResponse<Integer> create() {
-        return create(null, null, null, null, null, null, null, null);
+        return create(null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name) {
-        return create(name, null, null, null, null, null, null, null);
+        return create(name, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, String status) {
-        return create(name, status, null, null, null, null, null, null);
+        return create(name, status, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, String status, String avatarUuid) {
-        return create(name, status, avatarUuid, null, null, null, null, null);
+        return create(name, status, avatarUuid, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId) {
-        return create(name, status, avatarUuid, monetaryAccountId, null, null, null, null);
+        return create(name, status, avatarUuid, monetaryAccountId, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location) {
-        return create(name, status, avatarUuid, monetaryAccountId, location, null, null, null);
+        return create(name, status, avatarUuid, monetaryAccountId, location, null, null);
     }
 
-    public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters) {
-        return create(name, status, avatarUuid, monetaryAccountId, location, notificationFilters, null, null);
-    }
-
-    public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen) {
-        return create(name, status, avatarUuid, monetaryAccountId, location, notificationFilters, tabTextWaitingScreen, null);
+    public static BunqResponse<Integer> create(String name, String status, String avatarUuid, Integer monetaryAccountId, Geolocation location, List<TabTextWaitingScreen> tabTextWaitingScreen) {
+        return create(name, status, avatarUuid, monetaryAccountId, location, tabTextWaitingScreen, null);
     }
 
     /**
@@ -295,11 +265,9 @@ public class CashRegister extends BunqModel {
      * @param avatarUuid           The UUID of the avatar of the CashRegister. Use the calls
      *                             /attachment-public and /avatar to create a new Avatar and get its UUID.
      * @param location             The geolocation of the CashRegister.
-     * @param notificationFilters  The types of notifications that will result in a push notification
-     *                             or URL callback for this CashRegister.
      * @param tabTextWaitingScreen The tab text for waiting screen of CashRegister.
      */
-    public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<TabTextWaitingScreen> tabTextWaitingScreen, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -311,7 +279,6 @@ public class CashRegister extends BunqModel {
         requestMap.put(FIELD_STATUS, status);
         requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
         requestMap.put(FIELD_LOCATION, location);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
         requestMap.put(FIELD_TAB_TEXT_WAITING_SCREEN, tabTextWaitingScreen);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -321,35 +288,31 @@ public class CashRegister extends BunqModel {
     }
 
     public static BunqResponse<Integer> update(Integer cashRegisterId) {
-        return update(cashRegisterId, null, null, null, null, null, null, null, null);
+        return update(cashRegisterId, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId) {
-        return update(cashRegisterId, monetaryAccountId, null, null, null, null, null, null, null);
+        return update(cashRegisterId, monetaryAccountId, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name) {
-        return update(cashRegisterId, monetaryAccountId, name, null, null, null, null, null, null);
+        return update(cashRegisterId, monetaryAccountId, name, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status) {
-        return update(cashRegisterId, monetaryAccountId, name, status, null, null, null, null, null);
+        return update(cashRegisterId, monetaryAccountId, name, status, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid) {
-        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, null, null, null, null);
+        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location) {
-        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, null, null, null);
+        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters) {
-        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, notificationFilters, null, null);
-    }
-
-    public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<NotificationFilter> notificationFilters, List<TabTextWaitingScreen> tabTextWaitingScreen) {
-        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, notificationFilters, tabTextWaitingScreen, null);
+    public static BunqResponse<Integer> update(Integer cashRegisterId, Integer monetaryAccountId, String name, String status, String avatarUuid, Geolocation location, List<TabTextWaitingScreen> tabTextWaitingScreen) {
+        return update(cashRegisterId, monetaryAccountId, name, status, avatarUuid, location, tabTextWaitingScreen, null);
     }
 
     /**
@@ -459,18 +422,6 @@ public class CashRegister extends BunqModel {
     }
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * CashRegister.
-     */
-    public List<NotificationFilter> getNotificationFilters() {
-        return this.notificationFilters;
-    }
-
-    public void setNotificationFilters(List<NotificationFilter> notificationFilters) {
-        this.notificationFilters = notificationFilters;
-    }
-
-    /**
      * The tab text for waiting screen of CashRegister.
      */
     public List<TabTextWaitingScreen> getTabTextWaitingScreen() {
@@ -510,10 +461,6 @@ public class CashRegister extends BunqModel {
         }
 
         if (this.location != null) {
-            return false;
-        }
-
-        if (this.notificationFilters != null) {
             return false;
         }
 
