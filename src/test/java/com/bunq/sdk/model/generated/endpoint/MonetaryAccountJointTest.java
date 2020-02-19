@@ -14,7 +14,7 @@ import static org.junit.Assert.assertNotNull;
 public class MonetaryAccountJointTest extends BunqSdkTestBase {
 
   private static final String PATH_TO_JSON_RESPONSE =
-      "src/test/Recourse/ResponseJsons/MonetaryAccountJoint.json";
+      "src/test/Resource/ResponseJsons/MonetaryAccountJoint.json";
 
   @BeforeClass
   public static void setUpBeforeClass() {

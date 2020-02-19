@@ -370,50 +370,19 @@ public final class SecurityUtils {
   }
 
   public static String generateSignature(BunqRequestBuilder requestBuilder, KeyPair keyPairClient) {
-    byte[] requestBytes = getRequestBytes(requestBuilder);
+    try {
+      byte[] allRequestBodyByte = getEntityBodyBytes(requestBuilder);
 
-    return SecurityUtils.signBase64(requestBytes, keyPairClient);
-  }
-
-  public static String generateSignature(String stringToSign, KeyPair keyPairClient) {
-    byte[] rawBytes = stringToSign.getBytes();
-
-    return SecurityUtils.signBase64(rawBytes, keyPairClient);
+      return SecurityUtils.signBase64(allRequestBodyByte, keyPairClient);
+    } catch (IOException exception) {
+      throw new UncaughtExceptionError(exception);
+    }
   }
 
   public static String generateSignature(String stringToSign, PrivateKey privateKey) {
     byte[] rawBytes = stringToSign.getBytes();
 
     return SecurityUtils.signBase64(rawBytes, privateKey);
-  }
-
-  private static byte[] getRequestBytes(BunqRequestBuilder requestBuilder) {
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-    try {
-      outputStream.write(getRequestHeadBytes(requestBuilder));
-      outputStream.write(getEntityBodyBytes(requestBuilder));
-    } catch (IOException exception) {
-      throw new UncaughtExceptionError(exception);
-    }
-
-    return outputStream.toByteArray();
-  }
-
-  private static byte[] getRequestHeadBytes(BunqRequestBuilder requestBuilder) {
-    String requestHeadString = generateMethodAndEndpointString(requestBuilder) + NEWLINE +
-        generateRequestHeadersSortedString(requestBuilder) + NEWLINE + NEWLINE;
-
-    return requestHeadString.getBytes();
-  }
-
-  private static String generateMethodAndEndpointString(BunqRequestBuilder requestBuilder) {
-    String uriString = requestBuilder.getUrl().toString();
-    String method = requestBuilder.getMethod().getMethodSrring();
-    String path = requestBuilder.getUrl().encodedPath();
-    String pathWithParameters = uriString.substring(uriString.indexOf(path));
-
-    return method + DELIMITER_METHOD_PATH + pathWithParameters;
   }
 
   private static byte[] getEntityBodyBytes(BunqRequestBuilder requestBuilder) throws IOException {
@@ -426,14 +395,6 @@ public final class SecurityUtils {
     } else {
       throw new IllegalStateException(ERROR_CAN_NOT_GET_ENTITY_BODY_BYTES);
     }
-  }
-
-  private static String generateRequestHeadersSortedString(BunqRequestBuilder bunqRequestBuilder) {
-    return BunqBasicHeader.collectForSigning(
-            bunqRequestBuilder.getAllHeader(),
-            null,
-            Arrays.asList(BunqHeader.CACHE_CONTROL, BunqHeader.USER_AGENT)
-    );
   }
 
   /**
@@ -497,13 +458,20 @@ public final class SecurityUtils {
 
   private static void verifyDataSigned(Signature signature, PublicKey publicKey, byte[] dataBytes,
       byte[] dataBytesSigned) throws BunqException {
+      if (SecurityUtils.isSignatureValid(signature, publicKey, dataBytes, dataBytesSigned)) {
+        // All good.
+      } else {
+        throw new BunqException(ERROR_RESPONSE_VERIFICATION_FAILED);
+      }
+  }
+
+  private static boolean isSignatureValid(Signature signature, PublicKey publicKey, byte[] dataBytes,
+      byte[] dataBytesSigned) throws BunqException {
     try {
       signature.initVerify(publicKey);
       signature.update(dataBytes);
 
-      if (!signature.verify(dataBytesSigned)) {
-        throw new BunqException(ERROR_RESPONSE_VERIFICATION_FAILED);
-      }
+      return signature.verify(dataBytesSigned);
     } catch (GeneralSecurityException exception) {
       throw new BunqException(ERROR_COULD_NOT_VERIFY_DATA, exception);
     }
@@ -526,7 +494,14 @@ public final class SecurityUtils {
     byte[] serverSignatureDecoded = DatatypeConverter.parseBase64Binary(
         serverSignature.getValue()
     );
-    verifyDataSigned(signature, keyPublicServer, responseBytes, serverSignatureDecoded);
+
+    if (SecurityUtils.isSignatureValid(signature, keyPublicServer, responseBytes, serverSignatureDecoded)) {
+      // Signature is valid headers + body signature.
+    } else if (SecurityUtils.isSignatureValid(signature, keyPublicServer, responseBodyBytes, serverSignatureDecoded)) {
+      // Signature is valid body signature.
+    } else {
+      throw new BunqException(ERROR_RESPONSE_VERIFICATION_FAILED);
+    }
   }
 
   private static byte[] getResponseBytes(

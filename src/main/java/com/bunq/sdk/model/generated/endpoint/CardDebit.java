@@ -5,7 +5,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.*;
-import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -291,7 +290,6 @@ public class CardDebit extends BunqModel {
         requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
-        requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
         return fromJson(CardDebit.class, responseRaw, OBJECT_TYPE_POST);
