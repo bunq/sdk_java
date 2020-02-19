@@ -177,14 +177,14 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
      */
     @Expose
     @SerializedName("ShareInviteBankInquiry")
-    private ShareInviteBankInquiry shareInviteBankInquiry;
+    private ShareInviteMonetaryAccountInquiry shareInviteBankInquiry;
 
     /**
      *
      */
     @Expose
     @SerializedName("ShareInviteBankResponse")
-    private ShareInviteBankResponse shareInviteBankResponse;
+    private ShareInviteMonetaryAccountResponse shareInviteBankResponse;
 
     /**
      *
@@ -466,22 +466,22 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
     /**
      *
      */
-    public ShareInviteBankInquiry getShareInviteBankInquiry() {
+    public ShareInviteMonetaryAccountInquiry getShareInviteBankInquiry() {
         return this.shareInviteBankInquiry;
     }
 
-    public void setShareInviteBankInquiry(ShareInviteBankInquiry shareInviteBankInquiry) {
+    public void setShareInviteBankInquiry(ShareInviteMonetaryAccountInquiry shareInviteBankInquiry) {
         this.shareInviteBankInquiry = shareInviteBankInquiry;
     }
 
     /**
      *
      */
-    public ShareInviteBankResponse getShareInviteBankResponse() {
+    public ShareInviteMonetaryAccountResponse getShareInviteBankResponse() {
         return this.shareInviteBankResponse;
     }
 
-    public void setShareInviteBankResponse(ShareInviteBankResponse shareInviteBankResponse) {
+    public void setShareInviteBankResponse(ShareInviteMonetaryAccountResponse shareInviteBankResponse) {
         this.shareInviteBankResponse = shareInviteBankResponse;
     }
 

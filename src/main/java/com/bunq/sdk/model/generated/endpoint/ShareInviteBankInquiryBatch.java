@@ -20,7 +20,7 @@ public class ShareInviteBankInquiryBatch extends BunqModel {
      */
     @Expose
     @SerializedName("share_invite_bank_inquiries")
-    private List<ShareInviteBankInquiry> shareInviteBankInquiries;
+    private List<ShareInviteMonetaryAccountInquiry> shareInviteBankInquiries;
 
     /**
      * The LabelMonetaryAccount containing the public information of this share invite inquiry
@@ -40,11 +40,11 @@ public class ShareInviteBankInquiryBatch extends BunqModel {
     /**
      * The list of share invite bank inquiries that were made.
      */
-    public List<ShareInviteBankInquiry> getShareInviteBankInquiries() {
+    public List<ShareInviteMonetaryAccountInquiry> getShareInviteBankInquiries() {
         return this.shareInviteBankInquiries;
     }
 
-    public void setShareInviteBankInquiries(List<ShareInviteBankInquiry> shareInviteBankInquiries) {
+    public void setShareInviteBankInquiries(List<ShareInviteMonetaryAccountInquiry> shareInviteBankInquiries) {
         this.shareInviteBankInquiries = shareInviteBankInquiries;
     }
 

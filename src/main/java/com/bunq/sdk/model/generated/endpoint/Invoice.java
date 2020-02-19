@@ -76,6 +76,13 @@ public class Invoice extends BunqModel {
     private String status;
 
     /**
+     * The category to display to the user.
+     */
+    @Expose
+    @SerializedName("category")
+    private String category;
+
+    /**
      * The invoice item groups.
      */
     @Expose
@@ -314,6 +321,17 @@ public class Invoice extends BunqModel {
     }
 
     /**
+     * The category to display to the user.
+     */
+    public String getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
      * The invoice item groups.
      */
     public List<InvoiceItemGroup> getGroup() {
@@ -460,6 +478,10 @@ public class Invoice extends BunqModel {
         }
 
         if (this.status != null) {
+            return false;
+        }
+
+        if (this.category != null) {
             return false;
         }
 

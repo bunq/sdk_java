@@ -35,7 +35,7 @@ public class MonetaryAccountBank extends BunqModel {
     public static final String FIELD_SUB_STATUS = "sub_status";
     public static final String FIELD_REASON = "reason";
     public static final String FIELD_REASON_DESCRIPTION = "reason_description";
-    public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
+    public static final String FIELD_DISPLAY_NAME = "display_name";
     public static final String FIELD_SETTING = "setting";
     /**
      * Endpoint constants.
@@ -98,13 +98,6 @@ public class MonetaryAccountBank extends BunqModel {
     @Expose
     @SerializedName("daily_limit")
     private Amount dailyLimit;
-
-    /**
-     * Total Amount of money spent today. Timezone aware.
-     */
-    @Expose
-    @SerializedName("daily_spent")
-    private Amount dailySpent;
 
     /**
      * The maximum Amount the MonetaryAccountBank can be 'in the red'.
@@ -180,12 +173,11 @@ public class MonetaryAccountBank extends BunqModel {
     private MonetaryAccountProfile monetaryAccountProfile;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountBank.
+     * The legal name of the user / company using this monetary account.
      */
     @Expose
-    @SerializedName("notification_filters")
-    private List<NotificationFilter> notificationFilters;
+    @SerializedName("display_name")
+    private String displayName;
 
     /**
      * The settings of the MonetaryAccountBank.
@@ -276,12 +268,11 @@ public class MonetaryAccountBank extends BunqModel {
     private String reasonDescriptionFieldForRequest;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountBank.
+     * The legal name of the user / company using this monetary account.
      */
     @Expose
-    @SerializedName("notification_filters_field_for_request")
-    private List<NotificationFilter> notificationFiltersFieldForRequest;
+    @SerializedName("display_name_field_for_request")
+    private String displayNameFieldForRequest;
 
     /**
      * The settings of the MonetaryAccountBank.
@@ -326,11 +317,11 @@ public class MonetaryAccountBank extends BunqModel {
         this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
     }
 
-    public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null);
+    public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null);
     }
 
-    public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
+    public MonetaryAccountBank(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
         this.currencyFieldForRequest = currency;
         this.descriptionFieldForRequest = description;
         this.dailyLimitFieldForRequest = dailyLimit;
@@ -339,38 +330,37 @@ public class MonetaryAccountBank extends BunqModel {
         this.subStatusFieldForRequest = subStatus;
         this.reasonFieldForRequest = reason;
         this.reasonDescriptionFieldForRequest = reasonDescription;
-        this.notificationFiltersFieldForRequest = notificationFilters;
+        this.displayNameFieldForRequest = displayName;
         this.settingFieldForRequest = setting;
     }
 
     /**
      * Create new MonetaryAccountBank.
      *
-     * @param currency            The currency of the MonetaryAccountBank as an ISO 4217 formatted currency
-     *                            code.
-     * @param description         The description of the MonetaryAccountBank. Defaults to 'bunq account'.
-     * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountBank. Defaults to
-     *                            1000 EUR. Currency must match the MonetaryAccountBank's currency. Limited to 10000 EUR.
-     * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountBank.
-     * @param status              The status of the MonetaryAccountBank. Ignored in POST requests (always set to
-     *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-     *                            MonetaryAccountBank. When updating the status and/or sub_status no other fields can be
-     *                            updated in the same request (and vice versa).
-     * @param subStatus           The sub-status of the MonetaryAccountBank providing extra information
-     *                            regarding the status. Should be ignored for POST requests. In case of PUT requests with
-     *                            status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
-     *                            only be NONE. When updating the status and/or sub_status no other fields can be updated in
-     *                            the same request (and vice versa).
-     * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
-     *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-     * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-     *                            the MonetaryAccountBank. Can be any user provided message. Should only be specified if
-     *                            updating the status to CANCELLED.
-     * @param notificationFilters The types of notifications that will result in a push notification
-     *                            or URL callback for this MonetaryAccountBank.
-     * @param setting             The settings of the MonetaryAccountBank.
+     * @param currency          The currency of the MonetaryAccountBank as an ISO 4217 formatted currency
+     *                          code.
+     * @param description       The description of the MonetaryAccountBank. Defaults to 'bunq account'.
+     * @param dailyLimit        The daily spending limit Amount of the MonetaryAccountBank. Defaults to
+     *                          1000 EUR. Currency must match the MonetaryAccountBank's currency. Limited to 10000 EUR.
+     * @param avatarUuid        The UUID of the Avatar of the MonetaryAccountBank.
+     * @param status            The status of the MonetaryAccountBank. Ignored in POST requests (always set to
+     *                          ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+     *                          MonetaryAccountBank. When updating the status and/or sub_status no other fields can be
+     *                          updated in the same request (and vice versa).
+     * @param subStatus         The sub-status of the MonetaryAccountBank providing extra information
+     *                          regarding the status. Should be ignored for POST requests. In case of PUT requests with
+     *                          status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+     *                          only be NONE. When updating the status and/or sub_status no other fields can be updated in
+     *                          the same request (and vice versa).
+     * @param reason            The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
+     *                          only be OTHER. Should only be specified if updating the status to CANCELLED.
+     * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+     *                          the MonetaryAccountBank. Can be any user provided message. Should only be specified if
+     *                          updating the status to CANCELLED.
+     * @param displayName       The legal name of the user / company using this monetary account.
+     * @param setting           The settings of the MonetaryAccountBank.
      */
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -386,7 +376,7 @@ public class MonetaryAccountBank extends BunqModel {
         requestMap.put(FIELD_SUB_STATUS, subStatus);
         requestMap.put(FIELD_REASON, reason);
         requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+        requestMap.put(FIELD_DISPLAY_NAME, displayName);
         requestMap.put(FIELD_SETTING, setting);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -431,12 +421,12 @@ public class MonetaryAccountBank extends BunqModel {
         return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null);
     }
 
     /**
@@ -464,29 +454,28 @@ public class MonetaryAccountBank extends BunqModel {
     /**
      * Update a specific existing MonetaryAccountBank.
      *
-     * @param description         The description of the MonetaryAccountBank. Defaults to 'bunq account'.
-     * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountBank. Defaults to
-     *                            1000 EUR. Currency must match the MonetaryAccountBank's currency. Limited to 10000 EUR.
-     * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountBank.
-     * @param status              The status of the MonetaryAccountBank. Ignored in POST requests (always set to
-     *                            ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-     *                            MonetaryAccountBank. When updating the status and/or sub_status no other fields can be
-     *                            updated in the same request (and vice versa).
-     * @param subStatus           The sub-status of the MonetaryAccountBank providing extra information
-     *                            regarding the status. Should be ignored for POST requests. In case of PUT requests with
-     *                            status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
-     *                            only be NONE. When updating the status and/or sub_status no other fields can be updated in
-     *                            the same request (and vice versa).
-     * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
-     *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-     * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-     *                            the MonetaryAccountBank. Can be any user provided message. Should only be specified if
-     *                            updating the status to CANCELLED.
-     * @param notificationFilters The types of notifications that will result in a push notification
-     *                            or URL callback for this MonetaryAccountBank.
-     * @param setting             The settings of the MonetaryAccountBank.
+     * @param description       The description of the MonetaryAccountBank. Defaults to 'bunq account'.
+     * @param dailyLimit        The daily spending limit Amount of the MonetaryAccountBank. Defaults to
+     *                          1000 EUR. Currency must match the MonetaryAccountBank's currency. Limited to 10000 EUR.
+     * @param avatarUuid        The UUID of the Avatar of the MonetaryAccountBank.
+     * @param status            The status of the MonetaryAccountBank. Ignored in POST requests (always set to
+     *                          ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+     *                          MonetaryAccountBank. When updating the status and/or sub_status no other fields can be
+     *                          updated in the same request (and vice versa).
+     * @param subStatus         The sub-status of the MonetaryAccountBank providing extra information
+     *                          regarding the status. Should be ignored for POST requests. In case of PUT requests with
+     *                          status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+     *                          only be NONE. When updating the status and/or sub_status no other fields can be updated in
+     *                          the same request (and vice versa).
+     * @param reason            The reason for voluntarily cancelling (closing) the MonetaryAccountBank, can
+     *                          only be OTHER. Should only be specified if updating the status to CANCELLED.
+     * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+     *                          the MonetaryAccountBank. Can be any user provided message. Should only be specified if
+     *                          updating the status to CANCELLED.
+     * @param displayName       The legal name of the user / company using this monetary account.
+     * @param setting           The settings of the MonetaryAccountBank.
      */
-    public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -501,7 +490,7 @@ public class MonetaryAccountBank extends BunqModel {
         requestMap.put(FIELD_SUB_STATUS, subStatus);
         requestMap.put(FIELD_REASON, reason);
         requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
+        requestMap.put(FIELD_DISPLAY_NAME, displayName);
         requestMap.put(FIELD_SETTING, setting);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -542,12 +531,12 @@ public class MonetaryAccountBank extends BunqModel {
         return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-        return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null);
+    public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+        return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-        return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null);
+    public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
+        return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null);
     }
 
     /**
@@ -651,17 +640,6 @@ public class MonetaryAccountBank extends BunqModel {
 
     public void setDailyLimit(Amount dailyLimit) {
         this.dailyLimit = dailyLimit;
-    }
-
-    /**
-     * Total Amount of money spent today. Timezone aware.
-     */
-    public Amount getDailySpent() {
-        return this.dailySpent;
-    }
-
-    public void setDailySpent(Amount dailySpent) {
-        this.dailySpent = dailySpent;
     }
 
     /**
@@ -778,15 +756,14 @@ public class MonetaryAccountBank extends BunqModel {
     }
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountBank.
+     * The legal name of the user / company using this monetary account.
      */
-    public List<NotificationFilter> getNotificationFilters() {
-        return this.notificationFilters;
+    public String getDisplayName() {
+        return this.displayName;
     }
 
-    public void setNotificationFilters(List<NotificationFilter> notificationFilters) {
-        this.notificationFilters = notificationFilters;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     /**
@@ -854,10 +831,6 @@ public class MonetaryAccountBank extends BunqModel {
             return false;
         }
 
-        if (this.dailySpent != null) {
-            return false;
-        }
-
         if (this.overdraftLimit != null) {
             return false;
         }
@@ -898,7 +871,7 @@ public class MonetaryAccountBank extends BunqModel {
             return false;
         }
 
-        if (this.notificationFilters != null) {
+        if (this.displayName != null) {
             return false;
         }
 

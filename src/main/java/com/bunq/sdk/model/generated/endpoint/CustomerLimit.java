@@ -70,13 +70,6 @@ public class CustomerLimit extends BunqModel {
     private Integer limitCardWildcard;
 
     /**
-     * DEPRECTATED: The limit of free replacement debit cards, replaced by: limit_card_replacement
-     */
-    @Expose
-    @SerializedName("limit_card_debit_replacement")
-    private Integer limitCardDebitReplacement;
-
-    /**
      * The limit of free replacement cards.
      */
     @Expose
@@ -189,17 +182,6 @@ public class CustomerLimit extends BunqModel {
     }
 
     /**
-     * DEPRECTATED: The limit of free replacement debit cards, replaced by: limit_card_replacement
-     */
-    public Integer getLimitCardDebitReplacement() {
-        return this.limitCardDebitReplacement;
-    }
-
-    public void setLimitCardDebitReplacement(Integer limitCardDebitReplacement) {
-        this.limitCardDebitReplacement = limitCardDebitReplacement;
-    }
-
-    /**
      * The limit of free replacement cards.
      */
     public Integer getLimitCardReplacement() {
@@ -257,10 +239,6 @@ public class CustomerLimit extends BunqModel {
         }
 
         if (this.limitCardWildcard != null) {
-            return false;
-        }
-
-        if (this.limitCardDebitReplacement != null) {
             return false;
         }
 

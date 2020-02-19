@@ -5,7 +5,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.*;
-import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -27,6 +26,7 @@ public class CardCredit extends BunqModel {
     public static final String FIELD_NAME_ON_CARD = "name_on_card";
     public static final String FIELD_ALIAS = "alias";
     public static final String FIELD_TYPE = "type";
+    public static final String FIELD_PRODUCT_TYPE = "product_type";
     public static final String FIELD_PIN_CODE_ASSIGNMENT = "pin_code_assignment";
     public static final String FIELD_MONETARY_ACCOUNT_ID_FALLBACK = "monetary_account_id_fallback";
     /**
@@ -125,20 +125,6 @@ public class CardCredit extends BunqModel {
     private String nameOnCard;
 
     /**
-     * The last 4 digits of the PAN of the card.
-     */
-    @Expose
-    @SerializedName("primary_account_number_four_digit")
-    private String primaryAccountNumberFourDigit;
-
-    /**
-     * Array of PANs, status, description and account id for online cards.
-     */
-    @Expose
-    @SerializedName("primary_account_numbers_virtual")
-    private List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual;
-
-    /**
      * The spending limit for the card.
      */
     @Expose
@@ -228,6 +214,13 @@ public class CardCredit extends BunqModel {
     private String typeFieldForRequest;
 
     /**
+     * The product type of the card to order.
+     */
+    @Expose
+    @SerializedName("product_type_field_for_request")
+    private String productTypeFieldForRequest;
+
+    /**
      * Array of Types, PINs, account IDs assigned to the card.
      */
     @Expose
@@ -243,34 +236,39 @@ public class CardCredit extends BunqModel {
     private Integer monetaryAccountIdFallbackFieldForRequest;
 
     public CardCredit() {
-        this(null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null);
     }
 
     public CardCredit(String secondLine) {
-        this(secondLine, null, null, null, null, null);
+        this(secondLine, null, null, null, null, null, null);
     }
 
     public CardCredit(String secondLine, String nameOnCard) {
-        this(secondLine, nameOnCard, null, null, null, null);
+        this(secondLine, nameOnCard, null, null, null, null, null);
     }
 
     public CardCredit(String secondLine, String nameOnCard, String type) {
-        this(secondLine, nameOnCard, type, null, null, null);
+        this(secondLine, nameOnCard, type, null, null, null, null);
     }
 
     public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias) {
-        this(secondLine, nameOnCard, type, alias, null, null);
+        this(secondLine, nameOnCard, type, alias, null, null, null);
     }
 
-    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
-        this(secondLine, nameOnCard, type, alias, pinCodeAssignment, null);
+    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, String productType) {
+        this(secondLine, nameOnCard, type, alias, productType, null, null);
     }
 
-    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, String productType, List<CardPinAssignment> pinCodeAssignment) {
+        this(secondLine, nameOnCard, type, alias, productType, pinCodeAssignment, null);
+    }
+
+    public CardCredit(String secondLine, String nameOnCard, String type, Pointer alias, String productType, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
         this.secondLineFieldForRequest = secondLine;
         this.nameOnCardFieldForRequest = nameOnCard;
         this.aliasFieldForRequest = alias;
         this.typeFieldForRequest = type;
+        this.productTypeFieldForRequest = productType;
         this.pinCodeAssignmentFieldForRequest = pinCodeAssignment;
         this.monetaryAccountIdFallbackFieldForRequest = monetaryAccountIdFallback;
     }
@@ -286,11 +284,12 @@ public class CardCredit extends BunqModel {
      * @param alias                     The pointer to the monetary account that will be connected at first with the
      *                                  card. Its IBAN code is also the one that will be printed on the card itself. The pointer must
      *                                  be of type IBAN.
+     * @param productType               The product type of the card to order.
      * @param pinCodeAssignment         Array of Types, PINs, account IDs assigned to the card.
      * @param monetaryAccountIdFallback ID of the MA to be used as fallback for this card if
      *                                  insufficient balance. Fallback account is removed if not supplied.
      */
-    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, String productType, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -302,42 +301,46 @@ public class CardCredit extends BunqModel {
         requestMap.put(FIELD_NAME_ON_CARD, nameOnCard);
         requestMap.put(FIELD_ALIAS, alias);
         requestMap.put(FIELD_TYPE, type);
+        requestMap.put(FIELD_PRODUCT_TYPE, productType);
         requestMap.put(FIELD_PIN_CODE_ASSIGNMENT, pinCodeAssignment);
         requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
-        requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
         return fromJson(CardCredit.class, responseRaw, OBJECT_TYPE_POST);
     }
 
     public static BunqResponse<CardCredit> create() {
-        return create(null, null, null, null, null, null, null);
+        return create(null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<CardCredit> create(String secondLine) {
-        return create(secondLine, null, null, null, null, null, null);
+        return create(secondLine, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard) {
-        return create(secondLine, nameOnCard, null, null, null, null, null);
+        return create(secondLine, nameOnCard, null, null, null, null, null, null);
     }
 
     public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type) {
-        return create(secondLine, nameOnCard, type, null, null, null, null);
+        return create(secondLine, nameOnCard, type, null, null, null, null, null);
     }
 
     public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias) {
-        return create(secondLine, nameOnCard, type, alias, null, null, null);
+        return create(secondLine, nameOnCard, type, alias, null, null, null, null);
     }
 
-    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
-        return create(secondLine, nameOnCard, type, alias, pinCodeAssignment, null, null);
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, String productType) {
+        return create(secondLine, nameOnCard, type, alias, productType, null, null, null);
     }
 
-    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
-        return create(secondLine, nameOnCard, type, alias, pinCodeAssignment, monetaryAccountIdFallback, null);
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, String productType, List<CardPinAssignment> pinCodeAssignment) {
+        return create(secondLine, nameOnCard, type, alias, productType, pinCodeAssignment, null, null);
+    }
+
+    public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, Pointer alias, String productType, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+        return create(secondLine, nameOnCard, type, alias, productType, pinCodeAssignment, monetaryAccountIdFallback, null);
     }
 
     /**
@@ -482,28 +485,6 @@ public class CardCredit extends BunqModel {
     }
 
     /**
-     * The last 4 digits of the PAN of the card.
-     */
-    public String getPrimaryAccountNumberFourDigit() {
-        return this.primaryAccountNumberFourDigit;
-    }
-
-    public void setPrimaryAccountNumberFourDigit(String primaryAccountNumberFourDigit) {
-        this.primaryAccountNumberFourDigit = primaryAccountNumberFourDigit;
-    }
-
-    /**
-     * Array of PANs, status, description and account id for online cards.
-     */
-    public List<CardVirtualPrimaryAccountNumber> getPrimaryAccountNumbersVirtual() {
-        return this.primaryAccountNumbersVirtual;
-    }
-
-    public void setPrimaryAccountNumbersVirtual(List<CardVirtualPrimaryAccountNumber> primaryAccountNumbersVirtual) {
-        this.primaryAccountNumbersVirtual = primaryAccountNumbersVirtual;
-    }
-
-    /**
      * The spending limit for the card.
      */
     public Amount getCardLimit() {
@@ -641,14 +622,6 @@ public class CardCredit extends BunqModel {
         }
 
         if (this.nameOnCard != null) {
-            return false;
-        }
-
-        if (this.primaryAccountNumberFourDigit != null) {
-            return false;
-        }
-
-        if (this.primaryAccountNumbersVirtual != null) {
             return false;
         }
 

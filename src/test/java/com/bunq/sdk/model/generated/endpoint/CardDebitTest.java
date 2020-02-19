@@ -81,8 +81,7 @@ public class CardDebitTest extends BunqSdkTestBase {
         secondLine,
         nameOnCard,
         CARD_DEBIT_TYPE_MAESTRO,
-        alias,
-        cardPinAssignmentList
+        alias
     ).getValue();
 
     Card cardFromCardEndpoint = getCard(cardDebit.getId());
