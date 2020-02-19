@@ -109,6 +109,14 @@ public class MasterCardAction extends BunqModel {
     private String decision;
 
     /**
+     * The payment status of the transaction. For example PAYMENT_SUCCESSFUL, for a successful
+     * payment.
+     */
+    @Expose
+    @SerializedName("payment_status")
+    private String paymentStatus;
+
+    /**
      * Empty if allowed, otherwise a textual explanation of why it was denied.
      */
     @Expose
@@ -436,6 +444,18 @@ public class MasterCardAction extends BunqModel {
     }
 
     /**
+     * The payment status of the transaction. For example PAYMENT_SUCCESSFUL, for a successful
+     * payment.
+     */
+    public String getPaymentStatus() {
+        return this.paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    /**
      * Empty if allowed, otherwise a textual explanation of why it was denied.
      */
     public String getDecisionDescription() {
@@ -715,6 +735,10 @@ public class MasterCardAction extends BunqModel {
         }
 
         if (this.decision != null) {
+            return false;
+        }
+
+        if (this.paymentStatus != null) {
             return false;
         }
 

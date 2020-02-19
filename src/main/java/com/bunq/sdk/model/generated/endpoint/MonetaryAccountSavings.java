@@ -32,7 +32,6 @@ public class MonetaryAccountSavings extends BunqModel {
     public static final String FIELD_REASON = "reason";
     public static final String FIELD_REASON_DESCRIPTION = "reason_description";
     public static final String FIELD_ALL_CO_OWNER = "all_co_owner";
-    public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
     public static final String FIELD_SETTING = "setting";
     public static final String FIELD_SAVINGS_GOAL = "savings_goal";
     /**
@@ -96,13 +95,6 @@ public class MonetaryAccountSavings extends BunqModel {
     @Expose
     @SerializedName("daily_limit")
     private Amount dailyLimit;
-
-    /**
-     * Total Amount of money spent today. Timezone aware.
-     */
-    @Expose
-    @SerializedName("daily_spent")
-    private Amount dailySpent;
 
     /**
      * The maximum Amount the MonetaryAccountSavings can be 'in the red'. Must be 0 EUR or omitted.
@@ -185,14 +177,6 @@ public class MonetaryAccountSavings extends BunqModel {
     @Expose
     @SerializedName("monetary_account_profile")
     private MonetaryAccountProfile monetaryAccountProfile;
-
-    /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountSavings.
-     */
-    @Expose
-    @SerializedName("notification_filters")
-    private List<NotificationFilter> notificationFilters;
 
     /**
      * The settings of the MonetaryAccountSavings.
@@ -304,14 +288,6 @@ public class MonetaryAccountSavings extends BunqModel {
     private List<CoOwner> allCoOwnerFieldForRequest;
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountSavings.
-     */
-    @Expose
-    @SerializedName("notification_filters_field_for_request")
-    private List<NotificationFilter> notificationFiltersFieldForRequest;
-
-    /**
      * The settings of the MonetaryAccountSavings.
      */
     @Expose
@@ -326,54 +302,50 @@ public class MonetaryAccountSavings extends BunqModel {
     private Amount savingsGoalFieldForRequest;
 
     public MonetaryAccountSavings() {
-        this(null, null, null, null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency) {
-        this(currency, null, null, null, null, null, null, null, null, null, null, null);
+        this(currency, null, null, null, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description) {
-        this(currency, description, null, null, null, null, null, null, null, null, null, null);
+        this(currency, description, null, null, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit) {
-        this(currency, description, dailyLimit, null, null, null, null, null, null, null, null, null);
+        this(currency, description, dailyLimit, null, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid) {
-        this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
-        this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
     }
 
     public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null, null);
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null);
     }
 
-    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, null, null);
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, MonetaryAccountSetting setting) {
+        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, setting, null);
     }
 
-    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-        this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, null);
-    }
-
-    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal) {
+    public MonetaryAccountSavings(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, MonetaryAccountSetting setting, Amount savingsGoal) {
         this.currencyFieldForRequest = currency;
         this.descriptionFieldForRequest = description;
         this.dailyLimitFieldForRequest = dailyLimit;
@@ -383,7 +355,6 @@ public class MonetaryAccountSavings extends BunqModel {
         this.reasonFieldForRequest = reason;
         this.reasonDescriptionFieldForRequest = reasonDescription;
         this.allCoOwnerFieldForRequest = allCoOwner;
-        this.notificationFiltersFieldForRequest = notificationFilters;
         this.settingFieldForRequest = setting;
         this.savingsGoalFieldForRequest = savingsGoal;
     }
@@ -391,33 +362,31 @@ public class MonetaryAccountSavings extends BunqModel {
     /**
      * Create new MonetaryAccountSavings.
      *
-     * @param currency            The currency of the MonetaryAccountSavings as an ISO 4217 formatted currency
-     *                            code.
-     * @param description         The description of the MonetaryAccountSavings. Defaults to 'bunq account'.
-     * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountSavings. Defaults to
-     *                            1000 EUR. Currency must match the MonetaryAccountSavings's currency. Limited to 10000 EUR.
-     * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountSavings.
-     * @param status              The status of the MonetaryAccountSavings. Ignored in POST requests (always set
-     *                            to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-     *                            MonetaryAccountSavings. When updating the status and/or sub_status no other fields can be
-     *                            updated in the same request (and vice versa).
-     * @param subStatus           The sub-status of the MonetaryAccountSavings providing extra information
-     *                            regarding the status. Should be ignored for POST requests. In case of PUT requests with
-     *                            status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
-     *                            only be NONE. When updating the status and/or sub_status no other fields can be updated in
-     *                            the same request (and vice versa).
-     * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountSavings, can
-     *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-     * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-     *                            the MonetaryAccountSavings. Can be any user provided message. Should only be specified if
-     *                            updating the status to CANCELLED.
-     * @param allCoOwner          The users the account will be joint with.
-     * @param notificationFilters The types of notifications that will result in a push notification
-     *                            or URL callback for this MonetaryAccountSavings.
-     * @param setting             The settings of the MonetaryAccountSavings.
-     * @param savingsGoal         The Savings Goal set for this MonetaryAccountSavings.
+     * @param currency          The currency of the MonetaryAccountSavings as an ISO 4217 formatted currency
+     *                          code.
+     * @param description       The description of the MonetaryAccountSavings. Defaults to 'bunq account'.
+     * @param dailyLimit        The daily spending limit Amount of the MonetaryAccountSavings. Defaults to
+     *                          1000 EUR. Currency must match the MonetaryAccountSavings's currency. Limited to 10000 EUR.
+     * @param avatarUuid        The UUID of the Avatar of the MonetaryAccountSavings.
+     * @param status            The status of the MonetaryAccountSavings. Ignored in POST requests (always set
+     *                          to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+     *                          MonetaryAccountSavings. When updating the status and/or sub_status no other fields can be
+     *                          updated in the same request (and vice versa).
+     * @param subStatus         The sub-status of the MonetaryAccountSavings providing extra information
+     *                          regarding the status. Should be ignored for POST requests. In case of PUT requests with
+     *                          status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+     *                          only be NONE. When updating the status and/or sub_status no other fields can be updated in
+     *                          the same request (and vice versa).
+     * @param reason            The reason for voluntarily cancelling (closing) the MonetaryAccountSavings, can
+     *                          only be OTHER. Should only be specified if updating the status to CANCELLED.
+     * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+     *                          the MonetaryAccountSavings. Can be any user provided message. Should only be specified if
+     *                          updating the status to CANCELLED.
+     * @param allCoOwner        The users the account will be joint with.
+     * @param setting           The settings of the MonetaryAccountSavings.
+     * @param savingsGoal       The Savings Goal set for this MonetaryAccountSavings.
      */
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, MonetaryAccountSetting setting, Amount savingsGoal, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -434,7 +403,6 @@ public class MonetaryAccountSavings extends BunqModel {
         requestMap.put(FIELD_REASON, reason);
         requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
         requestMap.put(FIELD_ALL_CO_OWNER, allCoOwner);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
         requestMap.put(FIELD_SETTING, setting);
         requestMap.put(FIELD_SAVINGS_GOAL, savingsGoal);
 
@@ -445,55 +413,51 @@ public class MonetaryAccountSavings extends BunqModel {
     }
 
     public static BunqResponse<Integer> create() {
-        return create(null, null, null, null, null, null, null, null, null, null, null, null, null);
+        return create(null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency) {
-        return create(currency, null, null, null, null, null, null, null, null, null, null, null, null);
+        return create(currency, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description) {
-        return create(currency, description, null, null, null, null, null, null, null, null, null, null, null);
+        return create(currency, description, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit) {
-        return create(currency, description, dailyLimit, null, null, null, null, null, null, null, null, null, null);
+        return create(currency, description, dailyLimit, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid) {
-        return create(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null, null);
+        return create(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
-        return create(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null, null);
+        return create(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null, null);
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null, null);
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null, null);
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null, null, null);
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, null, null, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, MonetaryAccountSetting setting) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, setting, null, null);
     }
 
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, null, null);
-    }
-
-    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal) {
-        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, notificationFilters, setting, savingsGoal, null);
+    public static BunqResponse<Integer> create(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<CoOwner> allCoOwner, MonetaryAccountSetting setting, Amount savingsGoal) {
+        return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, allCoOwner, setting, savingsGoal, null);
     }
 
     /**
@@ -521,30 +485,28 @@ public class MonetaryAccountSavings extends BunqModel {
     /**
      * Update a specific existing MonetaryAccountSavings.
      *
-     * @param description         The description of the MonetaryAccountSavings. Defaults to 'bunq account'.
-     * @param dailyLimit          The daily spending limit Amount of the MonetaryAccountSavings. Defaults to
-     *                            1000 EUR. Currency must match the MonetaryAccountSavings's currency. Limited to 10000 EUR.
-     * @param avatarUuid          The UUID of the Avatar of the MonetaryAccountSavings.
-     * @param status              The status of the MonetaryAccountSavings. Ignored in POST requests (always set
-     *                            to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
-     *                            MonetaryAccountSavings. When updating the status and/or sub_status no other fields can be
-     *                            updated in the same request (and vice versa).
-     * @param subStatus           The sub-status of the MonetaryAccountSavings providing extra information
-     *                            regarding the status. Should be ignored for POST requests. In case of PUT requests with
-     *                            status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
-     *                            only be NONE. When updating the status and/or sub_status no other fields can be updated in
-     *                            the same request (and vice versa).
-     * @param reason              The reason for voluntarily cancelling (closing) the MonetaryAccountSavings, can
-     *                            only be OTHER. Should only be specified if updating the status to CANCELLED.
-     * @param reasonDescription   The optional free-form reason for voluntarily cancelling (closing)
-     *                            the MonetaryAccountSavings. Can be any user provided message. Should only be specified if
-     *                            updating the status to CANCELLED.
-     * @param notificationFilters The types of notifications that will result in a push notification
-     *                            or URL callback for this MonetaryAccountSavings.
-     * @param setting             The settings of the MonetaryAccountSavings.
-     * @param savingsGoal         The Savings Goal set for this MonetaryAccountSavings.
+     * @param description       The description of the MonetaryAccountSavings. Defaults to 'bunq account'.
+     * @param dailyLimit        The daily spending limit Amount of the MonetaryAccountSavings. Defaults to
+     *                          1000 EUR. Currency must match the MonetaryAccountSavings's currency. Limited to 10000 EUR.
+     * @param avatarUuid        The UUID of the Avatar of the MonetaryAccountSavings.
+     * @param status            The status of the MonetaryAccountSavings. Ignored in POST requests (always set
+     *                          to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+     *                          MonetaryAccountSavings. When updating the status and/or sub_status no other fields can be
+     *                          updated in the same request (and vice versa).
+     * @param subStatus         The sub-status of the MonetaryAccountSavings providing extra information
+     *                          regarding the status. Should be ignored for POST requests. In case of PUT requests with
+     *                          status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+     *                          only be NONE. When updating the status and/or sub_status no other fields can be updated in
+     *                          the same request (and vice versa).
+     * @param reason            The reason for voluntarily cancelling (closing) the MonetaryAccountSavings, can
+     *                          only be OTHER. Should only be specified if updating the status to CANCELLED.
+     * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+     *                          the MonetaryAccountSavings. Can be any user provided message. Should only be specified if
+     *                          updating the status to CANCELLED.
+     * @param setting           The settings of the MonetaryAccountSavings.
+     * @param savingsGoal       The Savings Goal set for this MonetaryAccountSavings.
      */
-    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSetting setting, Amount savingsGoal, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -559,7 +521,6 @@ public class MonetaryAccountSavings extends BunqModel {
         requestMap.put(FIELD_SUB_STATUS, subStatus);
         requestMap.put(FIELD_REASON, reason);
         requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
         requestMap.put(FIELD_SETTING, setting);
         requestMap.put(FIELD_SAVINGS_GOAL, savingsGoal);
 
@@ -570,47 +531,43 @@ public class MonetaryAccountSavings extends BunqModel {
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId) {
-        return update(monetaryAccountSavingsId, null, null, null, null, null, null, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description) {
-        return update(monetaryAccountSavingsId, description, null, null, null, null, null, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, null, null, null, null, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, dailyLimit, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null);
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, null, null, null);
+    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSetting setting) {
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, setting, null, null);
     }
 
-    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, null, null);
-    }
-
-    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, List<NotificationFilter> notificationFilters, MonetaryAccountSetting setting, Amount savingsGoal) {
-        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, notificationFilters, setting, savingsGoal, null);
+    public static BunqResponse<Integer> update(Integer monetaryAccountSavingsId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSetting setting, Amount savingsGoal) {
+        return update(monetaryAccountSavingsId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, setting, savingsGoal, null);
     }
 
     /**
@@ -714,17 +671,6 @@ public class MonetaryAccountSavings extends BunqModel {
 
     public void setDailyLimit(Amount dailyLimit) {
         this.dailyLimit = dailyLimit;
-    }
-
-    /**
-     * Total Amount of money spent today. Timezone aware.
-     */
-    public Amount getDailySpent() {
-        return this.dailySpent;
-    }
-
-    public void setDailySpent(Amount dailySpent) {
-        this.dailySpent = dailySpent;
     }
 
     /**
@@ -854,18 +800,6 @@ public class MonetaryAccountSavings extends BunqModel {
     }
 
     /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * MonetaryAccountSavings.
-     */
-    public List<NotificationFilter> getNotificationFilters() {
-        return this.notificationFilters;
-    }
-
-    public void setNotificationFilters(List<NotificationFilter> notificationFilters) {
-        this.notificationFilters = notificationFilters;
-    }
-
-    /**
      * The settings of the MonetaryAccountSavings.
      */
     public MonetaryAccountSetting getSetting() {
@@ -952,10 +886,6 @@ public class MonetaryAccountSavings extends BunqModel {
             return false;
         }
 
-        if (this.dailySpent != null) {
-            return false;
-        }
-
         if (this.overdraftLimit != null) {
             return false;
         }
@@ -997,10 +927,6 @@ public class MonetaryAccountSavings extends BunqModel {
         }
 
         if (this.monetaryAccountProfile != null) {
-            return false;
-        }
-
-        if (this.notificationFilters != null) {
             return false;
         }
 

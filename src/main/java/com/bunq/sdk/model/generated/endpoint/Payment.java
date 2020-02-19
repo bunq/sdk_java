@@ -226,6 +226,13 @@ public class Payment extends BunqModel {
     private Amount balanceAfterMutation;
 
     /**
+     * A reference to the PaymentAutoAllocateInstance if it exists.
+     */
+    @Expose
+    @SerializedName("payment_auto_allocate_instance")
+    private PaymentAutoAllocateInstance paymentAutoAllocateInstance;
+
+    /**
      * The Amount to transfer with the Payment. Must be bigger than 0 and smaller than the
      * MonetaryAccount's balance.
      */
@@ -713,6 +720,17 @@ public class Payment extends BunqModel {
     }
 
     /**
+     * A reference to the PaymentAutoAllocateInstance if it exists.
+     */
+    public PaymentAutoAllocateInstance getPaymentAutoAllocateInstance() {
+        return this.paymentAutoAllocateInstance;
+    }
+
+    public void setPaymentAutoAllocateInstance(PaymentAutoAllocateInstance paymentAutoAllocateInstance) {
+        this.paymentAutoAllocateInstance = paymentAutoAllocateInstance;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -813,6 +831,10 @@ public class Payment extends BunqModel {
         }
 
         if (this.balanceAfterMutation != null) {
+            return false;
+        }
+
+        if (this.paymentAutoAllocateInstance != null) {
             return false;
         }
 

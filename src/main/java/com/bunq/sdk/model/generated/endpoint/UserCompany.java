@@ -40,7 +40,6 @@ public class UserCompany extends BunqModel {
     public static final String FIELD_SUB_STATUS = "sub_status";
     public static final String FIELD_SESSION_TIMEOUT = "session_timeout";
     public static final String FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN = "daily_limit_without_confirmation_login";
-    public static final String FIELD_NOTIFICATION_FILTERS = "notification_filters";
     /**
      * Endpoint constants.
      */
@@ -266,6 +265,13 @@ public class UserCompany extends BunqModel {
     private List<BillingContractSubscription> billingContract;
 
     /**
+     * The user deny reason.
+     */
+    @Expose
+    @SerializedName("deny_reason")
+    private String denyReason;
+
+    /**
      * The company name.
      */
     @Expose
@@ -374,79 +380,67 @@ public class UserCompany extends BunqModel {
     @SerializedName("daily_limit_without_confirmation_login_field_for_request")
     private Amount dailyLimitWithoutConfirmationLoginFieldForRequest;
 
-    /**
-     * The types of notifications that will result in a push notification or URL callback for this
-     * UserCompany.
-     */
-    @Expose
-    @SerializedName("notification_filters_field_for_request")
-    private List<NotificationFilter> notificationFiltersFieldForRequest;
-
     public UserCompany() {
-        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain) {
-        this(addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language) {
-        this(addressMain, language, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(addressMain, language, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region) {
-        this(addressMain, language, region, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(addressMain, language, region, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name) {
-        this(addressMain, language, region, name, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(addressMain, language, region, name, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName) {
-        this(addressMain, language, region, name, publicNickName, null, null, null, null, null, null, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, null, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, null, null, null, null, null, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, null, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, null, null, null, null, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, null, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, null, null, null, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, null, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, null, null, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, null, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, null, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, null, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, null, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, null, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, null, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, null, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null, null);
+        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null);
     }
 
     public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
-        this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null);
-    }
-
-    public UserCompany(Address addressMain, String language, String region, String name, String publicNickName, String avatarUuid, Address addressPostal, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters) {
         this.nameFieldForRequest = name;
         this.publicNickNameFieldForRequest = publicNickName;
         this.avatarUuidFieldForRequest = avatarUuid;
@@ -462,7 +456,6 @@ public class UserCompany extends BunqModel {
         this.subStatusFieldForRequest = subStatus;
         this.sessionTimeoutFieldForRequest = sessionTimeout;
         this.dailyLimitWithoutConfirmationLoginFieldForRequest = dailyLimitWithoutConfirmationLogin;
-        this.notificationFiltersFieldForRequest = notificationFilters;
     }
 
     /**
@@ -506,10 +499,8 @@ public class UserCompany extends BunqModel {
      * @param sessionTimeout                     The setting for the session timeout of the company in seconds.
      * @param dailyLimitWithoutConfirmationLogin The amount the company can pay in the session
      *                                           without asking for credentials.
-     * @param notificationFilters                The types of notifications that will result in a push notification
-     *                                           or URL callback for this UserCompany.
      */
-    public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -532,7 +523,6 @@ public class UserCompany extends BunqModel {
         requestMap.put(FIELD_SUB_STATUS, subStatus);
         requestMap.put(FIELD_SESSION_TIMEOUT, sessionTimeout);
         requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutConfirmationLogin);
-        requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
         BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId()), requestBytes, customHeaders);
@@ -541,67 +531,63 @@ public class UserCompany extends BunqModel {
     }
 
     public static BunqResponse<Integer> update(String name) {
-        return update(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        return update(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName) {
-        return update(name, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid) {
-        return update(name, publicNickName, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain) {
-        return update(name, publicNickName, avatarUuid, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, null, null, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, null, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, null, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, null, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, null, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, null, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, null, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, null, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null, null, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null, null);
     }
 
     public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null);
-    }
-
-    public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, Address addressMain, Address addressPostal, String language, String region, String country, List<Ubo> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, List<NotificationFilter> notificationFilters) {
-        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, notificationFilters, null);
+        return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null);
     }
 
     /**
@@ -946,6 +932,17 @@ public class UserCompany extends BunqModel {
     }
 
     /**
+     * The user deny reason.
+     */
+    public String getDenyReason() {
+        return this.denyReason;
+    }
+
+    public void setDenyReason(String denyReason) {
+        this.denyReason = denyReason;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -1066,6 +1063,10 @@ public class UserCompany extends BunqModel {
         }
 
         if (this.billingContract != null) {
+            return false;
+        }
+
+        if (this.denyReason != null) {
             return false;
         }
 

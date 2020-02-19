@@ -1,8 +1,7 @@
 # Change Log
 
-## [Unreleased](https://github.com/bunq/sdk_java/tree/HEAD)
-
-[Full Changelog](https://github.com/bunq/sdk_java/compare/1.12.0...HEAD)
+## [1.12.1](https://github.com/bunq/sdk_java/tree/1.12.1) (2019-09-16)
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.12.0...1.12.1)
 
 **Closed issues:**
 

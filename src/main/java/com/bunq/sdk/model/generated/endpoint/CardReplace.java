@@ -5,7 +5,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.CardPinAssignment;
-import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -101,7 +100,6 @@ public class CardReplace extends BunqModel {
         requestMap.put(FIELD_SECOND_LINE, secondLine);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
-        requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), cardId), requestBytes, customHeaders);
 
         return processForId(responseRaw);

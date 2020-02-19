@@ -4,7 +4,6 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -114,7 +113,6 @@ public class CardGeneratedCvc2 extends BunqModel {
         requestMap.put(FIELD_TYPE, type);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
-        requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), cardId), requestBytes, customHeaders);
 
         return processForId(responseRaw);
@@ -172,7 +170,6 @@ public class CardGeneratedCvc2 extends BunqModel {
         requestMap.put(FIELD_TYPE, type);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
-        requestBytes = SecurityUtils.encrypt(getApiContext(), requestBytes, customHeaders);
         BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), cardId, cardGeneratedCvc2Id), requestBytes, customHeaders);
 
         return processForId(responseRaw);
