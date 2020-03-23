@@ -39,8 +39,8 @@ public class OauthAccessToken extends BunqModel {
     /**
      * Token constants.
      */
-    protected static final String TOKEN_URI_FORMAT_SANDBOX = "https://api.oauth.bunq.com/v1/token?%s";
-    protected static final String TOKEN_URI_FORMAT_PRODUCTION = "https://api.oauth.sandbox.bunq.com/v1/token?%s";
+    protected static final String TOKEN_URI_FORMAT_SANDBOX = "https://api-oauth.sandbox.bunq.com/v1/token?%s";
+    protected static final String TOKEN_URI_FORMAT_PRODUCTION = "https://api.oauth.bunq.com/v1/token?%s";
 
     /**
      * Error constants.
