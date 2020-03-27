@@ -13,7 +13,7 @@ public enum ApiEnvironmentType {
   SANDBOX(
       "public-api.sandbox.bunq.com",
       "v1",
-      "sha256/9Y+oZve6H+r17Kdn+lN5sT0ijgxLyDGIuQtUwLupawA="
+      "sha256/SEJfjAW74vHQmGe/lb9NwBjzAw5y7rpJH3UWpGE5q8A="
   );
 
   /**
