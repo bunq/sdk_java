@@ -1,5 +1,5 @@
 group 'com.bunq.sdk'
-version '1.13.0'
+version '1.13.1'
 
 apply plugin: 'java'
 apply plugin: 'maven'
