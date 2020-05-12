@@ -55,21 +55,7 @@ public class SessionContext implements java.io.Serializable {
   }
 
   private int getUserId(BunqModel user) {
-    if (user instanceof UserPerson) {
-      return ((UserPerson) user).getId();
-    } else if (user instanceof UserCompany) {
-      return ((UserCompany) user).getId();
-    } else if (user instanceof UserApiKey) {
-      return ((UserApiKey) user).getId();
-    } else if (user instanceof UserPaymentServiceProvider) {
-      return ((UserPaymentServiceProvider) user).getId();
-    } else {
-      throw new BunqException(
-          String.format(
-              ERROR_UNEXPECTED_USER_TYPE, user.getClass().toString()
-          )
-      );
-    }
+    return user.getId();
   }
 
   private static Date calculateExpiryTime(SessionServer sessionServer) {
