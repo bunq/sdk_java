@@ -22,4 +22,8 @@ public class HttpUtil {
 
         return String.join(QUERY_DELIMITER, encodedParameters);
     }
+
+    public static String getQueryDelimiter() {
+        return QUERY_DELIMITER;
+    }
 }

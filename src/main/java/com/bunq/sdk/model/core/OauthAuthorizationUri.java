@@ -97,7 +97,7 @@ public class OauthAuthorizationUri extends BunqModel {
         };
 
         return new OauthAuthorizationUri(
-            baseUri.authorizationUri + HttpUtil.createQueryString(allAdditionalParameter)
+            baseUri.authorizationUri + HttpUtil.getQueryDelimiter() + HttpUtil.createQueryString(allAdditionalParameter)
         );
     }
 
