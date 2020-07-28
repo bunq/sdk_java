@@ -127,13 +127,6 @@ public class IdealMerchantTransaction extends BunqModel {
     private String transactionIdentifier;
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    @Expose
-    @SerializedName("allow_chat")
-    private Boolean allowChat;
-
-    /**
      * The requested amount of money to add.
      */
     @Expose
@@ -396,17 +389,6 @@ public class IdealMerchantTransaction extends BunqModel {
     }
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    public Boolean getAllowChat() {
-        return this.allowChat;
-    }
-
-    public void setAllowChat(Boolean allowChat) {
-        this.allowChat = allowChat;
-    }
-
-    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -459,10 +441,6 @@ public class IdealMerchantTransaction extends BunqModel {
         }
 
         if (this.transactionIdentifier != null) {
-            return false;
-        }
-
-        if (this.allowChat != null) {
             return false;
         }
 

@@ -102,7 +102,10 @@ public class CardDebit extends BunqModel {
     private String status;
 
     /**
-     * The order status of the card. After ordering the card it will be NEW_CARD_REQUEST_RECEIVED.
+     * The order status of the card. Can be NEW_CARD_REQUEST_RECEIVED, CARD_REQUEST_PENDING,
+     * SENT_FOR_PRODUCTION, ACCEPTED_FOR_PRODUCTION, DELIVERED_TO_CUSTOMER, CARD_UPDATE_REQUESTED,
+     * CARD_UPDATE_PENDING, CARD_UPDATE_SENT, CARD_UPDATE_ACCEPTED, VIRTUAL_DELIVERY,
+     * NEW_CARD_REQUEST_PENDING_USER_APPROVAL, SENT_FOR_DELIVERY or NEW_CARD_REQUEST_CANCELLED.
      */
     @Expose
     @SerializedName("order_status")
@@ -164,6 +167,13 @@ public class CardDebit extends BunqModel {
     @Expose
     @SerializedName("country")
     private String country;
+
+    /**
+     * A tracking link provided by our shipment provider.
+     */
+    @Expose
+    @SerializedName("card_shipment_tracking_url")
+    private String cardShipmentTrackingUrl;
 
     /**
      * The second line of text on the card, used as name/description for it. It can contain at most
@@ -434,7 +444,10 @@ public class CardDebit extends BunqModel {
     }
 
     /**
-     * The order status of the card. After ordering the card it will be NEW_CARD_REQUEST_RECEIVED.
+     * The order status of the card. Can be NEW_CARD_REQUEST_RECEIVED, CARD_REQUEST_PENDING,
+     * SENT_FOR_PRODUCTION, ACCEPTED_FOR_PRODUCTION, DELIVERED_TO_CUSTOMER, CARD_UPDATE_REQUESTED,
+     * CARD_UPDATE_PENDING, CARD_UPDATE_SENT, CARD_UPDATE_ACCEPTED, VIRTUAL_DELIVERY,
+     * NEW_CARD_REQUEST_PENDING_USER_APPROVAL, SENT_FOR_DELIVERY or NEW_CARD_REQUEST_CANCELLED.
      */
     public String getOrderStatus() {
         return this.orderStatus;
@@ -534,6 +547,17 @@ public class CardDebit extends BunqModel {
     }
 
     /**
+     * A tracking link provided by our shipment provider.
+     */
+    public String getCardShipmentTrackingUrl() {
+        return this.cardShipmentTrackingUrl;
+    }
+
+    public void setCardShipmentTrackingUrl(String cardShipmentTrackingUrl) {
+        this.cardShipmentTrackingUrl = cardShipmentTrackingUrl;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -606,6 +630,10 @@ public class CardDebit extends BunqModel {
         }
 
         if (this.country != null) {
+            return false;
+        }
+
+        if (this.cardShipmentTrackingUrl != null) {
             return false;
         }
 
