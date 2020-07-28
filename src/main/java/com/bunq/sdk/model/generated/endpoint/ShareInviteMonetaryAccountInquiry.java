@@ -31,6 +31,7 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
     public static final String FIELD_DRAFT_SHARE_INVITE_BANK_ID = "draft_share_invite_bank_id";
     public static final String FIELD_SHARE_DETAIL = "share_detail";
     public static final String FIELD_STATUS = "status";
+    public static final String FIELD_RELATIONSHIP = "relationship";
     public static final String FIELD_SHARE_TYPE = "share_type";
     public static final String FIELD_START_DATE = "start_date";
     public static final String FIELD_END_DATE = "end_date";
@@ -106,6 +107,13 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
     private String status;
 
     /**
+     * The relationship: COMPANY_DIRECTOR, COMPANY_EMPLOYEE, etc
+     */
+    @Expose
+    @SerializedName("relationship")
+    private String relationship;
+
+    /**
      * The share type, either STANDARD or MUTUAL.
      */
     @Expose
@@ -165,6 +173,13 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
     private String statusFieldForRequest;
 
     /**
+     * The relationship: COMPANY_DIRECTOR, COMPANY_EMPLOYEE, etc
+     */
+    @Expose
+    @SerializedName("relationship_field_for_request")
+    private String relationshipFieldForRequest;
+
+    /**
      * The share type, either STANDARD or MUTUAL.
      */
     @Expose
@@ -186,38 +201,43 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
     private String endDateFieldForRequest;
 
     public ShareInviteMonetaryAccountInquiry() {
-        this(null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null);
     }
 
     public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias) {
-        this(counterUserAlias, null, null, null, null, null, null);
+        this(counterUserAlias, null, null, null, null, null, null, null);
     }
 
     public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail) {
-        this(counterUserAlias, shareDetail, null, null, null, null, null);
+        this(counterUserAlias, shareDetail, null, null, null, null, null, null);
     }
 
     public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
-        this(counterUserAlias, shareDetail, status, null, null, null, null);
+        this(counterUserAlias, shareDetail, status, null, null, null, null, null);
     }
 
     public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId) {
-        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, null, null, null);
+        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, null, null, null, null);
     }
 
-    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType) {
-        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, shareType, null, null);
+    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship) {
+        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, relationship, null, null, null);
     }
 
-    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate) {
-        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, shareType, startDate, null);
+    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship, String shareType) {
+        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, relationship, shareType, null, null);
     }
 
-    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String shareType, String startDate, String endDate) {
+    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship, String shareType, String startDate) {
+        this(counterUserAlias, shareDetail, status, draftShareInviteBankId, relationship, shareType, startDate, null);
+    }
+
+    public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship, String shareType, String startDate, String endDate) {
         this.counterUserAliasFieldForRequest = counterUserAlias;
         this.draftShareInviteBankIdFieldForRequest = draftShareInviteBankId;
         this.shareDetailFieldForRequest = shareDetail;
         this.statusFieldForRequest = status;
+        this.relationshipFieldForRequest = relationship;
         this.shareTypeFieldForRequest = shareType;
         this.startDateFieldForRequest = startDate;
         this.endDateFieldForRequest = endDate;
@@ -234,11 +254,12 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
      *                               CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
      *                               connects).
      * @param draftShareInviteBankId The id of the draft share invite bank.
+     * @param relationship           The relationship: COMPANY_DIRECTOR, COMPANY_EMPLOYEE, etc
      * @param shareType              The share type, either STANDARD or MUTUAL.
      * @param startDate              The start date of this share.
      * @param endDate                The expiration date of this share.
      */
-    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -250,6 +271,7 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
         requestMap.put(FIELD_DRAFT_SHARE_INVITE_BANK_ID, draftShareInviteBankId);
         requestMap.put(FIELD_SHARE_DETAIL, shareDetail);
         requestMap.put(FIELD_STATUS, status);
+        requestMap.put(FIELD_RELATIONSHIP, relationship);
         requestMap.put(FIELD_SHARE_TYPE, shareType);
         requestMap.put(FIELD_START_DATE, startDate);
         requestMap.put(FIELD_END_DATE, endDate);
@@ -261,39 +283,43 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
     }
 
     public static BunqResponse<Integer> create() {
-        return create(null, null, null, null, null, null, null, null, null);
+        return create(null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(Pointer counterUserAlias) {
-        return create(counterUserAlias, null, null, null, null, null, null, null, null);
+        return create(counterUserAlias, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail) {
-        return create(counterUserAlias, shareDetail, null, null, null, null, null, null, null);
+        return create(counterUserAlias, shareDetail, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
-        return create(counterUserAlias, shareDetail, status, null, null, null, null, null, null);
+        return create(counterUserAlias, shareDetail, status, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId) {
-        return create(counterUserAlias, shareDetail, status, monetaryAccountId, null, null, null, null, null);
+        return create(counterUserAlias, shareDetail, status, monetaryAccountId, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId) {
-        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, null, null, null, null);
+        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, null, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType) {
-        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, shareType, null, null, null);
+    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship) {
+        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, null, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate) {
-        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, shareType, startDate, null, null);
+    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType) {
+        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, shareType, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String shareType, String startDate, String endDate) {
-        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, shareType, startDate, endDate, null);
+    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType, String startDate) {
+        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, shareType, startDate, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType, String startDate, String endDate) {
+        return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, shareType, startDate, endDate, null);
     }
 
     /**
@@ -502,6 +528,17 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
     }
 
     /**
+     * The relationship: COMPANY_DIRECTOR, COMPANY_EMPLOYEE, etc
+     */
+    public String getRelationship() {
+        return this.relationship;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
+    }
+
+    /**
      * The share type, either STANDARD or MUTUAL.
      */
     public String getShareType() {
@@ -578,6 +615,10 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
         }
 
         if (this.status != null) {
+            return false;
+        }
+
+        if (this.relationship != null) {
             return false;
         }
 

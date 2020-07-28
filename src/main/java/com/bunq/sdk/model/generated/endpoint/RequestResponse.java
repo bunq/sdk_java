@@ -216,13 +216,6 @@ public class RequestResponse extends BunqModel {
     private Address addressShipping;
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    @Expose
-    @SerializedName("allow_chat")
-    private Boolean allowChat;
-
-    /**
      * The credit scheme id provided by the counterparty for DIRECT_DEBIT inquiries.
      */
     @Expose
@@ -686,17 +679,6 @@ public class RequestResponse extends BunqModel {
     }
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    public Boolean getAllowChat() {
-        return this.allowChat;
-    }
-
-    public void setAllowChat(Boolean allowChat) {
-        this.allowChat = allowChat;
-    }
-
-    /**
      * The credit scheme id provided by the counterparty for DIRECT_DEBIT inquiries.
      */
     public String getCreditSchemeIdentifier() {
@@ -838,10 +820,6 @@ public class RequestResponse extends BunqModel {
         }
 
         if (this.addressShipping != null) {
-            return false;
-        }
-
-        if (this.allowChat != null) {
             return false;
         }
 

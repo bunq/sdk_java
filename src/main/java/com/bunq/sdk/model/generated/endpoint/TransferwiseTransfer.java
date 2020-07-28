@@ -1,11 +1,18 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Used to create Transferwise payments.
@@ -17,6 +24,16 @@ public class TransferwiseTransfer extends BunqModel {
      */
     public static final String FIELD_MONETARY_ACCOUNT_ID = "monetary_account_id";
     public static final String FIELD_RECIPIENT_ID = "recipient_id";
+    /**
+     * Endpoint constants.
+     */
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/transferwise-quote/%s/transferwise-transfer";
+    protected static final String ENDPOINT_URL_READ = "user/%s/transferwise-quote/%s/transferwise-transfer/%s";
+    protected static final String ENDPOINT_URL_LISTING = "user/%s/transferwise-quote/%s/transferwise-transfer";
+    /**
+     * Object type.
+     */
+    protected static final String OBJECT_TYPE_GET = "TransferwisePayment";
 
     /**
      * The LabelMonetaryAccount containing the public information of 'this' (party) side of the
@@ -137,6 +154,91 @@ public class TransferwiseTransfer extends BunqModel {
     public TransferwiseTransfer(String monetaryAccountId, String recipientId) {
         this.monetaryAccountIdFieldForRequest = monetaryAccountId;
         this.recipientIdFieldForRequest = recipientId;
+    }
+
+    /**
+     * @param monetaryAccountId The id of the monetary account the payment should be made from.
+     * @param recipientId       The id of the target account.
+     */
+    public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String monetaryAccountId, String recipientId, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+
+        if (customHeaders == null) {
+            customHeaders = new HashMap<>();
+        }
+
+        HashMap<String, Object> requestMap = new HashMap<>();
+        requestMap.put(FIELD_MONETARY_ACCOUNT_ID, monetaryAccountId);
+        requestMap.put(FIELD_RECIPIENT_ID, recipientId);
+
+        byte[] requestBytes = determineAllRequestByte(requestMap);
+        BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), transferwiseQuoteId), requestBytes, customHeaders);
+
+        return processForId(responseRaw);
+    }
+
+    public static BunqResponse<Integer> create() {
+        return create(null, null, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Integer transferwiseQuoteId) {
+        return create(transferwiseQuoteId, null, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String monetaryAccountId) {
+        return create(transferwiseQuoteId, monetaryAccountId, null, null);
+    }
+
+    public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String monetaryAccountId, String recipientId) {
+        return create(transferwiseQuoteId, monetaryAccountId, recipientId, null);
+    }
+
+    /**
+     *
+     */
+    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteId, transferwiseTransferId), params, customHeaders);
+
+        return fromJson(TransferwiseTransfer.class, responseRaw, OBJECT_TYPE_GET);
+    }
+
+    public static BunqResponse<TransferwiseTransfer> get() {
+        return get(null, null, null, null);
+    }
+
+    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId) {
+        return get(transferwiseQuoteId, null, null, null);
+    }
+
+    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId) {
+        return get(transferwiseQuoteId, transferwiseTransferId, null, null);
+    }
+
+    public static BunqResponse<TransferwiseTransfer> get(Integer transferwiseQuoteId, Integer transferwiseTransferId, Map<String, String> params) {
+        return get(transferwiseQuoteId, transferwiseTransferId, params, null);
+    }
+
+    /**
+     *
+     */
+    public static BunqResponse<List<TransferwiseTransfer>> list(Integer transferwiseQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
+        ApiClient apiClient = new ApiClient(getApiContext());
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), transferwiseQuoteId), params, customHeaders);
+
+        return fromJsonList(TransferwiseTransfer.class, responseRaw, OBJECT_TYPE_GET);
+    }
+
+    public static BunqResponse<List<TransferwiseTransfer>> list() {
+        return list(null, null, null);
+    }
+
+    public static BunqResponse<List<TransferwiseTransfer>> list(Integer transferwiseQuoteId) {
+        return list(transferwiseQuoteId, null, null);
+    }
+
+    public static BunqResponse<List<TransferwiseTransfer>> list(Integer transferwiseQuoteId, Map<String, String> params) {
+        return list(transferwiseQuoteId, params, null);
     }
 
     /**

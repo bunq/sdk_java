@@ -136,27 +136,6 @@ public class UserLight extends BunqModel {
     private List<TaxResident> taxResident;
 
     /**
-     * The type of identification document the user registered with.
-     */
-    @Expose
-    @SerializedName("document_type")
-    private String documentType;
-
-    /**
-     * The identification document number the user registered with.
-     */
-    @Expose
-    @SerializedName("document_number")
-    private String documentNumber;
-
-    /**
-     * The country which issued the identification document the user registered with.
-     */
-    @Expose
-    @SerializedName("document_country_of_issuance")
-    private String documentCountryOfIssuance;
-
-    /**
      * The user's main address.
      */
     @Expose
@@ -278,6 +257,13 @@ public class UserLight extends BunqModel {
     @Expose
     @SerializedName("deny_reason")
     private String denyReason;
+
+    /**
+     * The relations for this user.
+     */
+    @Expose
+    @SerializedName("relations")
+    private List<RelationUser> relations;
 
     /**
      * The user's first name.
@@ -471,103 +457,103 @@ public class UserLight extends BunqModel {
         this(firstName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName) {
-        this(firstName, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName) {
+        this(firstName, middleName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName) {
-        this(firstName, lastName, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName) {
+        this(firstName, middleName, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain) {
-        this(firstName, lastName, publicNickName, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName) {
+        this(firstName, middleName, lastName, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, null, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, null, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, null, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, null, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, null, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, null, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, null, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, null, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, null, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, null, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, null, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, null, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String placeOfBirth) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, placeOfBirth, null, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, null, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String placeOfBirth, String countryOfBirth) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, placeOfBirth, countryOfBirth, null, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, null, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String placeOfBirth, String countryOfBirth, String nationality) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, placeOfBirth, countryOfBirth, nationality, null, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String placeOfBirth, String countryOfBirth, String nationality, String gender) {
-        this(firstName, lastName, publicNickName, addressMain, avatarUuid, dateOfBirth, language, region, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, middleName, addressPostal, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, placeOfBirth, countryOfBirth, nationality, gender, null);
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout) {
+        this(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, socialSecurityNumber, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, placeOfBirth, countryOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null);
     }
 
-    public UserLight(String firstName, String lastName, String publicNickName, Address addressMain, String avatarUuid, String dateOfBirth, String language, String region, String status, String subStatus, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String middleName, Address addressPostal, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String placeOfBirth, String countryOfBirth, String nationality, String gender, Pointer legalGuardianAlias) {
+    public UserLight(String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, String socialSecurityNumber, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String placeOfBirth, String countryOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
         this.firstNameFieldForRequest = firstName;
         this.middleNameFieldForRequest = middleName;
         this.lastNameFieldForRequest = lastName;
@@ -744,39 +730,6 @@ public class UserLight extends BunqModel {
 
     public void setTaxResident(List<TaxResident> taxResident) {
         this.taxResident = taxResident;
-    }
-
-    /**
-     * The type of identification document the user registered with.
-     */
-    public String getDocumentType() {
-        return this.documentType;
-    }
-
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
-
-    /**
-     * The identification document number the user registered with.
-     */
-    public String getDocumentNumber() {
-        return this.documentNumber;
-    }
-
-    public void setDocumentNumber(String documentNumber) {
-        this.documentNumber = documentNumber;
-    }
-
-    /**
-     * The country which issued the identification document the user registered with.
-     */
-    public String getDocumentCountryOfIssuance() {
-        return this.documentCountryOfIssuance;
-    }
-
-    public void setDocumentCountryOfIssuance(String documentCountryOfIssuance) {
-        this.documentCountryOfIssuance = documentCountryOfIssuance;
     }
 
     /**
@@ -971,6 +924,17 @@ public class UserLight extends BunqModel {
     }
 
     /**
+     * The relations for this user.
+     */
+    public List<RelationUser> getRelations() {
+        return this.relations;
+    }
+
+    public void setRelations(List<RelationUser> relations) {
+        this.relations = relations;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -1023,18 +987,6 @@ public class UserLight extends BunqModel {
         }
 
         if (this.taxResident != null) {
-            return false;
-        }
-
-        if (this.documentType != null) {
-            return false;
-        }
-
-        if (this.documentNumber != null) {
-            return false;
-        }
-
-        if (this.documentCountryOfIssuance != null) {
             return false;
         }
 
@@ -1103,6 +1055,10 @@ public class UserLight extends BunqModel {
         }
 
         if (this.denyReason != null) {
+            return false;
+        }
+
+        if (this.relations != null) {
             return false;
         }
 

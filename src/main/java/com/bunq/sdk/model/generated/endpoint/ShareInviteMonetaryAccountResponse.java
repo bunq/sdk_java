@@ -104,6 +104,13 @@ public class ShareInviteMonetaryAccountResponse extends BunqModel {
     private String status;
 
     /**
+     * All of the relation users towards this MA.
+     */
+    @Expose
+    @SerializedName("relation_user")
+    private RelationUser relationUser;
+
+    /**
      * The share type, either STANDARD or MUTUAL.
      */
     @Expose
@@ -351,6 +358,17 @@ public class ShareInviteMonetaryAccountResponse extends BunqModel {
     }
 
     /**
+     * All of the relation users towards this MA.
+     */
+    public RelationUser getRelationUser() {
+        return this.relationUser;
+    }
+
+    public void setRelationUser(RelationUser relationUser) {
+        this.relationUser = relationUser;
+    }
+
+    /**
      * The share type, either STANDARD or MUTUAL.
      */
     public String getShareType() {
@@ -431,6 +449,10 @@ public class ShareInviteMonetaryAccountResponse extends BunqModel {
         }
 
         if (this.status != null) {
+            return false;
+        }
+
+        if (this.relationUser != null) {
             return false;
         }
 

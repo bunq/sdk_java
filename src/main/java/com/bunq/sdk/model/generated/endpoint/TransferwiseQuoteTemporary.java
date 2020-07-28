@@ -13,9 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Used to get quotes from Transferwise. These can be used to initiate payments.
+ * Used to get temporary quotes from Transferwise. These cannot be used to initiate payments
  */
-public class TransferwiseQuote extends BunqModel {
+public class TransferwiseQuoteTemporary extends BunqModel {
 
     /**
      * Field constants.
@@ -27,8 +27,8 @@ public class TransferwiseQuote extends BunqModel {
     /**
      * Endpoint constants.
      */
-    protected static final String ENDPOINT_URL_CREATE = "user/%s/transferwise-quote";
-    protected static final String ENDPOINT_URL_READ = "user/%s/transferwise-quote/%s";
+    protected static final String ENDPOINT_URL_CREATE = "user/%s/transferwise-quote-temporary";
+    protected static final String ENDPOINT_URL_READ = "user/%s/transferwise-quote-temporary/%s";
     /**
      * Object type.
      */
@@ -42,28 +42,28 @@ public class TransferwiseQuote extends BunqModel {
     private Integer id;
 
     /**
-     * The timestamp of the quote's creation.
+     * The timestamp of the note's creation.
      */
     @Expose
     @SerializedName("created")
     private String created;
 
     /**
-     * The timestamp of the quote's last update.
+     * The timestamp of the note's last update.
      */
     @Expose
     @SerializedName("updated")
     private String updated;
 
     /**
-     * The expiration timestamp of the quote.
+     * The expiration timestamp of the quote. Will always be null for temporary quotes.
      */
     @Expose
     @SerializedName("time_expiry")
     private String timeExpiry;
 
     /**
-     * The quote id Transferwise needs.
+     * The quote id Transferwise needs. Will always be null for temporary quotes.
      */
     @Expose
     @SerializedName("quote_id")
@@ -84,25 +84,11 @@ public class TransferwiseQuote extends BunqModel {
     private Amount amountTarget;
 
     /**
-     * The fee amount.
-     */
-    @Expose
-    @SerializedName("amount_fee")
-    private Amount amountFee;
-
-    /**
      * The rate.
      */
     @Expose
     @SerializedName("rate")
     private String rate;
-
-    /**
-     * The estimated delivery time.
-     */
-    @Expose
-    @SerializedName("time_delivery_estimate")
-    private String timeDeliveryEstimate;
 
     /**
      * The source currency.
@@ -132,23 +118,23 @@ public class TransferwiseQuote extends BunqModel {
     @SerializedName("amount_target_field_for_request")
     private Amount amountTargetFieldForRequest;
 
-    public TransferwiseQuote() {
+    public TransferwiseQuoteTemporary() {
         this(null, null, null, null);
     }
 
-    public TransferwiseQuote(String currencySource) {
+    public TransferwiseQuoteTemporary(String currencySource) {
         this(currencySource, null, null, null);
     }
 
-    public TransferwiseQuote(String currencySource, String currencyTarget) {
+    public TransferwiseQuoteTemporary(String currencySource, String currencyTarget) {
         this(currencySource, currencyTarget, null, null);
     }
 
-    public TransferwiseQuote(String currencySource, String currencyTarget, Amount amountSource) {
+    public TransferwiseQuoteTemporary(String currencySource, String currencyTarget, Amount amountSource) {
         this(currencySource, currencyTarget, amountSource, null);
     }
 
-    public TransferwiseQuote(String currencySource, String currencyTarget, Amount amountSource, Amount amountTarget) {
+    public TransferwiseQuoteTemporary(String currencySource, String currencyTarget, Amount amountSource, Amount amountTarget) {
         this.currencySourceFieldForRequest = currencySource;
         this.currencyTargetFieldForRequest = currencyTarget;
         this.amountSourceFieldForRequest = amountSource;
@@ -203,30 +189,30 @@ public class TransferwiseQuote extends BunqModel {
     /**
      *
      */
-    public static BunqResponse<TransferwiseQuote> get(Integer transferwiseQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
+    public static BunqResponse<TransferwiseQuoteTemporary> get(Integer transferwiseQuoteTemporaryId, Map<String, String> params, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
-        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteId), params, customHeaders);
+        BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteTemporaryId), params, customHeaders);
 
-        return fromJson(TransferwiseQuote.class, responseRaw, OBJECT_TYPE_GET);
+        return fromJson(TransferwiseQuoteTemporary.class, responseRaw, OBJECT_TYPE_GET);
     }
 
-    public static BunqResponse<TransferwiseQuote> get() {
+    public static BunqResponse<TransferwiseQuoteTemporary> get() {
         return get(null, null, null);
     }
 
-    public static BunqResponse<TransferwiseQuote> get(Integer transferwiseQuoteId) {
-        return get(transferwiseQuoteId, null, null);
+    public static BunqResponse<TransferwiseQuoteTemporary> get(Integer transferwiseQuoteTemporaryId) {
+        return get(transferwiseQuoteTemporaryId, null, null);
     }
 
-    public static BunqResponse<TransferwiseQuote> get(Integer transferwiseQuoteId, Map<String, String> params) {
-        return get(transferwiseQuoteId, params, null);
+    public static BunqResponse<TransferwiseQuoteTemporary> get(Integer transferwiseQuoteTemporaryId, Map<String, String> params) {
+        return get(transferwiseQuoteTemporaryId, params, null);
     }
 
     /**
      *
      */
-    public static TransferwiseQuote fromJsonReader(JsonReader reader) {
-        return fromJsonReader(TransferwiseQuote.class, reader);
+    public static TransferwiseQuoteTemporary fromJsonReader(JsonReader reader) {
+        return fromJsonReader(TransferwiseQuoteTemporary.class, reader);
     }
 
     /**
@@ -241,7 +227,7 @@ public class TransferwiseQuote extends BunqModel {
     }
 
     /**
-     * The timestamp of the quote's creation.
+     * The timestamp of the note's creation.
      */
     public String getCreated() {
         return this.created;
@@ -252,7 +238,7 @@ public class TransferwiseQuote extends BunqModel {
     }
 
     /**
-     * The timestamp of the quote's last update.
+     * The timestamp of the note's last update.
      */
     public String getUpdated() {
         return this.updated;
@@ -263,7 +249,7 @@ public class TransferwiseQuote extends BunqModel {
     }
 
     /**
-     * The expiration timestamp of the quote.
+     * The expiration timestamp of the quote. Will always be null for temporary quotes.
      */
     public String getTimeExpiry() {
         return this.timeExpiry;
@@ -274,7 +260,7 @@ public class TransferwiseQuote extends BunqModel {
     }
 
     /**
-     * The quote id Transferwise needs.
+     * The quote id Transferwise needs. Will always be null for temporary quotes.
      */
     public String getQuoteId() {
         return this.quoteId;
@@ -307,17 +293,6 @@ public class TransferwiseQuote extends BunqModel {
     }
 
     /**
-     * The fee amount.
-     */
-    public Amount getAmountFee() {
-        return this.amountFee;
-    }
-
-    public void setAmountFee(Amount amountFee) {
-        this.amountFee = amountFee;
-    }
-
-    /**
      * The rate.
      */
     public String getRate() {
@@ -326,17 +301,6 @@ public class TransferwiseQuote extends BunqModel {
 
     public void setRate(String rate) {
         this.rate = rate;
-    }
-
-    /**
-     * The estimated delivery time.
-     */
-    public String getTimeDeliveryEstimate() {
-        return this.timeDeliveryEstimate;
-    }
-
-    public void setTimeDeliveryEstimate(String timeDeliveryEstimate) {
-        this.timeDeliveryEstimate = timeDeliveryEstimate;
     }
 
     /**
@@ -371,15 +335,7 @@ public class TransferwiseQuote extends BunqModel {
             return false;
         }
 
-        if (this.amountFee != null) {
-            return false;
-        }
-
         if (this.rate != null) {
-            return false;
-        }
-
-        if (this.timeDeliveryEstimate != null) {
             return false;
         }
 
