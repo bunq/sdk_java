@@ -172,13 +172,6 @@ public class TokenQrRequestIdeal extends BunqModel {
     private String subType;
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    @Expose
-    @SerializedName("allow_chat")
-    private Boolean allowChat;
-
-    /**
      * The whitelist id for this action or null.
      */
     @Expose
@@ -449,17 +442,6 @@ public class TokenQrRequestIdeal extends BunqModel {
     }
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    public Boolean getAllowChat() {
-        return this.allowChat;
-    }
-
-    public void setAllowChat(Boolean allowChat) {
-        this.allowChat = allowChat;
-    }
-
-    /**
      * The whitelist id for this action or null.
      */
     public Integer getEligibleWhitelistId() {
@@ -547,10 +529,6 @@ public class TokenQrRequestIdeal extends BunqModel {
         }
 
         if (this.subType != null) {
-            return false;
-        }
-
-        if (this.allowChat != null) {
             return false;
         }
 

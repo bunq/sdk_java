@@ -170,11 +170,18 @@ public class UserCompany extends BunqModel {
     private String versionTermsOfService;
 
     /**
-     * The existing bunq user alias for the company's director.
+     * The existing bunq alias for the company's primary director.
      */
     @Expose
     @SerializedName("director_alias")
     private LabelUser directorAlias;
+
+    /**
+     * The existing bunq aliases for the company's directors.
+     */
+    @Expose
+    @SerializedName("directors")
+    private List<LabelUser> directors;
 
     /**
      * The person's preferred language. Formatted as a ISO 639-1 language code plus a ISO 3166-1
@@ -185,7 +192,7 @@ public class UserCompany extends BunqModel {
     private String language;
 
     /**
-     * The country as an ISO 3166-1 alpha-2 country code..
+     * The country as an ISO 3166-1 alpha-2 country code.
      */
     @Expose
     @SerializedName("country")
@@ -270,6 +277,13 @@ public class UserCompany extends BunqModel {
     @Expose
     @SerializedName("deny_reason")
     private String denyReason;
+
+    /**
+     * The relations for this user.
+     */
+    @Expose
+    @SerializedName("relations")
+    private List<RelationUser> relations;
 
     /**
      * The company name.
@@ -785,7 +799,7 @@ public class UserCompany extends BunqModel {
     }
 
     /**
-     * The existing bunq user alias for the company's director.
+     * The existing bunq alias for the company's primary director.
      */
     public LabelUser getDirectorAlias() {
         return this.directorAlias;
@@ -793,6 +807,17 @@ public class UserCompany extends BunqModel {
 
     public void setDirectorAlias(LabelUser directorAlias) {
         this.directorAlias = directorAlias;
+    }
+
+    /**
+     * The existing bunq aliases for the company's directors.
+     */
+    public List<LabelUser> getDirectors() {
+        return this.directors;
+    }
+
+    public void setDirectors(List<LabelUser> directors) {
+        this.directors = directors;
     }
 
     /**
@@ -808,7 +833,7 @@ public class UserCompany extends BunqModel {
     }
 
     /**
-     * The country as an ISO 3166-1 alpha-2 country code..
+     * The country as an ISO 3166-1 alpha-2 country code.
      */
     public String getCountry() {
         return this.country;
@@ -943,6 +968,17 @@ public class UserCompany extends BunqModel {
     }
 
     /**
+     * The relations for this user.
+     */
+    public List<RelationUser> getRelations() {
+        return this.relations;
+    }
+
+    public void setRelations(List<RelationUser> relations) {
+        this.relations = relations;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -1018,6 +1054,10 @@ public class UserCompany extends BunqModel {
             return false;
         }
 
+        if (this.directors != null) {
+            return false;
+        }
+
         if (this.language != null) {
             return false;
         }
@@ -1067,6 +1107,10 @@ public class UserCompany extends BunqModel {
         }
 
         if (this.denyReason != null) {
+            return false;
+        }
+
+        if (this.relations != null) {
             return false;
         }
 

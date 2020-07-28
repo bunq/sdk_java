@@ -46,7 +46,7 @@ public class Address extends BunqModel {
     private String city;
 
     /**
-     * The country as an ISO 3166-1 alpha-2 country code..
+     * The country as an ISO 3166-1 alpha-2 country code.
      */
     @Expose
     @SerializedName("country")
@@ -60,7 +60,7 @@ public class Address extends BunqModel {
     private String province;
 
     /**
-     * The appartment, building or other extra information for addresses.
+     * The apartment, building or other extra information for addresses.
      */
     @Expose
     @SerializedName("extra")
@@ -116,7 +116,7 @@ public class Address extends BunqModel {
     private String countryFieldForRequest;
 
     /**
-     * The appartment, building or other extra information for addresses.
+     * The apartment, building or other extra information for addresses.
      */
     @Expose
     @SerializedName("extra_field_for_request")
@@ -235,7 +235,7 @@ public class Address extends BunqModel {
     }
 
     /**
-     * The country as an ISO 3166-1 alpha-2 country code..
+     * The country as an ISO 3166-1 alpha-2 country code.
      */
     public String getCountry() {
         return this.country;
@@ -257,7 +257,7 @@ public class Address extends BunqModel {
     }
 
     /**
-     * The appartment, building or other extra information for addresses.
+     * The apartment, building or other extra information for addresses.
      */
     public String getExtra() {
         return this.extra;

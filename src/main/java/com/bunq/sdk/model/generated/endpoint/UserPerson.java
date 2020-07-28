@@ -146,27 +146,6 @@ public class UserPerson extends BunqModel {
     private List<TaxResident> taxResident;
 
     /**
-     * The type of identification document the person registered with.
-     */
-    @Expose
-    @SerializedName("document_type")
-    private String documentType;
-
-    /**
-     * The identification document number the person registered with.
-     */
-    @Expose
-    @SerializedName("document_number")
-    private String documentNumber;
-
-    /**
-     * The country which issued the identification document the person registered with.
-     */
-    @Expose
-    @SerializedName("document_country_of_issuance")
-    private String documentCountryOfIssuance;
-
-    /**
      * The person's main address.
      */
     @Expose
@@ -282,6 +261,13 @@ public class UserPerson extends BunqModel {
     @Expose
     @SerializedName("notification_filters")
     private List<NotificationFilter> notificationFilters;
+
+    /**
+     * The relations for this user.
+     */
+    @Expose
+    @SerializedName("relations")
+    private List<RelationUser> relations;
 
     /**
      * The person's first name.
@@ -942,39 +928,6 @@ public class UserPerson extends BunqModel {
     }
 
     /**
-     * The type of identification document the person registered with.
-     */
-    public String getDocumentType() {
-        return this.documentType;
-    }
-
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
-    }
-
-    /**
-     * The identification document number the person registered with.
-     */
-    public String getDocumentNumber() {
-        return this.documentNumber;
-    }
-
-    public void setDocumentNumber(String documentNumber) {
-        this.documentNumber = documentNumber;
-    }
-
-    /**
-     * The country which issued the identification document the person registered with.
-     */
-    public String getDocumentCountryOfIssuance() {
-        return this.documentCountryOfIssuance;
-    }
-
-    public void setDocumentCountryOfIssuance(String documentCountryOfIssuance) {
-        this.documentCountryOfIssuance = documentCountryOfIssuance;
-    }
-
-    /**
      * The person's main address.
      */
     public Address getAddressMain() {
@@ -1156,6 +1109,17 @@ public class UserPerson extends BunqModel {
     }
 
     /**
+     * The relations for this user.
+     */
+    public List<RelationUser> getRelations() {
+        return this.relations;
+    }
+
+    public void setRelations(List<RelationUser> relations) {
+        this.relations = relations;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -1204,18 +1168,6 @@ public class UserPerson extends BunqModel {
         }
 
         if (this.taxResident != null) {
-            return false;
-        }
-
-        if (this.documentType != null) {
-            return false;
-        }
-
-        if (this.documentNumber != null) {
-            return false;
-        }
-
-        if (this.documentCountryOfIssuance != null) {
             return false;
         }
 
@@ -1280,6 +1232,10 @@ public class UserPerson extends BunqModel {
         }
 
         if (this.notificationFilters != null) {
+            return false;
+        }
+
+        if (this.relations != null) {
             return false;
         }
 
