@@ -42,31 +42,31 @@ public class OauthAuthorizationUri extends BunqModel {
     /**
      * Private variables.
      */
-    private String authorizationUri;
+    private final String authorizationUri;
 
     /**
+     *
      */
-    protected OauthAuthorizationUri(String authorizationUri)
-    {
+    protected OauthAuthorizationUri(String authorizationUri) {
         this.authorizationUri = authorizationUri;
     }
 
     /**
+     *
      */
-    public String getAuthorizationUri()
-    {
+    public String getAuthorizationUri() {
         return this.authorizationUri;
     }
 
     /**
+     *
      */
     public static OauthAuthorizationUri create(
             final OauthResponseType responseType,
             final String redirectUri,
             final OauthClient client
     ) {
-        Map<String, String> allRequestParameter = new HashMap<String, String>()
-        {
+        Map<String, String> allRequestParameter = new HashMap<String, String>() {
             {
                 put(FIELD_REDIRECT_URI, redirectUri);
                 put(FIELD_RESPONSE_TYPE, responseType.toString());
@@ -75,11 +75,12 @@ public class OauthAuthorizationUri extends BunqModel {
         };
 
         return new OauthAuthorizationUri(
-            String.format(determineAuthUriFormat(), HttpUtil.createQueryString(allRequestParameter))
+                String.format(determineAuthUriFormat(), HttpUtil.createQueryString(allRequestParameter))
         );
     }
 
     /**
+     *
      */
     public static OauthAuthorizationUri create(
             OauthResponseType responseType,
@@ -89,31 +90,26 @@ public class OauthAuthorizationUri extends BunqModel {
     ) {
         OauthAuthorizationUri baseUri = create(responseType, redirectUri, client);
 
-        Map<String, String> allAdditionalParameter = new HashMap<String, String>()
-        {
+        Map<String, String> allAdditionalParameter = new HashMap<String, String>() {
             {
                 put(FIELD_STATE, state);
             }
         };
 
         return new OauthAuthorizationUri(
-            baseUri.authorizationUri + HttpUtil.createQueryString(allAdditionalParameter)
+                baseUri.authorizationUri + HttpUtil.getQueryDelimiter() + HttpUtil.createQueryString(allAdditionalParameter)
         );
     }
 
     @Override
     public boolean isAllFieldNull() {
-        if (authorizationUri != null) {
-            return false;
-        }
-
-        return true;
+        return authorizationUri == null;
     }
 
     /**
+     *
      */
-    private static String determineAuthUriFormat()
-    {
+    private static String determineAuthUriFormat() {
         ApiEnvironmentType environmentType = BunqContext.getApiContext().getEnvironmentType();
 
         if (AUTH_URI_ENVIRONMENT_MAP.containsKey(environmentType)) {
