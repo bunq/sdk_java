@@ -90,13 +90,6 @@ public class MonetaryAccountLight extends BunqModel {
     private Amount balance;
 
     /**
-     * The current real balance Amount of the MonetaryAccountLight.
-     */
-    @Expose
-    @SerializedName("balance_real")
-    private Amount balanceReal;
-
-    /**
      * The Aliases for the MonetaryAccountLight.
      */
     @Expose
@@ -422,17 +415,6 @@ public class MonetaryAccountLight extends BunqModel {
     }
 
     /**
-     * The current real balance Amount of the MonetaryAccountLight.
-     */
-    public Amount getBalanceReal() {
-        return this.balanceReal;
-    }
-
-    public void setBalanceReal(Amount balanceReal) {
-        this.balanceReal = balanceReal;
-    }
-
-    /**
      * The Aliases for the MonetaryAccountLight.
      */
     public List<Pointer> getAlias() {
@@ -633,10 +615,6 @@ public class MonetaryAccountLight extends BunqModel {
         }
 
         if (this.balance != null) {
-            return false;
-        }
-
-        if (this.balanceReal != null) {
             return false;
         }
 

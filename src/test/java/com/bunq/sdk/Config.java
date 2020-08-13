@@ -123,5 +123,4 @@ public class Config {
   public static Integer getPaymentIdWithGeolocation() {
     return Integer.parseInt(properties.getProperty(FIELD_PAYMENT_ID_WITH_GEOLOCATION));
   }
-
 }

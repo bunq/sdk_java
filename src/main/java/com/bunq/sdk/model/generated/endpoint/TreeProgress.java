@@ -42,6 +42,13 @@ public class TreeProgress extends BunqModel {
     private BigDecimal progressTreeNext;
 
     /**
+     * The label of the user the progress belongs to.
+     */
+    @Expose
+    @SerializedName("label_user")
+    private BunqModel labelUser;
+
+    /**
      *
      */
     public static BunqResponse<List<TreeProgress>> list(Map<String, String> params, Map<String, String> customHeaders) {
@@ -89,6 +96,17 @@ public class TreeProgress extends BunqModel {
     }
 
     /**
+     * The label of the user the progress belongs to.
+     */
+    public BunqModel getLabelUser() {
+        return this.labelUser;
+    }
+
+    public void setLabelUser(BunqModel labelUser) {
+        this.labelUser = labelUser;
+    }
+
+    /**
      *
      */
     public boolean isAllFieldNull() {
@@ -97,6 +115,10 @@ public class TreeProgress extends BunqModel {
         }
 
         if (this.progressTreeNext != null) {
+            return false;
+        }
+
+        if (this.labelUser != null) {
             return false;
         }
 

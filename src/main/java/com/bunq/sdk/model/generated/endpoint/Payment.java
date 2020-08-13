@@ -204,13 +204,6 @@ public class Payment extends BunqModel {
     private Geolocation geolocation;
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    @Expose
-    @SerializedName("allow_chat")
-    private Boolean allowChat;
-
-    /**
      * The reference to the object used for split the bill. Can be RequestInquiry or
      * RequestInquiryBatch
      */
@@ -686,17 +679,6 @@ public class Payment extends BunqModel {
     }
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    public Boolean getAllowChat() {
-        return this.allowChat;
-    }
-
-    public void setAllowChat(Boolean allowChat) {
-        this.allowChat = allowChat;
-    }
-
-    /**
      * The reference to the object used for split the bill. Can be RequestInquiry or
      * RequestInquiryBatch
      */
@@ -819,10 +801,6 @@ public class Payment extends BunqModel {
         }
 
         if (this.geolocation != null) {
-            return false;
-        }
-
-        if (this.allowChat != null) {
             return false;
         }
 

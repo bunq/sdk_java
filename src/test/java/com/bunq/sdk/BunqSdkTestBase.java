@@ -45,7 +45,7 @@ public class BunqSdkTestBase {
   protected static final String TEST_CONFIG_PATH = "bunq-test.conf";
   protected static final String CONTENT_TYPE = "image/png";
   protected static final String ATTACHMENT_DESCRIPTION = "TEST PNG JAVA";
-  protected static final String ATTACHMENT_PATH_IN = "assets/bunq_App_Icon_Round@4x.png";
+  protected static final String ATTACHMENT_PATH_IN = "assets/vader.png";
   protected static final String SCHEME_HTTPS = "https://";
   protected static final String URL_PATH_SEPARATOR = "/";
   protected static final String URL_PATH_SANDBOX_USER = "/sandbox-user";
