@@ -9,7 +9,7 @@ public class OauthAuthorizationUriTest extends BunqSdkTestBase {
     /**
      * Test constants.
      */
-    private static final String TEST_EXPECT_URI = "https://oauth.sandbox.bunq.com/auth?response_type=code&redirect_uri=redirecturi&client_id=null&state=state";
+    private static final String TEST_EXPECT_URI = "https://oauth.sandbox.bunq.com/auth?redirect_uri=redirecturi&response_type=code&state=state";
     private static final String TEST_REDIRECT_URI = "redirecturi";
     private static final String TEST_STATUS = "status";
     private static final String TEST_STATE = "state";

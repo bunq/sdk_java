@@ -7,6 +7,7 @@ import com.bunq.sdk.model.generated.endpoint.OauthClient;
 import com.bunq.sdk.util.HttpUtil;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class OauthAuthorizationUri extends BunqModel {
@@ -66,13 +67,13 @@ public class OauthAuthorizationUri extends BunqModel {
             final String redirectUri,
             final OauthClient client
     ) {
-        Map<String, String> allRequestParameter = new HashMap<String, String>() {
-            {
-                put(FIELD_REDIRECT_URI, redirectUri);
-                put(FIELD_RESPONSE_TYPE, responseType.toString());
-                put(FIELD_CLIENT_ID, client.getClientId());
-            }
-        };
+        Map<String, String> allRequestParameter = new LinkedHashMap<String, String>();
+        allRequestParameter.put(FIELD_REDIRECT_URI, redirectUri);
+        allRequestParameter.put(FIELD_RESPONSE_TYPE, responseType.toString());
+
+        if (client.getClientId() != null) {
+            allRequestParameter.put(FIELD_CLIENT_ID, client.getClientId());
+        }
 
         return new OauthAuthorizationUri(
                 String.format(determineAuthUriFormat(), HttpUtil.createQueryString(allRequestParameter))
