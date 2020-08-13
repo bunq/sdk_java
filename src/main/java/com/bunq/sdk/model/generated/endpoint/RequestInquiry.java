@@ -222,13 +222,6 @@ public class RequestInquiry extends BunqModel {
     private Geolocation geolocation;
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    @Expose
-    @SerializedName("allow_chat")
-    private Boolean allowChat;
-
-    /**
      * The reference to the object used for split the bill. Can be Payment, PaymentBatch,
      * ScheduleInstance, RequestResponse and MasterCardAction
      */
@@ -579,7 +572,8 @@ public class RequestInquiry extends BunqModel {
     }
 
     /**
-     * Get all payment requests for a user's monetary account.
+     * Get all payment requests for a user's monetary account. bunqme_share_url is always null if
+     * the counterparty is a bunq user.
      */
     public static BunqResponse<List<RequestInquiry>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
@@ -601,7 +595,8 @@ public class RequestInquiry extends BunqModel {
     }
 
     /**
-     * Get the details of a specific payment request, including its status.
+     * Get the details of a specific payment request, including its status. bunqme_share_url is
+     * always null if the counterparty is a bunq user.
      */
     public static BunqResponse<RequestInquiry> get(Integer requestInquiryId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
@@ -899,17 +894,6 @@ public class RequestInquiry extends BunqModel {
     }
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    public Boolean getAllowChat() {
-        return this.allowChat;
-    }
-
-    public void setAllowChat(Boolean allowChat) {
-        this.allowChat = allowChat;
-    }
-
-    /**
      * The reference to the object used for split the bill. Can be Payment, PaymentBatch,
      * ScheduleInstance, RequestResponse and MasterCardAction
      */
@@ -1018,10 +1002,6 @@ public class RequestInquiry extends BunqModel {
         }
 
         if (this.geolocation != null) {
-            return false;
-        }
-
-        if (this.allowChat != null) {
             return false;
         }
 

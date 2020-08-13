@@ -238,13 +238,6 @@ public class MasterCardAction extends BunqModel {
     private String appliedLimit;
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    @Expose
-    @SerializedName("allow_chat")
-    private Boolean allowChat;
-
-    /**
      * The secure code id for this mastercard action or null.
      */
     @Expose
@@ -645,17 +638,6 @@ public class MasterCardAction extends BunqModel {
     }
 
     /**
-     * Whether or not chat messages are allowed.
-     */
-    public Boolean getAllowChat() {
-        return this.allowChat;
-    }
-
-    public void setAllowChat(Boolean allowChat) {
-        this.allowChat = allowChat;
-    }
-
-    /**
      * The secure code id for this mastercard action or null.
      */
     public Integer getSecureCodeId() {
@@ -807,10 +789,6 @@ public class MasterCardAction extends BunqModel {
         }
 
         if (this.appliedLimit != null) {
-            return false;
-        }
-
-        if (this.allowChat != null) {
             return false;
         }
 

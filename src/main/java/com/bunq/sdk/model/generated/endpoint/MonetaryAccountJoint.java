@@ -184,13 +184,6 @@ public class MonetaryAccountJoint extends BunqModel {
     private MonetaryAccountSetting setting;
 
     /**
-     * The id of the AutoSave.
-     */
-    @Expose
-    @SerializedName("auto_save_id")
-    private Integer autoSaveId;
-
-    /**
      * The ids of the AutoSave.
      */
     @Expose
@@ -804,17 +797,6 @@ public class MonetaryAccountJoint extends BunqModel {
     }
 
     /**
-     * The id of the AutoSave.
-     */
-    public Integer getAutoSaveId() {
-        return this.autoSaveId;
-    }
-
-    public void setAutoSaveId(Integer autoSaveId) {
-        this.autoSaveId = autoSaveId;
-    }
-
-    /**
      * The ids of the AutoSave.
      */
     public List<BunqId> getAllAutoSaveId() {
@@ -902,10 +884,6 @@ public class MonetaryAccountJoint extends BunqModel {
         }
 
         if (this.setting != null) {
-            return false;
-        }
-
-        if (this.autoSaveId != null) {
             return false;
         }
 

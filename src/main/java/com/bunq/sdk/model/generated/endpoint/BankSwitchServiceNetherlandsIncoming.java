@@ -20,8 +20,6 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
     public static final String FIELD_ALIAS = "alias";
     public static final String FIELD_COUNTERPARTY_ALIAS = "counterparty_alias";
     public static final String FIELD_STATUS = "status";
-    public static final String FIELD_SUB_STATUS = "sub_status";
-    public static final String FIELD_TIME_START_ACTUAL = "time_start_actual";
 
     /**
      * The label of the user creator of this switch service.
@@ -110,46 +108,22 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
     @SerializedName("status_field_for_request")
     private String statusFieldForRequest;
 
-    /**
-     * The substatus of the switch service. Only available in UPDATE. Can be NONE or CAPTURED
-     */
-    @Expose
-    @SerializedName("sub_status_field_for_request")
-    private String subStatusFieldForRequest;
-
-    /**
-     * The timestamp when the switch service actually starts.
-     */
-    @Expose
-    @SerializedName("time_start_actual_field_for_request")
-    private String timeStartActualFieldForRequest;
-
     public BankSwitchServiceNetherlandsIncoming() {
-        this(null, null, null, null, null);
+        this(null, null, null);
     }
 
     public BankSwitchServiceNetherlandsIncoming(Pointer alias) {
-        this(alias, null, null, null, null);
+        this(alias, null, null);
     }
 
     public BankSwitchServiceNetherlandsIncoming(Pointer alias, Pointer counterpartyAlias) {
-        this(alias, counterpartyAlias, null, null, null);
+        this(alias, counterpartyAlias, null);
     }
 
     public BankSwitchServiceNetherlandsIncoming(Pointer alias, Pointer counterpartyAlias, String status) {
-        this(alias, counterpartyAlias, status, null, null);
-    }
-
-    public BankSwitchServiceNetherlandsIncoming(Pointer alias, Pointer counterpartyAlias, String status, String subStatus) {
-        this(alias, counterpartyAlias, status, subStatus, null);
-    }
-
-    public BankSwitchServiceNetherlandsIncoming(Pointer alias, Pointer counterpartyAlias, String status, String subStatus, String timeStartActual) {
         this.aliasFieldForRequest = alias;
         this.counterpartyAliasFieldForRequest = counterpartyAlias;
         this.statusFieldForRequest = status;
-        this.subStatusFieldForRequest = subStatus;
-        this.timeStartActualFieldForRequest = timeStartActual;
     }
 
     /**
