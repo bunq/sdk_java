@@ -9,6 +9,7 @@ import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultInquiry;
 import com.bunq.sdk.model.generated.object.Geolocation;
 import com.google.gson.GsonBuilder;
+
 import java.math.BigDecimal;
 
 /**
@@ -16,28 +17,27 @@ import java.math.BigDecimal;
  */
 public class BunqGsonBuilder {
 
-  private static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss.SSSSSS";
+    private static final String FORMAT_DATE = "yyyy-MM-dd HH:mm:ss.SSSSSS";
 
-  /**
-   * @return Creates a GsonBuilder set up according to the needs of the SDK.
-   */
-  public static GsonBuilder buildDefault() {
-    return new GsonBuilder()
-        .disableHtmlEscaping()
-        .setDateFormat(FORMAT_DATE)
-        .setPrettyPrinting()
-        .registerTypeAdapter(Installation.class, new InstallationAdapter())
-        .registerTypeAdapter(SessionServer.class, new SessionServerAdapter())
-        .registerTypeAdapter(BigDecimal.class, new BigDecimalTypeAdapter())
-        .registerTypeAdapter(Geolocation.class, new GeolocationTypeAdapter())
-        .registerTypeAdapter(
-            MonetaryAccountReference.class,
-            new MonetaryAccountReferenceTypeAdapter()
-        )
-        .registerTypeAdapter(InstallationContext.class, new InstallationContextAdapter())
-        .registerTypeAdapter(Pagination.class, new PaginationAdapter())
-        .registerTypeAdapter(BunqMeTabResultInquiry.class, new BunqMeTabResultInquiryDeserializer())
-        .registerTypeHierarchyAdapter(AnchorObjectInterface.class, new AnchorObjectAdapter());
-  }
-
+    /**
+     * @return Creates a GsonBuilder set up according to the needs of the SDK.
+     */
+    public static GsonBuilder buildDefault() {
+        return new GsonBuilder()
+                .disableHtmlEscaping()
+                .setDateFormat(FORMAT_DATE)
+                .setPrettyPrinting()
+                .registerTypeAdapter(Installation.class, new InstallationAdapter())
+                .registerTypeAdapter(SessionServer.class, new SessionServerAdapter())
+                .registerTypeAdapter(BigDecimal.class, new BigDecimalTypeAdapter())
+                .registerTypeAdapter(Geolocation.class, new GeolocationTypeAdapter())
+                .registerTypeAdapter(
+                        MonetaryAccountReference.class,
+                        new MonetaryAccountReferenceTypeAdapter()
+                )
+                .registerTypeAdapter(InstallationContext.class, new InstallationContextAdapter())
+                .registerTypeAdapter(Pagination.class, new PaginationAdapter())
+                .registerTypeAdapter(BunqMeTabResultInquiry.class, new BunqMeTabResultInquiryDeserializer())
+                .registerTypeHierarchyAdapter(AnchorObjectInterface.class, new AnchorObjectAdapter());
+    }
 }

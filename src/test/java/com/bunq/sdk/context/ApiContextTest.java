@@ -12,33 +12,32 @@ import static org.junit.Assert.assertEquals;
  */
 public class ApiContextTest extends BunqSdkTestBase {
 
-  /**
-   * Path to a temporary context file.
-   */
-  private static final String CONTEXT_FILENAME_TEST = "context-save-restore-test.conf";
+    /**
+     * Path to a temporary context file.
+     */
+    private static final String CONTEXT_FILENAME_TEST = "context-save-restore-test.conf";
 
-  private static ApiContext apiContext;
+    private static ApiContext apiContext;
 
-  @BeforeClass
-  public static void setUpBeforeClass() {
-    apiContext = getApiContext();
-  }
+    @BeforeClass
+    public static void setUpBeforeClass() {
+        apiContext = getApiContext();
+    }
 
-  @Test
-  public void apiContextSerializeDeserializeTest() {
-    String apiContextJson = apiContext.toJson();
-    ApiContext apiContextDeSerialised = ApiContext.fromJson(apiContextJson);
+    @Test
+    public void apiContextSerializeDeserializeTest() {
+        String apiContextJson = apiContext.toJson();
+        ApiContext apiContextDeSerialised = ApiContext.fromJson(apiContextJson);
 
-    assertEquals(apiContextJson, apiContextDeSerialised.toJson());
-  }
+        assertEquals(apiContextJson, apiContextDeSerialised.toJson());
+    }
 
-  @Test
-  public void apiContextSaveRestoreTest() {
-    String apiContextJson = apiContext.toJson();
-    apiContext.save(CONTEXT_FILENAME_TEST);
-    ApiContext apiContextRestored = ApiContext.restore(CONTEXT_FILENAME_TEST);
+    @Test
+    public void apiContextSaveRestoreTest() {
+        String apiContextJson = apiContext.toJson();
+        apiContext.save(CONTEXT_FILENAME_TEST);
+        ApiContext apiContextRestored = ApiContext.restore(CONTEXT_FILENAME_TEST);
 
-    assertEquals(apiContextJson, apiContextRestored.toJson());
-  }
-
+        assertEquals(apiContextJson, apiContextRestored.toJson());
+    }
 }

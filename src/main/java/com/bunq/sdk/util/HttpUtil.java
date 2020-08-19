@@ -12,6 +12,7 @@ public class HttpUtil {
     protected static final String QUERY_DELIMITER = "&";
 
     /**
+     *
      */
     public static String createQueryString(Map<String, String> allParameter) {
         List<String> encodedParameters = new ArrayList<>();
@@ -21,5 +22,12 @@ public class HttpUtil {
         }
 
         return String.join(QUERY_DELIMITER, encodedParameters);
+    }
+
+    /**
+     * @return String
+     */
+    public static String getQueryDelimiter() {
+        return QUERY_DELIMITER;
     }
 }

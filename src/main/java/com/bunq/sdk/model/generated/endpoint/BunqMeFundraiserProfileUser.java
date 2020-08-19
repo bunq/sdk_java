@@ -47,6 +47,13 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
     private Integer monetaryAccountId;
 
     /**
+     * Id of the user owning the profile.
+     */
+    @Expose
+    @SerializedName("owner_user_id")
+    private Integer ownerUserId;
+
+    /**
      * The color chosen for the bunq.me fundraiser profile in hexadecimal format.
      */
     @Expose
@@ -243,6 +250,17 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
     }
 
     /**
+     * Id of the user owning the profile.
+     */
+    public Integer getOwnerUserId() {
+        return this.ownerUserId;
+    }
+
+    public void setOwnerUserId(Integer ownerUserId) {
+        this.ownerUserId = ownerUserId;
+    }
+
+    /**
      * The color chosen for the bunq.me fundraiser profile in hexadecimal format.
      */
     public String getColor() {
@@ -325,6 +343,10 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
      */
     public boolean isAllFieldNull() {
         if (this.monetaryAccountId != null) {
+            return false;
+        }
+
+        if (this.ownerUserId != null) {
             return false;
         }
 

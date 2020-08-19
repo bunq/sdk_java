@@ -7,18 +7,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PublicKeyServer {
 
-  @SerializedName("server_public_key")
-  private String serverPublicKey;
+    @SerializedName("server_public_key")
+    private String serverPublicKey;
 
-  public PublicKeyServer() {
-  }
+    public PublicKeyServer() {
+    }
 
-  public PublicKeyServer(String serverPublicKey) {
-    this.serverPublicKey = serverPublicKey;
-  }
+    public PublicKeyServer(String serverPublicKey) {
+        this.serverPublicKey = serverPublicKey;
+    }
 
-  public String getPublicKeyServer() {
-    return serverPublicKey;
-  }
-
+    public String getPublicKeyServer() {
+        return serverPublicKey;
+    }
 }

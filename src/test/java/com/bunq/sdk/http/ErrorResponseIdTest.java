@@ -9,26 +9,22 @@ import static org.junit.Assert.assertNotNull;
 
 public class ErrorResponseIdTest extends BunqSdkTestBase {
 
-  /**
-   * Invalid user id to trigger BadRequestException
-   */
-  private static final int INVALID_MONETARY_ACCOUNT_ID = 0;
+    /**
+     * Invalid user id to trigger BadRequestException
+     */
+    private static final int INVALID_MONETARY_ACCOUNT_ID = 0;
 
-  /**
-   */
-  @Test
-  public void badRequestWitResponseIdTest()
-  {
-    ApiException caughtException = null;
+    @Test
+    public void badRequestWitResponseIdTest() {
+        ApiException caughtException = null;
 
-    try {
-      MonetaryAccount.get(INVALID_MONETARY_ACCOUNT_ID);
-    } catch (ApiException $exception) {
-      caughtException = $exception;
+        try {
+            MonetaryAccount.get(INVALID_MONETARY_ACCOUNT_ID);
+        } catch (ApiException $exception) {
+            caughtException = $exception;
+        }
+
+        assertNotNull(caughtException);
+        assertNotNull(caughtException.getResponseId());
     }
-
-    assertNotNull(caughtException);
-    assertNotNull(caughtException.getResponseId());
-  }
-
 }

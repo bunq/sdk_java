@@ -14,7 +14,7 @@ public class AnonymousApiClient extends ApiClient {
     /**
      * Private variables.
      */
-    private OkHttpClient httpClient;
+    private final OkHttpClient httpClient;
 
     /**
      * @param apiContext API context to make the calls in.
@@ -61,5 +61,4 @@ public class AnonymousApiClient extends ApiClient {
             throw new UncaughtExceptionError(exception);
         }
     }
-
 }

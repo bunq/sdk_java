@@ -5,43 +5,42 @@ package com.bunq.sdk.context;
  */
 public enum ApiEnvironmentType {
 
-  PRODUCTION(
-      "api.bunq.com",
-      "v1",
-      "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0="
-  ),
-  SANDBOX(
-      "public-api.sandbox.bunq.com",
-      "v1",
-      "sha256/SEJfjAW74vHQmGe/lb9NwBjzAw5y7rpJH3UWpGE5q8A="
-  );
+    PRODUCTION(
+            "api.bunq.com",
+            "v1",
+            "sha256/nI/T/sDfioCBHB5mVppDPyLi2HXYanwk2arpZuHLOu0="
+    ),
+    SANDBOX(
+            "public-api.sandbox.bunq.com",
+            "v1",
+            "sha256/SEJfjAW74vHQmGe/lb9NwBjzAw5y7rpJH3UWpGE5q8A="
+    );
 
-  /**
-   * Base URI of each given environment.
-   */
-  private final String baseUri;
-  private final String apiVersion;
-  private final String pinnedKey;
+    /**
+     * Base URI of each given environment.
+     */
+    private final String baseUri;
+    private final String apiVersion;
+    private final String pinnedKey;
 
-  ApiEnvironmentType(String baseUri, String apiVersion, String pinnedKey) {
-    this.baseUri = baseUri;
-    this.apiVersion = apiVersion;
-    this.pinnedKey = pinnedKey;
-  }
+    ApiEnvironmentType(String baseUri, String apiVersion, String pinnedKey) {
+        this.baseUri = baseUri;
+        this.apiVersion = apiVersion;
+        this.pinnedKey = pinnedKey;
+    }
 
-  /**
-   * @return Base URI of the environment.
-   */
-  public String getBaseUri() {
-    return this.baseUri;
-  }
+    /**
+     * @return Base URI of the environment.
+     */
+    public String getBaseUri() {
+        return this.baseUri;
+    }
 
-  public String getApiVersion() {
-    return this.apiVersion;
-  }
+    public String getApiVersion() {
+        return this.apiVersion;
+    }
 
-  public String getPinnedKey() {
-    return pinnedKey;
-  }
-
+    public String getPinnedKey() {
+        return pinnedKey;
+    }
 }

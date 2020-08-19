@@ -6,6 +6,7 @@ import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 
 /**
@@ -15,27 +16,26 @@ import java.io.IOException;
  */
 public class MonetaryAccountReferenceTypeAdapter extends TypeAdapter<MonetaryAccountReference> {
 
-  @Override
-  public void write(JsonWriter out, MonetaryAccountReference value) throws IOException {
-    if (value == null || value.isAllFieldNull()) {
-      out.nullValue();
-    } else if (value.getLabelMonetaryAccount() != null) {
-      LabelMonetaryAccount labelMonetaryAccount = value.getLabelMonetaryAccount();
+    @Override
+    public void write(JsonWriter out, MonetaryAccountReference value) throws IOException {
+        if (value == null || value.isAllFieldNull()) {
+            out.nullValue();
+        } else if (value.getLabelMonetaryAccount() != null) {
+            LabelMonetaryAccount labelMonetaryAccount = value.getLabelMonetaryAccount();
 
-      BunqGsonBuilder.buildDefault().create().toJson(labelMonetaryAccount, LabelMonetaryAccount.class, out);
-    } else {
-      Pointer pointer = value.getPointer();
+            BunqGsonBuilder.buildDefault().create().toJson(labelMonetaryAccount, LabelMonetaryAccount.class, out);
+        } else {
+            Pointer pointer = value.getPointer();
 
-      BunqGsonBuilder.buildDefault().create().toJson(pointer, Pointer.class, out);
+            BunqGsonBuilder.buildDefault().create().toJson(pointer, Pointer.class, out);
+        }
     }
-  }
 
-  @Override
-  public MonetaryAccountReference read(JsonReader in) throws IOException {
-    LabelMonetaryAccount labelMonetaryAccount =
-        BunqGsonBuilder.buildDefault().create().getAdapter(LabelMonetaryAccount.class).read(in);
+    @Override
+    public MonetaryAccountReference read(JsonReader in) throws IOException {
+        LabelMonetaryAccount labelMonetaryAccount =
+                BunqGsonBuilder.buildDefault().create().getAdapter(LabelMonetaryAccount.class).read(in);
 
-    return new MonetaryAccountReference(labelMonetaryAccount);
-  }
-
+        return new MonetaryAccountReference(labelMonetaryAccount);
+    }
 }

@@ -5,19 +5,18 @@ package com.bunq.sdk.exception;
  */
 public class BunqException extends RuntimeException {
 
-  /**
-   * @param message A custom error message.
-   */
-  public BunqException(String message) {
-    super(message);
-  }
+    /**
+     * @param message A custom error message.
+     */
+    public BunqException(String message) {
+        super(message);
+    }
 
-  /**
-   * @param message A custom error message.
-   * @param cause An exception which caused this exception.
-   */
-  public BunqException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
+    /**
+     * @param message A custom error message.
+     * @param cause An exception which caused this exception.
+     */
+    public BunqException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

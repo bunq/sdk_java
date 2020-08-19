@@ -4,6 +4,7 @@ import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.generated.object.LabelUser;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -46,7 +47,7 @@ public class TreeProgress extends BunqModel {
      */
     @Expose
     @SerializedName("label_user")
-    private BunqModel labelUser;
+    private LabelUser labelUser;
 
     /**
      *
@@ -98,11 +99,11 @@ public class TreeProgress extends BunqModel {
     /**
      * The label of the user the progress belongs to.
      */
-    public BunqModel getLabelUser() {
+    public LabelUser getLabelUser() {
         return this.labelUser;
     }
 
-    public void setLabelUser(BunqModel labelUser) {
+    public void setLabelUser(LabelUser labelUser) {
         this.labelUser = labelUser;
     }
 

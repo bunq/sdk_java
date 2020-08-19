@@ -68,6 +68,7 @@ public class OauthAccessToken extends BunqModel {
     }
 
     /**
+     *
      */
     protected OauthAccessToken(String token, String type) {
         this.token = token;
@@ -75,19 +76,20 @@ public class OauthAccessToken extends BunqModel {
     }
 
     /**
+     *
      */
-    public String getToken()
-    {
+    public String getToken() {
         return this.token;
     }
 
     /**
+     *
      */
     public static OauthAccessToken create(
-        OauthGrantType grantType,
-        String authCode,
-        String redirectUri,
-        OauthClient client
+            OauthGrantType grantType,
+            String authCode,
+            String redirectUri,
+            OauthClient client
     ) {
         ApiClient apiClient = new AnonymousApiClient(BunqContext.getApiContext());
         BunqResponseRaw responseRaw = apiClient.post(
@@ -100,12 +102,13 @@ public class OauthAccessToken extends BunqModel {
     }
 
     /**
+     *
      */
     protected static String createTokenUri(
-        final String grantType,
-        final String authCode,
-        final String redirectUri,
-        final OauthClient client
+            final String grantType,
+            final String authCode,
+            final String redirectUri,
+            final OauthClient client
     ) {
         Map<String, String> allTokenParameter = new HashMap<String, String>() {
             {
@@ -141,9 +144,9 @@ public class OauthAccessToken extends BunqModel {
     }
 
     /**
+     *
      */
-    private static String determineTokenUriFormat()
-    {
+    private static String determineTokenUriFormat() {
         ApiEnvironmentType environmentType = BunqContext.getApiContext().getEnvironmentType();
 
         if (AUTH_URI_ENVIRONMENT_MAP.containsKey(environmentType)) {

@@ -13,9 +13,9 @@ import java.util.List;
 
 /**
  * Tests:
- *  NotificationFilterUrlMonetaryAccountInternal
- *  NotificationFilterUrlUserInternal
- *  NotificationFilterPushUserInternal
+ * NotificationFilterUrlMonetaryAccountInternal
+ * NotificationFilterUrlUserInternal
+ * NotificationFilterPushUserInternal
  */
 public class NotificationFilterTest extends BunqSdkTestBase {
 
@@ -29,15 +29,14 @@ public class NotificationFilterTest extends BunqSdkTestBase {
      * Test NotificationFilterUrlMonetaryAccount creation.
      */
     @Test
-    public void testNotificationFilterUrlMonetaryAccount()
-    {
+    public void testNotificationFilterUrlMonetaryAccount() {
         NotificationFilterUrl notificationFilter = getNotificationFilterUrl();
         List<NotificationFilterUrl> allNotificationFilter = new ArrayList<>();
         allNotificationFilter.add(notificationFilter);
 
         List<NotificationFilterUrl> allCreatedNotificationFilter = NotificationFilterUrlMonetaryAccountInternal.createWithListResponse(
-            getPrimaryMonetaryAccount().getId(),
-            allNotificationFilter
+                getPrimaryMonetaryAccount().getId(),
+                allNotificationFilter
         ).getValue();
 
         Assert.assertEquals(1, allCreatedNotificationFilter.size());
@@ -47,8 +46,7 @@ public class NotificationFilterTest extends BunqSdkTestBase {
      * Test NotificationFilterUrlUser creation.
      */
     @Test
-    public void testNotificationFilterUrlUser()
-    {
+    public void testNotificationFilterUrlUser() {
         NotificationFilterUrl notificationFilter = getNotificationFilterUrl();
         List<NotificationFilterUrl> allNotificationFilter = new ArrayList<>();
         allNotificationFilter.add(notificationFilter);
@@ -59,12 +57,12 @@ public class NotificationFilterTest extends BunqSdkTestBase {
 
         Assert.assertEquals(1, allCreatedNotificationFilter.size());
     }
+
     /**
      * Test NotificationFilterPushUser creation.
      */
     @Test
-    public void testNotificationFilterPushUser()
-    {
+    public void testNotificationFilterPushUser() {
         NotificationFilterPush notificationFilter = getNotificationFilterPush();
         List<NotificationFilterPush> allNotificationFilter = new ArrayList<>();
         allNotificationFilter.add(notificationFilter);
@@ -80,8 +78,7 @@ public class NotificationFilterTest extends BunqSdkTestBase {
      * Test clear all filters.
      */
     @Test
-    public void testNotificationFilterClear()
-    {
+    public void testNotificationFilterClear() {
         List<NotificationFilterPush> allCreatedNotificationFilterPushUser =
                 NotificationFilterPushUserInternal.createWithListResponse().getValue();
         List<NotificationFilterUrl> allCreatedNotificationFilterUrlUser =
@@ -101,25 +98,21 @@ public class NotificationFilterTest extends BunqSdkTestBase {
     /**
      * @return NotificationFilterUrl
      */
-    private NotificationFilterUrl getNotificationFilterUrl()
-    {
+    private NotificationFilterUrl getNotificationFilterUrl() {
         return new NotificationFilterUrl(FILTER_CATEGORY_MUTATION, FILTER_CALLBACK_URL);
     }
 
     /**
      * @return NotificationFilterPush
      */
-    private static NotificationFilterPush getNotificationFilterPush()
-    {
+    private static NotificationFilterPush getNotificationFilterPush() {
         return new NotificationFilterPush(FILTER_CATEGORY_MUTATION);
     }
 
     /**
      * @return MonetaryAccountBank
      */
-    private static MonetaryAccountBank getPrimaryMonetaryAccount()
-    {
+    private static MonetaryAccountBank getPrimaryMonetaryAccount() {
         return BunqContext.getUserContext().getPrimaryMonetaryAccountBank();
     }
-
 }

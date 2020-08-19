@@ -2,22 +2,21 @@ package com.bunq.sdk.exception;
 
 public class ApiException extends RuntimeException {
 
-  private int responseCode;
-  private String responseId;
+    private final int responseCode;
+    private final String responseId;
 
-  protected ApiException(String message, int responseCode, String responseId) {
-    super(message);
+    protected ApiException(String message, int responseCode, String responseId) {
+        super(message);
 
-    this.responseCode = responseCode;
-    this.responseId = responseId;
-  }
+        this.responseCode = responseCode;
+        this.responseId = responseId;
+    }
 
-  public int getResponseCode() {
-    return responseCode;
-  }
+    public int getResponseCode() {
+        return responseCode;
+    }
 
-  public String getResponseId() {
-    return responseId;
-  }
-
+    public String getResponseId() {
+        return responseId;
+    }
 }

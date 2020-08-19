@@ -4,6 +4,7 @@ import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -14,32 +15,31 @@ import java.text.DecimalFormat;
  */
 public class BigDecimalTypeAdapter extends TypeAdapter<BigDecimal> {
 
-  private static final String FORMAT_DECIMAL = "0.0#";
+    private static final String FORMAT_DECIMAL = "0.0#";
 
-  @Override
-  public void write(JsonWriter output, BigDecimal value) throws IOException {
-    DecimalFormat decimalFormat = new DecimalFormat(FORMAT_DECIMAL);
+    @Override
+    public void write(JsonWriter output, BigDecimal value) throws IOException {
+        DecimalFormat decimalFormat = new DecimalFormat(FORMAT_DECIMAL);
 
-    if (value == null) {
-      output.nullValue();
-    } else {
-      output.value(decimalFormat.format(value));
+        if (value == null) {
+            output.nullValue();
+        } else {
+            output.value(decimalFormat.format(value));
+        }
     }
-  }
 
-  @Override
-  public BigDecimal read(JsonReader input) throws IOException {
-    JsonToken type = input.peek();
+    @Override
+    public BigDecimal read(JsonReader input) throws IOException {
+        JsonToken type = input.peek();
 
-    if (type == JsonToken.NUMBER) {
-      return new BigDecimal(input.nextDouble());
-    } else if (type == JsonToken.STRING) {
-      return new BigDecimal(input.nextString());
-    } else {
-      input.nextNull();
+        if (type == JsonToken.NUMBER) {
+            return BigDecimal.valueOf(input.nextDouble());
+        } else if (type == JsonToken.STRING) {
+            return new BigDecimal(input.nextString());
+        } else {
+            input.nextNull();
 
-      return null;
+            return null;
+        }
     }
-  }
-
 }
