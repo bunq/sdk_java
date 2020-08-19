@@ -22,7 +22,7 @@ public class TransferwiseRequirementField extends BunqModel {
      */
     @Expose
     @SerializedName("group")
-    private BunqModel group;
+    private TransferwiseRequirementFieldGroup group;
 
     /**
      * The name of the required field.
@@ -72,11 +72,11 @@ public class TransferwiseRequirementField extends BunqModel {
     /**
      * The field group.
      */
-    public BunqModel getGroup() {
+    public TransferwiseRequirementFieldGroup getGroup() {
         return this.group;
     }
 
-    public void setGroup(BunqModel group) {
+    public void setGroup(TransferwiseRequirementFieldGroup group) {
         this.group = group;
     }
 
