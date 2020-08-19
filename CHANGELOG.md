@@ -1,6 +1,50 @@
-# Change Log
+# Changelog
+
+## [Unreleased](https://github.com/bunq/sdk_java/tree/HEAD)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.14.0...HEAD)
+
+**Implemented enhancements:**
+
+- Update Java SDK dependencies  [\#131](https://github.com/bunq/sdk_java/issues/131)
+
+**Fixed bugs:**
+
+- OauthAuthorizationUri creates incorrect URL [\#126](https://github.com/bunq/sdk_java/issues/126)
+- Fixed OauthAuthorizationUri not being correctly created [\#133](https://github.com/bunq/sdk_java/pull/133) ([angelomelonas](https://github.com/angelomelonas))
+
+**Closed issues:**
+
+- ExceptionInInitializerError in ApiContext.create [\#127](https://github.com/bunq/sdk_java/issues/127)
+- Update Okio dependency [\#120](https://github.com/bunq/sdk_java/issues/120)
+
+**Merged pull requests:**
+
+- Updated Java SDK dependencies [\#132](https://github.com/bunq/sdk_java/pull/132) ([angelomelonas](https://github.com/angelomelonas))
+
+## [1.14.0](https://github.com/bunq/sdk_java/tree/1.14.0) (2020-07-28)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.13.1...1.14.0)
+
+**Closed issues:**
+
+- Certificate pinning issue after bunq certificate renewal [\#123](https://github.com/bunq/sdk_java/issues/123)
+
+## [1.13.1](https://github.com/bunq/sdk_java/tree/1.13.1) (2020-03-27)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.13.0...1.13.1)
+
+**Merged pull requests:**
+
+- Updated sandbox certificate pinning hash. [\#125](https://github.com/bunq/sdk_java/pull/125) ([NickvandeGroes](https://github.com/NickvandeGroes))
+- Use correct oauth url for sandbox and production [\#124](https://github.com/bunq/sdk_java/pull/124) ([thijsdejong](https://github.com/thijsdejong))
+
+## [1.13.0](https://github.com/bunq/sdk_java/tree/1.13.0) (2020-02-19)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.12.1...1.13.0)
 
 ## [1.12.1](https://github.com/bunq/sdk_java/tree/1.12.1) (2019-09-16)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.12.0...1.12.1)
 
 **Closed issues:**
@@ -12,6 +56,7 @@
 - Feature/object wrapping fix [\#119](https://github.com/bunq/sdk_java/pull/119) ([NickvandeGroes](https://github.com/NickvandeGroes))
 
 ## [1.12.0](https://github.com/bunq/sdk_java/tree/1.12.0) (2019-09-10)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.16...1.12.0)
 
 **Closed issues:**
@@ -23,9 +68,11 @@
 - Fix NotificationFilter and implement PSD2 [\#118](https://github.com/bunq/sdk_java/pull/118) ([NickvandeGroes](https://github.com/NickvandeGroes))
 
 ## [1.10.16](https://github.com/bunq/sdk_java/tree/1.10.16) (2019-06-16)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.1...1.10.16)
 
 ## [1.10.1](https://github.com/bunq/sdk_java/tree/1.10.1) (2019-05-22)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.10.0...1.10.1)
 
 **Closed issues:**
@@ -33,6 +80,7 @@
 - Support for MonetaryAccountBankSavings is missing [\#113](https://github.com/bunq/sdk_java/issues/113)
 
 ## [1.10.0](https://github.com/bunq/sdk_java/tree/1.10.0) (2019-05-09)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.1.0...1.10.0)
 
 **Closed issues:**
@@ -45,6 +93,7 @@
 - Changed pinned key to match new sandbox certificate  [\#116](https://github.com/bunq/sdk_java/pull/116) ([erwindeg](https://github.com/erwindeg))
 
 ## [1.1.0](https://github.com/bunq/sdk_java/tree/1.1.0) (2018-10-09)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.0.1...1.1.0)
 
 **Merged pull requests:**
@@ -52,6 +101,7 @@
 - bunq header handling as enum \(bunq/sdk\_java\#93\)  [\#105](https://github.com/bunq/sdk_java/pull/105) ([tubbynl](https://github.com/tubbynl))
 
 ## [1.0.1](https://github.com/bunq/sdk_java/tree/1.0.1) (2018-09-01)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/1.0.0...1.0.1)
 
 **Closed issues:**
@@ -63,6 +113,7 @@
 - Exclude examples and test files from build. \(bunq/sdk\_java\#109\) [\#110](https://github.com/bunq/sdk_java/pull/110) ([OGKevin](https://github.com/OGKevin))
 
 ## [1.0.0](https://github.com/bunq/sdk_java/tree/1.0.0) (2018-07-24)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.13.1...1.0.0)
 
 **Implemented enhancements:**
@@ -111,6 +162,7 @@
 - Replace examples with tinker bunq/sdk\_java\#66 [\#82](https://github.com/bunq/sdk_java/pull/82) ([OGKevin](https://github.com/OGKevin))
 
 ## [0.13.1](https://github.com/bunq/sdk_java/tree/0.13.1) (2018-05-30)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.13.0...0.13.1)
 
 **Closed issues:**
@@ -118,6 +170,7 @@
 - Android issue: HttpClient was deprecated in API Level 22 and removed in API Level 23 [\#69](https://github.com/bunq/sdk_java/issues/69)
 
 ## [0.13.0](https://github.com/bunq/sdk_java/tree/0.13.0) (2018-03-20)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.4...0.13.0)
 
 **Implemented enhancements:**
@@ -156,6 +209,7 @@
 - Improve issue and pr template. \(bunq/sdk\_java\#56\) [\#57](https://github.com/bunq/sdk_java/pull/57) ([OGKevin](https://github.com/OGKevin))
 
 ## [0.12.4](https://github.com/bunq/sdk_java/tree/0.12.4) (2017-12-21)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.3...0.12.4)
 
 **Implemented enhancements:**
@@ -169,17 +223,13 @@
 - Removed guava as dependency. \(bunq/sdk\_java\#41\) [\#44](https://github.com/bunq/sdk_java/pull/44) ([OGKevin](https://github.com/OGKevin))
 - Generated CHANGELOG.md :clap:. \(bunq/sdk\_java\#38\) [\#39](https://github.com/bunq/sdk_java/pull/39) ([OGKevin](https://github.com/OGKevin))
 
-**Fixed bugs:**
-
-- Remove guava  [\#41](https://github.com/bunq/sdk_java/issues/41)
-- Removed guava as dependency. \\(bunq/sdk\\_java\\#41\\) [\#44](https://github.com/bunq/sdk_java/pull/44) ([OGKevin](https://github.com/OGKevin))
-
 **Merged pull requests:**
 
 - Added method to ensure that reponse headers are correclty cased befor… [\#53](https://github.com/bunq/sdk_java/pull/53) ([OGKevin](https://github.com/OGKevin))
 - Feature/improve decoder bunq/sdk java\#35 [\#52](https://github.com/bunq/sdk_java/pull/52) ([OGKevin](https://github.com/OGKevin))
 
 ## [0.12.3](https://github.com/bunq/sdk_java/tree/0.12.3) (2017-11-15)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.2...0.12.3)
 
 **Implemented enhancements:**
@@ -192,6 +242,7 @@
 - ScheduledPayment causes decode error due to Typo [\#37](https://github.com/bunq/sdk_java/issues/37)
 
 ## [0.12.2](https://github.com/bunq/sdk_java/tree/0.12.2) (2017-11-08)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.12.0...0.12.2)
 
 **Implemented enhancements:**
@@ -212,6 +263,7 @@
 - Feature/add missing cvc fields \#30 [\#31](https://github.com/bunq/sdk_java/pull/31) ([OGKevin](https://github.com/OGKevin))
 
 ## [0.12.0](https://github.com/bunq/sdk_java/tree/0.12.0) (2017-10-11)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.11.0...0.12.0)
 
 **Implemented enhancements:**
@@ -232,6 +284,7 @@
 - Fix namespaces; cleanup tests; kill formatting of generated files \[\#19\] [\#20](https://github.com/bunq/sdk_java/pull/20) ([dnl-blkv](https://github.com/dnl-blkv))
 
 ## [0.11.0](https://github.com/bunq/sdk_java/tree/0.11.0) (2017-09-06)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.10.0...0.11.0)
 
 **Implemented enhancements:**
@@ -244,6 +297,7 @@
 - Add pagination; cleanup; add missing endpoints and fields \[\#4\] [\#13](https://github.com/bunq/sdk_java/pull/13) ([dnl-blkv](https://github.com/dnl-blkv))
 
 ## [0.10.0](https://github.com/bunq/sdk_java/tree/0.10.0) (2017-08-23)
+
 [Full Changelog](https://github.com/bunq/sdk_java/compare/0.9.1...0.10.0)
 
 **Implemented enhancements:**
@@ -259,6 +313,9 @@
 - Fix Jitpack build, add misssing fields, fix field types in generated \[\#6\] [\#8](https://github.com/bunq/sdk_java/pull/8) ([dnl-blkv](https://github.com/dnl-blkv))
 
 ## [0.9.1](https://github.com/bunq/sdk_java/tree/0.9.1) (2017-08-08)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/4af657908350df7604272a77d5d2eb9ad9187422...0.9.1)
+
 **Implemented enhancements:**
 
 - Added tests readme [\#3](https://github.com/bunq/sdk_java/pull/3) ([OGKevin](https://github.com/OGKevin))
@@ -266,4 +323,4 @@
 
 
 
-\* *This Change Log was automatically generated by [github_changelog_generator](https://github.com/skywinder/Github-Changelog-Generator)*
+\* *This Changelog was automatically generated by [github_changelog_generator](https://github.com/github-changelog-generator/github-changelog-generator)*
