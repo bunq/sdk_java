@@ -139,13 +139,6 @@ public class RegistryEntry extends BunqModel {
     private List<AllocationItem> allocations;
 
     /**
-     * The object that is connected to this RegistryEntry.
-     */
-    @Expose
-    @SerializedName("object")
-    private BunqModel object;
-
-    /**
      * The attachments attached to the payment.
      */
     @Expose
@@ -563,17 +556,6 @@ public class RegistryEntry extends BunqModel {
     }
 
     /**
-     * The object that is connected to this RegistryEntry.
-     */
-    public BunqModel getObject() {
-        return this.object;
-    }
-
-    public void setObject(BunqModel object) {
-        this.object = object;
-    }
-
-    /**
      * The attachments attached to the payment.
      */
     public List<RegistryEntryAttachment> getAttachment() {
@@ -641,10 +623,6 @@ public class RegistryEntry extends BunqModel {
         }
 
         if (this.allocations != null) {
-            return false;
-        }
-
-        if (this.object != null) {
             return false;
         }
 
