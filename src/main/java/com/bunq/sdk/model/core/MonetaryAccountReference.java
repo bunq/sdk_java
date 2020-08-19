@@ -9,35 +9,35 @@ import com.bunq.sdk.model.generated.object.Pointer;
  */
 public class MonetaryAccountReference extends BunqModel {
 
-  private Pointer pointer;
-  private LabelMonetaryAccount labelMonetaryAccount;
+    private Pointer pointer;
+    private LabelMonetaryAccount labelMonetaryAccount;
 
-  public MonetaryAccountReference(Pointer pointer) {
-    this.pointer = pointer;
-  }
-
-  public MonetaryAccountReference(LabelMonetaryAccount labelMonetaryAccount) {
-    this.labelMonetaryAccount = labelMonetaryAccount;
-  }
-
-  public Pointer getPointer() {
-    return pointer;
-  }
-
-  public LabelMonetaryAccount getLabelMonetaryAccount() {
-    return labelMonetaryAccount;
-  }
-
-  @Override
-  public boolean isAllFieldNull() {
-    if (this.pointer == null) {
-      return false;
+    public MonetaryAccountReference(Pointer pointer) {
+        this.pointer = pointer;
     }
 
-    if (this.labelMonetaryAccount == null) {
-      return false;
+    public MonetaryAccountReference(LabelMonetaryAccount labelMonetaryAccount) {
+        this.labelMonetaryAccount = labelMonetaryAccount;
     }
 
-    return true;
-  }
+    public Pointer getPointer() {
+        return pointer;
+    }
+
+    public LabelMonetaryAccount getLabelMonetaryAccount() {
+        return labelMonetaryAccount;
+    }
+
+    @Override
+    public boolean isAllFieldNull() {
+        if (this.pointer == null) {
+            return false;
+        }
+
+        if (this.labelMonetaryAccount == null) {
+            return false;
+        }
+
+        return true;
+    }
 }

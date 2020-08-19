@@ -2,13 +2,12 @@ package com.bunq.sdk.model.core;
 
 public class Uuid {
 
-  private String uuid;
+    private String uuid;
 
-  public Uuid() {
-  }
+    public Uuid() {
+    }
 
-  public String getUuid() {
-    return this.uuid;
-  }
-
+    public String getUuid() {
+        return this.uuid;
+    }
 }

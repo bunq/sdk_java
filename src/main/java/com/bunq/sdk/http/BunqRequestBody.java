@@ -7,58 +7,65 @@ import okio.BufferedSink;
 import java.io.IOException;
 
 public class BunqRequestBody extends RequestBody {
-  private RequestBody requestBody;
-  private MediaType contentType;
-  private int byteCount;
-  private int offset;
-  private byte[] content;
+    private final RequestBody requestBody;
+    private final MediaType contentType;
+    private final int byteCount;
+    private final int offset;
+    private final byte[] content;
 
-  /**
-   */
-  public BunqRequestBody(MediaType contentType, int byteCount, int offset, byte[] content) {
-    this.contentType = contentType;
-    this.byteCount = byteCount;
-    this.offset = offset;
-    this.content = content;
-    this.requestBody = create(contentType, content, offset, byteCount);
-  }
+    /**
+     *
+     */
+    public BunqRequestBody(MediaType contentType, int byteCount, int offset, byte[] content) {
+        this.contentType = contentType;
+        this.byteCount = byteCount;
+        this.offset = offset;
+        this.content = content;
+        this.requestBody = create(contentType, content, offset, byteCount);
+    }
 
-  /**
-   */
-  public static BunqRequestBody create(final MediaType contentType, final byte[] content) {
-    return new BunqRequestBody(contentType, content.length, 0, content);
-  }
+    /**
+     *
+     */
+    public static BunqRequestBody create(final MediaType contentType, final byte[] content) {
+        return new BunqRequestBody(contentType, content.length, 0, content);
+    }
 
-  /**
-   */
-  @Override
-  public MediaType contentType() {
-    return contentType;
-  }
+    /**
+     *
+     */
+    @Override
+    public MediaType contentType() {
+        return contentType;
+    }
 
-  /**
-   */
-  @Override
-  public long contentLength() {
-    return byteCount;
-  }
+    /**
+     *
+     */
+    @Override
+    public long contentLength() {
+        return byteCount;
+    }
 
-  /**
-   */
-  @Override
-  public void writeTo(BufferedSink sink) throws IOException {
-    sink.write(content, offset, byteCount);
-  }
+    /**
+     *
+     */
+    @Override
+    public void writeTo(BufferedSink sink) throws IOException {
+        sink.write(content, offset, byteCount);
+    }
 
-  /**
-   */
-  public RequestBody getRequestBody() {
-    return requestBody;
-  }
+    /**
+     *
+     */
+    public RequestBody getRequestBody() {
+        return requestBody;
+    }
 
-  /**
-   */
-  public byte[] getContent() {
-    return content;
-  }
+    /**
+     *
+     */
+    public byte[] getContent() {
+        return content;
+    }
 }

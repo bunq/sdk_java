@@ -1,11 +1,13 @@
 package com.bunq.sdk.model.core;
 
 public interface AnchorObjectInterface {
-  /**
-   */
-  boolean isAllFieldNull();
+    /**
+     *
+     */
+    boolean isAllFieldNull();
 
-  /**
-   */
-  BunqModel getReferencedObject();
+    /**
+     *
+     */
+    BunqModel getReferencedObject();
 }

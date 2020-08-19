@@ -2,26 +2,25 @@ package com.bunq.sdk.model.core;
 
 public class SessionToken extends BunqModel {
 
-  private String token;
+    private String token;
 
-  protected SessionToken() {
-  }
-
-  @Override
-  public boolean isAllFieldNull() {
-    if (this.token == null) {
-      return false;
+    protected SessionToken() {
     }
 
-    return true;
-  }
+    @Override
+    public boolean isAllFieldNull() {
+        if (this.token == null) {
+            return false;
+        }
 
-  public SessionToken(String token) {
-    this.token = token;
-  }
+        return true;
+    }
 
-  public String getToken() {
-    return token;
-  }
+    public SessionToken(String token) {
+        this.token = token;
+    }
 
+    public String getToken() {
+        return token;
+    }
 }
