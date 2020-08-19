@@ -19,45 +19,44 @@ import static org.junit.Assert.assertArrayEquals;
  */
 public class AvatarTest extends BunqSdkTestBase {
 
-  /**
-   * The very first index in an array.
-   */
-  private static final int INDEX_FIRST = 0;
+    /**
+     * The very first index in an array.
+     */
+    private static final int INDEX_FIRST = 0;
 
-  private static byte[] getFileContentBytes(String path) {
-    try {
-      return FileUtils.readFileToByteArray(new File(path));
-    } catch (IOException exception) {
-      throw new BunqException(exception.getMessage());
+    private static byte[] getFileContentBytes() {
+        try {
+            return FileUtils.readFileToByteArray(new File(BunqSdkTestBase.ATTACHMENT_PATH_IN));
+        } catch (IOException exception) {
+            throw new BunqException(exception.getMessage());
+        }
     }
-  }
 
-  /**
-   * Tests the creation of an avatar by uploading a picture via AttachmentPublic and setting it as
-   * avatar via the uuid
-   */
-  @Test
-  public void createAvatarTest() {
-    byte[] fileContentsSend = getFileContentBytes(ATTACHMENT_PATH_IN);
-    String attachmentPublicUuid = uploadAvatar(fileContentsSend);
+    /**
+     * Tests the creation of an avatar by uploading a picture via AttachmentPublic and setting it as
+     * avatar via the uuid
+     */
+    @Test
+    public void createAvatarTest() {
+        byte[] fileContentsSend = getFileContentBytes();
+        String attachmentPublicUuid = uploadAvatar(fileContentsSend);
 
-    String avatarUuid = Avatar.create(attachmentPublicUuid).getValue();
+        String avatarUuid = Avatar.create(attachmentPublicUuid).getValue();
 
-    String attachmentPublicUuidFromAvatar = Avatar.get(avatarUuid).getValue()
-        .getImage().get(INDEX_FIRST).getAttachmentPublicUuid();
+        String attachmentPublicUuidFromAvatar = Avatar.get(avatarUuid).getValue()
+                .getImage().get(INDEX_FIRST).getAttachmentPublicUuid();
 
-    byte[] fileContentsReceived = AttachmentPublicContent.list(attachmentPublicUuidFromAvatar).getValue();
+        byte[] fileContentsReceived = AttachmentPublicContent.list(attachmentPublicUuidFromAvatar).getValue();
 
-    assertArrayEquals(fileContentsSend, fileContentsReceived);
-  }
+        assertArrayEquals(fileContentsSend, fileContentsReceived);
+    }
 
-  private String uploadAvatar(byte[] file_contents) {
-    HashMap<String, String> allCustomHeader = new HashMap<>();
+    private String uploadAvatar(byte[] file_contents) {
+        HashMap<String, String> allCustomHeader = new HashMap<>();
 
-    BunqHeader.ATTACHMENT_DESCRIPTION.addTo(allCustomHeader, ATTACHMENT_PATH_IN);
-    BunqHeader.CONTENT_TYPE.addTo(allCustomHeader, CONTENT_TYPE);
+        BunqHeader.ATTACHMENT_DESCRIPTION.addTo(allCustomHeader, ATTACHMENT_PATH_IN);
+        BunqHeader.CONTENT_TYPE.addTo(allCustomHeader, CONTENT_TYPE);
 
-    return AttachmentPublic.create(allCustomHeader, file_contents).getValue();
-  }
-
+        return AttachmentPublic.create(allCustomHeader, file_contents).getValue();
+    }
 }

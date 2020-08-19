@@ -13,19 +13,18 @@ import static org.junit.Assert.assertNotNull;
 
 public class MonetaryAccountJointTest extends BunqSdkTestBase {
 
-  private static final String PATH_TO_JSON_RESPONSE =
-      "src/test/Resource/ResponseJsons/MonetaryAccountJoint.json";
+    private static final String PATH_TO_JSON_RESPONSE =
+            "src/test/Resource/ResponseJsons/MonetaryAccountJoint.json";
 
-  @BeforeClass
-  public static void setUpBeforeClass() {
-  }
+    @BeforeClass
+    public static void setUpBeforeClass() {
+    }
 
-  @Test
-  public void parseMonetaryAccountJoint() throws FileNotFoundException {
-    JsonReader jsonReader = new JsonReader(new FileReader(PATH_TO_JSON_RESPONSE));
-    MonetaryAccountJoint monetaryAccountJoint = BunqModel.fromJsonReader(MonetaryAccountJoint.class, jsonReader);
+    @Test
+    public void parseMonetaryAccountJoint() throws FileNotFoundException {
+        JsonReader jsonReader = new JsonReader(new FileReader(PATH_TO_JSON_RESPONSE));
+        MonetaryAccountJoint monetaryAccountJoint = BunqModel.fromJsonReader(MonetaryAccountJoint.class, jsonReader);
 
-    assertNotNull(monetaryAccountJoint);
-  }
-
+        assertNotNull(monetaryAccountJoint);
+    }
 }

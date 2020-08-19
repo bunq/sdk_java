@@ -7,14 +7,13 @@ import static org.junit.Assert.assertNotNull;
 
 public class UserContextTest extends BunqSdkTestBase {
 
-  @Test
-  public void buildUserContext() {
-    ApiContext context = getApiContext();
+    @Test
+    public void buildUserContext() {
+        ApiContext context = getApiContext();
 
-    UserContext userContext = new UserContext(context);
+        UserContext userContext = new UserContext(context);
 
-    assertNotNull(userContext.getUserId());
-    assertNotNull(userContext.getMainMonetaryAccountId());
-  }
-
+        assertNotNull(userContext.getUserId());
+        assertNotNull(userContext.getMainMonetaryAccountId());
+    }
 }

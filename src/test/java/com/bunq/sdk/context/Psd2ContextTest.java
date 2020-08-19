@@ -27,13 +27,15 @@ public class Psd2ContextTest {
     private static final String TEST_DEVICE_DESCRIPTION = "PSD2TestDevice";
 
     @Before
-    public void setupApiContext()
-    {
+    public void setupApiContext() {
         File configurationFile = new File(FILE_TEST_CONFIGURATION);
+
         if (!configurationFile.exists()) {
             try {
                 BunqContext.loadApiContext(createApiContext());
-            } catch (Exception ignored) {}
+            } catch (Exception ignored) {
+            }
+
             return;
         }
 
@@ -42,15 +44,14 @@ public class Psd2ContextTest {
     }
 
     @Test
-    public void testCreatePsd2Context()
-    {
+    public void testCreatePsd2Context() {
         File configurationFile = new File(FILE_TEST_CONFIGURATION);
+
         if (configurationFile.exists()) {
             return;
         }
 
         try {
-
             ApiContext apiContext = createApiContext();
             BunqContext.loadApiContext(apiContext);
 
@@ -62,9 +63,9 @@ public class Psd2ContextTest {
     }
 
     @Test
-    public void testCreateOauthClient()
-    {
+    public void testCreateOauthClient() {
         File oauthFile = new File(FILE_TEST_OAUTH);
+
         if (oauthFile.exists()) {
             return;
         }
@@ -88,8 +89,7 @@ public class Psd2ContextTest {
         }
     }
 
-    private ApiContext createApiContext() throws IOException
-    {
+    private ApiContext createApiContext() throws IOException {
         ApiContext apiContext = ApiContext.createForPsd2(
                 ApiEnvironmentType.SANDBOX,
                 SecurityUtils.getCertificateFromFile(FILE_TEST_CERTIFICATE),
