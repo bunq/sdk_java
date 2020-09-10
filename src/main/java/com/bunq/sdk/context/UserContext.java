@@ -22,7 +22,7 @@ public class UserContext {
 
     public UserContext(ApiContext apiContext) {
         this.apiContext = apiContext;
-        refreshContext();
+        initUser(this.apiContext.getSessionContext().getUser());
     }
 
     private void initUser(BunqModel user) {

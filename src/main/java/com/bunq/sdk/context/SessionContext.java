@@ -45,6 +45,10 @@ public class SessionContext implements java.io.Serializable {
     @SerializedName("user_id")
     private final Integer userId;
 
+    @Expose
+    @SerializedName("user")
+    private final BunqModel user;
+
     /**
      * @param sessionServer Object containing the session info.
      */
@@ -52,6 +56,7 @@ public class SessionContext implements java.io.Serializable {
         this.token = sessionServer.getSessionToken().getToken();
         this.expiryTime = calculateExpiryTime(sessionServer);
         this.userId = getUserId(sessionServer.getReferencedUser());
+        this.user = sessionServer.getReferencedUser();
     }
 
     private int getUserId(BunqModel user) {
@@ -110,5 +115,9 @@ public class SessionContext implements java.io.Serializable {
 
     public Integer getUserId() {
         return userId;
+    }
+
+    public BunqModel getUser() {
+        return user;
     }
 }
