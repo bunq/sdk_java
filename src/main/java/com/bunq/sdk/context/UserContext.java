@@ -39,17 +39,16 @@ public class UserContext {
     }
 
     public void initMainMonetaryAccount(UserContextHelper helper) {
+        if (this.userPaymentServiceProvider != null) {
+            return;
+        }
+
         this.primaryMonetaryAccountBank = helper.getFirstActiveMonetaryAccountBankByUserId(getUserId());
     }
 
     public void refreshContext() {
         UserContextHelper helper = new UserContextHelper(this.apiContext);
         this.initUser(helper.getFirstUser().getReferencedObject());
-
-        if (this.userPaymentServiceProvider != null) {
-            return;
-        }
-
         this.initMainMonetaryAccount(helper);
     }
 
