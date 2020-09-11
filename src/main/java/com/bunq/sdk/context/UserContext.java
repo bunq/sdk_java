@@ -6,7 +6,6 @@ import com.bunq.sdk.model.core.UserContextHelper;
 import com.bunq.sdk.model.generated.endpoint.*;
 
 public class UserContext {
-
     /**
      * Error constants.
      */
@@ -22,7 +21,7 @@ public class UserContext {
 
     public UserContext(ApiContext apiContext) {
         this.apiContext = apiContext;
-        initUser(this.apiContext.getSessionContext().getUser());
+        initUser(this.apiContext.getSessionContext().getUserReference());
     }
 
     private void initUser(BunqModel user) {
@@ -39,8 +38,8 @@ public class UserContext {
         }
     }
 
-    private void initMainMonetaryAccount(MonetaryAccountBank monetaryAccountBank) {
-        this.primaryMonetaryAccountBank = monetaryAccountBank;
+    public void initMainMonetaryAccount(UserContextHelper helper) {
+        this.primaryMonetaryAccountBank = helper.getFirstActiveMonetaryAccountBankByUserId(getUserId());
     }
 
     public void refreshContext() {
@@ -51,7 +50,7 @@ public class UserContext {
             return;
         }
 
-        this.initMainMonetaryAccount(helper.getFirstActiveMonetaryAccountBankByUserId(getUserId()));
+        this.initMainMonetaryAccount(helper);
     }
 
     public Integer getUserId() {
