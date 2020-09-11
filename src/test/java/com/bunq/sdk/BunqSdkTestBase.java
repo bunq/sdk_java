@@ -48,7 +48,7 @@ public class BunqSdkTestBase {
     protected static final String ATTACHMENT_PATH_IN = "assets/vader.png";
     protected static final String SCHEME_HTTPS = "https://";
     protected static final String URL_PATH_SEPARATOR = "/";
-    protected static final String URL_PATH_SANDBOX_USER = "/sandbox-user";
+    protected static final String URL_PATH_SANDBOX_USER = "/sandbox-user-person";
     protected static final String CURRENCY_EUR = "EUR";
     protected static final String ACCOUNT_DESCRIPTION = "test account java";
     protected static final String SPENDING_MONEY_AMOUNT = "500";
