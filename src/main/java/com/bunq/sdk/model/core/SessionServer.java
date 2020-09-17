@@ -1,7 +1,6 @@
 package com.bunq.sdk.model.core;
 
 import com.bunq.sdk.context.ApiContext;
-import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
@@ -9,15 +8,11 @@ import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.util.BunqUtil;
 
 import java.util.HashMap;
 
 public class SessionServer extends BunqModel {
-    /**
-     * Error constants.
-     */
-    private static final String ERROR_ALL_FIELD_NULL = "All fields of an extended model or object are null.";
-
     /**
      * Endpoint name.
      */
@@ -94,12 +89,20 @@ public class SessionServer extends BunqModel {
         return sessionToken;
     }
 
-    public UserCompany getUserCompany() {
+    public UserPerson getUserPersonOrNull() {
+        return userPerson;
+    }
+
+    public UserCompany getUserCompanyOrNull() {
         return userCompany;
     }
 
-    public UserPerson getUserPerson() {
-        return userPerson;
+    public UserApiKey getUserApiKeyOrNull() {
+        return userApiKey;
+    }
+
+    public UserPaymentServiceProvider getUserPaymentServiceProviderOrNull() {
+        return userPaymentServiceProvider;
     }
 
     @Override
@@ -124,16 +127,6 @@ public class SessionServer extends BunqModel {
     }
 
     public BunqModel getReferencedUser() {
-        if (this.userCompany == null && this.userApiKey == null && this.userPerson != null && this.userPaymentServiceProvider == null) {
-            return this.userPerson;
-        } else if (this.userPerson == null && this.userApiKey == null && this.userCompany != null && this.userPaymentServiceProvider == null) {
-            return this.userCompany;
-        } else if (this.userPerson == null && this.userCompany == null && this.userApiKey != null && this.userPaymentServiceProvider == null) {
-            return this.userApiKey;
-        } else if (this.userPerson == null && this.userCompany == null && this.userApiKey == null && this.userPaymentServiceProvider != null) {
-            return this.userPaymentServiceProvider;
-        } else {
-            throw new BunqException(ERROR_ALL_FIELD_NULL);
-        }
+        return BunqUtil.getReferencedUser(userPerson, userCompany, userApiKey, userPaymentServiceProvider);
     }
 }

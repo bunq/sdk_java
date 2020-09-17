@@ -1,6 +1,7 @@
 package com.bunq.sdk.context;
 
 import com.bunq.sdk.exception.BunqException;
+import com.bunq.sdk.model.core.UserContextHelper;
 
 public final class BunqContext {
 
@@ -16,6 +17,7 @@ public final class BunqContext {
     public static void loadApiContext(ApiContext apiContext) {
         BunqContext.apiContext = apiContext;
         BunqContext.userContext = new UserContext(apiContext);
+        BunqContext.userContext.initMainMonetaryAccount(new UserContextHelper(apiContext));
     }
 
     public static ApiContext getApiContext() {
