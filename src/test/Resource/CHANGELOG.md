@@ -2,7 +2,44 @@
 
 ## [Unreleased](https://github.com/bunq/sdk_java/tree/HEAD)
 
-[Full Changelog](https://github.com/bunq/sdk_java/compare/1.13.1...HEAD)
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.14.1...HEAD)
+
+**Implemented enhancements:**
+
+- Replace /sandbox-user with /sandbox-user-person and /sandbox-user-company [\#137](https://github.com/bunq/sdk_java/issues/137)
+- feature/sdk\_java\#137 Deprecate sandbox-user. [\#138](https://github.com/bunq/sdk_java/pull/138) ([angelomelonas](https://github.com/angelomelonas))
+
+**Fixed bugs:**
+
+- Remove getUserObject call immediately after UserContext creation \(reduce rate-limit hits\) [\#134](https://github.com/bunq/sdk_java/issues/134)
+- feature/sdk\_java\#134 save/restore User in SessionContext from file [\#136](https://github.com/bunq/sdk_java/pull/136) ([angelomelonas](https://github.com/angelomelonas))
+- feature/sdk\_java\#134 Do not call getUser immediately after UserContext creation [\#135](https://github.com/bunq/sdk_java/pull/135) ([angelomelonas](https://github.com/angelomelonas))
+
+## [1.14.1](https://github.com/bunq/sdk_java/tree/1.14.1) (2020-08-19)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.14.0...1.14.1)
+
+**Implemented enhancements:**
+
+- Update Java SDK dependencies  [\#131](https://github.com/bunq/sdk_java/issues/131)
+
+**Fixed bugs:**
+
+- OauthAuthorizationUri creates incorrect URL [\#126](https://github.com/bunq/sdk_java/issues/126)
+- Fixed OauthAuthorizationUri not being correctly created [\#133](https://github.com/bunq/sdk_java/pull/133) ([angelomelonas](https://github.com/angelomelonas))
+
+**Closed issues:**
+
+- ExceptionInInitializerError in ApiContext.create [\#127](https://github.com/bunq/sdk_java/issues/127)
+- Update Okio dependency [\#120](https://github.com/bunq/sdk_java/issues/120)
+
+**Merged pull requests:**
+
+- Updated Java SDK dependencies [\#132](https://github.com/bunq/sdk_java/pull/132) ([angelomelonas](https://github.com/angelomelonas))
+
+## [1.14.0](https://github.com/bunq/sdk_java/tree/1.14.0) (2020-07-28)
+
+[Full Changelog](https://github.com/bunq/sdk_java/compare/1.13.1...1.14.0)
 
 **Closed issues:**
 
@@ -184,7 +221,6 @@
 - Added missing id field from mastercard action. \(bunq/sdk\_java\#48\) [\#62](https://github.com/bunq/sdk_java/pull/62) ([OGKevin](https://github.com/OGKevin))
 - \(bunq/sdk\_java\#55\) add response id to request error [\#61](https://github.com/bunq/sdk_java/pull/61) ([OGKevin](https://github.com/OGKevin))
 - Configure Zappr [\#59](https://github.com/bunq/sdk_java/pull/59) ([OGKevin](https://github.com/OGKevin))
-- Improve issue and pr template. \(bunq/sdk\_java\#56\) [\#57](https://github.com/bunq/sdk_java/pull/57) ([OGKevin](https://github.com/OGKevin))
 
 ## [0.12.4](https://github.com/bunq/sdk_java/tree/0.12.4) (2017-12-21)
 
@@ -203,6 +239,7 @@
 
 **Merged pull requests:**
 
+- Improve issue and pr template. \(bunq/sdk\_java\#56\) [\#57](https://github.com/bunq/sdk_java/pull/57) ([OGKevin](https://github.com/OGKevin))
 - Added method to ensure that reponse headers are correclty cased befor… [\#53](https://github.com/bunq/sdk_java/pull/53) ([OGKevin](https://github.com/OGKevin))
 - Feature/improve decoder bunq/sdk java\#35 [\#52](https://github.com/bunq/sdk_java/pull/52) ([OGKevin](https://github.com/OGKevin))
 

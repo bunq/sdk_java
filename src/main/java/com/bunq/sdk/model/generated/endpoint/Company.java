@@ -29,6 +29,7 @@ public class Company extends BunqModel {
     public static final String FIELD_UBO = "ubo";
     public static final String FIELD_CHAMBER_OF_COMMERCE_NUMBER = "chamber_of_commerce_number";
     public static final String FIELD_LEGAL_FORM = "legal_form";
+    public static final String FIELD_SUBSCRIPTION_TYPE = "subscription_type";
     public static final String FIELD_AVATAR_UUID = "avatar_uuid";
     /**
      * Endpoint constants.
@@ -100,6 +101,13 @@ public class Company extends BunqModel {
     private String legalFormFieldForRequest;
 
     /**
+     * The subscription type for the company.
+     */
+    @Expose
+    @SerializedName("subscription_type_field_for_request")
+    private String subscriptionTypeFieldForRequest;
+
+    /**
      * The public UUID of the company's avatar.
      */
     @Expose
@@ -107,38 +115,42 @@ public class Company extends BunqModel {
     private String avatarUuidFieldForRequest;
 
     public Company() {
-        this(null, null, null, null, null, null, null, null);
+        this(null, null, null, null, null, null, null, null, null);
     }
 
     public Company(String name) {
-        this(name, null, null, null, null, null, null, null);
+        this(name, null, null, null, null, null, null, null, null);
     }
 
     public Company(String name, Address addressMain) {
-        this(name, addressMain, null, null, null, null, null, null);
+        this(name, addressMain, null, null, null, null, null, null, null);
     }
 
     public Company(String name, Address addressMain, Address addressPostal) {
-        this(name, addressMain, addressPostal, null, null, null, null, null);
+        this(name, addressMain, addressPostal, null, null, null, null, null, null);
     }
 
     public Company(String name, Address addressMain, Address addressPostal, String country) {
-        this(name, addressMain, addressPostal, country, null, null, null, null);
+        this(name, addressMain, addressPostal, country, null, null, null, null, null);
     }
 
     public Company(String name, Address addressMain, Address addressPostal, String country, String legalForm) {
-        this(name, addressMain, addressPostal, country, legalForm, null, null, null);
+        this(name, addressMain, addressPostal, country, legalForm, null, null, null, null);
     }
 
     public Company(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo) {
-        this(name, addressMain, addressPostal, country, legalForm, ubo, null, null);
+        this(name, addressMain, addressPostal, country, legalForm, ubo, null, null, null);
     }
 
     public Company(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber) {
-        this(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, null);
+        this(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, null, null);
     }
 
-    public Company(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String avatarUuid) {
+    public Company(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String subscriptionType) {
+        this(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, subscriptionType, null);
+    }
+
+    public Company(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String subscriptionType, String avatarUuid) {
         this.nameFieldForRequest = name;
         this.addressMainFieldForRequest = addressMain;
         this.addressPostalFieldForRequest = addressPostal;
@@ -146,6 +158,7 @@ public class Company extends BunqModel {
         this.uboFieldForRequest = ubo;
         this.chamberOfCommerceNumberFieldForRequest = chamberOfCommerceNumber;
         this.legalFormFieldForRequest = legalForm;
+        this.subscriptionTypeFieldForRequest = subscriptionType;
         this.avatarUuidFieldForRequest = avatarUuid;
     }
 
@@ -158,9 +171,10 @@ public class Company extends BunqModel {
      * @param ubo                     The names and birth dates of the company's ultimate beneficiary owners. Minimum
      *                                zero, maximum four.
      * @param chamberOfCommerceNumber The company's chamber of commerce number.
+     * @param subscriptionType        The subscription type for the company.
      * @param avatarUuid              The public UUID of the company's avatar.
      */
-    public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String avatarUuid, Map<String, String> customHeaders) {
+    public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String subscriptionType, String avatarUuid, Map<String, String> customHeaders) {
         ApiClient apiClient = new ApiClient(getApiContext());
 
         if (customHeaders == null) {
@@ -175,6 +189,7 @@ public class Company extends BunqModel {
         requestMap.put(FIELD_UBO, ubo);
         requestMap.put(FIELD_CHAMBER_OF_COMMERCE_NUMBER, chamberOfCommerceNumber);
         requestMap.put(FIELD_LEGAL_FORM, legalForm);
+        requestMap.put(FIELD_SUBSCRIPTION_TYPE, subscriptionType);
         requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
 
         byte[] requestBytes = determineAllRequestByte(requestMap);
@@ -184,39 +199,43 @@ public class Company extends BunqModel {
     }
 
     public static BunqResponse<Integer> create() {
-        return create(null, null, null, null, null, null, null, null, null);
+        return create(null, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name) {
-        return create(name, null, null, null, null, null, null, null, null);
+        return create(name, null, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, Address addressMain) {
-        return create(name, addressMain, null, null, null, null, null, null, null);
+        return create(name, addressMain, null, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal) {
-        return create(name, addressMain, addressPostal, null, null, null, null, null, null);
+        return create(name, addressMain, addressPostal, null, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country) {
-        return create(name, addressMain, addressPostal, country, null, null, null, null, null);
+        return create(name, addressMain, addressPostal, country, null, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm) {
-        return create(name, addressMain, addressPostal, country, legalForm, null, null, null, null);
+        return create(name, addressMain, addressPostal, country, legalForm, null, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo) {
-        return create(name, addressMain, addressPostal, country, legalForm, ubo, null, null, null);
+        return create(name, addressMain, addressPostal, country, legalForm, ubo, null, null, null, null);
     }
 
     public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber) {
-        return create(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, null, null);
+        return create(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, null, null, null);
     }
 
-    public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String avatarUuid) {
-        return create(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, avatarUuid, null);
+    public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String subscriptionType) {
+        return create(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, subscriptionType, null, null);
+    }
+
+    public static BunqResponse<Integer> create(String name, Address addressMain, Address addressPostal, String country, String legalForm, List<Ubo> ubo, String chamberOfCommerceNumber, String subscriptionType, String avatarUuid) {
+        return create(name, addressMain, addressPostal, country, legalForm, ubo, chamberOfCommerceNumber, subscriptionType, avatarUuid, null);
     }
 
     /**
