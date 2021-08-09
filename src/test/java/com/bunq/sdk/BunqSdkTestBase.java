@@ -92,7 +92,7 @@ public class BunqSdkTestBase {
         } else {
             SandboxUserPerson sandboxUser = generateNewSandboxUser();
             ApiContext apiContext = ApiContext.create(
-                    ApiEnvironmentType.PRODUCTION,
+                    ApiEnvironmentType.SANDBOX,
                     sandboxUser.getApiKey(),
                     DEVICE_DESCRIPTION
             );
