@@ -9,7 +9,7 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.model.generated.endpoint.CashRegister;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
 import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
-import com.bunq.sdk.model.generated.endpoint.SandboxUser;
+import com.bunq.sdk.model.generated.endpoint.SandboxUserPerson;
 import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.Gson;
@@ -90,7 +90,7 @@ public class BunqSdkTestBase {
 
             return apiContext;
         } else {
-            SandboxUser sandboxUser = generateNewSandboxUser();
+            SandboxUserPerson sandboxUser = generateNewSandboxUser();
             ApiContext apiContext = ApiContext.create(
                     ApiEnvironmentType.SANDBOX,
                     sandboxUser.getApiKey(),
@@ -108,7 +108,7 @@ public class BunqSdkTestBase {
         return confFile.exists() && !confFile.isDirectory();
     }
 
-    private static SandboxUser generateNewSandboxUser() {
+    private static SandboxUserPerson generateNewSandboxUser() {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -140,7 +140,7 @@ public class BunqSdkTestBase {
                         .get(FIELD_API_KEY)
                         .getAsJsonObject();
 
-                return SandboxUser.fromJsonReader(new JsonReader(new StringReader(apiKEy.toString())));
+                return SandboxUserPerson.fromJsonReader(new JsonReader(new StringReader(apiKEy.toString())));
             } else {
                 throw new BunqException(
                         String.format(ERROR_COULD_NOT_GENERATE_NEW_API_KEY, response.body().string())
