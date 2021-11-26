@@ -171,7 +171,7 @@ public final class SecurityUtils {
     }
 
     /**
-     * @param publicKeyString X509 Public Key string
+     * @param publicKeyString  X509 Public Key string
      * @param privateKeyString PKCS8 Private Key string
      */
     public static KeyPair createKeyPairFromFormattedStrings(String publicKeyString,
@@ -538,10 +538,11 @@ public final class SecurityUtils {
         File certificateFile = new File(path);
         if (certificateFile.exists()) {
             Certificate certificate = new Certificate();
-            certificate.setCertificate(FileUtils.readFileToString(certificateFile));
+            certificate.setCertificate(FileUtils.readFileToString(certificateFile, "UTF-8"));
             return certificate;
+        } else {
+            throw new FileNotFoundException();
         }
-        throw new FileNotFoundException();
     }
 
     private static byte[] getResponseHeadBytes(int code, List<BunqBasicHeader> headers) {

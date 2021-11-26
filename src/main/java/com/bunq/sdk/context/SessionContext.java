@@ -7,6 +7,7 @@ import com.bunq.sdk.model.generated.endpoint.UserApiKey;
 import com.bunq.sdk.model.generated.endpoint.UserCompany;
 import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
 import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -45,6 +46,22 @@ public class SessionContext implements java.io.Serializable {
     @SerializedName("user_id")
     private final Integer userId;
 
+    @Expose
+    @SerializedName("user_person")
+    private final UserPerson userPerson;
+
+    @Expose
+    @SerializedName("user_company")
+    private final UserCompany userCompany;
+
+    @Expose
+    @SerializedName("user_api_key")
+    private final UserApiKey userApiKey;
+
+    @Expose
+    @SerializedName("user_payment_service_provider")
+    private final UserPaymentServiceProvider userPaymentServiceProvider;
+
     /**
      * @param sessionServer Object containing the session info.
      */
@@ -52,6 +69,10 @@ public class SessionContext implements java.io.Serializable {
         this.token = sessionServer.getSessionToken().getToken();
         this.expiryTime = calculateExpiryTime(sessionServer);
         this.userId = getUserId(sessionServer.getReferencedUser());
+        this.userPerson = sessionServer.getUserPersonOrNull();
+        this.userCompany = sessionServer.getUserCompanyOrNull();
+        this.userApiKey = sessionServer.getUserApiKeyOrNull();
+        this.userPaymentServiceProvider = sessionServer.getUserPaymentServiceProviderOrNull();
     }
 
     private int getUserId(BunqModel user) {
@@ -110,5 +131,9 @@ public class SessionContext implements java.io.Serializable {
 
     public Integer getUserId() {
         return userId;
+    }
+
+    public BunqModel getUserReference() {
+        return BunqUtil.getReferencedUser(userPerson, userCompany, userApiKey, userPaymentServiceProvider);
     }
 }
