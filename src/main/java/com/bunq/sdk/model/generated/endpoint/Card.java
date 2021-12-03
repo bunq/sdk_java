@@ -156,6 +156,13 @@ public class Card extends BunqModel {
   private List<CardPrimaryAccountNumber> primaryAccountNumbers;
 
   /**
+   * The payment account reference number associated with the card.
+   */
+  @Expose
+  @SerializedName("payment_account_reference")
+  private String paymentAccountReference;
+
+  /**
    * The spending limit for the card.
    */
   @Expose
@@ -649,6 +656,17 @@ requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
   }
 
   /**
+   * The payment account reference number associated with the card.
+   */
+  public String getPaymentAccountReference() {
+    return this.paymentAccountReference;
+  }
+
+  public void setPaymentAccountReference(String paymentAccountReference) {
+    this.paymentAccountReference = paymentAccountReference;
+  }
+
+  /**
    * The spending limit for the card.
    */
   public Amount getCardLimit() {
@@ -815,6 +833,10 @@ requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
     }
 
     if (this.primaryAccountNumbers != null) {
+      return false;
+    }
+
+    if (this.paymentAccountReference != null) {
       return false;
     }
 
