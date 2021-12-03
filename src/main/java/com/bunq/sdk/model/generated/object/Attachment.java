@@ -30,6 +30,13 @@ public class Attachment extends BunqModel {
   private String contentType;
 
   /**
+   * The URLs where the file can be downloaded.
+   */
+  @Expose
+  @SerializedName("urls")
+  private List<AttachmentUrl> urls;
+
+  /**
    * The description of the attachment.
    */
   public String getDescription() {
@@ -52,6 +59,17 @@ public class Attachment extends BunqModel {
   }
 
   /**
+   * The URLs where the file can be downloaded.
+   */
+  public List<AttachmentUrl> getUrls() {
+    return this.urls;
+  }
+
+  public void setUrls(List<AttachmentUrl> urls) {
+    this.urls = urls;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.description != null) {
@@ -59,6 +77,10 @@ public class Attachment extends BunqModel {
     }
 
     if (this.contentType != null) {
+      return false;
+    }
+
+    if (this.urls != null) {
       return false;
     }
 
