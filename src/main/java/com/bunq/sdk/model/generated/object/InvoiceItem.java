@@ -16,6 +16,13 @@ import java.util.Map;
 public class InvoiceItem extends BunqModel {
 
   /**
+   * The id of the invoice item.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
    * The billing date of the item.
    */
   @Expose
@@ -77,6 +84,17 @@ public class InvoiceItem extends BunqModel {
   @Expose
   @SerializedName("total_vat_inclusive")
   private Amount totalVatInclusive;
+
+  /**
+   * The id of the invoice item.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
   /**
    * The billing date of the item.
@@ -180,6 +198,10 @@ public class InvoiceItem extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
     if (this.billingDate != null) {
       return false;
     }
