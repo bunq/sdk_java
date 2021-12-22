@@ -26,7 +26,7 @@ public class ExportStatementCardContent extends BunqModel {
   /**
    * Endpoint constants.
    */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/card-statement/%s/content";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/export-statement-card/%s/content";
 
   /**
    * Object type.
@@ -35,9 +35,9 @@ public class ExportStatementCardContent extends BunqModel {
 
   /**
    */
-  public static BunqResponse<byte[]> list(Integer cardId, Integer cardStatementId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(Integer cardId, Integer exportStatementCardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId, cardStatementId), params, customHeaders);
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId, exportStatementCardId), params, customHeaders);
 
     return new BunqResponse<>(responseRaw.getBodyBytes(), responseRaw.getHeaders());
   }
@@ -48,11 +48,11 @@ public class ExportStatementCardContent extends BunqModel {
   public static BunqResponse<byte[]> list(Integer cardId) {
     return list(cardId, null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer cardId, Integer cardStatementId) {
-    return list(cardId, cardStatementId, null, null);
+  public static BunqResponse<byte[]> list(Integer cardId, Integer exportStatementCardId) {
+    return list(cardId, exportStatementCardId, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer cardId, Integer cardStatementId, Map<String, String> params) {
-    return list(cardId, cardStatementId, params, null);
+  public static BunqResponse<byte[]> list(Integer cardId, Integer exportStatementCardId, Map<String, String> params) {
+    return list(cardId, exportStatementCardId, params, null);
   }
 
   /**
