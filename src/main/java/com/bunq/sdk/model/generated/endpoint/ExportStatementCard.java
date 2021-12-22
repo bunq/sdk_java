@@ -25,18 +25,8 @@ public class ExportStatementCard extends BunqModel {
   /**
    * Endpoint constants.
    */
-  protected static final String ENDPOINT_URL_CREATE = "user/%s/card/%s/card-statement";
-  protected static final String ENDPOINT_URL_READ = "user/%s/card/%s/card-statement/%s";
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/card-statement";
-  protected static final String ENDPOINT_URL_DELETE = "user/%s/card/%s/card-statement/%s";
-
-  /**
-   * Field constants.
-   */
-  public static final String FIELD_STATEMENT_FORMAT = "statement_format";
-  public static final String FIELD_DATE_START = "date_start";
-  public static final String FIELD_DATE_END = "date_end";
-  public static final String FIELD_REGIONAL_FORMAT = "regional_format";
+  protected static final String ENDPOINT_URL_READ = "user/%s/card/%s/export-statement-card/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/card/%s/export-statement-card";
 
   /**
    * Object type.
@@ -100,106 +90,6 @@ public class ExportStatementCard extends BunqModel {
   private Integer cardId;
 
   /**
-   * The format type of statement. Allowed values: CSV, PDF.
-   */
-  @Expose
-  @SerializedName("statement_format_field_for_request")
-  private String statementFormatFieldForRequest;
-
-  /**
-   * The start date for making statements.
-   */
-  @Expose
-  @SerializedName("date_start_field_for_request")
-  private String dateStartFieldForRequest;
-
-  /**
-   * The end date for making statements.
-   */
-  @Expose
-  @SerializedName("date_end_field_for_request")
-  private String dateEndFieldForRequest;
-
-  /**
-   * Required for CSV exports. The regional format of the statement, can be UK_US
-   * (comma-separated) or EUROPEAN (semicolon-separated).
-   */
-  @Expose
-  @SerializedName("regional_format_field_for_request")
-  private String regionalFormatFieldForRequest;
-
-  public ExportStatementCard() {
-  this(null, null, null, null);
-  }
-
-  public ExportStatementCard(String statementFormat) {
-  this(statementFormat, null, null, null);
-  }
-
-  public ExportStatementCard(String statementFormat, String dateStart) {
-  this(statementFormat, dateStart, null, null);
-  }
-
-  public ExportStatementCard(String statementFormat, String dateStart, String dateEnd) {
-  this(statementFormat, dateStart, dateEnd, null);
-  }
-
-  public ExportStatementCard(String statementFormat, String dateStart, String dateEnd, String regionalFormat) {
-    this.statementFormatFieldForRequest = statementFormat;
-    this.dateStartFieldForRequest = dateStart;
-    this.dateEndFieldForRequest = dateEnd;
-    this.regionalFormatFieldForRequest = regionalFormat;
-  }  /**
-   * @param statementFormat The format type of statement. Allowed values: CSV, PDF.
-   * @param dateStart The start date for making statements.
-   * @param dateEnd The end date for making statements.
-   * @param regionalFormat Required for CSV exports. The regional format of the statement, can be
-   * UK_US (comma-separated) or EUROPEAN (semicolon-separated).
-   */
-  public static BunqResponse<Integer> create(Integer cardId, String statementFormat, String dateStart, String dateEnd, String regionalFormat, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-
-    if (customHeaders == null) {
-      customHeaders = new HashMap<>();
-    }
-
-  HashMap<String, Object> requestMap = new HashMap<>();
-requestMap.put(FIELD_STATEMENT_FORMAT, statementFormat);
-requestMap.put(FIELD_DATE_START, dateStart);
-requestMap.put(FIELD_DATE_END, dateEnd);
-requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
-
-    byte[] requestBytes = determineAllRequestByte(requestMap);
-    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), cardId), requestBytes, customHeaders);
-
-    return processForId(responseRaw);
-  }
-
-  public static BunqResponse<Integer> create() {
-    return create(null, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer cardId) {
-    return create(cardId, null, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer cardId, String statementFormat) {
-    return create(cardId, statementFormat, null, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer cardId, String statementFormat, String dateStart) {
-    return create(cardId, statementFormat, dateStart, null, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer cardId, String statementFormat, String dateStart, String dateEnd) {
-    return create(cardId, statementFormat, dateStart, dateEnd, null, null);
-  }
-
-  public static BunqResponse<Integer> create(Integer cardId, String statementFormat, String dateStart, String dateEnd, String regionalFormat) {
-    return create(cardId, statementFormat, dateStart, dateEnd, regionalFormat, null);
-  }
-
-  /**
    */
   public static BunqResponse<ExportStatementCard> get(Integer cardId, Integer exportStatementCardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -243,23 +133,6 @@ requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
 
   public static BunqResponse<List<ExportStatementCard>> list(Integer cardId, Map<String, String> params) {
     return list(cardId, params, null);
-  }
-
-  /**
-   */
-  public static BunqResponse<ExportStatementCard> delete(Integer cardId, Integer exportStatementCardId, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), cardId, exportStatementCardId), customHeaders);
-
-    return new BunqResponse<>(null, responseRaw.getHeaders());
-  }
-
-  public static BunqResponse<ExportStatementCard> delete(Integer cardId) {
-    return delete(cardId, null, null);
-  }
-
-  public static BunqResponse<ExportStatementCard> delete(Integer cardId, Integer exportStatementCardId) {
-    return delete(cardId, exportStatementCardId, null);
   }
 
   /**
