@@ -79,6 +79,13 @@ public class Address extends BunqModel {
   private String mailboxName;
 
   /**
+   * To show whether user created or updated her address for app event listing.
+   */
+  @Expose
+  @SerializedName("is_user_address_updated")
+  private Boolean isUserAddressUpdated;
+
+  /**
    * The street.
    */
   @Expose
@@ -277,6 +284,17 @@ public class Address extends BunqModel {
   }
 
   /**
+   * To show whether user created or updated her address for app event listing.
+   */
+  public Boolean getIsUserAddressUpdated() {
+    return this.isUserAddressUpdated;
+  }
+
+  public void setIsUserAddressUpdated(Boolean isUserAddressUpdated) {
+    this.isUserAddressUpdated = isUserAddressUpdated;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.street != null) {
@@ -312,6 +330,10 @@ public class Address extends BunqModel {
     }
 
     if (this.mailboxName != null) {
+      return false;
+    }
+
+    if (this.isUserAddressUpdated != null) {
       return false;
     }
 
