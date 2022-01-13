@@ -79,6 +79,13 @@ public class BunqMeTabEntry extends BunqModel {
   private List<BunqMeMerchantAvailable> merchantAvailable;
 
   /**
+   * Provided if the user has enabled their invite link.
+   */
+  @Expose
+  @SerializedName("invite_profile_name")
+  private String inviteProfileName;
+
+  /**
    * The Amount requested to be paid. Can be optional.
    */
   @Expose
@@ -197,6 +204,17 @@ public class BunqMeTabEntry extends BunqModel {
   }
 
   /**
+   * Provided if the user has enabled their invite link.
+   */
+  public String getInviteProfileName() {
+    return this.inviteProfileName;
+  }
+
+  public void setInviteProfileName(String inviteProfileName) {
+    this.inviteProfileName = inviteProfileName;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.uuid != null) {
@@ -224,6 +242,10 @@ public class BunqMeTabEntry extends BunqModel {
     }
 
     if (this.merchantAvailable != null) {
+      return false;
+    }
+
+    if (this.inviteProfileName != null) {
       return false;
     }
 
