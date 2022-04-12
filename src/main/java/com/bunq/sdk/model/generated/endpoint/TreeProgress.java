@@ -47,6 +47,13 @@ public class TreeProgress extends BunqModel {
   private BigDecimal progressTreeNext;
 
   /**
+   * URL of the invite profile.
+   */
+  @Expose
+  @SerializedName("url_invite_profile")
+  private String urlInviteProfile;
+
+  /**
    * The label of the user the progress belongs to.
    */
   @Expose
@@ -93,6 +100,17 @@ public class TreeProgress extends BunqModel {
   }
 
   /**
+   * URL of the invite profile.
+   */
+  public String getUrlInviteProfile() {
+    return this.urlInviteProfile;
+  }
+
+  public void setUrlInviteProfile(String urlInviteProfile) {
+    this.urlInviteProfile = urlInviteProfile;
+  }
+
+  /**
    * The label of the user the progress belongs to.
    */
   public LabelUser getLabelUser() {
@@ -111,6 +129,10 @@ public class TreeProgress extends BunqModel {
     }
 
     if (this.progressTreeNext != null) {
+      return false;
+    }
+
+    if (this.urlInviteProfile != null) {
       return false;
     }
 
