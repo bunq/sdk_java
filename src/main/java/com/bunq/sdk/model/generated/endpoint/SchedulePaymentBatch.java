@@ -25,6 +25,7 @@ public class SchedulePaymentBatch extends BunqModel {
   /**
    * Endpoint constants.
    */
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
   protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account/%s/schedule-payment-batch";
   protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
   protected static final String ENDPOINT_URL_DELETE = "user/%s/monetary-account/%s/schedule-payment-batch/%s";
@@ -34,6 +35,11 @@ public class SchedulePaymentBatch extends BunqModel {
    */
   public static final String FIELD_PAYMENTS = "payments";
   public static final String FIELD_SCHEDULE = "schedule";
+
+  /**
+   * Object type.
+   */
+  protected static final String OBJECT_TYPE_GET = "ScheduledPaymentBatch";
 
   /**
    * The payment details.
@@ -75,6 +81,31 @@ public class SchedulePaymentBatch extends BunqModel {
     this.paymentsFieldForRequest = payments;
     this.scheduleFieldForRequest = schedule;
   }  /**
+   */
+  public static BunqResponse<SchedulePaymentBatch> get(Integer schedulePaymentBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentBatchId), params, customHeaders);
+
+    return fromJson(SchedulePaymentBatch.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<SchedulePaymentBatch> get() {
+    return get(null, null, null, null);
+  }
+
+  public static BunqResponse<SchedulePaymentBatch> get(Integer schedulePaymentBatchId) {
+    return get(schedulePaymentBatchId, null, null, null);
+  }
+
+  public static BunqResponse<SchedulePaymentBatch> get(Integer schedulePaymentBatchId, Integer monetaryAccountId) {
+    return get(schedulePaymentBatchId, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<SchedulePaymentBatch> get(Integer schedulePaymentBatchId, Integer monetaryAccountId, Map<String, String> params) {
+    return get(schedulePaymentBatchId, monetaryAccountId, params, null);
+  }
+
+  /**
    * @param payments The payment details.
    * @param schedule The schedule details when creating a scheduled payment.
    */
