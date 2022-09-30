@@ -20,7 +20,7 @@ import javax.lang.model.type.NullType;
 /**
  * Manage the email notification filters for a user.
  */
-public class NotificationFilterEmailUser extends BunqModel {
+public class NotificationFilterEmail extends BunqModel {
 
   /**
    * Endpoint constants.
@@ -53,17 +53,17 @@ public class NotificationFilterEmailUser extends BunqModel {
   @SerializedName("notification_filters_field_for_request")
   private List<NotificationFilterEmail> notificationFiltersFieldForRequest;
 
-  public NotificationFilterEmailUser() {
+  public NotificationFilterEmail() {
   this(null);
   }
 
-  public NotificationFilterEmailUser(List<NotificationFilterEmail> notificationFilters) {
+  public NotificationFilterEmail(List<NotificationFilterEmail> notificationFilters) {
     this.notificationFiltersFieldForRequest = notificationFilters;
   }  /**
    * @param notificationFilters The types of notifications that will result in a email
    * notification for this user.
    */
-  public static BunqResponse<NotificationFilterEmailUser> create(List<NotificationFilterEmail> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<NotificationFilterEmail> create(List<NotificationFilterEmail> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -76,31 +76,31 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
-    return fromJson(NotificationFilterEmailUser.class, responseRaw, OBJECT_TYPE_POST);
+    return fromJson(NotificationFilterEmail.class, responseRaw, OBJECT_TYPE_POST);
   }
 
-  public static BunqResponse<NotificationFilterEmailUser> create() {
+  public static BunqResponse<NotificationFilterEmail> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<NotificationFilterEmailUser> create(List<NotificationFilterEmail> notificationFilters) {
+  public static BunqResponse<NotificationFilterEmail> create(List<NotificationFilterEmail> notificationFilters) {
     return create(notificationFilters, null);
   }
 
   /**
    */
-  public static BunqResponse<List<NotificationFilterEmailUser>> list(Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NotificationFilterEmail>> list(Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-    return fromJsonList(NotificationFilterEmailUser.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJsonList(NotificationFilterEmail.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<NotificationFilterEmailUser>> list() {
+  public static BunqResponse<List<NotificationFilterEmail>> list() {
     return list(null, null);
   }
 
-  public static BunqResponse<List<NotificationFilterEmailUser>> list(Map<String, String> params) {
+  public static BunqResponse<List<NotificationFilterEmail>> list(Map<String, String> params) {
     return list(params, null);
   }
 
@@ -127,8 +127,8 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 
   /**
    */
-  public static NotificationFilterEmailUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationFilterEmailUser.class, reader);
+  public static NotificationFilterEmail fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationFilterEmail.class, reader);
   }
 
 }
