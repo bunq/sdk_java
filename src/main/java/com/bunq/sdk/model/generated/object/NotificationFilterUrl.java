@@ -44,6 +44,20 @@ public class NotificationFilterUrl extends BunqModel {
   private String category;
 
   /**
+   * The users this filter pertains to.
+   */
+  @Expose
+  @SerializedName("all_user_id")
+  private List<String> allUserId;
+
+  /**
+   * The MAs this filter pertains to.
+   */
+  @Expose
+  @SerializedName("all_monetary_account_id")
+  private List<String> allMonetaryAccountId;
+
+  /**
    * The URL to which the callback should be made.
    */
   @Expose
@@ -58,6 +72,20 @@ public class NotificationFilterUrl extends BunqModel {
   private String categoryFieldForRequest;
 
   /**
+   * The users this filter pertains to. OPTIONAL FOR BACKWARD COMPATIBILITY
+   */
+  @Expose
+  @SerializedName("all_user_id_field_for_request")
+  private List<String> allUserIdFieldForRequest;
+
+  /**
+   * The MAs this filter pertains to. OPTIONAL FOR BACKWARD COMPATIBILITY
+   */
+  @Expose
+  @SerializedName("all_monetary_account_id_field_for_request")
+  private List<String> allMonetaryAccountIdFieldForRequest;
+
+  /**
    * The URL to which the callback should be made.
    */
   @Expose
@@ -65,15 +93,25 @@ public class NotificationFilterUrl extends BunqModel {
   private String notificationTargetFieldForRequest;
 
   public NotificationFilterUrl() {
-  this(null, null);
+  this(null, null, null, null);
   }
 
   public NotificationFilterUrl(String category) {
-  this(category, null);
+  this(category, null, null, null);
   }
 
   public NotificationFilterUrl(String category, String notificationTarget) {
+  this(category, notificationTarget, null, null);
+  }
+
+  public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId) {
+  this(category, notificationTarget, allUserId, null);
+  }
+
+  public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId, List<String> allMonetaryAccountId) {
     this.categoryFieldForRequest = category;
+    this.allUserIdFieldForRequest = allUserId;
+    this.allMonetaryAccountIdFieldForRequest = allMonetaryAccountId;
     this.notificationTargetFieldForRequest = notificationTarget;
   }
 
@@ -122,6 +160,28 @@ public class NotificationFilterUrl extends BunqModel {
   }
 
   /**
+   * The users this filter pertains to.
+   */
+  public List<String> getAllUserId() {
+    return this.allUserId;
+  }
+
+  public void setAllUserId(List<String> allUserId) {
+    this.allUserId = allUserId;
+  }
+
+  /**
+   * The MAs this filter pertains to.
+   */
+  public List<String> getAllMonetaryAccountId() {
+    return this.allMonetaryAccountId;
+  }
+
+  public void setAllMonetaryAccountId(List<String> allMonetaryAccountId) {
+    this.allMonetaryAccountId = allMonetaryAccountId;
+  }
+
+  /**
    * The URL to which the callback should be made.
    */
   public String getNotificationTarget() {
@@ -148,6 +208,14 @@ public class NotificationFilterUrl extends BunqModel {
     }
 
     if (this.category != null) {
+      return false;
+    }
+
+    if (this.allUserId != null) {
+      return false;
+    }
+
+    if (this.allMonetaryAccountId != null) {
       return false;
     }
 

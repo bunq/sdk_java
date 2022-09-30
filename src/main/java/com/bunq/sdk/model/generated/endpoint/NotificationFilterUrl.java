@@ -20,7 +20,7 @@ import javax.lang.model.type.NullType;
 /**
  * Manage the url notification filters for a user.
  */
-public class NotificationFilterUrlUser extends BunqModel {
+public class NotificationFilterUrl extends BunqModel {
 
   /**
    * Endpoint constants.
@@ -52,11 +52,11 @@ public class NotificationFilterUrlUser extends BunqModel {
   @SerializedName("notification_filters_field_for_request")
   private List<NotificationFilterUrl> notificationFiltersFieldForRequest;
 
-  public NotificationFilterUrlUser() {
+  public NotificationFilterUrl() {
   this(null);
   }
 
-  public NotificationFilterUrlUser(List<NotificationFilterUrl> notificationFilters) {
+  public NotificationFilterUrl(List<NotificationFilterUrl> notificationFilters) {
     this.notificationFiltersFieldForRequest = notificationFilters;
   }  /**
    * @param notificationFilters The types of notifications that will result in a url notification
@@ -88,18 +88,18 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 
   /**
    */
-  public static BunqResponse<List<NotificationFilterUrlUser>> list(Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NotificationFilterUrl>> list(Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-    return fromJsonList(NotificationFilterUrlUser.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJsonList(NotificationFilterUrl.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<NotificationFilterUrlUser>> list() {
+  public static BunqResponse<List<NotificationFilterUrl>> list() {
     return list(null, null);
   }
 
-  public static BunqResponse<List<NotificationFilterUrlUser>> list(Map<String, String> params) {
+  public static BunqResponse<List<NotificationFilterUrl>> list(Map<String, String> params) {
     return list(params, null);
   }
 
@@ -126,8 +126,8 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 
   /**
    */
-  public static NotificationFilterUrlUser fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationFilterUrlUser.class, reader);
+  public static NotificationFilterUrl fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationFilterUrl.class, reader);
   }
 
 }
