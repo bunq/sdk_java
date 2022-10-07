@@ -86,7 +86,7 @@ public class BunqMeTab extends BunqModel {
   private String status;
 
   /**
-   * The type of the bunq.me Tab. Can be BUNQ_ME or SPLIT_RECEIPT.
+   * The type of the bunq.me Tab. Should be BUNQ_ME
    */
   @Expose
   @SerializedName("type")
@@ -337,7 +337,7 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
-   * The type of the bunq.me Tab. Can be BUNQ_ME or SPLIT_RECEIPT.
+   * The type of the bunq.me Tab. Should be BUNQ_ME
    */
   public String getType() {
     return this.type;
