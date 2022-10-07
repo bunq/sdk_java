@@ -37,6 +37,13 @@ public class CardPinAssignment extends BunqModel {
   private String typeFieldForRequest;
 
   /**
+   * Routing type. Can be MANUAL or AUTOMATIC
+   */
+  @Expose
+  @SerializedName("routing_type_field_for_request")
+  private String routingTypeFieldForRequest;
+
+  /**
    * The 4 digit PIN to be assigned to this account.
    */
   @Expose
@@ -51,19 +58,24 @@ public class CardPinAssignment extends BunqModel {
   private Integer monetaryAccountIdFieldForRequest;
 
   public CardPinAssignment() {
-  this(null, null, null);
+  this(null, null, null, null);
   }
 
   public CardPinAssignment(String type) {
-  this(type, null, null);
+  this(type, null, null, null);
   }
 
-  public CardPinAssignment(String type, String pinCode) {
-  this(type, pinCode, null);
+  public CardPinAssignment(String type, String routingType) {
+  this(type, routingType, null, null);
   }
 
-  public CardPinAssignment(String type, String pinCode, Integer monetaryAccountId) {
+  public CardPinAssignment(String type, String routingType, String pinCode) {
+  this(type, routingType, pinCode, null);
+  }
+
+  public CardPinAssignment(String type, String routingType, String pinCode, Integer monetaryAccountId) {
     this.typeFieldForRequest = type;
+    this.routingTypeFieldForRequest = routingType;
     this.pinCodeFieldForRequest = pinCode;
     this.monetaryAccountIdFieldForRequest = monetaryAccountId;
   }
