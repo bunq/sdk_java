@@ -60,6 +60,20 @@ public class RelationUser extends BunqModel {
   private String status;
 
   /**
+   * The account status of a user
+   */
+  @Expose
+  @SerializedName("user_status")
+  private String userStatus;
+
+  /**
+   * The account status of a user
+   */
+  @Expose
+  @SerializedName("counter_user_status")
+  private String counterUserStatus;
+
+  /**
    * The user's ID.
    */
   public String getUserId() {
@@ -126,6 +140,28 @@ public class RelationUser extends BunqModel {
   }
 
   /**
+   * The account status of a user
+   */
+  public String getUserStatus() {
+    return this.userStatus;
+  }
+
+  public void setUserStatus(String userStatus) {
+    this.userStatus = userStatus;
+  }
+
+  /**
+   * The account status of a user
+   */
+  public String getCounterUserStatus() {
+    return this.counterUserStatus;
+  }
+
+  public void setCounterUserStatus(String counterUserStatus) {
+    this.counterUserStatus = counterUserStatus;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.userId != null) {
@@ -149,6 +185,14 @@ public class RelationUser extends BunqModel {
     }
 
     if (this.status != null) {
+      return false;
+    }
+
+    if (this.userStatus != null) {
+      return false;
+    }
+
+    if (this.counterUserStatus != null) {
       return false;
     }
 
