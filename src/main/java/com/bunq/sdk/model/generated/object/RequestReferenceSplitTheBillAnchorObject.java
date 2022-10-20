@@ -11,7 +11,6 @@ import com.bunq.sdk.model.generated.endpoint.Payment;
 import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
 import com.bunq.sdk.model.generated.endpoint.RequestResponse;
 import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
-import com.bunq.sdk.model.generated.endpoint.TabResultResponse;
 import com.bunq.sdk.model.generated.endpoint.TransferwiseTransfer;
 import com.bunq.sdk.model.generated.endpoint.WhitelistResult;
 import com.google.gson.annotations.Expose;
@@ -73,12 +72,6 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
   @Expose
   @SerializedName("ScheduleInstance")
   private ScheduleInstance scheduleInstance;
-
-  /**
-   */
-  @Expose
-  @SerializedName("TabResultResponse")
-  private TabResultResponse tabResultResponse;
 
   /**
    */
@@ -164,16 +157,6 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
 
   /**
    */
-  public TabResultResponse getTabResultResponse() {
-    return this.tabResultResponse;
-  }
-
-  public void setTabResultResponse(TabResultResponse tabResultResponse) {
-    this.tabResultResponse = tabResultResponse;
-  }
-
-  /**
-   */
   public WhitelistResult getWhitelistResult() {
     return this.whitelistResult;
   }
@@ -223,10 +206,6 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
       return this.scheduleInstance;
     }
 
-    if (this.tabResultResponse != null) {
-      return this.tabResultResponse;
-    }
-
     if (this.whitelistResult != null) {
       return this.whitelistResult;
     }
@@ -266,10 +245,6 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
     }
 
     if (this.scheduleInstance != null) {
-      return false;
-    }
-
-    if (this.tabResultResponse != null) {
       return false;
     }
 
