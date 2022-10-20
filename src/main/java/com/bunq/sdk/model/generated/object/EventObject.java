@@ -29,8 +29,6 @@ import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiryBatch;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteMonetaryAccountInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteMonetaryAccountResponse;
 import com.bunq.sdk.model.generated.endpoint.SofortMerchantTransaction;
-import com.bunq.sdk.model.generated.endpoint.TabResultInquiry;
-import com.bunq.sdk.model.generated.endpoint.TabResultResponse;
 import com.bunq.sdk.model.generated.endpoint.TransferwiseTransfer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -199,18 +197,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
   @Expose
   @SerializedName("SofortMerchantTransaction")
   private SofortMerchantTransaction sofortMerchantTransaction;
-
-  /**
-   */
-  @Expose
-  @SerializedName("TabResultInquiry")
-  private TabResultInquiry tabResultInquiry;
-
-  /**
-   */
-  @Expose
-  @SerializedName("TabResultResponse")
-  private TabResultResponse tabResultResponse;
 
   /**
    */
@@ -470,26 +456,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
-  public TabResultInquiry getTabResultInquiry() {
-    return this.tabResultInquiry;
-  }
-
-  public void setTabResultInquiry(TabResultInquiry tabResultInquiry) {
-    this.tabResultInquiry = tabResultInquiry;
-  }
-
-  /**
-   */
-  public TabResultResponse getTabResultResponse() {
-    return this.tabResultResponse;
-  }
-
-  public void setTabResultResponse(TabResultResponse tabResultResponse) {
-    this.tabResultResponse = tabResultResponse;
-  }
-
-  /**
-   */
   public TransferwiseTransfer getTransferwisePayment() {
     return this.transferwisePayment;
   }
@@ -601,14 +567,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
       return this.sofortMerchantTransaction;
     }
 
-    if (this.tabResultInquiry != null) {
-      return this.tabResultInquiry;
-    }
-
-    if (this.tabResultResponse != null) {
-      return this.tabResultResponse;
-    }
-
     if (this.transferwisePayment != null) {
       return this.transferwisePayment;
     }
@@ -716,14 +674,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
     }
 
     if (this.sofortMerchantTransaction != null) {
-      return false;
-    }
-
-    if (this.tabResultInquiry != null) {
-      return false;
-    }
-
-    if (this.tabResultResponse != null) {
       return false;
     }
 

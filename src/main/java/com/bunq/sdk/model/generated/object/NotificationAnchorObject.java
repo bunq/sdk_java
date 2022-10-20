@@ -23,8 +23,6 @@ import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
 import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteMonetaryAccountInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteMonetaryAccountResponse;
-import com.bunq.sdk.model.generated.endpoint.TabResultInquiry;
-import com.bunq.sdk.model.generated.endpoint.TabResultResponse;
 import com.bunq.sdk.model.generated.endpoint.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -157,18 +155,6 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
   @Expose
   @SerializedName("ScheduledInstance")
   private ScheduleInstance scheduledInstance;
-
-  /**
-   */
-  @Expose
-  @SerializedName("TabResultInquiry")
-  private TabResultInquiry tabResultInquiry;
-
-  /**
-   */
-  @Expose
-  @SerializedName("TabResultResponse")
-  private TabResultResponse tabResultResponse;
 
   /**
    */
@@ -368,26 +354,6 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
 
   /**
    */
-  public TabResultInquiry getTabResultInquiry() {
-    return this.tabResultInquiry;
-  }
-
-  public void setTabResultInquiry(TabResultInquiry tabResultInquiry) {
-    this.tabResultInquiry = tabResultInquiry;
-  }
-
-  /**
-   */
-  public TabResultResponse getTabResultResponse() {
-    return this.tabResultResponse;
-  }
-
-  public void setTabResultResponse(TabResultResponse tabResultResponse) {
-    this.tabResultResponse = tabResultResponse;
-  }
-
-  /**
-   */
   public User getUser() {
     return this.user;
   }
@@ -475,14 +441,6 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
       return this.scheduledInstance;
     }
 
-    if (this.tabResultInquiry != null) {
-      return this.tabResultInquiry;
-    }
-
-    if (this.tabResultResponse != null) {
-      return this.tabResultResponse;
-    }
-
     if (this.user != null) {
       return this.user;
     }
@@ -566,14 +524,6 @@ public class NotificationAnchorObject extends BunqModel implements AnchorObjectI
     }
 
     if (this.scheduledInstance != null) {
-      return false;
-    }
-
-    if (this.tabResultInquiry != null) {
-      return false;
-    }
-
-    if (this.tabResultResponse != null) {
       return false;
     }
 
