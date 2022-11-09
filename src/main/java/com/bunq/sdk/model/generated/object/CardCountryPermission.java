@@ -30,13 +30,6 @@ public class CardCountryPermission extends BunqModel {
   private String country;
 
   /**
-   * Expiry time of this rule.
-   */
-  @Expose
-  @SerializedName("expiry_time")
-  private String expiryTime;
-
-  /**
    * The country to allow transactions in (e.g. NL, DE).
    */
   @Expose
@@ -86,17 +79,6 @@ public class CardCountryPermission extends BunqModel {
   }
 
   /**
-   * Expiry time of this rule.
-   */
-  public String getExpiryTime() {
-    return this.expiryTime;
-  }
-
-  public void setExpiryTime(String expiryTime) {
-    this.expiryTime = expiryTime;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -104,10 +86,6 @@ public class CardCountryPermission extends BunqModel {
     }
 
     if (this.country != null) {
-      return false;
-    }
-
-    if (this.expiryTime != null) {
       return false;
     }
 
