@@ -23,9 +23,17 @@ public class RegistryMembership extends BunqModel {
   /**
    * Field constants.
    */
+  public static final String FIELD_UUID = "uuid";
   public static final String FIELD_ALIAS = "alias";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_AUTO_ADD_CARD_TRANSACTION = "auto_add_card_transaction";
+
+  /**
+   * The UUID of the membership.
+   */
+  @Expose
+  @SerializedName("uuid")
+  private String uuid;
 
   /**
    * The LabelMonetaryAccount of the user who belongs to this RegistryMembership.
@@ -91,6 +99,15 @@ public class RegistryMembership extends BunqModel {
   private LabelUser invitor;
 
   /**
+   * The UUID of the membership. May be used as an alternative to the alias field to identify
+   * specific memberships, as the alias may be updated server-side, whereas the UUID will remain
+   * consistent.
+   */
+  @Expose
+  @SerializedName("uuid_field_for_request")
+  private String uuidFieldForRequest;
+
+  /**
    * The Alias of the party we are inviting to the Registry.
    */
   @Expose
@@ -112,21 +129,37 @@ public class RegistryMembership extends BunqModel {
   private String autoAddCardTransactionFieldForRequest;
 
   public RegistryMembership() {
-  this(null, null, null);
+  this(null, null, null, null);
   }
 
   public RegistryMembership(Pointer alias) {
-  this(alias, null, null);
+  this(alias, null, null, null);
   }
 
-  public RegistryMembership(Pointer alias, String status) {
-  this(alias, status, null);
+  public RegistryMembership(Pointer alias, String uuid) {
+  this(alias, uuid, null, null);
   }
 
-  public RegistryMembership(Pointer alias, String status, String autoAddCardTransaction) {
+  public RegistryMembership(Pointer alias, String uuid, String status) {
+  this(alias, uuid, status, null);
+  }
+
+  public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction) {
+    this.uuidFieldForRequest = uuid;
     this.aliasFieldForRequest = alias;
     this.statusFieldForRequest = status;
     this.autoAddCardTransactionFieldForRequest = autoAddCardTransaction;
+  }
+
+  /**
+   * The UUID of the membership.
+   */
+  public String getUuid() {
+    return this.uuid;
+  }
+
+  public void setUuid(String uuid) {
+    this.uuid = uuid;
   }
 
   /**
@@ -231,6 +264,10 @@ public class RegistryMembership extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.uuid != null) {
+      return false;
+    }
+
     if (this.alias != null) {
       return false;
     }
