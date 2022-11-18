@@ -1,21 +1,17 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.NotificationFilterPush;
+import com.bunq.sdk.model.generated.object.NotificationFilterPushObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Manage the push notification filters for a user.
@@ -44,26 +40,26 @@ public class NotificationFilterPush extends BunqModel {
    */
   @Expose
   @SerializedName("notification_filters")
-  private List<NotificationFilterPush> notificationFilters;
+  private List<NotificationFilterPushObject> notificationFilters;
 
   /**
    * The types of notifications that will result in a push notification for this user.
    */
   @Expose
   @SerializedName("notification_filters_field_for_request")
-  private List<NotificationFilterPush> notificationFiltersFieldForRequest;
+  private List<NotificationFilterPushObject> notificationFiltersFieldForRequest;
 
   public NotificationFilterPush() {
   this(null);
   }
 
-  public NotificationFilterPush(List<NotificationFilterPush> notificationFilters) {
+  public NotificationFilterPush(List<NotificationFilterPushObject> notificationFilters) {
     this.notificationFiltersFieldForRequest = notificationFilters;
   }  /**
    * @param notificationFilters The types of notifications that will result in a push notification
    * for this user.
    */
-  public static BunqResponse<NotificationFilterPush> create(List<NotificationFilterPush> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<NotificationFilterPushObject> create(List<NotificationFilterPushObject> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -76,42 +72,42 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
-    return fromJson(NotificationFilterPush.class, responseRaw, OBJECT_TYPE_POST);
+    return fromJson(NotificationFilterPushObject.class, responseRaw, OBJECT_TYPE_POST);
   }
 
-  public static BunqResponse<NotificationFilterPush> create() {
+  public static BunqResponse<NotificationFilterPushObject> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<NotificationFilterPush> create(List<NotificationFilterPush> notificationFilters) {
+  public static BunqResponse<NotificationFilterPushObject> create(List<NotificationFilterPushObject> notificationFilters) {
     return create(notificationFilters, null);
   }
 
   /**
    */
-  public static BunqResponse<List<NotificationFilterPush>> list(Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NotificationFilterPushObject>> list(Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-    return fromJsonList(NotificationFilterPush.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJsonList(NotificationFilterPushObject.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<NotificationFilterPush>> list() {
+  public static BunqResponse<List<NotificationFilterPushObject>> list() {
     return list(null, null);
   }
 
-  public static BunqResponse<List<NotificationFilterPush>> list(Map<String, String> params) {
+  public static BunqResponse<List<NotificationFilterPushObject>> list(Map<String, String> params) {
     return list(params, null);
   }
 
   /**
    * The types of notifications that will result in a push notification for this user.
    */
-  public List<NotificationFilterPush> getNotificationFilters() {
+  public List<NotificationFilterPushObject> getNotificationFilters() {
     return this.notificationFilters;
   }
 
-  public void setNotificationFilters(List<NotificationFilterPush> notificationFilters) {
+  public void setNotificationFilters(List<NotificationFilterPushObject> notificationFilters) {
     this.notificationFilters = notificationFilters;
   }
 
@@ -127,8 +123,8 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
 
   /**
    */
-  public static NotificationFilterPush fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationFilterPush.class, reader);
+  public static NotificationFilterPushObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationFilterPushObject.class, reader);
   }
 
 }

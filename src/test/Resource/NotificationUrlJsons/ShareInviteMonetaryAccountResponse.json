@@ -3,7 +3,7 @@
 	"category": "SHARE",
 	"event_type": "SHARE_INVITE_BANK_INQUIRY_ACCEPTED",
 	"object": {
-		"ShareInviteBankResponse": {
+		"ShareInviteMonetaryAccountResponse": {
 			"id": 2,
 			"created": "2017-07-20 02:32:32.114297",
 			"updated": "2017-07-20 02:32:32.114297",

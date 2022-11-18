@@ -6,7 +6,6 @@ import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.BunqHeader;
 import com.bunq.sdk.http.BunqResponse;
-import com.bunq.sdk.model.generated.endpoint.CashRegister;
 import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
 import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
 import com.bunq.sdk.model.generated.endpoint.SandboxUserPerson;
@@ -62,7 +61,6 @@ public class BunqSdkTestBase {
      * Individual properties.
      */
     protected static MonetaryAccountBank secondMonetaryAccountBank;
-    protected static CashRegister cashRegister;
 
     @BeforeClass
     public static void setUpBeforeClass() {
@@ -185,15 +183,6 @@ public class BunqSdkTestBase {
 
     protected static Pointer getPointerBravo() {
         return new Pointer(POINTER_TYPE_EMAIL, EMAIL_BRAVO);
-    }
-
-    protected static CashRegister getCashRegister() {
-        if (cashRegister == null) {
-            BunqResponse<Integer> response = CashRegister.create(CASH_REGISTER_DESCRIPTION);
-            cashRegister = CashRegister.get(response.getValue()).getValue();
-        }
-
-        return cashRegister;
     }
 
     private static boolean shouldMoneyBeRequested(MonetaryAccountBank monetaryAccountBank) {

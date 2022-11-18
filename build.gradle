@@ -1,8 +1,8 @@
 group 'com.bunq.sdk'
-version '1.14.1'
+version '1.20.22.74-zzave'
 
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: "maven-publish"
 sourceCompatibility = 1.8
 
 
@@ -16,8 +16,25 @@ sourceSets {
     }
 }
 
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {

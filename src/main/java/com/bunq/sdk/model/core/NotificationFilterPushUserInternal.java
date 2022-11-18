@@ -3,16 +3,15 @@ package com.bunq.sdk.model.core;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.NotificationFilterPushUser;
-import com.bunq.sdk.model.generated.object.NotificationFilterPush;
-import com.bunq.sdk.model.generated.object.NotificationFilterUrl;
+import com.bunq.sdk.model.generated.endpoint.NotificationFilterPush;
+import com.bunq.sdk.model.generated.object.NotificationFilterPushObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NotificationFilterPushUserInternal extends NotificationFilterPushUser {
+public class NotificationFilterPushUserInternal extends NotificationFilterPush {
     /**
      * Field constants.
      */
@@ -21,15 +20,15 @@ public class NotificationFilterPushUserInternal extends NotificationFilterPushUs
     /**
      * Create notification filters with list response type.
      */
-    public static BunqResponse<List<NotificationFilterPush>> createWithListResponse() {
-        return createWithListResponse(new ArrayList<NotificationFilterPush>(), null);
+    public static BunqResponse<List<NotificationFilterPushObject>> createWithListResponse() {
+        return createWithListResponse(new ArrayList<NotificationFilterPushObject>(), null);
     }
 
     /**
      * Create notification filters with list response type.
      */
-    public static BunqResponse<List<NotificationFilterPush>> createWithListResponse(
-            List<NotificationFilterPush> allNotificationFilter
+    public static BunqResponse<List<NotificationFilterPushObject>> createWithListResponse(
+            List<NotificationFilterPushObject> allNotificationFilter
     ) {
         return createWithListResponse(allNotificationFilter, null);
     }
@@ -37,8 +36,8 @@ public class NotificationFilterPushUserInternal extends NotificationFilterPushUs
     /**
      * Create notification filters with list response type.
      */
-    public static BunqResponse<List<NotificationFilterPush>> createWithListResponse(
-            List<NotificationFilterPush> allNotificationFilter,
+    public static BunqResponse<List<NotificationFilterPushObject>> createWithListResponse(
+            List<NotificationFilterPushObject> allNotificationFilter,
             Map<String, String> customHeaders
     ) {
         ApiClient apiClient = new ApiClient(getApiContext());
@@ -53,6 +52,6 @@ public class NotificationFilterPushUserInternal extends NotificationFilterPushUs
         byte[] requestBytes = determineAllRequestByte(requestMap);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
-        return NotificationFilterUrl.fromJsonList(NotificationFilterPush.class, responseRaw, OBJECT_TYPE);
+        return NotificationFilterPushObject.fromJsonList(NotificationFilterPushObject.class, responseRaw, OBJECT_TYPE);
     }
 }

@@ -48,10 +48,10 @@ public class CardDebitTest extends BunqSdkTestBase {
         BunqSdkTestBase.setUpBeforeClass();
 
         List<CardName> cardName = CardName.list().getValue();
-        List cardNameList = cardName.get(INDEX_FIRST).getPossibleCardNameArray();
+        List<String> cardNameList = cardName.get(INDEX_FIRST).getPossibleCardNameArray();
 
         alias = BunqContext.getUserContext().getUserPerson().getAlias().get(INDEX_FIRST);
-        nameOnCard = cardNameList.get(new Random().nextInt(cardNameList.size())).toString();
+        nameOnCard = cardNameList.get(new Random().nextInt(cardNameList.size()));
     }
 
     private static String generateRandomSecondLine() {
@@ -73,7 +73,7 @@ public class CardDebitTest extends BunqSdkTestBase {
                 new CardPinAssignment(
                         PIN_ASSIGNMENT_TYPE_PRIMARY,
                         PIN_CODE,
-                        BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId()
+                        BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId().toString()
                 )
         );
 
@@ -81,6 +81,8 @@ public class CardDebitTest extends BunqSdkTestBase {
                 secondLine,
                 nameOnCard,
                 CARD_DEBIT_TYPE_MAESTRO,
+                "MAESTRO_DEBIT",
+                null,
                 alias
         ).getValue();
 
