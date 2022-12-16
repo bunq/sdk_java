@@ -46,7 +46,7 @@ public class MasterCardIdentityCheckChallengeRequestUser extends BunqModel {
   private String amount;
 
   /**
-   * When the secure code expires.
+   * When the identity check expires.
    */
   @Expose
   @SerializedName("expiry_time")
@@ -148,7 +148,7 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
-   * When the secure code expires.
+   * When the identity check expires.
    */
   public String getExpiryTime() {
     return this.expiryTime;
