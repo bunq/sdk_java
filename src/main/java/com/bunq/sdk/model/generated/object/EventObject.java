@@ -25,7 +25,6 @@ import com.bunq.sdk.model.generated.endpoint.RewardSender;
 import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
 import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
 import com.bunq.sdk.model.generated.endpoint.SchedulePaymentBatch;
-import com.bunq.sdk.model.generated.endpoint.ShareInviteBankInquiryBatch;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteMonetaryAccountInquiry;
 import com.bunq.sdk.model.generated.endpoint.ShareInviteMonetaryAccountResponse;
 import com.bunq.sdk.model.generated.endpoint.SofortMerchantTransaction;
@@ -173,12 +172,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
   @Expose
   @SerializedName("RewardSender")
   private RewardSender rewardSender;
-
-  /**
-   */
-  @Expose
-  @SerializedName("ShareInviteBankInquiryBatch")
-  private ShareInviteBankInquiryBatch shareInviteBankInquiryBatch;
 
   /**
    */
@@ -416,16 +409,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
-  public ShareInviteBankInquiryBatch getShareInviteBankInquiryBatch() {
-    return this.shareInviteBankInquiryBatch;
-  }
-
-  public void setShareInviteBankInquiryBatch(ShareInviteBankInquiryBatch shareInviteBankInquiryBatch) {
-    this.shareInviteBankInquiryBatch = shareInviteBankInquiryBatch;
-  }
-
-  /**
-   */
   public ShareInviteMonetaryAccountInquiry getShareInviteBankInquiry() {
     return this.shareInviteBankInquiry;
   }
@@ -551,10 +534,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
       return this.rewardSender;
     }
 
-    if (this.shareInviteBankInquiryBatch != null) {
-      return this.shareInviteBankInquiryBatch;
-    }
-
     if (this.shareInviteBankInquiry != null) {
       return this.shareInviteBankInquiry;
     }
@@ -658,10 +637,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
     }
 
     if (this.rewardSender != null) {
-      return false;
-    }
-
-    if (this.shareInviteBankInquiryBatch != null) {
       return false;
     }
 

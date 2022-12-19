@@ -53,13 +53,6 @@ public class ShareDetailPayment extends BunqModel {
   private Boolean viewNewEvents;
 
   /**
-   * The budget restriction.
-   */
-  @Expose
-  @SerializedName("budget")
-  private BudgetRestriction budget;
-
-  /**
    * If set to true, the invited user will be able to make payments from the shared account.
    */
   @Expose
@@ -96,44 +89,32 @@ public class ShareDetailPayment extends BunqModel {
   @SerializedName("view_new_events_field_for_request")
   private Boolean viewNewEventsFieldForRequest;
 
-  /**
-   * The budget restriction.
-   */
-  @Expose
-  @SerializedName("budget_field_for_request")
-  private BudgetRestriction budgetFieldForRequest;
-
   public ShareDetailPayment() {
-  this(null, null, null, null, null, null);
+  this(null, null, null, null, null);
   }
 
   public ShareDetailPayment(Boolean makePayments) {
-  this(makePayments, null, null, null, null, null);
+  this(makePayments, null, null, null, null);
   }
 
   public ShareDetailPayment(Boolean makePayments, Boolean viewBalance) {
-  this(makePayments, viewBalance, null, null, null, null);
+  this(makePayments, viewBalance, null, null, null);
   }
 
   public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents) {
-  this(makePayments, viewBalance, viewOldEvents, null, null, null);
+  this(makePayments, viewBalance, viewOldEvents, null, null);
   }
 
   public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents, Boolean viewNewEvents) {
-  this(makePayments, viewBalance, viewOldEvents, viewNewEvents, null, null);
+  this(makePayments, viewBalance, viewOldEvents, viewNewEvents, null);
   }
 
   public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents, Boolean viewNewEvents, Boolean makeDraftPayments) {
-  this(makePayments, viewBalance, viewOldEvents, viewNewEvents, makeDraftPayments, null);
-  }
-
-  public ShareDetailPayment(Boolean makePayments, Boolean viewBalance, Boolean viewOldEvents, Boolean viewNewEvents, Boolean makeDraftPayments, BudgetRestriction budget) {
     this.makePaymentsFieldForRequest = makePayments;
     this.makeDraftPaymentsFieldForRequest = makeDraftPayments;
     this.viewBalanceFieldForRequest = viewBalance;
     this.viewOldEventsFieldForRequest = viewOldEvents;
     this.viewNewEventsFieldForRequest = viewNewEvents;
-    this.budgetFieldForRequest = budget;
   }
 
   /**
@@ -194,17 +175,6 @@ public class ShareDetailPayment extends BunqModel {
   }
 
   /**
-   * The budget restriction.
-   */
-  public BudgetRestriction getBudget() {
-    return this.budget;
-  }
-
-  public void setBudget(BudgetRestriction budget) {
-    this.budget = budget;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.makePayments != null) {
@@ -224,10 +194,6 @@ public class ShareDetailPayment extends BunqModel {
     }
 
     if (this.viewNewEvents != null) {
-      return false;
-    }
-
-    if (this.budget != null) {
       return false;
     }
 
