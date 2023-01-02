@@ -39,6 +39,7 @@ public class UserPerson extends BunqModel {
   /**
    * Field constants.
    */
+  public static final String FIELD_SUBSCRIPTION_TYPE = "subscription_type";
   public static final String FIELD_FIRST_NAME = "first_name";
   public static final String FIELD_MIDDLE_NAME = "middle_name";
   public static final String FIELD_LAST_NAME = "last_name";
@@ -278,6 +279,13 @@ public class UserPerson extends BunqModel {
   private List<RelationUser> relations;
 
   /**
+   * The subscription type the user should start on.
+   */
+  @Expose
+  @SerializedName("subscription_type_field_for_request")
+  private String subscriptionTypeFieldForRequest;
+
+  /**
    * The person's first name.
    */
   @Expose
@@ -449,102 +457,107 @@ public class UserPerson extends BunqModel {
   private String displayNameFieldForRequest;
 
   public UserPerson() {
-  this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain) {
-  this(addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType) {
+  this(subscriptionType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid) {
-  this(addressMain, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName) {
+  this(subscriptionType, firstName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType) {
-  this(addressMain, avatarUuid, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName) {
+  this(subscriptionType, firstName, middleName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber) {
-  this(addressMain, avatarUuid, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName) {
+  this(subscriptionType, firstName, middleName, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, null, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, null, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, null, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, null, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, null, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, null, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, null, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, null, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, gender, null, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, null, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, gender, status, null, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, null, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, null, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, null, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId) {
-  this(addressMain, avatarUuid, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, firstName, middleName, lastName, publicNickName, addressPostal, taxResident, documentBackAttachmentId, null);
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null);
   }
 
-  public UserPerson(Address addressMain, String avatarUuid, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String firstName, String middleName, String lastName, String publicNickName, Address addressPostal, List<TaxResident> taxResident, Integer documentBackAttachmentId, String displayName) {
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin) {
+  this(subscriptionType, firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null);
+  }
+
+  public UserPerson(String subscriptionType, String firstName, String middleName, String lastName, String publicNickName, Address addressMain, Address addressPostal, String avatarUuid, List<TaxResident> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, String language, String region, String gender, String status, String subStatus, Pointer legalGuardianAlias, Integer sessionTimeout, Amount dailyLimitWithoutConfirmationLogin, String displayName) {
+    this.subscriptionTypeFieldForRequest = subscriptionType;
     this.firstNameFieldForRequest = firstName;
     this.middleNameFieldForRequest = middleName;
     this.lastNameFieldForRequest = lastName;
