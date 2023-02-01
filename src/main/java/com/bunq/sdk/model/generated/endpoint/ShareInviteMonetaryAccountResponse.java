@@ -100,10 +100,15 @@ public class ShareInviteMonetaryAccountResponse extends BunqModel {
   private ShareDetail shareDetail;
 
   /**
-   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects)
+   * Type of access that is wanted, one of VIEW_BALANCE, VIEW_TRANSACTION, DRAFT_PAYMENT or
+   * FULL_TRANSIENT
+   */
+  @Expose
+  @SerializedName("access_type")
+  private String accessType;
+
+  /**
+   * The status of the share. Can be ACTIVE, REVOKED, REJECTED.
    */
   @Expose
   @SerializedName("status")
@@ -340,10 +345,19 @@ requestMap.put(FIELD_CARD_ID, cardId);
   }
 
   /**
-   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects)
+   * Type of access that is wanted, one of VIEW_BALANCE, VIEW_TRANSACTION, DRAFT_PAYMENT or
+   * FULL_TRANSIENT
+   */
+  public String getAccessType() {
+    return this.accessType;
+  }
+
+  public void setAccessType(String accessType) {
+    this.accessType = accessType;
+  }
+
+  /**
+   * The status of the share. Can be ACTIVE, REVOKED, REJECTED.
    */
   public String getStatus() {
     return this.status;
@@ -440,6 +454,10 @@ requestMap.put(FIELD_CARD_ID, cardId);
     }
 
     if (this.shareDetail != null) {
+      return false;
+    }
+
+    if (this.accessType != null) {
       return false;
     }
 
