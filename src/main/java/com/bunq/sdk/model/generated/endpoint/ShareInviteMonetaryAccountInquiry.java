@@ -40,6 +40,7 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
    * Field constants.
    */
   public static final String FIELD_COUNTER_USER_ALIAS = "counter_user_alias";
+  public static final String FIELD_ACCESS_TYPE = "access_type";
   public static final String FIELD_DRAFT_SHARE_INVITE_BANK_ID = "draft_share_invite_bank_id";
   public static final String FIELD_SHARE_DETAIL = "share_detail";
   public static final String FIELD_STATUS = "status";
@@ -89,28 +90,18 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
   private Integer monetaryAccountId;
 
   /**
-   * The id of the draft share invite bank.
-   */
-  @Expose
-  @SerializedName("draft_share_invite_bank_id")
-  private Integer draftShareInviteBankId;
-
-  /**
-   * The share details. Only one of these objects is returned.
-   */
-  @Expose
-  @SerializedName("share_detail")
-  private ShareDetail shareDetail;
-
-  /**
-   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects)
+   * The status of the share. Can be ACTIVE, REVOKED, REJECTED.
    */
   @Expose
   @SerializedName("status")
   private String status;
+
+  /**
+   * Type of access that is in place.
+   */
+  @Expose
+  @SerializedName("access_type")
+  private String accessType;
 
   /**
    * The relationship: COMPANY_DIRECTOR, COMPANY_EMPLOYEE, etc
@@ -118,27 +109,6 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
   @Expose
   @SerializedName("relationship")
   private String relationship;
-
-  /**
-   * The share type, either STANDARD or MUTUAL.
-   */
-  @Expose
-  @SerializedName("share_type")
-  private String shareType;
-
-  /**
-   * The start date of this share.
-   */
-  @Expose
-  @SerializedName("start_date")
-  private String startDate;
-
-  /**
-   * The expiration date of this share.
-   */
-  @Expose
-  @SerializedName("end_date")
-  private String endDate;
 
   /**
    * The id of the newly created share invite.
@@ -155,24 +125,30 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
   private Pointer counterUserAliasFieldForRequest;
 
   /**
-   * The id of the draft share invite bank.
+   * Type of access that is wanted, one of VIEW_BALANCE, VIEW_TRANSACTION, DRAFT_PAYMENT or
+   * FULL_TRANSIENT
+   */
+  @Expose
+  @SerializedName("access_type_field_for_request")
+  private String accessTypeFieldForRequest;
+
+  /**
+   * DEPRECATED: USE `access_type` INSTEAD | The id of the draft share invite bank.
    */
   @Expose
   @SerializedName("draft_share_invite_bank_id_field_for_request")
   private Integer draftShareInviteBankIdFieldForRequest;
 
   /**
-   * The share details. Only one of these objects may be passed.
+   * DEPRECATED: USE `access_type` INSTEAD | The share details. Only one of these objects may be
+   * passed.
    */
   @Expose
   @SerializedName("share_detail_field_for_request")
   private ShareDetail shareDetailFieldForRequest;
 
   /**
-   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects).
+   * The status of the share. Can be ACTIVE, REVOKED, REJECTED.
    */
   @Expose
   @SerializedName("status_field_for_request")
@@ -186,60 +162,65 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
   private String relationshipFieldForRequest;
 
   /**
-   * The share type, either STANDARD or MUTUAL.
+   * DEPRECATED: USE `access_type` INSTEAD | The share type, either STANDARD or MUTUAL.
    */
   @Expose
   @SerializedName("share_type_field_for_request")
   private String shareTypeFieldForRequest;
 
   /**
-   * The start date of this share.
+   * DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
    */
   @Expose
   @SerializedName("start_date_field_for_request")
   private String startDateFieldForRequest;
 
   /**
-   * The expiration date of this share.
+   * DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
   @Expose
   @SerializedName("end_date_field_for_request")
   private String endDateFieldForRequest;
 
   public ShareInviteMonetaryAccountInquiry() {
-  this(null, null, null, null, null, null, null, null);
+  this(null, null, null, null, null, null, null, null, null);
   }
 
   public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias) {
-  this(counterUserAlias, null, null, null, null, null, null, null);
+  this(counterUserAlias, null, null, null, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail) {
-  this(counterUserAlias, shareDetail, null, null, null, null, null, null);
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType) {
+  this(counterUserAlias, accessType, null, null, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
-  this(counterUserAlias, shareDetail, status, null, null, null, null, null);
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId) {
+  this(counterUserAlias, accessType, draftShareInviteBankId, null, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId) {
-  this(counterUserAlias, shareDetail, status, draftShareInviteBankId, null, null, null, null);
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail) {
+  this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship) {
-  this(counterUserAlias, shareDetail, status, draftShareInviteBankId, relationship, null, null, null);
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status) {
+  this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship, String shareType) {
-  this(counterUserAlias, shareDetail, status, draftShareInviteBankId, relationship, shareType, null, null);
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship) {
+  this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, relationship, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship, String shareType, String startDate) {
-  this(counterUserAlias, shareDetail, status, draftShareInviteBankId, relationship, shareType, startDate, null);
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType) {
+  this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer draftShareInviteBankId, String relationship, String shareType, String startDate, String endDate) {
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType, String startDate) {
+  this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, null);
+  }
+
+  public ShareInviteMonetaryAccountInquiry(Pointer counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
     this.counterUserAliasFieldForRequest = counterUserAlias;
+    this.accessTypeFieldForRequest = accessType;
     this.draftShareInviteBankIdFieldForRequest = draftShareInviteBankId;
     this.shareDetailFieldForRequest = shareDetail;
     this.statusFieldForRequest = status;
@@ -251,18 +232,20 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
    * [DEPRECATED - use /share-invite-monetary-account-response] Create a new share inquiry for a
    * monetary account, specifying the permission the other bunq user will have on it.
    * @param counterUserAlias The pointer of the user to share with.
-   * @param shareDetail The share details. Only one of these objects may be passed.
-   * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
-   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects).
-   * @param draftShareInviteBankId The id of the draft share invite bank.
+   * @param accessType Type of access that is wanted, one of VIEW_BALANCE, VIEW_TRANSACTION,
+   * DRAFT_PAYMENT or FULL_TRANSIENT
+   * @param draftShareInviteBankId DEPRECATED: USE `access_type` INSTEAD | The id of the draft
+   * share invite bank.
+   * @param shareDetail DEPRECATED: USE `access_type` INSTEAD | The share details. Only one of
+   * these objects may be passed.
+   * @param status The status of the share. Can be ACTIVE, REVOKED, REJECTED.
    * @param relationship The relationship: COMPANY_DIRECTOR, COMPANY_EMPLOYEE, etc
-   * @param shareType The share type, either STANDARD or MUTUAL.
-   * @param startDate The start date of this share.
-   * @param endDate The expiration date of this share.
+   * @param shareType DEPRECATED: USE `access_type` INSTEAD | The share type, either STANDARD or
+   * MUTUAL.
+   * @param startDate DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
+   * @param endDate DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -271,6 +254,7 @@ public class ShareInviteMonetaryAccountInquiry extends BunqModel {
 
   HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_COUNTER_USER_ALIAS, counterUserAlias);
+requestMap.put(FIELD_ACCESS_TYPE, accessType);
 requestMap.put(FIELD_DRAFT_SHARE_INVITE_BANK_ID, draftShareInviteBankId);
 requestMap.put(FIELD_SHARE_DETAIL, shareDetail);
 requestMap.put(FIELD_STATUS, status);
@@ -286,43 +270,47 @@ requestMap.put(FIELD_END_DATE, endDate);
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null, null, null, null, null, null, null);
+    return create(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Pointer counterUserAlias) {
-    return create(counterUserAlias, null, null, null, null, null, null, null, null, null);
+    return create(counterUserAlias, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail) {
-    return create(counterUserAlias, shareDetail, null, null, null, null, null, null, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId) {
+    return create(counterUserAlias, monetaryAccountId, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status) {
-    return create(counterUserAlias, shareDetail, status, null, null, null, null, null, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType) {
+    return create(counterUserAlias, monetaryAccountId, accessType, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId) {
-    return create(counterUserAlias, shareDetail, status, monetaryAccountId, null, null, null, null, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId) {
-    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, null, null, null, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship) {
-    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, null, null, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType) {
-    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, shareType, null, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType, String startDate) {
-    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, shareType, startDate, null, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Pointer counterUserAlias, ShareDetail shareDetail, String status, Integer monetaryAccountId, Integer draftShareInviteBankId, String relationship, String shareType, String startDate, String endDate) {
-    return create(counterUserAlias, shareDetail, status, monetaryAccountId, draftShareInviteBankId, relationship, shareType, startDate, endDate, null);
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType, String startDate) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Pointer counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetail shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
+    return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, endDate, null);
   }
 
   /**
@@ -356,15 +344,15 @@ requestMap.put(FIELD_END_DATE, endDate);
    * [DEPRECATED - use /share-invite-monetary-account-response] Update the details of a share.
    * This includes updating status (revoking or cancelling it), granted permission and validity
    * period of this share.
-   * @param shareDetail The share details. Only one of these objects may be passed.
-   * @param status The status of the share. Can be PENDING, REVOKED (the user deletes the share
-   * inquiry before it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects).
-   * @param startDate The start date of this share.
-   * @param endDate The expiration date of this share.
+   * @param accessType Type of access that is wanted, one of VIEW_BALANCE, VIEW_TRANSACTION,
+   * DRAFT_PAYMENT or FULL_TRANSIENT
+   * @param shareDetail DEPRECATED: USE `access_type` INSTEAD | The share details. Only one of
+   * these objects may be passed.
+   * @param status The status of the share. Can be ACTIVE, REVOKED, REJECTED.
+   * @param startDate DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
+   * @param endDate DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetail shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -372,6 +360,7 @@ requestMap.put(FIELD_END_DATE, endDate);
     }
 
   HashMap<String, Object> requestMap = new HashMap<>();
+requestMap.put(FIELD_ACCESS_TYPE, accessType);
 requestMap.put(FIELD_SHARE_DETAIL, shareDetail);
 requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_START_DATE, startDate);
@@ -384,27 +373,31 @@ requestMap.put(FIELD_END_DATE, endDate);
   }
 
   public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId) {
-    return update(shareInviteMonetaryAccountInquiryId, null, null, null, null, null, null);
+    return update(shareInviteMonetaryAccountInquiryId, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
-    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null, null, null, null);
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail) {
-    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, null, null, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status) {
-    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, status, null, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetail shareDetail) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate) {
-    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, status, startDate, null, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetail shareDetail, String status) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, ShareDetail shareDetail, String status, String startDate, String endDate) {
-    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, shareDetail, status, startDate, endDate, null);
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetail shareDetail, String status, String startDate) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, startDate, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetail shareDetail, String status, String startDate, String endDate) {
+    return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, startDate, endDate, null);
   }
 
   /**
@@ -487,32 +480,7 @@ requestMap.put(FIELD_END_DATE, endDate);
   }
 
   /**
-   * The id of the draft share invite bank.
-   */
-  public Integer getDraftShareInviteBankId() {
-    return this.draftShareInviteBankId;
-  }
-
-  public void setDraftShareInviteBankId(Integer draftShareInviteBankId) {
-    this.draftShareInviteBankId = draftShareInviteBankId;
-  }
-
-  /**
-   * The share details. Only one of these objects is returned.
-   */
-  public ShareDetail getShareDetail() {
-    return this.shareDetail;
-  }
-
-  public void setShareDetail(ShareDetail shareDetail) {
-    this.shareDetail = shareDetail;
-  }
-
-  /**
-   * The status of the share. Can be PENDING, REVOKED (the user deletes the share inquiry before
-   * it's accepted), ACCEPTED, CANCELLED (the user deletes an active share) or
-   * CANCELLATION_PENDING, CANCELLATION_ACCEPTED, CANCELLATION_REJECTED (for canceling mutual
-   * connects)
+   * The status of the share. Can be ACTIVE, REVOKED, REJECTED.
    */
   public String getStatus() {
     return this.status;
@@ -520,6 +488,17 @@ requestMap.put(FIELD_END_DATE, endDate);
 
   public void setStatus(String status) {
     this.status = status;
+  }
+
+  /**
+   * Type of access that is in place.
+   */
+  public String getAccessType() {
+    return this.accessType;
+  }
+
+  public void setAccessType(String accessType) {
+    this.accessType = accessType;
   }
 
   /**
@@ -531,39 +510,6 @@ requestMap.put(FIELD_END_DATE, endDate);
 
   public void setRelationship(String relationship) {
     this.relationship = relationship;
-  }
-
-  /**
-   * The share type, either STANDARD or MUTUAL.
-   */
-  public String getShareType() {
-    return this.shareType;
-  }
-
-  public void setShareType(String shareType) {
-    this.shareType = shareType;
-  }
-
-  /**
-   * The start date of this share.
-   */
-  public String getStartDate() {
-    return this.startDate;
-  }
-
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
-  }
-
-  /**
-   * The expiration date of this share.
-   */
-  public String getEndDate() {
-    return this.endDate;
-  }
-
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
   }
 
   /**
@@ -600,31 +546,15 @@ requestMap.put(FIELD_END_DATE, endDate);
       return false;
     }
 
-    if (this.draftShareInviteBankId != null) {
-      return false;
-    }
-
-    if (this.shareDetail != null) {
-      return false;
-    }
-
     if (this.status != null) {
       return false;
     }
 
+    if (this.accessType != null) {
+      return false;
+    }
+
     if (this.relationship != null) {
-      return false;
-    }
-
-    if (this.shareType != null) {
-      return false;
-    }
-
-    if (this.startDate != null) {
-      return false;
-    }
-
-    if (this.endDate != null) {
       return false;
     }
 
