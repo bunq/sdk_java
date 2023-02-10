@@ -227,13 +227,6 @@ public class Card extends BunqModel {
   private String cardShipmentTrackingUrl;
 
   /**
-   * The amount saved through ZeroFX on this card.
-   */
-  @Expose
-  @SerializedName("amount_saved_zero_fx")
-  private Amount amountSavedZeroFx;
-
-  /**
    * The plaintext pin code. Requests require encryption to be enabled.
    */
   @Expose
@@ -767,17 +760,6 @@ requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
   }
 
   /**
-   * The amount saved through ZeroFX on this card.
-   */
-  public Amount getAmountSavedZeroFx() {
-    return this.amountSavedZeroFx;
-  }
-
-  public void setAmountSavedZeroFx(Amount amountSavedZeroFx) {
-    this.amountSavedZeroFx = amountSavedZeroFx;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -873,10 +855,6 @@ requestMap.put(FIELD_MONETARY_ACCOUNT_ID_FALLBACK, monetaryAccountIdFallback);
     }
 
     if (this.cardShipmentTrackingUrl != null) {
-      return false;
-    }
-
-    if (this.amountSavedZeroFx != null) {
       return false;
     }
 
