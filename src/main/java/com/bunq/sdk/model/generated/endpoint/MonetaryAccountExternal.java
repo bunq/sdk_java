@@ -1,5 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
@@ -15,11 +19,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for managing monetary accounts which are connected to external services.
  */
 public class MonetaryAccountExternal extends BunqModel {
+
+  /**
+   * Endpoint constants.
+   */
+  protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-external/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-external";
 
   /**
    * Field constants.
@@ -34,6 +45,11 @@ public class MonetaryAccountExternal extends BunqModel {
   public static final String FIELD_REASON_DESCRIPTION = "reason_description";
   public static final String FIELD_DISPLAY_NAME = "display_name";
   public static final String FIELD_SETTING = "setting";
+
+  /**
+   * Object type.
+   */
+  protected static final String OBJECT_TYPE_GET = "MonetaryAccountExternal";
 
   /**
    * The id of the MonetaryAccountExternal.
@@ -313,6 +329,42 @@ public class MonetaryAccountExternal extends BunqModel {
     this.reasonDescriptionFieldForRequest = reasonDescription;
     this.displayNameFieldForRequest = displayName;
     this.settingFieldForRequest = setting;
+  }  /**
+   */
+  public static BunqResponse<MonetaryAccountExternal> get(Integer monetaryAccountExternalId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), monetaryAccountExternalId), params, customHeaders);
+
+    return fromJson(MonetaryAccountExternal.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<MonetaryAccountExternal> get() {
+    return get(null, null, null);
+  }
+
+  public static BunqResponse<MonetaryAccountExternal> get(Integer monetaryAccountExternalId) {
+    return get(monetaryAccountExternalId, null, null);
+  }
+
+  public static BunqResponse<MonetaryAccountExternal> get(Integer monetaryAccountExternalId, Map<String, String> params) {
+    return get(monetaryAccountExternalId, params, null);
+  }
+
+  /**
+   */
+  public static BunqResponse<List<MonetaryAccountExternal>> list(Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
+
+    return fromJsonList(MonetaryAccountExternal.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<MonetaryAccountExternal>> list() {
+    return list(null, null);
+  }
+
+  public static BunqResponse<List<MonetaryAccountExternal>> list(Map<String, String> params) {
+    return list(params, null);
   }
 
   /**
