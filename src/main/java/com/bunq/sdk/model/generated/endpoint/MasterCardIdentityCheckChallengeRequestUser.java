@@ -74,6 +74,13 @@ public class MasterCardIdentityCheckChallengeRequestUser extends BunqModel {
   private LabelMonetaryAccount counterpartyAlias;
 
   /**
+   * The ID of the latest event for the identity check.
+   */
+  @Expose
+  @SerializedName("event_id")
+  private Integer eventId;
+
+  /**
    * The status of the identity check. Can be ACCEPTED_PENDING_RESPONSE or
    * REJECTED_PENDING_RESPONSE.
    */
@@ -192,6 +199,17 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
+   * The ID of the latest event for the identity check.
+   */
+  public Integer getEventId() {
+    return this.eventId;
+  }
+
+  public void setEventId(Integer eventId) {
+    this.eventId = eventId;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.amount != null) {
@@ -211,6 +229,10 @@ requestMap.put(FIELD_STATUS, status);
     }
 
     if (this.counterpartyAlias != null) {
+      return false;
+    }
+
+    if (this.eventId != null) {
       return false;
     }
 
