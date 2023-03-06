@@ -257,6 +257,13 @@ public class RequestResponse extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   * The ID of the latest event for the request.
+   */
+  @Expose
+  @SerializedName("event_id")
+  private Integer eventId;
+
+  /**
    * The Amount the user decides to pay.
    */
   @Expose
@@ -726,6 +733,17 @@ requestMap.put(FIELD_ADDRESS_BILLING, addressBilling);
   }
 
   /**
+   * The ID of the latest event for the request.
+   */
+  public Integer getEventId() {
+    return this.eventId;
+  }
+
+  public void setEventId(Integer eventId) {
+    this.eventId = eventId;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -837,6 +855,10 @@ requestMap.put(FIELD_ADDRESS_BILLING, addressBilling);
     }
 
     if (this.requestReferenceSplitTheBill != null) {
+      return false;
+    }
+
+    if (this.eventId != null) {
       return false;
     }
 
