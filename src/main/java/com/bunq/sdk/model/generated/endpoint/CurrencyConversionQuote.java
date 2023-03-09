@@ -36,6 +36,7 @@ public class CurrencyConversionQuote extends BunqModel {
   public static final String FIELD_AMOUNT = "amount";
   public static final String FIELD_CURRENCY_SOURCE = "currency_source";
   public static final String FIELD_CURRENCY_TARGET = "currency_target";
+  public static final String FIELD_ORDER_TYPE = "order_type";
   public static final String FIELD_COUNTERPARTY_ALIAS = "counterparty_alias";
   public static final String FIELD_STATUS = "status";
 
@@ -123,6 +124,13 @@ public class CurrencyConversionQuote extends BunqModel {
   private String currencyTargetFieldForRequest;
 
   /**
+   * The type of the quote, SELL or BUY.
+   */
+  @Expose
+  @SerializedName("order_type_field_for_request")
+  private String orderTypeFieldForRequest;
+
+  /**
    * The Alias of the party we are transferring the money to.
    */
   @Expose
@@ -137,29 +145,34 @@ public class CurrencyConversionQuote extends BunqModel {
   private String statusFieldForRequest;
 
   public CurrencyConversionQuote() {
-  this(null, null, null, null, null);
+  this(null, null, null, null, null, null);
   }
 
   public CurrencyConversionQuote(Amount amount) {
-  this(amount, null, null, null, null);
+  this(amount, null, null, null, null, null);
   }
 
   public CurrencyConversionQuote(Amount amount, String currencySource) {
-  this(amount, currencySource, null, null, null);
+  this(amount, currencySource, null, null, null, null);
   }
 
   public CurrencyConversionQuote(Amount amount, String currencySource, String currencyTarget) {
-  this(amount, currencySource, currencyTarget, null, null);
+  this(amount, currencySource, currencyTarget, null, null, null);
   }
 
   public CurrencyConversionQuote(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias) {
-  this(amount, currencySource, currencyTarget, counterpartyAlias, null);
+  this(amount, currencySource, currencyTarget, counterpartyAlias, null, null);
   }
 
-  public CurrencyConversionQuote(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, String status) {
+  public CurrencyConversionQuote(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, String orderType) {
+  this(amount, currencySource, currencyTarget, counterpartyAlias, orderType, null);
+  }
+
+  public CurrencyConversionQuote(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, String orderType, String status) {
     this.amountFieldForRequest = amount;
     this.currencySourceFieldForRequest = currencySource;
     this.currencyTargetFieldForRequest = currencyTarget;
+    this.orderTypeFieldForRequest = orderType;
     this.counterpartyAliasFieldForRequest = counterpartyAlias;
     this.statusFieldForRequest = status;
   }  /**
@@ -167,9 +180,10 @@ public class CurrencyConversionQuote extends BunqModel {
    * @param currencySource The currency we are converting.
    * @param currencyTarget The currency we are converting towards.
    * @param counterpartyAlias The Alias of the party we are transferring the money to.
+   * @param orderType The type of the quote, SELL or BUY.
    * @param status The status of the quote.
    */
-  public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, Integer monetaryAccountId, String orderType, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -180,6 +194,7 @@ public class CurrencyConversionQuote extends BunqModel {
 requestMap.put(FIELD_AMOUNT, amount);
 requestMap.put(FIELD_CURRENCY_SOURCE, currencySource);
 requestMap.put(FIELD_CURRENCY_TARGET, currencyTarget);
+requestMap.put(FIELD_ORDER_TYPE, orderType);
 requestMap.put(FIELD_COUNTERPARTY_ALIAS, counterpartyAlias);
 requestMap.put(FIELD_STATUS, status);
 
@@ -190,31 +205,35 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null, null, null, null);
+    return create(null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount) {
-    return create(amount, null, null, null, null, null, null);
+    return create(amount, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, String currencySource) {
-    return create(amount, currencySource, null, null, null, null, null);
+    return create(amount, currencySource, null, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget) {
-    return create(amount, currencySource, currencyTarget, null, null, null, null);
+    return create(amount, currencySource, currencyTarget, null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias) {
-    return create(amount, currencySource, currencyTarget, counterpartyAlias, null, null, null);
+    return create(amount, currencySource, currencyTarget, counterpartyAlias, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, Integer monetaryAccountId) {
-    return create(amount, currencySource, currencyTarget, counterpartyAlias, monetaryAccountId, null, null);
+    return create(amount, currencySource, currencyTarget, counterpartyAlias, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, Integer monetaryAccountId, String status) {
-    return create(amount, currencySource, currencyTarget, counterpartyAlias, monetaryAccountId, status, null);
+  public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, Integer monetaryAccountId, String orderType) {
+    return create(amount, currencySource, currencyTarget, counterpartyAlias, monetaryAccountId, orderType, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Amount amount, String currencySource, String currencyTarget, Pointer counterpartyAlias, Integer monetaryAccountId, String orderType, String status) {
+    return create(amount, currencySource, currencyTarget, counterpartyAlias, monetaryAccountId, orderType, status, null);
   }
 
   /**
