@@ -265,6 +265,13 @@ public class RequestResponse extends BunqModel {
   private Integer eventId;
 
   /**
+   * The ID of the monetary account this user prefers to pay the request from.
+   */
+  @Expose
+  @SerializedName("monetary_account_preferred_id")
+  private Integer monetaryAccountPreferredId;
+
+  /**
    * The Amount the user decides to pay.
    */
   @Expose
@@ -765,6 +772,17 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
   }
 
   /**
+   * The ID of the monetary account this user prefers to pay the request from.
+   */
+  public Integer getMonetaryAccountPreferredId() {
+    return this.monetaryAccountPreferredId;
+  }
+
+  public void setMonetaryAccountPreferredId(Integer monetaryAccountPreferredId) {
+    this.monetaryAccountPreferredId = monetaryAccountPreferredId;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -880,6 +898,10 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
     }
 
     if (this.eventId != null) {
+      return false;
+    }
+
+    if (this.monetaryAccountPreferredId != null) {
       return false;
     }
 
