@@ -98,11 +98,18 @@ public class CurrencyConversion extends BunqModel {
   private String groupUuid;
 
   /**
-   * The type of this conversion in the pair.
+   * The type of this conversion.
    */
   @Expose
   @SerializedName("type")
   private String type;
+
+  /**
+   * The order type, buying or selling.
+   */
+  @Expose
+  @SerializedName("order_type")
+  private String orderType;
 
   /**
    * The label of the monetary account.
@@ -271,7 +278,7 @@ public class CurrencyConversion extends BunqModel {
   }
 
   /**
-   * The type of this conversion in the pair.
+   * The type of this conversion.
    */
   public String getType() {
     return this.type;
@@ -279,6 +286,17 @@ public class CurrencyConversion extends BunqModel {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  /**
+   * The order type, buying or selling.
+   */
+  public String getOrderType() {
+    return this.orderType;
+  }
+
+  public void setOrderType(String orderType) {
+    this.orderType = orderType;
   }
 
   /**
@@ -354,6 +372,10 @@ public class CurrencyConversion extends BunqModel {
     }
 
     if (this.type != null) {
+      return false;
+    }
+
+    if (this.orderType != null) {
       return false;
     }
 

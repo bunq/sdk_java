@@ -47,6 +47,20 @@ public class Insight extends BunqModel {
   private String categoryTranslated;
 
   /**
+   * The color of the category.
+   */
+  @Expose
+  @SerializedName("category_color")
+  private String categoryColor;
+
+  /**
+   * The icon of the category.
+   */
+  @Expose
+  @SerializedName("category_icon")
+  private String categoryIcon;
+
+  /**
    * The total amount of the transactions in the category.
    */
   @Expose
@@ -58,7 +72,7 @@ public class Insight extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_transactions")
-  private BigDecimal numberOfTransactions;
+  private Integer numberOfTransactions;
 
   /**
    */
@@ -100,6 +114,28 @@ public class Insight extends BunqModel {
   }
 
   /**
+   * The color of the category.
+   */
+  public String getCategoryColor() {
+    return this.categoryColor;
+  }
+
+  public void setCategoryColor(String categoryColor) {
+    this.categoryColor = categoryColor;
+  }
+
+  /**
+   * The icon of the category.
+   */
+  public String getCategoryIcon() {
+    return this.categoryIcon;
+  }
+
+  public void setCategoryIcon(String categoryIcon) {
+    this.categoryIcon = categoryIcon;
+  }
+
+  /**
    * The total amount of the transactions in the category.
    */
   public Amount getAmountTotal() {
@@ -113,11 +149,11 @@ public class Insight extends BunqModel {
   /**
    * The number of the transactions in the category.
    */
-  public BigDecimal getNumberOfTransactions() {
+  public Integer getNumberOfTransactions() {
     return this.numberOfTransactions;
   }
 
-  public void setNumberOfTransactions(BigDecimal numberOfTransactions) {
+  public void setNumberOfTransactions(Integer numberOfTransactions) {
     this.numberOfTransactions = numberOfTransactions;
   }
 
@@ -129,6 +165,14 @@ public class Insight extends BunqModel {
     }
 
     if (this.categoryTranslated != null) {
+      return false;
+    }
+
+    if (this.categoryColor != null) {
+      return false;
+    }
+
+    if (this.categoryIcon != null) {
       return false;
     }
 

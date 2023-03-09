@@ -45,6 +45,7 @@ public class RequestResponse extends BunqModel {
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_ADDRESS_SHIPPING = "address_shipping";
   public static final String FIELD_ADDRESS_BILLING = "address_billing";
+  public static final String FIELD_CURRENCY_CONVERSION_QUOTE_ID = "currency_conversion_quote_id";
 
   /**
    * Object type.
@@ -293,27 +294,40 @@ public class RequestResponse extends BunqModel {
   @SerializedName("address_billing_field_for_request")
   private Address addressBillingFieldForRequest;
 
+  /**
+   * When the request is accepted on a monetary account with a different currency, a quote is
+   * expected to convert.
+   */
+  @Expose
+  @SerializedName("currency_conversion_quote_id_field_for_request")
+  private Integer currencyConversionQuoteIdFieldForRequest;
+
   public RequestResponse() {
-  this(null, null, null, null);
+  this(null, null, null, null, null);
   }
 
   public RequestResponse(String status) {
-  this(status, null, null, null);
+  this(status, null, null, null, null);
   }
 
   public RequestResponse(String status, Amount amountResponded) {
-  this(status, amountResponded, null, null);
+  this(status, amountResponded, null, null, null);
   }
 
   public RequestResponse(String status, Amount amountResponded, Address addressShipping) {
-  this(status, amountResponded, addressShipping, null);
+  this(status, amountResponded, addressShipping, null, null);
   }
 
   public RequestResponse(String status, Amount amountResponded, Address addressShipping, Address addressBilling) {
+  this(status, amountResponded, addressShipping, addressBilling, null);
+  }
+
+  public RequestResponse(String status, Amount amountResponded, Address addressShipping, Address addressBilling, Integer currencyConversionQuoteId) {
     this.amountRespondedFieldForRequest = amountResponded;
     this.statusFieldForRequest = status;
     this.addressShippingFieldForRequest = addressShipping;
     this.addressBillingFieldForRequest = addressBilling;
+    this.currencyConversionQuoteIdFieldForRequest = currencyConversionQuoteId;
   }  /**
    * Update the status to accept or reject the RequestResponse.
    * @param amountResponded The Amount the user decides to pay.
@@ -324,8 +338,10 @@ public class RequestResponse extends BunqModel {
    * @param addressBilling The billing Address to return to the user who created the
    * RequestInquiry. Should only be provided if 'require_address' is set to BILLING,
    * BILLING_SHIPPING or OPTIONAL.
+   * @param currencyConversionQuoteId When the request is accepted on a monetary account with a
+   * different currency, a quote is expected to convert.
    */
-  public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status, Address addressShipping, Address addressBilling, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status, Address addressShipping, Address addressBilling, Integer currencyConversionQuoteId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -337,6 +353,7 @@ requestMap.put(FIELD_AMOUNT_RESPONDED, amountResponded);
 requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_ADDRESS_SHIPPING, addressShipping);
 requestMap.put(FIELD_ADDRESS_BILLING, addressBilling);
+requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestResponseId), requestBytes, customHeaders);
@@ -345,27 +362,31 @@ requestMap.put(FIELD_ADDRESS_BILLING, addressBilling);
   }
 
   public static BunqResponse<RequestResponse> update(Integer requestResponseId) {
-    return update(requestResponseId, null, null, null, null, null, null);
+    return update(requestResponseId, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId) {
-    return update(requestResponseId, monetaryAccountId, null, null, null, null, null);
+    return update(requestResponseId, monetaryAccountId, null, null, null, null, null, null);
   }
 
   public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded) {
-    return update(requestResponseId, monetaryAccountId, amountResponded, null, null, null, null);
+    return update(requestResponseId, monetaryAccountId, amountResponded, null, null, null, null, null);
   }
 
   public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status) {
-    return update(requestResponseId, monetaryAccountId, amountResponded, status, null, null, null);
+    return update(requestResponseId, monetaryAccountId, amountResponded, status, null, null, null, null);
   }
 
   public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status, Address addressShipping) {
-    return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, null, null);
+    return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, null, null, null);
   }
 
   public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status, Address addressShipping, Address addressBilling) {
-    return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, addressBilling, null);
+    return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, addressBilling, null, null);
+  }
+
+  public static BunqResponse<RequestResponse> update(Integer requestResponseId, Integer monetaryAccountId, Amount amountResponded, String status, Address addressShipping, Address addressBilling, Integer currencyConversionQuoteId) {
+    return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, addressBilling, currencyConversionQuoteId, null);
   }
 
   /**
