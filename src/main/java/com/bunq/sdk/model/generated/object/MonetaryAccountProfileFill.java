@@ -37,14 +37,6 @@ public class MonetaryAccountProfileFill extends BunqModel {
   private Amount balanceThresholdLow;
 
   /**
-   * The method used to fill the monetary account. Currently only iDEAL is supported, and it is
-   * the default one.
-   */
-  @Expose
-  @SerializedName("method_fill")
-  private String methodFill;
-
-  /**
    * The bank the fill is supposed to happen from, with BIC and bank name.
    */
   @Expose
@@ -73,13 +65,6 @@ public class MonetaryAccountProfileFill extends BunqModel {
   private Amount balanceThresholdLowFieldForRequest;
 
   /**
-   * The method used to fill the monetary account. Currently IDEAL and SOFORT is supported.
-   */
-  @Expose
-  @SerializedName("method_fill_field_for_request")
-  private String methodFillFieldForRequest;
-
-  /**
    * The bank the fill is supposed to happen from, with BIC and bank name.
    */
   @Expose
@@ -87,30 +72,25 @@ public class MonetaryAccountProfileFill extends BunqModel {
   private Issuer issuerFieldForRequest;
 
   public MonetaryAccountProfileFill() {
-  this(null, null, null, null, null);
+  this(null, null, null, null);
   }
 
   public MonetaryAccountProfileFill(String status) {
-  this(status, null, null, null, null);
+  this(status, null, null, null);
   }
 
   public MonetaryAccountProfileFill(String status, Amount balancePreferred) {
-  this(status, balancePreferred, null, null, null);
+  this(status, balancePreferred, null, null);
   }
 
   public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow) {
-  this(status, balancePreferred, balanceThresholdLow, null, null);
+  this(status, balancePreferred, balanceThresholdLow, null);
   }
 
-  public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow, String methodFill) {
-  this(status, balancePreferred, balanceThresholdLow, methodFill, null);
-  }
-
-  public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow, String methodFill, Issuer issuer) {
+  public MonetaryAccountProfileFill(String status, Amount balancePreferred, Amount balanceThresholdLow, Issuer issuer) {
     this.statusFieldForRequest = status;
     this.balancePreferredFieldForRequest = balancePreferred;
     this.balanceThresholdLowFieldForRequest = balanceThresholdLow;
-    this.methodFillFieldForRequest = methodFill;
     this.issuerFieldForRequest = issuer;
   }
 
@@ -148,18 +128,6 @@ public class MonetaryAccountProfileFill extends BunqModel {
   }
 
   /**
-   * The method used to fill the monetary account. Currently only iDEAL is supported, and it is
-   * the default one.
-   */
-  public String getMethodFill() {
-    return this.methodFill;
-  }
-
-  public void setMethodFill(String methodFill) {
-    this.methodFill = methodFill;
-  }
-
-  /**
    * The bank the fill is supposed to happen from, with BIC and bank name.
    */
   public Issuer getIssuer() {
@@ -182,10 +150,6 @@ public class MonetaryAccountProfileFill extends BunqModel {
     }
 
     if (this.balanceThresholdLow != null) {
-      return false;
-    }
-
-    if (this.methodFill != null) {
       return false;
     }
 
