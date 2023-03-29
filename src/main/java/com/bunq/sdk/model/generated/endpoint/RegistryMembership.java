@@ -27,6 +27,7 @@ public class RegistryMembership extends BunqModel {
   public static final String FIELD_ALIAS = "alias";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_AUTO_ADD_CARD_TRANSACTION = "auto_add_card_transaction";
+  public static final String FIELD_MEMBERSHIP_TICOUNT_ID = "membership_ticount_id";
 
   /**
    * The UUID of the membership.
@@ -128,27 +129,41 @@ public class RegistryMembership extends BunqModel {
   @SerializedName("auto_add_card_transaction_field_for_request")
   private String autoAddCardTransactionFieldForRequest;
 
+  /**
+   * The original TricountId of the membership for backwards compatibility. May be used as an
+   * alternative to the UUID to identify specific memberships to allow clients to sync changes
+   * made offline before the Tricount migration.
+   */
+  @Expose
+  @SerializedName("membership_ticount_id_field_for_request")
+  private Integer membershipTicountIdFieldForRequest;
+
   public RegistryMembership() {
-  this(null, null, null, null);
+  this(null, null, null, null, null);
   }
 
   public RegistryMembership(Pointer alias) {
-  this(alias, null, null, null);
+  this(alias, null, null, null, null);
   }
 
   public RegistryMembership(Pointer alias, String uuid) {
-  this(alias, uuid, null, null);
+  this(alias, uuid, null, null, null);
   }
 
   public RegistryMembership(Pointer alias, String uuid, String status) {
-  this(alias, uuid, status, null);
+  this(alias, uuid, status, null, null);
   }
 
   public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction) {
+  this(alias, uuid, status, autoAddCardTransaction, null);
+  }
+
+  public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction, Integer membershipTicountId) {
     this.uuidFieldForRequest = uuid;
     this.aliasFieldForRequest = alias;
     this.statusFieldForRequest = status;
     this.autoAddCardTransactionFieldForRequest = autoAddCardTransaction;
+    this.membershipTicountIdFieldForRequest = membershipTicountId;
   }
 
   /**
