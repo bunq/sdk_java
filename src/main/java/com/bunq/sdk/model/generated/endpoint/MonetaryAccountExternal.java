@@ -29,13 +29,16 @@ public class MonetaryAccountExternal extends BunqModel {
   /**
    * Endpoint constants.
    */
+  protected static final String ENDPOINT_URL_CREATE = "user/%s/monetary-account-external";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account-external/%s";
+  protected static final String ENDPOINT_URL_UPDATE = "user/%s/monetary-account-external/%s";
   protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account-external";
 
   /**
    * Field constants.
    */
   public static final String FIELD_CURRENCY = "currency";
+  public static final String FIELD_SERVICE = "service";
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_DAILY_LIMIT = "daily_limit";
   public static final String FIELD_AVATAR_UUID = "avatar_uuid";
@@ -205,6 +208,13 @@ public class MonetaryAccountExternal extends BunqModel {
   private String currencyFieldForRequest;
 
   /**
+   * The service the MonetaryAccountExternal is connected with.
+   */
+  @Expose
+  @SerializedName("service_field_for_request")
+  private String serviceFieldForRequest;
+
+  /**
    * The description of the MonetaryAccountExternal. Defaults to 'bunq account'.
    */
   @Expose
@@ -279,47 +289,52 @@ public class MonetaryAccountExternal extends BunqModel {
   private MonetaryAccountSetting settingFieldForRequest;
 
   public MonetaryAccountExternal() {
-  this(null, null, null, null, null, null, null, null, null, null);
+  this(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountExternal(String currency) {
-  this(currency, null, null, null, null, null, null, null, null, null);
+  this(currency, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description) {
-  this(currency, description, null, null, null, null, null, null, null, null);
+  public MonetaryAccountExternal(String currency, String service) {
+  this(currency, service, null, null, null, null, null, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit) {
-  this(currency, description, dailyLimit, null, null, null, null, null, null, null);
+  public MonetaryAccountExternal(String currency, String service, String description) {
+  this(currency, service, description, null, null, null, null, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid) {
-  this(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null);
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit) {
+  this(currency, service, description, dailyLimit, null, null, null, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid, String status) {
-  this(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null);
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid) {
+  this(currency, service, description, dailyLimit, avatarUuid, null, null, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-  this(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null);
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status) {
+  this(currency, service, description, dailyLimit, avatarUuid, status, null, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-  this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null);
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+  this(currency, service, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-  this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+  this(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
-  this(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null);
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+  this(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
   }
 
-  public MonetaryAccountExternal(String currency, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+  this(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null);
+  }
+
+  public MonetaryAccountExternal(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
     this.currencyFieldForRequest = currency;
+    this.serviceFieldForRequest = service;
     this.descriptionFieldForRequest = description;
     this.dailyLimitFieldForRequest = dailyLimit;
     this.avatarUuidFieldForRequest = avatarUuid;
@@ -330,6 +345,106 @@ public class MonetaryAccountExternal extends BunqModel {
     this.displayNameFieldForRequest = displayName;
     this.settingFieldForRequest = setting;
   }  /**
+   * @param currency The currency of the MonetaryAccountExternal as an ISO 4217 formatted currency
+   * code.
+   * @param service The service the MonetaryAccountExternal is connected with.
+   * @param description The description of the MonetaryAccountExternal. Defaults to 'bunq
+   * account'.
+   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountExternal. Defaults to
+   * 1000 EUR. Currency must match the MonetaryAccountExternal's currency. Limited to 10000 EUR.
+   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountExternal.
+   * @param status The status of the MonetaryAccountExternal. Ignored in POST requests (always set
+   * to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountExternal. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   * @param subStatus The sub-status of the MonetaryAccountExternal providing extra information
+   * regarding the status. Should be ignored for POST requests. In case of PUT requests with
+   * status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+   * only be NONE. When updating the status and/or sub_status no other fields can be updated in
+   * the same request (and vice versa).
+   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountExternal,
+   * can only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+   * the MonetaryAccountExternal. Can be any user provided message. Should only be specified if
+   * updating the status to CANCELLED.
+   * @param displayName The legal name of the user / company using this monetary account.
+   * @param setting The settings of the MonetaryAccountExternal.
+   */
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+  HashMap<String, Object> requestMap = new HashMap<>();
+requestMap.put(FIELD_CURRENCY, currency);
+requestMap.put(FIELD_SERVICE, service);
+requestMap.put(FIELD_DESCRIPTION, description);
+requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
+requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+requestMap.put(FIELD_STATUS, status);
+requestMap.put(FIELD_SUB_STATUS, subStatus);
+requestMap.put(FIELD_REASON, reason);
+requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
+requestMap.put(FIELD_DISPLAY_NAME, displayName);
+requestMap.put(FIELD_SETTING, setting);
+
+    byte[] requestBytes = determineAllRequestByte(requestMap);
+    BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
+
+    return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> create() {
+    return create(null, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency) {
+    return create(currency, null, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service) {
+    return create(currency, service, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description) {
+    return create(currency, service, description, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit) {
+    return create(currency, service, description, dailyLimit, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid) {
+    return create(currency, service, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status) {
+    return create(currency, service, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+    return create(currency, service, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+    return create(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+    return create(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+    return create(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null);
+  }
+
+  public static BunqResponse<Integer> create(String currency, String service, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
+    return create(currency, service, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null);
+  }
+
+  /**
    */
   public static BunqResponse<MonetaryAccountExternal> get(Integer monetaryAccountExternalId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -348,6 +463,93 @@ public class MonetaryAccountExternal extends BunqModel {
 
   public static BunqResponse<MonetaryAccountExternal> get(Integer monetaryAccountExternalId, Map<String, String> params) {
     return get(monetaryAccountExternalId, params, null);
+  }
+
+  /**
+   * @param description The description of the MonetaryAccountExternal. Defaults to 'bunq
+   * account'.
+   * @param dailyLimit The daily spending limit Amount of the MonetaryAccountExternal. Defaults to
+   * 1000 EUR. Currency must match the MonetaryAccountExternal's currency. Limited to 10000 EUR.
+   * @param avatarUuid The UUID of the Avatar of the MonetaryAccountExternal.
+   * @param status The status of the MonetaryAccountExternal. Ignored in POST requests (always set
+   * to ACTIVE) can be CANCELLED or PENDING_REOPEN in PUT requests to cancel (close) or reopen the
+   * MonetaryAccountExternal. When updating the status and/or sub_status no other fields can be
+   * updated in the same request (and vice versa).
+   * @param subStatus The sub-status of the MonetaryAccountExternal providing extra information
+   * regarding the status. Should be ignored for POST requests. In case of PUT requests with
+   * status CANCELLED it can only be REDEMPTION_VOLUNTARY, while with status PENDING_REOPEN it can
+   * only be NONE. When updating the status and/or sub_status no other fields can be updated in
+   * the same request (and vice versa).
+   * @param reason The reason for voluntarily cancelling (closing) the MonetaryAccountExternal,
+   * can only be OTHER. Should only be specified if updating the status to CANCELLED.
+   * @param reasonDescription The optional free-form reason for voluntarily cancelling (closing)
+   * the MonetaryAccountExternal. Can be any user provided message. Should only be specified if
+   * updating the status to CANCELLED.
+   * @param displayName The legal name of the user / company using this monetary account.
+   * @param setting The settings of the MonetaryAccountExternal.
+   */
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+
+    if (customHeaders == null) {
+      customHeaders = new HashMap<>();
+    }
+
+  HashMap<String, Object> requestMap = new HashMap<>();
+requestMap.put(FIELD_DESCRIPTION, description);
+requestMap.put(FIELD_DAILY_LIMIT, dailyLimit);
+requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
+requestMap.put(FIELD_STATUS, status);
+requestMap.put(FIELD_SUB_STATUS, subStatus);
+requestMap.put(FIELD_REASON, reason);
+requestMap.put(FIELD_REASON_DESCRIPTION, reasonDescription);
+requestMap.put(FIELD_DISPLAY_NAME, displayName);
+requestMap.put(FIELD_SETTING, setting);
+
+    byte[] requestBytes = determineAllRequestByte(requestMap);
+    BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), monetaryAccountExternalId), requestBytes, customHeaders);
+
+    return processForId(responseRaw);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId) {
+    return update(monetaryAccountExternalId, null, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description) {
+    return update(monetaryAccountExternalId, description, null, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit) {
+    return update(monetaryAccountExternalId, description, dailyLimit, null, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer monetaryAccountExternalId, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
+    return update(monetaryAccountExternalId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null);
   }
 
   /**
