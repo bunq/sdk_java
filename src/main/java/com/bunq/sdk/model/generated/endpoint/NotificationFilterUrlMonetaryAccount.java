@@ -1,21 +1,17 @@
 package com.bunq.sdk.model.generated.endpoint;
 
-import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.NotificationFilterUrl;
+import com.bunq.sdk.model.generated.object.NotificationFilterUrlObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.lang.model.type.NullType;
 
 /**
  * Manage the url notification filters for a user.
@@ -43,26 +39,26 @@ public class NotificationFilterUrlMonetaryAccount extends BunqModel {
    */
   @Expose
   @SerializedName("notification_filters")
-  private List<NotificationFilterUrl> notificationFilters;
+  private List<NotificationFilterUrlObject> notificationFilters;
 
   /**
    * The types of notifications that will result in a url notification for this monetary account.
    */
   @Expose
   @SerializedName("notification_filters_field_for_request")
-  private List<NotificationFilterUrl> notificationFiltersFieldForRequest;
+  private List<NotificationFilterUrlObject> notificationFiltersFieldForRequest;
 
   public NotificationFilterUrlMonetaryAccount() {
   this(null);
   }
 
-  public NotificationFilterUrlMonetaryAccount(List<NotificationFilterUrl> notificationFilters) {
+  public NotificationFilterUrlMonetaryAccount(List<NotificationFilterUrlObject> notificationFilters) {
     this.notificationFiltersFieldForRequest = notificationFilters;
   }  /**
    * @param notificationFilters The types of notifications that will result in a url notification
    * for this monetary account.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, List<NotificationFilterUrl> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -86,7 +82,7 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     return create(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, List<NotificationFilterUrl> notificationFilters) {
+  public static BunqResponse<Integer> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters) {
     return create(monetaryAccountId, notificationFilters, null);
   }
 
@@ -114,11 +110,11 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
   /**
    * The types of notifications that will result in a url notification for this monetary account.
    */
-  public List<NotificationFilterUrl> getNotificationFilters() {
+  public List<NotificationFilterUrlObject> getNotificationFilters() {
     return this.notificationFilters;
   }
 
-  public void setNotificationFilters(List<NotificationFilterUrl> notificationFilters) {
+  public void setNotificationFilters(List<NotificationFilterUrlObject> notificationFilters) {
     this.notificationFilters = notificationFilters;
   }
 

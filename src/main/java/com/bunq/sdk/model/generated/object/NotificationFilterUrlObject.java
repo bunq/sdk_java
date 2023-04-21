@@ -1,19 +1,15 @@
 package com.bunq.sdk.model.generated.object;
 
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  */
-public class NotificationFilterUrl extends BunqModel {
+public class NotificationFilterUrlObject extends BunqModel {
 
   /**
    * The id of the NotificationFilterUrl.
@@ -92,23 +88,23 @@ public class NotificationFilterUrl extends BunqModel {
   @SerializedName("notification_target_field_for_request")
   private String notificationTargetFieldForRequest;
 
-  public NotificationFilterUrl() {
+  public NotificationFilterUrlObject() {
   this(null, null, null, null);
   }
 
-  public NotificationFilterUrl(String category) {
+  public NotificationFilterUrlObject(String category) {
   this(category, null, null, null);
   }
 
-  public NotificationFilterUrl(String category, String notificationTarget) {
+  public NotificationFilterUrlObject(String category, String notificationTarget) {
   this(category, notificationTarget, null, null);
   }
 
-  public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId) {
+  public NotificationFilterUrlObject(String category, String notificationTarget, List<String> allUserId) {
   this(category, notificationTarget, allUserId, null);
   }
 
-  public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId, List<String> allMonetaryAccountId) {
+  public NotificationFilterUrlObject(String category, String notificationTarget, List<String> allUserId, List<String> allMonetaryAccountId) {
     this.categoryFieldForRequest = category;
     this.allUserIdFieldForRequest = allUserId;
     this.allMonetaryAccountIdFieldForRequest = allMonetaryAccountId;
@@ -228,8 +224,8 @@ public class NotificationFilterUrl extends BunqModel {
 
   /**
    */
-  public static NotificationFilterUrl fromJsonReader(JsonReader reader) {
-    return fromJsonReader(NotificationFilterUrl.class, reader);
+  public static NotificationFilterUrlObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(NotificationFilterUrlObject.class, reader);
   }
 
 }

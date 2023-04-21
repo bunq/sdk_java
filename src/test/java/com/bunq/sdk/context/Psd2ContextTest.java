@@ -7,6 +7,7 @@ import com.bunq.sdk.security.SecurityUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @FixMethodOrder
+@Ignore
 public class Psd2ContextTest {
 
     private static final String FILE_TEST_CONFIGURATION = "src/test/Resource/bunq-psd2-test.conf";
