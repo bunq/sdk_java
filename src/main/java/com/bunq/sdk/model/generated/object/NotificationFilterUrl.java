@@ -58,6 +58,13 @@ public class NotificationFilterUrl extends BunqModel {
   private List<String> allMonetaryAccountId;
 
   /**
+   * Type of verification required for the connection.
+   */
+  @Expose
+  @SerializedName("all_verification_type")
+  private List<String> allVerificationType;
+
+  /**
    * The URL to which the callback should be made.
    */
   @Expose
@@ -86,6 +93,13 @@ public class NotificationFilterUrl extends BunqModel {
   private List<String> allMonetaryAccountIdFieldForRequest;
 
   /**
+   * Type of verification required for the connection.
+   */
+  @Expose
+  @SerializedName("all_verification_type_field_for_request")
+  private List<String> allVerificationTypeFieldForRequest;
+
+  /**
    * The URL to which the callback should be made.
    */
   @Expose
@@ -93,25 +107,30 @@ public class NotificationFilterUrl extends BunqModel {
   private String notificationTargetFieldForRequest;
 
   public NotificationFilterUrl() {
-  this(null, null, null, null);
+  this(null, null, null, null, null);
   }
 
   public NotificationFilterUrl(String category) {
-  this(category, null, null, null);
+  this(category, null, null, null, null);
   }
 
   public NotificationFilterUrl(String category, String notificationTarget) {
-  this(category, notificationTarget, null, null);
+  this(category, notificationTarget, null, null, null);
   }
 
   public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId) {
-  this(category, notificationTarget, allUserId, null);
+  this(category, notificationTarget, allUserId, null, null);
   }
 
   public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId, List<String> allMonetaryAccountId) {
+  this(category, notificationTarget, allUserId, allMonetaryAccountId, null);
+  }
+
+  public NotificationFilterUrl(String category, String notificationTarget, List<String> allUserId, List<String> allMonetaryAccountId, List<String> allVerificationType) {
     this.categoryFieldForRequest = category;
     this.allUserIdFieldForRequest = allUserId;
     this.allMonetaryAccountIdFieldForRequest = allMonetaryAccountId;
+    this.allVerificationTypeFieldForRequest = allVerificationType;
     this.notificationTargetFieldForRequest = notificationTarget;
   }
 
@@ -182,6 +201,17 @@ public class NotificationFilterUrl extends BunqModel {
   }
 
   /**
+   * Type of verification required for the connection.
+   */
+  public List<String> getAllVerificationType() {
+    return this.allVerificationType;
+  }
+
+  public void setAllVerificationType(List<String> allVerificationType) {
+    this.allVerificationType = allVerificationType;
+  }
+
+  /**
    * The URL to which the callback should be made.
    */
   public String getNotificationTarget() {
@@ -216,6 +246,10 @@ public class NotificationFilterUrl extends BunqModel {
     }
 
     if (this.allMonetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.allVerificationType != null) {
       return false;
     }
 
