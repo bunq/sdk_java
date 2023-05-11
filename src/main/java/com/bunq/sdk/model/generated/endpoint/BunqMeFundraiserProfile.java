@@ -3,6 +3,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.AttachmentPublic;
+import com.bunq.sdk.model.generated.object.BunqMeMerchantAvailable;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
@@ -87,6 +88,13 @@ public class BunqMeFundraiserProfile extends BunqModel {
   @Expose
   @SerializedName("invite_profile_name")
   private String inviteProfileName;
+
+  /**
+   * List of available merchants.
+   */
+  @Expose
+  @SerializedName("merchant_available")
+  private List<BunqMeMerchantAvailable> merchantAvailable;
 
   /**
    * The pointer (url) which will be used to access the bunq.me fundraiser profile.
@@ -204,6 +212,17 @@ public class BunqMeFundraiserProfile extends BunqModel {
   }
 
   /**
+   * List of available merchants.
+   */
+  public List<BunqMeMerchantAvailable> getMerchantAvailable() {
+    return this.merchantAvailable;
+  }
+
+  public void setMerchantAvailable(List<BunqMeMerchantAvailable> merchantAvailable) {
+    this.merchantAvailable = merchantAvailable;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.color != null) {
@@ -239,6 +258,10 @@ public class BunqMeFundraiserProfile extends BunqModel {
     }
 
     if (this.inviteProfileName != null) {
+      return false;
+    }
+
+    if (this.merchantAvailable != null) {
       return false;
     }
 
