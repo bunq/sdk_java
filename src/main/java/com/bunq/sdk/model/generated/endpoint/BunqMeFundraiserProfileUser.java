@@ -44,7 +44,7 @@ public class BunqMeFundraiserProfileUser extends BunqModel {
   /**
    * Object type.
    */
-  protected static final String OBJECT_TYPE_GET = "BunqMeFundraiserProfileModel";
+  protected static final String OBJECT_TYPE_GET = "BunqMeFundraiserProfile";
 
   /**
    * Id of the monetary account on which you want to receive bunq.me payments.
