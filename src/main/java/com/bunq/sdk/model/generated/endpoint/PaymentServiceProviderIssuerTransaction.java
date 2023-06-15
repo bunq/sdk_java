@@ -7,6 +7,7 @@ import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.Amount;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -79,7 +80,7 @@ public class PaymentServiceProviderIssuerTransaction extends BunqModel {
    */
   @Expose
   @SerializedName("counterparty_alias")
-  private Pointer counterpartyAlias;
+  private LabelMonetaryAccount counterpartyAlias;
 
   /**
    * The money amount of this transaction
@@ -360,11 +361,11 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * The counter party this transaction should be sent to.
    */
-  public Pointer getCounterpartyAlias() {
+  public LabelMonetaryAccount getCounterpartyAlias() {
     return this.counterpartyAlias;
   }
 
-  public void setCounterpartyAlias(Pointer counterpartyAlias) {
+  public void setCounterpartyAlias(LabelMonetaryAccount counterpartyAlias) {
     this.counterpartyAlias = counterpartyAlias;
   }
 
