@@ -30,6 +30,13 @@ public class CompanyVatNumber extends BunqModel {
   private String value;
 
   /**
+   * The VAT identification number type.
+   */
+  @Expose
+  @SerializedName("type_field_for_request")
+  private String typeFieldForRequest;
+
+  /**
    * The country of the VAT identification number.
    */
   @Expose
@@ -44,14 +51,19 @@ public class CompanyVatNumber extends BunqModel {
   private String valueFieldForRequest;
 
   public CompanyVatNumber() {
-  this(null, null);
+  this(null, null, null);
   }
 
   public CompanyVatNumber(String country) {
-  this(country, null);
+  this(country, null, null);
   }
 
   public CompanyVatNumber(String country, String value) {
+  this(country, value, null);
+  }
+
+  public CompanyVatNumber(String country, String value, String type) {
+    this.typeFieldForRequest = type;
     this.countryFieldForRequest = country;
     this.valueFieldForRequest = value;
   }
