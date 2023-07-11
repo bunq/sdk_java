@@ -302,6 +302,13 @@ public class MasterCardAction extends BunqModel {
   private Integer eligibleWhitelistId;
 
   /**
+   * The cashback payout item for this action or null
+   */
+  @Expose
+  @SerializedName("cashback_payout_item")
+  private CashbackPayoutItem cashbackPayoutItem;
+
+  /**
    */
   public static BunqResponse<MasterCardAction> get(Integer masterCardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -761,6 +768,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The cashback payout item for this action or null
+   */
+  public CashbackPayoutItem getCashbackPayoutItem() {
+    return this.cashbackPayoutItem;
+  }
+
+  public void setCashbackPayoutItem(CashbackPayoutItem cashbackPayoutItem) {
+    this.cashbackPayoutItem = cashbackPayoutItem;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -908,6 +926,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.eligibleWhitelistId != null) {
+      return false;
+    }
+
+    if (this.cashbackPayoutItem != null) {
       return false;
     }
 
