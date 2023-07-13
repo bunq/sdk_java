@@ -106,13 +106,6 @@ public class MonetaryAccountSavings extends BunqModel {
   private Amount dailyLimit;
 
   /**
-   * The maximum Amount the MonetaryAccountSavings can be 'in the red'. Must be 0 EUR or omitted.
-   */
-  @Expose
-  @SerializedName("overdraft_limit")
-  private Amount overdraftLimit;
-
-  /**
    * The current available balance Amount of the MonetaryAccountSavings.
    */
   @Expose
@@ -207,6 +200,13 @@ public class MonetaryAccountSavings extends BunqModel {
   @Expose
   @SerializedName("savings_goal_progress")
   private BigDecimal savingsGoalProgress;
+
+  /**
+   * The number of payments that can be made from this savings account
+   */
+  @Expose
+  @SerializedName("number_of_payment_remaining")
+  private String numberOfPaymentRemaining;
 
   /**
    * The ids of the AutoSave.
@@ -665,17 +665,6 @@ requestMap.put(FIELD_SAVINGS_GOAL, savingsGoal);
   }
 
   /**
-   * The maximum Amount the MonetaryAccountSavings can be 'in the red'. Must be 0 EUR or omitted.
-   */
-  public Amount getOverdraftLimit() {
-    return this.overdraftLimit;
-  }
-
-  public void setOverdraftLimit(Amount overdraftLimit) {
-    this.overdraftLimit = overdraftLimit;
-  }
-
-  /**
    * The current available balance Amount of the MonetaryAccountSavings.
    */
   public Amount getBalance() {
@@ -824,6 +813,17 @@ requestMap.put(FIELD_SAVINGS_GOAL, savingsGoal);
   }
 
   /**
+   * The number of payments that can be made from this savings account
+   */
+  public String getNumberOfPaymentRemaining() {
+    return this.numberOfPaymentRemaining;
+  }
+
+  public void setNumberOfPaymentRemaining(String numberOfPaymentRemaining) {
+    this.numberOfPaymentRemaining = numberOfPaymentRemaining;
+  }
+
+  /**
    * The ids of the AutoSave.
    */
   public List<BunqId> getAllAutoSaveId() {
@@ -862,10 +862,6 @@ requestMap.put(FIELD_SAVINGS_GOAL, savingsGoal);
     }
 
     if (this.dailyLimit != null) {
-      return false;
-    }
-
-    if (this.overdraftLimit != null) {
       return false;
     }
 
@@ -918,6 +914,10 @@ requestMap.put(FIELD_SAVINGS_GOAL, savingsGoal);
     }
 
     if (this.savingsGoalProgress != null) {
+      return false;
+    }
+
+    if (this.numberOfPaymentRemaining != null) {
       return false;
     }
 
