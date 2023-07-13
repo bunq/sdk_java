@@ -222,6 +222,13 @@ public class MasterCardAction extends BunqModel {
   private LabelCard labelCard;
 
   /**
+   * The identification string of the merchant.
+   */
+  @Expose
+  @SerializedName("merchant_id")
+  private String merchantId;
+
+  /**
    * If this is a tokenisation action, this shows the status of the token.
    */
   @Expose
@@ -314,6 +321,13 @@ public class MasterCardAction extends BunqModel {
   @Expose
   @SerializedName("mastercard_action_report")
   private MasterCardActionReport mastercardActionReport;
+
+  /**
+   * The blacklist enabled for the merchant of this transaction
+   */
+  @Expose
+  @SerializedName("blacklist")
+  private UserBlacklistMasterCardMerchant blacklist;
 
   /**
    */
@@ -651,6 +665,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The identification string of the merchant.
+   */
+  public String getMerchantId() {
+    return this.merchantId;
+  }
+
+  public void setMerchantId(String merchantId) {
+    this.merchantId = merchantId;
+  }
+
+  /**
    * If this is a tokenisation action, this shows the status of the token.
    */
   public String getTokenStatus() {
@@ -797,6 +822,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The blacklist enabled for the merchant of this transaction
+   */
+  public UserBlacklistMasterCardMerchant getBlacklist() {
+    return this.blacklist;
+  }
+
+  public void setBlacklist(UserBlacklistMasterCardMerchant blacklist) {
+    this.blacklist = blacklist;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -903,6 +939,10 @@ public class MasterCardAction extends BunqModel {
       return false;
     }
 
+    if (this.merchantId != null) {
+      return false;
+    }
+
     if (this.tokenStatus != null) {
       return false;
     }
@@ -952,6 +992,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.mastercardActionReport != null) {
+      return false;
+    }
+
+    if (this.blacklist != null) {
       return false;
     }
 
