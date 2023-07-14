@@ -68,6 +68,13 @@ public class BirdeeInvestmentPortfolio extends BunqModel {
   private String name;
 
   /**
+   * The external identifier of the portfolio.
+   */
+  @Expose
+  @SerializedName("external_identifier")
+  private String externalIdentifier;
+
+  /**
    * The investment goal.
    */
   @Expose
@@ -206,6 +213,17 @@ public class BirdeeInvestmentPortfolio extends BunqModel {
   }
 
   /**
+   * The external identifier of the portfolio.
+   */
+  public String getExternalIdentifier() {
+    return this.externalIdentifier;
+  }
+
+  public void setExternalIdentifier(String externalIdentifier) {
+    this.externalIdentifier = externalIdentifier;
+  }
+
+  /**
    * The investment goal.
    */
   public BirdeeInvestmentPortfolioGoal getGoal() {
@@ -262,6 +280,10 @@ public class BirdeeInvestmentPortfolio extends BunqModel {
     }
 
     if (this.name != null) {
+      return false;
+    }
+
+    if (this.externalIdentifier != null) {
       return false;
     }
 
