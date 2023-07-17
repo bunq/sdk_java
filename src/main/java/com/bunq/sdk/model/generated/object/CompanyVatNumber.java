@@ -16,6 +16,13 @@ import java.util.Map;
 public class CompanyVatNumber extends BunqModel {
 
   /**
+   * The VAT identification number type.
+   */
+  @Expose
+  @SerializedName("type")
+  private String type;
+
+  /**
    * The country of the VAT identification number.
    */
   @Expose
@@ -69,6 +76,17 @@ public class CompanyVatNumber extends BunqModel {
   }
 
   /**
+   * The VAT identification number type.
+   */
+  public String getType() {
+    return this.type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  /**
    * The country of the VAT identification number.
    */
   public String getCountry() {
@@ -93,6 +111,10 @@ public class CompanyVatNumber extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.type != null) {
+      return false;
+    }
+
     if (this.country != null) {
       return false;
     }
