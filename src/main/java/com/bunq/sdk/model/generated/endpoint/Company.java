@@ -124,7 +124,7 @@ public class Company extends BunqModel {
   private String avatarUuidFieldForRequest;
 
   /**
-   * All the vat numbers of the company
+   * DEPRECATED All the vat numbers of the company
    */
   @Expose
   @SerializedName("vat_number_field_for_request")
@@ -216,7 +216,7 @@ public class Company extends BunqModel {
    * zero, maximum four.
    * @param chamberOfCommerceNumber The company's chamber of commerce number.
    * @param avatarUuid The public UUID of the company's avatar.
-   * @param vatNumber All the vat numbers of the company
+   * @param vatNumber DEPRECATED All the vat numbers of the company
    * @param vatNumbers All the vat numbers of the company
    * @param signupTrackType The type of signup track the user is following.
    */
