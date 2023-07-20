@@ -67,6 +67,13 @@ public class MasterCardIdentityCheckChallengeRequestUser extends BunqModel {
   private String status;
 
   /**
+   * The return url for the merchant app after the challenge is accepted or rejected.
+   */
+  @Expose
+  @SerializedName("url_merchant_app")
+  private String urlMerchantApp;
+
+  /**
    * The monetary account label of the counterparty.
    */
   @Expose
@@ -188,6 +195,17 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
+   * The return url for the merchant app after the challenge is accepted or rejected.
+   */
+  public String getUrlMerchantApp() {
+    return this.urlMerchantApp;
+  }
+
+  public void setUrlMerchantApp(String urlMerchantApp) {
+    this.urlMerchantApp = urlMerchantApp;
+  }
+
+  /**
    * The monetary account label of the counterparty.
    */
   public LabelMonetaryAccount getCounterpartyAlias() {
@@ -225,6 +243,10 @@ requestMap.put(FIELD_STATUS, status);
     }
 
     if (this.status != null) {
+      return false;
+    }
+
+    if (this.urlMerchantApp != null) {
       return false;
     }
 
