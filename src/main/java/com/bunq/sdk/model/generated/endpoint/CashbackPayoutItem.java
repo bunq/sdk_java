@@ -46,13 +46,6 @@ public class CashbackPayoutItem extends BunqModel {
   private AdditionalTransactionInformationCategory transactionCategory;
 
   /**
-   * The ID of the event of the mastercard action that triggered this cashback.
-   */
-  @Expose
-  @SerializedName("mastercard_action_event_id")
-  private Integer mastercardActionEventId;
-
-  /**
    * The status of the cashback payout item.
    */
   public String getStatus() {
@@ -97,17 +90,6 @@ public class CashbackPayoutItem extends BunqModel {
   }
 
   /**
-   * The ID of the event of the mastercard action that triggered this cashback.
-   */
-  public Integer getMastercardActionEventId() {
-    return this.mastercardActionEventId;
-  }
-
-  public void setMastercardActionEventId(Integer mastercardActionEventId) {
-    this.mastercardActionEventId = mastercardActionEventId;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.status != null) {
@@ -123,10 +105,6 @@ public class CashbackPayoutItem extends BunqModel {
     }
 
     if (this.transactionCategory != null) {
-      return false;
-    }
-
-    if (this.mastercardActionEventId != null) {
       return false;
     }
 
