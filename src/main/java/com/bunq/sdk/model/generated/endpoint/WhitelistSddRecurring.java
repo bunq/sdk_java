@@ -40,6 +40,7 @@ public class WhitelistSddRecurring extends BunqModel {
   public static final String FIELD_MONETARY_ACCOUNT_PAYING_ID = "monetary_account_paying_id";
   public static final String FIELD_REQUEST_ID = "request_id";
   public static final String FIELD_MAXIMUM_AMOUNT_PER_MONTH = "maximum_amount_per_month";
+  public static final String FIELD_MAXIMUM_AMOUNT_PER_PAYMENT = "maximum_amount_per_payment";
 
   /**
    * Object type.
@@ -112,6 +113,13 @@ public class WhitelistSddRecurring extends BunqModel {
   private Amount maximumAmountPerMonth;
 
   /**
+   * The maximum amount per payment that can be deducted from the target account.
+   */
+  @Expose
+  @SerializedName("maximum_amount_per_payment")
+  private Amount maximumAmountPerPayment;
+
+  /**
    * The user who created the whitelist entry.
    */
   @Expose
@@ -133,28 +141,41 @@ public class WhitelistSddRecurring extends BunqModel {
   private Integer requestIdFieldForRequest;
 
   /**
-   * The maximum amount of money that is allowed to be deducted based on the whitelist.
+   * The maximum amount of money that is allowed to be deducted per month based on the whitelist.
    */
   @Expose
   @SerializedName("maximum_amount_per_month_field_for_request")
   private Amount maximumAmountPerMonthFieldForRequest;
 
+  /**
+   * The maximum amount of money that is allowed to be deducted per payment based on the
+   * whitelist.
+   */
+  @Expose
+  @SerializedName("maximum_amount_per_payment_field_for_request")
+  private Amount maximumAmountPerPaymentFieldForRequest;
+
   public WhitelistSddRecurring() {
-  this(null, null, null);
+  this(null, null, null, null);
   }
 
   public WhitelistSddRecurring(Integer monetaryAccountPayingId) {
-  this(monetaryAccountPayingId, null, null);
+  this(monetaryAccountPayingId, null, null, null);
   }
 
   public WhitelistSddRecurring(Integer monetaryAccountPayingId, Integer requestId) {
-  this(monetaryAccountPayingId, requestId, null);
+  this(monetaryAccountPayingId, requestId, null, null);
   }
 
   public WhitelistSddRecurring(Integer monetaryAccountPayingId, Integer requestId, Amount maximumAmountPerMonth) {
+  this(monetaryAccountPayingId, requestId, maximumAmountPerMonth, null);
+  }
+
+  public WhitelistSddRecurring(Integer monetaryAccountPayingId, Integer requestId, Amount maximumAmountPerMonth, Amount maximumAmountPerPayment) {
     this.monetaryAccountPayingIdFieldForRequest = monetaryAccountPayingId;
     this.requestIdFieldForRequest = requestId;
     this.maximumAmountPerMonthFieldForRequest = maximumAmountPerMonth;
+    this.maximumAmountPerPaymentFieldForRequest = maximumAmountPerPayment;
   }  /**
    * Get a specific recurring SDD whitelist entry.
    */
@@ -181,10 +202,12 @@ public class WhitelistSddRecurring extends BunqModel {
    * Create a new recurring SDD whitelist entry.
    * @param monetaryAccountPayingId ID of the monetary account of which you want to pay from.
    * @param requestId ID of the request for which you want to whitelist the originating SDD.
-   * @param maximumAmountPerMonth The maximum amount of money that is allowed to be deducted based
-   * on the whitelist.
+   * @param maximumAmountPerMonth The maximum amount of money that is allowed to be deducted per
+   * month based on the whitelist.
+   * @param maximumAmountPerPayment The maximum amount of money that is allowed to be deducted per
+   * payment based on the whitelist.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, Amount maximumAmountPerMonth, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, Amount maximumAmountPerMonth, Amount maximumAmountPerPayment, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -195,6 +218,7 @@ public class WhitelistSddRecurring extends BunqModel {
 requestMap.put(FIELD_MONETARY_ACCOUNT_PAYING_ID, monetaryAccountPayingId);
 requestMap.put(FIELD_REQUEST_ID, requestId);
 requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
+requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_PAYMENT, maximumAmountPerPayment);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
@@ -203,27 +227,33 @@ requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null);
+    return create(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Integer monetaryAccountPayingId) {
-    return create(monetaryAccountPayingId, null, null, null);
+    return create(monetaryAccountPayingId, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId) {
-    return create(monetaryAccountPayingId, requestId, null, null);
+    return create(monetaryAccountPayingId, requestId, null, null, null);
   }
 
   public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, Amount maximumAmountPerMonth) {
-    return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, null);
+    return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, null, null);
+  }
+
+  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, Amount maximumAmountPerMonth, Amount maximumAmountPerPayment) {
+    return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, maximumAmountPerPayment, null);
   }
 
   /**
    * @param monetaryAccountPayingId ID of the monetary account of which you want to pay from.
-   * @param maximumAmountPerMonth The maximum amount of money that is allowed to be deducted based
-   * on the whitelist.
+   * @param maximumAmountPerMonth The maximum amount of money that is allowed to be deducted per
+   * month based on the whitelist.
+   * @param maximumAmountPerPayment The maximum amount of money that is allowed to be deducted per
+   * payment based on the whitelist.
    */
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, Amount maximumAmountPerMonth, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, Amount maximumAmountPerMonth, Amount maximumAmountPerPayment, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -233,6 +263,7 @@ requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
   HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_MONETARY_ACCOUNT_PAYING_ID, monetaryAccountPayingId);
 requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
+requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_PAYMENT, maximumAmountPerPayment);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), whitelistSddRecurringId), requestBytes, customHeaders);
@@ -241,15 +272,19 @@ requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
   }
 
   public static BunqResponse<Integer> update(Integer whitelistSddRecurringId) {
-    return update(whitelistSddRecurringId, null, null, null);
+    return update(whitelistSddRecurringId, null, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId) {
-    return update(whitelistSddRecurringId, monetaryAccountPayingId, null, null);
+    return update(whitelistSddRecurringId, monetaryAccountPayingId, null, null, null);
   }
 
   public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, Amount maximumAmountPerMonth) {
-    return update(whitelistSddRecurringId, monetaryAccountPayingId, maximumAmountPerMonth, null);
+    return update(whitelistSddRecurringId, monetaryAccountPayingId, maximumAmountPerMonth, null, null);
+  }
+
+  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, Amount maximumAmountPerMonth, Amount maximumAmountPerPayment) {
+    return update(whitelistSddRecurringId, monetaryAccountPayingId, maximumAmountPerMonth, maximumAmountPerPayment, null);
   }
 
   /**
@@ -385,6 +420,17 @@ requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
   }
 
   /**
+   * The maximum amount per payment that can be deducted from the target account.
+   */
+  public Amount getMaximumAmountPerPayment() {
+    return this.maximumAmountPerPayment;
+  }
+
+  public void setMaximumAmountPerPayment(Amount maximumAmountPerPayment) {
+    this.maximumAmountPerPayment = maximumAmountPerPayment;
+  }
+
+  /**
    * The user who created the whitelist entry.
    */
   public LabelUser getUserAliasCreated() {
@@ -431,6 +477,10 @@ requestMap.put(FIELD_MAXIMUM_AMOUNT_PER_MONTH, maximumAmountPerMonth);
     }
 
     if (this.maximumAmountPerMonth != null) {
+      return false;
+    }
+
+    if (this.maximumAmountPerPayment != null) {
       return false;
     }
 
