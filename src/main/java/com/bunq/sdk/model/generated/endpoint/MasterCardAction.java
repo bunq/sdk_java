@@ -330,6 +330,20 @@ public class MasterCardAction extends BunqModel {
   private UserBlacklistMasterCardMerchant blacklist;
 
   /**
+   * The status of the additional authentication performed (3ds) by the user for this transaction.
+   */
+  @Expose
+  @SerializedName("additional_authentication_status")
+  private String additionalAuthenticationStatus;
+
+  /**
+   * Status checking the provided PIN.
+   */
+  @Expose
+  @SerializedName("pin_status")
+  private String pinStatus;
+
+  /**
    */
   public static BunqResponse<MasterCardAction> get(Integer masterCardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -833,6 +847,28 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The status of the additional authentication performed (3ds) by the user for this transaction.
+   */
+  public String getAdditionalAuthenticationStatus() {
+    return this.additionalAuthenticationStatus;
+  }
+
+  public void setAdditionalAuthenticationStatus(String additionalAuthenticationStatus) {
+    this.additionalAuthenticationStatus = additionalAuthenticationStatus;
+  }
+
+  /**
+   * Status checking the provided PIN.
+   */
+  public String getPinStatus() {
+    return this.pinStatus;
+  }
+
+  public void setPinStatus(String pinStatus) {
+    this.pinStatus = pinStatus;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -996,6 +1032,14 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.blacklist != null) {
+      return false;
+    }
+
+    if (this.additionalAuthenticationStatus != null) {
+      return false;
+    }
+
+    if (this.pinStatus != null) {
       return false;
     }
 
