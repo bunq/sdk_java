@@ -178,7 +178,8 @@ public class MasterCardActionRefund extends BunqModel {
   private String statusTogetherUrl;
 
   /**
-   * Type of this refund. Can de REFUND or CHARGEBACK
+   * Type of this refund. Can de REFUND or CHARGEBACK. DEPRECATED: This is now determined by
+   * backend.
    */
   @Expose
   @SerializedName("type_field_for_request")
@@ -237,35 +238,35 @@ public class MasterCardActionRefund extends BunqModel {
   this(null, null, null, null, null, null, null, null);
   }
 
-  public MasterCardActionRefund(String type) {
-  this(type, null, null, null, null, null, null, null);
+  public MasterCardActionRefund(String subType) {
+  this(subType, null, null, null, null, null, null, null);
   }
 
-  public MasterCardActionRefund(String type, String subType) {
-  this(type, subType, null, null, null, null, null, null);
+  public MasterCardActionRefund(String subType, Amount amount) {
+  this(subType, amount, null, null, null, null, null, null);
   }
 
-  public MasterCardActionRefund(String type, String subType, Amount amount) {
-  this(type, subType, amount, null, null, null, null, null);
+  public MasterCardActionRefund(String subType, Amount amount, String type) {
+  this(subType, amount, type, null, null, null, null, null);
   }
 
-  public MasterCardActionRefund(String type, String subType, Amount amount, String category) {
-  this(type, subType, amount, category, null, null, null, null);
+  public MasterCardActionRefund(String subType, Amount amount, String type, String category) {
+  this(subType, amount, type, category, null, null, null, null);
   }
 
-  public MasterCardActionRefund(String type, String subType, Amount amount, String category, String reason) {
-  this(type, subType, amount, category, reason, null, null, null);
+  public MasterCardActionRefund(String subType, Amount amount, String type, String category, String reason) {
+  this(subType, amount, type, category, reason, null, null, null);
   }
 
-  public MasterCardActionRefund(String type, String subType, Amount amount, String category, String reason, String comment) {
-  this(type, subType, amount, category, reason, comment, null, null);
+  public MasterCardActionRefund(String subType, Amount amount, String type, String category, String reason, String comment) {
+  this(subType, amount, type, category, reason, comment, null, null);
   }
 
-  public MasterCardActionRefund(String type, String subType, Amount amount, String category, String reason, String comment, List<AttachmentMasterCardActionRefund> attachment) {
-  this(type, subType, amount, category, reason, comment, attachment, null);
+  public MasterCardActionRefund(String subType, Amount amount, String type, String category, String reason, String comment, List<AttachmentMasterCardActionRefund> attachment) {
+  this(subType, amount, type, category, reason, comment, attachment, null);
   }
 
-  public MasterCardActionRefund(String type, String subType, Amount amount, String category, String reason, String comment, List<AttachmentMasterCardActionRefund> attachment, String termsAndConditions) {
+  public MasterCardActionRefund(String subType, Amount amount, String type, String category, String reason, String comment, List<AttachmentMasterCardActionRefund> attachment, String termsAndConditions) {
     this.typeFieldForRequest = type;
     this.subTypeFieldForRequest = subType;
     this.amountFieldForRequest = amount;
