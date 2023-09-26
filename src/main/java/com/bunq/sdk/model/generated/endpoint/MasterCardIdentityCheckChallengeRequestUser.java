@@ -67,6 +67,20 @@ public class MasterCardIdentityCheckChallengeRequestUser extends BunqModel {
   private String status;
 
   /**
+   * Textual explanation of the decision.
+   */
+  @Expose
+  @SerializedName("decision_description")
+  private String decisionDescription;
+
+  /**
+   * Textual explanation of the decision in user's language.
+   */
+  @Expose
+  @SerializedName("decision_description_translated")
+  private String decisionDescriptionTranslated;
+
+  /**
    * The return url for the merchant app after the challenge is accepted or rejected.
    */
   @Expose
@@ -195,6 +209,28 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
+   * Textual explanation of the decision.
+   */
+  public String getDecisionDescription() {
+    return this.decisionDescription;
+  }
+
+  public void setDecisionDescription(String decisionDescription) {
+    this.decisionDescription = decisionDescription;
+  }
+
+  /**
+   * Textual explanation of the decision in user's language.
+   */
+  public String getDecisionDescriptionTranslated() {
+    return this.decisionDescriptionTranslated;
+  }
+
+  public void setDecisionDescriptionTranslated(String decisionDescriptionTranslated) {
+    this.decisionDescriptionTranslated = decisionDescriptionTranslated;
+  }
+
+  /**
    * The return url for the merchant app after the challenge is accepted or rejected.
    */
   public String getUrlMerchantApp() {
@@ -243,6 +279,14 @@ requestMap.put(FIELD_STATUS, status);
     }
 
     if (this.status != null) {
+      return false;
+    }
+
+    if (this.decisionDescription != null) {
+      return false;
+    }
+
+    if (this.decisionDescriptionTranslated != null) {
       return false;
     }
 
