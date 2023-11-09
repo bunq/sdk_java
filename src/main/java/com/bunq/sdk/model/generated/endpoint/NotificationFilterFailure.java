@@ -67,6 +67,20 @@ public class NotificationFilterFailure extends BunqModel {
   private Integer objectId;
 
   /**
+   * The exception bunq encountered when processing the callback.
+   */
+  @Expose
+  @SerializedName("exception_message")
+  private String exceptionMessage;
+
+  /**
+   * The response code (or null) received from the endpoint.
+   */
+  @Expose
+  @SerializedName("response_code")
+  private Integer responseCode;
+
+  /**
    * The IDs to retry.
    */
   @Expose
@@ -168,6 +182,28 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
   }
 
   /**
+   * The exception bunq encountered when processing the callback.
+   */
+  public String getExceptionMessage() {
+    return this.exceptionMessage;
+  }
+
+  public void setExceptionMessage(String exceptionMessage) {
+    this.exceptionMessage = exceptionMessage;
+  }
+
+  /**
+   * The response code (or null) received from the endpoint.
+   */
+  public Integer getResponseCode() {
+    return this.responseCode;
+  }
+
+  public void setResponseCode(Integer responseCode) {
+    this.responseCode = responseCode;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.notificationFilters != null) {
@@ -183,6 +219,14 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
     }
 
     if (this.objectId != null) {
+      return false;
+    }
+
+    if (this.exceptionMessage != null) {
+      return false;
+    }
+
+    if (this.responseCode != null) {
       return false;
     }
 
