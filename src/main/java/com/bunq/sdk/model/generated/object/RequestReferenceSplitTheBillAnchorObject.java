@@ -4,6 +4,7 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
+import com.bunq.sdk.model.generated.endpoint.CurrencyConversion;
 import com.bunq.sdk.model.generated.endpoint.DraftPayment;
 import com.bunq.sdk.model.generated.endpoint.Invoice;
 import com.bunq.sdk.model.generated.endpoint.MasterCardAction;
@@ -84,6 +85,12 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
   @Expose
   @SerializedName("TransferwisePayment")
   private TransferwiseTransfer transferwisePayment;
+
+  /**
+   */
+  @Expose
+  @SerializedName("CurrencyConversion")
+  private CurrencyConversion currencyConversion;
 
   /**
    */
@@ -177,6 +184,16 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
 
   /**
    */
+  public CurrencyConversion getCurrencyConversion() {
+    return this.currencyConversion;
+  }
+
+  public void setCurrencyConversion(CurrencyConversion currencyConversion) {
+    this.currencyConversion = currencyConversion;
+  }
+
+  /**
+   */
   public BunqModel getReferencedObject() {
     if (this.billingInvoice != null) {
       return this.billingInvoice;
@@ -212,6 +229,10 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
 
     if (this.transferwisePayment != null) {
       return this.transferwisePayment;
+    }
+
+    if (this.currencyConversion != null) {
+      return this.currencyConversion;
     }
 
     throw new BunqException(ERROR_NULL_FIELDS);
@@ -253,6 +274,10 @@ public class RequestReferenceSplitTheBillAnchorObject extends BunqModel implemen
     }
 
     if (this.transferwisePayment != null) {
+      return false;
+    }
+
+    if (this.currencyConversion != null) {
       return false;
     }
 
