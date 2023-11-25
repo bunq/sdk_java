@@ -35,6 +35,7 @@ public class CardCredit extends BunqModel {
   /**
    * Field constants.
    */
+  public static final String FIELD_FIRST_LINE = "first_line";
   public static final String FIELD_SECOND_LINE = "second_line";
   public static final String FIELD_NAME_ON_CARD = "name_on_card";
   public static final String FIELD_PREFERRED_NAME_ON_CARD = "preferred_name_on_card";
@@ -217,6 +218,14 @@ public class CardCredit extends BunqModel {
   private String cardShipmentTrackingUrl;
 
   /**
+   * The first line of text on the card, used as name/description for it. It can contain at most
+   * 17 characters and it can be empty.
+   */
+  @Expose
+  @SerializedName("first_line_field_for_request")
+  private String firstLineFieldForRequest;
+
+  /**
    * The second line of text on the card, used as name/description for it. It can contain at most
    * 17 characters and it can be empty.
    */
@@ -285,42 +294,47 @@ public class CardCredit extends BunqModel {
   private String orderStatusFieldForRequest;
 
   public CardCredit() {
-  this(null, null, null, null, null, null, null, null, null);
+  this(null, null, null, null, null, null, null, null, null, null);
   }
 
   public CardCredit(String secondLine) {
-  this(secondLine, null, null, null, null, null, null, null, null);
+  this(secondLine, null, null, null, null, null, null, null, null, null);
   }
 
   public CardCredit(String secondLine, String nameOnCard) {
-  this(secondLine, nameOnCard, null, null, null, null, null, null, null);
+  this(secondLine, nameOnCard, null, null, null, null, null, null, null, null);
   }
 
   public CardCredit(String secondLine, String nameOnCard, String type) {
-  this(secondLine, nameOnCard, type, null, null, null, null, null, null);
+  this(secondLine, nameOnCard, type, null, null, null, null, null, null, null);
   }
 
   public CardCredit(String secondLine, String nameOnCard, String type, String productType) {
-  this(secondLine, nameOnCard, type, productType, null, null, null, null, null);
+  this(secondLine, nameOnCard, type, productType, null, null, null, null, null, null);
   }
 
-  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard) {
-  this(secondLine, nameOnCard, type, productType, preferredNameOnCard, null, null, null, null);
+  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String firstLine) {
+  this(secondLine, nameOnCard, type, productType, firstLine, null, null, null, null, null);
   }
 
-  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias) {
-  this(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, null, null, null);
+  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard) {
+  this(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, null, null, null, null);
   }
 
-  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
-  this(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, null, null);
+  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias) {
+  this(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, null, null, null);
   }
 
-  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
-  this(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, null);
+  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
+  this(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, pinCodeAssignment, null, null);
   }
 
-  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus) {
+  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+  this(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, null);
+  }
+
+  public CardCredit(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus) {
+    this.firstLineFieldForRequest = firstLine;
     this.secondLineFieldForRequest = secondLine;
     this.nameOnCardFieldForRequest = nameOnCard;
     this.preferredNameOnCardFieldForRequest = preferredNameOnCard;
@@ -338,6 +352,8 @@ public class CardCredit extends BunqModel {
    * available card names for a user.
    * @param type The type of card to order. Can be MASTERCARD.
    * @param productType The product type of the card to order.
+   * @param firstLine The first line of text on the card, used as name/description for it. It can
+   * contain at most 17 characters and it can be empty.
    * @param preferredNameOnCard The user's preferred name that can be put on the card.
    * @param alias The pointer to the monetary account that will be connected at first with the
    * card. Its IBAN code is also the one that will be printed on the card itself. The pointer must
@@ -348,7 +364,7 @@ public class CardCredit extends BunqModel {
    * @param orderStatus The order status of this card. Can be CARD_REQUEST_PENDING or
    * VIRTUAL_DELIVERY.
    */
-  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus, Map<String, String> customHeaders) {
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -356,6 +372,7 @@ public class CardCredit extends BunqModel {
     }
 
   HashMap<String, Object> requestMap = new HashMap<>();
+requestMap.put(FIELD_FIRST_LINE, firstLine);
 requestMap.put(FIELD_SECOND_LINE, secondLine);
 requestMap.put(FIELD_NAME_ON_CARD, nameOnCard);
 requestMap.put(FIELD_PREFERRED_NAME_ON_CARD, preferredNameOnCard);
@@ -373,43 +390,47 @@ requestMap.put(FIELD_ORDER_STATUS, orderStatus);
   }
 
   public static BunqResponse<CardCredit> create() {
-    return create(null, null, null, null, null, null, null, null, null, null);
+    return create(null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<CardCredit> create(String secondLine) {
-    return create(secondLine, null, null, null, null, null, null, null, null, null);
+    return create(secondLine, null, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard) {
-    return create(secondLine, nameOnCard, null, null, null, null, null, null, null, null);
+    return create(secondLine, nameOnCard, null, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type) {
-    return create(secondLine, nameOnCard, type, null, null, null, null, null, null, null);
+    return create(secondLine, nameOnCard, type, null, null, null, null, null, null, null, null);
   }
 
   public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType) {
-    return create(secondLine, nameOnCard, type, productType, null, null, null, null, null, null);
+    return create(secondLine, nameOnCard, type, productType, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard) {
-    return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, null, null, null, null, null);
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine) {
+    return create(secondLine, nameOnCard, type, productType, firstLine, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias) {
-    return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, null, null, null, null);
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard) {
+    return create(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
-    return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, null, null, null);
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias) {
+    return create(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, null, null, null, null);
   }
 
-  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
-    return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, null, null);
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment) {
+    return create(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, pinCodeAssignment, null, null, null);
   }
 
-  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus) {
-    return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, orderStatus, null);
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+    return create(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, null, null);
+  }
+
+  public static BunqResponse<CardCredit> create(String secondLine, String nameOnCard, String type, String productType, String firstLine, String preferredNameOnCard, Pointer alias, List<CardPinAssignment> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus) {
+    return create(secondLine, nameOnCard, type, productType, firstLine, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, orderStatus, null);
   }
 
   /**
