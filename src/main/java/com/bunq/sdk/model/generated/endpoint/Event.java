@@ -109,6 +109,13 @@ public class Event extends BunqModel {
   private Boolean isEventLatestForObject;
 
   /**
+   * Indicator whether this is event can be reassigned to another Monetary Account.
+   */
+  @Expose
+  @SerializedName("is_event_reassignable")
+  private Boolean isEventReassignable;
+
+  /**
    * Get a specific event for a given user.
    */
   public static BunqResponse<Event> get(Integer eventId, Map<String, String> params, Map<String, String> customHeaders) {
@@ -268,6 +275,17 @@ public class Event extends BunqModel {
   }
 
   /**
+   * Indicator whether this is event can be reassigned to another Monetary Account.
+   */
+  public Boolean getIsEventReassignable() {
+    return this.isEventReassignable;
+  }
+
+  public void setIsEventReassignable(Boolean isEventReassignable) {
+    this.isEventReassignable = isEventReassignable;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -307,6 +325,10 @@ public class Event extends BunqModel {
     }
 
     if (this.isEventLatestForObject != null) {
+      return false;
+    }
+
+    if (this.isEventReassignable != null) {
       return false;
     }
 
