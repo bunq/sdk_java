@@ -228,6 +228,13 @@ public class Card extends BunqModel {
   private String cardShipmentTrackingUrl;
 
   /**
+   * Whether this card is eligible for a free replacement.
+   */
+  @Expose
+  @SerializedName("is_eligible_for_free_replacement")
+  private Boolean isEligibleForFreeReplacement;
+
+  /**
    * The plaintext pin code. Requests require encryption to be enabled.
    */
   @Expose
@@ -779,6 +786,17 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
   }
 
   /**
+   * Whether this card is eligible for a free replacement.
+   */
+  public Boolean getIsEligibleForFreeReplacement() {
+    return this.isEligibleForFreeReplacement;
+  }
+
+  public void setIsEligibleForFreeReplacement(Boolean isEligibleForFreeReplacement) {
+    this.isEligibleForFreeReplacement = isEligibleForFreeReplacement;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -874,6 +892,10 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     }
 
     if (this.cardShipmentTrackingUrl != null) {
+      return false;
+    }
+
+    if (this.isEligibleForFreeReplacement != null) {
       return false;
     }
 
