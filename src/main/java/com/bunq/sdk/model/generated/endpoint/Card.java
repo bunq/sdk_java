@@ -208,6 +208,13 @@ public class Card extends BunqModel {
   private LabelMonetaryAccount labelMonetaryAccountCurrent;
 
   /**
+   * Current monetary account (only for prepaid credit cards).
+   */
+  @Expose
+  @SerializedName("monetary_account")
+  private MonetaryAccount monetaryAccount;
+
+  /**
    * Array of Types, PINs, account IDs assigned to the card.
    */
   @Expose
@@ -797,6 +804,17 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
   }
 
   /**
+   * Current monetary account (only for prepaid credit cards).
+   */
+  public MonetaryAccount getMonetaryAccount() {
+    return this.monetaryAccount;
+  }
+
+  public void setMonetaryAccount(MonetaryAccount monetaryAccount) {
+    this.monetaryAccount = monetaryAccount;
+  }
+
+  /**
    * Array of Types, PINs, account IDs assigned to the card.
    */
   public List<CardPinAssignment> getPinCodeAssignment() {
@@ -936,6 +954,10 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     }
 
     if (this.labelMonetaryAccountCurrent != null) {
+      return false;
+    }
+
+    if (this.monetaryAccount != null) {
       return false;
     }
 
