@@ -344,6 +344,13 @@ public class MasterCardAction extends BunqModel {
   private String pinStatus;
 
   /**
+   * The MCC provided.
+   */
+  @Expose
+  @SerializedName("merchant_category_code")
+  private String merchantCategoryCode;
+
+  /**
    */
   public static BunqResponse<MasterCardAction> get(Integer masterCardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -869,6 +876,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The MCC provided.
+   */
+  public String getMerchantCategoryCode() {
+    return this.merchantCategoryCode;
+  }
+
+  public void setMerchantCategoryCode(String merchantCategoryCode) {
+    this.merchantCategoryCode = merchantCategoryCode;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -1040,6 +1058,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.pinStatus != null) {
+      return false;
+    }
+
+    if (this.merchantCategoryCode != null) {
       return false;
     }
 
