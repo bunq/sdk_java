@@ -6,6 +6,7 @@ import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
 import com.bunq.sdk.model.generated.object.LabelUser;
 import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.object.RegistryMembershipSetting;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -27,6 +28,7 @@ public class RegistryMembership extends BunqModel {
   public static final String FIELD_ALIAS = "alias";
   public static final String FIELD_STATUS = "status";
   public static final String FIELD_AUTO_ADD_CARD_TRANSACTION = "auto_add_card_transaction";
+  public static final String FIELD_SETTING = "setting";
   public static final String FIELD_MEMBERSHIP_TICOUNT_ID = "membership_ticount_id";
 
   /**
@@ -72,11 +74,18 @@ public class RegistryMembership extends BunqModel {
   private String statusSettlement;
 
   /**
-   * The setting for for adding automatically card transactions to the registry.
+   * The setting for for adding automatically card transactions to the registry. (deprecated)
    */
   @Expose
   @SerializedName("auto_add_card_transaction")
   private String autoAddCardTransaction;
+
+  /**
+   * Registry membership setting.
+   */
+  @Expose
+  @SerializedName("setting")
+  private RegistryMembershipSetting setting;
 
   /**
    * The registry id.
@@ -123,11 +132,18 @@ public class RegistryMembership extends BunqModel {
   private String statusFieldForRequest;
 
   /**
-   * The setting for for adding automatically card transactions to the registry.
+   * The setting for adding automatically card transactions to the registry. (deprecated)
    */
   @Expose
   @SerializedName("auto_add_card_transaction_field_for_request")
   private String autoAddCardTransactionFieldForRequest;
+
+  /**
+   * Registry membership setting.
+   */
+  @Expose
+  @SerializedName("setting_field_for_request")
+  private RegistryMembershipSetting settingFieldForRequest;
 
   /**
    * The original TricountId of the membership for backwards compatibility. May be used as an
@@ -139,30 +155,35 @@ public class RegistryMembership extends BunqModel {
   private Integer membershipTicountIdFieldForRequest;
 
   public RegistryMembership() {
-  this(null, null, null, null, null);
+  this(null, null, null, null, null, null);
   }
 
   public RegistryMembership(Pointer alias) {
-  this(alias, null, null, null, null);
+  this(alias, null, null, null, null, null);
   }
 
   public RegistryMembership(Pointer alias, String uuid) {
-  this(alias, uuid, null, null, null);
+  this(alias, uuid, null, null, null, null);
   }
 
   public RegistryMembership(Pointer alias, String uuid, String status) {
-  this(alias, uuid, status, null, null);
+  this(alias, uuid, status, null, null, null);
   }
 
   public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction) {
-  this(alias, uuid, status, autoAddCardTransaction, null);
+  this(alias, uuid, status, autoAddCardTransaction, null, null);
   }
 
-  public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction, Integer membershipTicountId) {
+  public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction, RegistryMembershipSetting setting) {
+  this(alias, uuid, status, autoAddCardTransaction, setting, null);
+  }
+
+  public RegistryMembership(Pointer alias, String uuid, String status, String autoAddCardTransaction, RegistryMembershipSetting setting, Integer membershipTicountId) {
     this.uuidFieldForRequest = uuid;
     this.aliasFieldForRequest = alias;
     this.statusFieldForRequest = status;
     this.autoAddCardTransactionFieldForRequest = autoAddCardTransaction;
+    this.settingFieldForRequest = setting;
     this.membershipTicountIdFieldForRequest = membershipTicountId;
   }
 
@@ -233,7 +254,7 @@ public class RegistryMembership extends BunqModel {
   }
 
   /**
-   * The setting for for adding automatically card transactions to the registry.
+   * The setting for for adding automatically card transactions to the registry. (deprecated)
    */
   public String getAutoAddCardTransaction() {
     return this.autoAddCardTransaction;
@@ -241,6 +262,17 @@ public class RegistryMembership extends BunqModel {
 
   public void setAutoAddCardTransaction(String autoAddCardTransaction) {
     this.autoAddCardTransaction = autoAddCardTransaction;
+  }
+
+  /**
+   * Registry membership setting.
+   */
+  public RegistryMembershipSetting getSetting() {
+    return this.setting;
+  }
+
+  public void setSetting(RegistryMembershipSetting setting) {
+    this.setting = setting;
   }
 
   /**
@@ -304,6 +336,10 @@ public class RegistryMembership extends BunqModel {
     }
 
     if (this.autoAddCardTransaction != null) {
+      return false;
+    }
+
+    if (this.setting != null) {
       return false;
     }
 
