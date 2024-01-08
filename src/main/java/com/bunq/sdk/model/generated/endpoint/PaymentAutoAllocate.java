@@ -86,11 +86,25 @@ public class PaymentAutoAllocate extends BunqModel {
   private Amount triggerAmount;
 
   /**
-   * The payment that was used to define the triggers for this payment auto allocate.
+   * DEPRECATED: superseded by `payment_original` and `payment_latest`
    */
   @Expose
   @SerializedName("payment")
   private Payment payment;
+
+  /**
+   * The payment that was used to define the triggers for this payment auto allocate.
+   */
+  @Expose
+  @SerializedName("payment_original")
+  private Payment paymentOriginal;
+
+  /**
+   * The latest payment allocated using this payment auto allocate.
+   */
+  @Expose
+  @SerializedName("payment_latest")
+  private Payment paymentLatest;
 
   /**
    * The payment that should be used to define the triggers for the payment auto allocate.
@@ -334,7 +348,7 @@ requestMap.put(FIELD_DEFINITION, definition);
   }
 
   /**
-   * The payment that was used to define the triggers for this payment auto allocate.
+   * DEPRECATED: superseded by `payment_original` and `payment_latest`
    */
   public Payment getPayment() {
     return this.payment;
@@ -342,6 +356,28 @@ requestMap.put(FIELD_DEFINITION, definition);
 
   public void setPayment(Payment payment) {
     this.payment = payment;
+  }
+
+  /**
+   * The payment that was used to define the triggers for this payment auto allocate.
+   */
+  public Payment getPaymentOriginal() {
+    return this.paymentOriginal;
+  }
+
+  public void setPaymentOriginal(Payment paymentOriginal) {
+    this.paymentOriginal = paymentOriginal;
+  }
+
+  /**
+   * The latest payment allocated using this payment auto allocate.
+   */
+  public Payment getPaymentLatest() {
+    return this.paymentLatest;
+  }
+
+  public void setPaymentLatest(Payment paymentLatest) {
+    this.paymentLatest = paymentLatest;
   }
 
   /**
@@ -372,6 +408,14 @@ requestMap.put(FIELD_DEFINITION, definition);
     }
 
     if (this.payment != null) {
+      return false;
+    }
+
+    if (this.paymentOriginal != null) {
+      return false;
+    }
+
+    if (this.paymentLatest != null) {
       return false;
     }
 
