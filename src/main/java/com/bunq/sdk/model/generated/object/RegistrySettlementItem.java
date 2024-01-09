@@ -52,6 +52,13 @@ public class RegistrySettlementItem extends BunqModel {
   private LabelMonetaryAccount receivingUserAlias;
 
   /**
+   * The status of the RequestInquiry or DraftPayment for this settlement item.
+   */
+  @Expose
+  @SerializedName("payment_status")
+  private String paymentStatus;
+
+  /**
    * The amount of the RegistrySettlementItem.
    */
   public Amount getAmount() {
@@ -107,6 +114,17 @@ public class RegistrySettlementItem extends BunqModel {
   }
 
   /**
+   * The status of the RequestInquiry or DraftPayment for this settlement item.
+   */
+  public String getPaymentStatus() {
+    return this.paymentStatus;
+  }
+
+  public void setPaymentStatus(String paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.amount != null) {
@@ -126,6 +144,10 @@ public class RegistrySettlementItem extends BunqModel {
     }
 
     if (this.receivingUserAlias != null) {
+      return false;
+    }
+
+    if (this.paymentStatus != null) {
       return false;
     }
 
