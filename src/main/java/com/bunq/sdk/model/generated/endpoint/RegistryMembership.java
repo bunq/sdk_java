@@ -74,7 +74,7 @@ public class RegistryMembership extends BunqModel {
   private String statusSettlement;
 
   /**
-   * The setting for for adding automatically card transactions to the registry. (deprecated)
+   * The setting for adding automatically card transactions to the registry. (deprecated)
    */
   @Expose
   @SerializedName("auto_add_card_transaction")
@@ -100,6 +100,13 @@ public class RegistryMembership extends BunqModel {
   @Expose
   @SerializedName("registry_title")
   private String registryTitle;
+
+  /**
+   * For dinner and grocery expenses.
+   */
+  @Expose
+  @SerializedName("registry_description")
+  private String registryDescription;
 
   /**
    * The label of the user that sent the invite.
@@ -254,7 +261,7 @@ public class RegistryMembership extends BunqModel {
   }
 
   /**
-   * The setting for for adding automatically card transactions to the registry. (deprecated)
+   * The setting for adding automatically card transactions to the registry. (deprecated)
    */
   public String getAutoAddCardTransaction() {
     return this.autoAddCardTransaction;
@@ -295,6 +302,17 @@ public class RegistryMembership extends BunqModel {
 
   public void setRegistryTitle(String registryTitle) {
     this.registryTitle = registryTitle;
+  }
+
+  /**
+   * For dinner and grocery expenses.
+   */
+  public String getRegistryDescription() {
+    return this.registryDescription;
+  }
+
+  public void setRegistryDescription(String registryDescription) {
+    this.registryDescription = registryDescription;
   }
 
   /**
@@ -348,6 +366,10 @@ public class RegistryMembership extends BunqModel {
     }
 
     if (this.registryTitle != null) {
+      return false;
+    }
+
+    if (this.registryDescription != null) {
       return false;
     }
 
