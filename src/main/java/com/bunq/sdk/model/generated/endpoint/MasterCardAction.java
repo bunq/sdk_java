@@ -316,13 +316,6 @@ public class MasterCardAction extends BunqModel {
   private CashbackPayoutItem cashbackPayoutItem;
 
   /**
-   * The report for this transaction
-   */
-  @Expose
-  @SerializedName("mastercard_action_report")
-  private MasterCardActionReport mastercardActionReport;
-
-  /**
    * The blacklist enabled for the merchant of this transaction
    */
   @Expose
@@ -342,6 +335,13 @@ public class MasterCardAction extends BunqModel {
   @Expose
   @SerializedName("pin_status")
   private String pinStatus;
+
+  /**
+   * The report for this transaction
+   */
+  @Expose
+  @SerializedName("mastercard_action_report")
+  private MasterCardActionReport mastercardActionReport;
 
   /**
    * The MCC provided.
@@ -832,17 +832,6 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
-   * The report for this transaction
-   */
-  public MasterCardActionReport getMastercardActionReport() {
-    return this.mastercardActionReport;
-  }
-
-  public void setMastercardActionReport(MasterCardActionReport mastercardActionReport) {
-    this.mastercardActionReport = mastercardActionReport;
-  }
-
-  /**
    * The blacklist enabled for the merchant of this transaction
    */
   public UserBlacklistMasterCardMerchant getBlacklist() {
@@ -873,6 +862,17 @@ public class MasterCardAction extends BunqModel {
 
   public void setPinStatus(String pinStatus) {
     this.pinStatus = pinStatus;
+  }
+
+  /**
+   * The report for this transaction
+   */
+  public MasterCardActionReport getMastercardActionReport() {
+    return this.mastercardActionReport;
+  }
+
+  public void setMastercardActionReport(MasterCardActionReport mastercardActionReport) {
+    this.mastercardActionReport = mastercardActionReport;
   }
 
   /**
@@ -1045,10 +1045,6 @@ public class MasterCardAction extends BunqModel {
       return false;
     }
 
-    if (this.mastercardActionReport != null) {
-      return false;
-    }
-
     if (this.blacklist != null) {
       return false;
     }
@@ -1058,6 +1054,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.pinStatus != null) {
+      return false;
+    }
+
+    if (this.mastercardActionReport != null) {
       return false;
     }
 
