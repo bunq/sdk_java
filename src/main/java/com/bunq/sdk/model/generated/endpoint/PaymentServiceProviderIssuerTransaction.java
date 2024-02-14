@@ -118,6 +118,13 @@ public class PaymentServiceProviderIssuerTransaction extends BunqModel {
   private String status;
 
   /**
+   * The monetary account this transaction is made from.
+   */
+  @Expose
+  @SerializedName("alias")
+  private LabelMonetaryAccount alias;
+
+  /**
    * The counter party this transaction should be sent to.
    */
   @Expose
@@ -425,6 +432,17 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
+   * The monetary account this transaction is made from.
+   */
+  public LabelMonetaryAccount getAlias() {
+    return this.alias;
+  }
+
+  public void setAlias(LabelMonetaryAccount alias) {
+    this.alias = alias;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -464,6 +482,10 @@ requestMap.put(FIELD_STATUS, status);
     }
 
     if (this.status != null) {
+      return false;
+    }
+
+    if (this.alias != null) {
       return false;
     }
 
