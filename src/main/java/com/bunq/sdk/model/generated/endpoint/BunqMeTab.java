@@ -37,6 +37,7 @@ public class BunqMeTab extends BunqModel {
    */
   public static final String FIELD_BUNQME_TAB_ENTRY = "bunqme_tab_entry";
   public static final String FIELD_STATUS = "status";
+  public static final String FIELD_EVENT_ID = "event_id";
 
   /**
    * Object type.
@@ -143,23 +144,36 @@ public class BunqMeTab extends BunqModel {
   @SerializedName("status_field_for_request")
   private String statusFieldForRequest;
 
+  /**
+   * The ID of the related event if the bunqMeTab made by 'split' functionality.
+   */
+  @Expose
+  @SerializedName("event_id_field_for_request")
+  private Integer eventIdFieldForRequest;
+
   public BunqMeTab() {
-  this(null, null);
+  this(null, null, null);
   }
 
   public BunqMeTab(BunqMeTabEntry bunqmeTabEntry) {
-  this(bunqmeTabEntry, null);
+  this(bunqmeTabEntry, null, null);
   }
 
   public BunqMeTab(BunqMeTabEntry bunqmeTabEntry, String status) {
+  this(bunqmeTabEntry, status, null);
+  }
+
+  public BunqMeTab(BunqMeTabEntry bunqmeTabEntry, String status, Integer eventId) {
     this.bunqmeTabEntryFieldForRequest = bunqmeTabEntry;
     this.statusFieldForRequest = status;
+    this.eventIdFieldForRequest = eventId;
   }  /**
    * @param bunqmeTabEntry The bunq.me entry containing the payment information.
    * @param status The status of the bunq.me. Ignored in POST requests but can be used for
    * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
+   * @param eventId The ID of the related event if the bunqMeTab made by 'split' functionality.
    */
-  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -169,6 +183,7 @@ public class BunqMeTab extends BunqModel {
   HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_BUNQME_TAB_ENTRY, bunqmeTabEntry);
 requestMap.put(FIELD_STATUS, status);
+requestMap.put(FIELD_EVENT_ID, eventId);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
@@ -177,19 +192,23 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null);
+    return create(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry) {
-    return create(bunqmeTabEntry, null, null, null);
+    return create(bunqmeTabEntry, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId) {
-    return create(bunqmeTabEntry, monetaryAccountId, null, null);
+    return create(bunqmeTabEntry, monetaryAccountId, null, null, null);
   }
 
   public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status) {
-    return create(bunqmeTabEntry, monetaryAccountId, status, null);
+    return create(bunqmeTabEntry, monetaryAccountId, status, null, null);
+  }
+
+  public static BunqResponse<Integer> create(BunqMeTabEntry bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId) {
+    return create(bunqmeTabEntry, monetaryAccountId, status, eventId, null);
   }
 
   /**
