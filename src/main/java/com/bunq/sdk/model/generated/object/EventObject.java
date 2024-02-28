@@ -20,8 +20,6 @@ import com.bunq.sdk.model.generated.endpoint.PaymentBatch;
 import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
 import com.bunq.sdk.model.generated.endpoint.RequestInquiryBatch;
 import com.bunq.sdk.model.generated.endpoint.RequestResponse;
-import com.bunq.sdk.model.generated.endpoint.RewardRecipient;
-import com.bunq.sdk.model.generated.endpoint.RewardSender;
 import com.bunq.sdk.model.generated.endpoint.ScheduleInstance;
 import com.bunq.sdk.model.generated.endpoint.SchedulePayment;
 import com.bunq.sdk.model.generated.endpoint.SchedulePaymentBatch;
@@ -160,18 +158,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
   @Expose
   @SerializedName("RequestResponse")
   private RequestResponse requestResponse;
-
-  /**
-   */
-  @Expose
-  @SerializedName("RewardRecipient")
-  private RewardRecipient rewardRecipient;
-
-  /**
-   */
-  @Expose
-  @SerializedName("RewardSender")
-  private RewardSender rewardSender;
 
   /**
    */
@@ -389,26 +375,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
-  public RewardRecipient getRewardRecipient() {
-    return this.rewardRecipient;
-  }
-
-  public void setRewardRecipient(RewardRecipient rewardRecipient) {
-    this.rewardRecipient = rewardRecipient;
-  }
-
-  /**
-   */
-  public RewardSender getRewardSender() {
-    return this.rewardSender;
-  }
-
-  public void setRewardSender(RewardSender rewardSender) {
-    this.rewardSender = rewardSender;
-  }
-
-  /**
-   */
   public ShareInviteMonetaryAccountInquiry getShareInviteBankInquiry() {
     return this.shareInviteBankInquiry;
   }
@@ -526,14 +492,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
       return this.requestResponse;
     }
 
-    if (this.rewardRecipient != null) {
-      return this.rewardRecipient;
-    }
-
-    if (this.rewardSender != null) {
-      return this.rewardSender;
-    }
-
     if (this.shareInviteBankInquiry != null) {
       return this.shareInviteBankInquiry;
     }
@@ -629,14 +587,6 @@ public class EventObject extends BunqModel implements AnchorObjectInterface {
     }
 
     if (this.requestResponse != null) {
-      return false;
-    }
-
-    if (this.rewardRecipient != null) {
-      return false;
-    }
-
-    if (this.rewardSender != null) {
       return false;
     }
 
