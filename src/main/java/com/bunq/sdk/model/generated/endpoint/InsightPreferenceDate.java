@@ -62,7 +62,7 @@ public class InsightPreferenceDate extends BunqModel {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
-    return fromJsonList(InsightPreferenceDate.class, responseRaw);
+    return fromJsonList(InsightPreferenceDate.class, responseRaw, OBJECT_TYPE_GET);
   }
 
   public static BunqResponse<List<InsightPreferenceDate>> list() {
