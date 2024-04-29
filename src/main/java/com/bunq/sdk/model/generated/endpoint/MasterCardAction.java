@@ -316,11 +316,18 @@ public class MasterCardAction extends BunqModel {
   private CashbackPayoutItem cashbackPayoutItem;
 
   /**
-   * The blacklist enabled for the merchant of this transaction
+   * DEPRECATED. The blacklist enabled for the merchant of this transaction
    */
   @Expose
   @SerializedName("blacklist")
-  private UserBlacklistMasterCardMerchant blacklist;
+  private UserBlocklistMasterCardMerchant blacklist;
+
+  /**
+   * The blocklist enabled for the merchant of this transaction
+   */
+  @Expose
+  @SerializedName("blocklist")
+  private UserBlocklistMasterCardMerchant blocklist;
 
   /**
    * The status of the additional authentication performed (3ds) by the user for this transaction.
@@ -832,14 +839,25 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
-   * The blacklist enabled for the merchant of this transaction
+   * DEPRECATED. The blacklist enabled for the merchant of this transaction
    */
-  public UserBlacklistMasterCardMerchant getBlacklist() {
+  public UserBlocklistMasterCardMerchant getBlacklist() {
     return this.blacklist;
   }
 
-  public void setBlacklist(UserBlacklistMasterCardMerchant blacklist) {
+  public void setBlacklist(UserBlocklistMasterCardMerchant blacklist) {
     this.blacklist = blacklist;
+  }
+
+  /**
+   * The blocklist enabled for the merchant of this transaction
+   */
+  public UserBlocklistMasterCardMerchant getBlocklist() {
+    return this.blocklist;
+  }
+
+  public void setBlocklist(UserBlocklistMasterCardMerchant blocklist) {
+    this.blocklist = blocklist;
   }
 
   /**
@@ -1046,6 +1064,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.blacklist != null) {
+      return false;
+    }
+
+    if (this.blocklist != null) {
       return false;
     }
 

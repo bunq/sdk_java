@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Fetch blacklists of merchants created by user
+ * Fetch blocklists of merchants created by user
  */
-public class UserBlacklistMasterCardMerchant extends BunqModel {
+public class UserBlocklistMasterCardMerchant extends BunqModel {
 
   /**
    * Field constants.
@@ -26,7 +26,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   public static final String FIELD_EXTERNAL_MERCHANT_ID = "external_merchant_id";
 
   /**
-   * The id of the blacklist.
+   * The id of the blocklist.
    */
   @Expose
   @SerializedName("id")
@@ -47,7 +47,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   private String updated;
 
   /**
-   * The status of the the blacklist.
+   * The status of the the blocklist.
    */
   @Expose
   @SerializedName("status")
@@ -61,21 +61,21 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   private String merchantName;
 
   /**
-   * The blacklisted merchant.
+   * The blocklisted merchant.
    */
   @Expose
   @SerializedName("merchant_id")
   private String merchantId;
 
   /**
-   * Identifier of the merchant we are blacklisting.
+   * Identifier of the merchant we are blocklisting.
    */
   @Expose
   @SerializedName("merchant_identifier")
   private String merchantIdentifier;
 
   /**
-   * The blacklisted merchant.
+   * The blocklisted merchant.
    */
   @Expose
   @SerializedName("mastercard_merchant_id")
@@ -89,7 +89,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   private String externalMerchantId;
 
   /**
-   * Hash of the merchant we are blacklisting.
+   * Hash of the merchant we are blocklisting.
    */
   @Expose
   @SerializedName("merchant_hash")
@@ -116,7 +116,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   private String merchantIdFieldForRequest;
 
   /**
-   * Optional identifier of the merchant to blacklist.
+   * Optional identifier of the merchant to blocklist.
    */
   @Expose
   @SerializedName("merchant_identifier_field_for_request")
@@ -136,27 +136,27 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   @SerializedName("external_merchant_id_field_for_request")
   private String externalMerchantIdFieldForRequest;
 
-  public UserBlacklistMasterCardMerchant() {
+  public UserBlocklistMasterCardMerchant() {
   this(null, null, null, null, null);
   }
 
-  public UserBlacklistMasterCardMerchant(String merchantName) {
+  public UserBlocklistMasterCardMerchant(String merchantName) {
   this(merchantName, null, null, null, null);
   }
 
-  public UserBlacklistMasterCardMerchant(String merchantName, String merchantId) {
+  public UserBlocklistMasterCardMerchant(String merchantName, String merchantId) {
   this(merchantName, merchantId, null, null, null);
   }
 
-  public UserBlacklistMasterCardMerchant(String merchantName, String merchantId, String merchantIdentifier) {
+  public UserBlocklistMasterCardMerchant(String merchantName, String merchantId, String merchantIdentifier) {
   this(merchantName, merchantId, merchantIdentifier, null, null);
   }
 
-  public UserBlacklistMasterCardMerchant(String merchantName, String merchantId, String merchantIdentifier, String mastercardMerchantId) {
+  public UserBlocklistMasterCardMerchant(String merchantName, String merchantId, String merchantIdentifier, String mastercardMerchantId) {
   this(merchantName, merchantId, merchantIdentifier, mastercardMerchantId, null);
   }
 
-  public UserBlacklistMasterCardMerchant(String merchantName, String merchantId, String merchantIdentifier, String mastercardMerchantId, String externalMerchantId) {
+  public UserBlocklistMasterCardMerchant(String merchantName, String merchantId, String merchantIdentifier, String mastercardMerchantId, String externalMerchantId) {
     this.merchantNameFieldForRequest = merchantName;
     this.merchantIdFieldForRequest = merchantId;
     this.merchantIdentifierFieldForRequest = merchantIdentifier;
@@ -165,7 +165,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   }
 
   /**
-   * The id of the blacklist.
+   * The id of the blocklist.
    */
   public Integer getId() {
     return this.id;
@@ -198,7 +198,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   }
 
   /**
-   * The status of the the blacklist.
+   * The status of the the blocklist.
    */
   public String getStatus() {
     return this.status;
@@ -220,7 +220,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   }
 
   /**
-   * The blacklisted merchant.
+   * The blocklisted merchant.
    */
   public String getMerchantId() {
     return this.merchantId;
@@ -231,7 +231,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   }
 
   /**
-   * Identifier of the merchant we are blacklisting.
+   * Identifier of the merchant we are blocklisting.
    */
   public String getMerchantIdentifier() {
     return this.merchantIdentifier;
@@ -242,7 +242,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   }
 
   /**
-   * The blacklisted merchant.
+   * The blocklisted merchant.
    */
   public String getMastercardMerchantId() {
     return this.mastercardMerchantId;
@@ -264,7 +264,7 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
   }
 
   /**
-   * Hash of the merchant we are blacklisting.
+   * Hash of the merchant we are blocklisting.
    */
   public String getMerchantHash() {
     return this.merchantHash;
@@ -336,8 +336,8 @@ public class UserBlacklistMasterCardMerchant extends BunqModel {
 
   /**
    */
-  public static UserBlacklistMasterCardMerchant fromJsonReader(JsonReader reader) {
-    return fromJsonReader(UserBlacklistMasterCardMerchant.class, reader);
+  public static UserBlocklistMasterCardMerchant fromJsonReader(JsonReader reader) {
+    return fromJsonReader(UserBlocklistMasterCardMerchant.class, reader);
   }
 
 }
