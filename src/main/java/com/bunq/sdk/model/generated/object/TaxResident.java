@@ -16,6 +16,13 @@ import java.util.Map;
 public class TaxResident extends BunqModel {
 
   /**
+   * The id of the tax resident.
+   */
+  @Expose
+  @SerializedName("id")
+  private Integer id;
+
+  /**
    * The country of the tax number.
    */
   @Expose
@@ -76,6 +83,17 @@ public class TaxResident extends BunqModel {
   }
 
   /**
+   * The id of the tax resident.
+   */
+  public Integer getId() {
+    return this.id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  /**
    * The country of the tax number.
    */
   public String getCountry() {
@@ -111,6 +129,10 @@ public class TaxResident extends BunqModel {
   /**
    */
   public boolean isAllFieldNull() {
+    if (this.id != null) {
+      return false;
+    }
+
     if (this.country != null) {
       return false;
     }
