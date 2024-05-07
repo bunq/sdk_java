@@ -201,6 +201,13 @@ public class MonetaryAccountExternal extends BunqModel {
   private List<BunqId> allAutoSaveId;
 
   /**
+   * The external service the Monetary Account is connected with.
+   */
+  @Expose
+  @SerializedName("service")
+  private String service;
+
+  /**
    * The currency of the MonetaryAccountExternal as an ISO 4217 formatted currency code.
    */
   @Expose
@@ -796,6 +803,17 @@ requestMap.put(FIELD_SETTING, setting);
   }
 
   /**
+   * The external service the Monetary Account is connected with.
+   */
+  public String getService() {
+    return this.service;
+  }
+
+  public void setService(String service) {
+    this.service = service;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -875,6 +893,10 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.allAutoSaveId != null) {
+      return false;
+    }
+
+    if (this.service != null) {
       return false;
     }
 
