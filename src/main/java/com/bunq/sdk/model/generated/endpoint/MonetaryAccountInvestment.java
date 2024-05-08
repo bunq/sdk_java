@@ -36,6 +36,8 @@ public class MonetaryAccountInvestment extends BunqModel {
   public static final String FIELD_DISPLAY_NAME = "display_name";
   public static final String FIELD_SETTING = "setting";
   public static final String FIELD_BIRDEE_INVESTMENT_PORTFOLIO = "birdee_investment_portfolio";
+  public static final String FIELD_MONETARY_ACCOUNT_DEPOSIT_INITIAL_ID = "monetary_account_deposit_initial_id";
+  public static final String FIELD_AMOUNT_DEPOSIT_INITIAL = "amount_deposit_initial";
 
   /**
    * The id of the MonetaryAccountInvestment.
@@ -271,55 +273,77 @@ public class MonetaryAccountInvestment extends BunqModel {
   @SerializedName("birdee_investment_portfolio_field_for_request")
   private BirdeeInvestmentPortfolio birdeeInvestmentPortfolioFieldForRequest;
 
+  /**
+   * ID of the MA to be used for the initial deposit to the investment account.
+   */
+  @Expose
+  @SerializedName("monetary_account_deposit_initial_id_field_for_request")
+  private Integer monetaryAccountDepositInitialIdFieldForRequest;
+
+  /**
+   * The amount to be transferred to the investment account as the initial deposit.
+   */
+  @Expose
+  @SerializedName("amount_deposit_initial_field_for_request")
+  private Amount amountDepositInitialFieldForRequest;
+
   public MonetaryAccountInvestment() {
-  this(null, null, null, null, null, null, null, null, null, null, null, null);
+  this(null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency) {
-  this(currency, null, null, null, null, null, null, null, null, null, null, null);
+  this(currency, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider) {
-  this(currency, provider, null, null, null, null, null, null, null, null, null, null);
+  this(currency, provider, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description) {
-  this(currency, provider, description, null, null, null, null, null, null, null, null, null);
+  this(currency, provider, description, null, null, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit) {
-  this(currency, provider, description, dailyLimit, null, null, null, null, null, null, null, null);
+  this(currency, provider, description, dailyLimit, null, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid) {
-  this(currency, provider, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status) {
-  this(currency, provider, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus) {
-  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
-  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
-  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
-  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting) {
-  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null);
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null, null, null);
   }
 
   public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, BirdeeInvestmentPortfolio birdeeInvestmentPortfolio) {
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, birdeeInvestmentPortfolio, null, null);
+  }
+
+  public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, BirdeeInvestmentPortfolio birdeeInvestmentPortfolio, Integer monetaryAccountDepositInitialId) {
+  this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, birdeeInvestmentPortfolio, monetaryAccountDepositInitialId, null);
+  }
+
+  public MonetaryAccountInvestment(String currency, String provider, String description, Amount dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSetting setting, BirdeeInvestmentPortfolio birdeeInvestmentPortfolio, Integer monetaryAccountDepositInitialId, Amount amountDepositInitial) {
     this.currencyFieldForRequest = currency;
     this.providerFieldForRequest = provider;
     this.descriptionFieldForRequest = description;
@@ -332,6 +356,8 @@ public class MonetaryAccountInvestment extends BunqModel {
     this.displayNameFieldForRequest = displayName;
     this.settingFieldForRequest = setting;
     this.birdeeInvestmentPortfolioFieldForRequest = birdeeInvestmentPortfolio;
+    this.monetaryAccountDepositInitialIdFieldForRequest = monetaryAccountDepositInitialId;
+    this.amountDepositInitialFieldForRequest = amountDepositInitial;
   }
 
   /**
