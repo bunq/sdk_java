@@ -208,6 +208,13 @@ public class MonetaryAccountExternal extends BunqModel {
   private String service;
 
   /**
+   * The open banking account for information about the external account.
+   */
+  @Expose
+  @SerializedName("open_banking_account")
+  private OpenBankingAccount openBankingAccount;
+
+  /**
    * The currency of the MonetaryAccountExternal as an ISO 4217 formatted currency code.
    */
   @Expose
@@ -814,6 +821,17 @@ requestMap.put(FIELD_SETTING, setting);
   }
 
   /**
+   * The open banking account for information about the external account.
+   */
+  public OpenBankingAccount getOpenBankingAccount() {
+    return this.openBankingAccount;
+  }
+
+  public void setOpenBankingAccount(OpenBankingAccount openBankingAccount) {
+    this.openBankingAccount = openBankingAccount;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -897,6 +915,10 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.service != null) {
+      return false;
+    }
+
+    if (this.openBankingAccount != null) {
       return false;
     }
 
