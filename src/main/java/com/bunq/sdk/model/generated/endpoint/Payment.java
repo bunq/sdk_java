@@ -11,6 +11,7 @@ import com.bunq.sdk.model.generated.object.Amount;
 import com.bunq.sdk.model.generated.object.AttachmentMonetaryAccountPayment;
 import com.bunq.sdk.model.generated.object.Geolocation;
 import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
+import com.bunq.sdk.model.generated.object.PaymentArrivalExpected;
 import com.bunq.sdk.model.generated.object.Pointer;
 import com.bunq.sdk.model.generated.object.RequestInquiryReference;
 import com.google.gson.annotations.Expose;
@@ -130,6 +131,13 @@ public class Payment extends BunqModel {
   @Expose
   @SerializedName("sub_type")
   private String subType;
+
+  /**
+   * Information about the expected arrival of the payment.
+   */
+  @Expose
+  @SerializedName("payment_arrival_expected")
+  private PaymentArrivalExpected paymentArrivalExpected;
 
   /**
    * The status of the bunq.to payment.
@@ -549,6 +557,17 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
   }
 
   /**
+   * Information about the expected arrival of the payment.
+   */
+  public PaymentArrivalExpected getPaymentArrivalExpected() {
+    return this.paymentArrivalExpected;
+  }
+
+  public void setPaymentArrivalExpected(PaymentArrivalExpected paymentArrivalExpected) {
+    this.paymentArrivalExpected = paymentArrivalExpected;
+  }
+
+  /**
    * The status of the bunq.to payment.
    */
   public String getBunqtoStatus() {
@@ -754,6 +773,10 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     }
 
     if (this.subType != null) {
+      return false;
+    }
+
+    if (this.paymentArrivalExpected != null) {
       return false;
     }
 
