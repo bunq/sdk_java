@@ -20,7 +20,8 @@ public class OpenBankingProviderBank extends BunqModel {
   /**
    * Field constants.
    */
-  public static final String FIELD_STATUS = "status";
+  public static final String FIELD_ACCOUNT_INFORMATION_SERVICE_STATUS = "account_information_service_status";
+  public static final String FIELD_PAYMENT_INFORMATION_SERVICE_STATUS = "payment_information_service_status";
 
   /**
    * The name of the bank provider.
@@ -30,11 +31,18 @@ public class OpenBankingProviderBank extends BunqModel {
   private String name;
 
   /**
-   * Provider's status.
+   * Whether we support Open Banking budgeting using the bank provider.
    */
   @Expose
-  @SerializedName("status")
-  private String status;
+  @SerializedName("account_information_service_status")
+  private String accountInformationServiceStatus;
+
+  /**
+   * Whether we support top ups using the bank provider.
+   */
+  @Expose
+  @SerializedName("payment_information_service_status")
+  private String paymentInformationServiceStatus;
 
   /**
    * The external identifier for this bank.
@@ -65,18 +73,18 @@ public class OpenBankingProviderBank extends BunqModel {
   private List<String> allPaymentMethodAllowedDomestic;
 
   /**
-   * Whether this provider supports business banking.
+   * Whether business banking is supported by the provider.
    */
   @Expose
-  @SerializedName("is_audience_business_supported")
-  private Boolean isAudienceBusinessSupported;
+  @SerializedName("audience_business_status")
+  private Boolean audienceBusinessStatus;
 
   /**
-   * Whether this provider supports brivate banking.
+   * Whether personal banking is supported by the provider.
    */
   @Expose
-  @SerializedName("is_audience_private_supported")
-  private Boolean isAudiencePrivateSupported;
+  @SerializedName("audience_private_status")
+  private Boolean audiencePrivateStatus;
 
   /**
    * The avatar of the bank.
@@ -86,18 +94,30 @@ public class OpenBankingProviderBank extends BunqModel {
   private Avatar avatar;
 
   /**
-   * Provider's status.
+   * Whether we want to activate the account information service for the bank provider.
    */
   @Expose
-  @SerializedName("status_field_for_request")
-  private String statusFieldForRequest;
+  @SerializedName("account_information_service_status_field_for_request")
+  private String accountInformationServiceStatusFieldForRequest;
+
+  /**
+   * Whether we want to activate the payment information service for the bank provider.
+   */
+  @Expose
+  @SerializedName("payment_information_service_status_field_for_request")
+  private String paymentInformationServiceStatusFieldForRequest;
 
   public OpenBankingProviderBank() {
-  this(null);
+  this(null, null);
   }
 
-  public OpenBankingProviderBank(String status) {
-    this.statusFieldForRequest = status;
+  public OpenBankingProviderBank(String accountInformationServiceStatus) {
+  this(accountInformationServiceStatus, null);
+  }
+
+  public OpenBankingProviderBank(String accountInformationServiceStatus, String paymentInformationServiceStatus) {
+    this.accountInformationServiceStatusFieldForRequest = accountInformationServiceStatus;
+    this.paymentInformationServiceStatusFieldForRequest = paymentInformationServiceStatus;
   }
 
   /**
@@ -112,14 +132,25 @@ public class OpenBankingProviderBank extends BunqModel {
   }
 
   /**
-   * Provider's status.
+   * Whether we support Open Banking budgeting using the bank provider.
    */
-  public String getStatus() {
-    return this.status;
+  public String getAccountInformationServiceStatus() {
+    return this.accountInformationServiceStatus;
   }
 
-  public void setStatus(String status) {
-    this.status = status;
+  public void setAccountInformationServiceStatus(String accountInformationServiceStatus) {
+    this.accountInformationServiceStatus = accountInformationServiceStatus;
+  }
+
+  /**
+   * Whether we support top ups using the bank provider.
+   */
+  public String getPaymentInformationServiceStatus() {
+    return this.paymentInformationServiceStatus;
+  }
+
+  public void setPaymentInformationServiceStatus(String paymentInformationServiceStatus) {
+    this.paymentInformationServiceStatus = paymentInformationServiceStatus;
   }
 
   /**
@@ -167,25 +198,25 @@ public class OpenBankingProviderBank extends BunqModel {
   }
 
   /**
-   * Whether this provider supports business banking.
+   * Whether business banking is supported by the provider.
    */
-  public Boolean getIsAudienceBusinessSupported() {
-    return this.isAudienceBusinessSupported;
+  public Boolean getAudienceBusinessStatus() {
+    return this.audienceBusinessStatus;
   }
 
-  public void setIsAudienceBusinessSupported(Boolean isAudienceBusinessSupported) {
-    this.isAudienceBusinessSupported = isAudienceBusinessSupported;
+  public void setAudienceBusinessStatus(Boolean audienceBusinessStatus) {
+    this.audienceBusinessStatus = audienceBusinessStatus;
   }
 
   /**
-   * Whether this provider supports brivate banking.
+   * Whether personal banking is supported by the provider.
    */
-  public Boolean getIsAudiencePrivateSupported() {
-    return this.isAudiencePrivateSupported;
+  public Boolean getAudiencePrivateStatus() {
+    return this.audiencePrivateStatus;
   }
 
-  public void setIsAudiencePrivateSupported(Boolean isAudiencePrivateSupported) {
-    this.isAudiencePrivateSupported = isAudiencePrivateSupported;
+  public void setAudiencePrivateStatus(Boolean audiencePrivateStatus) {
+    this.audiencePrivateStatus = audiencePrivateStatus;
   }
 
   /**
@@ -206,7 +237,11 @@ public class OpenBankingProviderBank extends BunqModel {
       return false;
     }
 
-    if (this.status != null) {
+    if (this.accountInformationServiceStatus != null) {
+      return false;
+    }
+
+    if (this.paymentInformationServiceStatus != null) {
       return false;
     }
 
@@ -226,11 +261,11 @@ public class OpenBankingProviderBank extends BunqModel {
       return false;
     }
 
-    if (this.isAudienceBusinessSupported != null) {
+    if (this.audienceBusinessStatus != null) {
       return false;
     }
 
-    if (this.isAudiencePrivateSupported != null) {
+    if (this.audiencePrivateStatus != null) {
       return false;
     }
 
