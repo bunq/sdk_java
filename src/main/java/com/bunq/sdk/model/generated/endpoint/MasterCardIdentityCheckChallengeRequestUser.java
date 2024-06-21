@@ -102,6 +102,13 @@ public class MasterCardIdentityCheckChallengeRequestUser extends BunqModel {
   private Integer eventId;
 
   /**
+   * The ID of the card used for the authentication request of the identity check.
+   */
+  @Expose
+  @SerializedName("card_id")
+  private Integer cardId;
+
+  /**
    * The status of the identity check. Can be ACCEPTED_PENDING_RESPONSE or
    * REJECTED_PENDING_RESPONSE.
    */
@@ -264,6 +271,17 @@ requestMap.put(FIELD_STATUS, status);
   }
 
   /**
+   * The ID of the card used for the authentication request of the identity check.
+   */
+  public Integer getCardId() {
+    return this.cardId;
+  }
+
+  public void setCardId(Integer cardId) {
+    this.cardId = cardId;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.amount != null) {
@@ -299,6 +317,10 @@ requestMap.put(FIELD_STATUS, status);
     }
 
     if (this.eventId != null) {
+      return false;
+    }
+
+    if (this.cardId != null) {
       return false;
     }
 
