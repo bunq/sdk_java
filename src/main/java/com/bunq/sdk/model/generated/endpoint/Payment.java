@@ -246,6 +246,13 @@ public class Payment extends BunqModel {
   private PaymentAutoAllocateInstance paymentAutoAllocateInstance;
 
   /**
+   * A reference to the PaymentSuspendedOutgoing if it exists.
+   */
+  @Expose
+  @SerializedName("payment_suspended_outgoing")
+  private PaymentSuspendedOutgoing paymentSuspendedOutgoing;
+
+  /**
    * The Amount to transfer with the Payment. Must be bigger than 0 and smaller than the
    * MonetaryAccount's balance.
    */
@@ -734,6 +741,17 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
   }
 
   /**
+   * A reference to the PaymentSuspendedOutgoing if it exists.
+   */
+  public PaymentSuspendedOutgoing getPaymentSuspendedOutgoing() {
+    return this.paymentSuspendedOutgoing;
+  }
+
+  public void setPaymentSuspendedOutgoing(PaymentSuspendedOutgoing paymentSuspendedOutgoing) {
+    this.paymentSuspendedOutgoing = paymentSuspendedOutgoing;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -837,6 +855,10 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     }
 
     if (this.paymentAutoAllocateInstance != null) {
+      return false;
+    }
+
+    if (this.paymentSuspendedOutgoing != null) {
       return false;
     }
 
