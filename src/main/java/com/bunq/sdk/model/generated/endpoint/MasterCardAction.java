@@ -281,6 +281,13 @@ public class MasterCardAction extends BunqModel {
   private List<RequestInquiryReference> requestReferenceSplitTheBill;
 
   /**
+   * The cardTokenization event awaiting acceptance by the user
+   */
+  @Expose
+  @SerializedName("card_tokenization_event")
+  private List<String> cardTokenizationEvent;
+
+  /**
    * A reference to the Refunds if they exist.
    */
   @Expose
@@ -784,6 +791,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The cardTokenization event awaiting acceptance by the user
+   */
+  public List<String> getCardTokenizationEvent() {
+    return this.cardTokenizationEvent;
+  }
+
+  public void setCardTokenizationEvent(List<String> cardTokenizationEvent) {
+    this.cardTokenizationEvent = cardTokenizationEvent;
+  }
+
+  /**
    * A reference to the Refunds if they exist.
    */
   public List<MasterCardActionRefund> getAllMastercardActionRefund() {
@@ -1040,6 +1058,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.requestReferenceSplitTheBill != null) {
+      return false;
+    }
+
+    if (this.cardTokenizationEvent != null) {
       return false;
     }
 
