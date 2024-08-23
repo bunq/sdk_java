@@ -91,6 +91,34 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
   private Attachment attachment;
 
   /**
+   * Rejection reason enum.
+   */
+  @Expose
+  @SerializedName("rejection_reason")
+  private String rejectionReason;
+
+  /**
+   * Rejection reason description to be shown to the user.
+   */
+  @Expose
+  @SerializedName("rejection_reason_description")
+  private String rejectionReasonDescription;
+
+  /**
+   * Rejection reason description to be shown to the user, translated.
+   */
+  @Expose
+  @SerializedName("rejection_reason_description_translated")
+  private String rejectionReasonDescriptionTranslated;
+
+  /**
+   * Rejection reason together URL.
+   */
+  @Expose
+  @SerializedName("rejection_reason_together_url")
+  private String rejectionReasonTogetherUrl;
+
+  /**
    * The alias of the Monetary Account this switch service is for.
    */
   @Expose
@@ -232,6 +260,50 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
   }
 
   /**
+   * Rejection reason enum.
+   */
+  public String getRejectionReason() {
+    return this.rejectionReason;
+  }
+
+  public void setRejectionReason(String rejectionReason) {
+    this.rejectionReason = rejectionReason;
+  }
+
+  /**
+   * Rejection reason description to be shown to the user.
+   */
+  public String getRejectionReasonDescription() {
+    return this.rejectionReasonDescription;
+  }
+
+  public void setRejectionReasonDescription(String rejectionReasonDescription) {
+    this.rejectionReasonDescription = rejectionReasonDescription;
+  }
+
+  /**
+   * Rejection reason description to be shown to the user, translated.
+   */
+  public String getRejectionReasonDescriptionTranslated() {
+    return this.rejectionReasonDescriptionTranslated;
+  }
+
+  public void setRejectionReasonDescriptionTranslated(String rejectionReasonDescriptionTranslated) {
+    this.rejectionReasonDescriptionTranslated = rejectionReasonDescriptionTranslated;
+  }
+
+  /**
+   * Rejection reason together URL.
+   */
+  public String getRejectionReasonTogetherUrl() {
+    return this.rejectionReasonTogetherUrl;
+  }
+
+  public void setRejectionReasonTogetherUrl(String rejectionReasonTogetherUrl) {
+    this.rejectionReasonTogetherUrl = rejectionReasonTogetherUrl;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.userAlias != null) {
@@ -267,6 +339,22 @@ public class BankSwitchServiceNetherlandsIncoming extends BunqModel {
     }
 
     if (this.attachment != null) {
+      return false;
+    }
+
+    if (this.rejectionReason != null) {
+      return false;
+    }
+
+    if (this.rejectionReasonDescription != null) {
+      return false;
+    }
+
+    if (this.rejectionReasonDescriptionTranslated != null) {
+      return false;
+    }
+
+    if (this.rejectionReasonTogetherUrl != null) {
       return false;
     }
 
