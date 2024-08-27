@@ -133,13 +133,6 @@ public class MonetaryAccountCard extends BunqModel {
   private Integer userId;
 
   /**
-   * The credit line attached to this monetary MonetaryAccountCard, if available.
-   */
-  @Expose
-  @SerializedName("credit_line")
-  private CreditLine creditLine;
-
-  /**
    * Get a specific MonetaryAccountCard.
    */
   public static BunqResponse<MonetaryAccountCard> get(Integer monetaryAccountCardId, Map<String, String> params, Map<String, String> customHeaders) {
@@ -356,17 +349,6 @@ public class MonetaryAccountCard extends BunqModel {
   }
 
   /**
-   * The credit line attached to this monetary MonetaryAccountCard, if available.
-   */
-  public CreditLine getCreditLine() {
-    return this.creditLine;
-  }
-
-  public void setCreditLine(CreditLine creditLine) {
-    this.creditLine = creditLine;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -422,10 +404,6 @@ public class MonetaryAccountCard extends BunqModel {
     }
 
     if (this.userId != null) {
-      return false;
-    }
-
-    if (this.creditLine != null) {
       return false;
     }
 

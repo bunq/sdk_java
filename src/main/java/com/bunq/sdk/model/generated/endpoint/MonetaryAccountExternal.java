@@ -215,13 +215,6 @@ public class MonetaryAccountExternal extends BunqModel {
   private OpenBankingAccount openBankingAccount;
 
   /**
-   * The credit line attached to this monetary MonetaryAccountExternal, if available.
-   */
-  @Expose
-  @SerializedName("credit_line")
-  private CreditLine creditLine;
-
-  /**
    * The currency of the MonetaryAccountExternal as an ISO 4217 formatted currency code.
    */
   @Expose
@@ -839,17 +832,6 @@ requestMap.put(FIELD_SETTING, setting);
   }
 
   /**
-   * The credit line attached to this monetary MonetaryAccountExternal, if available.
-   */
-  public CreditLine getCreditLine() {
-    return this.creditLine;
-  }
-
-  public void setCreditLine(CreditLine creditLine) {
-    this.creditLine = creditLine;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -937,10 +919,6 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.openBankingAccount != null) {
-      return false;
-    }
-
-    if (this.creditLine != null) {
       return false;
     }
 
