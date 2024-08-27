@@ -201,13 +201,6 @@ public class MonetaryAccountJoint extends BunqModel {
   private List<BunqId> allAutoSaveId;
 
   /**
-   * The credit line attached to this monetary MonetaryAccountJoint, if available.
-   */
-  @Expose
-  @SerializedName("credit_line")
-  private CreditLine creditLine;
-
-  /**
    * The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency code.
    */
   @Expose
@@ -814,17 +807,6 @@ requestMap.put(FIELD_SETTING, setting);
   }
 
   /**
-   * The credit line attached to this monetary MonetaryAccountJoint, if available.
-   */
-  public CreditLine getCreditLine() {
-    return this.creditLine;
-  }
-
-  public void setCreditLine(CreditLine creditLine) {
-    this.creditLine = creditLine;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -904,10 +886,6 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.allAutoSaveId != null) {
-      return false;
-    }
-
-    if (this.creditLine != null) {
       return false;
     }
 
