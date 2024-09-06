@@ -187,6 +187,12 @@ public class Registry extends BunqModel {
   private List<RegistryEntry> allRegistryEntry;
 
   /**
+   */
+  @Expose
+  @SerializedName("all_registry_gallery_attachment")
+  private List<RegistryGalleryAttachment> allRegistryGalleryAttachment;
+
+  /**
    * The timestamp of the Registry's last update.
    */
   @Expose
@@ -658,6 +664,16 @@ public class Registry extends BunqModel {
 
   /**
    */
+  public List<RegistryGalleryAttachment> getAllRegistryGalleryAttachment() {
+    return this.allRegistryGalleryAttachment;
+  }
+
+  public void setAllRegistryGalleryAttachment(List<RegistryGalleryAttachment> allRegistryGalleryAttachment) {
+    this.allRegistryGalleryAttachment = allRegistryGalleryAttachment;
+  }
+
+  /**
+   */
   public boolean isAllFieldNull() {
     if (this.id != null) {
       return false;
@@ -736,6 +752,10 @@ public class Registry extends BunqModel {
     }
 
     if (this.allRegistryEntry != null) {
+      return false;
+    }
+
+    if (this.allRegistryGalleryAttachment != null) {
       return false;
     }
 
