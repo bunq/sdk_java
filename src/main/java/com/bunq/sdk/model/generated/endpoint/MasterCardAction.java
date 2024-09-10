@@ -285,7 +285,7 @@ public class MasterCardAction extends BunqModel {
    */
   @Expose
   @SerializedName("card_tokenization_event")
-  private List<String> cardTokenizationEvent;
+  private Event cardTokenizationEvent;
 
   /**
    * A reference to the Refunds if they exist.
@@ -793,11 +793,11 @@ public class MasterCardAction extends BunqModel {
   /**
    * The cardTokenization event awaiting acceptance by the user
    */
-  public List<String> getCardTokenizationEvent() {
+  public Event getCardTokenizationEvent() {
     return this.cardTokenizationEvent;
   }
 
-  public void setCardTokenizationEvent(List<String> cardTokenizationEvent) {
+  public void setCardTokenizationEvent(Event cardTokenizationEvent) {
     this.cardTokenizationEvent = cardTokenizationEvent;
   }
 
