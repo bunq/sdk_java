@@ -53,8 +53,8 @@ public class Card extends BunqModel {
   /**
    * Object type.
    */
-  protected static final String OBJECT_TYPE_PUT = "CardDebit";
-  protected static final String OBJECT_TYPE_GET = "CardDebit";
+  protected static final String OBJECT_TYPE_PUT = "Card";
+  protected static final String OBJECT_TYPE_GET = "Card";
 
   /**
    * The id of the card.
@@ -256,6 +256,13 @@ public class Card extends BunqModel {
   @Expose
   @SerializedName("card_replacement")
   private CardReplacement cardReplacement;
+
+  /**
+   * The generated CVC2 code for this card.
+   */
+  @Expose
+  @SerializedName("card_generated_cvc2")
+  private CardGeneratedCvc2 cardGeneratedCvc2;
 
   /**
    * The plaintext pin code. Requests require encryption to be enabled.
@@ -889,6 +896,17 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
   }
 
   /**
+   * The generated CVC2 code for this card.
+   */
+  public CardGeneratedCvc2 getCardGeneratedCvc2() {
+    return this.cardGeneratedCvc2;
+  }
+
+  public void setCardGeneratedCvc2(CardGeneratedCvc2 cardGeneratedCvc2) {
+    this.cardGeneratedCvc2 = cardGeneratedCvc2;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -1000,6 +1018,10 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     }
 
     if (this.cardReplacement != null) {
+      return false;
+    }
+
+    if (this.cardGeneratedCvc2 != null) {
       return false;
     }
 
