@@ -243,6 +243,13 @@ public class RequestResponse extends BunqModel {
   private String mandateIdentifier;
 
   /**
+   * Recommended registration action after IdealIssuerTransaction from iDEAL issuer transaction.
+   */
+  @Expose
+  @SerializedName("registration_action")
+  private String registrationAction;
+
+  /**
    * The whitelist id for this action or null.
    */
   @Expose
@@ -738,6 +745,17 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
   }
 
   /**
+   * Recommended registration action after IdealIssuerTransaction from iDEAL issuer transaction.
+   */
+  public String getRegistrationAction() {
+    return this.registrationAction;
+  }
+
+  public void setRegistrationAction(String registrationAction) {
+    this.registrationAction = registrationAction;
+  }
+
+  /**
    * The whitelist id for this action or null.
    */
   public Integer getEligibleWhitelistId() {
@@ -886,6 +904,10 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
     }
 
     if (this.mandateIdentifier != null) {
+      return false;
+    }
+
+    if (this.registrationAction != null) {
       return false;
     }
 
