@@ -265,6 +265,20 @@ public class Card extends BunqModel {
   private CardGeneratedCvc2 cardGeneratedCvc2;
 
   /**
+   * Whether this card is a limited edition metal card.
+   */
+  @Expose
+  @SerializedName("is_limited_edition")
+  private Boolean isLimitedEdition;
+
+  /**
+   * The date for the member since field on the black metal card.
+   */
+  @Expose
+  @SerializedName("card_metal_member_since_date")
+  private String cardMetalMemberSinceDate;
+
+  /**
    * The plaintext pin code. Requests require encryption to be enabled.
    */
   @Expose
@@ -907,6 +921,28 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
   }
 
   /**
+   * Whether this card is a limited edition metal card.
+   */
+  public Boolean getIsLimitedEdition() {
+    return this.isLimitedEdition;
+  }
+
+  public void setIsLimitedEdition(Boolean isLimitedEdition) {
+    this.isLimitedEdition = isLimitedEdition;
+  }
+
+  /**
+   * The date for the member since field on the black metal card.
+   */
+  public String getCardMetalMemberSinceDate() {
+    return this.cardMetalMemberSinceDate;
+  }
+
+  public void setCardMetalMemberSinceDate(String cardMetalMemberSinceDate) {
+    this.cardMetalMemberSinceDate = cardMetalMemberSinceDate;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -1022,6 +1058,14 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     }
 
     if (this.cardGeneratedCvc2 != null) {
+      return false;
+    }
+
+    if (this.isLimitedEdition != null) {
+      return false;
+    }
+
+    if (this.cardMetalMemberSinceDate != null) {
       return false;
     }
 
