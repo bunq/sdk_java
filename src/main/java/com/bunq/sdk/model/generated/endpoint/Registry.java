@@ -118,13 +118,6 @@ public class Registry extends BunqModel {
   private String status;
 
   /**
-   * The number of RegistryEntries in this Registry that the user has not seen.
-   */
-  @Expose
-  @SerializedName("unseen_entries_count")
-  private Integer unseenEntriesCount;
-
-  /**
    * The total amount spent in this Registry since the last settlement.
    */
   @Expose
@@ -554,17 +547,6 @@ public class Registry extends BunqModel {
   }
 
   /**
-   * The number of RegistryEntries in this Registry that the user has not seen.
-   */
-  public Integer getUnseenEntriesCount() {
-    return this.unseenEntriesCount;
-  }
-
-  public void setUnseenEntriesCount(Integer unseenEntriesCount) {
-    this.unseenEntriesCount = unseenEntriesCount;
-  }
-
-  /**
    * The total amount spent in this Registry since the last settlement.
    */
   public Amount getTotalAmountSpent() {
@@ -712,10 +694,6 @@ public class Registry extends BunqModel {
     }
 
     if (this.status != null) {
-      return false;
-    }
-
-    if (this.unseenEntriesCount != null) {
       return false;
     }
 
