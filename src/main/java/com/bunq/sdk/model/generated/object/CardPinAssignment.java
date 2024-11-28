@@ -30,6 +30,20 @@ public class CardPinAssignment extends BunqModel {
   private Integer monetaryAccountId;
 
   /**
+   * The status of the card pin assignment.
+   */
+  @Expose
+  @SerializedName("status")
+  private String status;
+
+  /**
+   * Routing type.
+   */
+  @Expose
+  @SerializedName("routing_type")
+  private String routingType;
+
+  /**
    * PIN type. Can be PRIMARY, SECONDARY or TERTIARY
    */
   @Expose
@@ -103,6 +117,28 @@ public class CardPinAssignment extends BunqModel {
   }
 
   /**
+   * The status of the card pin assignment.
+   */
+  public String getStatus() {
+    return this.status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  /**
+   * Routing type.
+   */
+  public String getRoutingType() {
+    return this.routingType;
+  }
+
+  public void setRoutingType(String routingType) {
+    this.routingType = routingType;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.type != null) {
@@ -110,6 +146,14 @@ public class CardPinAssignment extends BunqModel {
     }
 
     if (this.monetaryAccountId != null) {
+      return false;
+    }
+
+    if (this.status != null) {
+      return false;
+    }
+
+    if (this.routingType != null) {
       return false;
     }
 
