@@ -74,6 +74,27 @@ public class RelationUser extends BunqModel {
   private String counterUserStatus;
 
   /**
+   * Tap to Pay settings for the company employee.
+   */
+  @Expose
+  @SerializedName("company_employee_setting_adyen_card_transaction")
+  private CompanyEmployeeSettingAdyenCardTransaction companyEmployeeSettingAdyenCardTransaction;
+
+  /**
+   * Cards accessible by the company employee
+   */
+  @Expose
+  @SerializedName("all_company_employee_card")
+  private List<CompanyEmployeeCard> allCompanyEmployeeCard;
+
+  /**
+   * The number of transactions that still need a receipt.
+   */
+  @Expose
+  @SerializedName("number_of_company_employee_card_receipt_pending")
+  private Integer numberOfCompanyEmployeeCardReceiptPending;
+
+  /**
    * The user's ID.
    */
   public String getUserId() {
@@ -162,6 +183,39 @@ public class RelationUser extends BunqModel {
   }
 
   /**
+   * Tap to Pay settings for the company employee.
+   */
+  public CompanyEmployeeSettingAdyenCardTransaction getCompanyEmployeeSettingAdyenCardTransaction() {
+    return this.companyEmployeeSettingAdyenCardTransaction;
+  }
+
+  public void setCompanyEmployeeSettingAdyenCardTransaction(CompanyEmployeeSettingAdyenCardTransaction companyEmployeeSettingAdyenCardTransaction) {
+    this.companyEmployeeSettingAdyenCardTransaction = companyEmployeeSettingAdyenCardTransaction;
+  }
+
+  /**
+   * Cards accessible by the company employee
+   */
+  public List<CompanyEmployeeCard> getAllCompanyEmployeeCard() {
+    return this.allCompanyEmployeeCard;
+  }
+
+  public void setAllCompanyEmployeeCard(List<CompanyEmployeeCard> allCompanyEmployeeCard) {
+    this.allCompanyEmployeeCard = allCompanyEmployeeCard;
+  }
+
+  /**
+   * The number of transactions that still need a receipt.
+   */
+  public Integer getNumberOfCompanyEmployeeCardReceiptPending() {
+    return this.numberOfCompanyEmployeeCardReceiptPending;
+  }
+
+  public void setNumberOfCompanyEmployeeCardReceiptPending(Integer numberOfCompanyEmployeeCardReceiptPending) {
+    this.numberOfCompanyEmployeeCardReceiptPending = numberOfCompanyEmployeeCardReceiptPending;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.userId != null) {
@@ -193,6 +247,18 @@ public class RelationUser extends BunqModel {
     }
 
     if (this.counterUserStatus != null) {
+      return false;
+    }
+
+    if (this.companyEmployeeSettingAdyenCardTransaction != null) {
+      return false;
+    }
+
+    if (this.allCompanyEmployeeCard != null) {
+      return false;
+    }
+
+    if (this.numberOfCompanyEmployeeCardReceiptPending != null) {
       return false;
     }
 
