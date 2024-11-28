@@ -88,13 +88,6 @@ public class RelationUser extends BunqModel {
   private List<CompanyEmployeeCard> allCompanyEmployeeCard;
 
   /**
-   * The number of transactions that still need a receipt.
-   */
-  @Expose
-  @SerializedName("number_of_company_employee_card_receipt_pending")
-  private Integer numberOfCompanyEmployeeCardReceiptPending;
-
-  /**
    * The user's ID.
    */
   public String getUserId() {
@@ -205,17 +198,6 @@ public class RelationUser extends BunqModel {
   }
 
   /**
-   * The number of transactions that still need a receipt.
-   */
-  public Integer getNumberOfCompanyEmployeeCardReceiptPending() {
-    return this.numberOfCompanyEmployeeCardReceiptPending;
-  }
-
-  public void setNumberOfCompanyEmployeeCardReceiptPending(Integer numberOfCompanyEmployeeCardReceiptPending) {
-    this.numberOfCompanyEmployeeCardReceiptPending = numberOfCompanyEmployeeCardReceiptPending;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.userId != null) {
@@ -255,10 +237,6 @@ public class RelationUser extends BunqModel {
     }
 
     if (this.allCompanyEmployeeCard != null) {
-      return false;
-    }
-
-    if (this.numberOfCompanyEmployeeCardReceiptPending != null) {
       return false;
     }
 
