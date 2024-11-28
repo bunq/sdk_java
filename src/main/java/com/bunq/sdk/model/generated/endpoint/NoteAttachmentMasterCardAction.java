@@ -103,18 +103,18 @@ public class NoteAttachmentMasterCardAction extends BunqModel {
   this(null, null);
   }
 
-  public NoteAttachmentMasterCardAction(Integer attachmentId) {
-  this(attachmentId, null);
+  public NoteAttachmentMasterCardAction(String description) {
+  this(description, null);
   }
 
-  public NoteAttachmentMasterCardAction(Integer attachmentId, String description) {
+  public NoteAttachmentMasterCardAction(String description, Integer attachmentId) {
     this.descriptionFieldForRequest = description;
     this.attachmentIdFieldForRequest = attachmentId;
   }  /**
-   * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
+   * @param attachmentId The reference to the uploaded file to attach to this note.
    */
-  public static BunqResponse<Integer> create(Integer mastercardActionId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -139,16 +139,16 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return create(mastercardActionId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId, Integer attachmentId) {
-    return create(mastercardActionId, attachmentId, null, null, null);
+  public static BunqResponse<Integer> create(Integer mastercardActionId, String description) {
+    return create(mastercardActionId, description, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId, Integer attachmentId, Integer monetaryAccountId) {
-    return create(mastercardActionId, attachmentId, monetaryAccountId, null, null);
+  public static BunqResponse<Integer> create(Integer mastercardActionId, String description, Integer attachmentId) {
+    return create(mastercardActionId, description, attachmentId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId, Integer attachmentId, Integer monetaryAccountId, String description) {
-    return create(mastercardActionId, attachmentId, monetaryAccountId, description, null);
+  public static BunqResponse<Integer> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId) {
+    return create(mastercardActionId, description, attachmentId, monetaryAccountId, null);
   }
 
   /**

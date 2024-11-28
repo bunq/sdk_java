@@ -365,6 +365,13 @@ public class MasterCardAction extends BunqModel {
   private String merchantCategoryCode;
 
   /**
+   * The receipt the company employee has to provide for this transaction.
+   */
+  @Expose
+  @SerializedName("company_employee_card_receipt")
+  private CompanyEmployeeCardReceipt companyEmployeeCardReceipt;
+
+  /**
    */
   public static BunqResponse<MasterCardAction> get(Integer masterCardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -923,6 +930,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The receipt the company employee has to provide for this transaction.
+   */
+  public CompanyEmployeeCardReceipt getCompanyEmployeeCardReceipt() {
+    return this.companyEmployeeCardReceipt;
+  }
+
+  public void setCompanyEmployeeCardReceipt(CompanyEmployeeCardReceipt companyEmployeeCardReceipt) {
+    this.companyEmployeeCardReceipt = companyEmployeeCardReceipt;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -1106,6 +1124,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.merchantCategoryCode != null) {
+      return false;
+    }
+
+    if (this.companyEmployeeCardReceipt != null) {
       return false;
     }
 
