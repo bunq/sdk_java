@@ -36,7 +36,6 @@ public class PaymentAutoAllocateDefinition extends BunqModel {
   public static final String FIELD_DESCRIPTION = "description";
   public static final String FIELD_AMOUNT = "amount";
   public static final String FIELD_FRACTION = "fraction";
-  public static final String FIELD_GINMON_COST_DISCLOSURE_ID = "ginmon_cost_disclosure_id";
 
   /**
    * Object type.
@@ -127,44 +126,32 @@ public class PaymentAutoAllocateDefinition extends BunqModel {
   @SerializedName("fraction_field_for_request")
   private BigDecimal fractionFieldForRequest;
 
-  /**
-   * The id of the ginmon cost disclosure, if this definition is a scheduled order.
-   */
-  @Expose
-  @SerializedName("ginmon_cost_disclosure_id_field_for_request")
-  private String ginmonCostDisclosureIdFieldForRequest;
-
   public PaymentAutoAllocateDefinition() {
-  this(null, null, null, null, null, null);
+  this(null, null, null, null, null);
   }
 
   public PaymentAutoAllocateDefinition(String type) {
-  this(type, null, null, null, null, null);
+  this(type, null, null, null, null);
   }
 
   public PaymentAutoAllocateDefinition(String type, Pointer counterpartyAlias) {
-  this(type, counterpartyAlias, null, null, null, null);
+  this(type, counterpartyAlias, null, null, null);
   }
 
   public PaymentAutoAllocateDefinition(String type, Pointer counterpartyAlias, String description) {
-  this(type, counterpartyAlias, description, null, null, null);
+  this(type, counterpartyAlias, description, null, null);
   }
 
   public PaymentAutoAllocateDefinition(String type, Pointer counterpartyAlias, String description, Amount amount) {
-  this(type, counterpartyAlias, description, amount, null, null);
+  this(type, counterpartyAlias, description, amount, null);
   }
 
   public PaymentAutoAllocateDefinition(String type, Pointer counterpartyAlias, String description, Amount amount, BigDecimal fraction) {
-  this(type, counterpartyAlias, description, amount, fraction, null);
-  }
-
-  public PaymentAutoAllocateDefinition(String type, Pointer counterpartyAlias, String description, Amount amount, BigDecimal fraction, String ginmonCostDisclosureId) {
     this.typeFieldForRequest = type;
     this.counterpartyAliasFieldForRequest = counterpartyAlias;
     this.descriptionFieldForRequest = description;
     this.amountFieldForRequest = amount;
     this.fractionFieldForRequest = fraction;
-    this.ginmonCostDisclosureIdFieldForRequest = ginmonCostDisclosureId;
   }  /**
    */
   public static BunqResponse<List<PaymentAutoAllocateDefinition>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
