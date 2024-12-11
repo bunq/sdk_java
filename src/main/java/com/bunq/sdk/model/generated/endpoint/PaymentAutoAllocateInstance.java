@@ -90,6 +90,13 @@ public class PaymentAutoAllocateInstance extends BunqModel {
   private Integer paymentId;
 
   /**
+   * All Ginmon transaction orders executed with this instance.
+   */
+  @Expose
+  @SerializedName("all_ginmon_transaction_order")
+  private List<GinmonTransaction> allGinmonTransactionOrder;
+
+  /**
    */
   public static BunqResponse<List<PaymentAutoAllocateInstance>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -232,6 +239,17 @@ public class PaymentAutoAllocateInstance extends BunqModel {
   }
 
   /**
+   * All Ginmon transaction orders executed with this instance.
+   */
+  public List<GinmonTransaction> getAllGinmonTransactionOrder() {
+    return this.allGinmonTransactionOrder;
+  }
+
+  public void setAllGinmonTransactionOrder(List<GinmonTransaction> allGinmonTransactionOrder) {
+    this.allGinmonTransactionOrder = allGinmonTransactionOrder;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -263,6 +281,10 @@ public class PaymentAutoAllocateInstance extends BunqModel {
     }
 
     if (this.paymentId != null) {
+      return false;
+    }
+
+    if (this.allGinmonTransactionOrder != null) {
       return false;
     }
 
