@@ -323,6 +323,13 @@ public class MasterCardAction extends BunqModel {
   private CashbackPayoutItem cashbackPayoutItem;
 
   /**
+   * The point mutation for this action or null
+   */
+  @Expose
+  @SerializedName("point_mutation")
+  private PointMutation pointMutation;
+
+  /**
    * DEPRECATED. The blacklist enabled for the merchant of this transaction
    */
   @Expose
@@ -864,6 +871,17 @@ public class MasterCardAction extends BunqModel {
   }
 
   /**
+   * The point mutation for this action or null
+   */
+  public PointMutation getPointMutation() {
+    return this.pointMutation;
+  }
+
+  public void setPointMutation(PointMutation pointMutation) {
+    this.pointMutation = pointMutation;
+  }
+
+  /**
    * DEPRECATED. The blacklist enabled for the merchant of this transaction
    */
   public UserBlocklistMasterCardMerchant getBlacklist() {
@@ -1100,6 +1118,10 @@ public class MasterCardAction extends BunqModel {
     }
 
     if (this.cashbackPayoutItem != null) {
+      return false;
+    }
+
+    if (this.pointMutation != null) {
       return false;
     }
 
