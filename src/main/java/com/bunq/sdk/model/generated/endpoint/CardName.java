@@ -29,6 +29,11 @@ public class CardName extends BunqModel {
   protected static final String ENDPOINT_URL_LISTING = "user/%s/card-name";
 
   /**
+   * Field constants.
+   */
+  public static final String FIELD_NAME = "name";
+
+  /**
    * Object type.
    */
   protected static final String OBJECT_TYPE_GET = "CardUserNameArray";
@@ -41,6 +46,19 @@ public class CardName extends BunqModel {
   private List<String> possibleCardNameArray;
 
   /**
+   * The card name.
+   */
+  @Expose
+  @SerializedName("name_field_for_request")
+  private String nameFieldForRequest;
+
+  public CardName() {
+  this(null);
+  }
+
+  public CardName(String name) {
+    this.nameFieldForRequest = name;
+  }  /**
    * Return all the accepted card names for a specific user.
    */
   public static BunqResponse<List<CardName>> list(Map<String, String> params, Map<String, String> customHeaders) {
