@@ -252,6 +252,13 @@ public class Payment extends BunqModel {
   private PaymentSuspendedOutgoing paymentSuspendedOutgoing;
 
   /**
+   * Incurred fee for the payment.
+   */
+  @Expose
+  @SerializedName("payment_fee")
+  private PaymentFee paymentFee;
+
+  /**
    * The Amount to transfer with the Payment. Must be bigger than 0 and smaller than the
    * MonetaryAccount's balance.
    */
@@ -751,6 +758,17 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
   }
 
   /**
+   * Incurred fee for the payment.
+   */
+  public PaymentFee getPaymentFee() {
+    return this.paymentFee;
+  }
+
+  public void setPaymentFee(PaymentFee paymentFee) {
+    this.paymentFee = paymentFee;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -858,6 +876,10 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     }
 
     if (this.paymentSuspendedOutgoing != null) {
+      return false;
+    }
+
+    if (this.paymentFee != null) {
       return false;
     }
 
