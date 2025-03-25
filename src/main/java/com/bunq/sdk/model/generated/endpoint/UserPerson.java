@@ -171,6 +171,13 @@ public class UserPerson extends BunqModel {
   private Address addressPostal;
 
   /**
+   * The person's shipping address.
+   */
+  @Expose
+  @SerializedName("address_shipping")
+  private Address addressShipping;
+
+  /**
    * The person's date of birth. Accepts ISO8601 date formats.
    */
   @Expose
@@ -964,6 +971,17 @@ requestMap.put(FIELD_DISPLAY_NAME, displayName);
   }
 
   /**
+   * The person's shipping address.
+   */
+  public Address getAddressShipping() {
+    return this.addressShipping;
+  }
+
+  public void setAddressShipping(Address addressShipping) {
+    this.addressShipping = addressShipping;
+  }
+
+  /**
    * The person's date of birth. Accepts ISO8601 date formats.
    */
   public String getDateOfBirth() {
@@ -1200,6 +1218,10 @@ requestMap.put(FIELD_DISPLAY_NAME, displayName);
     }
 
     if (this.addressPostal != null) {
+      return false;
+    }
+
+    if (this.addressShipping != null) {
       return false;
     }
 

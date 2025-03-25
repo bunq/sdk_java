@@ -72,7 +72,7 @@ public class Address extends BunqModel {
   private String extra;
 
   /**
-   * The name on the mailbox (only used for Postal addresses).
+   * The name on the mailbox (only used for Postal and Shipping addresses).
    */
   @Expose
   @SerializedName("mailbox_name")
@@ -135,7 +135,7 @@ public class Address extends BunqModel {
   private String extraFieldForRequest;
 
   /**
-   * The name on the mailbox (only used for Postal addresses).
+   * The name on the mailbox (only used for Postal and Shipping addresses).
    */
   @Expose
   @SerializedName("mailbox_name_field_for_request")
@@ -273,7 +273,7 @@ public class Address extends BunqModel {
   }
 
   /**
-   * The name on the mailbox (only used for Postal addresses).
+   * The name on the mailbox (only used for Postal and Shipping addresses).
    */
   public String getMailboxName() {
     return this.mailboxName;
