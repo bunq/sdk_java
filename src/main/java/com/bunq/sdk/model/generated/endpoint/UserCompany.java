@@ -175,6 +175,13 @@ public class UserCompany extends BunqModel {
   private Address addressPostal;
 
   /**
+   * The company's shipping address.
+   */
+  @Expose
+  @SerializedName("address_shipping")
+  private Address addressShipping;
+
+  /**
    * The version of the terms of service accepted by the user.
    */
   @Expose
@@ -790,6 +797,17 @@ requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutCo
   }
 
   /**
+   * The company's shipping address.
+   */
+  public Address getAddressShipping() {
+    return this.addressShipping;
+  }
+
+  public void setAddressShipping(Address addressShipping) {
+    this.addressShipping = addressShipping;
+  }
+
+  /**
    * The version of the terms of service accepted by the user.
    */
   public String getVersionTermsOfService() {
@@ -1044,6 +1062,10 @@ requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutCo
     }
 
     if (this.addressPostal != null) {
+      return false;
+    }
+
+    if (this.addressShipping != null) {
       return false;
     }
 
