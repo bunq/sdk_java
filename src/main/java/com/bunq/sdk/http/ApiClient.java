@@ -243,7 +243,7 @@ public class ApiClient {
      */
     private void setCustomHeaders(Request.Builder requestBuilder, Map<String, String> customHeaders) {
         for (Map.Entry<String, String> entry : customHeaders.entrySet()) {
-            requestBuilder.addHeader(entry.getKey(), entry.getValue());
+            requestBuilder.header(entry.getKey(), entry.getValue());
         }
     }
 
