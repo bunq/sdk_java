@@ -36,6 +36,7 @@ public class SchedulePayment extends BunqModel {
    */
   public static final String FIELD_PAYMENT = "payment";
   public static final String FIELD_SCHEDULE = "schedule";
+  public static final String FIELD_PURPOSE = "purpose";
 
   /**
    * Object type.
@@ -65,6 +66,13 @@ public class SchedulePayment extends BunqModel {
   private String status;
 
   /**
+   * The schedule purpose.
+   */
+  @Expose
+  @SerializedName("purpose")
+  private String purpose;
+
+  /**
    * The payment details.
    */
   @Expose
@@ -78,22 +86,35 @@ public class SchedulePayment extends BunqModel {
   @SerializedName("schedule_field_for_request")
   private Schedule scheduleFieldForRequest;
 
+  /**
+   * The purpose of this scheduled payment.
+   */
+  @Expose
+  @SerializedName("purpose_field_for_request")
+  private String purposeFieldForRequest;
+
   public SchedulePayment() {
-  this(null, null);
+  this(null, null, null);
   }
 
   public SchedulePayment(SchedulePaymentEntry payment) {
-  this(payment, null);
+  this(payment, null, null);
   }
 
   public SchedulePayment(SchedulePaymentEntry payment, Schedule schedule) {
+  this(payment, schedule, null);
+  }
+
+  public SchedulePayment(SchedulePaymentEntry payment, Schedule schedule, String purpose) {
     this.paymentFieldForRequest = payment;
     this.scheduleFieldForRequest = schedule;
+    this.purposeFieldForRequest = purpose;
   }  /**
    * @param payment The payment details.
    * @param schedule The schedule details when creating or updating a scheduled payment.
+   * @param purpose The purpose of this scheduled payment.
    */
-  public static BunqResponse<Integer> create(SchedulePaymentEntry payment, Schedule schedule, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(SchedulePaymentEntry payment, Schedule schedule, Integer monetaryAccountId, String purpose, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -103,6 +124,7 @@ public class SchedulePayment extends BunqModel {
   HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_PAYMENT, payment);
 requestMap.put(FIELD_SCHEDULE, schedule);
+requestMap.put(FIELD_PURPOSE, purpose);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
@@ -111,19 +133,23 @@ requestMap.put(FIELD_SCHEDULE, schedule);
   }
 
   public static BunqResponse<Integer> create() {
-    return create(null, null, null, null);
+    return create(null, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(SchedulePaymentEntry payment) {
-    return create(payment, null, null, null);
+    return create(payment, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(SchedulePaymentEntry payment, Schedule schedule) {
-    return create(payment, schedule, null, null);
+    return create(payment, schedule, null, null, null);
   }
 
   public static BunqResponse<Integer> create(SchedulePaymentEntry payment, Schedule schedule, Integer monetaryAccountId) {
-    return create(payment, schedule, monetaryAccountId, null);
+    return create(payment, schedule, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<Integer> create(SchedulePaymentEntry payment, Schedule schedule, Integer monetaryAccountId, String purpose) {
+    return create(payment, schedule, monetaryAccountId, purpose, null);
   }
 
   /**
@@ -260,6 +286,17 @@ requestMap.put(FIELD_SCHEDULE, schedule);
   }
 
   /**
+   * The schedule purpose.
+   */
+  public String getPurpose() {
+    return this.purpose;
+  }
+
+  public void setPurpose(String purpose) {
+    this.purpose = purpose;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.payment != null) {
@@ -271,6 +308,10 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     }
 
     if (this.status != null) {
+      return false;
+    }
+
+    if (this.purpose != null) {
       return false;
     }
 
