@@ -3,15 +3,15 @@ package com.bunq.sdk.model.core;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.NotificationFilterUrlUser;
-import com.bunq.sdk.model.generated.object.NotificationFilterUrl;
+import com.bunq.sdk.model.generated.endpoint.NotificationFilterUrlApiObject;
+import com.bunq.sdk.model.generated.object.NotificationFilterUrlObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NotificationFilterUrlUserInternal extends NotificationFilterUrlUser {
+public class NotificationFilterUrlUserInternal extends NotificationFilterUrlApiObject {
     /**
      * Field constants.
      */
@@ -20,15 +20,15 @@ public class NotificationFilterUrlUserInternal extends NotificationFilterUrlUser
     /**
      * Create notification filters with list response type.
      */
-    public static BunqResponse<List<NotificationFilterUrl>> createWithListResponse() {
-        return createWithListResponse(new ArrayList<NotificationFilterUrl>(), null);
+    public static BunqResponse<List<NotificationFilterUrlObject>> createWithListResponse() {
+        return createWithListResponse(new ArrayList<NotificationFilterUrlObject>(), null);
     }
 
     /**
      * Create notification filters with list response type.
      */
-    public static BunqResponse<List<NotificationFilterUrl>> createWithListResponse(
-            List<NotificationFilterUrl> allNotificationFilter
+    public static BunqResponse<List<NotificationFilterUrlObject>> createWithListResponse(
+            List<NotificationFilterUrlObject> allNotificationFilter
     ) {
         return createWithListResponse(allNotificationFilter, null);
     }
@@ -36,8 +36,8 @@ public class NotificationFilterUrlUserInternal extends NotificationFilterUrlUser
     /**
      * Create notification filters with list response type.
      */
-    public static BunqResponse<List<NotificationFilterUrl>> createWithListResponse(
-            List<NotificationFilterUrl> allNotificationFilter,
+    public static BunqResponse<List<NotificationFilterUrlObject>> createWithListResponse(
+            List<NotificationFilterUrlObject> allNotificationFilter,
             Map<String, String> customHeaders
     ) {
         ApiClient apiClient = new ApiClient(getApiContext());
@@ -52,6 +52,6 @@ public class NotificationFilterUrlUserInternal extends NotificationFilterUrlUser
         byte[] requestBytes = determineAllRequestByte(requestMap);
         BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId()), requestBytes, customHeaders);
 
-        return NotificationFilterUrl.fromJsonList(NotificationFilterUrl.class, responseRaw, OBJECT_TYPE);
+        return NotificationFilterUrlObject.fromJsonList(NotificationFilterUrlObject.class, responseRaw, OBJECT_TYPE);
     }
 }

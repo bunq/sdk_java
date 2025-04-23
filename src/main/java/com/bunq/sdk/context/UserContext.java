@@ -13,11 +13,11 @@ public class UserContext {
     private static final String ERROR_PRIMARY_MONETARY_ACCOUNT_IS_NOT_SET = "Primary monetaryAccount is not set";
 
     private final ApiContext apiContext;
-    private UserCompany userCompany;
-    private UserPerson userPerson;
-    private UserApiKey userApiKey;
-    private UserPaymentServiceProvider userPaymentServiceProvider;
-    private MonetaryAccountBank primaryMonetaryAccountBank;
+    private UserCompanyApiObject userCompany;
+    private UserPersonApiObject userPerson;
+    private UserApiKeyApiObject userApiKey;
+    private UserPaymentServiceProviderApiObject userPaymentServiceProvider;
+    private MonetaryAccountBankApiObject primaryMonetaryAccountBank;
 
     public UserContext(ApiContext apiContext) {
         this.apiContext = apiContext;
@@ -25,14 +25,14 @@ public class UserContext {
     }
 
     private void initUser(BunqModel user) {
-        if (user instanceof UserPerson) {
-            this.userPerson = (UserPerson) user;
-        } else if (user instanceof UserCompany) {
-            this.userCompany = (UserCompany) user;
-        } else if (user instanceof UserApiKey) {
-            this.userApiKey = (UserApiKey) user;
-        } else if (user instanceof UserPaymentServiceProvider) {
-            this.userPaymentServiceProvider = (UserPaymentServiceProvider) user;
+        if (user instanceof UserPersonApiObject) {
+            this.userPerson = (UserPersonApiObject) user;
+        } else if (user instanceof UserCompanyApiObject) {
+            this.userCompany = (UserCompanyApiObject) user;
+        } else if (user instanceof UserApiKeyApiObject) {
+            this.userApiKey = (UserApiKeyApiObject) user;
+        } else if (user instanceof UserPaymentServiceProviderApiObject) {
+            this.userPaymentServiceProvider = (UserPaymentServiceProviderApiObject) user;
         } else {
             throw new BunqException(String.format(ERROR_UNEXPECTED_USER_INSTANCE, user.getClass().toString()));
         }
@@ -80,19 +80,19 @@ public class UserContext {
         }
     }
 
-    public UserPerson getUserPerson() {
+    public UserPersonApiObject getUserPerson() {
         return this.userPerson;
     }
 
-    public UserCompany getUserCompany() {
+    public UserCompanyApiObject getUserCompany() {
         return this.userCompany;
     }
 
-    public UserApiKey getUserApiKey() {
+    public UserApiKeyApiObject getUserApiKey() {
         return userApiKey;
     }
 
-    public MonetaryAccountBank getPrimaryMonetaryAccountBank() {
+    public MonetaryAccountBankApiObject getPrimaryMonetaryAccountBank() {
         return this.primaryMonetaryAccountBank;
     }
 }

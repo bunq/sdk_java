@@ -24,7 +24,7 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
      * Config values.
      */
     private static byte[] getAttachmentPublicContentBytes(String uuid) {
-        return AttachmentPublicContent.list(uuid).getValue();
+        return AttachmentPublicContentApiObject.list(uuid).getValue();
     }
 
     private static byte[] getRequestBytes() {
@@ -41,7 +41,7 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
         BunqHeader.CONTENT_TYPE.addTo(customHeaders, CONTENT_TYPE);
         BunqHeader.ATTACHMENT_DESCRIPTION.addTo(customHeaders, ATTACHMENT_DESCRIPTION);
 
-        return AttachmentPublic.create(customHeaders, getRequestBytes()).getValue();
+        return AttachmentPublicApiObject.create(customHeaders, getRequestBytes()).getValue();
     }
 
     /**
@@ -50,7 +50,7 @@ public class AttachmentPublicTest extends BunqSdkTestBase {
     @Test
     public void fileUploadAndRetrievalTest() {
         String uuidBefore = uploadFileAndGetUuid();
-        AttachmentPublic uuidFromAttachmentPublic = AttachmentPublic.get(uuidBefore)
+        AttachmentPublicApiObject uuidFromAttachmentPublic = AttachmentPublicApiObject.get(uuidBefore)
                 .getValue();
 
         byte[] requestBytes = getRequestBytes();

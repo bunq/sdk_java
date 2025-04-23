@@ -4,12 +4,12 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.DeviceServer;
+import com.bunq.sdk.model.generated.endpoint.DeviceServerApiObject;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class DeviceServerInternal extends DeviceServer {
+public class DeviceServerInternal extends DeviceServerApiObject {
     public static BunqResponse<Integer> create(
             ApiContext apiContext,
             String description,

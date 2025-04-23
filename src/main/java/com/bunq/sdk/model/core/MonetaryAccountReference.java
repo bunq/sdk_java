@@ -1,7 +1,7 @@
 package com.bunq.sdk.model.core;
 
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
-import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccountObject;
+import com.bunq.sdk.model.generated.object.PointerObject;
 
 /**
  * Adapter required to provide compatibility between the two types used to refer to Monetary
@@ -9,22 +9,22 @@ import com.bunq.sdk.model.generated.object.Pointer;
  */
 public class MonetaryAccountReference extends BunqModel {
 
-    private Pointer pointer;
-    private LabelMonetaryAccount labelMonetaryAccount;
+    private PointerObject pointer;
+    private LabelMonetaryAccountObject labelMonetaryAccount;
 
-    public MonetaryAccountReference(Pointer pointer) {
+    public MonetaryAccountReference(PointerObject pointer) {
         this.pointer = pointer;
     }
 
-    public MonetaryAccountReference(LabelMonetaryAccount labelMonetaryAccount) {
+    public MonetaryAccountReference(LabelMonetaryAccountObject labelMonetaryAccount) {
         this.labelMonetaryAccount = labelMonetaryAccount;
     }
 
-    public Pointer getPointer() {
+    public PointerObject getPointer() {
         return pointer;
     }
 
-    public LabelMonetaryAccount getLabelMonetaryAccount() {
+    public LabelMonetaryAccountObject getLabelMonetaryAccount() {
         return labelMonetaryAccount;
     }
 

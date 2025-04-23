@@ -4,10 +4,10 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.UserApiKey;
-import com.bunq.sdk.model.generated.endpoint.UserCompany;
-import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.UserApiKeyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserCompanyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProviderApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPersonApiObject;
 import com.bunq.sdk.util.BunqUtil;
 
 import java.util.HashMap;
@@ -25,30 +25,30 @@ public class SessionServer extends BunqModel {
 
     private final Id id;
     private final SessionToken sessionToken;
-    private UserCompany userCompany;
-    private UserPerson userPerson;
-    private UserApiKey userApiKey;
-    private UserPaymentServiceProvider userPaymentServiceProvider;
+    private UserCompanyApiObject userCompany;
+    private UserPersonApiObject userPerson;
+    private UserApiKeyApiObject userApiKey;
+    private UserPaymentServiceProviderApiObject userPaymentServiceProvider;
 
-    public SessionServer(Id id, SessionToken sessionToken, UserCompany userCompany) {
+    public SessionServer(Id id, SessionToken sessionToken, UserCompanyApiObject userCompany) {
         this.id = id;
         this.sessionToken = sessionToken;
         this.userCompany = userCompany;
     }
 
-    public SessionServer(Id id, SessionToken sessionToken, UserPerson userPerson) {
+    public SessionServer(Id id, SessionToken sessionToken, UserPersonApiObject userPerson) {
         this.id = id;
         this.sessionToken = sessionToken;
         this.userPerson = userPerson;
     }
 
-    public SessionServer(Id id, SessionToken sessionToken, UserPaymentServiceProvider userPaymentServiceProvider) {
+    public SessionServer(Id id, SessionToken sessionToken, UserPaymentServiceProviderApiObject userPaymentServiceProvider) {
         this.id = id;
         this.sessionToken = sessionToken;
         this.userPaymentServiceProvider = userPaymentServiceProvider;
     }
 
-    public SessionServer(Id id, SessionToken sessionToken, UserApiKey userApiKey) {
+    public SessionServer(Id id, SessionToken sessionToken, UserApiKeyApiObject userApiKey) {
         this.id = id;
         this.sessionToken = sessionToken;
         this.userApiKey = userApiKey;
@@ -89,19 +89,19 @@ public class SessionServer extends BunqModel {
         return sessionToken;
     }
 
-    public UserPerson getUserPersonOrNull() {
+    public UserPersonApiObject getUserPersonOrNull() {
         return userPerson;
     }
 
-    public UserCompany getUserCompanyOrNull() {
+    public UserCompanyApiObject getUserCompanyOrNull() {
         return userCompany;
     }
 
-    public UserApiKey getUserApiKeyOrNull() {
+    public UserApiKeyApiObject getUserApiKeyOrNull() {
         return userApiKey;
     }
 
-    public UserPaymentServiceProvider getUserPaymentServiceProviderOrNull() {
+    public UserPaymentServiceProviderApiObject getUserPaymentServiceProviderOrNull() {
         return userPaymentServiceProvider;
     }
 

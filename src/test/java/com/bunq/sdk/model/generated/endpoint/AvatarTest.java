@@ -41,12 +41,12 @@ public class AvatarTest extends BunqSdkTestBase {
         byte[] fileContentsSend = getFileContentBytes();
         String attachmentPublicUuid = uploadAvatar(fileContentsSend);
 
-        String avatarUuid = Avatar.create(attachmentPublicUuid).getValue();
+        String avatarUuid = AvatarApiObject.create(attachmentPublicUuid).getValue();
 
-        String attachmentPublicUuidFromAvatar = Avatar.get(avatarUuid).getValue()
+        String attachmentPublicUuidFromAvatar = AvatarApiObject.get(avatarUuid).getValue()
                 .getImage().get(INDEX_FIRST).getAttachmentPublicUuid();
 
-        byte[] fileContentsReceived = AttachmentPublicContent.list(attachmentPublicUuidFromAvatar).getValue();
+        byte[] fileContentsReceived = AttachmentPublicContentApiObject.list(attachmentPublicUuidFromAvatar).getValue();
 
         assertArrayEquals(fileContentsSend, fileContentsReceived);
     }
@@ -57,6 +57,6 @@ public class AvatarTest extends BunqSdkTestBase {
         BunqHeader.ATTACHMENT_DESCRIPTION.addTo(allCustomHeader, ATTACHMENT_PATH_IN);
         BunqHeader.CONTENT_TYPE.addTo(allCustomHeader, CONTENT_TYPE);
 
-        return AttachmentPublic.create(allCustomHeader, file_contents).getValue();
+        return AttachmentPublicApiObject.create(allCustomHeader, file_contents).getValue();
     }
 }

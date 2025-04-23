@@ -3,10 +3,10 @@ package com.bunq.sdk.context;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.SessionServer;
-import com.bunq.sdk.model.generated.endpoint.UserApiKey;
-import com.bunq.sdk.model.generated.endpoint.UserCompany;
-import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.UserApiKeyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserCompanyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProviderApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPersonApiObject;
 import com.bunq.sdk.util.BunqUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -48,19 +48,19 @@ public class SessionContext implements java.io.Serializable {
 
     @Expose
     @SerializedName("user_person")
-    private final UserPerson userPerson;
+    private final UserPersonApiObject userPerson;
 
     @Expose
     @SerializedName("user_company")
-    private final UserCompany userCompany;
+    private final UserCompanyApiObject userCompany;
 
     @Expose
     @SerializedName("user_api_key")
-    private final UserApiKey userApiKey;
+    private final UserApiKeyApiObject userApiKey;
 
     @Expose
     @SerializedName("user_payment_service_provider")
-    private final UserPaymentServiceProvider userPaymentServiceProvider;
+    private final UserPaymentServiceProviderApiObject userPaymentServiceProvider;
 
     /**
      * @param sessionServer Object containing the session info.
@@ -76,14 +76,14 @@ public class SessionContext implements java.io.Serializable {
     }
 
     private int getUserId(BunqModel user) {
-        if (user instanceof UserPerson) {
-            return ((UserPerson) user).getId();
-        } else if (user instanceof UserCompany) {
-            return ((UserCompany) user).getId();
-        } else if (user instanceof UserApiKey) {
-            return ((UserApiKey) user).getId();
-        } else if (user instanceof UserPaymentServiceProvider) {
-            return ((UserPaymentServiceProvider) user).getId();
+        if (user instanceof UserPersonApiObject) {
+            return ((UserPersonApiObject) user).getId();
+        } else if (user instanceof UserCompanyApiObject) {
+            return ((UserCompanyApiObject) user).getId();
+        } else if (user instanceof UserApiKeyApiObject) {
+            return ((UserApiKeyApiObject) user).getId();
+        } else if (user instanceof UserPaymentServiceProviderApiObject) {
+            return ((UserPaymentServiceProviderApiObject) user).getId();
         } else {
             throw new BunqException(String.format(ERROR_UNEXPECTED_USER_TYPE, user.getClass().toString()));
         }
@@ -100,8 +100,8 @@ public class SessionContext implements java.io.Serializable {
     private static int getSessionTimeout(SessionServer sessionServer) {
         BunqModel user = sessionServer.getReferencedUser();
 
-        if (user instanceof UserApiKey) {
-            BunqModel referencedUser = ((UserApiKey) user).getRequestedByUser().getReferencedObject();
+        if (user instanceof UserApiKeyApiObject) {
+            BunqModel referencedUser = ((UserApiKeyApiObject) user).getRequestedByUser().getReferencedObject();
 
             return getSessionTimeOutFromUser(referencedUser);
         } else {
@@ -110,12 +110,12 @@ public class SessionContext implements java.io.Serializable {
     }
 
     private static int getSessionTimeOutFromUser(BunqModel user) {
-        if (user instanceof UserCompany) {
-            return ((UserCompany) user).getSessionTimeout();
-        } else if (user instanceof UserPerson) {
-            return ((UserPerson) user).getSessionTimeout();
-        } else if (user instanceof UserPaymentServiceProvider) {
-            return ((UserPaymentServiceProvider) user).getSessionTimeout();
+        if (user instanceof UserCompanyApiObject) {
+            return ((UserCompanyApiObject) user).getSessionTimeout();
+        } else if (user instanceof UserPersonApiObject) {
+            return ((UserPersonApiObject) user).getSessionTimeout();
+        } else if (user instanceof UserPaymentServiceProviderApiObject) {
+            return ((UserPaymentServiceProviderApiObject) user).getSessionTimeout();
         } else {
             throw new BunqException(ERROR_UNEXPECTED_USER_TYPE);
         }

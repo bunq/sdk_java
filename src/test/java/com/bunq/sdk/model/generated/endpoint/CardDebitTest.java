@@ -2,8 +2,8 @@ package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.context.BunqContext;
-import com.bunq.sdk.model.generated.object.CardPinAssignment;
-import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.object.CardPinAssignmentObject;
+import com.bunq.sdk.model.generated.object.PointerObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -31,7 +31,8 @@ public class CardDebitTest extends BunqSdkTestBase {
     private static final int NUM_BITS_23_DECIMAL_DIGITS = 76;
     private static final int INDEX_FIRST = 0;
     private static final String PIN_ASSIGNMENT_TYPE_PRIMARY = "PRIMARY";
-    private static final String CARD_DEBIT_TYPE_MAESTRO = "MAESTRO";
+    private static final String CARD_DEBIT_TYPE = "MASTERCARD";
+    private static final String CARD_DEBIT_PRODUCT_TYPE = "MASTERCARD_DEBIT";
 
     /**
      * The name that is going to be shown on the card
@@ -41,13 +42,13 @@ public class CardDebitTest extends BunqSdkTestBase {
     /**
      * The alias which this card will be linked to
      */
-    private static Pointer alias;
+    private static PointerObject alias;
 
     @BeforeClass
     public static void setUpBeforeClass() {
         BunqSdkTestBase.setUpBeforeClass();
 
-        List<CardName> cardName = CardName.list().getValue();
+        List<CardNameApiObject> cardName = CardNameApiObject.list().getValue();
         List cardNameList = cardName.get(INDEX_FIRST).getPossibleCardNameArray();
 
         alias = BunqContext.getUserContext().getUserPerson().getAlias().get(INDEX_FIRST);
@@ -68,30 +69,20 @@ public class CardDebitTest extends BunqSdkTestBase {
     public void orderNewMaestroCardTest() {
         String secondLine = generateRandomSecondLine();
 
-        List<CardPinAssignment> cardPinAssignmentList = new ArrayList<>();
-        cardPinAssignmentList.add(
-                new CardPinAssignment(
-                        PIN_ASSIGNMENT_TYPE_PRIMARY,
-                        PIN_CODE,
-                        BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId()
-                )
-        );
-
-        CardDebit cardDebit = CardDebit.create(
+        CardDebitApiObject cardDebit = CardDebitApiObject.create(
                 secondLine,
                 nameOnCard,
-                CARD_DEBIT_TYPE_MAESTRO,
-                alias
+                CARD_DEBIT_TYPE,
+                CARD_DEBIT_PRODUCT_TYPE
         ).getValue();
 
-        Card cardFromCardEndpoint = getCard(cardDebit.getId());
+        CardApiObject cardFromCardEndpoint = CardApiObject.get(cardDebit.getId()).getValue();
+        System.out.print(cardDebit.getNameOnCard());
+        System.out.print(cardFromCardEndpoint.getNameOnCard());
 
         assertEquals(nameOnCard, cardFromCardEndpoint.getNameOnCard());
         assertEquals(secondLine, cardFromCardEndpoint.getSecondLine());
         assertEquals(cardDebit.getCreated(), cardFromCardEndpoint.getCreated());
     }
 
-    private Card getCard(Integer cardId) {
-        return Card.get(cardId).getValue();
-    }
 }

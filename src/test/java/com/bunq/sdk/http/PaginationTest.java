@@ -2,9 +2,7 @@ package com.bunq.sdk.http;
 
 import com.bunq.sdk.exception.BunqException;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,9 +20,6 @@ public class PaginationTest {
     private static final int PAGINATION_NEWER_ID_CUSTOM = 2;
     private static final int PAGINATION_FUTURE_ID_CUSTOM = 3;
     private static final int PAGINATION_COUNT_CUSTOM = 5;
-
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     private static Pagination createPaginationWithAllPropertiesSet() {
         Pagination pagination = new Pagination();
@@ -129,8 +124,11 @@ public class PaginationTest {
         pagination.setOlderId(null);
 
         Assert.assertFalse(pagination.hasPreviousPage());
-        exception.expect(BunqException.class);
-        pagination.getUrlParamsPreviousPage();
+
+        BunqException exception = Assert.assertThrows(
+                BunqException.class,
+                pagination::getUrlParamsPreviousPage
+        );
     }
 
     @Test
@@ -139,7 +137,9 @@ public class PaginationTest {
         pagination.setNewerId(null);
         pagination.setFutureId(null);
 
-        exception.expect(BunqException.class);
-        pagination.getUrlParamsNextPage();
+        BunqException exception = Assert.assertThrows(
+                BunqException.class,
+                pagination::getUrlParamsNextPage
+        );
     }
 }
