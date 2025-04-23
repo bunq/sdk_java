@@ -1,16 +1,21 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
+import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.SchedulePaymentEntryObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
  * Endpoint for schedule payments.
@@ -81,24 +86,35 @@ public class SchedulePaymentApiObject extends BunqModel {
   @SerializedName("schedule_field_for_request")
   private ScheduleApiObject scheduleFieldForRequest;
 
+  /**
+   * The purpose of this scheduled payment.
+   */
+  @Expose
+  @SerializedName("purpose_field_for_request")
+  private String purposeFieldForRequest;
+
   public SchedulePaymentApiObject() {
-  this(null, null);
+  this(null, null, null);
   }
 
   public SchedulePaymentApiObject(SchedulePaymentEntryObject payment) {
-  this(payment, null);
+  this(payment, null, null);
   }
 
   public SchedulePaymentApiObject(SchedulePaymentEntryObject payment, ScheduleApiObject schedule) {
-    this.paymentFieldForRequest = payment;
-    this.scheduleFieldForRequest = schedule;
+  this(payment, schedule, null);
   }
 
-  /**
+  public SchedulePaymentApiObject(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, String purpose) {
+    this.paymentFieldForRequest = payment;
+    this.scheduleFieldForRequest = schedule;
+    this.purposeFieldForRequest = purpose;
+  }  /**
    * @param payment The payment details.
    * @param schedule The schedule details when creating or updating a scheduled payment.
+   * @param purpose The purpose of this scheduled payment.
    */
-  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, String purpose, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,6 +124,7 @@ public class SchedulePaymentApiObject extends BunqModel {
   HashMap<String, Object> requestMap = new HashMap<>();
 requestMap.put(FIELD_PAYMENT, payment);
 requestMap.put(FIELD_SCHEDULE, schedule);
+requestMap.put(FIELD_PURPOSE, purpose);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
@@ -120,15 +137,19 @@ requestMap.put(FIELD_SCHEDULE, schedule);
   }
 
   public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment) {
-    return create(payment, null, null, null);
+    return create(payment, null, null, null, null);
   }
 
   public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule) {
-    return create(payment, schedule, null, null);
+    return create(payment, schedule, null, null, null);
   }
 
   public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId) {
-    return create(payment, schedule, monetaryAccountId, null);
+    return create(payment, schedule, monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, String purpose) {
+    return create(payment, schedule, monetaryAccountId, purpose, null);
   }
 
   /**

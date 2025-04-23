@@ -5,6 +5,8 @@
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+.idea/codeStyles/
+.idea
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -72,5 +74,8 @@ context-save-restore-test.conf
 /tmp
 config.properties
 bunq-test.conf
-.idea/codeStyles/
-.idea
+
+/src/test/Resource/bunq-oauth-test.conf
+/src/test/Resource/bunq-psd2-test.conf
+/src/test/Resource/certificate.pem
+/src/test/Resource/key.pem

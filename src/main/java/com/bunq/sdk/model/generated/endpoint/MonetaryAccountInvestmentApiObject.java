@@ -170,7 +170,7 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
+  private MonetaryAccountProfileApiObject monetaryAccountProfile;
 
   /**
    * The legal name of the user / company using this monetary account.
@@ -234,6 +234,13 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
   @Expose
   @SerializedName("open_banking_account")
   private OpenBankingAccountApiObject openBankingAccount;
+
+  /**
+   * The access of this Monetary Account.
+   */
+  @Expose
+  @SerializedName("all_access")
+  private List<MonetaryAccountAccessApiObject> allAccess;
 
   /**
    * The currency of the MonetaryAccountInvestment as an ISO 4217 formatted currency code.
@@ -613,11 +620,11 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
   /**
    * The profiles of the account.
    */
-  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
+  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -718,6 +725,17 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
 
   public void setOpenBankingAccount(OpenBankingAccountApiObject openBankingAccount) {
     this.openBankingAccount = openBankingAccount;
+  }
+
+  /**
+   * The access of this Monetary Account.
+   */
+  public List<MonetaryAccountAccessApiObject> getAllAccess() {
+    return this.allAccess;
+  }
+
+  public void setAllAccess(List<MonetaryAccountAccessApiObject> allAccess) {
+    this.allAccess = allAccess;
   }
 
   /**
@@ -828,6 +846,10 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
     }
 
     if (this.openBankingAccount != null) {
+      return false;
+    }
+
+    if (this.allAccess != null) {
       return false;
     }
 

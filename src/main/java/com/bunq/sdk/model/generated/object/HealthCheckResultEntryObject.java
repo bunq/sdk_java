@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  */
-public class HealthCheckResultEntry extends BunqModel {
+public class HealthCheckResultEntryObject extends BunqModel {
 
   /**
    * The type of HealthCheckResultEntry.
@@ -67,8 +67,8 @@ public class HealthCheckResultEntry extends BunqModel {
 
   /**
    */
-  public static HealthCheckResultEntry fromJsonReader(JsonReader reader) {
-    return fromJsonReader(HealthCheckResultEntry.class, reader);
+  public static HealthCheckResultEntryObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(HealthCheckResultEntryObject.class, reader);
   }
 
 }

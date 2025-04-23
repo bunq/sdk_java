@@ -199,7 +199,7 @@ public class MonetaryAccountJointApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
+  private MonetaryAccountProfileApiObject monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -249,6 +249,13 @@ public class MonetaryAccountJointApiObject extends BunqModel {
   @Expose
   @SerializedName("birdee_investment_portfolio")
   private BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio;
+
+  /**
+   * The access of this Monetary Account.
+   */
+  @Expose
+  @SerializedName("all_access")
+  private List<MonetaryAccountAccessApiObject> allAccess;
 
   /**
    * The currency of the MonetaryAccountJoint as an ISO 4217 formatted currency code.
@@ -849,11 +856,11 @@ requestMap.put(FIELD_SETTING, setting);
   /**
    * The profiles of the account.
    */
-  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
+  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -932,6 +939,17 @@ requestMap.put(FIELD_SETTING, setting);
 
   public void setBirdeeInvestmentPortfolio(BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio) {
     this.birdeeInvestmentPortfolio = birdeeInvestmentPortfolio;
+  }
+
+  /**
+   * The access of this Monetary Account.
+   */
+  public List<MonetaryAccountAccessApiObject> getAllAccess() {
+    return this.allAccess;
+  }
+
+  public void setAllAccess(List<MonetaryAccountAccessApiObject> allAccess) {
+    this.allAccess = allAccess;
   }
 
   /**
@@ -1042,6 +1060,10 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.birdeeInvestmentPortfolio != null) {
+      return false;
+    }
+
+    if (this.allAccess != null) {
       return false;
     }
 

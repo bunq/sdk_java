@@ -605,7 +605,6 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId), params, customHeaders);
 
-
     return fromJson(CardApiObject.class, responseRaw, OBJECT_TYPE_GET);
   }
 

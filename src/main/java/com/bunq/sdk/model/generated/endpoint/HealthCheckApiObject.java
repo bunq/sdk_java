@@ -8,7 +8,7 @@ import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.HealthCheckResult;
+import com.bunq.sdk.model.generated.object.HealthCheckResultObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -22,7 +22,7 @@ import javax.lang.model.type.NullType;
 /**
  * Basic health check for uptime and instance health monitoring.
  */
-public class HealthCheck extends BunqModel implements AnchorObjectInterface {
+public class HealthCheckApiObject extends BunqModel implements AnchorObjectInterface {
 
   /**
    * Error constants.
@@ -43,32 +43,32 @@ public class HealthCheck extends BunqModel implements AnchorObjectInterface {
    */
   @Expose
   @SerializedName("HealthResult")
-  private HealthCheckResult healthResult;
+  private HealthCheckResultObject healthResult;
 
   /**
    */
-  public static BunqResponse<List<HealthCheck>> list(Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<HealthCheckApiObject>> list(Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(ENDPOINT_URL_LISTING, params, customHeaders);
 
-    return fromJsonList(HealthCheck.class, responseRaw, OBJECT_TYPE_GET);
+    return fromJsonList(HealthCheckApiObject.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public static BunqResponse<List<HealthCheck>> list() {
+  public static BunqResponse<List<HealthCheckApiObject>> list() {
     return list(null, null);
   }
 
-  public static BunqResponse<List<HealthCheck>> list(Map<String, String> params) {
+  public static BunqResponse<List<HealthCheckApiObject>> list(Map<String, String> params) {
     return list(params, null);
   }
 
   /**
    */
-  public HealthCheckResult getHealthResult() {
+  public HealthCheckResultObject getHealthResult() {
     return this.healthResult;
   }
 
-  public void setHealthResult(HealthCheckResult healthResult) {
+  public void setHealthResult(HealthCheckResultObject healthResult) {
     this.healthResult = healthResult;
   }
 
@@ -94,8 +94,8 @@ public class HealthCheck extends BunqModel implements AnchorObjectInterface {
 
   /**
    */
-  public static HealthCheck fromJsonReader(JsonReader reader) {
-    return fromJsonReader(HealthCheck.class, reader);
+  public static HealthCheckApiObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(HealthCheckApiObject.class, reader);
   }
 
 }

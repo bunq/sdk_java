@@ -75,7 +75,7 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
+  private MonetaryAccountProfileApiObject monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -164,6 +164,13 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
   private BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio;
 
   /**
+   * The access of this Monetary Account.
+   */
+  @Expose
+  @SerializedName("all_access")
+  private List<MonetaryAccountAccessApiObject> allAccess;
+
+  /**
    * The id of the monetary account.
    */
   public Integer getId() {
@@ -243,11 +250,11 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
   /**
    * The profiles of the account.
    */
-  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
+  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -386,6 +393,17 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
   }
 
   /**
+   * The access of this Monetary Account.
+   */
+  public List<MonetaryAccountAccessApiObject> getAllAccess() {
+    return this.allAccess;
+  }
+
+  public void setAllAccess(List<MonetaryAccountAccessApiObject> allAccess) {
+    this.allAccess = allAccess;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -465,6 +483,10 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
     }
 
     if (this.birdeeInvestmentPortfolio != null) {
+      return false;
+    }
+
+    if (this.allAccess != null) {
       return false;
     }
 

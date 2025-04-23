@@ -262,6 +262,13 @@ public class MonetaryAccountBankApiObject extends BunqModel {
   private BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio;
 
   /**
+   * The access of this Monetary Account.
+   */
+  @Expose
+  @SerializedName("all_access")
+  private List<MonetaryAccountAccessApiObject> allAccess;
+
+  /**
    * The currency of the MonetaryAccountBank as an ISO 4217 formatted currency code.
    */
   @Expose
@@ -946,6 +953,17 @@ requestMap.put(FIELD_SETTING, setting);
   }
 
   /**
+   * The access of this Monetary Account.
+   */
+  public List<MonetaryAccountAccessApiObject> getAllAccess() {
+    return this.allAccess;
+  }
+
+  public void setAllAccess(List<MonetaryAccountAccessApiObject> allAccess) {
+    this.allAccess = allAccess;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -1057,6 +1075,10 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.birdeeInvestmentPortfolio != null) {
+      return false;
+    }
+
+    if (this.allAccess != null) {
       return false;
     }
 

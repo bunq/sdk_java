@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  */
-public class HealthCheckResult extends BunqModel {
+public class HealthCheckResultObject extends BunqModel {
 
   /**
    * The result status of the health check.
@@ -27,7 +27,7 @@ public class HealthCheckResult extends BunqModel {
    */
   @Expose
   @SerializedName("allEntry")
-  private List<HealthCheckResultEntry> allEntry;
+  private List<HealthCheckResultEntryObject> allEntry;
 
   /**
    * The result status of the health check.
@@ -43,11 +43,11 @@ public class HealthCheckResult extends BunqModel {
   /**
    * The entries on which the current status is based.
    */
-  public List<HealthCheckResultEntry> getAllEntry() {
+  public List<HealthCheckResultEntryObject> getAllEntry() {
     return this.allEntry;
   }
 
-  public void setAllEntry(List<HealthCheckResultEntry> allEntry) {
+  public void setAllEntry(List<HealthCheckResultEntryObject> allEntry) {
     this.allEntry = allEntry;
   }
 
@@ -67,8 +67,8 @@ public class HealthCheckResult extends BunqModel {
 
   /**
    */
-  public static HealthCheckResult fromJsonReader(JsonReader reader) {
-    return fromJsonReader(HealthCheckResult.class, reader);
+  public static HealthCheckResultObject fromJsonReader(JsonReader reader) {
+    return fromJsonReader(HealthCheckResultObject.class, reader);
   }
 
 }

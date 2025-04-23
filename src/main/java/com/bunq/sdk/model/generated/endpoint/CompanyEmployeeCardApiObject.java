@@ -74,6 +74,13 @@ public class CompanyEmployeeCardApiObject extends BunqModel {
   private Integer numberOfCompanyEmployeeCardReceiptPending;
 
   /**
+   * The company employee's monthly cumulative card limit.
+   */
+  @Expose
+  @SerializedName("company_employee_card_limit")
+  private CompanyEmployeeCardLimitApiObject companyEmployeeCardLimit;
+
+  /**
    * The pointer to the employee for which you want to create a card.
    */
   @Expose
@@ -251,6 +258,17 @@ public class CompanyEmployeeCardApiObject extends BunqModel {
   }
 
   /**
+   * The company employee's monthly cumulative card limit.
+   */
+  public CompanyEmployeeCardLimitApiObject getCompanyEmployeeCardLimit() {
+    return this.companyEmployeeCardLimit;
+  }
+
+  public void setCompanyEmployeeCardLimit(CompanyEmployeeCardLimitApiObject companyEmployeeCardLimit) {
+    this.companyEmployeeCardLimit = companyEmployeeCardLimit;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.card != null) {
@@ -274,6 +292,10 @@ public class CompanyEmployeeCardApiObject extends BunqModel {
     }
 
     if (this.numberOfCompanyEmployeeCardReceiptPending != null) {
+      return false;
+    }
+
+    if (this.companyEmployeeCardLimit != null) {
       return false;
     }
 
