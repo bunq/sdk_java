@@ -47,7 +47,10 @@ public class RequestInquiryTest extends BunqSdkTestBase {
     private static String acceptRequest() {
         Map<String, String> allParameter = new HashMap<>();
         allParameter.put(FIELD_STATUS, PENDING_STATUS);
-        List<RequestResponseApiObject> responses = RequestResponseApiObject.list(BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId(), allParameter).getValue();
+        List<RequestResponseApiObject> responses = RequestResponseApiObject.list(
+                BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId(),
+                allParameter
+        ).getValue();
 
         RequestResponseApiObject acceptRequest = RequestResponseApiObject.update(
                 responses.get(INDEX_FIRST).getId(),

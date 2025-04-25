@@ -31,6 +31,7 @@ public class Psd2ContextTest {
     public void setupApiContext()
     {
         File configurationFile = new File(FILE_TEST_CONFIGURATION);
+
         if (!configurationFile.exists()) {
             try {
                 BunqContext.loadApiContext(createApiContext());

@@ -6,7 +6,6 @@ import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.PaymentBatchAnchoredPaymentObject;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
@@ -45,7 +44,7 @@ public class PaymentBatchApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("payments")
-  private PaymentBatchAnchoredPaymentObject payments;
+  private List<PaymentApiObject> payments;
 
   /**
    * The list of payments we want to send in a single batch.
@@ -170,11 +169,11 @@ requestMap.put(FIELD_PAYMENTS, payments);
   /**
    * The list of mutations that were made.
    */
-  public PaymentBatchAnchoredPaymentObject getPayments() {
+  public List<PaymentApiObject> getPayments() {
     return this.payments;
   }
 
-  public void setPayments(PaymentBatchAnchoredPaymentObject payments) {
+  public void setPayments(List<PaymentApiObject> payments) {
     this.payments = payments;
   }
 
