@@ -89,25 +89,15 @@ abstract public class BunqModel {
         return responseItemObject.getAsJsonArray(FIELD_RESPONSE).get(INDEX_FIRST).getAsJsonObject();
     }
 
-    /**
-     * Gets content from JSON based on wrapper prefix, supporting subtypes (like CardDebit, CardCredit, etc.)
-     *
-     * @param json The JSON object to unwrap
-     * @param wrapper The wrapper prefix to look for (e.g., "Card", "MonetaryAccount")
-     * @return The unwrapped JsonObject for the matching key
-     * @throws IllegalArgumentException if no matching key is found
-     */
     private static JsonObject getWrappedContent(JsonObject json, String wrapper) {
         if (wrapper == null || wrapper.isEmpty()) {
             throw new IllegalArgumentException("Wrapper cannot be null or empty");
         }
 
-        // First check for exact match
         if (json.has(wrapper)) {
             return json.getAsJsonObject(wrapper);
         }
 
-        // Then look for keys that start with the wrapper name
         for (String key : json.keySet()) {
             if (key.startsWith(wrapper)) {
                 return json.getAsJsonObject(key);

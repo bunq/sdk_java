@@ -12,7 +12,7 @@ public class ErrorResponseIdTest extends BunqSdkTestBase {
     /**
      * Invalid user id to trigger BadRequestException
      */
-    private static final int INVALID_MONETARY_ACCOUNT_ID = 1;
+    private static final int INVALID_MONETARY_ACCOUNT_ID = 0;
 
     @Test
     public void badRequestWitResponseIdTest() {

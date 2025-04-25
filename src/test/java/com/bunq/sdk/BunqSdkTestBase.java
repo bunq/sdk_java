@@ -161,29 +161,23 @@ public class BunqSdkTestBase {
      */
     protected static void requestSpendingMoneyIfNeeded() {
 
-        System.out.println("Should : " + shouldMoneyBeRequested(BunqContext.getUserContext().getPrimaryMonetaryAccountBank()));
         if (shouldMoneyBeRequested(BunqContext.getUserContext().getPrimaryMonetaryAccountBank())) {
-            BunqResponse<Integer> requestResponse = RequestInquiryApiObject.create(
+            RequestInquiryApiObject.create(
                     new AmountObject(SPENDING_MONEY_AMOUNT, CURRENCY_EUR),
                     new PointerObject(POINTER_TYPE_EMAIL, SUGAR_DADDY_EMAIL),
                     SUGAR_DADDY_REQUESTS_DESCRIPTION,
                     false
             );
-            System.out.println("Request inquiry created with ID: " + requestResponse.getValue());
         }
-        System.out.println("ShouldSecond : " + shouldMoneyBeRequested(secondMonetaryAccountBank));
-        System.out.println("second id : " + secondMonetaryAccountBank.getId().toString());
 
         if (shouldMoneyBeRequested(secondMonetaryAccountBank)) {
-            BunqResponse<Integer> requestResponse = RequestInquiryApiObject.create(
+            RequestInquiryApiObject.create(
                     new AmountObject(SPENDING_MONEY_AMOUNT, CURRENCY_EUR),
                     new PointerObject(POINTER_TYPE_EMAIL, SUGAR_DADDY_EMAIL),
                     SUGAR_DADDY_REQUESTS_DESCRIPTION,
                     false,
                     secondMonetaryAccountBank.getId()
             );
-            System.out.println("Request Second ID: " + requestResponse.getValue());
-
         }
     }
 

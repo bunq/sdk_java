@@ -125,7 +125,7 @@ public class PaginationTest {
 
         Assert.assertFalse(pagination.hasPreviousPage());
 
-        BunqException exception = Assert.assertThrows(
+        Assert.assertThrows(
                 BunqException.class,
                 pagination::getUrlParamsPreviousPage
         );
@@ -137,7 +137,7 @@ public class PaginationTest {
         pagination.setNewerId(null);
         pagination.setFutureId(null);
 
-        BunqException exception = Assert.assertThrows(
+        Assert.assertThrows(
                 BunqException.class,
                 pagination::getUrlParamsNextPage
         );

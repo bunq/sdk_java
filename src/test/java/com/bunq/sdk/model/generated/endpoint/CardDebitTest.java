@@ -2,14 +2,12 @@ package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.context.BunqContext;
-import com.bunq.sdk.model.generated.object.CardPinAssignmentObject;
 import com.bunq.sdk.model.generated.object.PointerObject;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -26,11 +24,9 @@ public class CardDebitTest extends BunqSdkTestBase {
     /**
      * Config values.
      */
-    private static final String PIN_CODE = "4045";
     private static final int RADIX_DIGITS_AND_LATIN_LETTERS = 36;
     private static final int NUM_BITS_23_DECIMAL_DIGITS = 76;
     private static final int INDEX_FIRST = 0;
-    private static final String PIN_ASSIGNMENT_TYPE_PRIMARY = "PRIMARY";
     private static final String CARD_DEBIT_TYPE = "MASTERCARD";
     private static final String CARD_DEBIT_PRODUCT_TYPE = "MASTERCARD_DEBIT";
 
@@ -66,7 +62,7 @@ public class CardDebitTest extends BunqSdkTestBase {
      * submitted
      */
     @Test
-    public void orderNewMaestroCardTest() {
+    public void orderNewMastercardCardTest() {
         String secondLine = generateRandomSecondLine();
 
         CardDebitApiObject cardDebit = CardDebitApiObject.create(
