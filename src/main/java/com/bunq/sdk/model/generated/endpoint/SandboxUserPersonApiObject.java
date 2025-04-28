@@ -39,6 +39,20 @@ public class SandboxUserPersonApiObject extends BunqModel {
   private String apiKey;
 
   /**
+   * The user which was created.
+   */
+  @Expose
+  @SerializedName("user")
+  private UserApiObject user;
+
+  /**
+   * The login code which the developer can use to log into their sandbox user.
+   */
+  @Expose
+  @SerializedName("login_code")
+  private String loginCode;
+
+  /**
    */
   public static BunqResponse<SandboxUserPersonApiObject> create(Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -71,9 +85,39 @@ public class SandboxUserPersonApiObject extends BunqModel {
   }
 
   /**
+   * The user which was created.
+   */
+  public UserApiObject getUser() {
+    return this.user;
+  }
+
+  public void setUser(UserApiObject user) {
+    this.user = user;
+  }
+
+  /**
+   * The login code which the developer can use to log into their sandbox user.
+   */
+  public String getLoginCode() {
+    return this.loginCode;
+  }
+
+  public void setLoginCode(String loginCode) {
+    this.loginCode = loginCode;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.apiKey != null) {
+      return false;
+    }
+
+    if (this.user != null) {
+      return false;
+    }
+
+    if (this.loginCode != null) {
       return false;
     }
 

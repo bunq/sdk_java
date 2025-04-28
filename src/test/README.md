@@ -9,7 +9,7 @@ common scenarios can run without any errors.
 First create a certificate and key using this command
 
 ```
-openssl req -x509 -newkey rsa:4096 -keyout src/test/Resource/key.pem -out src/test/Resource/certificate.pem -days 365 -nodes -subj "/CN=Your App Id/C=NL" && \
+openssl req -x509 -newkey rsa:4096 -keyout src/test/Resource/key.pem -out src/test/Resource/certificate.pem -days 365 -nodes -subj "/CN=SdkJavaTdas1123asdhjb/C=NL" && \
 echo -e "\n--- KEY ---\n" && cat src/test/Resource/key.pem && \
 echo -e "\n--- CERTIFICATE ---\n" && cat src/test/Resource/certificate.pem
 ```
