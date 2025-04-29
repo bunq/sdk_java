@@ -51,3 +51,5 @@ bunq-test.conf
 /src/test/Resource/bunq-psd2-test.conf
 /src/test/Resource/certificate.pem
 /src/test/Resource/key.pem
+
+.DS_STORE
