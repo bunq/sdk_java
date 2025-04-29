@@ -26,7 +26,7 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
   @AfterClass
   public static void tearDown() {
     if (monetaryAccountIdToClose != null) {
-      MonetaryAccountBank.update(monetaryAccountIdToClose,
+      MonetaryAccountBankApiObject.update(monetaryAccountIdToClose,
           null,
           null,
           null,
@@ -44,7 +44,7 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
    */
   @Test
   public void createNewMonetaryAccountTest() {
-    monetaryAccountIdToClose = MonetaryAccountBank.create(CURRENCY, MONETARY_ACCOUNT_DESCRIPTION)
+    monetaryAccountIdToClose = MonetaryAccountBankApiObject.create(CURRENCY, MONETARY_ACCOUNT_DESCRIPTION)
         .getValue();
 
     Assert.assertNotNull(monetaryAccountIdToClose);

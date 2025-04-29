@@ -2,10 +2,10 @@ package com.bunq.sdk.util;
 
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.BunqModel;
-import com.bunq.sdk.model.generated.endpoint.UserApiKey;
-import com.bunq.sdk.model.generated.endpoint.UserCompany;
-import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.UserApiKeyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserCompanyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProviderApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPersonApiObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +37,10 @@ public class BunqUtil {
     }
 
     public static BunqModel getReferencedUser(
-            UserPerson userPerson,
-            UserCompany userCompany,
-            UserApiKey userApiKey,
-            UserPaymentServiceProvider userPaymentServiceProvider
+            UserPersonApiObject userPerson,
+            UserCompanyApiObject userCompany,
+            UserApiKeyApiObject userApiKey,
+            UserPaymentServiceProviderApiObject userPaymentServiceProvider
     ) {
         if (userCompany == null && userApiKey == null && userPerson != null && userPaymentServiceProvider == null) {
             return userPerson;

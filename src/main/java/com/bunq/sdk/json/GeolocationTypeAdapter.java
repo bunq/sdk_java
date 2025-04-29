@@ -1,6 +1,6 @@
 package com.bunq.sdk.json;
 
-import com.bunq.sdk.model.generated.object.Geolocation;
+import com.bunq.sdk.model.generated.object.GeolocationObject;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * but their precision at the moment of serialization should be higher than that of a normal
  * BigDecimal from bunq SDK.
  */
-public class GeolocationTypeAdapter implements JsonSerializer<Geolocation> {
+public class GeolocationTypeAdapter implements JsonSerializer<GeolocationObject> {
 
     private static final String FIELD_LATITUDE = "latitude";
     private static final String FIELD_LONGITUDE = "longitude";
@@ -22,7 +22,7 @@ public class GeolocationTypeAdapter implements JsonSerializer<Geolocation> {
     private static final String FIELD_RADIUS = "radius";
 
     @Override
-    public JsonElement serialize(Geolocation geolocation, Type typeOfSrc,
+    public JsonElement serialize(GeolocationObject geolocation, Type typeOfSrc,
                                  JsonSerializationContext context) {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty(FIELD_LATITUDE, getBigDecimalStringOrNull(geolocation.getLatitude()));

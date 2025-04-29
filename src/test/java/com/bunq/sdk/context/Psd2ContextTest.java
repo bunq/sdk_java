@@ -1,8 +1,8 @@
 package com.bunq.sdk.context;
 
 import com.bunq.sdk.json.BunqGsonBuilder;
-import com.bunq.sdk.model.generated.endpoint.OauthClient;
-import com.bunq.sdk.model.generated.object.Certificate;
+import com.bunq.sdk.model.generated.endpoint.OauthClientApiObject;
+import com.bunq.sdk.model.generated.object.CertificateObject;
 import com.bunq.sdk.security.SecurityUtils;
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,16 +26,16 @@ public class Psd2ContextTest {
 
     private static final String TEST_DEVICE_DESCRIPTION = "PSD2TestDevice";
 
+
     @Before
-    public void setupApiContext() {
+    public void setupApiContext()
+    {
         File configurationFile = new File(FILE_TEST_CONFIGURATION);
 
         if (!configurationFile.exists()) {
             try {
                 BunqContext.loadApiContext(createApiContext());
-            } catch (Exception ignored) {
-            }
-
+            } catch (Exception ignored) {}
             return;
         }
 
@@ -56,10 +56,25 @@ public class Psd2ContextTest {
             BunqContext.loadApiContext(apiContext);
 
             Assert.assertTrue(configurationFile.exists());
-
         } catch (Exception e) {
             Assert.fail(e.getMessage());
         }
+    }
+
+    private ApiContext createApiContext() throws IOException {
+        ApiContext apiContext = ApiContext.createForPsd2(
+                ApiEnvironmentType.SANDBOX,
+                SecurityUtils.getCertificateFromFile(FILE_TEST_CERTIFICATE),
+                SecurityUtils.getPrivateKeyFromFile(FILE_TEST_PRIVATE_KEY),
+                new CertificateObject[]{
+                        SecurityUtils.getCertificateFromFile(FILE_TEST_CERTIFICATE_CHAIN)
+                },
+                TEST_DEVICE_DESCRIPTION,
+                new ArrayList<String>()
+        );
+        apiContext.save(FILE_TEST_CONFIGURATION);
+
+        return apiContext;
     }
 
     @Test
@@ -71,8 +86,8 @@ public class Psd2ContextTest {
         }
 
         try {
-            Integer clientId = OauthClient.create().getValue();
-            OauthClient oauthClient = OauthClient.get(clientId).getValue();
+            Integer clientId = OauthClientApiObject.create().getValue();
+            OauthClientApiObject oauthClient = OauthClientApiObject.get(clientId).getValue();
 
             Assert.assertNotNull(oauthClient);
 
@@ -85,23 +100,9 @@ public class Psd2ContextTest {
             Assert.assertTrue(oauthFile.exists());
 
         } catch (Exception e) {
+            System.err.println("Error: " + e);
+            e.printStackTrace();
             Assert.fail(e.getMessage());
         }
-    }
-
-    private ApiContext createApiContext() throws IOException {
-        ApiContext apiContext = ApiContext.createForPsd2(
-                ApiEnvironmentType.SANDBOX,
-                SecurityUtils.getCertificateFromFile(FILE_TEST_CERTIFICATE),
-                SecurityUtils.getPrivateKeyFromFile(FILE_TEST_PRIVATE_KEY),
-                new Certificate[]{
-                        SecurityUtils.getCertificateFromFile(FILE_TEST_CERTIFICATE_CHAIN)
-                },
-                TEST_DEVICE_DESCRIPTION,
-                new ArrayList<String>()
-        );
-        apiContext.save(FILE_TEST_CONFIGURATION);
-
-        return apiContext;
     }
 }

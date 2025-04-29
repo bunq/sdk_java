@@ -2,9 +2,10 @@ group 'com.bunq.sdk'
 version '1.14.1'
 
 apply plugin: 'java'
-apply plugin: 'maven'
-sourceCompatibility = 1.8
+apply plugin: 'maven-publish'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 sourceSets {
     main {
@@ -22,23 +23,23 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/junit/junit
-    testCompile group: 'junit', name: 'junit', version: '4.13'
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
     // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
-    compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.9'
+    implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.14.9'
     // https://mvnrepository.com/artifact/commons-io/commons-io
-    compile group: 'commons-io', name: 'commons-io', version: '2.7'
+    implementation group: 'commons-io', name: 'commons-io', version: '2.7'
     // https://mvnrepository.com/artifact/com.squareup.okio/okio
-    compile group: 'com.squareup.okio', name: 'okio', version: '1.17.5'
+    implementation group: 'com.squareup.okio', name: 'okio', version: '1.17.5'
     // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
-    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
     // https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-core
-    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
     // https://mvnrepository.com/artifact/com.sun.xml.bind/jaxb-impl
-    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.3'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.3'
     // https://mvnrepository.com/artifact/com.google.code.findbugs/jsr305
-    compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 }
 
 apply plugin: 'idea'

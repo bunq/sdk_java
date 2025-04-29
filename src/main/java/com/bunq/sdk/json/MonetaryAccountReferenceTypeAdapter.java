@@ -1,8 +1,8 @@
 package com.bunq.sdk.json;
 
 import com.bunq.sdk.model.core.MonetaryAccountReference;
-import com.bunq.sdk.model.generated.object.LabelMonetaryAccount;
-import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.object.LabelMonetaryAccountObject;
+import com.bunq.sdk.model.generated.object.PointerObject;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
@@ -21,20 +21,20 @@ public class MonetaryAccountReferenceTypeAdapter extends TypeAdapter<MonetaryAcc
         if (value == null || value.isAllFieldNull()) {
             out.nullValue();
         } else if (value.getLabelMonetaryAccount() != null) {
-            LabelMonetaryAccount labelMonetaryAccount = value.getLabelMonetaryAccount();
+            LabelMonetaryAccountObject labelMonetaryAccount = value.getLabelMonetaryAccount();
 
-            BunqGsonBuilder.buildDefault().create().toJson(labelMonetaryAccount, LabelMonetaryAccount.class, out);
+            BunqGsonBuilder.buildDefault().create().toJson(labelMonetaryAccount, LabelMonetaryAccountObject.class, out);
         } else {
-            Pointer pointer = value.getPointer();
+            PointerObject pointer = value.getPointer();
 
-            BunqGsonBuilder.buildDefault().create().toJson(pointer, Pointer.class, out);
+            BunqGsonBuilder.buildDefault().create().toJson(pointer, PointerObject.class, out);
         }
     }
 
     @Override
     public MonetaryAccountReference read(JsonReader in) throws IOException {
-        LabelMonetaryAccount labelMonetaryAccount =
-                BunqGsonBuilder.buildDefault().create().getAdapter(LabelMonetaryAccount.class).read(in);
+        LabelMonetaryAccountObject labelMonetaryAccount =
+                BunqGsonBuilder.buildDefault().create().getAdapter(LabelMonetaryAccountObject.class).read(in);
 
         return new MonetaryAccountReference(labelMonetaryAccount);
     }

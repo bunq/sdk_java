@@ -90,7 +90,21 @@ abstract public class BunqModel {
     }
 
     private static JsonObject getWrappedContent(JsonObject json, String wrapper) {
-        return json.getAsJsonObject(wrapper);
+        if (wrapper == null || wrapper.isEmpty()) {
+            throw new IllegalArgumentException("Wrapper cannot be null or empty");
+        }
+
+        if (json.has(wrapper)) {
+            return json.getAsJsonObject(wrapper);
+        }
+
+        for (String key : json.keySet()) {
+            if (key.startsWith(wrapper)) {
+                return json.getAsJsonObject(key);
+            }
+        }
+
+        throw new IllegalArgumentException("No JSON object found with key starting with '" + wrapper + "'");
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.bunq.sdk.model.generated.endpoint;
 
 import com.bunq.sdk.BunqSdkTestBase;
+import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.context.SessionContext;
 import com.bunq.sdk.exception.ApiException;
@@ -29,12 +30,11 @@ public class SessionTest extends BunqSdkTestBase {
      */
     @Test
     public void deleteSessionTest() {
-        SessionContext context = BunqContext.getApiContext().getSessionContext();
-        Session.delete(SESSION_ID_DUMMY);
+        System.out.println(SessionApiObject.delete(SESSION_ID_DUMMY).getValue());
         ApiException bunqException = null;
 
         try {
-            User.list();
+            UserApiObject.list().getValue();
         } catch (ForbiddenException exception) {
             bunqException = exception;
         }

@@ -7,7 +7,7 @@ import com.bunq.sdk.http.BunqBasicHeader;
 import com.bunq.sdk.http.BunqHeader;
 import com.bunq.sdk.http.BunqRequestBuilder;
 import com.bunq.sdk.http.HttpMethod;
-import com.bunq.sdk.model.generated.object.Certificate;
+import com.bunq.sdk.model.generated.object.CertificateObject;
 import com.bunq.sdk.util.BunqUtil;
 import okhttp3.Headers;
 import okhttp3.Response;
@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
@@ -123,11 +124,6 @@ public final class SecurityUtils {
      * Length of an empty array.
      */
     private static final int ARRAY_LENGTH_EMPTY = 0;
-
-    /**
-     * Delimiter constants for building the data to sign.
-     */
-    private static final String DELIMITER_METHOD_PATH = " ";
 
     /**
      * The index of the first item in an array.
@@ -231,7 +227,7 @@ public final class SecurityUtils {
     public static PrivateKey getPrivateKeyFromFile(String path) {
         try {
             File keyFile = new File(path);
-            String keyString = FileUtils.readFileToString(keyFile);
+            String keyString = FileUtils.readFileToString(keyFile, StandardCharsets.UTF_8);
 
             return createPrivateKeyFromFormattedString(keyString);
         } catch (IOException exception) {
@@ -525,19 +521,19 @@ public final class SecurityUtils {
         return outputStream.toByteArray();
     }
 
-    public static String getCertificateChainString(Certificate[] allChainCertificate) {
+    public static String getCertificateChainString(CertificateObject[] allChainCertificate) {
         StringBuilder chainString = new StringBuilder();
-        for (Certificate certificate : allChainCertificate) {
+        for (CertificateObject certificate : allChainCertificate) {
             chainString.append(certificate.getCertificate());
             chainString.append(NEWLINE);
         }
         return chainString.toString();
     }
 
-    public static Certificate getCertificateFromFile(String path) throws IOException {
+    public static CertificateObject getCertificateFromFile(String path) throws IOException {
         File certificateFile = new File(path);
         if (certificateFile.exists()) {
-            Certificate certificate = new Certificate();
+            CertificateObject certificate = new CertificateObject();
             certificate.setCertificate(FileUtils.readFileToString(certificateFile, "UTF-8"));
             return certificate;
         } else {

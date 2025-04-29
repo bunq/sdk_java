@@ -4,7 +4,7 @@ package com.bunq.sdk.model.generated.endpoint;
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.Pagination;
-import com.bunq.sdk.model.generated.object.Amount;
+import com.bunq.sdk.model.generated.object.AmountObject;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -41,13 +41,12 @@ public class PaymentTest extends BunqSdkTestBase {
      */
     @Test
     public void makePaymentToOtherUser() {
-        Amount amount = new Amount(AMOUNT_EUR, CURRENCY_EUR);
-
-        BunqResponse<Integer> response = Payment.create(
+        AmountObject amount = new AmountObject(AMOUNT_EUR, CURRENCY_EUR);
+        requestSpendingMoneyIfNeeded();
+        BunqResponse<Integer> response = PaymentApiObject.create(
                 amount,
                 secondMonetaryAccountBank.getAlias().get(INDEX_FIRST),
-                PAYMENT_DESCRIPTION,
-                null
+                PAYMENT_DESCRIPTION
         );
 
         Assert.assertNotNull(response);
@@ -60,9 +59,9 @@ public class PaymentTest extends BunqSdkTestBase {
      */
     @Test
     public void makePaymentToOtherAccount() {
-        Amount amount = new Amount(AMOUNT_EUR, CURRENCY_EUR);
-
-        BunqResponse<Integer> response = Payment.create(amount, getPointerBravo(), PAYMENT_DESCRIPTION);
+        AmountObject amount = new AmountObject(AMOUNT_EUR, CURRENCY_EUR);
+        requestSpendingMoneyIfNeeded();
+        BunqResponse<Integer> response = PaymentApiObject.create(amount, getPointerBravo(), PAYMENT_DESCRIPTION);
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getValue());
@@ -73,31 +72,31 @@ public class PaymentTest extends BunqSdkTestBase {
         Pagination pagination = new Pagination();
         pagination.setCount(PAGE_SIZE);
 
-        List<Payment> allPayment = Payment.list(
+        List<PaymentApiObject> allPayment = PaymentApiObject.list(
                 null,
                 pagination.getUrlParamsCountOnly()
         ).getValue();
 
-        for (Payment payment : allPayment) {
+        for (PaymentApiObject payment : allPayment) {
             Assert.assertNotNull(payment.getCounterpartyAlias());
             Assert.assertFalse(payment.getCounterpartyAlias().isAllFieldNull());
-            Assert.assertNotEquals(payment.getCounterpartyAlias().toString(), STRING_NULL);
+            Assert.assertNotEquals(STRING_NULL, payment.getCounterpartyAlias().toString());
         }
     }
 
     @Test
     public void paymentBatchTest() {
-        BunqResponse<Integer> response = PaymentBatch.create(createPaymentForBatch());
+        BunqResponse<Integer> response = PaymentBatchApiObject.create(createPaymentForBatch());
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getValue());
     }
 
-    private List<Payment> createPaymentForBatch() {
-        List<Payment> allPayment = new ArrayList<>();
+    private List<PaymentApiObject> createPaymentForBatch() {
+        List<PaymentApiObject> allPayment = new ArrayList<>();
 
         while (allPayment.size() < MAXIMUM_AMOUNT_OF_PAYMENT) {
-            allPayment.add(new Payment(new Amount(AMOUNT_EUR, CURRENCY_EUR), getPointerBravo(), PAYMENT_DESCRIPTION));
+            allPayment.add(new PaymentApiObject(new AmountObject(AMOUNT_EUR, CURRENCY_EUR), getPointerBravo(), PAYMENT_DESCRIPTION));
         }
 
         return allPayment;

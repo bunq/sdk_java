@@ -6,8 +6,8 @@ import com.bunq.sdk.model.core.AnchorObjectInterface;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.core.SessionServer;
-import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultInquiry;
-import com.bunq.sdk.model.generated.object.Geolocation;
+import com.bunq.sdk.model.generated.endpoint.BunqMeTabResultInquiryApiObject;
+import com.bunq.sdk.model.generated.object.GeolocationObject;
 import com.google.gson.GsonBuilder;
 
 import java.math.BigDecimal;
@@ -30,14 +30,14 @@ public class BunqGsonBuilder {
                 .registerTypeAdapter(Installation.class, new InstallationAdapter())
                 .registerTypeAdapter(SessionServer.class, new SessionServerAdapter())
                 .registerTypeAdapter(BigDecimal.class, new BigDecimalTypeAdapter())
-                .registerTypeAdapter(Geolocation.class, new GeolocationTypeAdapter())
+                .registerTypeAdapter(GeolocationObject.class, new GeolocationTypeAdapter())
                 .registerTypeAdapter(
                         MonetaryAccountReference.class,
                         new MonetaryAccountReferenceTypeAdapter()
                 )
                 .registerTypeAdapter(InstallationContext.class, new InstallationContextAdapter())
                 .registerTypeAdapter(Pagination.class, new PaginationAdapter())
-                .registerTypeAdapter(BunqMeTabResultInquiry.class, new BunqMeTabResultInquiryDeserializer())
+                .registerTypeAdapter(BunqMeTabResultInquiryApiObject.class, new BunqMeTabResultInquiryDeserializer())
                 .registerTypeHierarchyAdapter(AnchorObjectInterface.class, new AnchorObjectAdapter());
     }
 }

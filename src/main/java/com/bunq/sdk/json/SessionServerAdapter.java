@@ -4,10 +4,10 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.model.core.Id;
 import com.bunq.sdk.model.core.SessionServer;
 import com.bunq.sdk.model.core.SessionToken;
-import com.bunq.sdk.model.generated.endpoint.UserApiKey;
-import com.bunq.sdk.model.generated.endpoint.UserCompany;
-import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProvider;
-import com.bunq.sdk.model.generated.endpoint.UserPerson;
+import com.bunq.sdk.model.generated.endpoint.UserApiKeyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserCompanyApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPaymentServiceProviderApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserPersonApiObject;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -50,30 +50,30 @@ public class SessionServerAdapter implements JsonDeserializer<SessionServer> {
         JsonObject userBody = values.get(INDEX_USER).getAsJsonObject();
 
         if (userBody.has(FIELD_USER_COMPANY)) {
-            UserCompany userCompany = context.deserialize(
+            UserCompanyApiObject userCompany = context.deserialize(
                     userBody.get(FIELD_USER_COMPANY),
-                    UserCompany.class
+                    UserCompanyApiObject.class
             );
 
             return new SessionServer(id, token, userCompany);
         } else if (userBody.has(FIELD_USER_PERSON)) {
-            UserPerson userPerson = context.deserialize(
+            UserPersonApiObject userPerson = context.deserialize(
                     userBody.get(FIELD_USER_PERSON),
-                    UserPerson.class
+                    UserPersonApiObject.class
             );
 
             return new SessionServer(id, token, userPerson);
         } else if (userBody.has(FIELD_USER_API_KEY)) {
-            UserApiKey userApiKey = context.deserialize(
+            UserApiKeyApiObject userApiKey = context.deserialize(
                     userBody.get(FIELD_USER_API_KEY),
-                    UserApiKey.class
+                    UserApiKeyApiObject.class
             );
 
             return new SessionServer(id, token, userApiKey);
         } else if (userBody.has(FIELD_USER_PAYMENT_SERVER_PROVIDER)) {
-            UserPaymentServiceProvider userPaymentServiceProvider = context.deserialize(
+            UserPaymentServiceProviderApiObject userPaymentServiceProvider = context.deserialize(
                     userBody.get(FIELD_USER_PAYMENT_SERVER_PROVIDER),
-                    UserPaymentServiceProvider.class
+                    UserPaymentServiceProviderApiObject.class
             );
 
             return new SessionServer(id, token, userPaymentServiceProvider);

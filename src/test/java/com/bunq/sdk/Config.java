@@ -1,6 +1,6 @@
 package com.bunq.sdk;
 
-import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.object.PointerObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,7 +40,6 @@ public class Config {
     private static final String FIELD_MONETARY_ACCOUNT_ID2 = "MONETARY_ACCOUNT_ID2";
     private static final String FIELD_COUNTER_PARTY_ALIAS = "COUNTER_PARTY_ALIAS";
     private static final String FIELD_COUNTER_PARTY_TYPE = "COUNTER_PARTY_TYPE";
-    private static final String FIELD_CASH_REGISTER_ID = "CASH_REGISTER_ID";
     private static final String FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS = "SAME_USER_OTHER_ACCOUNT_ALIAS";
     private static final String FIELD_SAME_USER_OTHER_ACCOUNT_TYPE = "SAME_USER_OTHER_ACCOUNT_TYPE";
     private static final String FIELD_PAYMENT_ID_WITH_GEOLOCATION = "PAYMENT_ID_WITH_GEOLOCATION";
@@ -102,22 +101,18 @@ public class Config {
         return Integer.parseInt(properties.getProperty(FIELD_MONETARY_ACCOUNT_ID2));
     }
 
-    public static Pointer getCounterPartyAliasOther() {
+    public static PointerObject getCounterPartyAliasOther() {
         String type = properties.getProperty(FIELD_COUNTER_PARTY_TYPE);
         String value = properties.getProperty(FIELD_COUNTER_PARTY_ALIAS);
 
-        return new Pointer(type, value);
+        return new PointerObject(type, value);
     }
 
-    public static Integer getCashRegisterId() {
-        return Integer.parseInt(properties.getProperty(FIELD_CASH_REGISTER_ID));
-    }
-
-    public static Pointer getCounterPartyAliasSelf() {
+    public static PointerObject getCounterPartyAliasSelf() {
         String type = properties.getProperty(FIELD_SAME_USER_OTHER_ACCOUNT_TYPE);
         String value = properties.getProperty(FIELD_SAME_USER_OTHER_ACCOUNT_ALIAS);
 
-        return new Pointer(type, value);
+        return new PointerObject(type, value);
     }
 
     public static Integer getPaymentIdWithGeolocation() {

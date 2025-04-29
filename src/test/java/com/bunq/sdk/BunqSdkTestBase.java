@@ -6,12 +6,11 @@ import com.bunq.sdk.context.BunqContext;
 import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.BunqHeader;
 import com.bunq.sdk.http.BunqResponse;
-import com.bunq.sdk.model.generated.endpoint.CashRegister;
-import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
-import com.bunq.sdk.model.generated.endpoint.RequestInquiry;
-import com.bunq.sdk.model.generated.endpoint.SandboxUserPerson;
-import com.bunq.sdk.model.generated.object.Amount;
-import com.bunq.sdk.model.generated.object.Pointer;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBankApiObject;
+import com.bunq.sdk.model.generated.endpoint.RequestInquiryApiObject;
+import com.bunq.sdk.model.generated.endpoint.SandboxUserPersonApiObject;
+import com.bunq.sdk.model.generated.object.AmountObject;
+import com.bunq.sdk.model.generated.object.PointerObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
@@ -56,19 +55,17 @@ public class BunqSdkTestBase {
     protected static final String SUGAR_DADDY_EMAIL = "sugardaddy@bunq.com";
     protected static final String SUGAR_DADDY_REQUESTS_DESCRIPTION = "sdk java test, thanks daddy <3";
     protected static final String EMAIL_BRAVO = "bravo@bunq.com";
-    protected static final String CASH_REGISTER_DESCRIPTION = "java cash register test";
 
     /**
      * Individual properties.
      */
-    protected static MonetaryAccountBank secondMonetaryAccountBank;
-    protected static CashRegister cashRegister;
+    protected static MonetaryAccountBankApiObject secondMonetaryAccountBank;
 
     @BeforeClass
     public static void setUpBeforeClass() {
         BunqContext.loadApiContext(getApiContext());
         setSecondMonetaryAccountBank();
-        requestSpendingMoney();
+        requestSpendingMoneyIfNeeded();
 
         try {
             Thread.sleep(500);
@@ -90,7 +87,7 @@ public class BunqSdkTestBase {
 
             return apiContext;
         } else {
-            SandboxUserPerson sandboxUser = generateNewSandboxUser();
+            SandboxUserPersonApiObject sandboxUser = generateNewSandboxUser();
             ApiContext apiContext = ApiContext.create(
                     ApiEnvironmentType.SANDBOX,
                     sandboxUser.getApiKey(),
@@ -108,7 +105,7 @@ public class BunqSdkTestBase {
         return confFile.exists() && !confFile.isDirectory();
     }
 
-    private static SandboxUserPerson generateNewSandboxUser() {
+    private static SandboxUserPersonApiObject generateNewSandboxUser() {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -140,7 +137,7 @@ public class BunqSdkTestBase {
                         .get(FIELD_API_KEY)
                         .getAsJsonObject();
 
-                return SandboxUserPerson.fromJsonReader(new JsonReader(new StringReader(apiKEy.toString())));
+                return SandboxUserPersonApiObject.fromJsonReader(new JsonReader(new StringReader(apiKEy.toString())));
             } else {
                 throw new BunqException(
                         String.format(ERROR_COULD_NOT_GENERATE_NEW_API_KEY, response.body().string())
@@ -152,9 +149,9 @@ public class BunqSdkTestBase {
     }
 
     private static void setSecondMonetaryAccountBank() {
-        BunqResponse<Integer> response = MonetaryAccountBank.create(CURRENCY_EUR, ACCOUNT_DESCRIPTION);
+        BunqResponse<Integer> response = MonetaryAccountBankApiObject.create(CURRENCY_EUR, ACCOUNT_DESCRIPTION);
 
-        secondMonetaryAccountBank = MonetaryAccountBank.get(response.getValue()).getValue();
+        secondMonetaryAccountBank = MonetaryAccountBankApiObject.get(response.getValue()).getValue();
     }
 
     /**
@@ -162,20 +159,21 @@ public class BunqSdkTestBase {
      * we sent a request to suggerdaddy@bunq.com
      * to top-up the account.
      */
-    private static void requestSpendingMoney() {
+    protected static void requestSpendingMoneyIfNeeded() {
+
         if (shouldMoneyBeRequested(BunqContext.getUserContext().getPrimaryMonetaryAccountBank())) {
-            RequestInquiry.create(
-                    new Amount(SPENDING_MONEY_AMOUNT, CURRENCY_EUR),
-                    new Pointer(POINTER_TYPE_EMAIL, SUGAR_DADDY_EMAIL),
+            RequestInquiryApiObject.create(
+                    new AmountObject(SPENDING_MONEY_AMOUNT, CURRENCY_EUR),
+                    new PointerObject(POINTER_TYPE_EMAIL, SUGAR_DADDY_EMAIL),
                     SUGAR_DADDY_REQUESTS_DESCRIPTION,
                     false
             );
         }
 
         if (shouldMoneyBeRequested(secondMonetaryAccountBank)) {
-            RequestInquiry.create(
-                    new Amount(SPENDING_MONEY_AMOUNT, CURRENCY_EUR),
-                    new Pointer(POINTER_TYPE_EMAIL, SUGAR_DADDY_EMAIL),
+            RequestInquiryApiObject.create(
+                    new AmountObject(SPENDING_MONEY_AMOUNT, CURRENCY_EUR),
+                    new PointerObject(POINTER_TYPE_EMAIL, SUGAR_DADDY_EMAIL),
                     SUGAR_DADDY_REQUESTS_DESCRIPTION,
                     false,
                     secondMonetaryAccountBank.getId()
@@ -183,20 +181,11 @@ public class BunqSdkTestBase {
         }
     }
 
-    protected static Pointer getPointerBravo() {
-        return new Pointer(POINTER_TYPE_EMAIL, EMAIL_BRAVO);
+    protected static PointerObject getPointerBravo() {
+        return new PointerObject(POINTER_TYPE_EMAIL, EMAIL_BRAVO);
     }
 
-    protected static CashRegister getCashRegister() {
-        if (cashRegister == null) {
-            BunqResponse<Integer> response = CashRegister.create(CASH_REGISTER_DESCRIPTION);
-            cashRegister = CashRegister.get(response.getValue()).getValue();
-        }
-
-        return cashRegister;
-    }
-
-    private static boolean shouldMoneyBeRequested(MonetaryAccountBank monetaryAccountBank) {
+    private static boolean shouldMoneyBeRequested(MonetaryAccountBankApiObject monetaryAccountBank) {
         return Float.parseFloat(monetaryAccountBank.getBalance().getValue()) < 10;
     }
 }

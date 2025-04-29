@@ -5,8 +5,8 @@ import com.bunq.sdk.exception.BunqException;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBank;
-import com.bunq.sdk.model.generated.endpoint.User;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccountBankApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserApiObject;
 
 import java.util.List;
 
@@ -23,6 +23,11 @@ public class UserContextHelper extends BunqModel {
      */
     private static final String ENDPOINT_USER = "user";
     private static final String ENDPOINT_MONETARY_ACCOUNT_BANK = "user/%s/monetary-account-bank";
+
+    /**
+     * Object type.
+     */
+    private static final String MONETARY_ACCOUNT_BANK_OBJECT_TYPE_GET = "MonetaryAccountBank";
 
     /**
      * The index of the first item in an array.
@@ -44,25 +49,25 @@ public class UserContextHelper extends BunqModel {
         return this.apiClient.get(url, null, null);
     }
 
-    public User getFirstUser() {
+    public UserApiObject getFirstUser() {
         BunqResponseRaw responseRaw = getRawResponse(ENDPOINT_USER);
-        BunqResponse<List<User>> response = fromJsonList(User.class, responseRaw);
+        BunqResponse<List<UserApiObject>> response = fromJsonList(UserApiObject.class, responseRaw);
 
         return response.getValue().get(INDEX_FIRST);
     }
 
-    public MonetaryAccountBank getFirstActiveMonetaryAccountBankByUserId(Integer userId) {
+    public MonetaryAccountBankApiObject getFirstActiveMonetaryAccountBankByUserId(Integer userId) {
         BunqResponseRaw responseRaw = getRawResponse(
                 String.format(ENDPOINT_MONETARY_ACCOUNT_BANK, userId)
         );
-        String wrapper = MonetaryAccountBank.class.getSimpleName();
-        BunqResponse<List<MonetaryAccountBank>> response = fromJsonList(
-                MonetaryAccountBank.class,
+
+        BunqResponse<List<MonetaryAccountBankApiObject>> response = fromJsonList(
+                MonetaryAccountBankApiObject.class,
                 responseRaw,
-                wrapper
+                MONETARY_ACCOUNT_BANK_OBJECT_TYPE_GET
         );
 
-        for (MonetaryAccountBank monetaryAccountBank : response.getValue()) {
+        for (MonetaryAccountBankApiObject monetaryAccountBank : response.getValue()) {
             if (STATUS_ACTIVE.equals(monetaryAccountBank.getStatus())) {
                 return monetaryAccountBank;
             }

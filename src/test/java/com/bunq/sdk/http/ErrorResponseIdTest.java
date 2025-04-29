@@ -2,7 +2,7 @@ package com.bunq.sdk.http;
 
 import com.bunq.sdk.BunqSdkTestBase;
 import com.bunq.sdk.exception.ApiException;
-import com.bunq.sdk.model.generated.endpoint.MonetaryAccount;
+import com.bunq.sdk.model.generated.endpoint.MonetaryAccountApiObject;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -19,7 +19,7 @@ public class ErrorResponseIdTest extends BunqSdkTestBase {
         ApiException caughtException = null;
 
         try {
-            MonetaryAccount.get(INVALID_MONETARY_ACCOUNT_ID);
+            MonetaryAccountApiObject.get(INVALID_MONETARY_ACCOUNT_ID);
         } catch (ApiException $exception) {
             caughtException = $exception;
         }

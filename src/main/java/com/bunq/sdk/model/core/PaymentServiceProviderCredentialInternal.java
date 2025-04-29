@@ -4,13 +4,13 @@ import com.bunq.sdk.context.ApiContext;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.PaymentServiceProviderCredential;
-import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIp;
+import com.bunq.sdk.model.generated.endpoint.PaymentServiceProviderCredentialApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIpApiObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class PaymentServiceProviderCredentialInternal extends PaymentServiceProviderCredential {
+public class PaymentServiceProviderCredentialInternal extends PaymentServiceProviderCredentialApiObject {
     /**
      * Object types.
      */
@@ -26,7 +26,7 @@ public class PaymentServiceProviderCredentialInternal extends PaymentServiceProv
     /**
      * Create PSD2 Service Provider credential.
      */
-    public static BunqResponse<UserCredentialPasswordIp> createWithApiContext(
+    public static BunqResponse<UserCredentialPasswordIpApiObject> createWithApiContext(
             String clientPaymentServiceProviderCertificate,
             String clientPaymentServiceProviderCertificateChain,
             String clientPublicKeySignature,
@@ -38,7 +38,7 @@ public class PaymentServiceProviderCredentialInternal extends PaymentServiceProv
     /**
      * Create PSD2 Service Provider credential.
      */
-    public static BunqResponse<UserCredentialPasswordIp> createWithApiContext(
+    public static BunqResponse<UserCredentialPasswordIpApiObject> createWithApiContext(
             String clientPaymentServiceProviderCertificate,
             String clientPaymentServiceProviderCertificateChain,
             String clientPublicKeySignature,
@@ -57,6 +57,6 @@ public class PaymentServiceProviderCredentialInternal extends PaymentServiceProv
                 allCustomHeader
         );
 
-        return fromJson(UserCredentialPasswordIp.class, responseRaw, OBJECT_TYPE_GET);
+        return fromJson(UserCredentialPasswordIpApiObject.class, responseRaw, OBJECT_TYPE_GET);
     }
 }

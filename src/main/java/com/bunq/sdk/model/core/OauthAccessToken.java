@@ -7,7 +7,7 @@ import com.bunq.sdk.http.AnonymousApiClient;
 import com.bunq.sdk.http.ApiClient;
 import com.bunq.sdk.http.BunqResponse;
 import com.bunq.sdk.http.BunqResponseRaw;
-import com.bunq.sdk.model.generated.endpoint.OauthClient;
+import com.bunq.sdk.model.generated.endpoint.OauthClientApiObject;
 import com.bunq.sdk.util.HttpUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
@@ -89,7 +89,7 @@ public class OauthAccessToken extends BunqModel {
             OauthGrantType grantType,
             String authCode,
             String redirectUri,
-            OauthClient client
+            OauthClientApiObject client
     ) {
         ApiClient apiClient = new AnonymousApiClient(BunqContext.getApiContext());
         BunqResponseRaw responseRaw = apiClient.post(
@@ -108,7 +108,7 @@ public class OauthAccessToken extends BunqModel {
             final String grantType,
             final String authCode,
             final String redirectUri,
-            final OauthClient client
+            final OauthClientApiObject client
     ) {
         Map<String, String> allTokenParameter = new HashMap<String, String>() {
             {

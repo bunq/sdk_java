@@ -7,9 +7,9 @@ import com.bunq.sdk.model.core.DeviceServerInternal;
 import com.bunq.sdk.model.core.Installation;
 import com.bunq.sdk.model.core.PaymentServiceProviderCredentialInternal;
 import com.bunq.sdk.model.core.SessionServer;
-import com.bunq.sdk.model.generated.endpoint.Session;
-import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIp;
-import com.bunq.sdk.model.generated.object.Certificate;
+import com.bunq.sdk.model.generated.endpoint.SessionApiObject;
+import com.bunq.sdk.model.generated.endpoint.UserCredentialPasswordIpApiObject;
+import com.bunq.sdk.model.generated.object.CertificateObject;
 import com.bunq.sdk.security.SecurityUtils;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
@@ -154,16 +154,16 @@ public class ApiContext implements java.io.Serializable {
      */
     public static ApiContext createForPsd2(
             ApiEnvironmentType environmentType,
-            Certificate certificate,
+            CertificateObject certificate,
             PrivateKey privateKey,
-            Certificate[] allChainCertificate,
+            CertificateObject[] allChainCertificate,
             String description,
             List<String> allPermittedIp
     ) {
         ApiContext apiContext = new ApiContext(environmentType);
 
         apiContext.initializeInstallation();
-        UserCredentialPasswordIp serviceProviderCredential = apiContext.initializePsd2Credential(
+        UserCredentialPasswordIpApiObject serviceProviderCredential = apiContext.initializePsd2Credential(
                 certificate,
                 privateKey,
                 allChainCertificate
@@ -184,9 +184,9 @@ public class ApiContext implements java.io.Serializable {
      */
     public static ApiContext createForPsd2(
             ApiEnvironmentType environmentType,
-            Certificate certificate,
+            CertificateObject certificate,
             PrivateKey privateKey,
-            Certificate[] allChainCertificate,
+            CertificateObject[] allChainCertificate,
             String description,
             List<String> allPermittedIp,
             String proxy
@@ -248,10 +248,10 @@ public class ApiContext implements java.io.Serializable {
     /**
      * Initialize the context with Psd2 credentials.
      */
-    private UserCredentialPasswordIp initializePsd2Credential(
-            Certificate certificate,
+    private UserCredentialPasswordIpApiObject initializePsd2Credential(
+            CertificateObject certificate,
             PrivateKey privateKey,
-            Certificate[] allChainCertificate
+            CertificateObject[] allChainCertificate
     ) {
         String sessionToken = installationContext.getToken();
         KeyPair clientKeyPair = installationContext.getKeyPairClient();
@@ -259,7 +259,7 @@ public class ApiContext implements java.io.Serializable {
         String stringToSign = SecurityUtils.getPublicKeyFormattedString(clientKeyPair.getPublic()) + sessionToken;
         String encodedSignature = SecurityUtils.generateSignature(stringToSign, privateKey);
 
-        BunqResponse<UserCredentialPasswordIp> paymentProviderResponse = PaymentServiceProviderCredentialInternal.createWithApiContext(
+        BunqResponse<UserCredentialPasswordIpApiObject> paymentProviderResponse = PaymentServiceProviderCredentialInternal.createWithApiContext(
                 certificate.getCertificate(),
                 SecurityUtils.getCertificateChainString(allChainCertificate),
                 encodedSignature,
@@ -301,7 +301,7 @@ public class ApiContext implements java.io.Serializable {
     }
 
     private void deleteSession() {
-        Session.delete(SESSION_ID_DUMMY);
+        SessionApiObject.delete(SESSION_ID_DUMMY);
     }
 
     /**
