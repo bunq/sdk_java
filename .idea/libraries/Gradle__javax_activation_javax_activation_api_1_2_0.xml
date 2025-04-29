@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: javax.activation:javax.activation-api:1.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="javax.activation" artifactId="javax.activation-api" version="1.2.0" baseVersion="1.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/javax.activation/javax.activation-api/1.2.0/85262acf3ca9816f9537ca47d5adeabaead7cb16/javax.activation-api-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
