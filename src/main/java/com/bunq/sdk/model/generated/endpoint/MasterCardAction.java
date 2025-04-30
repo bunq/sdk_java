@@ -42,6 +42,20 @@ public class MasterCardAction extends BunqModel {
   @Expose
   @SerializedName("id")
   private Integer id;
+  
+  /**
+   * The date string of when the MastercardAction was created
+   */
+  @Expose
+  @SerializedName("created")
+  private String created;
+
+  /**
+   * The date string of when the MastercardAction was last updated
+   */
+  @Expose
+  @SerializedName("updated")
+  private String updated;
 
   /**
    * The id of the monetary account this action links to.
