@@ -114,7 +114,7 @@ public class NoteAttachmentMasterCardActionApiObject extends BunqModel {
    * @param description Optional description of the attachment.
    * @param attachmentId The reference to the uploaded file to attach to this note.
    */
-  public static BunqResponse<Integer> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -131,30 +131,30 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId) {
+  public static BunqResponse<Long> create(Integer mastercardActionId) {
     return create(mastercardActionId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId, String description) {
+  public static BunqResponse<Long> create(Integer mastercardActionId, String description) {
     return create(mastercardActionId, description, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId, String description, Integer attachmentId) {
+  public static BunqResponse<Long> create(Integer mastercardActionId, String description, Integer attachmentId) {
     return create(mastercardActionId, description, attachmentId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId) {
     return create(mastercardActionId, description, attachmentId, monetaryAccountId, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,19 +170,19 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer mastercardActionId) {
+  public static BunqResponse<Long> update(Integer mastercardActionId) {
     return update(mastercardActionId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId) {
+  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId) {
     return update(mastercardActionId, noteAttachmentMasterCardActionId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId) {
     return update(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, String description) {
     return update(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, description, null);
   }
 

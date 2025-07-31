@@ -173,7 +173,7 @@ public class BunqMeTabApiObject extends BunqModel {
    * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    * @param eventId The ID of the related event if the bunqMeTab made by 'split' functionality.
    */
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -191,23 +191,23 @@ requestMap.put(FIELD_EVENT_ID, eventId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry) {
     return create(bunqmeTabEntry, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId) {
     return create(bunqmeTabEntry, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status) {
     return create(bunqmeTabEntry, monetaryAccountId, status, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId) {
     return create(bunqmeTabEntry, monetaryAccountId, status, eventId, null);
   }
 
@@ -215,7 +215,7 @@ requestMap.put(FIELD_EVENT_ID, eventId);
    * @param status The status of the bunq.me. Ignored in POST requests but can be used for
    * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    */
-  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer bunqMeTabId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -231,15 +231,15 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer bunqMeTabId) {
+  public static BunqResponse<Long> update(Integer bunqMeTabId) {
     return update(bunqMeTabId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer bunqMeTabId, Integer monetaryAccountId) {
     return update(bunqMeTabId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> update(Integer bunqMeTabId, Integer monetaryAccountId, String status) {
     return update(bunqMeTabId, monetaryAccountId, status, null);
   }
 

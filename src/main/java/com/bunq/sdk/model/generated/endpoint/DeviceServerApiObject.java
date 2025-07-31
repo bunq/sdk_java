@@ -136,7 +136,7 @@ public class DeviceServerApiObject extends BunqModel {
    * @param permittedIps An array of IPs (v4 or v6) this DeviceServer will be able to do calls
    * from. These will be linked to the API key.
    */
-  public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String description, String secret, List<String> permittedIps, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -154,19 +154,19 @@ requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String description) {
+  public static BunqResponse<Long> create(String description) {
     return create(description, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String description, String secret) {
+  public static BunqResponse<Long> create(String description, String secret) {
     return create(description, secret, null, null);
   }
 
-  public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps) {
+  public static BunqResponse<Long> create(String description, String secret, List<String> permittedIps) {
     return create(description, secret, permittedIps, null);
   }
 

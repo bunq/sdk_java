@@ -114,7 +114,7 @@ public class NoteAttachmentScheduleInstanceApiObject extends BunqModel {
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -131,34 +131,34 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleId) {
+  public static BunqResponse<Long> create(Integer scheduleId) {
     return create(scheduleId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleId, Integer scheduleInstanceId) {
+  public static BunqResponse<Long> create(Integer scheduleId, Integer scheduleInstanceId) {
     return create(scheduleId, scheduleInstanceId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId) {
     return create(scheduleId, scheduleInstanceId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId) {
     return create(scheduleId, scheduleInstanceId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Integer scheduleId, Integer scheduleInstanceId, Integer attachmentId, Integer monetaryAccountId, String description) {
     return create(scheduleId, scheduleInstanceId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -174,23 +174,23 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId) {
+  public static BunqResponse<Long> update(Integer scheduleId) {
     return update(scheduleId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId) {
     return update(scheduleId, scheduleInstanceId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId) {
     return update(scheduleId, scheduleInstanceId, noteAttachmentScheduleInstanceId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId, Integer monetaryAccountId) {
     return update(scheduleId, scheduleInstanceId, noteAttachmentScheduleInstanceId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer noteAttachmentScheduleInstanceId, Integer monetaryAccountId, String description) {
     return update(scheduleId, scheduleInstanceId, noteAttachmentScheduleInstanceId, monetaryAccountId, description, null);
   }
 

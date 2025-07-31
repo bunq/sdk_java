@@ -260,7 +260,7 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   /**
    * Update a specific existing MonetaryAccountCard.
    */
-  public static BunqResponse<Integer> update(Integer monetaryAccountCardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer monetaryAccountCardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -275,7 +275,7 @@ public class MonetaryAccountCardApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountCardId) {
+  public static BunqResponse<Long> update(Integer monetaryAccountCardId) {
     return update(monetaryAccountCardId, null);
   }
 

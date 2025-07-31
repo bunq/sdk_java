@@ -88,7 +88,7 @@ public class OauthCallbackUrlApiObject extends BunqModel {
   /**
    * @param url The URL for this callback.
    */
-  public static BunqResponse<Integer> create(Integer oauthClientId, String url, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer oauthClientId, String url, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -104,22 +104,22 @@ requestMap.put(FIELD_URL, url);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer oauthClientId) {
+  public static BunqResponse<Long> create(Integer oauthClientId) {
     return create(oauthClientId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer oauthClientId, String url) {
+  public static BunqResponse<Long> create(Integer oauthClientId, String url) {
     return create(oauthClientId, url, null);
   }
 
   /**
    * @param url The URL for this callback.
    */
-  public static BunqResponse<Integer> update(Integer oauthClientId, Integer oauthCallbackUrlId, String url, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer oauthClientId, Integer oauthCallbackUrlId, String url, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,15 +135,15 @@ requestMap.put(FIELD_URL, url);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId) {
+  public static BunqResponse<Long> update(Integer oauthClientId) {
     return update(oauthClientId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId, Integer oauthCallbackUrlId) {
+  public static BunqResponse<Long> update(Integer oauthClientId, Integer oauthCallbackUrlId) {
     return update(oauthClientId, oauthCallbackUrlId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId, Integer oauthCallbackUrlId, String url) {
+  public static BunqResponse<Long> update(Integer oauthClientId, Integer oauthCallbackUrlId, String url) {
     return update(oauthClientId, oauthCallbackUrlId, url, null);
   }
 

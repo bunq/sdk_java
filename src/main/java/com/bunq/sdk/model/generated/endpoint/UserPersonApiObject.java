@@ -676,7 +676,7 @@ public class UserPersonApiObject extends BunqModel {
    * @param displayName The person's legal name. Available legal names can be listed via the
    * 'user/{user_id}/legal-name' endpoint.
    */
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, String displayName, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, String displayName, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -716,103 +716,103 @@ requestMap.put(FIELD_DISPLAY_NAME, displayName);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(String firstName) {
+  public static BunqResponse<Long> update(String firstName) {
     return update(firstName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName) {
+  public static BunqResponse<Long> update(String firstName, String middleName) {
     return update(firstName, middleName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName) {
     return update(firstName, middleName, lastName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName) {
     return update(firstName, middleName, lastName, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, status, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, status, subStatus, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, status, subStatus, legalGuardianAlias, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, null, null);
   }
 
-  public static BunqResponse<Integer> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, String displayName) {
+  public static BunqResponse<Long> update(String firstName, String middleName, String lastName, String publicNickName, AddressObject addressMain, AddressObject addressPostal, String avatarUuid, List<TaxResidentObject> taxResident, String documentType, String documentNumber, String documentCountryOfIssuance, Integer documentFrontAttachmentId, Integer documentBackAttachmentId, String dateOfBirth, String nationality, List<String> allNationality, String language, String region, String gender, String status, String subStatus, PointerObject legalGuardianAlias, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, String displayName) {
     return update(firstName, middleName, lastName, publicNickName, addressMain, addressPostal, avatarUuid, taxResident, documentType, documentNumber, documentCountryOfIssuance, documentFrontAttachmentId, documentBackAttachmentId, dateOfBirth, nationality, allNationality, language, region, gender, status, subStatus, legalGuardianAlias, sessionTimeout, dailyLimitWithoutConfirmationLogin, displayName, null);
   }
 

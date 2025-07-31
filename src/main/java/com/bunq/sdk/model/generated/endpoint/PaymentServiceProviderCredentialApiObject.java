@@ -158,7 +158,7 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
    * during installation and with the installation token appended as a nonce. Signed with the
    * private key belonging to the QSEAL certificate.
    */
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -176,19 +176,19 @@ requestMap.put(FIELD_CLIENT_PUBLIC_KEY_SIGNATURE, clientPublicKeySignature);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate) {
     return create(clientPaymentServiceProviderCertificate, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain) {
     return create(clientPaymentServiceProviderCertificate, clientPaymentServiceProviderCertificateChain, null, null);
   }
 
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature) {
     return create(clientPaymentServiceProviderCertificate, clientPaymentServiceProviderCertificateChain, clientPublicKeySignature, null);
   }
 

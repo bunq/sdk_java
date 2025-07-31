@@ -196,7 +196,7 @@ public class DraftPaymentApiObject extends BunqModel {
    * DraftPayment. This needs to be provided to prevent race conditions.
    * @param schedule The schedule details when creating or updating a scheduled payment.
    */
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -216,31 +216,31 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries) {
     return create(entries, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts) {
     return create(entries, numberOfRequiredAccepts, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId) {
     return create(entries, numberOfRequiredAccepts, monetaryAccountId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status) {
     return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
     return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
     return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null);
   }
 
@@ -251,7 +251,7 @@ requestMap.put(FIELD_SCHEDULE, schedule);
    * DraftPayment. This needs to be provided to prevent race conditions.
    * @param schedule The schedule details when creating or updating a scheduled payment.
    */
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -269,23 +269,23 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId) {
+  public static BunqResponse<Long> update(Integer draftPaymentId) {
     return update(draftPaymentId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer draftPaymentId, Integer monetaryAccountId) {
     return update(draftPaymentId, monetaryAccountId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> update(Integer draftPaymentId, Integer monetaryAccountId, String status) {
     return update(draftPaymentId, monetaryAccountId, status, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
+  public static BunqResponse<Long> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
     return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
+  public static BunqResponse<Long> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
     return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null);
   }
 

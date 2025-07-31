@@ -114,7 +114,7 @@ public class SchedulePaymentApiObject extends BunqModel {
    * @param schedule The schedule details when creating or updating a scheduled payment.
    * @param purpose The purpose of this scheduled payment.
    */
-  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, String purpose, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, String purpose, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -132,23 +132,23 @@ requestMap.put(FIELD_PURPOSE, purpose);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment) {
+  public static BunqResponse<Long> create(SchedulePaymentEntryObject payment) {
     return create(payment, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule) {
+  public static BunqResponse<Long> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule) {
     return create(payment, schedule, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId) {
     return create(payment, schedule, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, String purpose) {
+  public static BunqResponse<Long> create(SchedulePaymentEntryObject payment, ScheduleApiObject schedule, Integer monetaryAccountId, String purpose) {
     return create(payment, schedule, monetaryAccountId, purpose, null);
   }
 

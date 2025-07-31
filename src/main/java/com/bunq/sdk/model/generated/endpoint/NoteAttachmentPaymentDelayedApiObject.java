@@ -114,7 +114,7 @@ public class NoteAttachmentPaymentDelayedApiObject extends BunqModel {
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer paymentDelayedId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -131,30 +131,30 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId) {
+  public static BunqResponse<Long> create(Integer paymentDelayedId) {
     return create(paymentDelayedId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Integer paymentDelayedId, Integer attachmentId) {
     return create(paymentDelayedId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer paymentDelayedId, Integer attachmentId, Integer monetaryAccountId) {
     return create(paymentDelayedId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Integer paymentDelayedId, Integer attachmentId, Integer monetaryAccountId, String description) {
     return create(paymentDelayedId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,19 +170,19 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId) {
+  public static BunqResponse<Long> update(Integer paymentDelayedId) {
     return update(paymentDelayedId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId) {
+  public static BunqResponse<Long> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId) {
     return update(paymentDelayedId, noteAttachmentPaymentDelayedId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId, Integer monetaryAccountId) {
     return update(paymentDelayedId, noteAttachmentPaymentDelayedId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Integer paymentDelayedId, Integer noteAttachmentPaymentDelayedId, Integer monetaryAccountId, String description) {
     return update(paymentDelayedId, noteAttachmentPaymentDelayedId, monetaryAccountId, description, null);
   }
 

@@ -141,7 +141,7 @@ public class ExportStatementCardCsvApiObject extends BunqModel {
    * @param regionalFormat Required for CSV exports. The regional format of the statement, can be
    * UK_US (comma-separated) or EUROPEAN (semicolon-separated).
    */
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd, String regionalFormat, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart, String dateEnd, String regionalFormat, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -159,23 +159,23 @@ requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Integer cardId) {
     return create(cardId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart) {
     return create(cardId, dateStart, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart, String dateEnd) {
     return create(cardId, dateStart, dateEnd, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd, String regionalFormat) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart, String dateEnd, String regionalFormat) {
     return create(cardId, dateStart, dateEnd, regionalFormat, null);
   }
 

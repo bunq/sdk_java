@@ -92,7 +92,7 @@ public class NoteTextBankSwitchServiceNetherlandsIncomingPaymentApiObject extend
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> create(Integer switchServicePaymentId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,26 +108,26 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer switchServicePaymentId) {
+  public static BunqResponse<Long> create(Integer switchServicePaymentId) {
     return create(switchServicePaymentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer switchServicePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer monetaryAccountId) {
     return create(switchServicePaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer switchServicePaymentId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer monetaryAccountId, String content) {
     return create(switchServicePaymentId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,19 +143,19 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer switchServicePaymentId) {
+  public static BunqResponse<Long> update(Integer switchServicePaymentId) {
     return update(switchServicePaymentId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId) {
+  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId) {
     return update(switchServicePaymentId, noteTextBankSwitchServiceNetherlandsIncomingPaymentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId) {
     return update(switchServicePaymentId, noteTextBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteTextBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, String content) {
     return update(switchServicePaymentId, noteTextBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, content, null);
   }
 

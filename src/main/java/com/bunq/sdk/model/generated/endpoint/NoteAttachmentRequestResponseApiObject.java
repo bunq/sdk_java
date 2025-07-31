@@ -114,7 +114,7 @@ public class NoteAttachmentRequestResponseApiObject extends BunqModel {
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -131,30 +131,30 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId) {
+  public static BunqResponse<Long> create(Integer requestResponseId) {
     return create(requestResponseId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer attachmentId) {
     return create(requestResponseId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer attachmentId, Integer monetaryAccountId) {
     return create(requestResponseId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer attachmentId, Integer monetaryAccountId, String description) {
     return create(requestResponseId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,19 +170,19 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId) {
+  public static BunqResponse<Long> update(Integer requestResponseId) {
     return update(requestResponseId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId) {
     return update(requestResponseId, noteAttachmentRequestResponseId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId, Integer monetaryAccountId) {
     return update(requestResponseId, noteAttachmentRequestResponseId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteAttachmentRequestResponseId, Integer monetaryAccountId, String description) {
     return update(requestResponseId, noteAttachmentRequestResponseId, monetaryAccountId, description, null);
   }
 

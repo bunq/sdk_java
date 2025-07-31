@@ -183,7 +183,7 @@ public class CurrencyConversionQuoteApiObject extends BunqModel {
    * @param counterpartyAlias The Alias of the party we are transferring the money to.
    * @param status The status of the quote.
    */
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -204,35 +204,35 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount) {
+  public static BunqResponse<Long> create(AmountObject amount) {
     return create(amount, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource) {
     return create(amount, currencySource, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource, String currencyTarget) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget) {
     return create(amount, currencySource, currencyTarget, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource, String currencyTarget, String orderType) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType) {
     return create(amount, currencySource, currencyTarget, orderType, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias) {
     return create(amount, currencySource, currencyTarget, orderType, counterpartyAlias, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId) {
     return create(amount, currencySource, currencyTarget, orderType, counterpartyAlias, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId, String status) {
     return create(amount, currencySource, currencyTarget, orderType, counterpartyAlias, monetaryAccountId, status, null);
   }
 

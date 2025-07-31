@@ -161,7 +161,7 @@ public class IdealMerchantTransactionApiObject extends BunqModel {
    * @param amountRequested The requested amount of money to add.
    * @param issuer The BIC of the issuing bank to ask for money.
    */
-  public static BunqResponse<Integer> create(AmountObject amountRequested, String issuer, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(AmountObject amountRequested, String issuer, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -178,19 +178,19 @@ requestMap.put(FIELD_ISSUER, issuer);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountRequested) {
+  public static BunqResponse<Long> create(AmountObject amountRequested) {
     return create(amountRequested, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountRequested, String issuer) {
+  public static BunqResponse<Long> create(AmountObject amountRequested, String issuer) {
     return create(amountRequested, issuer, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountRequested, String issuer, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(AmountObject amountRequested, String issuer, Integer monetaryAccountId) {
     return create(amountRequested, issuer, monetaryAccountId, null);
   }
 

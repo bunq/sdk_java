@@ -119,7 +119,7 @@ public class OauthClientApiObject extends BunqModel {
   /**
    * @param status The status of the Oauth Client, can be ACTIVE or CANCELLED.
    */
-  public static BunqResponse<Integer> create(String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,18 +135,18 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(String status) {
+  public static BunqResponse<Long> create(String status) {
     return create(status, null);
   }
 
   /**
    * @param status The status of the Oauth Client, can be ACTIVE or CANCELLED.
    */
-  public static BunqResponse<Integer> update(Integer oauthClientId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer oauthClientId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -162,11 +162,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId) {
+  public static BunqResponse<Long> update(Integer oauthClientId) {
     return update(oauthClientId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId, String status) {
+  public static BunqResponse<Long> update(Integer oauthClientId, String status) {
     return update(oauthClientId, status, null);
   }
 

@@ -89,7 +89,7 @@ public class InvoiceExportPdfApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<Integer> create(Integer invoiceId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer invoiceId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -104,17 +104,17 @@ public class InvoiceExportPdfApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer invoiceId) {
+  public static BunqResponse<Long> create(Integer invoiceId) {
     return create(invoiceId, null);
   }
 
   /**
    */
-  public static BunqResponse<Integer> update(Integer invoiceId, Integer invoiceExportPdfId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer invoiceId, Integer invoiceExportPdfId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -129,11 +129,11 @@ public class InvoiceExportPdfApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer invoiceId) {
+  public static BunqResponse<Long> update(Integer invoiceId) {
     return update(invoiceId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer invoiceId, Integer invoiceExportPdfId) {
+  public static BunqResponse<Long> update(Integer invoiceId, Integer invoiceExportPdfId) {
     return update(invoiceId, invoiceExportPdfId, null);
   }
 

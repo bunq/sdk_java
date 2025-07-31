@@ -92,7 +92,7 @@ public class NoteTextWhitelistResultApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,30 +108,30 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId) {
+  public static BunqResponse<Long> create(Integer whitelistId) {
     return create(whitelistId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId) {
     return create(whitelistId, whitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId) {
     return create(whitelistId, whitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, String content) {
     return create(whitelistId, whitelistResultId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -147,23 +147,23 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId) {
+  public static BunqResponse<Long> update(Integer whitelistId) {
     return update(whitelistId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId) {
     return update(whitelistId, whitelistResultId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId) {
     return update(whitelistId, whitelistResultId, noteTextWhitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId) {
     return update(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, String content) {
     return update(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, content, null);
   }
 

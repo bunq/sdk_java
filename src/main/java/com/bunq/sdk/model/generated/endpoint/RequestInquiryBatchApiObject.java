@@ -124,7 +124,7 @@ public class RequestInquiryBatchApiObject extends BunqModel {
    * @param eventId The ID of the associated event if the request batch was made using 'split the
    * bill'.
    */
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,27 +143,27 @@ requestMap.put(FIELD_EVENT_ID, eventId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries) {
     return create(requestInquiries, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired) {
     return create(requestInquiries, totalAmountInquired, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId) {
     return create(requestInquiries, totalAmountInquired, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status) {
     return create(requestInquiries, totalAmountInquired, monetaryAccountId, status, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId) {
     return create(requestInquiries, totalAmountInquired, monetaryAccountId, status, eventId, null);
   }
 
@@ -171,7 +171,7 @@ requestMap.put(FIELD_EVENT_ID, eventId);
    * Revoke a request batch. The status of all the requests will be set to REVOKED.
    * @param status The status of the request.
    */
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -187,15 +187,15 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId) {
     return update(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer monetaryAccountId) {
     return update(requestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status) {
     return update(requestInquiryBatchId, monetaryAccountId, status, null);
   }
 

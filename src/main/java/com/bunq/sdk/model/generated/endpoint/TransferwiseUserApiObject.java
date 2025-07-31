@@ -97,7 +97,7 @@ public class TransferwiseUserApiObject extends BunqModel {
    * @param oauthCode The OAuth code returned by Transferwise we should be using to gain access to
    * the user's Transferwise account.
    */
-  public static BunqResponse<Integer> create(String oauthCode, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String oauthCode, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -113,11 +113,11 @@ requestMap.put(FIELD_OAUTH_CODE, oauthCode);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(String oauthCode) {
+  public static BunqResponse<Long> create(String oauthCode) {
     return create(oauthCode, null);
   }
 

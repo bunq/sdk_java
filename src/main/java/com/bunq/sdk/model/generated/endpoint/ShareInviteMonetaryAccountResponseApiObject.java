@@ -209,7 +209,7 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
    * @param cardId The card to link to the shared monetary account. Used only if share_detail is
    * ShareDetailCardPayment.
    */
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountResponseId, String status, Integer cardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId, String status, Integer cardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -226,15 +226,15 @@ requestMap.put(FIELD_CARD_ID, cardId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountResponseId) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId) {
     return update(shareInviteMonetaryAccountResponseId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountResponseId, String status) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId, String status) {
     return update(shareInviteMonetaryAccountResponseId, status, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountResponseId, String status, Integer cardId) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId, String status, Integer cardId) {
     return update(shareInviteMonetaryAccountResponseId, status, cardId, null);
   }
 

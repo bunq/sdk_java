@@ -245,7 +245,7 @@ public class ShareInviteMonetaryAccountInquiryApiObject extends BunqModel {
    * @param startDate DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
    * @param endDate DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -269,47 +269,47 @@ requestMap.put(FIELD_END_DATE, endDate);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias) {
     return create(counterUserAlias, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId) {
     return create(counterUserAlias, monetaryAccountId, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType) {
     return create(counterUserAlias, monetaryAccountId, accessType, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, endDate, null);
   }
 
@@ -352,7 +352,7 @@ requestMap.put(FIELD_END_DATE, endDate);
    * @param startDate DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
    * @param endDate DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -372,31 +372,31 @@ requestMap.put(FIELD_END_DATE, endDate);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId) {
     return update(shareInviteMonetaryAccountInquiryId, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, startDate, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate) {
+  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, startDate, endDate, null);
   }
 

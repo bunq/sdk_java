@@ -73,7 +73,7 @@ public class CertificatePinnedApiObject extends BunqModel {
    * Pin the certificate chain.
    * @param certificateChain The certificate chain in .PEM format.
    */
-  public static BunqResponse<Integer> create(List<CertificateObject> certificateChain, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<CertificateObject> certificateChain, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -89,11 +89,11 @@ requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(List<CertificateObject> certificateChain) {
+  public static BunqResponse<Long> create(List<CertificateObject> certificateChain) {
     return create(certificateChain, null);
   }
 

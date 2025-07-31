@@ -353,7 +353,7 @@ public class PaymentApiObject extends BunqModel {
    * merchant.
    * @param allowBunqto Whether or not sending a bunq.to payment is allowed.
    */
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -374,35 +374,35 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount) {
+  public static BunqResponse<Long> create(AmountObject amount) {
     return create(amount, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias) {
     return create(amount, counterpartyAlias, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description) {
     return create(amount, counterpartyAlias, description, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, allowBunqto, null);
   }
 

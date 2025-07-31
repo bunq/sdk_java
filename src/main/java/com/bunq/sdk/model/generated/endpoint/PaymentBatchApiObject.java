@@ -64,7 +64,7 @@ public class PaymentBatchApiObject extends BunqModel {
    * of the batch.
    * @param payments The list of payments we want to send in a single batch.
    */
-  public static BunqResponse<Integer> create(List<PaymentApiObject> payments, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<PaymentApiObject> payments, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -80,22 +80,22 @@ requestMap.put(FIELD_PAYMENTS, payments);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<PaymentApiObject> payments) {
+  public static BunqResponse<Long> create(List<PaymentApiObject> payments) {
     return create(payments, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<PaymentApiObject> payments, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(List<PaymentApiObject> payments, Integer monetaryAccountId) {
     return create(payments, monetaryAccountId, null);
   }
 
   /**
    * Revoke a bunq.to payment batch. The status of all the payments will be set to REVOKED.
    */
-  public static BunqResponse<Integer> update(Integer paymentBatchId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer paymentBatchId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -110,11 +110,11 @@ requestMap.put(FIELD_PAYMENTS, payments);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentBatchId) {
+  public static BunqResponse<Long> update(Integer paymentBatchId) {
     return update(paymentBatchId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer paymentBatchId, Integer monetaryAccountId) {
     return update(paymentBatchId, monetaryAccountId, null);
   }
 

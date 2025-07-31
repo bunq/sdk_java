@@ -230,7 +230,7 @@ public class WhitelistSddRecurringApiObject extends BunqModel {
    * @param routingType The type of routing for this whitelist. Should be changed to non-optional
    * CIT/technical#12806.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -250,27 +250,27 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId) {
+  public static BunqResponse<Long> create(Integer monetaryAccountPayingId) {
     return create(monetaryAccountPayingId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId) {
+  public static BunqResponse<Long> create(Integer monetaryAccountPayingId, Integer requestId) {
     return create(monetaryAccountPayingId, requestId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth) {
+  public static BunqResponse<Long> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth) {
     return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
+  public static BunqResponse<Long> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
     return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, maximumAmountPerPayment, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
+  public static BunqResponse<Long> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
     return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, maximumAmountPerPayment, routingType, null);
   }
 
@@ -283,7 +283,7 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
    * @param routingType The type of routing for this whitelist. Should be changed to non-optional
    * CIT/technical#12806.
    */
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -302,23 +302,23 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId) {
+  public static BunqResponse<Long> update(Integer whitelistSddRecurringId) {
     return update(whitelistSddRecurringId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId) {
+  public static BunqResponse<Long> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId) {
     return update(whitelistSddRecurringId, monetaryAccountPayingId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth) {
+  public static BunqResponse<Long> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth) {
     return update(whitelistSddRecurringId, monetaryAccountPayingId, maximumAmountPerMonth, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
+  public static BunqResponse<Long> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
     return update(whitelistSddRecurringId, monetaryAccountPayingId, maximumAmountPerMonth, maximumAmountPerPayment, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
+  public static BunqResponse<Long> update(Integer whitelistSddRecurringId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
     return update(whitelistSddRecurringId, monetaryAccountPayingId, maximumAmountPerMonth, maximumAmountPerPayment, routingType, null);
   }
 

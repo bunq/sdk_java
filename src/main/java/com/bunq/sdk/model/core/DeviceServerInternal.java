@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DeviceServerInternal extends DeviceServerApiObject {
-    public static BunqResponse<Integer> create(
+    public static BunqResponse<Long> create(
             ApiContext apiContext,
             String description,
             String secret,

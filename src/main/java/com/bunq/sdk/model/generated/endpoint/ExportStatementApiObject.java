@@ -187,7 +187,7 @@ public class ExportStatementApiObject extends BunqModel {
    * @param includeAttachment Only for PDF exports. Includes attachments to mutations in the
    * export, such as scanned receipts.
    */
-  public static BunqResponse<Integer> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Boolean includeAttachment, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Boolean includeAttachment, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -207,31 +207,31 @@ requestMap.put(FIELD_INCLUDE_ATTACHMENT, includeAttachment);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String statementFormat) {
+  public static BunqResponse<Long> create(String statementFormat) {
     return create(statementFormat, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String statementFormat, String dateStart) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart) {
     return create(statementFormat, dateStart, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String statementFormat, String dateStart, String dateEnd) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd) {
     return create(statementFormat, dateStart, dateEnd, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId) {
     return create(statementFormat, dateStart, dateEnd, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat) {
     return create(statementFormat, dateStart, dateEnd, monetaryAccountId, regionalFormat, null, null);
   }
 
-  public static BunqResponse<Integer> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Boolean includeAttachment) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Boolean includeAttachment) {
     return create(statementFormat, dateStart, dateEnd, monetaryAccountId, regionalFormat, includeAttachment, null);
   }
 

@@ -118,7 +118,7 @@ public class ExportStatementCardPdfApiObject extends BunqModel {
    * @param dateStart The start date for making statements.
    * @param dateEnd The end date for making statements.
    */
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart, String dateEnd, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,19 +135,19 @@ requestMap.put(FIELD_DATE_END, dateEnd);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Integer cardId) {
     return create(cardId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart) {
     return create(cardId, dateStart, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd) {
+  public static BunqResponse<Long> create(Integer cardId, String dateStart, String dateEnd) {
     return create(cardId, dateStart, dateEnd, null);
   }
 

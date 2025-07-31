@@ -92,7 +92,7 @@ public class NoteTextRequestInquiryBatchApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> create(Integer requestInquiryBatchId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer requestInquiryBatchId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,26 +108,26 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestInquiryBatchId) {
+  public static BunqResponse<Long> create(Integer requestInquiryBatchId) {
     return create(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer requestInquiryBatchId, Integer monetaryAccountId) {
     return create(requestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestInquiryBatchId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Integer requestInquiryBatchId, Integer monetaryAccountId, String content) {
     return create(requestInquiryBatchId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,19 +143,19 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId) {
     return update(requestInquiryBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId) {
     return update(requestInquiryBatchId, noteTextRequestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId) {
     return update(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, String content) {
     return update(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, content, null);
   }
 

@@ -58,7 +58,7 @@ public class ExportRibApiObject extends BunqModel {
   /**
    * Create a new RIB.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -73,11 +73,11 @@ public class ExportRibApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId) {
     return create(monetaryAccountId, null);
   }
 

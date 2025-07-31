@@ -92,7 +92,7 @@ public class NoteTextRequestResponseApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,26 +108,26 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId) {
+  public static BunqResponse<Long> create(Integer requestResponseId) {
     return create(requestResponseId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer monetaryAccountId) {
     return create(requestResponseId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer requestResponseId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Integer requestResponseId, Integer monetaryAccountId, String content) {
     return create(requestResponseId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteTextRequestResponseId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteTextRequestResponseId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,19 +143,19 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId) {
+  public static BunqResponse<Long> update(Integer requestResponseId) {
     return update(requestResponseId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteTextRequestResponseId) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteTextRequestResponseId) {
     return update(requestResponseId, noteTextRequestResponseId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteTextRequestResponseId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteTextRequestResponseId, Integer monetaryAccountId) {
     return update(requestResponseId, noteTextRequestResponseId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestResponseId, Integer noteTextRequestResponseId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Integer requestResponseId, Integer noteTextRequestResponseId, Integer monetaryAccountId, String content) {
     return update(requestResponseId, noteTextRequestResponseId, monetaryAccountId, content, null);
   }
 

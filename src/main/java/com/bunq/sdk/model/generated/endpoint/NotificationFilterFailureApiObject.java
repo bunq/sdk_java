@@ -96,7 +96,7 @@ public class NotificationFilterFailureApiObject extends BunqModel {
   }  /**
    * @param notificationFilterFailedIds The IDs to retry.
    */
-  public static BunqResponse<Integer> create(String notificationFilterFailedIds, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String notificationFilterFailedIds, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -112,11 +112,11 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(String notificationFilterFailedIds) {
+  public static BunqResponse<Long> create(String notificationFilterFailedIds) {
     return create(notificationFilterFailedIds, null);
   }
 

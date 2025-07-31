@@ -137,7 +137,7 @@ public class ScheduleInstanceApiObject extends BunqModel {
   /**
    * @param state Change the state of the scheduleInstance from FAILED_USER_ERROR to RETRY.
    */
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -153,19 +153,19 @@ requestMap.put(FIELD_STATE, state);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId) {
+  public static BunqResponse<Long> update(Integer scheduleId) {
     return update(scheduleId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId) {
     return update(scheduleId, scheduleInstanceId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId) {
     return update(scheduleId, scheduleInstanceId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state) {
+  public static BunqResponse<Long> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state) {
     return update(scheduleId, scheduleInstanceId, monetaryAccountId, state, null);
   }
 

@@ -62,7 +62,7 @@ public class ExportStatementPaymentApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<Integer> create(Integer eventId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer eventId, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -77,15 +77,15 @@ public class ExportStatementPaymentApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer eventId) {
+  public static BunqResponse<Long> create(Integer eventId) {
     return create(eventId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer eventId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer eventId, Integer monetaryAccountId) {
     return create(eventId, monetaryAccountId, null);
   }
 

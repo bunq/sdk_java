@@ -48,18 +48,18 @@ public class AttachmentMonetaryAccountApiObject extends BunqModel {
    * MIME type (i.e. image/jpeg) in the Content-Type header. You are required to provide a
    * description of the attachment using the X-Bunq-Attachment-Description header.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, Map<String, String> customHeaders, byte[] bytes) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId, Map<String, String> customHeaders, byte[] bytes) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), bytes, customHeaders);
 
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create( byte[] bytes) {
+  public static BunqResponse<Long> create( byte[] bytes) {
     return create(null, null, bytes);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, byte[] bytes) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId, byte[] bytes) {
     return create(monetaryAccountId, null, bytes);
   }
 

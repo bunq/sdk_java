@@ -105,7 +105,7 @@ public class CardGeneratedCvc2ApiObject extends BunqModel {
    * Generate a new CVC2 code for a card.
    * @param type The type of generated cvc2. Can be STATIC or GENERATED.
    */
-  public static BunqResponse<Integer> create(Integer cardId, String type, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer cardId, String type, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -121,15 +121,15 @@ requestMap.put(FIELD_TYPE, type);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Integer cardId) {
     return create(cardId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String type) {
+  public static BunqResponse<Long> create(Integer cardId, String type) {
     return create(cardId, type, null);
   }
 
@@ -162,7 +162,7 @@ requestMap.put(FIELD_TYPE, type);
   /**
    * @param type The type of generated cvc2. Can be STATIC or GENERATED.
    */
-  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id, String type, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer cardId, Integer cardGeneratedCvc2Id, String type, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -178,15 +178,15 @@ requestMap.put(FIELD_TYPE, type);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer cardId) {
+  public static BunqResponse<Long> update(Integer cardId) {
     return update(cardId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id) {
+  public static BunqResponse<Long> update(Integer cardId, Integer cardGeneratedCvc2Id) {
     return update(cardId, cardGeneratedCvc2Id, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id, String type) {
+  public static BunqResponse<Long> update(Integer cardId, Integer cardGeneratedCvc2Id, String type) {
     return update(cardId, cardGeneratedCvc2Id, type, null);
   }
 

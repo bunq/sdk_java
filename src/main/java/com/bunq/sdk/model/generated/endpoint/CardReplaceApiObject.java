@@ -104,7 +104,7 @@ public class CardReplaceApiObject extends BunqModel {
    * @param pinCodeAssignment Array of Types, PINs, account IDs assigned to the card.
    * @param secondLine The second line on the card.
    */
-  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String preferredNameOnCard, List<CardPinAssignmentObject> pinCodeAssignment, String secondLine, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer cardId, String nameOnCard, String preferredNameOnCard, List<CardPinAssignmentObject> pinCodeAssignment, String secondLine, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -123,27 +123,27 @@ requestMap.put(FIELD_SECOND_LINE, secondLine);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Integer cardId) {
     return create(cardId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard) {
+  public static BunqResponse<Long> create(Integer cardId, String nameOnCard) {
     return create(cardId, nameOnCard, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String preferredNameOnCard) {
+  public static BunqResponse<Long> create(Integer cardId, String nameOnCard, String preferredNameOnCard) {
     return create(cardId, nameOnCard, preferredNameOnCard, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String preferredNameOnCard, List<CardPinAssignmentObject> pinCodeAssignment) {
+  public static BunqResponse<Long> create(Integer cardId, String nameOnCard, String preferredNameOnCard, List<CardPinAssignmentObject> pinCodeAssignment) {
     return create(cardId, nameOnCard, preferredNameOnCard, pinCodeAssignment, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String nameOnCard, String preferredNameOnCard, List<CardPinAssignmentObject> pinCodeAssignment, String secondLine) {
+  public static BunqResponse<Long> create(Integer cardId, String nameOnCard, String preferredNameOnCard, List<CardPinAssignmentObject> pinCodeAssignment, String secondLine) {
     return create(cardId, nameOnCard, preferredNameOnCard, pinCodeAssignment, secondLine, null);
   }
 

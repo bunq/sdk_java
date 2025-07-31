@@ -149,7 +149,7 @@ public class PaymentAutoAllocateApiObject extends BunqModel {
    * @param type Whether a payment should be sorted ONCE or RECURRING.
    * @param definition The definition of how the money should be allocated.
    */
-  public static BunqResponse<Integer> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Integer monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -167,23 +167,23 @@ requestMap.put(FIELD_DEFINITION, definition);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentId) {
+  public static BunqResponse<Long> create(Integer paymentId) {
     return create(paymentId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentId, String type) {
+  public static BunqResponse<Long> create(Integer paymentId, String type) {
     return create(paymentId, type, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition) {
+  public static BunqResponse<Long> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition) {
     return create(paymentId, type, definition, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Integer monetaryAccountId) {
     return create(paymentId, type, definition, monetaryAccountId, null);
   }
 
@@ -236,7 +236,7 @@ requestMap.put(FIELD_DEFINITION, definition);
   /**
    * @param definition The definition of how the money should be allocated.
    */
-  public static BunqResponse<Integer> update(Integer paymentAutoAllocateId, Integer monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer paymentAutoAllocateId, Integer monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -252,15 +252,15 @@ requestMap.put(FIELD_DEFINITION, definition);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentAutoAllocateId) {
+  public static BunqResponse<Long> update(Integer paymentAutoAllocateId) {
     return update(paymentAutoAllocateId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
     return update(paymentAutoAllocateId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentAutoAllocateId, Integer monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition) {
+  public static BunqResponse<Long> update(Integer paymentAutoAllocateId, Integer monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition) {
     return update(paymentAutoAllocateId, monetaryAccountId, definition, null);
   }
 

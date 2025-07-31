@@ -454,7 +454,7 @@ public class RequestInquiryApiObject extends BunqModel {
    * Request.
    * @param eventId The ID of the associated event if the request was made using 'split the bill'.
    */
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl, Integer eventId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl, Integer eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -483,67 +483,67 @@ requestMap.put(FIELD_EVENT_ID, eventId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired) {
+  public static BunqResponse<Long> create(AmountObject amountInquired) {
     return create(amountInquired, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias) {
     return create(amountInquired, counterpartyAlias, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description) {
     return create(amountInquired, counterpartyAlias, description, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, requireAddress, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, allowAmountHigher, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, allowAmountHigher, redirectUrl, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl, Integer eventId) {
+  public static BunqResponse<Long> create(AmountObject amountInquired, PointerObject counterpartyAlias, String description, Boolean allowBunqme, Integer monetaryAccountId, List<BunqIdObject> attachment, String merchantReference, String status, Integer minimumAge, String requireAddress, Boolean wantTip, Boolean allowAmountLower, Boolean allowAmountHigher, String redirectUrl, Integer eventId) {
     return create(amountInquired, counterpartyAlias, description, allowBunqme, monetaryAccountId, attachment, merchantReference, status, minimumAge, requireAddress, wantTip, allowAmountLower, allowAmountHigher, redirectUrl, eventId, null);
   }
 

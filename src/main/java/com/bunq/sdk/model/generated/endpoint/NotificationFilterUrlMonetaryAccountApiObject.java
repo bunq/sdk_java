@@ -62,7 +62,7 @@ public class NotificationFilterUrlMonetaryAccountApiObject extends BunqModel {
    * @param notificationFilters The types of notifications that will result in a url notification
    * for this monetary account.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -78,15 +78,15 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId) {
     return create(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters) {
+  public static BunqResponse<Long> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters) {
     return create(monetaryAccountId, notificationFilters, null);
   }
 

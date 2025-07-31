@@ -75,10 +75,10 @@ abstract public class BunqModel {
     /**
      * De-serializes an ID object and returns its integer value.
      */
-    protected static BunqResponse<Integer> processForId(BunqResponseRaw responseRaw) {
+    protected static BunqResponse<Long> processForId(BunqResponseRaw responseRaw) {
         JsonObject responseItemObject = getResponseItemObject(responseRaw);
         JsonObject responseItemObjectUnwrapped = getWrappedContent(responseItemObject, FIELD_ID);
-        Integer responseValue = gson.fromJson(responseItemObjectUnwrapped, Id.class).getId();
+        Long responseValue = gson.fromJson(responseItemObjectUnwrapped, Id.class).getId();
 
         return new BunqResponse<>(responseValue, responseRaw.getHeaders());
     }

@@ -114,7 +114,7 @@ public class NoteAttachmentWhitelistResultApiObject extends BunqModel {
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -131,34 +131,34 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId) {
+  public static BunqResponse<Long> create(Integer whitelistId) {
     return create(whitelistId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId) {
     return create(whitelistId, whitelistResultId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId) {
     return create(whitelistId, whitelistResultId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId, Integer monetaryAccountId) {
     return create(whitelistId, whitelistResultId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer attachmentId, Integer monetaryAccountId, String description) {
     return create(whitelistId, whitelistResultId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -174,23 +174,23 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId) {
+  public static BunqResponse<Long> update(Integer whitelistId) {
     return update(whitelistId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId) {
     return update(whitelistId, whitelistResultId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId) {
     return update(whitelistId, whitelistResultId, noteAttachmentWhitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId, Integer monetaryAccountId) {
     return update(whitelistId, whitelistResultId, noteAttachmentWhitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteAttachmentWhitelistResultId, Integer monetaryAccountId, String description) {
     return update(whitelistId, whitelistResultId, noteAttachmentWhitelistResultId, monetaryAccountId, description, null);
   }
 

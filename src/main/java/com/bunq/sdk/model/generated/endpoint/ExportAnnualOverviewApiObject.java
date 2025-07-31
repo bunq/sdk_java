@@ -102,7 +102,7 @@ public class ExportAnnualOverviewApiObject extends BunqModel {
    * past year.
    * @param year The year for which the overview is.
    */
-  public static BunqResponse<Integer> create(Integer year, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer year, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -118,11 +118,11 @@ requestMap.put(FIELD_YEAR, year);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer year) {
+  public static BunqResponse<Long> create(Integer year) {
     return create(year, null);
   }
 

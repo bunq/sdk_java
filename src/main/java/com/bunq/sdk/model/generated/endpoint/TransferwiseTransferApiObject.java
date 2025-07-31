@@ -164,7 +164,7 @@ public class TransferwiseTransferApiObject extends BunqModel {
    * @param monetaryAccountId The id of the monetary account the payment should be made from.
    * @param recipientId The id of the target account.
    */
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String monetaryAccountId, String recipientId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String monetaryAccountId, String recipientId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -181,19 +181,19 @@ requestMap.put(FIELD_RECIPIENT_ID, recipientId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId) {
+  public static BunqResponse<Long> create(Integer transferwiseQuoteId) {
     return create(transferwiseQuoteId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String monetaryAccountId) {
+  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String monetaryAccountId) {
     return create(transferwiseQuoteId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String monetaryAccountId, String recipientId) {
+  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String monetaryAccountId, String recipientId) {
     return create(transferwiseQuoteId, monetaryAccountId, recipientId, null);
   }
 

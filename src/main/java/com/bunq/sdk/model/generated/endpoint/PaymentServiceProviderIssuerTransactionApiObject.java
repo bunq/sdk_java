@@ -207,7 +207,7 @@ public class PaymentServiceProviderIssuerTransactionApiObject extends BunqModel 
    * @param timeExpiry The (optional) expiration time of the transaction. Defaults to 10 minutes.
    * @param status The status of the transaction. Can only be used for cancelling the transaction.
    */
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect, String timeExpiry, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect, String timeExpiry, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -228,31 +228,31 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias) {
     return create(counterpartyAlias, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias, AmountObject amount) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias, AmountObject amount) {
     return create(counterpartyAlias, amount, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias, AmountObject amount, String description) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias, AmountObject amount, String description) {
     return create(counterpartyAlias, amount, description, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect) {
     return create(counterpartyAlias, amount, description, urlRedirect, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect, String timeExpiry) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect, String timeExpiry) {
     return create(counterpartyAlias, amount, description, urlRedirect, timeExpiry, null, null);
   }
 
-  public static BunqResponse<Integer> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect, String timeExpiry, String status) {
+  public static BunqResponse<Long> create(PointerObject counterpartyAlias, AmountObject amount, String description, String urlRedirect, String timeExpiry, String status) {
     return create(counterpartyAlias, amount, description, urlRedirect, timeExpiry, status, null);
   }
 
@@ -280,7 +280,7 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * @param status The status of the transaction. Can only be used for cancelling the transaction.
    */
-  public static BunqResponse<Integer> update(Integer paymentServiceProviderIssuerTransactionId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer paymentServiceProviderIssuerTransactionId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -296,11 +296,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentServiceProviderIssuerTransactionId) {
+  public static BunqResponse<Long> update(Integer paymentServiceProviderIssuerTransactionId) {
     return update(paymentServiceProviderIssuerTransactionId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentServiceProviderIssuerTransactionId, String status) {
+  public static BunqResponse<Long> update(Integer paymentServiceProviderIssuerTransactionId, String status) {
     return update(paymentServiceProviderIssuerTransactionId, status, null);
   }
 

@@ -147,7 +147,7 @@ public class MasterCardIdentityCheckChallengeRequestUserApiObject extends BunqMo
    * @param status The status of the identity check. Can be ACCEPTED_PENDING_RESPONSE or
    * REJECTED_PENDING_RESPONSE.
    */
-  public static BunqResponse<Integer> update(Integer masterCardIdentityCheckChallengeRequestUserId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer masterCardIdentityCheckChallengeRequestUserId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -163,11 +163,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer masterCardIdentityCheckChallengeRequestUserId) {
+  public static BunqResponse<Long> update(Integer masterCardIdentityCheckChallengeRequestUserId) {
     return update(masterCardIdentityCheckChallengeRequestUserId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer masterCardIdentityCheckChallengeRequestUserId, String status) {
+  public static BunqResponse<Long> update(Integer masterCardIdentityCheckChallengeRequestUserId, String status) {
     return update(masterCardIdentityCheckChallengeRequestUserId, status, null);
   }
 

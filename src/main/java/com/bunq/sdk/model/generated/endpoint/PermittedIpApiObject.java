@@ -111,7 +111,7 @@ public class PermittedIpApiObject extends BunqModel {
    * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
    * make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
    */
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Integer credentialPasswordIpId, String ip, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -128,19 +128,19 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId) {
+  public static BunqResponse<Long> create(Integer credentialPasswordIpId) {
     return create(credentialPasswordIpId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip) {
+  public static BunqResponse<Long> create(Integer credentialPasswordIpId, String ip) {
     return create(credentialPasswordIpId, ip, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer credentialPasswordIpId, String ip, String status) {
+  public static BunqResponse<Long> create(Integer credentialPasswordIpId, String ip, String status) {
     return create(credentialPasswordIpId, ip, status, null);
   }
 
@@ -169,7 +169,7 @@ requestMap.put(FIELD_STATUS, status);
    * @param status The status of the IP. May be "ACTIVE" or "INACTIVE". It is only possible to
    * make requests from "ACTIVE" IP addresses. Only "ACTIVE" IPs will be billed.
    */
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Integer credentialPasswordIpId, Integer permittedIpId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -185,15 +185,15 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId) {
+  public static BunqResponse<Long> update(Integer credentialPasswordIpId) {
     return update(credentialPasswordIpId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId) {
+  public static BunqResponse<Long> update(Integer credentialPasswordIpId, Integer permittedIpId) {
     return update(credentialPasswordIpId, permittedIpId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer credentialPasswordIpId, Integer permittedIpId, String status) {
+  public static BunqResponse<Long> update(Integer credentialPasswordIpId, Integer permittedIpId, String status) {
     return update(credentialPasswordIpId, permittedIpId, status, null);
   }
 

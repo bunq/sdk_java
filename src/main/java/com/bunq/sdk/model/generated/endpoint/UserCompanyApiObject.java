@@ -530,7 +530,7 @@ public class UserCompanyApiObject extends BunqModel {
    * @param dailyLimitWithoutConfirmationLogin The amount the company can pay in the session
    * without asking for credentials.
    */
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -560,63 +560,63 @@ requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutCo
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(String name) {
+  public static BunqResponse<Long> update(String name) {
     return update(name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName) {
+  public static BunqResponse<Long> update(String name, String publicNickName) {
     return update(name, publicNickName, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid) {
     return update(name, publicNickName, avatarUuid, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain) {
     return update(name, publicNickName, avatarUuid, addressMain, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null, null);
   }
 
-  public static BunqResponse<Integer> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null);
   }
 

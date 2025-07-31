@@ -175,7 +175,7 @@ public class CurrencyCloudBeneficiaryApiObject extends BunqModel {
    * @param allField All fields that were required by CurrencyCloud. Obtained through the
    * CurrencyCloudBeneficiaryRequirement listing.
    */
-  public static BunqResponse<Integer> create(String name, String country, String currency, String paymentType, String legalEntityType, List<String> allField, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String name, String country, String currency, String paymentType, String legalEntityType, List<String> allField, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -196,31 +196,31 @@ requestMap.put(FIELD_ALL_FIELD, allField);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name) {
+  public static BunqResponse<Long> create(String name) {
     return create(name, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, String country) {
+  public static BunqResponse<Long> create(String name, String country) {
     return create(name, country, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, String country, String currency) {
+  public static BunqResponse<Long> create(String name, String country, String currency) {
     return create(name, country, currency, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, String country, String currency, String paymentType) {
+  public static BunqResponse<Long> create(String name, String country, String currency, String paymentType) {
     return create(name, country, currency, paymentType, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, String country, String currency, String paymentType, String legalEntityType) {
+  public static BunqResponse<Long> create(String name, String country, String currency, String paymentType, String legalEntityType) {
     return create(name, country, currency, paymentType, legalEntityType, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, String country, String currency, String paymentType, String legalEntityType, List<String> allField) {
+  public static BunqResponse<Long> create(String name, String country, String currency, String paymentType, String legalEntityType, List<String> allField) {
     return create(name, country, currency, paymentType, legalEntityType, allField, null);
   }
 
