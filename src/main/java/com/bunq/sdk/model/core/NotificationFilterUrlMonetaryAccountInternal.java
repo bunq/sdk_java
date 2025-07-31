@@ -28,7 +28,7 @@ public class NotificationFilterUrlMonetaryAccountInternal extends NotificationFi
      * Create notification filters with list response type.
      */
     public static BunqResponse<List<NotificationFilterUrlObject>> createWithListResponse(
-            Integer monetaryAccountId,
+            Long monetaryAccountId,
             List<NotificationFilterUrlObject> allNotificationFilter
     ) {
         return createWithListResponse(monetaryAccountId, allNotificationFilter, null);
@@ -38,7 +38,7 @@ public class NotificationFilterUrlMonetaryAccountInternal extends NotificationFi
      * Create notification filters with list response type.
      */
     public static BunqResponse<List<NotificationFilterUrlObject>> createWithListResponse(
-            Integer monetaryAccountId,
+            Long monetaryAccountId,
             List<NotificationFilterUrlObject> allNotificationFilter,
             Map<String, String> customHeaders
     ) {

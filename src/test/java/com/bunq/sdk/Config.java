@@ -77,8 +77,8 @@ public class Config {
         }
     }
 
-    public static Integer getUserId() {
-        return Integer.parseInt(properties.getProperty(FIELD_USER_ID));
+    public static Long getUserId() {
+        return Long.parseLong(properties.getProperty(FIELD_USER_ID));
     }
 
     public static String getContentType() {
@@ -93,12 +93,12 @@ public class Config {
         return properties.getProperty(FIELD_PATH_ATTACHMENT_IN);
     }
 
-    public static Integer getMonetaryAccountId() {
-        return Integer.parseInt(properties.getProperty(FIELD_MONETARY_ACCOUNT_ID));
+    public static Long getMonetaryAccountId() {
+        return Long.parseLong(properties.getProperty(FIELD_MONETARY_ACCOUNT_ID));
     }
 
-    public static Integer getMonetaryAccountId2() {
-        return Integer.parseInt(properties.getProperty(FIELD_MONETARY_ACCOUNT_ID2));
+    public static Long getMonetaryAccountId2() {
+        return Long.parseLong(properties.getProperty(FIELD_MONETARY_ACCOUNT_ID2));
     }
 
     public static PointerObject getCounterPartyAliasOther() {
@@ -115,7 +115,7 @@ public class Config {
         return new PointerObject(type, value);
     }
 
-    public static Integer getPaymentIdWithGeolocation() {
-        return Integer.parseInt(properties.getProperty(FIELD_PAYMENT_ID_WITH_GEOLOCATION));
+    public static Long getPaymentIdWithGeolocation() {
+        return Long.parseLong(properties.getProperty(FIELD_PAYMENT_ID_WITH_GEOLOCATION));
     }
 }

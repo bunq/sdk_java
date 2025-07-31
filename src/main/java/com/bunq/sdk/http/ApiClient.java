@@ -65,7 +65,7 @@ public class ApiClient {
     /**
      * Response code to use in case the response code is null due to unforeseen circumstances.
      */
-    private static final int DUMMY_RESPONSE_CODE = 0;
+    private static final long DUMMY_RESPONSE_CODE = 0;
 
     /**
      * Private variables.
@@ -272,7 +272,7 @@ public class ApiClient {
      */
     private BunqResponseRaw createBunqResponseRaw(Response response)
             throws IOException {
-        int responseCode = response.code();
+        long responseCode = response.code();
         byte[] responseBodyBytes = Objects.requireNonNull(response.body()).bytes();
 
         assertResponseSuccess(responseCode, responseBodyBytes, getResponseId(response));
@@ -293,7 +293,7 @@ public class ApiClient {
     /**
      *
      */
-    private static void assertResponseSuccess(Integer responseCode, byte[] responseBodyBytes, String responseId) {
+    private static void assertResponseSuccess(Long responseCode, byte[] responseBodyBytes, String responseId) {
         if (responseCode == null) {
             responseCode = DUMMY_RESPONSE_CODE;
         }
@@ -307,7 +307,7 @@ public class ApiClient {
      *
      */
     private static ApiException createApiExceptionRequestUnsuccessful(
-            Integer responseCode,
+            Long responseCode,
             String responseBody,
             String responseId
     ) {
@@ -359,7 +359,7 @@ public class ApiClient {
      *
      */
     private void validateResponseSignature(
-            int responseCode,
+            long responseCode,
             byte[] responseBodyBytes,
             Response response
     ) {

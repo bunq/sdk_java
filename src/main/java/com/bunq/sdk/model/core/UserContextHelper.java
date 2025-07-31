@@ -32,7 +32,7 @@ public class UserContextHelper extends BunqModel {
     /**
      * The index of the first item in an array.
      */
-    private static final Integer INDEX_FIRST = 0;
+    private static final Long INDEX_FIRST = 0;
 
     /**
      * Status constants.
@@ -56,7 +56,7 @@ public class UserContextHelper extends BunqModel {
         return response.getValue().get(INDEX_FIRST);
     }
 
-    public MonetaryAccountBankApiObject getFirstActiveMonetaryAccountBankByUserId(Integer userId) {
+    public MonetaryAccountBankApiObject getFirstActiveMonetaryAccountBankByUserId(Long userId) {
         BunqResponseRaw responseRaw = getRawResponse(
                 String.format(ENDPOINT_MONETARY_ACCOUNT_BANK, userId)
         );

@@ -86,7 +86,7 @@ public class Psd2ContextTest {
         }
 
         try {
-            Integer clientId = OauthClientApiObject.create().getValue();
+            Long clientId = OauthClientApiObject.create().getValue();
             OauthClientApiObject oauthClient = OauthClientApiObject.get(clientId).getValue();
 
             Assert.assertNotNull(oauthClient);

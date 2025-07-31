@@ -195,11 +195,11 @@ abstract public class BunqModel {
         return BunqContext.getApiContext();
     }
 
-    protected static Integer determineUserId() {
+    protected static Long determineUserId() {
         return BunqContext.getUserContext().getUserId();
     }
 
-    protected static Integer determineMonetaryAccountId(Integer id) {
+    protected static Long determineMonetaryAccountId(Long id) {
         if (id == null) {
             return BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getId();
         } else {

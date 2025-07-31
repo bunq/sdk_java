@@ -23,10 +23,10 @@ public class Pagination {
     public static final String PARAM_FUTURE_ID = "future_id";
     public static final String PARAM_COUNT = "count";
 
-    private Integer olderId;
-    private Integer newerId;
-    private Integer futureId;
-    private Integer count;
+    private Long olderId;
+    private Long newerId;
+    private Long futureId;
+    private Long count;
 
     /**
      * Get the URL params required to request the next page of the listing.
@@ -47,7 +47,7 @@ public class Pagination {
         }
     }
 
-    private Integer getNextId() {
+    private Long getNextId() {
         if (hasNextPageAssured()) {
             return newerId;
         } else {
@@ -98,35 +98,35 @@ public class Pagination {
         return params;
     }
 
-    public Integer getOlderId() {
+    public Long getOlderId() {
         return olderId;
     }
 
-    public void setOlderId(Integer olderId) {
+    public void setOlderId(Long olderId) {
         this.olderId = olderId;
     }
 
-    public Integer getNewerId() {
+    public Long getNewerId() {
         return newerId;
     }
 
-    public void setNewerId(Integer newerId) {
+    public void setNewerId(Long newerId) {
         this.newerId = newerId;
     }
 
-    public Integer getFutureId() {
+    public Long getFutureId() {
         return futureId;
     }
 
-    public void setFutureId(Integer futureId) {
+    public void setFutureId(Long futureId) {
         this.futureId = futureId;
     }
 
-    public Integer getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 }
