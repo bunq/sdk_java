@@ -43,7 +43,7 @@ public class MonetaryAccountLightApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the MonetaryAccountLight's creation.
@@ -145,7 +145,7 @@ public class MonetaryAccountLightApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * The ShareInviteBankResponse when the MonetaryAccount is accessed by the User via a
@@ -226,11 +226,19 @@ public class MonetaryAccountLightApiObject extends BunqModel {
   private List<FulfillmentApiObject> fulfillments;
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
+
+  /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The budgets of the MonetaryAccount.
@@ -405,11 +413,11 @@ public class MonetaryAccountLightApiObject extends BunqModel {
   /**
    * The id of the MonetaryAccountLight.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -563,11 +571,11 @@ public class MonetaryAccountLightApiObject extends BunqModel {
   /**
    * The id of the User who owns the MonetaryAccountLight.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
@@ -694,13 +702,25 @@ public class MonetaryAccountLightApiObject extends BunqModel {
   }
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
+  }
+
+  /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -885,6 +905,10 @@ public class MonetaryAccountLightApiObject extends BunqModel {
     }
 
     if (this.fulfillments != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

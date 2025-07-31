@@ -301,7 +301,7 @@ requestMap.put(FIELD_SIGNUP_TRACK_TYPE, signupTrackType);
 
   /**
    */
-  public static BunqResponse<CompanyApiObject> get(Integer companyId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CompanyApiObject> get(Long companyId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), companyId), params, customHeaders);
 
@@ -312,11 +312,11 @@ requestMap.put(FIELD_SIGNUP_TRACK_TYPE, signupTrackType);
     return get(null, null, null);
   }
 
-  public static BunqResponse<CompanyApiObject> get(Integer companyId) {
+  public static BunqResponse<CompanyApiObject> get(Long companyId) {
     return get(companyId, null, null);
   }
 
-  public static BunqResponse<CompanyApiObject> get(Integer companyId, Map<String, String> params) {
+  public static BunqResponse<CompanyApiObject> get(Long companyId, Map<String, String> params) {
     return get(companyId, params, null);
   }
 
@@ -340,7 +340,7 @@ requestMap.put(FIELD_SIGNUP_TRACK_TYPE, signupTrackType);
   /**
    * @param avatarUuid The public UUID of the company's avatar.
    */
-  public static BunqResponse<Long> update(Integer companyId, String avatarUuid, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long companyId, String avatarUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -356,11 +356,11 @@ requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer companyId) {
+  public static BunqResponse<Long> update(Long companyId) {
     return update(companyId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer companyId, String avatarUuid) {
+  public static BunqResponse<Long> update(Long companyId, String avatarUuid) {
     return update(companyId, avatarUuid, null);
   }
 

@@ -50,7 +50,7 @@ public class TokenQrRequestIdealApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of when the RequestResponse was responded to.
@@ -71,7 +71,7 @@ public class TokenQrRequestIdealApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The requested Amount.
@@ -130,7 +130,7 @@ public class TokenQrRequestIdealApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("minimum_age")
-  private Integer minimumAge;
+  private Long minimumAge;
 
   /**
    * Whether or not an address must be provided on accept.
@@ -186,7 +186,7 @@ public class TokenQrRequestIdealApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("eligible_whitelist_id")
-  private Integer eligibleWhitelistId;
+  private Long eligibleWhitelistId;
 
   /**
    * The token passed from a site or read from a QR code.
@@ -232,11 +232,11 @@ requestMap.put(FIELD_TOKEN, token);
   /**
    * The id of the RequestResponse.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -265,11 +265,11 @@ requestMap.put(FIELD_TOKEN, token);
   /**
    * The id of the MonetaryAccount the RequestResponse was received on.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
@@ -356,11 +356,11 @@ requestMap.put(FIELD_TOKEN, token);
   /**
    * The minimum age the user accepting the RequestResponse must have.
    */
-  public Integer getMinimumAge() {
+  public Long getMinimumAge() {
     return this.minimumAge;
   }
 
-  public void setMinimumAge(Integer minimumAge) {
+  public void setMinimumAge(Long minimumAge) {
     this.minimumAge = minimumAge;
   }
 
@@ -444,11 +444,11 @@ requestMap.put(FIELD_TOKEN, token);
   /**
    * The whitelist id for this action or null.
    */
-  public Integer getEligibleWhitelistId() {
+  public Long getEligibleWhitelistId() {
     return this.eligibleWhitelistId;
   }
 
-  public void setEligibleWhitelistId(Integer eligibleWhitelistId) {
+  public void setEligibleWhitelistId(Long eligibleWhitelistId) {
     this.eligibleWhitelistId = eligibleWhitelistId;
   }
 

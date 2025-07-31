@@ -39,11 +39,18 @@ public class SandboxUserCompanyApiObject extends BunqModel {
   private String apiKey;
 
   /**
-   * The user which was created.
+   * The user company which was created.
    */
   @Expose
-  @SerializedName("user")
-  private UserApiObject user;
+  @SerializedName("user_company")
+  private UserCompanyApiObject userCompany;
+
+  /**
+   * The director of the company which was created.
+   */
+  @Expose
+  @SerializedName("user_person")
+  private UserPersonApiObject userPerson;
 
   /**
    * The login code which the developer can use to log into their sandbox user.
@@ -85,14 +92,25 @@ public class SandboxUserCompanyApiObject extends BunqModel {
   }
 
   /**
-   * The user which was created.
+   * The user company which was created.
    */
-  public UserApiObject getUser() {
-    return this.user;
+  public UserCompanyApiObject getUserCompany() {
+    return this.userCompany;
   }
 
-  public void setUser(UserApiObject user) {
-    this.user = user;
+  public void setUserCompany(UserCompanyApiObject userCompany) {
+    this.userCompany = userCompany;
+  }
+
+  /**
+   * The director of the company which was created.
+   */
+  public UserPersonApiObject getUserPerson() {
+    return this.userPerson;
+  }
+
+  public void setUserPerson(UserPersonApiObject userPerson) {
+    this.userPerson = userPerson;
   }
 
   /**
@@ -113,7 +131,11 @@ public class SandboxUserCompanyApiObject extends BunqModel {
       return false;
     }
 
-    if (this.user != null) {
+    if (this.userCompany != null) {
+      return false;
+    }
+
+    if (this.userPerson != null) {
       return false;
     }
 

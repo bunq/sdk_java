@@ -46,7 +46,7 @@ public class NoteTextSofortMerchantTransactionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -92,7 +92,7 @@ public class NoteTextSofortMerchantTransactionApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Long> create(Integer sofortMerchantTransactionId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long sofortMerchantTransactionId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -112,22 +112,22 @@ requestMap.put(FIELD_CONTENT, content);
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer sofortMerchantTransactionId) {
+  public static BunqResponse<Long> create(Long sofortMerchantTransactionId) {
     return create(sofortMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer sofortMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long sofortMerchantTransactionId, Long monetaryAccountId) {
     return create(sofortMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer sofortMerchantTransactionId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Long sofortMerchantTransactionId, Long monetaryAccountId, String content) {
     return create(sofortMerchantTransactionId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Long> update(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,47 +143,47 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer sofortMerchantTransactionId) {
+  public static BunqResponse<Long> update(Long sofortMerchantTransactionId) {
     return update(sofortMerchantTransactionId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId) {
+  public static BunqResponse<Long> update(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId) {
     return update(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId) {
     return update(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId, String content) {
     return update(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, monetaryAccountId, content, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), sofortMerchantTransactionId, noteTextSofortMerchantTransactionId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Integer sofortMerchantTransactionId) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Long sofortMerchantTransactionId) {
     return delete(sofortMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId) {
     return delete(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, null, null);
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> delete(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId) {
     return delete(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a given user.
    */
-  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Integer sofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Long sofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), sofortMerchantTransactionId), params, customHeaders);
 
@@ -194,21 +194,21 @@ requestMap.put(FIELD_CONTENT, content);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Integer sofortMerchantTransactionId) {
+  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Long sofortMerchantTransactionId) {
     return list(sofortMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Integer sofortMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Long sofortMerchantTransactionId, Long monetaryAccountId) {
     return list(sofortMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Integer sofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteTextSofortMerchantTransactionApiObject>> list(Long sofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> params) {
     return list(sofortMerchantTransactionId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), sofortMerchantTransactionId, noteTextSofortMerchantTransactionId), params, customHeaders);
 
@@ -219,30 +219,30 @@ requestMap.put(FIELD_CONTENT, content);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId) {
     return get(sofortMerchantTransactionId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId) {
     return get(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId) {
     return get(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer noteTextSofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteTextSofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long noteTextSofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> params) {
     return get(sofortMerchantTransactionId, noteTextSofortMerchantTransactionId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

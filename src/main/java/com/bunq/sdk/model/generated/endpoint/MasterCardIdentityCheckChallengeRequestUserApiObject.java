@@ -99,14 +99,14 @@ public class MasterCardIdentityCheckChallengeRequestUserApiObject extends BunqMo
    */
   @Expose
   @SerializedName("event_id")
-  private Integer eventId;
+  private Long eventId;
 
   /**
    * The ID of the card used for the authentication request of the identity check.
    */
   @Expose
   @SerializedName("card_id")
-  private Integer cardId;
+  private Long cardId;
 
   /**
    * The status of the identity check. Can be ACCEPTED_PENDING_RESPONSE or
@@ -124,7 +124,7 @@ public class MasterCardIdentityCheckChallengeRequestUserApiObject extends BunqMo
     this.statusFieldForRequest = status;
   }  /**
    */
-  public static BunqResponse<MasterCardIdentityCheckChallengeRequestUserApiObject> get(Integer masterCardIdentityCheckChallengeRequestUserId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<MasterCardIdentityCheckChallengeRequestUserApiObject> get(Long masterCardIdentityCheckChallengeRequestUserId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), masterCardIdentityCheckChallengeRequestUserId), params, customHeaders);
 
@@ -135,11 +135,11 @@ public class MasterCardIdentityCheckChallengeRequestUserApiObject extends BunqMo
     return get(null, null, null);
   }
 
-  public static BunqResponse<MasterCardIdentityCheckChallengeRequestUserApiObject> get(Integer masterCardIdentityCheckChallengeRequestUserId) {
+  public static BunqResponse<MasterCardIdentityCheckChallengeRequestUserApiObject> get(Long masterCardIdentityCheckChallengeRequestUserId) {
     return get(masterCardIdentityCheckChallengeRequestUserId, null, null);
   }
 
-  public static BunqResponse<MasterCardIdentityCheckChallengeRequestUserApiObject> get(Integer masterCardIdentityCheckChallengeRequestUserId, Map<String, String> params) {
+  public static BunqResponse<MasterCardIdentityCheckChallengeRequestUserApiObject> get(Long masterCardIdentityCheckChallengeRequestUserId, Map<String, String> params) {
     return get(masterCardIdentityCheckChallengeRequestUserId, params, null);
   }
 
@@ -147,7 +147,7 @@ public class MasterCardIdentityCheckChallengeRequestUserApiObject extends BunqMo
    * @param status The status of the identity check. Can be ACCEPTED_PENDING_RESPONSE or
    * REJECTED_PENDING_RESPONSE.
    */
-  public static BunqResponse<Long> update(Integer masterCardIdentityCheckChallengeRequestUserId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long masterCardIdentityCheckChallengeRequestUserId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -163,11 +163,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer masterCardIdentityCheckChallengeRequestUserId) {
+  public static BunqResponse<Long> update(Long masterCardIdentityCheckChallengeRequestUserId) {
     return update(masterCardIdentityCheckChallengeRequestUserId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer masterCardIdentityCheckChallengeRequestUserId, String status) {
+  public static BunqResponse<Long> update(Long masterCardIdentityCheckChallengeRequestUserId, String status) {
     return update(masterCardIdentityCheckChallengeRequestUserId, status, null);
   }
 
@@ -262,22 +262,22 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * The ID of the latest event for the identity check.
    */
-  public Integer getEventId() {
+  public Long getEventId() {
     return this.eventId;
   }
 
-  public void setEventId(Integer eventId) {
+  public void setEventId(Long eventId) {
     this.eventId = eventId;
   }
 
   /**
    * The ID of the card used for the authentication request of the identity check.
    */
-  public Integer getCardId() {
+  public Long getCardId() {
     return this.cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 

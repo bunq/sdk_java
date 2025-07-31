@@ -40,7 +40,7 @@ public class AttachmentMonetaryAccountApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * Create a new monetary account attachment. Create a POST request with a payload that contains
@@ -48,7 +48,7 @@ public class AttachmentMonetaryAccountApiObject extends BunqModel {
    * MIME type (i.e. image/jpeg) in the Content-Type header. You are required to provide a
    * description of the attachment using the X-Bunq-Attachment-Description header.
    */
-  public static BunqResponse<Long> create(Integer monetaryAccountId, Map<String, String> customHeaders, byte[] bytes) {
+  public static BunqResponse<Long> create(Long monetaryAccountId, Map<String, String> customHeaders, byte[] bytes) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), bytes, customHeaders);
 
@@ -59,7 +59,7 @@ public class AttachmentMonetaryAccountApiObject extends BunqModel {
     return create(null, null, bytes);
   }
 
-  public static BunqResponse<Long> create(Integer monetaryAccountId, byte[] bytes) {
+  public static BunqResponse<Long> create(Long monetaryAccountId, byte[] bytes) {
     return create(monetaryAccountId, null, bytes);
   }
 
@@ -77,11 +77,11 @@ public class AttachmentMonetaryAccountApiObject extends BunqModel {
   /**
    * The ID of the attachment created.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

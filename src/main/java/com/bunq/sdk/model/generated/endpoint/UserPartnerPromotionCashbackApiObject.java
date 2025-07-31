@@ -33,7 +33,7 @@ public class UserPartnerPromotionCashbackApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_transaction_remaining")
-  private Integer numberOfTransactionRemaining;
+  private Long numberOfTransactionRemaining;
 
   /**
    * The promotion that the user signed up with.
@@ -71,11 +71,11 @@ public class UserPartnerPromotionCashbackApiObject extends BunqModel {
   /**
    * The number of transactions that are still eligible for this promotion.
    */
-  public Integer getNumberOfTransactionRemaining() {
+  public Long getNumberOfTransactionRemaining() {
     return this.numberOfTransactionRemaining;
   }
 
-  public void setNumberOfTransactionRemaining(Integer numberOfTransactionRemaining) {
+  public void setNumberOfTransactionRemaining(Long numberOfTransactionRemaining) {
     this.numberOfTransactionRemaining = numberOfTransactionRemaining;
   }
 

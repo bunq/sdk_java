@@ -40,7 +40,7 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The account to which payments will come in before possibly being 'redirected' by the
@@ -48,7 +48,7 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_incoming_id")
-  private Integer monetaryAccountIncomingId;
+  private Long monetaryAccountIncomingId;
 
   /**
    * The account from which payments will be deducted when a transaction is matched with this
@@ -56,7 +56,7 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_paying_id")
-  private Integer monetaryAccountPayingId;
+  private Long monetaryAccountPayingId;
 
   /**
    * The type of the SDD whitelist, can be CORE or B2B.
@@ -110,7 +110,7 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
   /**
    * Get a specific SDD whitelist entry.
    */
-  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Integer whitelistSddMonetaryAccountPayingId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Long whitelistSddMonetaryAccountPayingId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), whitelistSddMonetaryAccountPayingId), params, customHeaders);
 
@@ -121,22 +121,22 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Integer whitelistSddMonetaryAccountPayingId) {
+  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Long whitelistSddMonetaryAccountPayingId) {
     return get(whitelistSddMonetaryAccountPayingId, null, null, null);
   }
 
-  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Integer whitelistSddMonetaryAccountPayingId, Integer monetaryAccountId) {
+  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Long whitelistSddMonetaryAccountPayingId, Long monetaryAccountId) {
     return get(whitelistSddMonetaryAccountPayingId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Integer whitelistSddMonetaryAccountPayingId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<WhitelistSddMonetaryAccountPayingApiObject> get(Long whitelistSddMonetaryAccountPayingId, Long monetaryAccountId, Map<String, String> params) {
     return get(whitelistSddMonetaryAccountPayingId, monetaryAccountId, params, null);
   }
 
   /**
    * Get a listing of all SDD whitelist entries for a target monetary account.
    */
-  public static BunqResponse<List<WhitelistSddMonetaryAccountPayingApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<WhitelistSddMonetaryAccountPayingApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -147,22 +147,22 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<WhitelistSddMonetaryAccountPayingApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<WhitelistSddMonetaryAccountPayingApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<WhitelistSddMonetaryAccountPayingApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<WhitelistSddMonetaryAccountPayingApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * The ID of the whitelist entry.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -170,11 +170,11 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
    * The account to which payments will come in before possibly being 'redirected' by the
    * whitelist.
    */
-  public Integer getMonetaryAccountIncomingId() {
+  public Long getMonetaryAccountIncomingId() {
     return this.monetaryAccountIncomingId;
   }
 
-  public void setMonetaryAccountIncomingId(Integer monetaryAccountIncomingId) {
+  public void setMonetaryAccountIncomingId(Long monetaryAccountIncomingId) {
     this.monetaryAccountIncomingId = monetaryAccountIncomingId;
   }
 
@@ -182,11 +182,11 @@ public class WhitelistSddMonetaryAccountPayingApiObject extends BunqModel {
    * The account from which payments will be deducted when a transaction is matched with this
    * whitelist.
    */
-  public Integer getMonetaryAccountPayingId() {
+  public Long getMonetaryAccountPayingId() {
     return this.monetaryAccountPayingId;
   }
 
-  public void setMonetaryAccountPayingId(Integer monetaryAccountPayingId) {
+  public void setMonetaryAccountPayingId(Long monetaryAccountPayingId) {
     this.monetaryAccountPayingId = monetaryAccountPayingId;
   }
 

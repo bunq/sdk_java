@@ -38,7 +38,7 @@ public class ExportStatementCardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the statement model's creation.
@@ -87,11 +87,11 @@ public class ExportStatementCardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("card_id")
-  private Integer cardId;
+  private Long cardId;
 
   /**
    */
-  public static BunqResponse<ExportStatementCardApiObject> get(Integer cardId, Integer exportStatementCardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementCardApiObject> get(Long cardId, Long exportStatementCardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId, exportStatementCardId), params, customHeaders);
 
@@ -102,21 +102,21 @@ public class ExportStatementCardApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardApiObject> get(Integer cardId) {
+  public static BunqResponse<ExportStatementCardApiObject> get(Long cardId) {
     return get(cardId, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardApiObject> get(Integer cardId, Integer exportStatementCardId) {
+  public static BunqResponse<ExportStatementCardApiObject> get(Long cardId, Long exportStatementCardId) {
     return get(cardId, exportStatementCardId, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardApiObject> get(Integer cardId, Integer exportStatementCardId, Map<String, String> params) {
+  public static BunqResponse<ExportStatementCardApiObject> get(Long cardId, Long exportStatementCardId, Map<String, String> params) {
     return get(cardId, exportStatementCardId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<ExportStatementCardApiObject>> list(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ExportStatementCardApiObject>> list(Long cardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId), params, customHeaders);
 
@@ -127,22 +127,22 @@ public class ExportStatementCardApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementCardApiObject>> list(Integer cardId) {
+  public static BunqResponse<List<ExportStatementCardApiObject>> list(Long cardId) {
     return list(cardId, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementCardApiObject>> list(Integer cardId, Map<String, String> params) {
+  public static BunqResponse<List<ExportStatementCardApiObject>> list(Long cardId, Map<String, String> params) {
     return list(cardId, params, null);
   }
 
   /**
    * The id of the customer statement model.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -215,11 +215,11 @@ public class ExportStatementCardApiObject extends BunqModel {
   /**
    * The card for which this statement was created.
    */
-  public Integer getCardId() {
+  public Long getCardId() {
     return this.cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 

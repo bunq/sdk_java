@@ -41,20 +41,20 @@ public class InsightPreferenceDateApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("day_of_month")
-  private Integer dayOfMonth;
+  private Long dayOfMonth;
 
   /**
    * The day of month at which budgeting/insights should start.
    */
   @Expose
   @SerializedName("day_of_month_field_for_request")
-  private Integer dayOfMonthFieldForRequest;
+  private Long dayOfMonthFieldForRequest;
 
   public InsightPreferenceDateApiObject() {
   this(null);
   }
 
-  public InsightPreferenceDateApiObject(Integer dayOfMonth) {
+  public InsightPreferenceDateApiObject(Long dayOfMonth) {
     this.dayOfMonthFieldForRequest = dayOfMonth;
   }  /**
    */
@@ -76,11 +76,11 @@ public class InsightPreferenceDateApiObject extends BunqModel {
   /**
    * The day of month at which budgeting/insights should start.
    */
-  public Integer getDayOfMonth() {
+  public Long getDayOfMonth() {
     return this.dayOfMonth;
   }
 
-  public void setDayOfMonth(Integer dayOfMonth) {
+  public void setDayOfMonth(Long dayOfMonth) {
     this.dayOfMonth = dayOfMonth;
   }
 

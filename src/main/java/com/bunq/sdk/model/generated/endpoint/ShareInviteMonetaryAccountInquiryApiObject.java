@@ -87,7 +87,7 @@ public class ShareInviteMonetaryAccountInquiryApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The status of the share. Can be ACTIVE, REVOKED, REJECTED.
@@ -115,7 +115,7 @@ public class ShareInviteMonetaryAccountInquiryApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The pointer of the user to share with.
@@ -137,7 +137,7 @@ public class ShareInviteMonetaryAccountInquiryApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("draft_share_invite_bank_id_field_for_request")
-  private Integer draftShareInviteBankIdFieldForRequest;
+  private Long draftShareInviteBankIdFieldForRequest;
 
   /**
    * DEPRECATED: USE `access_type` INSTEAD | The share details. Only one of these objects may be
@@ -194,31 +194,31 @@ public class ShareInviteMonetaryAccountInquiryApiObject extends BunqModel {
   this(counterUserAlias, accessType, null, null, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId) {
   this(counterUserAlias, accessType, draftShareInviteBankId, null, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail) {
   this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, null, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status) {
   this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, null, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship) {
   this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, relationship, null, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType) {
   this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, null, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate) {
   this(counterUserAlias, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, null);
   }
 
-  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
+  public ShareInviteMonetaryAccountInquiryApiObject(PointerObject counterUserAlias, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
     this.counterUserAliasFieldForRequest = counterUserAlias;
     this.accessTypeFieldForRequest = accessType;
     this.draftShareInviteBankIdFieldForRequest = draftShareInviteBankId;
@@ -245,7 +245,7 @@ public class ShareInviteMonetaryAccountInquiryApiObject extends BunqModel {
    * @param startDate DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
    * @param endDate DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -277,39 +277,39 @@ requestMap.put(FIELD_END_DATE, endDate);
     return create(counterUserAlias, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId) {
     return create(counterUserAlias, monetaryAccountId, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType) {
     return create(counterUserAlias, monetaryAccountId, accessType, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, null, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, null, null);
   }
 
-  public static BunqResponse<Long> create(PointerObject counterUserAlias, Integer monetaryAccountId, String accessType, Integer draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
+  public static BunqResponse<Long> create(PointerObject counterUserAlias, Long monetaryAccountId, String accessType, Long draftShareInviteBankId, ShareDetailObject shareDetail, String status, String relationship, String shareType, String startDate, String endDate) {
     return create(counterUserAlias, monetaryAccountId, accessType, draftShareInviteBankId, shareDetail, status, relationship, shareType, startDate, endDate, null);
   }
 
@@ -317,7 +317,7 @@ requestMap.put(FIELD_END_DATE, endDate);
    * [DEPRECATED - use /share-invite-monetary-account-response] Get the details of a specific
    * share inquiry.
    */
-  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), shareInviteMonetaryAccountInquiryId), params, customHeaders);
 
@@ -328,15 +328,15 @@ requestMap.put(FIELD_END_DATE, endDate);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Integer shareInviteMonetaryAccountInquiryId) {
+  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Long shareInviteMonetaryAccountInquiryId) {
     return get(shareInviteMonetaryAccountInquiryId, null, null, null);
   }
 
-  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
+  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId) {
     return get(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<ShareInviteMonetaryAccountInquiryApiObject> get(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, Map<String, String> params) {
     return get(shareInviteMonetaryAccountInquiryId, monetaryAccountId, params, null);
   }
 
@@ -352,7 +352,7 @@ requestMap.put(FIELD_END_DATE, endDate);
    * @param startDate DEPRECATED: USE `access_type` INSTEAD | The start date of this share.
    * @param endDate DEPRECATED: USE `access_type` INSTEAD | The expiration date of this share.
    */
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -372,31 +372,31 @@ requestMap.put(FIELD_END_DATE, endDate);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId) {
     return update(shareInviteMonetaryAccountInquiryId, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, String accessType) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, String accessType, ShareDetailObject shareDetail) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, startDate, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountInquiryId, Integer monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountInquiryId, Long monetaryAccountId, String accessType, ShareDetailObject shareDetail, String status, String startDate, String endDate) {
     return update(shareInviteMonetaryAccountInquiryId, monetaryAccountId, accessType, shareDetail, status, startDate, endDate, null);
   }
 
@@ -405,7 +405,7 @@ requestMap.put(FIELD_END_DATE, endDate);
    * inquiries for a monetary account, only if the requesting user has permission to change the
    * details of the various ones.
    */
-  public static BunqResponse<List<ShareInviteMonetaryAccountInquiryApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiryApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -416,11 +416,11 @@ requestMap.put(FIELD_END_DATE, endDate);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ShareInviteMonetaryAccountInquiryApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiryApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<ShareInviteMonetaryAccountInquiryApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<ShareInviteMonetaryAccountInquiryApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
@@ -471,11 +471,11 @@ requestMap.put(FIELD_END_DATE, endDate);
   /**
    * The id of the monetary account the share applies to.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
@@ -515,11 +515,11 @@ requestMap.put(FIELD_END_DATE, endDate);
   /**
    * The id of the newly created share invite.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

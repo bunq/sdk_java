@@ -27,14 +27,14 @@ public class CompanyEmployeeCardLimitApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_company_id")
-  private Integer userCompanyId;
+  private Long userCompanyId;
 
   /**
    * Company employee item id.
    */
   @Expose
   @SerializedName("user_employee_id")
-  private Integer userEmployeeId;
+  private Long userEmployeeId;
 
   /**
    * The monthly spending limit for this employee on the card.
@@ -68,22 +68,22 @@ public class CompanyEmployeeCardLimitApiObject extends BunqModel {
   /**
    * Company item id.
    */
-  public Integer getUserCompanyId() {
+  public Long getUserCompanyId() {
     return this.userCompanyId;
   }
 
-  public void setUserCompanyId(Integer userCompanyId) {
+  public void setUserCompanyId(Long userCompanyId) {
     this.userCompanyId = userCompanyId;
   }
 
   /**
    * Company employee item id.
    */
-  public Integer getUserEmployeeId() {
+  public Long getUserEmployeeId() {
     return this.userEmployeeId;
   }
 
-  public void setUserEmployeeId(Integer userEmployeeId) {
+  public void setUserEmployeeId(Long userEmployeeId) {
     this.userEmployeeId = userEmployeeId;
   }
 

@@ -39,7 +39,7 @@ public class CurrencyConversionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the conversion's creation.
@@ -134,7 +134,7 @@ public class CurrencyConversionApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<List<CurrencyConversionApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<CurrencyConversionApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -145,17 +145,17 @@ public class CurrencyConversionApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<CurrencyConversionApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<CurrencyConversionApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<CurrencyConversionApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<CurrencyConversionApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<CurrencyConversionApiObject> get(Integer currencyConversionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CurrencyConversionApiObject> get(Long currencyConversionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), currencyConversionId), params, customHeaders);
 
@@ -166,26 +166,26 @@ public class CurrencyConversionApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionApiObject> get(Integer currencyConversionId) {
+  public static BunqResponse<CurrencyConversionApiObject> get(Long currencyConversionId) {
     return get(currencyConversionId, null, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionApiObject> get(Integer currencyConversionId, Integer monetaryAccountId) {
+  public static BunqResponse<CurrencyConversionApiObject> get(Long currencyConversionId, Long monetaryAccountId) {
     return get(currencyConversionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionApiObject> get(Integer currencyConversionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<CurrencyConversionApiObject> get(Long currencyConversionId, Long monetaryAccountId, Map<String, String> params) {
     return get(currencyConversionId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the conversion.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

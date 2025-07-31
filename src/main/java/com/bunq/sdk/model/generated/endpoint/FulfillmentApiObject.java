@@ -56,7 +56,7 @@ public class FulfillmentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * The allowed statusses for this fulfillment.
@@ -123,11 +123,11 @@ public class FulfillmentApiObject extends BunqModel {
   /**
    * The user id this fulfillment is required for.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 

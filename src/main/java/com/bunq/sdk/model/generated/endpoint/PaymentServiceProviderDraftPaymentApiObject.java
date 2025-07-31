@@ -227,7 +227,7 @@ requestMap.put(FIELD_STATUS, status);
    * @param status The new status of the Draft Payment. Can only be set to REJECTED or CANCELLED
    * by update.
    */
-  public static BunqResponse<Long> update(Integer paymentServiceProviderDraftPaymentId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long paymentServiceProviderDraftPaymentId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -243,11 +243,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer paymentServiceProviderDraftPaymentId) {
+  public static BunqResponse<Long> update(Long paymentServiceProviderDraftPaymentId) {
     return update(paymentServiceProviderDraftPaymentId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer paymentServiceProviderDraftPaymentId, String status) {
+  public static BunqResponse<Long> update(Long paymentServiceProviderDraftPaymentId, String status) {
     return update(paymentServiceProviderDraftPaymentId, status, null);
   }
 
@@ -270,7 +270,7 @@ requestMap.put(FIELD_STATUS, status);
 
   /**
    */
-  public static BunqResponse<PaymentServiceProviderDraftPaymentApiObject> get(Integer paymentServiceProviderDraftPaymentId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentServiceProviderDraftPaymentApiObject> get(Long paymentServiceProviderDraftPaymentId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), paymentServiceProviderDraftPaymentId), params, customHeaders);
 
@@ -281,11 +281,11 @@ requestMap.put(FIELD_STATUS, status);
     return get(null, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderDraftPaymentApiObject> get(Integer paymentServiceProviderDraftPaymentId) {
+  public static BunqResponse<PaymentServiceProviderDraftPaymentApiObject> get(Long paymentServiceProviderDraftPaymentId) {
     return get(paymentServiceProviderDraftPaymentId, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderDraftPaymentApiObject> get(Integer paymentServiceProviderDraftPaymentId, Map<String, String> params) {
+  public static BunqResponse<PaymentServiceProviderDraftPaymentApiObject> get(Long paymentServiceProviderDraftPaymentId, Map<String, String> params) {
     return get(paymentServiceProviderDraftPaymentId, params, null);
   }
 

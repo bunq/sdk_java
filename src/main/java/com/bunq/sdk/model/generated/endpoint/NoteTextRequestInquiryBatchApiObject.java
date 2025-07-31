@@ -46,7 +46,7 @@ public class NoteTextRequestInquiryBatchApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -92,7 +92,7 @@ public class NoteTextRequestInquiryBatchApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Long> create(Integer requestInquiryBatchId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long requestInquiryBatchId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -112,22 +112,22 @@ requestMap.put(FIELD_CONTENT, content);
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer requestInquiryBatchId) {
+  public static BunqResponse<Long> create(Long requestInquiryBatchId) {
     return create(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer requestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long requestInquiryBatchId, Long monetaryAccountId) {
     return create(requestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer requestInquiryBatchId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Long requestInquiryBatchId, Long monetaryAccountId, String content) {
     return create(requestInquiryBatchId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,47 +143,47 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer requestInquiryBatchId) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId) {
     return update(requestInquiryBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId) {
     return update(requestInquiryBatchId, noteTextRequestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId) {
     return update(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId, String content) {
     return update(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, content, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryBatchId, noteTextRequestInquiryBatchId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Integer requestInquiryBatchId) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Long requestInquiryBatchId) {
     return delete(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId) {
     return delete(requestInquiryBatchId, noteTextRequestInquiryBatchId, null, null);
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> delete(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId) {
     return delete(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a given user.
    */
-  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Integer requestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Long requestInquiryBatchId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryBatchId), params, customHeaders);
 
@@ -194,21 +194,21 @@ requestMap.put(FIELD_CONTENT, content);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Integer requestInquiryBatchId) {
+  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Long requestInquiryBatchId) {
     return list(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Integer requestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Long requestInquiryBatchId, Long monetaryAccountId) {
     return list(requestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Integer requestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteTextRequestInquiryBatchApiObject>> list(Long requestInquiryBatchId, Long monetaryAccountId, Map<String, String> params) {
     return list(requestInquiryBatchId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryBatchId, noteTextRequestInquiryBatchId), params, customHeaders);
 
@@ -219,30 +219,30 @@ requestMap.put(FIELD_CONTENT, content);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Integer requestInquiryBatchId) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Long requestInquiryBatchId) {
     return get(requestInquiryBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId) {
     return get(requestInquiryBatchId, noteTextRequestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId) {
     return get(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer noteTextRequestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteTextRequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long noteTextRequestInquiryBatchId, Long monetaryAccountId, Map<String, String> params) {
     return get(requestInquiryBatchId, noteTextRequestInquiryBatchId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

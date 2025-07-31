@@ -35,7 +35,7 @@ public class AttachmentMonetaryAccountContentApiObject extends BunqModel {
   /**
    * Get the raw content of a specific attachment.
    */
-  public static BunqResponse<byte[]> list(Integer attachmentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(Long attachmentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), attachmentId), params, customHeaders);
 
@@ -45,13 +45,13 @@ public class AttachmentMonetaryAccountContentApiObject extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer attachmentId) {
+  public static BunqResponse<byte[]> list(Long attachmentId) {
     return list(attachmentId, null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<byte[]> list(Long attachmentId, Long monetaryAccountId) {
     return list(attachmentId, monetaryAccountId, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer attachmentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<byte[]> list(Long attachmentId, Long monetaryAccountId, Map<String, String> params) {
     return list(attachmentId, monetaryAccountId, params, null);
   }
 

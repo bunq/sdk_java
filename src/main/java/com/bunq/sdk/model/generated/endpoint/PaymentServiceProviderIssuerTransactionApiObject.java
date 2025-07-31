@@ -52,7 +52,7 @@ public class PaymentServiceProviderIssuerTransactionApiObject extends BunqModel 
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The time this transaction was created.
@@ -258,7 +258,7 @@ requestMap.put(FIELD_STATUS, status);
 
   /**
    */
-  public static BunqResponse<PaymentServiceProviderIssuerTransactionApiObject> get(Integer paymentServiceProviderIssuerTransactionId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentServiceProviderIssuerTransactionApiObject> get(Long paymentServiceProviderIssuerTransactionId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), paymentServiceProviderIssuerTransactionId), params, customHeaders);
 
@@ -269,18 +269,18 @@ requestMap.put(FIELD_STATUS, status);
     return get(null, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderIssuerTransactionApiObject> get(Integer paymentServiceProviderIssuerTransactionId) {
+  public static BunqResponse<PaymentServiceProviderIssuerTransactionApiObject> get(Long paymentServiceProviderIssuerTransactionId) {
     return get(paymentServiceProviderIssuerTransactionId, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderIssuerTransactionApiObject> get(Integer paymentServiceProviderIssuerTransactionId, Map<String, String> params) {
+  public static BunqResponse<PaymentServiceProviderIssuerTransactionApiObject> get(Long paymentServiceProviderIssuerTransactionId, Map<String, String> params) {
     return get(paymentServiceProviderIssuerTransactionId, params, null);
   }
 
   /**
    * @param status The status of the transaction. Can only be used for cancelling the transaction.
    */
-  public static BunqResponse<Long> update(Integer paymentServiceProviderIssuerTransactionId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long paymentServiceProviderIssuerTransactionId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -296,11 +296,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer paymentServiceProviderIssuerTransactionId) {
+  public static BunqResponse<Long> update(Long paymentServiceProviderIssuerTransactionId) {
     return update(paymentServiceProviderIssuerTransactionId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer paymentServiceProviderIssuerTransactionId, String status) {
+  public static BunqResponse<Long> update(Long paymentServiceProviderIssuerTransactionId, String status) {
     return update(paymentServiceProviderIssuerTransactionId, status, null);
   }
 
@@ -324,11 +324,11 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * The id of this transaction.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

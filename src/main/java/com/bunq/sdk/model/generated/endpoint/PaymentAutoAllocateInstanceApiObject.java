@@ -38,7 +38,7 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the PaymentAutoAllocateInstance was created.
@@ -59,7 +59,7 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("payment_auto_allocate_id")
-  private Integer paymentAutoAllocateId;
+  private Long paymentAutoAllocateId;
 
   /**
    * The status of the payment auto allocate instance. SUCCEEDED or FAILED.
@@ -87,7 +87,7 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("payment_id")
-  private Integer paymentId;
+  private Long paymentId;
 
   /**
    * All Ginmon transaction orders executed with this instance.
@@ -97,8 +97,15 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
   private List<GinmonTransactionApiObject> allGinmonTransactionOrder;
 
   /**
+   * All Kraken transactions executed with this instance.
    */
-  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  @Expose
+  @SerializedName("all_kraken_transaction")
+  private List<KrakenTransactionApiObject> allKrakenTransaction;
+
+  /**
+   */
+  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentAutoAllocateId), params, customHeaders);
 
@@ -109,21 +116,21 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Integer paymentAutoAllocateId) {
+  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Long paymentAutoAllocateId) {
     return list(paymentAutoAllocateId, null, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
+  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId) {
     return list(paymentAutoAllocateId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params) {
     return list(paymentAutoAllocateId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Integer paymentAutoAllocateId, Integer paymentAutoAllocateInstanceId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Long paymentAutoAllocateId, Long paymentAutoAllocateInstanceId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentAutoAllocateId, paymentAutoAllocateInstanceId), params, customHeaders);
 
@@ -134,30 +141,30 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Integer paymentAutoAllocateId) {
+  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Long paymentAutoAllocateId) {
     return get(paymentAutoAllocateId, null, null, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Integer paymentAutoAllocateId, Integer paymentAutoAllocateInstanceId) {
+  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Long paymentAutoAllocateId, Long paymentAutoAllocateInstanceId) {
     return get(paymentAutoAllocateId, paymentAutoAllocateInstanceId, null, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Integer paymentAutoAllocateId, Integer paymentAutoAllocateInstanceId, Integer monetaryAccountId) {
+  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Long paymentAutoAllocateId, Long paymentAutoAllocateInstanceId, Long monetaryAccountId) {
     return get(paymentAutoAllocateId, paymentAutoAllocateInstanceId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Integer paymentAutoAllocateId, Integer paymentAutoAllocateInstanceId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<PaymentAutoAllocateInstanceApiObject> get(Long paymentAutoAllocateId, Long paymentAutoAllocateInstanceId, Long monetaryAccountId, Map<String, String> params) {
     return get(paymentAutoAllocateId, paymentAutoAllocateInstanceId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the PaymentAutoAllocateInstance.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -186,11 +193,11 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
   /**
    * The ID of the payment auto allocate this instance belongs to.
    */
-  public Integer getPaymentAutoAllocateId() {
+  public Long getPaymentAutoAllocateId() {
     return this.paymentAutoAllocateId;
   }
 
-  public void setPaymentAutoAllocateId(Integer paymentAutoAllocateId) {
+  public void setPaymentAutoAllocateId(Long paymentAutoAllocateId) {
     this.paymentAutoAllocateId = paymentAutoAllocateId;
   }
 
@@ -230,11 +237,11 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
   /**
    * The ID of the payment that triggered the allocating of the payments.
    */
-  public Integer getPaymentId() {
+  public Long getPaymentId() {
     return this.paymentId;
   }
 
-  public void setPaymentId(Integer paymentId) {
+  public void setPaymentId(Long paymentId) {
     this.paymentId = paymentId;
   }
 
@@ -247,6 +254,17 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
 
   public void setAllGinmonTransactionOrder(List<GinmonTransactionApiObject> allGinmonTransactionOrder) {
     this.allGinmonTransactionOrder = allGinmonTransactionOrder;
+  }
+
+  /**
+   * All Kraken transactions executed with this instance.
+   */
+  public List<KrakenTransactionApiObject> getAllKrakenTransaction() {
+    return this.allKrakenTransaction;
+  }
+
+  public void setAllKrakenTransaction(List<KrakenTransactionApiObject> allKrakenTransaction) {
+    this.allKrakenTransaction = allKrakenTransaction;
   }
 
   /**
@@ -285,6 +303,10 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
     }
 
     if (this.allGinmonTransactionOrder != null) {
+      return false;
+    }
+
+    if (this.allKrakenTransaction != null) {
       return false;
     }
 

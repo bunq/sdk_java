@@ -35,7 +35,7 @@ public class ExportStatementContentApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<byte[]> list(Integer customerStatementId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(Long customerStatementId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), customerStatementId), params, customHeaders);
 
@@ -45,13 +45,13 @@ public class ExportStatementContentApiObject extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer customerStatementId) {
+  public static BunqResponse<byte[]> list(Long customerStatementId) {
     return list(customerStatementId, null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer customerStatementId, Integer monetaryAccountId) {
+  public static BunqResponse<byte[]> list(Long customerStatementId, Long monetaryAccountId) {
     return list(customerStatementId, monetaryAccountId, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer customerStatementId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<byte[]> list(Long customerStatementId, Long monetaryAccountId, Map<String, String> params) {
     return list(customerStatementId, monetaryAccountId, params, null);
   }
 

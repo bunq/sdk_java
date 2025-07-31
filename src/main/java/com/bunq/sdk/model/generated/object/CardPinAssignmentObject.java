@@ -27,7 +27,7 @@ public class CardPinAssignmentObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The status of the card pin assignment.
@@ -69,7 +69,7 @@ public class CardPinAssignmentObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_field_for_request")
-  private Integer monetaryAccountIdFieldForRequest;
+  private Long monetaryAccountIdFieldForRequest;
 
   public CardPinAssignmentObject() {
   this(null, null, null, null);
@@ -87,7 +87,7 @@ public class CardPinAssignmentObject extends BunqModel {
   this(type, routingType, pinCode, null);
   }
 
-  public CardPinAssignmentObject(String type, String routingType, String pinCode, Integer monetaryAccountId) {
+  public CardPinAssignmentObject(String type, String routingType, String pinCode, Long monetaryAccountId) {
     this.typeFieldForRequest = type;
     this.routingTypeFieldForRequest = routingType;
     this.pinCodeFieldForRequest = pinCode;
@@ -108,11 +108,11 @@ public class CardPinAssignmentObject extends BunqModel {
   /**
    * The ID of the monetary account to assign to this pin for the card.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

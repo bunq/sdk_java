@@ -20,31 +20,31 @@ public class BunqIdObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * An integer ID of an object. Unique per object type.
    */
   @Expose
   @SerializedName("id_field_for_request")
-  private Integer idFieldForRequest;
+  private Long idFieldForRequest;
 
   public BunqIdObject() {
   this(null);
   }
 
-  public BunqIdObject(Integer id) {
+  public BunqIdObject(Long id) {
     this.idFieldForRequest = id;
   }
 
   /**
    * An integer ID of an object. Unique per object type.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

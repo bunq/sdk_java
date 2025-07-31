@@ -56,7 +56,7 @@ public class CurrencyCloudPaymentQuoteApiObject extends BunqModel {
   }  /**
    * @param pointers The points we want to know the fees for.
    */
-  public static BunqResponse<Long> create(List<PointerObject> pointers, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<PointerObject> pointers, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -80,7 +80,7 @@ requestMap.put(FIELD_POINTERS, pointers);
     return create(pointers, null, null);
   }
 
-  public static BunqResponse<Long> create(List<PointerObject> pointers, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(List<PointerObject> pointers, Long monetaryAccountId) {
     return create(pointers, monetaryAccountId, null);
   }
 

@@ -51,7 +51,7 @@ public class CurrencyConversionQuoteApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the quote's creation.
@@ -183,7 +183,7 @@ public class CurrencyConversionQuoteApiObject extends BunqModel {
    * @param counterpartyAlias The Alias of the party we are transferring the money to.
    * @param status The status of the quote.
    */
-  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Long monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -228,17 +228,17 @@ requestMap.put(FIELD_STATUS, status);
     return create(amount, currencySource, currencyTarget, orderType, counterpartyAlias, null, null, null);
   }
 
-  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Long monetaryAccountId) {
     return create(amount, currencySource, currencyTarget, orderType, counterpartyAlias, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(AmountObject amount, String currencySource, String currencyTarget, String orderType, PointerObject counterpartyAlias, Long monetaryAccountId, String status) {
     return create(amount, currencySource, currencyTarget, orderType, counterpartyAlias, monetaryAccountId, status, null);
   }
 
   /**
    */
-  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Integer currencyConversionQuoteId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Long currencyConversionQuoteId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), currencyConversionQuoteId), params, customHeaders);
 
@@ -249,22 +249,22 @@ requestMap.put(FIELD_STATUS, status);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Integer currencyConversionQuoteId) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Long currencyConversionQuoteId) {
     return get(currencyConversionQuoteId, null, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Integer currencyConversionQuoteId, Integer monetaryAccountId) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Long currencyConversionQuoteId, Long monetaryAccountId) {
     return get(currencyConversionQuoteId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Integer currencyConversionQuoteId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> get(Long currencyConversionQuoteId, Long monetaryAccountId, Map<String, String> params) {
     return get(currencyConversionQuoteId, monetaryAccountId, params, null);
   }
 
   /**
    * @param status The status of the quote.
    */
-  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Integer currencyConversionQuoteId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Long currencyConversionQuoteId, Long monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -280,26 +280,26 @@ requestMap.put(FIELD_STATUS, status);
     return fromJson(CurrencyConversionQuoteApiObject.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Integer currencyConversionQuoteId) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Long currencyConversionQuoteId) {
     return update(currencyConversionQuoteId, null, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Integer currencyConversionQuoteId, Integer monetaryAccountId) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Long currencyConversionQuoteId, Long monetaryAccountId) {
     return update(currencyConversionQuoteId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Integer currencyConversionQuoteId, Integer monetaryAccountId, String status) {
+  public static BunqResponse<CurrencyConversionQuoteApiObject> update(Long currencyConversionQuoteId, Long monetaryAccountId, String status) {
     return update(currencyConversionQuoteId, monetaryAccountId, status, null);
   }
 
   /**
    * The id of the quote.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

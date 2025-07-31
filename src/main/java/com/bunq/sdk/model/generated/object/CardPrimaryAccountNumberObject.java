@@ -20,7 +20,7 @@ public class CardPrimaryAccountNumberObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The UUID for this Virtual PAN.
@@ -48,7 +48,7 @@ public class CardPrimaryAccountNumberObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The last four digits of the PAN.
@@ -69,7 +69,7 @@ public class CardPrimaryAccountNumberObject extends BunqModel {
    */
   @Expose
   @SerializedName("id_field_for_request")
-  private Integer idFieldForRequest;
+  private Long idFieldForRequest;
 
   /**
    * The description for this PAN.
@@ -90,25 +90,25 @@ public class CardPrimaryAccountNumberObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_field_for_request")
-  private Integer monetaryAccountIdFieldForRequest;
+  private Long monetaryAccountIdFieldForRequest;
 
   public CardPrimaryAccountNumberObject() {
   this(null, null, null, null);
   }
 
-  public CardPrimaryAccountNumberObject(Integer id) {
+  public CardPrimaryAccountNumberObject(Long id) {
   this(id, null, null, null);
   }
 
-  public CardPrimaryAccountNumberObject(Integer id, String description) {
+  public CardPrimaryAccountNumberObject(Long id, String description) {
   this(id, description, null, null);
   }
 
-  public CardPrimaryAccountNumberObject(Integer id, String description, String status) {
+  public CardPrimaryAccountNumberObject(Long id, String description, String status) {
   this(id, description, status, null);
   }
 
-  public CardPrimaryAccountNumberObject(Integer id, String description, String status, Integer monetaryAccountId) {
+  public CardPrimaryAccountNumberObject(Long id, String description, String status, Long monetaryAccountId) {
     this.idFieldForRequest = id;
     this.descriptionFieldForRequest = description;
     this.statusFieldForRequest = status;
@@ -118,11 +118,11 @@ public class CardPrimaryAccountNumberObject extends BunqModel {
   /**
    * The ID for this Virtual PAN.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -162,11 +162,11 @@ public class CardPrimaryAccountNumberObject extends BunqModel {
   /**
    * The ID of the monetary account to assign to this PAN, only for Online Cards.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

@@ -45,7 +45,7 @@ public class OauthClientApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The status of the pack group, can be ACTIVE, CANCELLED or CANCELLED_PENDING.
@@ -97,7 +97,7 @@ public class OauthClientApiObject extends BunqModel {
     this.statusFieldForRequest = status;
   }  /**
    */
-  public static BunqResponse<OauthClientApiObject> get(Integer oauthClientId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<OauthClientApiObject> get(Long oauthClientId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), oauthClientId), params, customHeaders);
 
@@ -108,11 +108,11 @@ public class OauthClientApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<OauthClientApiObject> get(Integer oauthClientId) {
+  public static BunqResponse<OauthClientApiObject> get(Long oauthClientId) {
     return get(oauthClientId, null, null);
   }
 
-  public static BunqResponse<OauthClientApiObject> get(Integer oauthClientId, Map<String, String> params) {
+  public static BunqResponse<OauthClientApiObject> get(Long oauthClientId, Map<String, String> params) {
     return get(oauthClientId, params, null);
   }
 
@@ -146,7 +146,7 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * @param status The status of the Oauth Client, can be ACTIVE or CANCELLED.
    */
-  public static BunqResponse<Long> update(Integer oauthClientId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long oauthClientId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -162,11 +162,11 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer oauthClientId) {
+  public static BunqResponse<Long> update(Long oauthClientId) {
     return update(oauthClientId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer oauthClientId, String status) {
+  public static BunqResponse<Long> update(Long oauthClientId, String status) {
     return update(oauthClientId, status, null);
   }
 
@@ -190,11 +190,11 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * Id of the client.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

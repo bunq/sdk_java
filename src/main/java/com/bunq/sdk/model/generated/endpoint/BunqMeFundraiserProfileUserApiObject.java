@@ -51,14 +51,14 @@ public class BunqMeFundraiserProfileUserApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * Id of the user owning the profile.
    */
   @Expose
   @SerializedName("owner_user_id")
-  private Integer ownerUserId;
+  private Long ownerUserId;
 
   /**
    * The color chosen for the bunq.me fundraiser profile in hexadecimal format.
@@ -122,7 +122,7 @@ public class BunqMeFundraiserProfileUserApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_field_for_request")
-  private Integer monetaryAccountIdFieldForRequest;
+  private Long monetaryAccountIdFieldForRequest;
 
   /**
    * The color chosen for the bunq.me fundraiser profile in hexadecimal format.
@@ -171,31 +171,31 @@ public class BunqMeFundraiserProfileUserApiObject extends BunqModel {
   this(null, null, null, null, null, null, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId) {
   this(monetaryAccountId, null, null, null, null, null, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId, String description) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId, String description) {
   this(monetaryAccountId, description, null, null, null, null, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId, String description, PointerObject pointer) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId, String description, PointerObject pointer) {
   this(monetaryAccountId, description, pointer, null, null, null, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId, String description, PointerObject pointer, String color) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId, String description, PointerObject pointer, String color) {
   this(monetaryAccountId, description, pointer, color, null, null, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId, String description, PointerObject pointer, String color, String attachmentPublicUuid) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId, String description, PointerObject pointer, String color, String attachmentPublicUuid) {
   this(monetaryAccountId, description, pointer, color, attachmentPublicUuid, null, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId, String description, PointerObject pointer, String color, String attachmentPublicUuid, String redirectUrl) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId, String description, PointerObject pointer, String color, String attachmentPublicUuid, String redirectUrl) {
   this(monetaryAccountId, description, pointer, color, attachmentPublicUuid, redirectUrl, null);
   }
 
-  public BunqMeFundraiserProfileUserApiObject(Integer monetaryAccountId, String description, PointerObject pointer, String color, String attachmentPublicUuid, String redirectUrl, String status) {
+  public BunqMeFundraiserProfileUserApiObject(Long monetaryAccountId, String description, PointerObject pointer, String color, String attachmentPublicUuid, String redirectUrl, String status) {
     this.monetaryAccountIdFieldForRequest = monetaryAccountId;
     this.colorFieldForRequest = color;
     this.descriptionFieldForRequest = description;
@@ -205,7 +205,7 @@ public class BunqMeFundraiserProfileUserApiObject extends BunqModel {
     this.statusFieldForRequest = status;
   }  /**
    */
-  public static BunqResponse<BunqMeFundraiserProfileUserApiObject> get(Integer bunqMeFundraiserProfileUserId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<BunqMeFundraiserProfileUserApiObject> get(Long bunqMeFundraiserProfileUserId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), bunqMeFundraiserProfileUserId), params, customHeaders);
 
@@ -216,11 +216,11 @@ public class BunqMeFundraiserProfileUserApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<BunqMeFundraiserProfileUserApiObject> get(Integer bunqMeFundraiserProfileUserId) {
+  public static BunqResponse<BunqMeFundraiserProfileUserApiObject> get(Long bunqMeFundraiserProfileUserId) {
     return get(bunqMeFundraiserProfileUserId, null, null);
   }
 
-  public static BunqResponse<BunqMeFundraiserProfileUserApiObject> get(Integer bunqMeFundraiserProfileUserId, Map<String, String> params) {
+  public static BunqResponse<BunqMeFundraiserProfileUserApiObject> get(Long bunqMeFundraiserProfileUserId, Map<String, String> params) {
     return get(bunqMeFundraiserProfileUserId, params, null);
   }
 
@@ -244,22 +244,22 @@ public class BunqMeFundraiserProfileUserApiObject extends BunqModel {
   /**
    * Id of the monetary account on which you want to receive bunq.me payments.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
   /**
    * Id of the user owning the profile.
    */
-  public Integer getOwnerUserId() {
+  public Long getOwnerUserId() {
     return this.ownerUserId;
   }
 
-  public void setOwnerUserId(Integer ownerUserId) {
+  public void setOwnerUserId(Long ownerUserId) {
     this.ownerUserId = ownerUserId;
   }
 

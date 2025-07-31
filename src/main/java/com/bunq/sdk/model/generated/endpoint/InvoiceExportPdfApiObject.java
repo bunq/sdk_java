@@ -39,7 +39,7 @@ public class InvoiceExportPdfApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the invoice export's creation.
@@ -64,7 +64,7 @@ public class InvoiceExportPdfApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<InvoiceExportPdfApiObject> get(Integer invoiceId, Integer invoiceExportPdfId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<InvoiceExportPdfApiObject> get(Long invoiceId, Long invoiceExportPdfId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), invoiceId, invoiceExportPdfId), params, customHeaders);
 
@@ -75,21 +75,21 @@ public class InvoiceExportPdfApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<InvoiceExportPdfApiObject> get(Integer invoiceId) {
+  public static BunqResponse<InvoiceExportPdfApiObject> get(Long invoiceId) {
     return get(invoiceId, null, null, null);
   }
 
-  public static BunqResponse<InvoiceExportPdfApiObject> get(Integer invoiceId, Integer invoiceExportPdfId) {
+  public static BunqResponse<InvoiceExportPdfApiObject> get(Long invoiceId, Long invoiceExportPdfId) {
     return get(invoiceId, invoiceExportPdfId, null, null);
   }
 
-  public static BunqResponse<InvoiceExportPdfApiObject> get(Integer invoiceId, Integer invoiceExportPdfId, Map<String, String> params) {
+  public static BunqResponse<InvoiceExportPdfApiObject> get(Long invoiceId, Long invoiceExportPdfId, Map<String, String> params) {
     return get(invoiceId, invoiceExportPdfId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<Long> create(Integer invoiceId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long invoiceId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,13 +108,13 @@ public class InvoiceExportPdfApiObject extends BunqModel {
     return create(null, null);
   }
 
-  public static BunqResponse<Long> create(Integer invoiceId) {
+  public static BunqResponse<Long> create(Long invoiceId) {
     return create(invoiceId, null);
   }
 
   /**
    */
-  public static BunqResponse<Long> update(Integer invoiceId, Integer invoiceExportPdfId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long invoiceId, Long invoiceExportPdfId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -129,39 +129,39 @@ public class InvoiceExportPdfApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer invoiceId) {
+  public static BunqResponse<Long> update(Long invoiceId) {
     return update(invoiceId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer invoiceId, Integer invoiceExportPdfId) {
+  public static BunqResponse<Long> update(Long invoiceId, Long invoiceExportPdfId) {
     return update(invoiceId, invoiceExportPdfId, null);
   }
 
   /**
    */
-  public static BunqResponse<InvoiceExportPdfApiObject> delete(Integer invoiceId, Integer invoiceExportPdfId, Map<String, String> customHeaders) {
+  public static BunqResponse<InvoiceExportPdfApiObject> delete(Long invoiceId, Long invoiceExportPdfId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), invoiceId, invoiceExportPdfId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<InvoiceExportPdfApiObject> delete(Integer invoiceId) {
+  public static BunqResponse<InvoiceExportPdfApiObject> delete(Long invoiceId) {
     return delete(invoiceId, null, null);
   }
 
-  public static BunqResponse<InvoiceExportPdfApiObject> delete(Integer invoiceId, Integer invoiceExportPdfId) {
+  public static BunqResponse<InvoiceExportPdfApiObject> delete(Long invoiceId, Long invoiceExportPdfId) {
     return delete(invoiceId, invoiceExportPdfId, null);
   }
 
   /**
    * The id of the invoice export model.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

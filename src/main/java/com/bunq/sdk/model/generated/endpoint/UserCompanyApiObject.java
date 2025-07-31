@@ -67,7 +67,7 @@ public class UserCompanyApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the company object's creation.
@@ -245,7 +245,7 @@ public class UserCompanyApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("session_timeout")
-  private Integer sessionTimeout;
+  private Long sessionTimeout;
 
   /**
    * The amount the company can pay in the session without asking for credentials.
@@ -404,7 +404,7 @@ public class UserCompanyApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("session_timeout_field_for_request")
-  private Integer sessionTimeoutFieldForRequest;
+  private Long sessionTimeoutFieldForRequest;
 
   /**
    * The amount the company can pay in the session without asking for credentials.
@@ -469,11 +469,11 @@ public class UserCompanyApiObject extends BunqModel {
   this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null);
   }
 
-  public UserCompanyApiObject(AddressObject addressMain, String language, String region, String name, String publicNickName, String avatarUuid, AddressObject addressPostal, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout) {
+  public UserCompanyApiObject(AddressObject addressMain, String language, String region, String name, String publicNickName, String avatarUuid, AddressObject addressPostal, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Long sessionTimeout) {
   this(addressMain, language, region, name, publicNickName, avatarUuid, addressPostal, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null);
   }
 
-  public UserCompanyApiObject(AddressObject addressMain, String language, String region, String name, String publicNickName, String avatarUuid, AddressObject addressPostal, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
+  public UserCompanyApiObject(AddressObject addressMain, String language, String region, String name, String publicNickName, String avatarUuid, AddressObject addressPostal, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Long sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
     this.nameFieldForRequest = name;
     this.publicNickNameFieldForRequest = publicNickName;
     this.avatarUuidFieldForRequest = avatarUuid;
@@ -530,7 +530,7 @@ public class UserCompanyApiObject extends BunqModel {
    * @param dailyLimitWithoutConfirmationLogin The amount the company can pay in the session
    * without asking for credentials.
    */
-  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Long sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -612,22 +612,22 @@ requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutCo
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, null, null, null);
   }
 
-  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Long sessionTimeout) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, null, null);
   }
 
-  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Integer sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
+  public static BunqResponse<Long> update(String name, String publicNickName, String avatarUuid, AddressObject addressMain, AddressObject addressPostal, String language, String region, String country, List<UboObject> ubo, String chamberOfCommerceNumber, String legalForm, String status, String subStatus, Long sessionTimeout, AmountObject dailyLimitWithoutConfirmationLogin) {
     return update(name, publicNickName, avatarUuid, addressMain, addressPostal, language, region, country, ubo, chamberOfCommerceNumber, legalForm, status, subStatus, sessionTimeout, dailyLimitWithoutConfirmationLogin, null);
   }
 
   /**
    * The id of the modified company.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -901,11 +901,11 @@ requestMap.put(FIELD_DAILY_LIMIT_WITHOUT_CONFIRMATION_LOGIN, dailyLimitWithoutCo
   /**
    * The setting for the session timeout of the company in seconds.
    */
-  public Integer getSessionTimeout() {
+  public Long getSessionTimeout() {
     return this.sessionTimeout;
   }
 
-  public void setSessionTimeout(Integer sessionTimeout) {
+  public void setSessionTimeout(Long sessionTimeout) {
     this.sessionTimeout = sessionTimeout;
   }
 

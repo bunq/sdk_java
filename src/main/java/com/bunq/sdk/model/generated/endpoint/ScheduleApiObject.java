@@ -68,7 +68,7 @@ public class ScheduleApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("recurrence_size")
-  private Integer recurrenceSize;
+  private Long recurrenceSize;
 
   /**
    * The schedule status, options: ACTIVE, FINISHED, CANCELLED.
@@ -111,7 +111,7 @@ public class ScheduleApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("recurrence_size_field_for_request")
-  private Integer recurrenceSizeFieldForRequest;
+  private Long recurrenceSizeFieldForRequest;
 
   public ScheduleApiObject() {
   this(null, null, null, null);
@@ -125,11 +125,11 @@ public class ScheduleApiObject extends BunqModel {
   this(timeStart, recurrenceUnit, null, null);
   }
 
-  public ScheduleApiObject(String timeStart, String recurrenceUnit, Integer recurrenceSize) {
+  public ScheduleApiObject(String timeStart, String recurrenceUnit, Long recurrenceSize) {
   this(timeStart, recurrenceUnit, recurrenceSize, null);
   }
 
-  public ScheduleApiObject(String timeStart, String recurrenceUnit, Integer recurrenceSize, String timeEnd) {
+  public ScheduleApiObject(String timeStart, String recurrenceUnit, Long recurrenceSize, String timeEnd) {
     this.timeStartFieldForRequest = timeStart;
     this.timeEndFieldForRequest = timeEnd;
     this.recurrenceUnitFieldForRequest = recurrenceUnit;
@@ -137,7 +137,7 @@ public class ScheduleApiObject extends BunqModel {
   }  /**
    * Get a specific schedule definition for a given monetary account.
    */
-  public static BunqResponse<ScheduleApiObject> get(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ScheduleApiObject> get(Long scheduleId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId), params, customHeaders);
 
@@ -148,15 +148,15 @@ public class ScheduleApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ScheduleApiObject> get(Integer scheduleId) {
+  public static BunqResponse<ScheduleApiObject> get(Long scheduleId) {
     return get(scheduleId, null, null, null);
   }
 
-  public static BunqResponse<ScheduleApiObject> get(Integer scheduleId, Integer monetaryAccountId) {
+  public static BunqResponse<ScheduleApiObject> get(Long scheduleId, Long monetaryAccountId) {
     return get(scheduleId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ScheduleApiObject> get(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<ScheduleApiObject> get(Long scheduleId, Long monetaryAccountId, Map<String, String> params) {
     return get(scheduleId, monetaryAccountId, params, null);
   }
 
@@ -166,7 +166,7 @@ public class ScheduleApiObject extends BunqModel {
    * type={SCHEDULE_DEFINITION_PAYMENT,SCHEDULE_DEFINITION_PAYMENT_BATCH} is provided only
    * schedule definition object that relate to these definitions are returned.
    */
-  public static BunqResponse<List<ScheduleApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ScheduleApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -177,11 +177,11 @@ public class ScheduleApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ScheduleApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<ScheduleApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<ScheduleApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<ScheduleApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
@@ -222,11 +222,11 @@ public class ScheduleApiObject extends BunqModel {
    * The schedule recurrence size. For example size 4 and unit WEEKLY means the recurrence is
    * every 4 weeks.
    */
-  public Integer getRecurrenceSize() {
+  public Long getRecurrenceSize() {
     return this.recurrenceSize;
   }
 
-  public void setRecurrenceSize(Integer recurrenceSize) {
+  public void setRecurrenceSize(Long recurrenceSize) {
     this.recurrenceSize = recurrenceSize;
   }
 

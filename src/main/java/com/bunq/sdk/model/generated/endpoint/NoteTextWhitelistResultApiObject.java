@@ -46,7 +46,7 @@ public class NoteTextWhitelistResultApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -92,7 +92,7 @@ public class NoteTextWhitelistResultApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long whitelistId, Long whitelistResultId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -112,26 +112,26 @@ requestMap.put(FIELD_CONTENT, content);
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer whitelistId) {
+  public static BunqResponse<Long> create(Long whitelistId) {
     return create(whitelistId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<Long> create(Long whitelistId, Long whitelistResultId) {
     return create(whitelistId, whitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long whitelistId, Long whitelistResultId, Long monetaryAccountId) {
     return create(whitelistId, whitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Long whitelistId, Long whitelistResultId, Long monetaryAccountId, String content) {
     return create(whitelistId, whitelistResultId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -147,55 +147,55 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer whitelistId) {
+  public static BunqResponse<Long> update(Long whitelistId) {
     return update(whitelistId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<Long> update(Long whitelistId, Long whitelistResultId) {
     return update(whitelistId, whitelistResultId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId) {
+  public static BunqResponse<Long> update(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId) {
     return update(whitelistId, whitelistResultId, noteTextWhitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId) {
     return update(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId, String content) {
     return update(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, content, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), whitelistId, whitelistResultId, noteTextWhitelistResultId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Integer whitelistId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Long whitelistId) {
     return delete(whitelistId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Long whitelistId, Long whitelistResultId) {
     return delete(whitelistId, whitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId) {
     return delete(whitelistId, whitelistResultId, noteTextWhitelistResultId, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> delete(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId) {
     return delete(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a given user.
    */
-  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Long whitelistId, Long whitelistResultId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), whitelistId, whitelistResultId), params, customHeaders);
 
@@ -206,25 +206,25 @@ requestMap.put(FIELD_CONTENT, content);
     return list(null, null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Integer whitelistId) {
+  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Long whitelistId) {
     return list(whitelistId, null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Long whitelistId, Long whitelistResultId) {
     return list(whitelistId, whitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Long whitelistId, Long whitelistResultId, Long monetaryAccountId) {
     return list(whitelistId, whitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Integer whitelistId, Integer whitelistResultId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteTextWhitelistResultApiObject>> list(Long whitelistId, Long whitelistResultId, Long monetaryAccountId, Map<String, String> params) {
     return list(whitelistId, whitelistResultId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), whitelistId, whitelistResultId, noteTextWhitelistResultId), params, customHeaders);
 
@@ -235,34 +235,34 @@ requestMap.put(FIELD_CONTENT, content);
     return get(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Integer whitelistId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Long whitelistId) {
     return get(whitelistId, null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Integer whitelistId, Integer whitelistResultId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Long whitelistId, Long whitelistResultId) {
     return get(whitelistId, whitelistResultId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId) {
     return get(whitelistId, whitelistResultId, noteTextWhitelistResultId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId) {
     return get(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Integer whitelistId, Integer whitelistResultId, Integer noteTextWhitelistResultId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteTextWhitelistResultApiObject> get(Long whitelistId, Long whitelistResultId, Long noteTextWhitelistResultId, Long monetaryAccountId, Map<String, String> params) {
     return get(whitelistId, whitelistResultId, noteTextWhitelistResultId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

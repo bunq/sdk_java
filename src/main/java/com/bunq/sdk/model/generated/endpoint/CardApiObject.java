@@ -61,7 +61,7 @@ public class CardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the card's creation.
@@ -89,21 +89,21 @@ public class CardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * ID of the user who is owner of the card.
    */
   @Expose
   @SerializedName("user_owner_id")
-  private Integer userOwnerId;
+  private Long userOwnerId;
 
   /**
    * ID of the user who is holder of the card.
    */
   @Expose
   @SerializedName("user_holder_id")
-  private Integer userHolderId;
+  private Long userHolderId;
 
   /**
    * The type of the card. Can be MAESTRO, MASTERCARD.
@@ -262,7 +262,7 @@ public class CardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_fallback")
-  private Integer monetaryAccountIdFallback;
+  private Long monetaryAccountIdFallback;
 
   /**
    * The country that is domestic to the card. Defaults to country of residence of user.
@@ -397,7 +397,7 @@ public class CardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_fallback_field_for_request")
-  private Integer monetaryAccountIdFallbackFieldForRequest;
+  private Long monetaryAccountIdFallbackFieldForRequest;
 
   /**
    * The user's preferred name as it will be on the card.
@@ -460,19 +460,19 @@ public class CardApiObject extends BunqModel {
   this(pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, null, null, null, null);
   }
 
-  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback) {
+  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback) {
   this(pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, null, null, null);
   }
 
-  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard) {
+  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard) {
   this(pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, preferredNameOnCard, null, null);
   }
 
-  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard, String secondLine) {
+  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard, String secondLine) {
   this(pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, preferredNameOnCard, secondLine, null);
   }
 
-  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard, String secondLine, String cancellationReason) {
+  public CardApiObject(String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard, String secondLine, String cancellationReason) {
     this.pinCodeFieldForRequest = pinCode;
     this.activationCodeFieldForRequest = activationCode;
     this.statusFieldForRequest = status;
@@ -514,7 +514,7 @@ public class CardApiObject extends BunqModel {
    * @param secondLine The second line of text on the card
    * @param cancellationReason The reason for card cancellation.
    */
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard, String secondLine, String cancellationReason, Map<String, String> customHeaders) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard, String secondLine, String cancellationReason, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -542,66 +542,66 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     return fromJson(CardApiObject.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId) {
+  public static BunqResponse<CardApiObject> update(Long cardId) {
     return update(cardId, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode) {
     return update(cardId, pinCode, null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode) {
     return update(cardId, pinCode, activationCode, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status) {
     return update(cardId, pinCode, activationCode, status, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus) {
     return update(cardId, pinCode, activationCode, status, orderStatus, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, null, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, null, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, preferredNameOnCard, null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard, String secondLine) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard, String secondLine) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, preferredNameOnCard, secondLine, null, null);
   }
 
-  public static BunqResponse<CardApiObject> update(Integer cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Integer monetaryAccountIdFallback, String preferredNameOnCard, String secondLine, String cancellationReason) {
+  public static BunqResponse<CardApiObject> update(Long cardId, String pinCode, String activationCode, String status, String orderStatus, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, List<CardPinAssignmentObject> pinCodeAssignment, List<CardPrimaryAccountNumberObject> primaryAccountNumbers, Long monetaryAccountIdFallback, String preferredNameOnCard, String secondLine, String cancellationReason) {
     return update(cardId, pinCode, activationCode, status, orderStatus, cardLimit, cardLimitAtm, countryPermission, pinCodeAssignment, primaryAccountNumbers, monetaryAccountIdFallback, preferredNameOnCard, secondLine, cancellationReason, null);
   }
 
   /**
    * Return the details of a specific card.
    */
-  public static BunqResponse<CardApiObject> get(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CardApiObject> get(Long cardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId), params, customHeaders);
 
@@ -612,11 +612,11 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
     return get(null, null, null);
   }
 
-  public static BunqResponse<CardApiObject> get(Integer cardId) {
+  public static BunqResponse<CardApiObject> get(Long cardId) {
     return get(cardId, null, null);
   }
 
-  public static BunqResponse<CardApiObject> get(Integer cardId, Map<String, String> params) {
+  public static BunqResponse<CardApiObject> get(Long cardId, Map<String, String> params) {
     return get(cardId, params, null);
   }
 
@@ -641,11 +641,11 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
   /**
    * The id of the card.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -685,33 +685,33 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
   /**
    * DEPRECATED. ID of the user who is owner of the card.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
   /**
    * ID of the user who is owner of the card.
    */
-  public Integer getUserOwnerId() {
+  public Long getUserOwnerId() {
     return this.userOwnerId;
   }
 
-  public void setUserOwnerId(Integer userOwnerId) {
+  public void setUserOwnerId(Long userOwnerId) {
     this.userOwnerId = userOwnerId;
   }
 
   /**
    * ID of the user who is holder of the card.
    */
-  public Integer getUserHolderId() {
+  public Long getUserHolderId() {
     return this.userHolderId;
   }
 
-  public void setUserHolderId(Integer userHolderId) {
+  public void setUserHolderId(Long userHolderId) {
     this.userHolderId = userHolderId;
   }
 
@@ -954,11 +954,11 @@ requestMap.put(FIELD_CANCELLATION_REASON, cancellationReason);
    * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
    * is removed if not supplied.
    */
-  public Integer getMonetaryAccountIdFallback() {
+  public Long getMonetaryAccountIdFallback() {
     return this.monetaryAccountIdFallback;
   }
 
-  public void setMonetaryAccountIdFallback(Integer monetaryAccountIdFallback) {
+  public void setMonetaryAccountIdFallback(Long monetaryAccountIdFallback) {
     this.monetaryAccountIdFallback = monetaryAccountIdFallback;
   }
 

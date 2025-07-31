@@ -39,7 +39,7 @@ public class AttachmentUserApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the attachment's creation.
@@ -66,7 +66,7 @@ public class AttachmentUserApiObject extends BunqModel {
    * Get a specific attachment. The header of the response contains the content-type of the
    * attachment.
    */
-  public static BunqResponse<AttachmentUserApiObject> get(Integer attachmentUserId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<AttachmentUserApiObject> get(Long attachmentUserId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), attachmentUserId), params, customHeaders);
 
@@ -77,22 +77,22 @@ public class AttachmentUserApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<AttachmentUserApiObject> get(Integer attachmentUserId) {
+  public static BunqResponse<AttachmentUserApiObject> get(Long attachmentUserId) {
     return get(attachmentUserId, null, null);
   }
 
-  public static BunqResponse<AttachmentUserApiObject> get(Integer attachmentUserId, Map<String, String> params) {
+  public static BunqResponse<AttachmentUserApiObject> get(Long attachmentUserId, Map<String, String> params) {
     return get(attachmentUserId, params, null);
   }
 
   /**
    * The id of the attachment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

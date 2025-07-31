@@ -37,49 +37,49 @@ public class CustomerLimitApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("limit_monetary_account")
-  private Integer limitMonetaryAccount;
+  private Long limitMonetaryAccount;
 
   /**
    * The amount of additional monetary accounts you can create.
    */
   @Expose
   @SerializedName("limit_monetary_account_remaining")
-  private Integer limitMonetaryAccountRemaining;
+  private Long limitMonetaryAccountRemaining;
 
   /**
    * The limit of Maestro cards.
    */
   @Expose
   @SerializedName("limit_card_debit_maestro")
-  private Integer limitCardDebitMaestro;
+  private Long limitCardDebitMaestro;
 
   /**
    * The limit of MasterCard cards.
    */
   @Expose
   @SerializedName("limit_card_debit_mastercard")
-  private Integer limitCardDebitMastercard;
+  private Long limitCardDebitMastercard;
 
   /**
    * DEPRECTATED: The limit of wildcards, e.g. Maestro or MasterCard cards.
    */
   @Expose
   @SerializedName("limit_card_debit_wildcard")
-  private Integer limitCardDebitWildcard;
+  private Long limitCardDebitWildcard;
 
   /**
    * The limit of wildcards, e.g. Maestro or MasterCard cards.
    */
   @Expose
   @SerializedName("limit_card_wildcard")
-  private Integer limitCardWildcard;
+  private Long limitCardWildcard;
 
   /**
    * The limit of free replacement cards.
    */
   @Expose
   @SerializedName("limit_card_replacement")
-  private Integer limitCardReplacement;
+  private Long limitCardReplacement;
 
   /**
    * The maximum amount a user is allowed to spend in a month.
@@ -116,77 +116,77 @@ public class CustomerLimitApiObject extends BunqModel {
   /**
    * The limit of monetary accounts.
    */
-  public Integer getLimitMonetaryAccount() {
+  public Long getLimitMonetaryAccount() {
     return this.limitMonetaryAccount;
   }
 
-  public void setLimitMonetaryAccount(Integer limitMonetaryAccount) {
+  public void setLimitMonetaryAccount(Long limitMonetaryAccount) {
     this.limitMonetaryAccount = limitMonetaryAccount;
   }
 
   /**
    * The amount of additional monetary accounts you can create.
    */
-  public Integer getLimitMonetaryAccountRemaining() {
+  public Long getLimitMonetaryAccountRemaining() {
     return this.limitMonetaryAccountRemaining;
   }
 
-  public void setLimitMonetaryAccountRemaining(Integer limitMonetaryAccountRemaining) {
+  public void setLimitMonetaryAccountRemaining(Long limitMonetaryAccountRemaining) {
     this.limitMonetaryAccountRemaining = limitMonetaryAccountRemaining;
   }
 
   /**
    * The limit of Maestro cards.
    */
-  public Integer getLimitCardDebitMaestro() {
+  public Long getLimitCardDebitMaestro() {
     return this.limitCardDebitMaestro;
   }
 
-  public void setLimitCardDebitMaestro(Integer limitCardDebitMaestro) {
+  public void setLimitCardDebitMaestro(Long limitCardDebitMaestro) {
     this.limitCardDebitMaestro = limitCardDebitMaestro;
   }
 
   /**
    * The limit of MasterCard cards.
    */
-  public Integer getLimitCardDebitMastercard() {
+  public Long getLimitCardDebitMastercard() {
     return this.limitCardDebitMastercard;
   }
 
-  public void setLimitCardDebitMastercard(Integer limitCardDebitMastercard) {
+  public void setLimitCardDebitMastercard(Long limitCardDebitMastercard) {
     this.limitCardDebitMastercard = limitCardDebitMastercard;
   }
 
   /**
    * DEPRECTATED: The limit of wildcards, e.g. Maestro or MasterCard cards.
    */
-  public Integer getLimitCardDebitWildcard() {
+  public Long getLimitCardDebitWildcard() {
     return this.limitCardDebitWildcard;
   }
 
-  public void setLimitCardDebitWildcard(Integer limitCardDebitWildcard) {
+  public void setLimitCardDebitWildcard(Long limitCardDebitWildcard) {
     this.limitCardDebitWildcard = limitCardDebitWildcard;
   }
 
   /**
    * The limit of wildcards, e.g. Maestro or MasterCard cards.
    */
-  public Integer getLimitCardWildcard() {
+  public Long getLimitCardWildcard() {
     return this.limitCardWildcard;
   }
 
-  public void setLimitCardWildcard(Integer limitCardWildcard) {
+  public void setLimitCardWildcard(Long limitCardWildcard) {
     this.limitCardWildcard = limitCardWildcard;
   }
 
   /**
    * The limit of free replacement cards.
    */
-  public Integer getLimitCardReplacement() {
+  public Long getLimitCardReplacement() {
     return this.limitCardReplacement;
   }
 
-  public void setLimitCardReplacement(Integer limitCardReplacement) {
+  public void setLimitCardReplacement(Long limitCardReplacement) {
     this.limitCardReplacement = limitCardReplacement;
   }
 

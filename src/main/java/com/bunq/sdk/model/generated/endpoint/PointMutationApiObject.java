@@ -21,16 +21,16 @@ public class PointMutationApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_point")
-  private Integer numberOfPoint;
+  private Long numberOfPoint;
 
   /**
    * The number of points earned.
    */
-  public Integer getNumberOfPoint() {
+  public Long getNumberOfPoint() {
     return this.numberOfPoint;
   }
 
-  public void setNumberOfPoint(Integer numberOfPoint) {
+  public void setNumberOfPoint(Long numberOfPoint) {
     this.numberOfPoint = numberOfPoint;
   }
 

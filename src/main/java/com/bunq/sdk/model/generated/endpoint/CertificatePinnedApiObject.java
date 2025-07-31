@@ -54,7 +54,7 @@ public class CertificatePinnedApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The certificate chain in .PEM format.
@@ -100,14 +100,14 @@ requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
   /**
    * Remove the pinned certificate chain with the specific ID.
    */
-  public static BunqResponse<CertificatePinnedApiObject> delete(Integer certificatePinnedId, Map<String, String> customHeaders) {
+  public static BunqResponse<CertificatePinnedApiObject> delete(Long certificatePinnedId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), certificatePinnedId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<CertificatePinnedApiObject> delete(Integer certificatePinnedId) {
+  public static BunqResponse<CertificatePinnedApiObject> delete(Long certificatePinnedId) {
     return delete(certificatePinnedId, null);
   }
 
@@ -132,7 +132,7 @@ requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
   /**
    * Get the pinned certificate chain with the specified ID.
    */
-  public static BunqResponse<CertificatePinnedApiObject> get(Integer certificatePinnedId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CertificatePinnedApiObject> get(Long certificatePinnedId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), certificatePinnedId), params, customHeaders);
 
@@ -143,11 +143,11 @@ requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
     return get(null, null, null);
   }
 
-  public static BunqResponse<CertificatePinnedApiObject> get(Integer certificatePinnedId) {
+  public static BunqResponse<CertificatePinnedApiObject> get(Long certificatePinnedId) {
     return get(certificatePinnedId, null, null);
   }
 
-  public static BunqResponse<CertificatePinnedApiObject> get(Integer certificatePinnedId, Map<String, String> params) {
+  public static BunqResponse<CertificatePinnedApiObject> get(Long certificatePinnedId, Map<String, String> params) {
     return get(certificatePinnedId, params, null);
   }
 
@@ -165,11 +165,11 @@ requestMap.put(FIELD_CERTIFICATE_CHAIN, certificateChain);
   /**
    * The id generated for the pinned certificate chain.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

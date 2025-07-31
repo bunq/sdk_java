@@ -49,7 +49,7 @@ public class DeviceApiObject extends BunqModel implements AnchorObjectInterface 
   /**
    * Get a single Device. A Device is either a DevicePhone or a DeviceServer.
    */
-  public static BunqResponse<DeviceApiObject> get(Integer deviceId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<DeviceApiObject> get(Long deviceId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceId), params, customHeaders);
 
@@ -60,11 +60,11 @@ public class DeviceApiObject extends BunqModel implements AnchorObjectInterface 
     return get(null, null, null);
   }
 
-  public static BunqResponse<DeviceApiObject> get(Integer deviceId) {
+  public static BunqResponse<DeviceApiObject> get(Long deviceId) {
     return get(deviceId, null, null);
   }
 
-  public static BunqResponse<DeviceApiObject> get(Integer deviceId, Map<String, String> params) {
+  public static BunqResponse<DeviceApiObject> get(Long deviceId, Map<String, String> params) {
     return get(deviceId, params, null);
   }
 

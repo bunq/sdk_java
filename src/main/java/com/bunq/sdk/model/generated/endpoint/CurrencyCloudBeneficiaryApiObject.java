@@ -48,7 +48,7 @@ public class CurrencyCloudBeneficiaryApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the beneficiaries creation.
@@ -226,7 +226,7 @@ requestMap.put(FIELD_ALL_FIELD, allField);
 
   /**
    */
-  public static BunqResponse<CurrencyCloudBeneficiaryApiObject> get(Integer currencyCloudBeneficiaryId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CurrencyCloudBeneficiaryApiObject> get(Long currencyCloudBeneficiaryId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), currencyCloudBeneficiaryId), params, customHeaders);
 
@@ -237,11 +237,11 @@ requestMap.put(FIELD_ALL_FIELD, allField);
     return get(null, null, null);
   }
 
-  public static BunqResponse<CurrencyCloudBeneficiaryApiObject> get(Integer currencyCloudBeneficiaryId) {
+  public static BunqResponse<CurrencyCloudBeneficiaryApiObject> get(Long currencyCloudBeneficiaryId) {
     return get(currencyCloudBeneficiaryId, null, null);
   }
 
-  public static BunqResponse<CurrencyCloudBeneficiaryApiObject> get(Integer currencyCloudBeneficiaryId, Map<String, String> params) {
+  public static BunqResponse<CurrencyCloudBeneficiaryApiObject> get(Long currencyCloudBeneficiaryId, Map<String, String> params) {
     return get(currencyCloudBeneficiaryId, params, null);
   }
 
@@ -265,11 +265,11 @@ requestMap.put(FIELD_ALL_FIELD, allField);
   /**
    * The id of the profile.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

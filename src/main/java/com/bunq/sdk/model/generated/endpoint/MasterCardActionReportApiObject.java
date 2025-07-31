@@ -29,7 +29,7 @@ public class MasterCardActionReportApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("mastercard_action_id")
-  private Integer mastercardActionId;
+  private Long mastercardActionId;
 
   /**
    * The id of mastercard action being reported.
@@ -71,7 +71,7 @@ public class MasterCardActionReportApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("mastercard_action_id_field_for_request")
-  private Integer mastercardActionIdFieldForRequest;
+  private Long mastercardActionIdFieldForRequest;
 
   /**
    * The type of report. Can be 'FRAUD' or 'MERCHANT_BLOCKED'.
@@ -91,15 +91,15 @@ public class MasterCardActionReportApiObject extends BunqModel {
   this(null, null, null);
   }
 
-  public MasterCardActionReportApiObject(Integer mastercardActionId) {
+  public MasterCardActionReportApiObject(Long mastercardActionId) {
   this(mastercardActionId, null, null);
   }
 
-  public MasterCardActionReportApiObject(Integer mastercardActionId, String type) {
+  public MasterCardActionReportApiObject(Long mastercardActionId, String type) {
   this(mastercardActionId, type, null);
   }
 
-  public MasterCardActionReportApiObject(Integer mastercardActionId, String type, String status) {
+  public MasterCardActionReportApiObject(Long mastercardActionId, String type, String status) {
     this.mastercardActionIdFieldForRequest = mastercardActionId;
     this.typeFieldForRequest = type;
     this.statusFieldForRequest = status;
@@ -108,11 +108,11 @@ public class MasterCardActionReportApiObject extends BunqModel {
   /**
    * The id of mastercard action being reported.
    */
-  public Integer getMastercardActionId() {
+  public Long getMastercardActionId() {
     return this.mastercardActionId;
   }
 
-  public void setMastercardActionId(Integer mastercardActionId) {
+  public void setMastercardActionId(Long mastercardActionId) {
     this.mastercardActionId = mastercardActionId;
   }
 

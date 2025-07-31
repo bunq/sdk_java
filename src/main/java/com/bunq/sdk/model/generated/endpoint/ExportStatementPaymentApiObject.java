@@ -37,7 +37,7 @@ public class ExportStatementPaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the statement model's creation.
@@ -62,7 +62,7 @@ public class ExportStatementPaymentApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<Long> create(Integer eventId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long eventId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -81,17 +81,17 @@ public class ExportStatementPaymentApiObject extends BunqModel {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer eventId) {
+  public static BunqResponse<Long> create(Long eventId) {
     return create(eventId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer eventId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long eventId, Long monetaryAccountId) {
     return create(eventId, monetaryAccountId, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementPaymentApiObject> get(Integer eventId, Integer exportStatementPaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementPaymentApiObject> get(Long eventId, Long exportStatementPaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), eventId, exportStatementPaymentId), params, customHeaders);
 
@@ -102,30 +102,30 @@ public class ExportStatementPaymentApiObject extends BunqModel {
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementPaymentApiObject> get(Integer eventId) {
+  public static BunqResponse<ExportStatementPaymentApiObject> get(Long eventId) {
     return get(eventId, null, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementPaymentApiObject> get(Integer eventId, Integer exportStatementPaymentId) {
+  public static BunqResponse<ExportStatementPaymentApiObject> get(Long eventId, Long exportStatementPaymentId) {
     return get(eventId, exportStatementPaymentId, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementPaymentApiObject> get(Integer eventId, Integer exportStatementPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<ExportStatementPaymentApiObject> get(Long eventId, Long exportStatementPaymentId, Long monetaryAccountId) {
     return get(eventId, exportStatementPaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ExportStatementPaymentApiObject> get(Integer eventId, Integer exportStatementPaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<ExportStatementPaymentApiObject> get(Long eventId, Long exportStatementPaymentId, Long monetaryAccountId, Map<String, String> params) {
     return get(eventId, exportStatementPaymentId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the single payment statement model.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

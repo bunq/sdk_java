@@ -48,7 +48,7 @@ public class NoteAttachmentOpenBankingMerchantTransactionApiObject extends BunqM
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -97,24 +97,24 @@ public class NoteAttachmentOpenBankingMerchantTransactionApiObject extends BunqM
    */
   @Expose
   @SerializedName("attachment_id_field_for_request")
-  private Integer attachmentIdFieldForRequest;
+  private Long attachmentIdFieldForRequest;
 
   public NoteAttachmentOpenBankingMerchantTransactionApiObject() {
   this(null, null);
   }
 
-  public NoteAttachmentOpenBankingMerchantTransactionApiObject(Integer attachmentId) {
+  public NoteAttachmentOpenBankingMerchantTransactionApiObject(Long attachmentId) {
   this(attachmentId, null);
   }
 
-  public NoteAttachmentOpenBankingMerchantTransactionApiObject(Integer attachmentId, String description) {
+  public NoteAttachmentOpenBankingMerchantTransactionApiObject(Long attachmentId, String description) {
     this.descriptionFieldForRequest = description;
     this.attachmentIdFieldForRequest = attachmentId;
   }  /**
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Long> create(Integer openBankingMerchantTransactionId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long openBankingMerchantTransactionId, Long attachmentId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,26 +135,26 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer openBankingMerchantTransactionId) {
+  public static BunqResponse<Long> create(Long openBankingMerchantTransactionId) {
     return create(openBankingMerchantTransactionId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer openBankingMerchantTransactionId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Long openBankingMerchantTransactionId, Long attachmentId) {
     return create(openBankingMerchantTransactionId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer openBankingMerchantTransactionId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long openBankingMerchantTransactionId, Long attachmentId, Long monetaryAccountId) {
     return create(openBankingMerchantTransactionId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer openBankingMerchantTransactionId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Long openBankingMerchantTransactionId, Long attachmentId, Long monetaryAccountId, String description) {
     return create(openBankingMerchantTransactionId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Long> update(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,46 +170,46 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer openBankingMerchantTransactionId) {
+  public static BunqResponse<Long> update(Long openBankingMerchantTransactionId) {
     return update(openBankingMerchantTransactionId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId) {
+  public static BunqResponse<Long> update(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId) {
     return update(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId) {
     return update(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId, String description) {
     return update(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, monetaryAccountId, description, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Integer openBankingMerchantTransactionId) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Long openBankingMerchantTransactionId) {
     return delete(openBankingMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId) {
     return delete(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> delete(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId) {
     return delete(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, monetaryAccountId, null);
   }
 
   /**
    */
-  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Integer openBankingMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Long openBankingMerchantTransactionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), openBankingMerchantTransactionId), params, customHeaders);
 
@@ -220,21 +220,21 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Integer openBankingMerchantTransactionId) {
+  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Long openBankingMerchantTransactionId) {
     return list(openBankingMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Integer openBankingMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Long openBankingMerchantTransactionId, Long monetaryAccountId) {
     return list(openBankingMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Integer openBankingMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteAttachmentOpenBankingMerchantTransactionApiObject>> list(Long openBankingMerchantTransactionId, Long monetaryAccountId, Map<String, String> params) {
     return list(openBankingMerchantTransactionId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId), params, customHeaders);
 
@@ -245,30 +245,30 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Integer openBankingMerchantTransactionId) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Long openBankingMerchantTransactionId) {
     return get(openBankingMerchantTransactionId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId) {
     return get(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId) {
     return get(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Integer openBankingMerchantTransactionId, Integer noteAttachmentOpenBankingMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteAttachmentOpenBankingMerchantTransactionApiObject> get(Long openBankingMerchantTransactionId, Long noteAttachmentOpenBankingMerchantTransactionId, Long monetaryAccountId, Map<String, String> params) {
     return get(openBankingMerchantTransactionId, noteAttachmentOpenBankingMerchantTransactionId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -50,7 +50,7 @@ public class ExportStatementApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the statement model's creation.
@@ -92,7 +92,7 @@ public class ExportStatementApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("statement_number")
-  private Integer statementNumber;
+  private Long statementNumber;
 
   /**
    * The format of statement.
@@ -187,7 +187,7 @@ public class ExportStatementApiObject extends BunqModel {
    * @param includeAttachment Only for PDF exports. Includes attachments to mutations in the
    * export, such as scanned receipts.
    */
-  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Boolean includeAttachment, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Long monetaryAccountId, String regionalFormat, Boolean includeAttachment, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -223,21 +223,21 @@ requestMap.put(FIELD_INCLUDE_ATTACHMENT, includeAttachment);
     return create(statementFormat, dateStart, dateEnd, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Long monetaryAccountId) {
     return create(statementFormat, dateStart, dateEnd, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Long monetaryAccountId, String regionalFormat) {
     return create(statementFormat, dateStart, dateEnd, monetaryAccountId, regionalFormat, null, null);
   }
 
-  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Integer monetaryAccountId, String regionalFormat, Boolean includeAttachment) {
+  public static BunqResponse<Long> create(String statementFormat, String dateStart, String dateEnd, Long monetaryAccountId, String regionalFormat, Boolean includeAttachment) {
     return create(statementFormat, dateStart, dateEnd, monetaryAccountId, regionalFormat, includeAttachment, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementApiObject> get(Integer exportStatementId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementApiObject> get(Long exportStatementId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), exportStatementId), params, customHeaders);
 
@@ -248,21 +248,21 @@ requestMap.put(FIELD_INCLUDE_ATTACHMENT, includeAttachment);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementApiObject> get(Integer exportStatementId) {
+  public static BunqResponse<ExportStatementApiObject> get(Long exportStatementId) {
     return get(exportStatementId, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementApiObject> get(Integer exportStatementId, Integer monetaryAccountId) {
+  public static BunqResponse<ExportStatementApiObject> get(Long exportStatementId, Long monetaryAccountId) {
     return get(exportStatementId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ExportStatementApiObject> get(Integer exportStatementId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<ExportStatementApiObject> get(Long exportStatementId, Long monetaryAccountId, Map<String, String> params) {
     return get(exportStatementId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<ExportStatementApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ExportStatementApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -273,39 +273,39 @@ requestMap.put(FIELD_INCLUDE_ATTACHMENT, includeAttachment);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<ExportStatementApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<ExportStatementApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementApiObject> delete(Integer exportStatementId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementApiObject> delete(Long exportStatementId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), exportStatementId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<ExportStatementApiObject> delete(Integer exportStatementId) {
+  public static BunqResponse<ExportStatementApiObject> delete(Long exportStatementId) {
     return delete(exportStatementId, null, null);
   }
 
-  public static BunqResponse<ExportStatementApiObject> delete(Integer exportStatementId, Integer monetaryAccountId) {
+  public static BunqResponse<ExportStatementApiObject> delete(Long exportStatementId, Long monetaryAccountId) {
     return delete(exportStatementId, monetaryAccountId, null);
   }
 
   /**
    * The id of the customer statement model.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -367,11 +367,11 @@ requestMap.put(FIELD_INCLUDE_ATTACHMENT, includeAttachment);
   /**
    * MT940 Statement number. Unique per monetary account.
    */
-  public Integer getStatementNumber() {
+  public Long getStatementNumber() {
     return this.statementNumber;
   }
 
-  public void setStatementNumber(Integer statementNumber) {
+  public void setStatementNumber(Long statementNumber) {
     this.statementNumber = statementNumber;
   }
 

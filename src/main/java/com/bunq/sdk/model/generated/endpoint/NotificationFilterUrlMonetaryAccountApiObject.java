@@ -62,7 +62,7 @@ public class NotificationFilterUrlMonetaryAccountApiObject extends BunqModel {
    * @param notificationFilters The types of notifications that will result in a url notification
    * for this monetary account.
    */
-  public static BunqResponse<Long> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -82,17 +82,17 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     return create(null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long monetaryAccountId) {
     return create(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters) {
+  public static BunqResponse<Long> create(Long monetaryAccountId, List<NotificationFilterUrlObject> notificationFilters) {
     return create(monetaryAccountId, notificationFilters, null);
   }
 
   /**
    */
-  public static BunqResponse<List<NotificationFilterUrlMonetaryAccountApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NotificationFilterUrlMonetaryAccountApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -103,11 +103,11 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<NotificationFilterUrlMonetaryAccountApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<NotificationFilterUrlMonetaryAccountApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NotificationFilterUrlMonetaryAccountApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NotificationFilterUrlMonetaryAccountApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 

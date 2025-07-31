@@ -33,7 +33,7 @@ public class InvoiceExportPdfContentApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<byte[]> list(Integer invoiceId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(Long invoiceId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), invoiceId), params, customHeaders);
 
@@ -43,10 +43,10 @@ public class InvoiceExportPdfContentApiObject extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer invoiceId) {
+  public static BunqResponse<byte[]> list(Long invoiceId) {
     return list(invoiceId, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer invoiceId, Map<String, String> params) {
+  public static BunqResponse<byte[]> list(Long invoiceId, Map<String, String> params) {
     return list(invoiceId, params, null);
   }
 

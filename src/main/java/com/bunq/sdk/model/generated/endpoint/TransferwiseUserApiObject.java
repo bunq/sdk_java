@@ -42,7 +42,7 @@ public class TransferwiseUserApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the TransferwiseUser's creation.
@@ -141,11 +141,11 @@ requestMap.put(FIELD_OAUTH_CODE, oauthCode);
   /**
    * The id of the TransferwiseUser.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

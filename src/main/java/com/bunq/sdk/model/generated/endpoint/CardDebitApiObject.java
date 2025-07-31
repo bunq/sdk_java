@@ -56,7 +56,7 @@ public class CardDebitApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the card's creation.
@@ -84,21 +84,21 @@ public class CardDebitApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * ID of the user who is owner of the card.
    */
   @Expose
   @SerializedName("user_owner_id")
-  private Integer userOwnerId;
+  private Long userOwnerId;
 
   /**
    * ID of the user who is holder of the card.
    */
   @Expose
   @SerializedName("user_holder_id")
-  private Integer userHolderId;
+  private Long userHolderId;
 
   /**
    * The type of the card. Can be MAESTRO, MASTERCARD.
@@ -257,7 +257,7 @@ public class CardDebitApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_fallback")
-  private Integer monetaryAccountIdFallback;
+  private Long monetaryAccountIdFallback;
 
   /**
    * The country that is domestic to the card. Defaults to country of residence of user.
@@ -374,7 +374,7 @@ public class CardDebitApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_fallback_field_for_request")
-  private Integer monetaryAccountIdFallbackFieldForRequest;
+  private Long monetaryAccountIdFallbackFieldForRequest;
 
   /**
    * The order status of this card. Can be CARD_REQUEST_PENDING or VIRTUAL_DELIVERY.
@@ -415,11 +415,11 @@ public class CardDebitApiObject extends BunqModel {
   this(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, null, null);
   }
 
-  public CardDebitApiObject(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+  public CardDebitApiObject(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Long monetaryAccountIdFallback) {
   this(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, null);
   }
 
-  public CardDebitApiObject(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus) {
+  public CardDebitApiObject(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Long monetaryAccountIdFallback, String orderStatus) {
     this.secondLineFieldForRequest = secondLine;
     this.nameOnCardFieldForRequest = nameOnCard;
     this.preferredNameOnCardFieldForRequest = preferredNameOnCard;
@@ -447,7 +447,7 @@ public class CardDebitApiObject extends BunqModel {
    * @param orderStatus The order status of this card. Can be CARD_REQUEST_PENDING or
    * VIRTUAL_DELIVERY.
    */
-  public static BunqResponse<CardDebitApiObject> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus, Map<String, String> customHeaders) {
+  public static BunqResponse<CardDebitApiObject> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Long monetaryAccountIdFallback, String orderStatus, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -503,22 +503,22 @@ requestMap.put(FIELD_ORDER_STATUS, orderStatus);
     return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, null, null, null);
   }
 
-  public static BunqResponse<CardDebitApiObject> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Integer monetaryAccountIdFallback) {
+  public static BunqResponse<CardDebitApiObject> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Long monetaryAccountIdFallback) {
     return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, null, null);
   }
 
-  public static BunqResponse<CardDebitApiObject> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Integer monetaryAccountIdFallback, String orderStatus) {
+  public static BunqResponse<CardDebitApiObject> create(String secondLine, String nameOnCard, String type, String productType, String preferredNameOnCard, PointerObject alias, List<CardPinAssignmentObject> pinCodeAssignment, Long monetaryAccountIdFallback, String orderStatus) {
     return create(secondLine, nameOnCard, type, productType, preferredNameOnCard, alias, pinCodeAssignment, monetaryAccountIdFallback, orderStatus, null);
   }
 
   /**
    * The id of the card.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -558,33 +558,33 @@ requestMap.put(FIELD_ORDER_STATUS, orderStatus);
   /**
    * DEPRECATED. ID of the user who is owner of the card.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
   /**
    * ID of the user who is owner of the card.
    */
-  public Integer getUserOwnerId() {
+  public Long getUserOwnerId() {
     return this.userOwnerId;
   }
 
-  public void setUserOwnerId(Integer userOwnerId) {
+  public void setUserOwnerId(Long userOwnerId) {
     this.userOwnerId = userOwnerId;
   }
 
   /**
    * ID of the user who is holder of the card.
    */
-  public Integer getUserHolderId() {
+  public Long getUserHolderId() {
     return this.userHolderId;
   }
 
-  public void setUserHolderId(Integer userHolderId) {
+  public void setUserHolderId(Long userHolderId) {
     this.userHolderId = userHolderId;
   }
 
@@ -827,11 +827,11 @@ requestMap.put(FIELD_ORDER_STATUS, orderStatus);
    * ID of the MA to be used as fallback for this card if insufficient balance. Fallback account
    * is removed if not supplied.
    */
-  public Integer getMonetaryAccountIdFallback() {
+  public Long getMonetaryAccountIdFallback() {
     return this.monetaryAccountIdFallback;
   }
 
-  public void setMonetaryAccountIdFallback(Integer monetaryAccountIdFallback) {
+  public void setMonetaryAccountIdFallback(Long monetaryAccountIdFallback) {
     this.monetaryAccountIdFallback = monetaryAccountIdFallback;
   }
 

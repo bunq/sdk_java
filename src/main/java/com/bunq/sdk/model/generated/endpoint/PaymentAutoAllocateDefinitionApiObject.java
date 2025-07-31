@@ -47,7 +47,7 @@ public class PaymentAutoAllocateDefinitionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the PaymentAutoAllocateDefinition was created.
@@ -154,7 +154,7 @@ public class PaymentAutoAllocateDefinitionApiObject extends BunqModel {
     this.fractionFieldForRequest = fraction;
   }  /**
    */
-  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentAutoAllocateId), params, customHeaders);
 
@@ -165,26 +165,26 @@ public class PaymentAutoAllocateDefinitionApiObject extends BunqModel {
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Integer paymentAutoAllocateId) {
+  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Long paymentAutoAllocateId) {
     return list(paymentAutoAllocateId, null, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
+  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId) {
     return list(paymentAutoAllocateId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<PaymentAutoAllocateDefinitionApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params) {
     return list(paymentAutoAllocateId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the PaymentAutoAllocateDefinition.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

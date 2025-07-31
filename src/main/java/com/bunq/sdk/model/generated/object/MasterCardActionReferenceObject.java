@@ -20,16 +20,16 @@ public class MasterCardActionReferenceObject extends BunqModel {
    */
   @Expose
   @SerializedName("event_id")
-  private Integer eventId;
+  private Long eventId;
 
   /**
    * The id of the event.
    */
-  public Integer getEventId() {
+  public Long getEventId() {
     return this.eventId;
   }
 
-  public void setEventId(Integer eventId) {
+  public void setEventId(Long eventId) {
     this.eventId = eventId;
   }
 

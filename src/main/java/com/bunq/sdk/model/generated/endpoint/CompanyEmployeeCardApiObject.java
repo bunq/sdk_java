@@ -71,7 +71,7 @@ public class CompanyEmployeeCardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_company_employee_card_receipt_pending")
-  private Integer numberOfCompanyEmployeeCardReceiptPending;
+  private Long numberOfCompanyEmployeeCardReceiptPending;
 
   /**
    * The company employee's monthly cumulative card limit.
@@ -249,11 +249,11 @@ public class CompanyEmployeeCardApiObject extends BunqModel {
   /**
    * The number of transactions that still need a receipt.
    */
-  public Integer getNumberOfCompanyEmployeeCardReceiptPending() {
+  public Long getNumberOfCompanyEmployeeCardReceiptPending() {
     return this.numberOfCompanyEmployeeCardReceiptPending;
   }
 
-  public void setNumberOfCompanyEmployeeCardReceiptPending(Integer numberOfCompanyEmployeeCardReceiptPending) {
+  public void setNumberOfCompanyEmployeeCardReceiptPending(Long numberOfCompanyEmployeeCardReceiptPending) {
     this.numberOfCompanyEmployeeCardReceiptPending = numberOfCompanyEmployeeCardReceiptPending;
   }
 

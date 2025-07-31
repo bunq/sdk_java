@@ -72,7 +72,7 @@ public class InsightApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_transactions")
-  private Integer numberOfTransactions;
+  private Long numberOfTransactions;
 
   /**
    */
@@ -149,11 +149,11 @@ public class InsightApiObject extends BunqModel {
   /**
    * The number of the transactions in the category.
    */
-  public Integer getNumberOfTransactions() {
+  public Long getNumberOfTransactions() {
     return this.numberOfTransactions;
   }
 
-  public void setNumberOfTransactions(Integer numberOfTransactions) {
+  public void setNumberOfTransactions(Long numberOfTransactions) {
     this.numberOfTransactions = numberOfTransactions;
   }
 

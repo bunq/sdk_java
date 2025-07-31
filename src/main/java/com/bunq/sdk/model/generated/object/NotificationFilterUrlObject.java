@@ -20,7 +20,7 @@ public class NotificationFilterUrlObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the NotificationFilterUrl's creation.
@@ -137,11 +137,11 @@ public class NotificationFilterUrlObject extends BunqModel {
   /**
    * The id of the NotificationFilterUrl.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -48,7 +48,7 @@ public class NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject 
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -97,24 +97,24 @@ public class NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject 
    */
   @Expose
   @SerializedName("attachment_id_field_for_request")
-  private Integer attachmentIdFieldForRequest;
+  private Long attachmentIdFieldForRequest;
 
   public NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject() {
   this(null, null);
   }
 
-  public NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject(Integer attachmentId) {
+  public NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject(Long attachmentId) {
   this(attachmentId, null);
   }
 
-  public NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject(Integer attachmentId, String description) {
+  public NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject(Long attachmentId, String description) {
     this.descriptionFieldForRequest = description;
     this.attachmentIdFieldForRequest = attachmentId;
   }  /**
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long switchServicePaymentId, Long attachmentId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,26 +135,26 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer switchServicePaymentId) {
+  public static BunqResponse<Long> create(Long switchServicePaymentId) {
     return create(switchServicePaymentId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Long switchServicePaymentId, Long attachmentId) {
     return create(switchServicePaymentId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long switchServicePaymentId, Long attachmentId, Long monetaryAccountId) {
     return create(switchServicePaymentId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer switchServicePaymentId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Long switchServicePaymentId, Long attachmentId, Long monetaryAccountId, String description) {
     return create(switchServicePaymentId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,47 +170,47 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer switchServicePaymentId) {
+  public static BunqResponse<Long> update(Long switchServicePaymentId) {
     return update(switchServicePaymentId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId) {
+  public static BunqResponse<Long> update(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId) {
     return update(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId) {
     return update(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, String description) {
     return update(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, description, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Integer switchServicePaymentId) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Long switchServicePaymentId) {
     return delete(switchServicePaymentId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId) {
     return delete(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> delete(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId) {
     return delete(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a given user.
    */
-  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Integer switchServicePaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Long switchServicePaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), switchServicePaymentId), params, customHeaders);
 
@@ -221,21 +221,21 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Integer switchServicePaymentId) {
+  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Long switchServicePaymentId) {
     return list(switchServicePaymentId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Integer switchServicePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Long switchServicePaymentId, Long monetaryAccountId) {
     return list(switchServicePaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Integer switchServicePaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject>> list(Long switchServicePaymentId, Long monetaryAccountId, Map<String, String> params) {
     return list(switchServicePaymentId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId), params, customHeaders);
 
@@ -246,30 +246,30 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer switchServicePaymentId) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long switchServicePaymentId) {
     return get(switchServicePaymentId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId) {
     return get(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId) {
     return get(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer switchServicePaymentId, Integer noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteAttachmentBankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long switchServicePaymentId, Long noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, Map<String, String> params) {
     return get(switchServicePaymentId, noteAttachmentBankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

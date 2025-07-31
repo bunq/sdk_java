@@ -48,7 +48,7 @@ public class PaymentAutoAllocateApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the PaymentAutoAllocate was created.
@@ -111,7 +111,7 @@ public class PaymentAutoAllocateApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("payment_id_field_for_request")
-  private Integer paymentIdFieldForRequest;
+  private Long paymentIdFieldForRequest;
 
   /**
    * Whether a payment should be sorted ONCE or RECURRING.
@@ -131,15 +131,15 @@ public class PaymentAutoAllocateApiObject extends BunqModel {
   this(null, null, null);
   }
 
-  public PaymentAutoAllocateApiObject(Integer paymentId) {
+  public PaymentAutoAllocateApiObject(Long paymentId) {
   this(paymentId, null, null);
   }
 
-  public PaymentAutoAllocateApiObject(Integer paymentId, String type) {
+  public PaymentAutoAllocateApiObject(Long paymentId, String type) {
   this(paymentId, type, null);
   }
 
-  public PaymentAutoAllocateApiObject(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition) {
+  public PaymentAutoAllocateApiObject(Long paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition) {
     this.paymentIdFieldForRequest = paymentId;
     this.typeFieldForRequest = type;
     this.definitionFieldForRequest = definition;
@@ -149,7 +149,7 @@ public class PaymentAutoAllocateApiObject extends BunqModel {
    * @param type Whether a payment should be sorted ONCE or RECURRING.
    * @param definition The definition of how the money should be allocated.
    */
-  public static BunqResponse<Long> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -171,25 +171,25 @@ requestMap.put(FIELD_DEFINITION, definition);
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer paymentId) {
+  public static BunqResponse<Long> create(Long paymentId) {
     return create(paymentId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer paymentId, String type) {
+  public static BunqResponse<Long> create(Long paymentId, String type) {
     return create(paymentId, type, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition) {
+  public static BunqResponse<Long> create(Long paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition) {
     return create(paymentId, type, definition, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long paymentId, String type, List<PaymentAutoAllocateDefinitionApiObject> definition, Long monetaryAccountId) {
     return create(paymentId, type, definition, monetaryAccountId, null);
   }
 
   /**
    */
-  public static BunqResponse<PaymentAutoAllocateApiObject> get(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> get(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentAutoAllocateId), params, customHeaders);
 
@@ -200,21 +200,21 @@ requestMap.put(FIELD_DEFINITION, definition);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateApiObject> get(Integer paymentAutoAllocateId) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> get(Long paymentAutoAllocateId) {
     return get(paymentAutoAllocateId, null, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateApiObject> get(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> get(Long paymentAutoAllocateId, Long monetaryAccountId) {
     return get(paymentAutoAllocateId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateApiObject> get(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> get(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params) {
     return get(paymentAutoAllocateId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<PaymentAutoAllocateApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<PaymentAutoAllocateApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -225,18 +225,18 @@ requestMap.put(FIELD_DEFINITION, definition);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<PaymentAutoAllocateApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<PaymentAutoAllocateApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<PaymentAutoAllocateApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * @param definition The definition of how the money should be allocated.
    */
-  public static BunqResponse<Long> update(Integer paymentAutoAllocateId, Integer monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long paymentAutoAllocateId, Long monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -252,43 +252,43 @@ requestMap.put(FIELD_DEFINITION, definition);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer paymentAutoAllocateId) {
+  public static BunqResponse<Long> update(Long paymentAutoAllocateId) {
     return update(paymentAutoAllocateId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long paymentAutoAllocateId, Long monetaryAccountId) {
     return update(paymentAutoAllocateId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer paymentAutoAllocateId, Integer monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition) {
+  public static BunqResponse<Long> update(Long paymentAutoAllocateId, Long monetaryAccountId, List<PaymentAutoAllocateDefinitionApiObject> definition) {
     return update(paymentAutoAllocateId, monetaryAccountId, definition, null);
   }
 
   /**
    */
-  public static BunqResponse<PaymentAutoAllocateApiObject> delete(Integer paymentAutoAllocateId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> delete(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentAutoAllocateId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<PaymentAutoAllocateApiObject> delete(Integer paymentAutoAllocateId) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> delete(Long paymentAutoAllocateId) {
     return delete(paymentAutoAllocateId, null, null);
   }
 
-  public static BunqResponse<PaymentAutoAllocateApiObject> delete(Integer paymentAutoAllocateId, Integer monetaryAccountId) {
+  public static BunqResponse<PaymentAutoAllocateApiObject> delete(Long paymentAutoAllocateId, Long monetaryAccountId) {
     return delete(paymentAutoAllocateId, monetaryAccountId, null);
   }
 
   /**
    * The id of the PaymentAutoAllocate.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

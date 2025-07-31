@@ -82,7 +82,7 @@ public class SchedulePaymentBatchApiObject extends BunqModel {
     this.scheduleFieldForRequest = schedule;
   }  /**
    */
-  public static BunqResponse<SchedulePaymentBatchApiObject> get(Integer schedulePaymentBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> get(Long schedulePaymentBatchId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentBatchId), params, customHeaders);
 
@@ -93,15 +93,15 @@ public class SchedulePaymentBatchApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<SchedulePaymentBatchApiObject> get(Integer schedulePaymentBatchId) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> get(Long schedulePaymentBatchId) {
     return get(schedulePaymentBatchId, null, null, null);
   }
 
-  public static BunqResponse<SchedulePaymentBatchApiObject> get(Integer schedulePaymentBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> get(Long schedulePaymentBatchId, Long monetaryAccountId) {
     return get(schedulePaymentBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<SchedulePaymentBatchApiObject> get(Integer schedulePaymentBatchId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> get(Long schedulePaymentBatchId, Long monetaryAccountId, Map<String, String> params) {
     return get(schedulePaymentBatchId, monetaryAccountId, params, null);
   }
 
@@ -109,7 +109,7 @@ public class SchedulePaymentBatchApiObject extends BunqModel {
    * @param payments The payment details.
    * @param schedule The schedule details when creating a scheduled payment.
    */
-  public static BunqResponse<Long> create(List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -138,7 +138,7 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return create(payments, schedule, null, null);
   }
 
-  public static BunqResponse<Long> create(List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule, Long monetaryAccountId) {
     return create(payments, schedule, monetaryAccountId, null);
   }
 
@@ -146,7 +146,7 @@ requestMap.put(FIELD_SCHEDULE, schedule);
    * @param payments The payment details.
    * @param schedule The schedule details when creating a scheduled payment.
    */
-  public static BunqResponse<Long> update(Integer schedulePaymentBatchId, Integer monetaryAccountId, List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long schedulePaymentBatchId, Long monetaryAccountId, List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -163,36 +163,36 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer schedulePaymentBatchId) {
+  public static BunqResponse<Long> update(Long schedulePaymentBatchId) {
     return update(schedulePaymentBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer schedulePaymentBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long schedulePaymentBatchId, Long monetaryAccountId) {
     return update(schedulePaymentBatchId, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer schedulePaymentBatchId, Integer monetaryAccountId, List<SchedulePaymentEntryObject> payments) {
+  public static BunqResponse<Long> update(Long schedulePaymentBatchId, Long monetaryAccountId, List<SchedulePaymentEntryObject> payments) {
     return update(schedulePaymentBatchId, monetaryAccountId, payments, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer schedulePaymentBatchId, Integer monetaryAccountId, List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule) {
+  public static BunqResponse<Long> update(Long schedulePaymentBatchId, Long monetaryAccountId, List<SchedulePaymentEntryObject> payments, ScheduleApiObject schedule) {
     return update(schedulePaymentBatchId, monetaryAccountId, payments, schedule, null);
   }
 
   /**
    */
-  public static BunqResponse<SchedulePaymentBatchApiObject> delete(Integer schedulePaymentBatchId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> delete(Long schedulePaymentBatchId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentBatchId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<SchedulePaymentBatchApiObject> delete(Integer schedulePaymentBatchId) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> delete(Long schedulePaymentBatchId) {
     return delete(schedulePaymentBatchId, null, null);
   }
 
-  public static BunqResponse<SchedulePaymentBatchApiObject> delete(Integer schedulePaymentBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<SchedulePaymentBatchApiObject> delete(Long schedulePaymentBatchId, Long monetaryAccountId) {
     return delete(schedulePaymentBatchId, monetaryAccountId, null);
   }
 

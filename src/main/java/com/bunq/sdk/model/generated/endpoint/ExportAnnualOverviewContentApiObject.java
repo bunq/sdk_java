@@ -35,7 +35,7 @@ public class ExportAnnualOverviewContentApiObject extends BunqModel {
   /**
    * Used to retrieve the raw content of an annual overview.
    */
-  public static BunqResponse<byte[]> list(Integer exportAnnualOverviewId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(Long exportAnnualOverviewId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), exportAnnualOverviewId), params, customHeaders);
 
@@ -45,10 +45,10 @@ public class ExportAnnualOverviewContentApiObject extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer exportAnnualOverviewId) {
+  public static BunqResponse<byte[]> list(Long exportAnnualOverviewId) {
     return list(exportAnnualOverviewId, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer exportAnnualOverviewId, Map<String, String> params) {
+  public static BunqResponse<byte[]> list(Long exportAnnualOverviewId, Map<String, String> params) {
     return list(exportAnnualOverviewId, params, null);
   }
 

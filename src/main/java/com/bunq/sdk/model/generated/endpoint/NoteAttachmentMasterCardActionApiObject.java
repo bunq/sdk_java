@@ -48,7 +48,7 @@ public class NoteAttachmentMasterCardActionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -97,7 +97,7 @@ public class NoteAttachmentMasterCardActionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("attachment_id_field_for_request")
-  private Integer attachmentIdFieldForRequest;
+  private Long attachmentIdFieldForRequest;
 
   public NoteAttachmentMasterCardActionApiObject() {
   this(null, null);
@@ -107,14 +107,14 @@ public class NoteAttachmentMasterCardActionApiObject extends BunqModel {
   this(description, null);
   }
 
-  public NoteAttachmentMasterCardActionApiObject(String description, Integer attachmentId) {
+  public NoteAttachmentMasterCardActionApiObject(String description, Long attachmentId) {
     this.descriptionFieldForRequest = description;
     this.attachmentIdFieldForRequest = attachmentId;
   }  /**
    * @param description Optional description of the attachment.
    * @param attachmentId The reference to the uploaded file to attach to this note.
    */
-  public static BunqResponse<Long> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long mastercardActionId, String description, Long attachmentId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,26 +135,26 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer mastercardActionId) {
+  public static BunqResponse<Long> create(Long mastercardActionId) {
     return create(mastercardActionId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer mastercardActionId, String description) {
+  public static BunqResponse<Long> create(Long mastercardActionId, String description) {
     return create(mastercardActionId, description, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer mastercardActionId, String description, Integer attachmentId) {
+  public static BunqResponse<Long> create(Long mastercardActionId, String description, Long attachmentId) {
     return create(mastercardActionId, description, attachmentId, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer mastercardActionId, String description, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long mastercardActionId, String description, Long attachmentId, Long monetaryAccountId) {
     return create(mastercardActionId, description, attachmentId, monetaryAccountId, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,47 +170,47 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer mastercardActionId) {
+  public static BunqResponse<Long> update(Long mastercardActionId) {
     return update(mastercardActionId, null, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId) {
+  public static BunqResponse<Long> update(Long mastercardActionId, Long noteAttachmentMasterCardActionId) {
     return update(mastercardActionId, noteAttachmentMasterCardActionId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId) {
     return update(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId, String description) {
     return update(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, description, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), mastercardActionId, noteAttachmentMasterCardActionId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Integer mastercardActionId) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Long mastercardActionId) {
     return delete(mastercardActionId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Long mastercardActionId, Long noteAttachmentMasterCardActionId) {
     return delete(mastercardActionId, noteAttachmentMasterCardActionId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> delete(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId) {
     return delete(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a given user.
    */
-  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Integer mastercardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Long mastercardActionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), mastercardActionId), params, customHeaders);
 
@@ -221,21 +221,21 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Integer mastercardActionId) {
+  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Long mastercardActionId) {
     return list(mastercardActionId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Integer mastercardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Long mastercardActionId, Long monetaryAccountId) {
     return list(mastercardActionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Integer mastercardActionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteAttachmentMasterCardActionApiObject>> list(Long mastercardActionId, Long monetaryAccountId, Map<String, String> params) {
     return list(mastercardActionId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), mastercardActionId, noteAttachmentMasterCardActionId), params, customHeaders);
 
@@ -246,30 +246,30 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Integer mastercardActionId) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Long mastercardActionId) {
     return get(mastercardActionId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Long mastercardActionId, Long noteAttachmentMasterCardActionId) {
     return get(mastercardActionId, noteAttachmentMasterCardActionId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId) {
     return get(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Integer mastercardActionId, Integer noteAttachmentMasterCardActionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteAttachmentMasterCardActionApiObject> get(Long mastercardActionId, Long noteAttachmentMasterCardActionId, Long monetaryAccountId, Map<String, String> params) {
     return get(mastercardActionId, noteAttachmentMasterCardActionId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

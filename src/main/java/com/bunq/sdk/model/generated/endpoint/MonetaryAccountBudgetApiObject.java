@@ -53,14 +53,14 @@ public class MonetaryAccountBudgetApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_source_funding_id_field_for_request")
-  private Integer monetaryAccountSourceFundingIdFieldForRequest;
+  private Long monetaryAccountSourceFundingIdFieldForRequest;
 
   /**
    * DEPRECATED. The day of the month for the automatic top-up.
    */
   @Expose
   @SerializedName("payment_day_of_month_field_for_request")
-  private Integer paymentDayOfMonthFieldForRequest;
+  private Long paymentDayOfMonthFieldForRequest;
 
   public MonetaryAccountBudgetApiObject() {
   this(null, null, null, null, null);
@@ -78,11 +78,11 @@ public class MonetaryAccountBudgetApiObject extends BunqModel {
   this(allCategory, amount, recurrenceType, null, null);
   }
 
-  public MonetaryAccountBudgetApiObject(List<String> allCategory, AmountObject amount, String recurrenceType, Integer monetaryAccountSourceFundingId) {
+  public MonetaryAccountBudgetApiObject(List<String> allCategory, AmountObject amount, String recurrenceType, Long monetaryAccountSourceFundingId) {
   this(allCategory, amount, recurrenceType, monetaryAccountSourceFundingId, null);
   }
 
-  public MonetaryAccountBudgetApiObject(List<String> allCategory, AmountObject amount, String recurrenceType, Integer monetaryAccountSourceFundingId, Integer paymentDayOfMonth) {
+  public MonetaryAccountBudgetApiObject(List<String> allCategory, AmountObject amount, String recurrenceType, Long monetaryAccountSourceFundingId, Long paymentDayOfMonth) {
     this.allCategoryFieldForRequest = allCategory;
     this.amountFieldForRequest = amount;
     this.recurrenceTypeFieldForRequest = recurrenceType;

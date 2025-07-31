@@ -144,7 +144,7 @@ public class TransferwiseAccountQuoteApiObject extends BunqModel {
    * @param detail The fields which were specified as "required" and have since been filled by the
    * user. Always provide the full list.
    */
-  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String nameAccountHolder, String type, String country, List<TransferwiseRequirementFieldObject> detail, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String nameAccountHolder, String type, String country, List<TransferwiseRequirementFieldObject> detail, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -167,29 +167,29 @@ requestMap.put(FIELD_DETAIL, detail);
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer transferwiseQuoteId) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId) {
     return create(transferwiseQuoteId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String nameAccountHolder) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String nameAccountHolder) {
     return create(transferwiseQuoteId, nameAccountHolder, null, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String nameAccountHolder, String type) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String nameAccountHolder, String type) {
     return create(transferwiseQuoteId, nameAccountHolder, type, null, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String nameAccountHolder, String type, String country) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String nameAccountHolder, String type, String country) {
     return create(transferwiseQuoteId, nameAccountHolder, type, country, null, null);
   }
 
-  public static BunqResponse<Long> create(Integer transferwiseQuoteId, String nameAccountHolder, String type, String country, List<TransferwiseRequirementFieldObject> detail) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String nameAccountHolder, String type, String country, List<TransferwiseRequirementFieldObject> detail) {
     return create(transferwiseQuoteId, nameAccountHolder, type, country, detail, null);
   }
 
   /**
    */
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Integer transferwiseQuoteId, Integer transferwiseAccountQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Long transferwiseQuoteId, Long transferwiseAccountQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteId, transferwiseAccountQuoteId), params, customHeaders);
 
@@ -200,21 +200,21 @@ requestMap.put(FIELD_DETAIL, detail);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Integer transferwiseQuoteId) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Long transferwiseQuoteId) {
     return get(transferwiseQuoteId, null, null, null);
   }
 
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Integer transferwiseQuoteId, Integer transferwiseAccountQuoteId) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Long transferwiseQuoteId, Long transferwiseAccountQuoteId) {
     return get(transferwiseQuoteId, transferwiseAccountQuoteId, null, null);
   }
 
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Integer transferwiseQuoteId, Integer transferwiseAccountQuoteId, Map<String, String> params) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> get(Long transferwiseQuoteId, Long transferwiseAccountQuoteId, Map<String, String> params) {
     return get(transferwiseQuoteId, transferwiseAccountQuoteId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<TransferwiseAccountQuoteApiObject>> list(Integer transferwiseQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<TransferwiseAccountQuoteApiObject>> list(Long transferwiseQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), transferwiseQuoteId), params, customHeaders);
 
@@ -225,28 +225,28 @@ requestMap.put(FIELD_DETAIL, detail);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<TransferwiseAccountQuoteApiObject>> list(Integer transferwiseQuoteId) {
+  public static BunqResponse<List<TransferwiseAccountQuoteApiObject>> list(Long transferwiseQuoteId) {
     return list(transferwiseQuoteId, null, null);
   }
 
-  public static BunqResponse<List<TransferwiseAccountQuoteApiObject>> list(Integer transferwiseQuoteId, Map<String, String> params) {
+  public static BunqResponse<List<TransferwiseAccountQuoteApiObject>> list(Long transferwiseQuoteId, Map<String, String> params) {
     return list(transferwiseQuoteId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> delete(Integer transferwiseQuoteId, Integer transferwiseAccountQuoteId, Map<String, String> customHeaders) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> delete(Long transferwiseQuoteId, Long transferwiseAccountQuoteId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), transferwiseQuoteId, transferwiseAccountQuoteId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> delete(Integer transferwiseQuoteId) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> delete(Long transferwiseQuoteId) {
     return delete(transferwiseQuoteId, null, null);
   }
 
-  public static BunqResponse<TransferwiseAccountQuoteApiObject> delete(Integer transferwiseQuoteId, Integer transferwiseAccountQuoteId) {
+  public static BunqResponse<TransferwiseAccountQuoteApiObject> delete(Long transferwiseQuoteId, Long transferwiseAccountQuoteId) {
     return delete(transferwiseQuoteId, transferwiseAccountQuoteId, null);
   }
 

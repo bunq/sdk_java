@@ -42,7 +42,7 @@ public class UserCompanyNameApiObject extends BunqModel {
   /**
    * Return all the known (trade) names for a specific user company.
    */
-  public static BunqResponse<List<UserCompanyNameApiObject>> list(Integer userCompanyId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<UserCompanyNameApiObject>> list(Long userCompanyId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId()), params, customHeaders);
 
@@ -53,11 +53,11 @@ public class UserCompanyNameApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<UserCompanyNameApiObject>> list(Integer userCompanyId) {
+  public static BunqResponse<List<UserCompanyNameApiObject>> list(Long userCompanyId) {
     return list(userCompanyId, null, null);
   }
 
-  public static BunqResponse<List<UserCompanyNameApiObject>> list(Integer userCompanyId, Map<String, String> params) {
+  public static BunqResponse<List<UserCompanyNameApiObject>> list(Long userCompanyId, Map<String, String> params) {
     return list(userCompanyId, params, null);
   }
 

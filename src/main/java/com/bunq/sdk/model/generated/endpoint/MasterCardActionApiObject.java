@@ -41,21 +41,21 @@ public class MasterCardActionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The id of the monetary account this action links to.
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The id of the card this action links to.
    */
   @Expose
   @SerializedName("card_id")
-  private Integer cardId;
+  private Long cardId;
 
   /**
    * The amount of the transaction in local currency.
@@ -262,7 +262,7 @@ public class MasterCardActionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("secure_code_id")
-  private Integer secureCodeId;
+  private Long secureCodeId;
 
   /**
    * The ID of the wallet provider as defined by MasterCard. 420 = bunq Android app with Tap&Pay;
@@ -313,7 +313,7 @@ public class MasterCardActionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("eligible_whitelist_id")
-  private Integer eligibleWhitelistId;
+  private Long eligibleWhitelistId;
 
   /**
    * The cashback payout item for this action or null
@@ -380,7 +380,7 @@ public class MasterCardActionApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<MasterCardActionApiObject> get(Integer masterCardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<MasterCardActionApiObject> get(Long masterCardActionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), masterCardActionId), params, customHeaders);
 
@@ -391,21 +391,21 @@ public class MasterCardActionApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<MasterCardActionApiObject> get(Integer masterCardActionId) {
+  public static BunqResponse<MasterCardActionApiObject> get(Long masterCardActionId) {
     return get(masterCardActionId, null, null, null);
   }
 
-  public static BunqResponse<MasterCardActionApiObject> get(Integer masterCardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<MasterCardActionApiObject> get(Long masterCardActionId, Long monetaryAccountId) {
     return get(masterCardActionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<MasterCardActionApiObject> get(Integer masterCardActionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<MasterCardActionApiObject> get(Long masterCardActionId, Long monetaryAccountId, Map<String, String> params) {
     return get(masterCardActionId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<MasterCardActionApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<MasterCardActionApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -416,44 +416,44 @@ public class MasterCardActionApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<MasterCardActionApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<MasterCardActionApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<MasterCardActionApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<MasterCardActionApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * The id of the MastercardAction.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
   /**
    * The id of the monetary account this action links to.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
   /**
    * The id of the card this action links to.
    */
-  public Integer getCardId() {
+  public Long getCardId() {
     return this.cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 
@@ -772,11 +772,11 @@ public class MasterCardActionApiObject extends BunqModel {
   /**
    * The secure code id for this mastercard action or null.
    */
-  public Integer getSecureCodeId() {
+  public Long getSecureCodeId() {
     return this.secureCodeId;
   }
 
-  public void setSecureCodeId(Integer secureCodeId) {
+  public void setSecureCodeId(Long secureCodeId) {
     this.secureCodeId = secureCodeId;
   }
 
@@ -851,11 +851,11 @@ public class MasterCardActionApiObject extends BunqModel {
   /**
    * The whitelist id for this action or null.
    */
-  public Integer getEligibleWhitelistId() {
+  public Long getEligibleWhitelistId() {
     return this.eligibleWhitelistId;
   }
 
-  public void setEligibleWhitelistId(Integer eligibleWhitelistId) {
+  public void setEligibleWhitelistId(Long eligibleWhitelistId) {
     this.eligibleWhitelistId = eligibleWhitelistId;
   }
 

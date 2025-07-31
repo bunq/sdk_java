@@ -29,14 +29,14 @@ public class SessionApiObject extends BunqModel {
   /**
    * Deletes the current session.
    */
-  public static BunqResponse<SessionApiObject> delete(Integer sessionId, Map<String, String> customHeaders) {
+  public static BunqResponse<SessionApiObject> delete(Long sessionId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, sessionId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<SessionApiObject> delete(Integer sessionId) {
+  public static BunqResponse<SessionApiObject> delete(Long sessionId) {
     return delete(sessionId, null);
   }
 

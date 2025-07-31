@@ -46,7 +46,7 @@ public class TransferwiseQuoteTemporaryApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -193,7 +193,7 @@ requestMap.put(FIELD_AMOUNT_TARGET, amountTarget);
 
   /**
    */
-  public static BunqResponse<TransferwiseQuoteTemporaryApiObject> get(Integer transferwiseQuoteTemporaryId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<TransferwiseQuoteTemporaryApiObject> get(Long transferwiseQuoteTemporaryId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteTemporaryId), params, customHeaders);
 
@@ -204,22 +204,22 @@ requestMap.put(FIELD_AMOUNT_TARGET, amountTarget);
     return get(null, null, null);
   }
 
-  public static BunqResponse<TransferwiseQuoteTemporaryApiObject> get(Integer transferwiseQuoteTemporaryId) {
+  public static BunqResponse<TransferwiseQuoteTemporaryApiObject> get(Long transferwiseQuoteTemporaryId) {
     return get(transferwiseQuoteTemporaryId, null, null);
   }
 
-  public static BunqResponse<TransferwiseQuoteTemporaryApiObject> get(Integer transferwiseQuoteTemporaryId, Map<String, String> params) {
+  public static BunqResponse<TransferwiseQuoteTemporaryApiObject> get(Long transferwiseQuoteTemporaryId, Map<String, String> params) {
     return get(transferwiseQuoteTemporaryId, params, null);
   }
 
   /**
    * The id of the quote.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

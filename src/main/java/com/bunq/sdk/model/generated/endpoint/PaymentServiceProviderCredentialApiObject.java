@@ -45,7 +45,7 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the credential object's creation.
@@ -130,7 +130,7 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
     this.clientPublicKeySignatureFieldForRequest = clientPublicKeySignature;
   }  /**
    */
-  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Integer paymentServiceProviderCredentialId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Long paymentServiceProviderCredentialId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, paymentServiceProviderCredentialId), params, customHeaders);
 
@@ -141,11 +141,11 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Integer paymentServiceProviderCredentialId) {
+  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Long paymentServiceProviderCredentialId) {
     return get(paymentServiceProviderCredentialId, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Integer paymentServiceProviderCredentialId, Map<String, String> params) {
+  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Long paymentServiceProviderCredentialId, Map<String, String> params) {
     return get(paymentServiceProviderCredentialId, params, null);
   }
 
@@ -195,11 +195,11 @@ requestMap.put(FIELD_CLIENT_PUBLIC_KEY_SIGNATURE, clientPublicKeySignature);
   /**
    * The id of the credential.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

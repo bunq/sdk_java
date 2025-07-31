@@ -64,7 +64,7 @@ public class NotificationFilterFailureApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("object_id")
-  private Integer objectId;
+  private Long objectId;
 
   /**
    * The exception bunq encountered when processing the callback.
@@ -78,7 +78,14 @@ public class NotificationFilterFailureApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("response_code")
-  private Integer responseCode;
+  private Long responseCode;
+
+  /**
+   * This is the URL to which the callback will be made.
+   */
+  @Expose
+  @SerializedName("notification_target")
+  private String notificationTarget;
 
   /**
    * The IDs to retry.
@@ -173,11 +180,11 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
   /**
    * The object id used to generate the body of the notification.
    */
-  public Integer getObjectId() {
+  public Long getObjectId() {
     return this.objectId;
   }
 
-  public void setObjectId(Integer objectId) {
+  public void setObjectId(Long objectId) {
     this.objectId = objectId;
   }
 
@@ -195,12 +202,23 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
   /**
    * The response code (or null) received from the endpoint.
    */
-  public Integer getResponseCode() {
+  public Long getResponseCode() {
     return this.responseCode;
   }
 
-  public void setResponseCode(Integer responseCode) {
+  public void setResponseCode(Long responseCode) {
     this.responseCode = responseCode;
+  }
+
+  /**
+   * This is the URL to which the callback will be made.
+   */
+  public String getNotificationTarget() {
+    return this.notificationTarget;
+  }
+
+  public void setNotificationTarget(String notificationTarget) {
+    this.notificationTarget = notificationTarget;
   }
 
   /**
@@ -227,6 +245,10 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
     }
 
     if (this.responseCode != null) {
+      return false;
+    }
+
+    if (this.notificationTarget != null) {
       return false;
     }
 

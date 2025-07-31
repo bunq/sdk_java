@@ -48,7 +48,7 @@ public class BankSwitchServiceNetherlandsIncomingPaymentApiObject extends BunqMo
 
   /**
    */
-  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer bankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long bankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bankSwitchServiceNetherlandsIncomingPaymentId), params, customHeaders);
 
@@ -59,15 +59,15 @@ public class BankSwitchServiceNetherlandsIncomingPaymentApiObject extends BunqMo
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer bankSwitchServiceNetherlandsIncomingPaymentId) {
+  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long bankSwitchServiceNetherlandsIncomingPaymentId) {
     return get(bankSwitchServiceNetherlandsIncomingPaymentId, null, null, null);
   }
 
-  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer bankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long bankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId) {
     return get(bankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Integer bankSwitchServiceNetherlandsIncomingPaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<BankSwitchServiceNetherlandsIncomingPaymentApiObject> get(Long bankSwitchServiceNetherlandsIncomingPaymentId, Long monetaryAccountId, Map<String, String> params) {
     return get(bankSwitchServiceNetherlandsIncomingPaymentId, monetaryAccountId, params, null);
   }
 

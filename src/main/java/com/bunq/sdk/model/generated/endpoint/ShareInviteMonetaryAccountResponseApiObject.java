@@ -48,7 +48,7 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the ShareInviteBankResponse creation.
@@ -83,14 +83,14 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The id of the draft share invite bank.
    */
   @Expose
   @SerializedName("draft_share_invite_bank_id")
-  private Integer draftShareInviteBankId;
+  private Long draftShareInviteBankId;
 
   /**
    * The share details.
@@ -165,7 +165,7 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("card_id_field_for_request")
-  private Integer cardIdFieldForRequest;
+  private Long cardIdFieldForRequest;
 
   public ShareInviteMonetaryAccountResponseApiObject() {
   this(null, null);
@@ -175,13 +175,13 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
   this(status, null);
   }
 
-  public ShareInviteMonetaryAccountResponseApiObject(String status, Integer cardId) {
+  public ShareInviteMonetaryAccountResponseApiObject(String status, Long cardId) {
     this.statusFieldForRequest = status;
     this.cardIdFieldForRequest = cardId;
   }  /**
    * Return the details of a specific share a user was invited to.
    */
-  public static BunqResponse<ShareInviteMonetaryAccountResponseApiObject> get(Integer shareInviteMonetaryAccountResponseId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ShareInviteMonetaryAccountResponseApiObject> get(Long shareInviteMonetaryAccountResponseId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), shareInviteMonetaryAccountResponseId), params, customHeaders);
 
@@ -192,11 +192,11 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<ShareInviteMonetaryAccountResponseApiObject> get(Integer shareInviteMonetaryAccountResponseId) {
+  public static BunqResponse<ShareInviteMonetaryAccountResponseApiObject> get(Long shareInviteMonetaryAccountResponseId) {
     return get(shareInviteMonetaryAccountResponseId, null, null);
   }
 
-  public static BunqResponse<ShareInviteMonetaryAccountResponseApiObject> get(Integer shareInviteMonetaryAccountResponseId, Map<String, String> params) {
+  public static BunqResponse<ShareInviteMonetaryAccountResponseApiObject> get(Long shareInviteMonetaryAccountResponseId, Map<String, String> params) {
     return get(shareInviteMonetaryAccountResponseId, params, null);
   }
 
@@ -209,7 +209,7 @@ public class ShareInviteMonetaryAccountResponseApiObject extends BunqModel {
    * @param cardId The card to link to the shared monetary account. Used only if share_detail is
    * ShareDetailCardPayment.
    */
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId, String status, Integer cardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountResponseId, String status, Long cardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -226,15 +226,15 @@ requestMap.put(FIELD_CARD_ID, cardId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountResponseId) {
     return update(shareInviteMonetaryAccountResponseId, null, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId, String status) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountResponseId, String status) {
     return update(shareInviteMonetaryAccountResponseId, status, null, null);
   }
 
-  public static BunqResponse<Long> update(Integer shareInviteMonetaryAccountResponseId, String status, Integer cardId) {
+  public static BunqResponse<Long> update(Long shareInviteMonetaryAccountResponseId, String status, Long cardId) {
     return update(shareInviteMonetaryAccountResponseId, status, cardId, null);
   }
 
@@ -259,11 +259,11 @@ requestMap.put(FIELD_CARD_ID, cardId);
   /**
    * The id of the ShareInviteBankResponse.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -314,22 +314,22 @@ requestMap.put(FIELD_CARD_ID, cardId);
   /**
    * The id of the monetary account the ACCEPTED share applies to. null otherwise.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
   /**
    * The id of the draft share invite bank.
    */
-  public Integer getDraftShareInviteBankId() {
+  public Long getDraftShareInviteBankId() {
     return this.draftShareInviteBankId;
   }
 
-  public void setDraftShareInviteBankId(Integer draftShareInviteBankId) {
+  public void setDraftShareInviteBankId(Long draftShareInviteBankId) {
     this.draftShareInviteBankId = draftShareInviteBankId;
   }
 
