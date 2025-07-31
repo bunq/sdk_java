@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/main/java/com/bunq/sdk/examples" vcs="Git" />
-    <mapping directory="" vcs="Git" />
   </component>
 </project>
