@@ -29,7 +29,7 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
                                   JsonDeserializationContext context) throws JsonParseException {
         try {
             JsonObject responseJson = json.getAsJsonObject();
-            Map<String, Integer> paginationBody = parsePaginationBody(responseJson);
+            Map<String, Long> paginationBody = parsePaginationBody(responseJson);
 
             return createPagination(paginationBody);
         } catch (URISyntaxException exception) {
@@ -37,9 +37,9 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
         }
     }
 
-    private Map<String, Integer> parsePaginationBody(JsonObject responseJson)
+    private Map<String, Long> parsePaginationBody(JsonObject responseJson)
             throws URISyntaxException {
-        Map<String, Integer> paginationBody = new HashMap<>();
+        Map<String, Long> paginationBody = new HashMap<>();
         updatePaginationBodyFromResponseField(
                 paginationBody,
                 Pagination.PARAM_OLDER_ID,
@@ -65,7 +65,7 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
         return paginationBody;
     }
 
-    private Pagination createPagination(Map<String, Integer> paginationBody) {
+    private Pagination createPagination(Map<String, Long> paginationBody) {
         Pagination pagination = new Pagination();
         pagination.setOlderId(paginationBody.get(Pagination.PARAM_OLDER_ID));
         pagination.setNewerId(paginationBody.get(Pagination.PARAM_NEWER_ID));
@@ -76,7 +76,7 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
     }
 
     private void updatePaginationBodyFromResponseField(
-            Map<String, Integer> paginationBody,
+            Map<String, Long> paginationBody,
             String idField,
             JsonObject responseJson,
             String responseField,
@@ -89,10 +89,10 @@ public class PaginationAdapter implements JsonDeserializer<Pagination> {
 
             for (String parameterName : Objects.requireNonNull(url).queryParameterNames()) {
                 if (responseParam.equals(parameterName)) {
-                    paginationBody.put(idField, Integer.parseInt(Objects.requireNonNull(url.queryParameter(parameterName))));
+                    paginationBody.put(idField, Long.parseLong(Objects.requireNonNull(url.queryParameter(parameterName))));
                 } else if (Pagination.PARAM_COUNT.equals(parameterName) &&
                         paginationBody.get(Pagination.PARAM_COUNT) == null) {
-                    paginationBody.put(Pagination.PARAM_COUNT, Integer.parseInt(Objects.requireNonNull(url.queryParameter(parameterName))));
+                    paginationBody.put(Pagination.PARAM_COUNT, Long.parseLong(Objects.requireNonNull(url.queryParameter(parameterName))));
                 }
             }
         }

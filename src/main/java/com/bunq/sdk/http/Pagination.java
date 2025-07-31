@@ -35,7 +35,7 @@ public class Pagination {
         assertHasNextPage();
 
         Map<String, String> params = new HashMap<>();
-        params.put(PARAM_NEWER_ID, Integer.toString(getNextId()));
+        params.put(PARAM_NEWER_ID, Long.toString(getNextId()));
         addCountToParamsIfNeeded(params);
 
         return params;
@@ -61,7 +61,7 @@ public class Pagination {
 
     private void addCountToParamsIfNeeded(Map<String, String> params) {
         if (count != null) {
-            params.put(PARAM_COUNT, Integer.toString(count));
+            params.put(PARAM_COUNT, Long.toString(count));
         }
     }
 
@@ -72,7 +72,7 @@ public class Pagination {
         assertHasPreviousPage();
 
         Map<String, String> params = new HashMap<>();
-        params.put(PARAM_OLDER_ID, Integer.toString(olderId));
+        params.put(PARAM_OLDER_ID, Long.toString(olderId));
         addCountToParamsIfNeeded(params);
 
         return params;
