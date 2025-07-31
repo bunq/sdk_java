@@ -32,7 +32,7 @@ public class UserContextHelper extends BunqModel {
     /**
      * The index of the first item in an array.
      */
-    private static final Long INDEX_FIRST = 0;
+    private static final Integer INDEX_FIRST = 0;
 
     /**
      * Status constants.
