@@ -40,7 +40,7 @@ public class MasterCardActionRefundApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the refund's creation.
@@ -83,7 +83,7 @@ public class MasterCardActionRefundApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("mastercard_action_id")
-  private Integer mastercardActionId;
+  private Long mastercardActionId;
 
   /**
    * Type of this refund. Can de REFUND or CHARGEBACK
@@ -280,11 +280,11 @@ public class MasterCardActionRefundApiObject extends BunqModel {
   /**
    * The id of the refund.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -347,11 +347,11 @@ public class MasterCardActionRefundApiObject extends BunqModel {
   /**
    * The id of mastercard action being refunded.
    */
-  public Integer getMastercardActionId() {
+  public Long getMastercardActionId() {
     return this.mastercardActionId;
   }
 
-  public void setMastercardActionId(Integer mastercardActionId) {
+  public void setMastercardActionId(Long mastercardActionId) {
     this.mastercardActionId = mastercardActionId;
   }
 

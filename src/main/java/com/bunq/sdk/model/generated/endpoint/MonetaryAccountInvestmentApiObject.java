@@ -45,7 +45,7 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the MonetaryAccountInvestment's creation.
@@ -163,14 +163,14 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The legal name of the user / company using this monetary account.
@@ -206,6 +206,14 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
   @Expose
   @SerializedName("birdee_investment_portfolio")
   private BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio;
+
+  /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
 
   /**
    * The budgets of the MonetaryAccount.
@@ -342,7 +350,7 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_deposit_initial_id_field_for_request")
-  private Integer monetaryAccountDepositInitialIdFieldForRequest;
+  private Long monetaryAccountDepositInitialIdFieldForRequest;
 
   /**
    * The amount to be transferred to the investment account as the initial deposit.
@@ -403,11 +411,11 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
   this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, birdeeInvestmentPortfolio, null, null);
   }
 
-  public MonetaryAccountInvestmentApiObject(String currency, String provider, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio, Integer monetaryAccountDepositInitialId) {
+  public MonetaryAccountInvestmentApiObject(String currency, String provider, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio, Long monetaryAccountDepositInitialId) {
   this(currency, provider, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, birdeeInvestmentPortfolio, monetaryAccountDepositInitialId, null);
   }
 
-  public MonetaryAccountInvestmentApiObject(String currency, String provider, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio, Integer monetaryAccountDepositInitialId, AmountObject amountDepositInitial) {
+  public MonetaryAccountInvestmentApiObject(String currency, String provider, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio, Long monetaryAccountDepositInitialId, AmountObject amountDepositInitial) {
     this.currencyFieldForRequest = currency;
     this.providerFieldForRequest = provider;
     this.descriptionFieldForRequest = description;
@@ -427,11 +435,11 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
   /**
    * The id of the MonetaryAccountInvestment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -609,22 +617,22 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
   /**
    * The id of the User who owns the MonetaryAccountInvestment.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
   /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -681,6 +689,18 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
 
   public void setBirdeeInvestmentPortfolio(BirdeeInvestmentPortfolioApiObject birdeeInvestmentPortfolio) {
     this.birdeeInvestmentPortfolio = birdeeInvestmentPortfolio;
+  }
+
+  /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
   }
 
   /**
@@ -830,6 +850,10 @@ public class MonetaryAccountInvestmentApiObject extends BunqModel {
     }
 
     if (this.birdeeInvestmentPortfolio != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

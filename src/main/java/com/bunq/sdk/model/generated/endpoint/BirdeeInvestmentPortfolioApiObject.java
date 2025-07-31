@@ -51,14 +51,14 @@ public class BirdeeInvestmentPortfolioApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_strategy_change_annual_maximum")
-  private Integer numberOfStrategyChangeAnnualMaximum;
+  private Long numberOfStrategyChangeAnnualMaximum;
 
   /**
    * Maximum number of strategy changes used.
    */
   @Expose
   @SerializedName("number_of_strategy_change_annual_used")
-  private Integer numberOfStrategyChangeAnnualUsed;
+  private Long numberOfStrategyChangeAnnualUsed;
 
   /**
    * The name associated with the investment portfolio.
@@ -182,22 +182,22 @@ public class BirdeeInvestmentPortfolioApiObject extends BunqModel {
   /**
    * Maximum number of strategy changes in a year.
    */
-  public Integer getNumberOfStrategyChangeAnnualMaximum() {
+  public Long getNumberOfStrategyChangeAnnualMaximum() {
     return this.numberOfStrategyChangeAnnualMaximum;
   }
 
-  public void setNumberOfStrategyChangeAnnualMaximum(Integer numberOfStrategyChangeAnnualMaximum) {
+  public void setNumberOfStrategyChangeAnnualMaximum(Long numberOfStrategyChangeAnnualMaximum) {
     this.numberOfStrategyChangeAnnualMaximum = numberOfStrategyChangeAnnualMaximum;
   }
 
   /**
    * Maximum number of strategy changes used.
    */
-  public Integer getNumberOfStrategyChangeAnnualUsed() {
+  public Long getNumberOfStrategyChangeAnnualUsed() {
     return this.numberOfStrategyChangeAnnualUsed;
   }
 
-  public void setNumberOfStrategyChangeAnnualUsed(Integer numberOfStrategyChangeAnnualUsed) {
+  public void setNumberOfStrategyChangeAnnualUsed(Long numberOfStrategyChangeAnnualUsed) {
     this.numberOfStrategyChangeAnnualUsed = numberOfStrategyChangeAnnualUsed;
   }
 

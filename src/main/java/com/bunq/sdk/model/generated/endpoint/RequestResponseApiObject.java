@@ -58,7 +58,7 @@ public class RequestResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the Request Response was created.
@@ -115,7 +115,7 @@ public class RequestResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The requested Amount.
@@ -175,7 +175,7 @@ public class RequestResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("minimum_age")
-  private Integer minimumAge;
+  private Long minimumAge;
 
   /**
    * Whether or not an address must be provided on accept.
@@ -254,7 +254,7 @@ public class RequestResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("eligible_whitelist_id")
-  private Integer eligibleWhitelistId;
+  private Long eligibleWhitelistId;
 
   /**
    * The reference to the object used for split the bill. Can be RequestInquiry or
@@ -269,14 +269,14 @@ public class RequestResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("event_id")
-  private Integer eventId;
+  private Long eventId;
 
   /**
    * The ID of the monetary account this user prefers to pay the request from.
    */
   @Expose
   @SerializedName("monetary_account_preferred_id")
-  private Integer monetaryAccountPreferredId;
+  private Long monetaryAccountPreferredId;
 
   /**
    * The Amount the user decides to pay.
@@ -314,7 +314,7 @@ public class RequestResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("currency_conversion_quote_id_field_for_request")
-  private Integer currencyConversionQuoteIdFieldForRequest;
+  private Long currencyConversionQuoteIdFieldForRequest;
 
   public RequestResponseApiObject() {
   this(null, null, null, null, null);
@@ -336,7 +336,7 @@ public class RequestResponseApiObject extends BunqModel {
   this(status, amountResponded, addressShipping, addressBilling, null);
   }
 
-  public RequestResponseApiObject(String status, AmountObject amountResponded, AddressObject addressShipping, AddressObject addressBilling, Integer currencyConversionQuoteId) {
+  public RequestResponseApiObject(String status, AmountObject amountResponded, AddressObject addressShipping, AddressObject addressBilling, Long currencyConversionQuoteId) {
     this.amountRespondedFieldForRequest = amountResponded;
     this.statusFieldForRequest = status;
     this.addressShippingFieldForRequest = addressShipping;
@@ -355,7 +355,7 @@ public class RequestResponseApiObject extends BunqModel {
    * @param currencyConversionQuoteId When the request is accepted on a monetary account with a
    * different currency, a quote is expected to convert.
    */
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping, AddressObject addressBilling, Integer currencyConversionQuoteId, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping, AddressObject addressBilling, Long currencyConversionQuoteId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -375,38 +375,38 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
     return fromJson(RequestResponseApiObject.class, responseRaw, OBJECT_TYPE_PUT);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId) {
     return update(requestResponseId, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId) {
     return update(requestResponseId, monetaryAccountId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId, AmountObject amountResponded) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId, AmountObject amountResponded) {
     return update(requestResponseId, monetaryAccountId, amountResponded, null, null, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId, AmountObject amountResponded, String status) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId, AmountObject amountResponded, String status) {
     return update(requestResponseId, monetaryAccountId, amountResponded, status, null, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping) {
     return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping, AddressObject addressBilling) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping, AddressObject addressBilling) {
     return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, addressBilling, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> update(Integer requestResponseId, Integer monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping, AddressObject addressBilling, Integer currencyConversionQuoteId) {
+  public static BunqResponse<RequestResponseApiObject> update(Long requestResponseId, Long monetaryAccountId, AmountObject amountResponded, String status, AddressObject addressShipping, AddressObject addressBilling, Long currencyConversionQuoteId) {
     return update(requestResponseId, monetaryAccountId, amountResponded, status, addressShipping, addressBilling, currencyConversionQuoteId, null);
   }
 
   /**
    * Get all RequestResponses for a MonetaryAccount.
    */
-  public static BunqResponse<List<RequestResponseApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<RequestResponseApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -417,18 +417,18 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<RequestResponseApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<RequestResponseApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<RequestResponseApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<RequestResponseApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * Get the details for a specific existing RequestResponse.
    */
-  public static BunqResponse<RequestResponseApiObject> get(Integer requestResponseId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestResponseApiObject> get(Long requestResponseId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestResponseId), params, customHeaders);
 
@@ -439,26 +439,26 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> get(Integer requestResponseId) {
+  public static BunqResponse<RequestResponseApiObject> get(Long requestResponseId) {
     return get(requestResponseId, null, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> get(Integer requestResponseId, Integer monetaryAccountId) {
+  public static BunqResponse<RequestResponseApiObject> get(Long requestResponseId, Long monetaryAccountId) {
     return get(requestResponseId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<RequestResponseApiObject> get(Integer requestResponseId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<RequestResponseApiObject> get(Long requestResponseId, Long monetaryAccountId, Map<String, String> params) {
     return get(requestResponseId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the Request Response.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -543,11 +543,11 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
   /**
    * The id of the MonetaryAccount the RequestResponse was received on.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
@@ -635,11 +635,11 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
   /**
    * The minimum age the user accepting the RequestResponse must have.
    */
-  public Integer getMinimumAge() {
+  public Long getMinimumAge() {
     return this.minimumAge;
   }
 
-  public void setMinimumAge(Integer minimumAge) {
+  public void setMinimumAge(Long minimumAge) {
     this.minimumAge = minimumAge;
   }
 
@@ -758,11 +758,11 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
   /**
    * The whitelist id for this action or null.
    */
-  public Integer getEligibleWhitelistId() {
+  public Long getEligibleWhitelistId() {
     return this.eligibleWhitelistId;
   }
 
-  public void setEligibleWhitelistId(Integer eligibleWhitelistId) {
+  public void setEligibleWhitelistId(Long eligibleWhitelistId) {
     this.eligibleWhitelistId = eligibleWhitelistId;
   }
 
@@ -781,22 +781,22 @@ requestMap.put(FIELD_CURRENCY_CONVERSION_QUOTE_ID, currencyConversionQuoteId);
   /**
    * The ID of the latest event for the request.
    */
-  public Integer getEventId() {
+  public Long getEventId() {
     return this.eventId;
   }
 
-  public void setEventId(Integer eventId) {
+  public void setEventId(Long eventId) {
     this.eventId = eventId;
   }
 
   /**
    * The ID of the monetary account this user prefers to pay the request from.
    */
-  public Integer getMonetaryAccountPreferredId() {
+  public Long getMonetaryAccountPreferredId() {
     return this.monetaryAccountPreferredId;
   }
 
-  public void setMonetaryAccountPreferredId(Integer monetaryAccountPreferredId) {
+  public void setMonetaryAccountPreferredId(Long monetaryAccountPreferredId) {
     this.monetaryAccountPreferredId = monetaryAccountPreferredId;
   }
 

@@ -62,7 +62,7 @@ public class NotificationFilterUrlApiObject extends BunqModel {
    * @param notificationFilters The types of notifications that will result in a url notification
    * for this user.
    */
-  public static BunqResponse<Integer> create(List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<NotificationFilterUrlObject> notificationFilters, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -78,11 +78,11 @@ requestMap.put(FIELD_NOTIFICATION_FILTERS, notificationFilters);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(List<NotificationFilterUrlObject> notificationFilters) {
+  public static BunqResponse<Long> create(List<NotificationFilterUrlObject> notificationFilters) {
     return create(notificationFilters, null);
   }
 

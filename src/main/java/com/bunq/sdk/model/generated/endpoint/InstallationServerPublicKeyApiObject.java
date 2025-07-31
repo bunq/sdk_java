@@ -42,7 +42,7 @@ public class InstallationServerPublicKeyApiObject extends BunqModel {
   /**
    * Show the ServerPublicKey for this Installation.
    */
-  public static BunqResponse<List<InstallationServerPublicKeyApiObject>> list(Integer installationId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<InstallationServerPublicKeyApiObject>> list(Long installationId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, installationId), params, customHeaders);
 
@@ -53,11 +53,11 @@ public class InstallationServerPublicKeyApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<InstallationServerPublicKeyApiObject>> list(Integer installationId) {
+  public static BunqResponse<List<InstallationServerPublicKeyApiObject>> list(Long installationId) {
     return list(installationId, null, null);
   }
 
-  public static BunqResponse<List<InstallationServerPublicKeyApiObject>> list(Integer installationId, Map<String, String> params) {
+  public static BunqResponse<List<InstallationServerPublicKeyApiObject>> list(Long installationId, Map<String, String> params) {
     return list(installationId, params, null);
   }
 

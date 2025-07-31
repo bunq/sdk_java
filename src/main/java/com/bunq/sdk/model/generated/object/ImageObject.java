@@ -34,14 +34,14 @@ public class ImageObject extends BunqModel {
    */
   @Expose
   @SerializedName("height")
-  private Integer height;
+  private Long height;
 
   /**
    * The image width in pixels.
    */
   @Expose
   @SerializedName("width")
-  private Integer width;
+  private Long width;
 
   /**
    * The public UUID of the public attachment containing the image.
@@ -68,22 +68,22 @@ public class ImageObject extends BunqModel {
   /**
    * The image height in pixels.
    */
-  public Integer getHeight() {
+  public Long getHeight() {
     return this.height;
   }
 
-  public void setHeight(Integer height) {
+  public void setHeight(Long height) {
     this.height = height;
   }
 
   /**
    * The image width in pixels.
    */
-  public Integer getWidth() {
+  public Long getWidth() {
     return this.width;
   }
 
-  public void setWidth(Integer width) {
+  public void setWidth(Long width) {
     this.width = width;
   }
 

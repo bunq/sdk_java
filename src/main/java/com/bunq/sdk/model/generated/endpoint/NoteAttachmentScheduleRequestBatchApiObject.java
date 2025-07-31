@@ -48,7 +48,7 @@ public class NoteAttachmentScheduleRequestBatchApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -97,24 +97,24 @@ public class NoteAttachmentScheduleRequestBatchApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("attachment_id_field_for_request")
-  private Integer attachmentIdFieldForRequest;
+  private Long attachmentIdFieldForRequest;
 
   public NoteAttachmentScheduleRequestBatchApiObject() {
   this(null, null);
   }
 
-  public NoteAttachmentScheduleRequestBatchApiObject(Integer attachmentId) {
+  public NoteAttachmentScheduleRequestBatchApiObject(Long attachmentId) {
   this(attachmentId, null);
   }
 
-  public NoteAttachmentScheduleRequestBatchApiObject(Integer attachmentId, String description) {
+  public NoteAttachmentScheduleRequestBatchApiObject(Long attachmentId, String description) {
     this.descriptionFieldForRequest = description;
     this.attachmentIdFieldForRequest = attachmentId;
   }  /**
    * @param attachmentId The reference to the uploaded file to attach to this note.
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> create(Integer scheduleRequestInquiryBatchId, Integer attachmentId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long scheduleRequestInquiryBatchId, Long attachmentId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -131,30 +131,30 @@ requestMap.put(FIELD_ATTACHMENT_ID, attachmentId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleRequestInquiryBatchId) {
+  public static BunqResponse<Long> create(Long scheduleRequestInquiryBatchId) {
     return create(scheduleRequestInquiryBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleRequestInquiryBatchId, Integer attachmentId) {
+  public static BunqResponse<Long> create(Long scheduleRequestInquiryBatchId, Long attachmentId) {
     return create(scheduleRequestInquiryBatchId, attachmentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleRequestInquiryBatchId, Integer attachmentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long scheduleRequestInquiryBatchId, Long attachmentId, Long monetaryAccountId) {
     return create(scheduleRequestInquiryBatchId, attachmentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer scheduleRequestInquiryBatchId, Integer attachmentId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> create(Long scheduleRequestInquiryBatchId, Long attachmentId, Long monetaryAccountId, String description) {
     return create(scheduleRequestInquiryBatchId, attachmentId, monetaryAccountId, description, null);
   }
 
   /**
    * @param description Optional description of the attachment.
    */
-  public static BunqResponse<Integer> update(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId, String description, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId, String description, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -170,47 +170,47 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleRequestInquiryBatchId) {
+  public static BunqResponse<Long> update(Long scheduleRequestInquiryBatchId) {
     return update(scheduleRequestInquiryBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId) {
+  public static BunqResponse<Long> update(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId) {
     return update(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId) {
     return update(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId, String description) {
+  public static BunqResponse<Long> update(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId, String description) {
     return update(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, monetaryAccountId, description, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Integer scheduleRequestInquiryBatchId) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Long scheduleRequestInquiryBatchId) {
     return delete(scheduleRequestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId) {
     return delete(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> delete(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId) {
     return delete(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a scheduled request.
    */
-  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Integer scheduleRequestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Long scheduleRequestInquiryBatchId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleRequestInquiryBatchId), params, customHeaders);
 
@@ -221,21 +221,21 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Integer scheduleRequestInquiryBatchId) {
+  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Long scheduleRequestInquiryBatchId) {
     return list(scheduleRequestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Integer scheduleRequestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Long scheduleRequestInquiryBatchId, Long monetaryAccountId) {
     return list(scheduleRequestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Integer scheduleRequestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteAttachmentScheduleRequestBatchApiObject>> list(Long scheduleRequestInquiryBatchId, Long monetaryAccountId, Map<String, String> params) {
     return list(scheduleRequestInquiryBatchId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId), params, customHeaders);
 
@@ -246,30 +246,30 @@ requestMap.put(FIELD_DESCRIPTION, description);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Integer scheduleRequestInquiryBatchId) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Long scheduleRequestInquiryBatchId) {
     return get(scheduleRequestInquiryBatchId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId) {
     return get(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, null, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId) {
     return get(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Integer scheduleRequestInquiryBatchId, Integer noteAttachmentScheduleRequestBatchId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteAttachmentScheduleRequestBatchApiObject> get(Long scheduleRequestInquiryBatchId, Long noteAttachmentScheduleRequestBatchId, Long monetaryAccountId, Map<String, String> params) {
     return get(scheduleRequestInquiryBatchId, noteAttachmentScheduleRequestBatchId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

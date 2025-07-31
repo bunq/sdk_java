@@ -45,7 +45,7 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the credential object's creation.
@@ -130,7 +130,7 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
     this.clientPublicKeySignatureFieldForRequest = clientPublicKeySignature;
   }  /**
    */
-  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Integer paymentServiceProviderCredentialId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Long paymentServiceProviderCredentialId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, paymentServiceProviderCredentialId), params, customHeaders);
 
@@ -141,11 +141,11 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Integer paymentServiceProviderCredentialId) {
+  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Long paymentServiceProviderCredentialId) {
     return get(paymentServiceProviderCredentialId, null, null);
   }
 
-  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Integer paymentServiceProviderCredentialId, Map<String, String> params) {
+  public static BunqResponse<PaymentServiceProviderCredentialApiObject> get(Long paymentServiceProviderCredentialId, Map<String, String> params) {
     return get(paymentServiceProviderCredentialId, params, null);
   }
 
@@ -158,7 +158,7 @@ public class PaymentServiceProviderCredentialApiObject extends BunqModel {
    * during installation and with the installation token appended as a nonce. Signed with the
    * private key belonging to the QSEAL certificate.
    */
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -176,30 +176,30 @@ requestMap.put(FIELD_CLIENT_PUBLIC_KEY_SIGNATURE, clientPublicKeySignature);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate) {
     return create(clientPaymentServiceProviderCertificate, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain) {
     return create(clientPaymentServiceProviderCertificate, clientPaymentServiceProviderCertificateChain, null, null);
   }
 
-  public static BunqResponse<Integer> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature) {
+  public static BunqResponse<Long> create(String clientPaymentServiceProviderCertificate, String clientPaymentServiceProviderCertificateChain, String clientPublicKeySignature) {
     return create(clientPaymentServiceProviderCertificate, clientPaymentServiceProviderCertificateChain, clientPublicKeySignature, null);
   }
 
   /**
    * The id of the credential.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

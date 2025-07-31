@@ -46,7 +46,7 @@ public class NoteTextPaymentDelayedApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -92,7 +92,7 @@ public class NoteTextPaymentDelayedApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long paymentDelayedId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,26 +108,26 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId) {
+  public static BunqResponse<Long> create(Long paymentDelayedId) {
     return create(paymentDelayedId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long paymentDelayedId, Long monetaryAccountId) {
     return create(paymentDelayedId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer paymentDelayedId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Long paymentDelayedId, Long monetaryAccountId, String content) {
     return create(paymentDelayedId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,46 +143,46 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId) {
+  public static BunqResponse<Long> update(Long paymentDelayedId) {
     return update(paymentDelayedId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteTextPaymentDelayedId) {
+  public static BunqResponse<Long> update(Long paymentDelayedId, Long noteTextPaymentDelayedId) {
     return update(paymentDelayedId, noteTextPaymentDelayedId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId) {
     return update(paymentDelayedId, noteTextPaymentDelayedId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId, String content) {
     return update(paymentDelayedId, noteTextPaymentDelayedId, monetaryAccountId, content, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentDelayedId, noteTextPaymentDelayedId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Integer paymentDelayedId) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Long paymentDelayedId) {
     return delete(paymentDelayedId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Integer paymentDelayedId, Integer noteTextPaymentDelayedId) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Long paymentDelayedId, Long noteTextPaymentDelayedId) {
     return delete(paymentDelayedId, noteTextPaymentDelayedId, null, null);
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> delete(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId) {
     return delete(paymentDelayedId, noteTextPaymentDelayedId, monetaryAccountId, null);
   }
 
   /**
    */
-  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Integer paymentDelayedId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Long paymentDelayedId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentDelayedId), params, customHeaders);
 
@@ -193,21 +193,21 @@ requestMap.put(FIELD_CONTENT, content);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Integer paymentDelayedId) {
+  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Long paymentDelayedId) {
     return list(paymentDelayedId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Integer paymentDelayedId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Long paymentDelayedId, Long monetaryAccountId) {
     return list(paymentDelayedId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Integer paymentDelayedId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteTextPaymentDelayedApiObject>> list(Long paymentDelayedId, Long monetaryAccountId, Map<String, String> params) {
     return list(paymentDelayedId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentDelayedId, noteTextPaymentDelayedId), params, customHeaders);
 
@@ -218,30 +218,30 @@ requestMap.put(FIELD_CONTENT, content);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Integer paymentDelayedId) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Long paymentDelayedId) {
     return get(paymentDelayedId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Integer paymentDelayedId, Integer noteTextPaymentDelayedId) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Long paymentDelayedId, Long noteTextPaymentDelayedId) {
     return get(paymentDelayedId, noteTextPaymentDelayedId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId) {
     return get(paymentDelayedId, noteTextPaymentDelayedId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Integer paymentDelayedId, Integer noteTextPaymentDelayedId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteTextPaymentDelayedApiObject> get(Long paymentDelayedId, Long noteTextPaymentDelayedId, Long monetaryAccountId, Map<String, String> params) {
     return get(paymentDelayedId, noteTextPaymentDelayedId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -43,7 +43,7 @@ public class PaymentTest extends BunqSdkTestBase {
     public void makePaymentToOtherUser() {
         AmountObject amount = new AmountObject(AMOUNT_EUR, CURRENCY_EUR);
         requestSpendingMoneyIfNeeded();
-        BunqResponse<Integer> response = PaymentApiObject.create(
+        BunqResponse<Long> response = PaymentApiObject.create(
                 amount,
                 secondMonetaryAccountBank.getAlias().get(INDEX_FIRST),
                 PAYMENT_DESCRIPTION
@@ -61,7 +61,7 @@ public class PaymentTest extends BunqSdkTestBase {
     public void makePaymentToOtherAccount() {
         AmountObject amount = new AmountObject(AMOUNT_EUR, CURRENCY_EUR);
         requestSpendingMoneyIfNeeded();
-        BunqResponse<Integer> response = PaymentApiObject.create(amount, getPointerBravo(), PAYMENT_DESCRIPTION);
+        BunqResponse<Long> response = PaymentApiObject.create(amount, getPointerBravo(), PAYMENT_DESCRIPTION);
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getValue());
@@ -86,7 +86,7 @@ public class PaymentTest extends BunqSdkTestBase {
 
     @Test
     public void paymentBatchTest() {
-        BunqResponse<Integer> response = PaymentBatchApiObject.create(createPaymentForBatch());
+        BunqResponse<Long> response = PaymentBatchApiObject.create(createPaymentForBatch());
 
         Assert.assertNotNull(response);
         Assert.assertNotNull(response.getValue());

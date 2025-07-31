@@ -27,7 +27,7 @@ public class CustomerApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the customer object's creation.
@@ -87,11 +87,11 @@ public class CustomerApiObject extends BunqModel {
   /**
    * The id of the customer.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

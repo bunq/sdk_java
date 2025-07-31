@@ -149,7 +149,7 @@ public class BunqSdkTestBase {
     }
 
     private static void setSecondMonetaryAccountBank() {
-        BunqResponse<Integer> response = MonetaryAccountBankApiObject.create(CURRENCY_EUR, ACCOUNT_DESCRIPTION);
+        BunqResponse<Long> response = MonetaryAccountBankApiObject.create(CURRENCY_EUR, ACCOUNT_DESCRIPTION);
 
         secondMonetaryAccountBank = MonetaryAccountBankApiObject.get(response.getValue()).getValue();
     }

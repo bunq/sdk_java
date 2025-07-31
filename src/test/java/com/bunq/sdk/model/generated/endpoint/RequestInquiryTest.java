@@ -32,7 +32,7 @@ public class RequestInquiryTest extends BunqSdkTestBase {
      */
     @Test
     public void createRequestInquiryTest() {
-        BunqResponse<Integer> request = RequestInquiryApiObject.create(
+        BunqResponse<Long> request = RequestInquiryApiObject.create(
                 new AmountObject(AMOUNT_EUR, CURRENCY),
                 BunqContext.getUserContext().getPrimaryMonetaryAccountBank().getAlias().get(INDEX_FIRST),
                 REQUEST_DESCRIPTION,

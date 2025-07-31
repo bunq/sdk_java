@@ -41,7 +41,7 @@ public class EventApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the event's creation.
@@ -118,7 +118,7 @@ public class EventApiObject extends BunqModel {
   /**
    * Get a specific event for a given user.
    */
-  public static BunqResponse<EventApiObject> get(Integer eventId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<EventApiObject> get(Long eventId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), eventId), params, customHeaders);
 
@@ -129,11 +129,11 @@ public class EventApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<EventApiObject> get(Integer eventId) {
+  public static BunqResponse<EventApiObject> get(Long eventId) {
     return get(eventId, null, null);
   }
 
-  public static BunqResponse<EventApiObject> get(Integer eventId, Map<String, String> params) {
+  public static BunqResponse<EventApiObject> get(Long eventId, Map<String, String> params) {
     return get(eventId, params, null);
   }
 
@@ -165,11 +165,11 @@ public class EventApiObject extends BunqModel {
   /**
    * The id of the event.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

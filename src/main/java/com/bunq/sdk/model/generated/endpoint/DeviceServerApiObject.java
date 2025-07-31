@@ -46,7 +46,7 @@ public class DeviceServerApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the DeviceServer's creation.
@@ -136,7 +136,7 @@ public class DeviceServerApiObject extends BunqModel {
    * @param permittedIps An array of IPs (v4 or v6) this DeviceServer will be able to do calls
    * from. These will be linked to the API key.
    */
-  public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String description, String secret, List<String> permittedIps, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -154,26 +154,26 @@ requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String description) {
+  public static BunqResponse<Long> create(String description) {
     return create(description, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String description, String secret) {
+  public static BunqResponse<Long> create(String description, String secret) {
     return create(description, secret, null, null);
   }
 
-  public static BunqResponse<Integer> create(String description, String secret, List<String> permittedIps) {
+  public static BunqResponse<Long> create(String description, String secret, List<String> permittedIps) {
     return create(description, secret, permittedIps, null);
   }
 
   /**
    * Get one of your DeviceServers.
    */
-  public static BunqResponse<DeviceServerApiObject> get(Integer deviceServerId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<DeviceServerApiObject> get(Long deviceServerId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, deviceServerId), params, customHeaders);
 
@@ -184,11 +184,11 @@ requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
     return get(null, null, null);
   }
 
-  public static BunqResponse<DeviceServerApiObject> get(Integer deviceServerId) {
+  public static BunqResponse<DeviceServerApiObject> get(Long deviceServerId) {
     return get(deviceServerId, null, null);
   }
 
-  public static BunqResponse<DeviceServerApiObject> get(Integer deviceServerId, Map<String, String> params) {
+  public static BunqResponse<DeviceServerApiObject> get(Long deviceServerId, Map<String, String> params) {
     return get(deviceServerId, params, null);
   }
 
@@ -213,11 +213,11 @@ requestMap.put(FIELD_PERMITTED_IPS, permittedIps);
   /**
    * The id of the DeviceServer as created on the server.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

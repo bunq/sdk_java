@@ -20,7 +20,7 @@ public class CardBatchEntryObject extends BunqModel {
    */
   @Expose
   @SerializedName("id_field_for_request")
-  private Integer idFieldForRequest;
+  private Long idFieldForRequest;
 
   /**
    * The status to set for the card. Can be ACTIVE, DEACTIVATED, LOST, STOLEN or CANCELLED, and
@@ -62,33 +62,33 @@ public class CardBatchEntryObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id_fallback_field_for_request")
-  private Integer monetaryAccountIdFallbackFieldForRequest;
+  private Long monetaryAccountIdFallbackFieldForRequest;
 
   public CardBatchEntryObject() {
   this(null, null, null, null, null, null);
   }
 
-  public CardBatchEntryObject(Integer id) {
+  public CardBatchEntryObject(Long id) {
   this(id, null, null, null, null, null);
   }
 
-  public CardBatchEntryObject(Integer id, String status) {
+  public CardBatchEntryObject(Long id, String status) {
   this(id, status, null, null, null, null);
   }
 
-  public CardBatchEntryObject(Integer id, String status, AmountObject cardLimit) {
+  public CardBatchEntryObject(Long id, String status, AmountObject cardLimit) {
   this(id, status, cardLimit, null, null, null);
   }
 
-  public CardBatchEntryObject(Integer id, String status, AmountObject cardLimit, AmountObject cardLimitAtm) {
+  public CardBatchEntryObject(Long id, String status, AmountObject cardLimit, AmountObject cardLimitAtm) {
   this(id, status, cardLimit, cardLimitAtm, null, null);
   }
 
-  public CardBatchEntryObject(Integer id, String status, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission) {
+  public CardBatchEntryObject(Long id, String status, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission) {
   this(id, status, cardLimit, cardLimitAtm, countryPermission, null);
   }
 
-  public CardBatchEntryObject(Integer id, String status, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, Integer monetaryAccountIdFallback) {
+  public CardBatchEntryObject(Long id, String status, AmountObject cardLimit, AmountObject cardLimitAtm, List<CardCountryPermissionObject> countryPermission, Long monetaryAccountIdFallback) {
     this.idFieldForRequest = id;
     this.statusFieldForRequest = status;
     this.cardLimitFieldForRequest = cardLimit;

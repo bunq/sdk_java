@@ -44,7 +44,7 @@ public class MasterCardPaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the Payment was done.
@@ -67,7 +67,7 @@ public class MasterCardPaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The Amount transferred by the Payment. Will be negative for outgoing Payments and positive
@@ -177,14 +177,14 @@ public class MasterCardPaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("batch_id")
-  private Integer batchId;
+  private Long batchId;
 
   /**
    * The id of the JobScheduled if the Payment was scheduled.
    */
   @Expose
   @SerializedName("scheduled_id")
-  private Integer scheduledId;
+  private Long scheduledId;
 
   /**
    * A shipping Address provided with the Payment, currently unused.
@@ -245,7 +245,7 @@ public class MasterCardPaymentApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Integer mastercardActionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Long mastercardActionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), mastercardActionId), params, customHeaders);
 
@@ -256,26 +256,26 @@ public class MasterCardPaymentApiObject extends BunqModel {
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Integer mastercardActionId) {
+  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Long mastercardActionId) {
     return list(mastercardActionId, null, null, null);
   }
 
-  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Integer mastercardActionId, Integer monetaryAccountId) {
+  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Long mastercardActionId, Long monetaryAccountId) {
     return list(mastercardActionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Integer mastercardActionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<MasterCardPaymentApiObject>> list(Long mastercardActionId, Long monetaryAccountId, Map<String, String> params) {
     return list(mastercardActionId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the Payment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -306,11 +306,11 @@ public class MasterCardPaymentApiObject extends BunqModel {
    * The id of the MonetaryAccount the Payment was made to or from (depending on whether this is
    * an incoming or outgoing Payment).
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
@@ -476,22 +476,22 @@ public class MasterCardPaymentApiObject extends BunqModel {
   /**
    * The id of the PaymentBatch if this Payment was part of one.
    */
-  public Integer getBatchId() {
+  public Long getBatchId() {
     return this.batchId;
   }
 
-  public void setBatchId(Integer batchId) {
+  public void setBatchId(Long batchId) {
     this.batchId = batchId;
   }
 
   /**
    * The id of the JobScheduled if the Payment was scheduled.
    */
-  public Integer getScheduledId() {
+  public Long getScheduledId() {
     return this.scheduledId;
   }
 
-  public void setScheduledId(Integer scheduledId) {
+  public void setScheduledId(Long scheduledId) {
     this.scheduledId = scheduledId;
   }
 

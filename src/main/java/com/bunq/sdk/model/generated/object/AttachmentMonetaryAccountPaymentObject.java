@@ -20,49 +20,49 @@ public class AttachmentMonetaryAccountPaymentObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The id of the MonetaryAccount this Attachment is attached from.
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The id of the Attachment to attach to the MonetaryAccount.
    */
   @Expose
   @SerializedName("id_field_for_request")
-  private Integer idFieldForRequest;
+  private Long idFieldForRequest;
 
   public AttachmentMonetaryAccountPaymentObject() {
   this(null);
   }
 
-  public AttachmentMonetaryAccountPaymentObject(Integer id) {
+  public AttachmentMonetaryAccountPaymentObject(Long id) {
     this.idFieldForRequest = id;
   }
 
   /**
    * The id of the attached Attachment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
   /**
    * The id of the MonetaryAccount this Attachment is attached from.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

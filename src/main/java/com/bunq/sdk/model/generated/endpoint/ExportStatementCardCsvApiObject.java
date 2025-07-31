@@ -46,7 +46,7 @@ public class ExportStatementCardCsvApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the statement model's creation.
@@ -95,7 +95,7 @@ public class ExportStatementCardCsvApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("card_id")
-  private Integer cardId;
+  private Long cardId;
 
   /**
    * The start date for making statements.
@@ -141,7 +141,7 @@ public class ExportStatementCardCsvApiObject extends BunqModel {
    * @param regionalFormat Required for CSV exports. The regional format of the statement, can be
    * UK_US (comma-separated) or EUROPEAN (semicolon-separated).
    */
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd, String regionalFormat, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart, String dateEnd, String regionalFormat, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -159,29 +159,29 @@ requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Long cardId) {
     return create(cardId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart) {
     return create(cardId, dateStart, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart, String dateEnd) {
     return create(cardId, dateStart, dateEnd, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd, String regionalFormat) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart, String dateEnd, String regionalFormat) {
     return create(cardId, dateStart, dateEnd, regionalFormat, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementCardCsvApiObject> get(Integer cardId, Integer exportStatementCardCsvId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> get(Long cardId, Long exportStatementCardCsvId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId, exportStatementCardCsvId), params, customHeaders);
 
@@ -192,21 +192,21 @@ requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardCsvApiObject> get(Integer cardId) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> get(Long cardId) {
     return get(cardId, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardCsvApiObject> get(Integer cardId, Integer exportStatementCardCsvId) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> get(Long cardId, Long exportStatementCardCsvId) {
     return get(cardId, exportStatementCardCsvId, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardCsvApiObject> get(Integer cardId, Integer exportStatementCardCsvId, Map<String, String> params) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> get(Long cardId, Long exportStatementCardCsvId, Map<String, String> params) {
     return get(cardId, exportStatementCardCsvId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<ExportStatementCardCsvApiObject>> list(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ExportStatementCardCsvApiObject>> list(Long cardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId), params, customHeaders);
 
@@ -217,39 +217,39 @@ requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementCardCsvApiObject>> list(Integer cardId) {
+  public static BunqResponse<List<ExportStatementCardCsvApiObject>> list(Long cardId) {
     return list(cardId, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementCardCsvApiObject>> list(Integer cardId, Map<String, String> params) {
+  public static BunqResponse<List<ExportStatementCardCsvApiObject>> list(Long cardId, Map<String, String> params) {
     return list(cardId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementCardCsvApiObject> delete(Integer cardId, Integer exportStatementCardCsvId, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> delete(Long cardId, Long exportStatementCardCsvId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), cardId, exportStatementCardCsvId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<ExportStatementCardCsvApiObject> delete(Integer cardId) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> delete(Long cardId) {
     return delete(cardId, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardCsvApiObject> delete(Integer cardId, Integer exportStatementCardCsvId) {
+  public static BunqResponse<ExportStatementCardCsvApiObject> delete(Long cardId, Long exportStatementCardCsvId) {
     return delete(cardId, exportStatementCardCsvId, null);
   }
 
   /**
    * The id of the customer statement model.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -322,11 +322,11 @@ requestMap.put(FIELD_REGIONAL_FORMAT, regionalFormat);
   /**
    * The card for which this statement was created.
    */
-  public Integer getCardId() {
+  public Long getCardId() {
     return this.cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 

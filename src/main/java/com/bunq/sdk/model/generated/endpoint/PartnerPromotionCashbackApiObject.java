@@ -52,7 +52,7 @@ public class PartnerPromotionCashbackApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_transaction_maximum")
-  private Integer numberOfTransactionMaximum;
+  private Long numberOfTransactionMaximum;
 
   /**
    * The minimum amount of a transaction.
@@ -158,11 +158,11 @@ public class PartnerPromotionCashbackApiObject extends BunqModel {
   /**
    * The maximum number of transactions that can be made.
    */
-  public Integer getNumberOfTransactionMaximum() {
+  public Long getNumberOfTransactionMaximum() {
     return this.numberOfTransactionMaximum;
   }
 
-  public void setNumberOfTransactionMaximum(Integer numberOfTransactionMaximum) {
+  public void setNumberOfTransactionMaximum(Long numberOfTransactionMaximum) {
     this.numberOfTransactionMaximum = numberOfTransactionMaximum;
   }
 

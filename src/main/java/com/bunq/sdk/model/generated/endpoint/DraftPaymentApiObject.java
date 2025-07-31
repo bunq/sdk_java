@@ -43,6 +43,7 @@ public class DraftPaymentApiObject extends BunqModel {
   public static final String FIELD_PREVIOUS_UPDATED_TIMESTAMP = "previous_updated_timestamp";
   public static final String FIELD_NUMBER_OF_REQUIRED_ACCEPTS = "number_of_required_accepts";
   public static final String FIELD_SCHEDULE = "schedule";
+  public static final String FIELD_PAYMENT_BATCH_EXECUTION_TYPE = "payment_batch_execution_type";
 
   /**
    * Object type.
@@ -54,14 +55,14 @@ public class DraftPaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The id of the MonetaryAccount the DraftPayment applies to.
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The label of the User who created the DraftPayment.
@@ -122,6 +123,13 @@ public class DraftPaymentApiObject extends BunqModel {
   private ScheduleApiObject schedule;
 
   /**
+   * The execution type that will be used when converting this draft payment to a payment batch.
+   */
+  @Expose
+  @SerializedName("payment_batch_execution_type")
+  private String paymentBatchExecutionType;
+
+  /**
    * The status of the DraftPayment.
    */
   @Expose
@@ -150,7 +158,7 @@ public class DraftPaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("number_of_required_accepts_field_for_request")
-  private Integer numberOfRequiredAcceptsFieldForRequest;
+  private Long numberOfRequiredAcceptsFieldForRequest;
 
   /**
    * The schedule details when creating or updating a scheduled payment.
@@ -159,32 +167,44 @@ public class DraftPaymentApiObject extends BunqModel {
   @SerializedName("schedule_field_for_request")
   private ScheduleApiObject scheduleFieldForRequest;
 
+  /**
+   * The execution type that will be used when converting this draft payment to a payment batch.
+   */
+  @Expose
+  @SerializedName("payment_batch_execution_type_field_for_request")
+  private String paymentBatchExecutionTypeFieldForRequest;
+
   public DraftPaymentApiObject() {
-  this(null, null, null, null, null);
+  this(null, null, null, null, null, null);
   }
 
   public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries) {
-  this(entries, null, null, null, null);
+  this(entries, null, null, null, null, null);
   }
 
-  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts) {
-  this(entries, numberOfRequiredAccepts, null, null, null);
+  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts) {
+  this(entries, numberOfRequiredAccepts, null, null, null, null);
   }
 
-  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, String status) {
-  this(entries, numberOfRequiredAccepts, status, null, null);
+  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, String status) {
+  this(entries, numberOfRequiredAccepts, status, null, null, null);
   }
 
-  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, String status, String previousUpdatedTimestamp) {
-  this(entries, numberOfRequiredAccepts, status, previousUpdatedTimestamp, null);
+  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, String status, String previousUpdatedTimestamp) {
+  this(entries, numberOfRequiredAccepts, status, previousUpdatedTimestamp, null, null);
   }
 
-  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
+  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
+  this(entries, numberOfRequiredAccepts, status, previousUpdatedTimestamp, schedule, null);
+  }
+
+  public DraftPaymentApiObject(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, String paymentBatchExecutionType) {
     this.statusFieldForRequest = status;
     this.entriesFieldForRequest = entries;
     this.previousUpdatedTimestampFieldForRequest = previousUpdatedTimestamp;
     this.numberOfRequiredAcceptsFieldForRequest = numberOfRequiredAccepts;
     this.scheduleFieldForRequest = schedule;
+    this.paymentBatchExecutionTypeFieldForRequest = paymentBatchExecutionType;
   }  /**
    * Create a new DraftPayment.
    * @param entries The list of entries in the DraftPayment. Each entry will result in a payment
@@ -195,8 +215,10 @@ public class DraftPaymentApiObject extends BunqModel {
    * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
    * DraftPayment. This needs to be provided to prevent race conditions.
    * @param schedule The schedule details when creating or updating a scheduled payment.
+   * @param paymentBatchExecutionType The execution type that will be used when converting this
+   * draft payment to a payment batch.
    */
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, Long monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, String paymentBatchExecutionType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -209,6 +231,7 @@ requestMap.put(FIELD_ENTRIES, entries);
 requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
 requestMap.put(FIELD_NUMBER_OF_REQUIRED_ACCEPTS, numberOfRequiredAccepts);
 requestMap.put(FIELD_SCHEDULE, schedule);
+requestMap.put(FIELD_PAYMENT_BATCH_EXECUTION_TYPE, paymentBatchExecutionType);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.post(String.format(ENDPOINT_URL_CREATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), requestBytes, customHeaders);
@@ -216,32 +239,36 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
-    return create(null, null, null, null, null, null, null);
+  public static BunqResponse<Long> create() {
+    return create(null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries) {
-    return create(entries, null, null, null, null, null, null);
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries) {
+    return create(entries, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts) {
-    return create(entries, numberOfRequiredAccepts, null, null, null, null, null);
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts) {
+    return create(entries, numberOfRequiredAccepts, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId) {
-    return create(entries, numberOfRequiredAccepts, monetaryAccountId, null, null, null, null);
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, Long monetaryAccountId) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status) {
-    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, null, null, null);
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, Long monetaryAccountId, String status) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
-    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, null, null);
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, Long monetaryAccountId, String status, String previousUpdatedTimestamp) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<DraftPaymentEntryObject> entries, Integer numberOfRequiredAccepts, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
-    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null);
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, Long monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null, null);
+  }
+
+  public static BunqResponse<Long> create(List<DraftPaymentEntryObject> entries, Long numberOfRequiredAccepts, Long monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, String paymentBatchExecutionType) {
+    return create(entries, numberOfRequiredAccepts, monetaryAccountId, status, previousUpdatedTimestamp, schedule, paymentBatchExecutionType, null);
   }
 
   /**
@@ -250,8 +277,10 @@ requestMap.put(FIELD_SCHEDULE, schedule);
    * @param previousUpdatedTimestamp The last updated_timestamp that you received for this
    * DraftPayment. This needs to be provided to prevent race conditions.
    * @param schedule The schedule details when creating or updating a scheduled payment.
+   * @param paymentBatchExecutionType The execution type that will be used when converting this
+   * draft payment to a payment batch.
    */
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long draftPaymentId, Long monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, String paymentBatchExecutionType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -262,6 +291,7 @@ requestMap.put(FIELD_SCHEDULE, schedule);
 requestMap.put(FIELD_STATUS, status);
 requestMap.put(FIELD_PREVIOUS_UPDATED_TIMESTAMP, previousUpdatedTimestamp);
 requestMap.put(FIELD_SCHEDULE, schedule);
+requestMap.put(FIELD_PAYMENT_BATCH_EXECUTION_TYPE, paymentBatchExecutionType);
 
     byte[] requestBytes = determineAllRequestByte(requestMap);
     BunqResponseRaw responseRaw = apiClient.put(String.format(ENDPOINT_URL_UPDATE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), requestBytes, customHeaders);
@@ -269,30 +299,34 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId) {
-    return update(draftPaymentId, null, null, null, null, null);
+  public static BunqResponse<Long> update(Long draftPaymentId) {
+    return update(draftPaymentId, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId) {
-    return update(draftPaymentId, monetaryAccountId, null, null, null, null);
+  public static BunqResponse<Long> update(Long draftPaymentId, Long monetaryAccountId) {
+    return update(draftPaymentId, monetaryAccountId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status) {
-    return update(draftPaymentId, monetaryAccountId, status, null, null, null);
+  public static BunqResponse<Long> update(Long draftPaymentId, Long monetaryAccountId, String status) {
+    return update(draftPaymentId, monetaryAccountId, status, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp) {
-    return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, null, null);
+  public static BunqResponse<Long> update(Long draftPaymentId, Long monetaryAccountId, String status, String previousUpdatedTimestamp) {
+    return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer draftPaymentId, Integer monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
-    return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null);
+  public static BunqResponse<Long> update(Long draftPaymentId, Long monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule) {
+    return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, schedule, null, null);
+  }
+
+  public static BunqResponse<Long> update(Long draftPaymentId, Long monetaryAccountId, String status, String previousUpdatedTimestamp, ScheduleApiObject schedule, String paymentBatchExecutionType) {
+    return update(draftPaymentId, monetaryAccountId, status, previousUpdatedTimestamp, schedule, paymentBatchExecutionType, null);
   }
 
   /**
    * Get a listing of all DraftPayments from a given MonetaryAccount.
    */
-  public static BunqResponse<List<DraftPaymentApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<DraftPaymentApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -303,18 +337,18 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<DraftPaymentApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<DraftPaymentApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<DraftPaymentApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<DraftPaymentApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * Get a specific DraftPayment.
    */
-  public static BunqResponse<DraftPaymentApiObject> get(Integer draftPaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<DraftPaymentApiObject> get(Long draftPaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), draftPaymentId), params, customHeaders);
 
@@ -325,37 +359,37 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<DraftPaymentApiObject> get(Integer draftPaymentId) {
+  public static BunqResponse<DraftPaymentApiObject> get(Long draftPaymentId) {
     return get(draftPaymentId, null, null, null);
   }
 
-  public static BunqResponse<DraftPaymentApiObject> get(Integer draftPaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<DraftPaymentApiObject> get(Long draftPaymentId, Long monetaryAccountId) {
     return get(draftPaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<DraftPaymentApiObject> get(Integer draftPaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<DraftPaymentApiObject> get(Long draftPaymentId, Long monetaryAccountId, Map<String, String> params) {
     return get(draftPaymentId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the created DrafPayment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
   /**
    * The id of the MonetaryAccount the DraftPayment applies to.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
@@ -450,6 +484,17 @@ requestMap.put(FIELD_SCHEDULE, schedule);
   }
 
   /**
+   * The execution type that will be used when converting this draft payment to a payment batch.
+   */
+  public String getPaymentBatchExecutionType() {
+    return this.paymentBatchExecutionType;
+  }
+
+  public void setPaymentBatchExecutionType(String paymentBatchExecutionType) {
+    this.paymentBatchExecutionType = paymentBatchExecutionType;
+  }
+
+  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -489,6 +534,10 @@ requestMap.put(FIELD_SCHEDULE, schedule);
     }
 
     if (this.schedule != null) {
+      return false;
+    }
+
+    if (this.paymentBatchExecutionType != null) {
       return false;
     }
 

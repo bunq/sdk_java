@@ -103,7 +103,7 @@ public class AdditionalTransactionInformationCategoryUserDefinedApiObject extend
    * @param color The color of the category.
    * @param icon The icon of the category.
    */
-  public static BunqResponse<Integer> create(String status, String category, String description, String color, String icon, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String status, String category, String description, String color, String icon, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -123,27 +123,27 @@ requestMap.put(FIELD_ICON, icon);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String status) {
+  public static BunqResponse<Long> create(String status) {
     return create(status, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String status, String category) {
+  public static BunqResponse<Long> create(String status, String category) {
     return create(status, category, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String status, String category, String description) {
+  public static BunqResponse<Long> create(String status, String category, String description) {
     return create(status, category, description, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String status, String category, String description, String color) {
+  public static BunqResponse<Long> create(String status, String category, String description, String color) {
     return create(status, category, description, color, null, null);
   }
 
-  public static BunqResponse<Integer> create(String status, String category, String description, String color, String icon) {
+  public static BunqResponse<Long> create(String status, String category, String description, String color, String icon) {
     return create(status, category, description, color, icon, null);
   }
 

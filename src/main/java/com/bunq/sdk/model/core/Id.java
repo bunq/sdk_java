@@ -2,12 +2,12 @@ package com.bunq.sdk.model.core;
 
 public class Id {
 
-    private Integer id;
+    private Long id;
 
     public Id() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 }

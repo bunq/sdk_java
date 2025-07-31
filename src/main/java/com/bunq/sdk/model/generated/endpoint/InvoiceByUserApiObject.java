@@ -41,7 +41,7 @@ public class InvoiceByUserApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the invoice object's creation.
@@ -167,7 +167,7 @@ public class InvoiceByUserApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<InvoiceByUserApiObject> get(Integer invoiceByUserId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<InvoiceByUserApiObject> get(Long invoiceByUserId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), invoiceByUserId), params, customHeaders);
 
@@ -178,22 +178,22 @@ public class InvoiceByUserApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<InvoiceByUserApiObject> get(Integer invoiceByUserId) {
+  public static BunqResponse<InvoiceByUserApiObject> get(Long invoiceByUserId) {
     return get(invoiceByUserId, null, null);
   }
 
-  public static BunqResponse<InvoiceByUserApiObject> get(Integer invoiceByUserId, Map<String, String> params) {
+  public static BunqResponse<InvoiceByUserApiObject> get(Long invoiceByUserId, Map<String, String> params) {
     return get(invoiceByUserId, params, null);
   }
 
   /**
    * The id of the invoice object.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

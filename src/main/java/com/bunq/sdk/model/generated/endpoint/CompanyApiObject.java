@@ -220,7 +220,7 @@ public class CompanyApiObject extends BunqModel {
    * @param vatNumbers All the vat numbers of the company
    * @param signupTrackType The type of signup track the user is following.
    */
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber, List<CompanyVatNumberObject> vatNumbers, String signupTrackType, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber, List<CompanyVatNumberObject> vatNumbers, String signupTrackType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -247,61 +247,61 @@ requestMap.put(FIELD_SIGNUP_TRACK_TYPE, signupTrackType);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name) {
+  public static BunqResponse<Long> create(String name) {
     return create(name, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain) {
     return create(name, addressMain, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal) {
     return create(name, addressMain, addressPostal, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country) {
     return create(name, addressMain, addressPostal, country, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm) {
     return create(name, addressMain, addressPostal, country, legalForm, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, ubo, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, ubo, chamberOfCommerceNumber, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, ubo, chamberOfCommerceNumber, avatarUuid, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, ubo, chamberOfCommerceNumber, avatarUuid, vatNumber, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber, List<CompanyVatNumberObject> vatNumbers) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber, List<CompanyVatNumberObject> vatNumbers) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, ubo, chamberOfCommerceNumber, avatarUuid, vatNumber, vatNumbers, null, null);
   }
 
-  public static BunqResponse<Integer> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber, List<CompanyVatNumberObject> vatNumbers, String signupTrackType) {
+  public static BunqResponse<Long> create(String name, AddressObject addressMain, AddressObject addressPostal, String country, String legalForm, String subscriptionType, List<UboObject> ubo, String chamberOfCommerceNumber, String avatarUuid, CompanyVatNumberObject vatNumber, List<CompanyVatNumberObject> vatNumbers, String signupTrackType) {
     return create(name, addressMain, addressPostal, country, legalForm, subscriptionType, ubo, chamberOfCommerceNumber, avatarUuid, vatNumber, vatNumbers, signupTrackType, null);
   }
 
   /**
    */
-  public static BunqResponse<CompanyApiObject> get(Integer companyId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CompanyApiObject> get(Long companyId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), companyId), params, customHeaders);
 
@@ -312,11 +312,11 @@ requestMap.put(FIELD_SIGNUP_TRACK_TYPE, signupTrackType);
     return get(null, null, null);
   }
 
-  public static BunqResponse<CompanyApiObject> get(Integer companyId) {
+  public static BunqResponse<CompanyApiObject> get(Long companyId) {
     return get(companyId, null, null);
   }
 
-  public static BunqResponse<CompanyApiObject> get(Integer companyId, Map<String, String> params) {
+  public static BunqResponse<CompanyApiObject> get(Long companyId, Map<String, String> params) {
     return get(companyId, params, null);
   }
 
@@ -340,7 +340,7 @@ requestMap.put(FIELD_SIGNUP_TRACK_TYPE, signupTrackType);
   /**
    * @param avatarUuid The public UUID of the company's avatar.
    */
-  public static BunqResponse<Integer> update(Integer companyId, String avatarUuid, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long companyId, String avatarUuid, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -356,11 +356,11 @@ requestMap.put(FIELD_AVATAR_UUID, avatarUuid);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer companyId) {
+  public static BunqResponse<Long> update(Long companyId) {
     return update(companyId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer companyId, String avatarUuid) {
+  public static BunqResponse<Long> update(Long companyId, String avatarUuid) {
     return update(companyId, avatarUuid, null);
   }
 

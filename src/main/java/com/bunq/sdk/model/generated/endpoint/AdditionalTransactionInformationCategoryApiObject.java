@@ -57,7 +57,7 @@ public class AdditionalTransactionInformationCategoryApiObject extends BunqModel
    */
   @Expose
   @SerializedName("order")
-  private Integer order;
+  private Long order;
 
   /**
    * The description of the category.
@@ -140,11 +140,11 @@ public class AdditionalTransactionInformationCategoryApiObject extends BunqModel
   /**
    * The sort order of the category.
    */
-  public Integer getOrder() {
+  public Long getOrder() {
     return this.order;
   }
 
-  public void setOrder(Integer order) {
+  public void setOrder(Long order) {
     this.order = order;
   }
 

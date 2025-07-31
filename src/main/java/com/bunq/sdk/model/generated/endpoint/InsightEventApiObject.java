@@ -37,7 +37,7 @@ public class InsightEventApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the event's creation.
@@ -109,11 +109,11 @@ public class InsightEventApiObject extends BunqModel {
   /**
    * The id of the event.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

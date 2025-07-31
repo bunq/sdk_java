@@ -61,7 +61,7 @@ public class PaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the Payment was done.
@@ -84,7 +84,7 @@ public class PaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The Amount transferred by the Payment. Will be negative for outgoing Payments and positive
@@ -194,14 +194,14 @@ public class PaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("batch_id")
-  private Integer batchId;
+  private Long batchId;
 
   /**
    * The id of the JobScheduled if the Payment was scheduled.
    */
   @Expose
   @SerializedName("scheduled_id")
-  private Integer scheduledId;
+  private Long scheduledId;
 
   /**
    * A shipping Address provided with the Payment, currently unused.
@@ -353,7 +353,7 @@ public class PaymentApiObject extends BunqModel {
    * merchant.
    * @param allowBunqto Whether or not sending a bunq.to payment is allowed.
    */
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Long monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -374,42 +374,42 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount) {
+  public static BunqResponse<Long> create(AmountObject amount) {
     return create(amount, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias) {
     return create(amount, counterpartyAlias, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description) {
     return create(amount, counterpartyAlias, description, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Long monetaryAccountId) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Long monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Long monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, null, null);
   }
 
-  public static BunqResponse<Integer> create(AmountObject amount, PointerObject counterpartyAlias, String description, Integer monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto) {
+  public static BunqResponse<Long> create(AmountObject amount, PointerObject counterpartyAlias, String description, Long monetaryAccountId, List<AttachmentMonetaryAccountPaymentObject> attachment, String merchantReference, Boolean allowBunqto) {
     return create(amount, counterpartyAlias, description, monetaryAccountId, attachment, merchantReference, allowBunqto, null);
   }
 
   /**
    * Get a specific previous Payment.
    */
-  public static BunqResponse<PaymentApiObject> get(Integer paymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<PaymentApiObject> get(Long paymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), paymentId), params, customHeaders);
 
@@ -420,22 +420,22 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<PaymentApiObject> get(Integer paymentId) {
+  public static BunqResponse<PaymentApiObject> get(Long paymentId) {
     return get(paymentId, null, null, null);
   }
 
-  public static BunqResponse<PaymentApiObject> get(Integer paymentId, Integer monetaryAccountId) {
+  public static BunqResponse<PaymentApiObject> get(Long paymentId, Long monetaryAccountId) {
     return get(paymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<PaymentApiObject> get(Integer paymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<PaymentApiObject> get(Long paymentId, Long monetaryAccountId, Map<String, String> params) {
     return get(paymentId, monetaryAccountId, params, null);
   }
 
   /**
    * Get a listing of all Payments performed on a given MonetaryAccount (incoming and outgoing).
    */
-  public static BunqResponse<List<PaymentApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<PaymentApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -446,22 +446,22 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<PaymentApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<PaymentApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<PaymentApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<PaymentApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * The id of the created Payment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -492,11 +492,11 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
    * The id of the MonetaryAccount the Payment was made to or from (depending on whether this is
    * an incoming or outgoing Payment).
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 
@@ -662,22 +662,22 @@ requestMap.put(FIELD_ALLOW_BUNQTO, allowBunqto);
   /**
    * The id of the PaymentBatch if this Payment was part of one.
    */
-  public Integer getBatchId() {
+  public Long getBatchId() {
     return this.batchId;
   }
 
-  public void setBatchId(Integer batchId) {
+  public void setBatchId(Long batchId) {
     this.batchId = batchId;
   }
 
   /**
    * The id of the JobScheduled if the Payment was scheduled.
    */
-  public Integer getScheduledId() {
+  public Long getScheduledId() {
     return this.scheduledId;
   }
 
-  public void setScheduledId(Integer scheduledId) {
+  public void setScheduledId(Long scheduledId) {
     this.scheduledId = scheduledId;
   }
 

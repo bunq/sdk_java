@@ -27,7 +27,7 @@ public class RequestInquiryReferenceObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The type of request inquiry. Can be RequestInquiry or RequestInquiryBatch.
@@ -43,11 +43,11 @@ public class RequestInquiryReferenceObject extends BunqModel {
   /**
    * The id of the request inquiry (batch).
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

@@ -47,7 +47,7 @@ public class ExportAnnualOverviewApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the annual overview 's creation.
@@ -68,7 +68,7 @@ public class ExportAnnualOverviewApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("year")
-  private Integer year;
+  private Long year;
 
   /**
    * The status of the annual overview export.
@@ -89,20 +89,20 @@ public class ExportAnnualOverviewApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("year_field_for_request")
-  private Integer yearFieldForRequest;
+  private Long yearFieldForRequest;
 
   public ExportAnnualOverviewApiObject() {
   this(null);
   }
 
-  public ExportAnnualOverviewApiObject(Integer year) {
+  public ExportAnnualOverviewApiObject(Long year) {
     this.yearFieldForRequest = year;
   }  /**
    * Create a new annual overview for a specific year. An overview can be generated only for a
    * past year.
    * @param year The year for which the overview is.
    */
-  public static BunqResponse<Integer> create(Integer year, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long year, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -118,18 +118,18 @@ requestMap.put(FIELD_YEAR, year);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer year) {
+  public static BunqResponse<Long> create(Long year) {
     return create(year, null);
   }
 
   /**
    * Get an annual overview for a user by its id.
    */
-  public static BunqResponse<ExportAnnualOverviewApiObject> get(Integer exportAnnualOverviewId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportAnnualOverviewApiObject> get(Long exportAnnualOverviewId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), exportAnnualOverviewId), params, customHeaders);
 
@@ -140,24 +140,24 @@ requestMap.put(FIELD_YEAR, year);
     return get(null, null, null);
   }
 
-  public static BunqResponse<ExportAnnualOverviewApiObject> get(Integer exportAnnualOverviewId) {
+  public static BunqResponse<ExportAnnualOverviewApiObject> get(Long exportAnnualOverviewId) {
     return get(exportAnnualOverviewId, null, null);
   }
 
-  public static BunqResponse<ExportAnnualOverviewApiObject> get(Integer exportAnnualOverviewId, Map<String, String> params) {
+  public static BunqResponse<ExportAnnualOverviewApiObject> get(Long exportAnnualOverviewId, Map<String, String> params) {
     return get(exportAnnualOverviewId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportAnnualOverviewApiObject> delete(Integer exportAnnualOverviewId, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportAnnualOverviewApiObject> delete(Long exportAnnualOverviewId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), exportAnnualOverviewId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<ExportAnnualOverviewApiObject> delete(Integer exportAnnualOverviewId) {
+  public static BunqResponse<ExportAnnualOverviewApiObject> delete(Long exportAnnualOverviewId) {
     return delete(exportAnnualOverviewId, null);
   }
 
@@ -182,11 +182,11 @@ requestMap.put(FIELD_YEAR, year);
   /**
    * The id of the annual overview as created on the server.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -215,11 +215,11 @@ requestMap.put(FIELD_YEAR, year);
   /**
    * The year for which the overview is.
    */
-  public Integer getYear() {
+  public Long getYear() {
     return this.year;
   }
 
-  public void setYear(Integer year) {
+  public void setYear(Long year) {
     this.year = year;
   }
 

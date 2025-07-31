@@ -59,7 +59,7 @@ public class Installation extends BunqModel {
         return gson.toJson(installationRequestBody).getBytes();
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id.getId();
     }
 

@@ -29,8 +29,8 @@ public class InvoiceApiObject extends BunqModel {
   /**
    * Endpoint constants.
    */
-  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
   protected static final String ENDPOINT_URL_READ = "user/%s/monetary-account/%s/invoice/%s";
+  protected static final String ENDPOINT_URL_LISTING = "user/%s/monetary-account/%s/invoice";
 
   /**
    * Field constants.
@@ -49,7 +49,7 @@ public class InvoiceApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the invoice object's creation.
@@ -210,28 +210,7 @@ public class InvoiceApiObject extends BunqModel {
     this.externalUrlFieldForRequest = externalUrl;
   }  /**
    */
-  public static BunqResponse<List<InvoiceApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
-    ApiClient apiClient = new ApiClient(getApiContext());
-    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
-
-    return fromJsonList(InvoiceApiObject.class, responseRaw, OBJECT_TYPE_GET);
-  }
-
-  public static BunqResponse<List<InvoiceApiObject>> list() {
-    return list(null, null, null);
-  }
-
-  public static BunqResponse<List<InvoiceApiObject>> list(Integer monetaryAccountId) {
-    return list(monetaryAccountId, null, null);
-  }
-
-  public static BunqResponse<List<InvoiceApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
-    return list(monetaryAccountId, params, null);
-  }
-
-  /**
-   */
-  public static BunqResponse<InvoiceApiObject> get(Integer invoiceId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<InvoiceApiObject> get(Long invoiceId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), invoiceId), params, customHeaders);
 
@@ -242,26 +221,47 @@ public class InvoiceApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<InvoiceApiObject> get(Integer invoiceId) {
+  public static BunqResponse<InvoiceApiObject> get(Long invoiceId) {
     return get(invoiceId, null, null, null);
   }
 
-  public static BunqResponse<InvoiceApiObject> get(Integer invoiceId, Integer monetaryAccountId) {
+  public static BunqResponse<InvoiceApiObject> get(Long invoiceId, Long monetaryAccountId) {
     return get(invoiceId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<InvoiceApiObject> get(Integer invoiceId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<InvoiceApiObject> get(Long invoiceId, Long monetaryAccountId, Map<String, String> params) {
     return get(invoiceId, monetaryAccountId, params, null);
+  }
+
+  /**
+   */
+  public static BunqResponse<List<InvoiceApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
+
+    return fromJsonList(InvoiceApiObject.class, responseRaw, OBJECT_TYPE_GET);
+  }
+
+  public static BunqResponse<List<InvoiceApiObject>> list() {
+    return list(null, null, null);
+  }
+
+  public static BunqResponse<List<InvoiceApiObject>> list(Long monetaryAccountId) {
+    return list(monetaryAccountId, null, null);
+  }
+
+  public static BunqResponse<List<InvoiceApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
+    return list(monetaryAccountId, params, null);
   }
 
   /**
    * The id of the invoice object.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

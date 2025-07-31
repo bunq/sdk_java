@@ -39,7 +39,7 @@ public class UserCredentialPasswordIpApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the credential object's creation.
@@ -85,7 +85,7 @@ public class UserCredentialPasswordIpApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<UserCredentialPasswordIpApiObject> get(Integer userCredentialPasswordIpId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<UserCredentialPasswordIpApiObject> get(Long userCredentialPasswordIpId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), userCredentialPasswordIpId), params, customHeaders);
 
@@ -96,11 +96,11 @@ public class UserCredentialPasswordIpApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<UserCredentialPasswordIpApiObject> get(Integer userCredentialPasswordIpId) {
+  public static BunqResponse<UserCredentialPasswordIpApiObject> get(Long userCredentialPasswordIpId) {
     return get(userCredentialPasswordIpId, null, null);
   }
 
-  public static BunqResponse<UserCredentialPasswordIpApiObject> get(Integer userCredentialPasswordIpId, Map<String, String> params) {
+  public static BunqResponse<UserCredentialPasswordIpApiObject> get(Long userCredentialPasswordIpId, Map<String, String> params) {
     return get(userCredentialPasswordIpId, params, null);
   }
 
@@ -124,11 +124,11 @@ public class UserCredentialPasswordIpApiObject extends BunqModel {
   /**
    * The id of the credential.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

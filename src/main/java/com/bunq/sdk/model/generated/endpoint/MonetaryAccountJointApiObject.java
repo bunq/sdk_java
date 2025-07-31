@@ -61,7 +61,7 @@ public class MonetaryAccountJointApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the MonetaryAccountJoint's creation.
@@ -192,14 +192,14 @@ public class MonetaryAccountJointApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -228,6 +228,14 @@ public class MonetaryAccountJointApiObject extends BunqModel {
   @Expose
   @SerializedName("co_owner_invite")
   private CoOwnerInviteResponseApiObject coOwnerInvite;
+
+  /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
 
   /**
    * The budgets of the MonetaryAccount.
@@ -442,7 +450,7 @@ public class MonetaryAccountJointApiObject extends BunqModel {
    * updating the status to CANCELLED.
    * @param setting The settings of the MonetaryAccountJoint.
    */
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -469,61 +477,61 @@ requestMap.put(FIELD_SETTING, setting);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency) {
+  public static BunqResponse<Long> create(String currency) {
     return create(currency, null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner) {
     return create(currency, allCoOwner, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description) {
     return create(currency, allCoOwner, description, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit) {
     return create(currency, allCoOwner, description, dailyLimit, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting) {
+  public static BunqResponse<Long> create(String currency, List<CoOwnerObject> allCoOwner, String description, AmountObject dailyLimit, AmountObject overdraftLimit, List<PointerObject> alias, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting) {
     return create(currency, allCoOwner, description, dailyLimit, overdraftLimit, alias, avatarUuid, status, subStatus, reason, reasonDescription, setting, null);
   }
 
   /**
    */
-  public static BunqResponse<MonetaryAccountJointApiObject> get(Integer monetaryAccountJointId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<MonetaryAccountJointApiObject> get(Long monetaryAccountJointId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), monetaryAccountJointId), params, customHeaders);
 
@@ -534,11 +542,11 @@ requestMap.put(FIELD_SETTING, setting);
     return get(null, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountJointApiObject> get(Integer monetaryAccountJointId) {
+  public static BunqResponse<MonetaryAccountJointApiObject> get(Long monetaryAccountJointId) {
     return get(monetaryAccountJointId, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountJointApiObject> get(Integer monetaryAccountJointId, Map<String, String> params) {
+  public static BunqResponse<MonetaryAccountJointApiObject> get(Long monetaryAccountJointId, Map<String, String> params) {
     return get(monetaryAccountJointId, params, null);
   }
 
@@ -563,7 +571,7 @@ requestMap.put(FIELD_SETTING, setting);
    * updating the status to CANCELLED.
    * @param setting The settings of the MonetaryAccountJoint.
    */
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -586,39 +594,39 @@ requestMap.put(FIELD_SETTING, setting);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId) {
     return update(monetaryAccountJointId, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description) {
     return update(monetaryAccountJointId, description, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit) {
     return update(monetaryAccountJointId, description, dailyLimit, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid) {
     return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status) {
     return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus) {
     return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
     return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
     return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting) {
+  public static BunqResponse<Long> update(Long monetaryAccountJointId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, MonetaryAccountSettingObject setting) {
     return update(monetaryAccountJointId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, setting, null);
   }
 
@@ -642,11 +650,11 @@ requestMap.put(FIELD_SETTING, setting);
   /**
    * The id of the MonetaryAccountJoint.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -845,22 +853,22 @@ requestMap.put(FIELD_SETTING, setting);
   /**
    * The id of the User who owns the MonetaryAccountJoint.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
   /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -906,6 +914,18 @@ requestMap.put(FIELD_SETTING, setting);
 
   public void setCoOwnerInvite(CoOwnerInviteResponseApiObject coOwnerInvite) {
     this.coOwnerInvite = coOwnerInvite;
+  }
+
+  /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
   }
 
   /**
@@ -1048,6 +1068,10 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.coOwnerInvite != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

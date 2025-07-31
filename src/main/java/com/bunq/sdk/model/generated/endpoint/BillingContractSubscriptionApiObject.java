@@ -41,7 +41,7 @@ public class BillingContractSubscriptionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the billing contract was made.
@@ -76,7 +76,7 @@ public class BillingContractSubscriptionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("contract_version")
-  private Integer contractVersion;
+  private Long contractVersion;
 
   /**
    * The subscription type of the user. Can be one of PERSON_SUPER_LIGHT_V1, PERSON_LIGHT_V1,
@@ -143,11 +143,11 @@ public class BillingContractSubscriptionApiObject extends BunqModel {
   /**
    * The id of the billing contract.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -198,11 +198,11 @@ public class BillingContractSubscriptionApiObject extends BunqModel {
   /**
    * The version of the billing contract.
    */
-  public Integer getContractVersion() {
+  public Long getContractVersion() {
     return this.contractVersion;
   }
 
-  public void setContractVersion(Integer contractVersion) {
+  public void setContractVersion(Long contractVersion) {
     this.contractVersion = contractVersion;
   }
 

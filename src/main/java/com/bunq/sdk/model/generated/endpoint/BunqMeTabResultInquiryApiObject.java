@@ -29,7 +29,7 @@ public class BunqMeTabResultInquiryApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("bunq_me_tab_id")
-  private Integer bunqMeTabId;
+  private Long bunqMeTabId;
 
   /**
    * The payment made for the Tab.
@@ -45,11 +45,11 @@ public class BunqMeTabResultInquiryApiObject extends BunqModel {
   /**
    * The Id of the bunq.me tab that this BunqMeTabResultInquiry belongs to.
    */
-  public Integer getBunqMeTabId() {
+  public Long getBunqMeTabId() {
     return this.bunqMeTabId;
   }
 
-  public void setBunqMeTabId(Integer bunqMeTabId) {
+  public void setBunqMeTabId(Long bunqMeTabId) {
     this.bunqMeTabId = bunqMeTabId;
   }
 

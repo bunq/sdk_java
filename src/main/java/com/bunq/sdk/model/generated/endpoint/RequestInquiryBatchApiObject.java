@@ -92,7 +92,7 @@ public class RequestInquiryBatchApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("event_id_field_for_request")
-  private Integer eventIdFieldForRequest;
+  private Long eventIdFieldForRequest;
 
   public RequestInquiryBatchApiObject() {
   this(null, null, null, null);
@@ -110,7 +110,7 @@ public class RequestInquiryBatchApiObject extends BunqModel {
   this(requestInquiries, totalAmountInquired, status, null);
   }
 
-  public RequestInquiryBatchApiObject(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, String status, Integer eventId) {
+  public RequestInquiryBatchApiObject(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, String status, Long eventId) {
     this.requestInquiriesFieldForRequest = requestInquiries;
     this.statusFieldForRequest = status;
     this.totalAmountInquiredFieldForRequest = totalAmountInquired;
@@ -124,7 +124,7 @@ public class RequestInquiryBatchApiObject extends BunqModel {
    * @param eventId The ID of the associated event if the request batch was made using 'split the
    * bill'.
    */
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Long monetaryAccountId, String status, Long eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,27 +143,27 @@ requestMap.put(FIELD_EVENT_ID, eventId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries) {
     return create(requestInquiries, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired) {
     return create(requestInquiries, totalAmountInquired, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Long monetaryAccountId) {
     return create(requestInquiries, totalAmountInquired, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Long monetaryAccountId, String status) {
     return create(requestInquiries, totalAmountInquired, monetaryAccountId, status, null, null);
   }
 
-  public static BunqResponse<Integer> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Integer monetaryAccountId, String status, Integer eventId) {
+  public static BunqResponse<Long> create(List<RequestInquiryApiObject> requestInquiries, AmountObject totalAmountInquired, Long monetaryAccountId, String status, Long eventId) {
     return create(requestInquiries, totalAmountInquired, monetaryAccountId, status, eventId, null);
   }
 
@@ -171,7 +171,7 @@ requestMap.put(FIELD_EVENT_ID, eventId);
    * Revoke a request batch. The status of all the requests will be set to REVOKED.
    * @param status The status of the request.
    */
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -187,22 +187,22 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId) {
     return update(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long monetaryAccountId) {
     return update(requestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer requestInquiryBatchId, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> update(Long requestInquiryBatchId, Long monetaryAccountId, String status) {
     return update(requestInquiryBatchId, monetaryAccountId, status, null);
   }
 
   /**
    * Return the details of a specific request batch.
    */
-  public static BunqResponse<RequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<RequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), requestInquiryBatchId), params, customHeaders);
 
@@ -213,22 +213,22 @@ requestMap.put(FIELD_STATUS, status);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<RequestInquiryBatchApiObject> get(Integer requestInquiryBatchId) {
+  public static BunqResponse<RequestInquiryBatchApiObject> get(Long requestInquiryBatchId) {
     return get(requestInquiryBatchId, null, null, null);
   }
 
-  public static BunqResponse<RequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer monetaryAccountId) {
+  public static BunqResponse<RequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long monetaryAccountId) {
     return get(requestInquiryBatchId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<RequestInquiryBatchApiObject> get(Integer requestInquiryBatchId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<RequestInquiryBatchApiObject> get(Long requestInquiryBatchId, Long monetaryAccountId, Map<String, String> params) {
     return get(requestInquiryBatchId, monetaryAccountId, params, null);
   }
 
   /**
    * Return all the request batches for a monetary account.
    */
-  public static BunqResponse<List<RequestInquiryBatchApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<RequestInquiryBatchApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -239,11 +239,11 @@ requestMap.put(FIELD_STATUS, status);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<RequestInquiryBatchApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<RequestInquiryBatchApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<RequestInquiryBatchApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<RequestInquiryBatchApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 

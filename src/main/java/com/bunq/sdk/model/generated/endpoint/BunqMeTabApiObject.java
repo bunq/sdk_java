@@ -49,7 +49,7 @@ public class BunqMeTabApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the bunq.me was created.
@@ -77,7 +77,7 @@ public class BunqMeTabApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The status of the bunq.me. Can be WAITING_FOR_PAYMENT, CANCELLED or EXPIRED.
@@ -149,7 +149,7 @@ public class BunqMeTabApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("event_id_field_for_request")
-  private Integer eventIdFieldForRequest;
+  private Long eventIdFieldForRequest;
 
   public BunqMeTabApiObject() {
   this(null, null, null);
@@ -163,7 +163,7 @@ public class BunqMeTabApiObject extends BunqModel {
   this(bunqmeTabEntry, status, null);
   }
 
-  public BunqMeTabApiObject(BunqMeTabEntryApiObject bunqmeTabEntry, String status, Integer eventId) {
+  public BunqMeTabApiObject(BunqMeTabEntryApiObject bunqmeTabEntry, String status, Long eventId) {
     this.bunqmeTabEntryFieldForRequest = bunqmeTabEntry;
     this.statusFieldForRequest = status;
     this.eventIdFieldForRequest = eventId;
@@ -173,7 +173,7 @@ public class BunqMeTabApiObject extends BunqModel {
    * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    * @param eventId The ID of the related event if the bunqMeTab made by 'split' functionality.
    */
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Long monetaryAccountId, String status, Long eventId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -191,23 +191,23 @@ requestMap.put(FIELD_EVENT_ID, eventId);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry) {
     return create(bunqmeTabEntry, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Long monetaryAccountId) {
     return create(bunqmeTabEntry, monetaryAccountId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Long monetaryAccountId, String status) {
     return create(bunqmeTabEntry, monetaryAccountId, status, null, null);
   }
 
-  public static BunqResponse<Integer> create(BunqMeTabEntryApiObject bunqmeTabEntry, Integer monetaryAccountId, String status, Integer eventId) {
+  public static BunqResponse<Long> create(BunqMeTabEntryApiObject bunqmeTabEntry, Long monetaryAccountId, String status, Long eventId) {
     return create(bunqmeTabEntry, monetaryAccountId, status, eventId, null);
   }
 
@@ -215,7 +215,7 @@ requestMap.put(FIELD_EVENT_ID, eventId);
    * @param status The status of the bunq.me. Ignored in POST requests but can be used for
    * cancelling the bunq.me by setting status as CANCELLED with a PUT request.
    */
-  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long bunqMeTabId, Long monetaryAccountId, String status, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -231,21 +231,21 @@ requestMap.put(FIELD_STATUS, status);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer bunqMeTabId) {
+  public static BunqResponse<Long> update(Long bunqMeTabId) {
     return update(bunqMeTabId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long bunqMeTabId, Long monetaryAccountId) {
     return update(bunqMeTabId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer bunqMeTabId, Integer monetaryAccountId, String status) {
+  public static BunqResponse<Long> update(Long bunqMeTabId, Long monetaryAccountId, String status) {
     return update(bunqMeTabId, monetaryAccountId, status, null);
   }
 
   /**
    */
-  public static BunqResponse<List<BunqMeTabApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<BunqMeTabApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -256,17 +256,17 @@ requestMap.put(FIELD_STATUS, status);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<BunqMeTabApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<BunqMeTabApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<BunqMeTabApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<BunqMeTabApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<BunqMeTabApiObject> get(Integer bunqMeTabId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<BunqMeTabApiObject> get(Long bunqMeTabId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabId), params, customHeaders);
 
@@ -277,26 +277,26 @@ requestMap.put(FIELD_STATUS, status);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<BunqMeTabApiObject> get(Integer bunqMeTabId) {
+  public static BunqResponse<BunqMeTabApiObject> get(Long bunqMeTabId) {
     return get(bunqMeTabId, null, null, null);
   }
 
-  public static BunqResponse<BunqMeTabApiObject> get(Integer bunqMeTabId, Integer monetaryAccountId) {
+  public static BunqResponse<BunqMeTabApiObject> get(Long bunqMeTabId, Long monetaryAccountId) {
     return get(bunqMeTabId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<BunqMeTabApiObject> get(Integer bunqMeTabId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<BunqMeTabApiObject> get(Long bunqMeTabId, Long monetaryAccountId, Map<String, String> params) {
     return get(bunqMeTabId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the created bunq.me.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -336,11 +336,11 @@ requestMap.put(FIELD_STATUS, status);
   /**
    * The id of the MonetaryAccount the bunq.me was sent from.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

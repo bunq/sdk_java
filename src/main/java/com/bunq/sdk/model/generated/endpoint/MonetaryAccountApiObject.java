@@ -55,11 +55,19 @@ public class MonetaryAccountApiObject extends BunqModel {
   private AmountObject balance;
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
+
+  /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -211,7 +219,7 @@ public class MonetaryAccountApiObject extends BunqModel {
   /**
    * Get a specific MonetaryAccount.
    */
-  public static BunqResponse<MonetaryAccountApiObject> get(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<MonetaryAccountApiObject> get(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -222,11 +230,11 @@ public class MonetaryAccountApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountApiObject> get(Integer monetaryAccountId) {
+  public static BunqResponse<MonetaryAccountApiObject> get(Long monetaryAccountId) {
     return get(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountApiObject> get(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<MonetaryAccountApiObject> get(Long monetaryAccountId, Map<String, String> params) {
     return get(monetaryAccountId, params, null);
   }
 
@@ -271,13 +279,25 @@ public class MonetaryAccountApiObject extends BunqModel {
   }
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
+  }
+
+  /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -524,6 +544,10 @@ public class MonetaryAccountApiObject extends BunqModel {
     }
 
     if (this.balance != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

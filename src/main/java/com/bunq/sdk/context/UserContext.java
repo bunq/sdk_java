@@ -52,7 +52,7 @@ public class UserContext {
         this.initMainMonetaryAccount(helper);
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return this.apiContext.getSessionContext().getUserId();
     }
 
@@ -72,7 +72,7 @@ public class UserContext {
         return this.userPerson != null && this.userCompany != null && this.userApiKey != null;
     }
 
-    public Integer getMainMonetaryAccountId() {
+    public Long getMainMonetaryAccountId() {
         if (this.primaryMonetaryAccountBank == null) {
             throw new BunqException(ERROR_PRIMARY_MONETARY_ACCOUNT_IS_NOT_SET);
         } else {

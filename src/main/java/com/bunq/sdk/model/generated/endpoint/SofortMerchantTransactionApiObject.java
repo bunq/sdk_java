@@ -46,7 +46,7 @@ public class SofortMerchantTransactionApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The alias of the monetary account to add money to.
@@ -138,7 +138,7 @@ public class SofortMerchantTransactionApiObject extends BunqModel {
     this.issuerFieldForRequest = issuer;
   }  /**
    */
-  public static BunqResponse<SofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<SofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), sofortMerchantTransactionId), params, customHeaders);
 
@@ -149,21 +149,21 @@ public class SofortMerchantTransactionApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<SofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId) {
+  public static BunqResponse<SofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId) {
     return get(sofortMerchantTransactionId, null, null, null);
   }
 
-  public static BunqResponse<SofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer monetaryAccountId) {
+  public static BunqResponse<SofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long monetaryAccountId) {
     return get(sofortMerchantTransactionId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<SofortMerchantTransactionApiObject> get(Integer sofortMerchantTransactionId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<SofortMerchantTransactionApiObject> get(Long sofortMerchantTransactionId, Long monetaryAccountId, Map<String, String> params) {
     return get(sofortMerchantTransactionId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<SofortMerchantTransactionApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<SofortMerchantTransactionApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -174,22 +174,22 @@ public class SofortMerchantTransactionApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<SofortMerchantTransactionApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<SofortMerchantTransactionApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<SofortMerchantTransactionApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<SofortMerchantTransactionApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * The id of the monetary account this sofort merchant transaction links to.
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

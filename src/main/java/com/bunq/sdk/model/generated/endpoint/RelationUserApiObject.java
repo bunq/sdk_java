@@ -60,18 +60,46 @@ public class RelationUserApiObject extends BunqModel {
   private String status;
 
   /**
-   * The account status of a user
+   * The account status of a user.
    */
   @Expose
   @SerializedName("user_status")
   private String userStatus;
 
   /**
-   * The account status of a user
+   * The account sub-status of the user.
+   */
+  @Expose
+  @SerializedName("user_sub_status")
+  private String userSubStatus;
+
+  /**
+   * The account verification status of the user.
+   */
+  @Expose
+  @SerializedName("user_verification_status")
+  private String userVerificationStatus;
+
+  /**
+   * The account sub-status of the counter user.
    */
   @Expose
   @SerializedName("counter_user_status")
   private String counterUserStatus;
+
+  /**
+   * The account sub-status of the counter user.
+   */
+  @Expose
+  @SerializedName("counter_user_sub_status")
+  private String counterUserSubStatus;
+
+  /**
+   * The account verification status of the counter user.
+   */
+  @Expose
+  @SerializedName("counter_user_verification_status")
+  private String counterUserVerificationStatus;
 
   /**
    * Tap to Pay settings for the company employee.
@@ -154,7 +182,7 @@ public class RelationUserApiObject extends BunqModel {
   }
 
   /**
-   * The account status of a user
+   * The account status of a user.
    */
   public String getUserStatus() {
     return this.userStatus;
@@ -165,7 +193,29 @@ public class RelationUserApiObject extends BunqModel {
   }
 
   /**
-   * The account status of a user
+   * The account sub-status of the user.
+   */
+  public String getUserSubStatus() {
+    return this.userSubStatus;
+  }
+
+  public void setUserSubStatus(String userSubStatus) {
+    this.userSubStatus = userSubStatus;
+  }
+
+  /**
+   * The account verification status of the user.
+   */
+  public String getUserVerificationStatus() {
+    return this.userVerificationStatus;
+  }
+
+  public void setUserVerificationStatus(String userVerificationStatus) {
+    this.userVerificationStatus = userVerificationStatus;
+  }
+
+  /**
+   * The account sub-status of the counter user.
    */
   public String getCounterUserStatus() {
     return this.counterUserStatus;
@@ -173,6 +223,28 @@ public class RelationUserApiObject extends BunqModel {
 
   public void setCounterUserStatus(String counterUserStatus) {
     this.counterUserStatus = counterUserStatus;
+  }
+
+  /**
+   * The account sub-status of the counter user.
+   */
+  public String getCounterUserSubStatus() {
+    return this.counterUserSubStatus;
+  }
+
+  public void setCounterUserSubStatus(String counterUserSubStatus) {
+    this.counterUserSubStatus = counterUserSubStatus;
+  }
+
+  /**
+   * The account verification status of the counter user.
+   */
+  public String getCounterUserVerificationStatus() {
+    return this.counterUserVerificationStatus;
+  }
+
+  public void setCounterUserVerificationStatus(String counterUserVerificationStatus) {
+    this.counterUserVerificationStatus = counterUserVerificationStatus;
   }
 
   /**
@@ -228,7 +300,23 @@ public class RelationUserApiObject extends BunqModel {
       return false;
     }
 
+    if (this.userSubStatus != null) {
+      return false;
+    }
+
+    if (this.userVerificationStatus != null) {
+      return false;
+    }
+
     if (this.counterUserStatus != null) {
+      return false;
+    }
+
+    if (this.counterUserSubStatus != null) {
+      return false;
+    }
+
+    if (this.counterUserVerificationStatus != null) {
       return false;
     }
 

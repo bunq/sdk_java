@@ -45,7 +45,7 @@ public class ExportStatementCardPdfApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the statement model's creation.
@@ -87,7 +87,7 @@ public class ExportStatementCardPdfApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("card_id")
-  private Integer cardId;
+  private Long cardId;
 
   /**
    * The start date for making statements.
@@ -118,7 +118,7 @@ public class ExportStatementCardPdfApiObject extends BunqModel {
    * @param dateStart The start date for making statements.
    * @param dateEnd The end date for making statements.
    */
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart, String dateEnd, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,25 +135,25 @@ requestMap.put(FIELD_DATE_END, dateEnd);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Long cardId) {
     return create(cardId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart) {
     return create(cardId, dateStart, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String dateStart, String dateEnd) {
+  public static BunqResponse<Long> create(Long cardId, String dateStart, String dateEnd) {
     return create(cardId, dateStart, dateEnd, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementCardPdfApiObject> get(Integer cardId, Integer exportStatementCardPdfId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> get(Long cardId, Long exportStatementCardPdfId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId, exportStatementCardPdfId), params, customHeaders);
 
@@ -164,21 +164,21 @@ requestMap.put(FIELD_DATE_END, dateEnd);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardPdfApiObject> get(Integer cardId) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> get(Long cardId) {
     return get(cardId, null, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardPdfApiObject> get(Integer cardId, Integer exportStatementCardPdfId) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> get(Long cardId, Long exportStatementCardPdfId) {
     return get(cardId, exportStatementCardPdfId, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardPdfApiObject> get(Integer cardId, Integer exportStatementCardPdfId, Map<String, String> params) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> get(Long cardId, Long exportStatementCardPdfId, Map<String, String> params) {
     return get(cardId, exportStatementCardPdfId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<List<ExportStatementCardPdfApiObject>> list(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ExportStatementCardPdfApiObject>> list(Long cardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId), params, customHeaders);
 
@@ -189,39 +189,39 @@ requestMap.put(FIELD_DATE_END, dateEnd);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementCardPdfApiObject>> list(Integer cardId) {
+  public static BunqResponse<List<ExportStatementCardPdfApiObject>> list(Long cardId) {
     return list(cardId, null, null);
   }
 
-  public static BunqResponse<List<ExportStatementCardPdfApiObject>> list(Integer cardId, Map<String, String> params) {
+  public static BunqResponse<List<ExportStatementCardPdfApiObject>> list(Long cardId, Map<String, String> params) {
     return list(cardId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportStatementCardPdfApiObject> delete(Integer cardId, Integer exportStatementCardPdfId, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> delete(Long cardId, Long exportStatementCardPdfId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), cardId, exportStatementCardPdfId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<ExportStatementCardPdfApiObject> delete(Integer cardId) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> delete(Long cardId) {
     return delete(cardId, null, null);
   }
 
-  public static BunqResponse<ExportStatementCardPdfApiObject> delete(Integer cardId, Integer exportStatementCardPdfId) {
+  public static BunqResponse<ExportStatementCardPdfApiObject> delete(Long cardId, Long exportStatementCardPdfId) {
     return delete(cardId, exportStatementCardPdfId, null);
   }
 
   /**
    * The id of the customer statement model.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -283,11 +283,11 @@ requestMap.put(FIELD_DATE_END, dateEnd);
   /**
    * The card for which this statement was created.
    */
-  public Integer getCardId() {
+  public Long getCardId() {
     return this.cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 

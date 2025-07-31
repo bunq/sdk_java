@@ -46,7 +46,7 @@ public class TransferwiseQuoteApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the quote's creation.
@@ -166,7 +166,7 @@ public class TransferwiseQuoteApiObject extends BunqModel {
    * @param amountSource The source amount. Required if target amount is left empty.
    * @param amountTarget The target amount. Required if source amount is left empty.
    */
-  public static BunqResponse<Integer> create(String currencySource, String currencyTarget, AmountObject amountSource, AmountObject amountTarget, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String currencySource, String currencyTarget, AmountObject amountSource, AmountObject amountTarget, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -185,29 +185,29 @@ requestMap.put(FIELD_AMOUNT_TARGET, amountTarget);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currencySource) {
+  public static BunqResponse<Long> create(String currencySource) {
     return create(currencySource, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currencySource, String currencyTarget) {
+  public static BunqResponse<Long> create(String currencySource, String currencyTarget) {
     return create(currencySource, currencyTarget, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currencySource, String currencyTarget, AmountObject amountSource) {
+  public static BunqResponse<Long> create(String currencySource, String currencyTarget, AmountObject amountSource) {
     return create(currencySource, currencyTarget, amountSource, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currencySource, String currencyTarget, AmountObject amountSource, AmountObject amountTarget) {
+  public static BunqResponse<Long> create(String currencySource, String currencyTarget, AmountObject amountSource, AmountObject amountTarget) {
     return create(currencySource, currencyTarget, amountSource, amountTarget, null);
   }
 
   /**
    */
-  public static BunqResponse<TransferwiseQuoteApiObject> get(Integer transferwiseQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<TransferwiseQuoteApiObject> get(Long transferwiseQuoteId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), transferwiseQuoteId), params, customHeaders);
 
@@ -218,22 +218,22 @@ requestMap.put(FIELD_AMOUNT_TARGET, amountTarget);
     return get(null, null, null);
   }
 
-  public static BunqResponse<TransferwiseQuoteApiObject> get(Integer transferwiseQuoteId) {
+  public static BunqResponse<TransferwiseQuoteApiObject> get(Long transferwiseQuoteId) {
     return get(transferwiseQuoteId, null, null);
   }
 
-  public static BunqResponse<TransferwiseQuoteApiObject> get(Integer transferwiseQuoteId, Map<String, String> params) {
+  public static BunqResponse<TransferwiseQuoteApiObject> get(Long transferwiseQuoteId, Map<String, String> params) {
     return get(transferwiseQuoteId, params, null);
   }
 
   /**
    * The id of the quote.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

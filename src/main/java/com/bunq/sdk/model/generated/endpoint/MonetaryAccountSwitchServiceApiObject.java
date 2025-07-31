@@ -26,7 +26,7 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the monetary account's creation.
@@ -71,11 +71,19 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
   private AmountObject balance;
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
+
+  /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -173,11 +181,11 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
   /**
    * The id of the monetary account.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -248,13 +256,25 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
   }
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
+  }
+
+  /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -431,6 +451,10 @@ public class MonetaryAccountSwitchServiceApiObject extends BunqModel {
     }
 
     if (this.balance != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

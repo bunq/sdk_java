@@ -21,7 +21,7 @@ public class MonetaryAccountBankTest extends BunqSdkTestBase {
   /**
    * The id of the newly created monetary account which should be closed after the tests completes
    */
-  private static Integer monetaryAccountIdToClose;
+  private static Long monetaryAccountIdToClose;
 
   @AfterClass
   public static void tearDown() {

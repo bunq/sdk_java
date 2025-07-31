@@ -85,7 +85,7 @@ public class TransferwiseTransferRequirementApiObject extends BunqModel {
    * @param detail The fields which were specified as "required" and have since been filled by the
    * user. Always provide the full list.
    */
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String recipientId, List<TransferwiseRequirementFieldObject> detail, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String recipientId, List<TransferwiseRequirementFieldObject> detail, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -102,19 +102,19 @@ requestMap.put(FIELD_DETAIL, detail);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId) {
     return create(transferwiseQuoteId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String recipientId) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String recipientId) {
     return create(transferwiseQuoteId, recipientId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer transferwiseQuoteId, String recipientId, List<TransferwiseRequirementFieldObject> detail) {
+  public static BunqResponse<Long> create(Long transferwiseQuoteId, String recipientId, List<TransferwiseRequirementFieldObject> detail) {
     return create(transferwiseQuoteId, recipientId, detail, null);
   }
 

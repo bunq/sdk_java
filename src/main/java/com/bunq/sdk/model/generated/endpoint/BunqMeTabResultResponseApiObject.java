@@ -41,7 +41,7 @@ public class BunqMeTabResultResponseApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Long bunqMeTabResultResponseId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeTabResultResponseId), params, customHeaders);
 
@@ -52,15 +52,15 @@ public class BunqMeTabResultResponseApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Integer bunqMeTabResultResponseId) {
+  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Long bunqMeTabResultResponseId) {
     return get(bunqMeTabResultResponseId, null, null, null);
   }
 
-  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId) {
+  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Long bunqMeTabResultResponseId, Long monetaryAccountId) {
     return get(bunqMeTabResultResponseId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Integer bunqMeTabResultResponseId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<BunqMeTabResultResponseApiObject> get(Long bunqMeTabResultResponseId, Long monetaryAccountId, Map<String, String> params) {
     return get(bunqMeTabResultResponseId, monetaryAccountId, params, null);
   }
 

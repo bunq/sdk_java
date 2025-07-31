@@ -44,7 +44,7 @@ public class CardGeneratedCvc2ApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the cvc code's creation.
@@ -105,7 +105,7 @@ public class CardGeneratedCvc2ApiObject extends BunqModel {
    * Generate a new CVC2 code for a card.
    * @param type The type of generated cvc2. Can be STATIC or GENERATED.
    */
-  public static BunqResponse<Integer> create(Integer cardId, String type, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long cardId, String type, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -121,22 +121,22 @@ requestMap.put(FIELD_TYPE, type);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId) {
+  public static BunqResponse<Long> create(Long cardId) {
     return create(cardId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer cardId, String type) {
+  public static BunqResponse<Long> create(Long cardId, String type) {
     return create(cardId, type, null);
   }
 
   /**
    * Get the details for a specific generated CVC2 code.
    */
-  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Integer cardId, Integer cardGeneratedCvc2Id, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Long cardId, Long cardGeneratedCvc2Id, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), cardId, cardGeneratedCvc2Id), params, customHeaders);
 
@@ -147,22 +147,22 @@ requestMap.put(FIELD_TYPE, type);
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Integer cardId) {
+  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Long cardId) {
     return get(cardId, null, null, null);
   }
 
-  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Integer cardId, Integer cardGeneratedCvc2Id) {
+  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Long cardId, Long cardGeneratedCvc2Id) {
     return get(cardId, cardGeneratedCvc2Id, null, null);
   }
 
-  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Integer cardId, Integer cardGeneratedCvc2Id, Map<String, String> params) {
+  public static BunqResponse<CardGeneratedCvc2ApiObject> get(Long cardId, Long cardGeneratedCvc2Id, Map<String, String> params) {
     return get(cardId, cardGeneratedCvc2Id, params, null);
   }
 
   /**
    * @param type The type of generated cvc2. Can be STATIC or GENERATED.
    */
-  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id, String type, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long cardId, Long cardGeneratedCvc2Id, String type, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -178,22 +178,22 @@ requestMap.put(FIELD_TYPE, type);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer cardId) {
+  public static BunqResponse<Long> update(Long cardId) {
     return update(cardId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id) {
+  public static BunqResponse<Long> update(Long cardId, Long cardGeneratedCvc2Id) {
     return update(cardId, cardGeneratedCvc2Id, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer cardId, Integer cardGeneratedCvc2Id, String type) {
+  public static BunqResponse<Long> update(Long cardId, Long cardGeneratedCvc2Id, String type) {
     return update(cardId, cardGeneratedCvc2Id, type, null);
   }
 
   /**
    * Get all generated CVC2 codes for a card.
    */
-  public static BunqResponse<List<CardGeneratedCvc2ApiObject>> list(Integer cardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<CardGeneratedCvc2ApiObject>> list(Long cardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), cardId), params, customHeaders);
 
@@ -204,22 +204,22 @@ requestMap.put(FIELD_TYPE, type);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<CardGeneratedCvc2ApiObject>> list(Integer cardId) {
+  public static BunqResponse<List<CardGeneratedCvc2ApiObject>> list(Long cardId) {
     return list(cardId, null, null);
   }
 
-  public static BunqResponse<List<CardGeneratedCvc2ApiObject>> list(Integer cardId, Map<String, String> params) {
+  public static BunqResponse<List<CardGeneratedCvc2ApiObject>> list(Long cardId, Map<String, String> params) {
     return list(cardId, params, null);
   }
 
   /**
    * The id of the cvc code.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

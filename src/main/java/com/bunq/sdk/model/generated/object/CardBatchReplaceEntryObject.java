@@ -20,7 +20,7 @@ public class CardBatchReplaceEntryObject extends BunqModel {
    */
   @Expose
   @SerializedName("id_field_for_request")
-  private Integer idFieldForRequest;
+  private Long idFieldForRequest;
 
   /**
    * The user's name as it will be on the card. Check 'card-name' for the available card names for
@@ -48,19 +48,19 @@ public class CardBatchReplaceEntryObject extends BunqModel {
   this(null, null, null, null);
   }
 
-  public CardBatchReplaceEntryObject(Integer id) {
+  public CardBatchReplaceEntryObject(Long id) {
   this(id, null, null, null);
   }
 
-  public CardBatchReplaceEntryObject(Integer id, String nameOnCard) {
+  public CardBatchReplaceEntryObject(Long id, String nameOnCard) {
   this(id, nameOnCard, null, null);
   }
 
-  public CardBatchReplaceEntryObject(Integer id, String nameOnCard, List<CardPinAssignmentObject> pinCodeAssignment) {
+  public CardBatchReplaceEntryObject(Long id, String nameOnCard, List<CardPinAssignmentObject> pinCodeAssignment) {
   this(id, nameOnCard, pinCodeAssignment, null);
   }
 
-  public CardBatchReplaceEntryObject(Integer id, String nameOnCard, List<CardPinAssignmentObject> pinCodeAssignment, String secondLine) {
+  public CardBatchReplaceEntryObject(Long id, String nameOnCard, List<CardPinAssignmentObject> pinCodeAssignment, String secondLine) {
     this.idFieldForRequest = id;
     this.nameOnCardFieldForRequest = nameOnCard;
     this.pinCodeAssignmentFieldForRequest = pinCodeAssignment;

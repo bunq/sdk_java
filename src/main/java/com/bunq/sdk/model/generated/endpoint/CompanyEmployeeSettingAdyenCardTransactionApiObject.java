@@ -51,7 +51,7 @@ public class CompanyEmployeeSettingAdyenCardTransactionApiObject extends BunqMod
    */
   @Expose
   @SerializedName("monetary_account_payout_id")
-  private Integer monetaryAccountPayoutId;
+  private Long monetaryAccountPayoutId;
 
   /**
    * The pointer to the employee for which you want to create a card.
@@ -72,7 +72,7 @@ public class CompanyEmployeeSettingAdyenCardTransactionApiObject extends BunqMod
    */
   @Expose
   @SerializedName("monetary_account_payout_id_field_for_request")
-  private Integer monetaryAccountPayoutIdFieldForRequest;
+  private Long monetaryAccountPayoutIdFieldForRequest;
 
   public CompanyEmployeeSettingAdyenCardTransactionApiObject() {
   this(null, null, null);
@@ -86,13 +86,13 @@ public class CompanyEmployeeSettingAdyenCardTransactionApiObject extends BunqMod
   this(pointerCounterUser, status, null);
   }
 
-  public CompanyEmployeeSettingAdyenCardTransactionApiObject(PointerObject pointerCounterUser, String status, Integer monetaryAccountPayoutId) {
+  public CompanyEmployeeSettingAdyenCardTransactionApiObject(PointerObject pointerCounterUser, String status, Long monetaryAccountPayoutId) {
     this.pointerCounterUserFieldForRequest = pointerCounterUser;
     this.statusFieldForRequest = status;
     this.monetaryAccountPayoutIdFieldForRequest = monetaryAccountPayoutId;
   }  /**
    */
-  public static BunqResponse<CompanyEmployeeSettingAdyenCardTransactionApiObject> get(Integer companyEmployeeSettingAdyenCardTransactionId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<CompanyEmployeeSettingAdyenCardTransactionApiObject> get(Long companyEmployeeSettingAdyenCardTransactionId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), companyEmployeeSettingAdyenCardTransactionId), params, customHeaders);
 
@@ -103,11 +103,11 @@ public class CompanyEmployeeSettingAdyenCardTransactionApiObject extends BunqMod
     return get(null, null, null);
   }
 
-  public static BunqResponse<CompanyEmployeeSettingAdyenCardTransactionApiObject> get(Integer companyEmployeeSettingAdyenCardTransactionId) {
+  public static BunqResponse<CompanyEmployeeSettingAdyenCardTransactionApiObject> get(Long companyEmployeeSettingAdyenCardTransactionId) {
     return get(companyEmployeeSettingAdyenCardTransactionId, null, null);
   }
 
-  public static BunqResponse<CompanyEmployeeSettingAdyenCardTransactionApiObject> get(Integer companyEmployeeSettingAdyenCardTransactionId, Map<String, String> params) {
+  public static BunqResponse<CompanyEmployeeSettingAdyenCardTransactionApiObject> get(Long companyEmployeeSettingAdyenCardTransactionId, Map<String, String> params) {
     return get(companyEmployeeSettingAdyenCardTransactionId, params, null);
   }
 
@@ -125,11 +125,11 @@ public class CompanyEmployeeSettingAdyenCardTransactionApiObject extends BunqMod
   /**
    * The ID of the monetary account where Tap to Pay transactions should be paid out to.
    */
-  public Integer getMonetaryAccountPayoutId() {
+  public Long getMonetaryAccountPayoutId() {
     return this.monetaryAccountPayoutId;
   }
 
-  public void setMonetaryAccountPayoutId(Integer monetaryAccountPayoutId) {
+  public void setMonetaryAccountPayoutId(Long monetaryAccountPayoutId) {
     this.monetaryAccountPayoutId = monetaryAccountPayoutId;
   }
 

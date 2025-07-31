@@ -107,7 +107,7 @@ public class ScheduleInstanceApiObject extends BunqModel {
     this.stateFieldForRequest = state;
   }  /**
    */
-  public static BunqResponse<ScheduleInstanceApiObject> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ScheduleInstanceApiObject> get(Long scheduleId, Long scheduleInstanceId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId, scheduleInstanceId), params, customHeaders);
 
@@ -118,26 +118,26 @@ public class ScheduleInstanceApiObject extends BunqModel {
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<ScheduleInstanceApiObject> get(Integer scheduleId) {
+  public static BunqResponse<ScheduleInstanceApiObject> get(Long scheduleId) {
     return get(scheduleId, null, null, null, null);
   }
 
-  public static BunqResponse<ScheduleInstanceApiObject> get(Integer scheduleId, Integer scheduleInstanceId) {
+  public static BunqResponse<ScheduleInstanceApiObject> get(Long scheduleId, Long scheduleInstanceId) {
     return get(scheduleId, scheduleInstanceId, null, null, null);
   }
 
-  public static BunqResponse<ScheduleInstanceApiObject> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId) {
+  public static BunqResponse<ScheduleInstanceApiObject> get(Long scheduleId, Long scheduleInstanceId, Long monetaryAccountId) {
     return get(scheduleId, scheduleInstanceId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ScheduleInstanceApiObject> get(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<ScheduleInstanceApiObject> get(Long scheduleId, Long scheduleInstanceId, Long monetaryAccountId, Map<String, String> params) {
     return get(scheduleId, scheduleInstanceId, monetaryAccountId, params, null);
   }
 
   /**
    * @param state Change the state of the scheduleInstance from FAILED_USER_ERROR to RETRY.
    */
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long scheduleId, Long scheduleInstanceId, Long monetaryAccountId, String state, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -153,25 +153,25 @@ requestMap.put(FIELD_STATE, state);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId) {
+  public static BunqResponse<Long> update(Long scheduleId) {
     return update(scheduleId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId) {
+  public static BunqResponse<Long> update(Long scheduleId, Long scheduleInstanceId) {
     return update(scheduleId, scheduleInstanceId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long scheduleId, Long scheduleInstanceId, Long monetaryAccountId) {
     return update(scheduleId, scheduleInstanceId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer scheduleId, Integer scheduleInstanceId, Integer monetaryAccountId, String state) {
+  public static BunqResponse<Long> update(Long scheduleId, Long scheduleInstanceId, Long monetaryAccountId, String state) {
     return update(scheduleId, scheduleInstanceId, monetaryAccountId, state, null);
   }
 
   /**
    */
-  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Long scheduleId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), scheduleId), params, customHeaders);
 
@@ -182,15 +182,15 @@ requestMap.put(FIELD_STATE, state);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Integer scheduleId) {
+  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Long scheduleId) {
     return list(scheduleId, null, null, null);
   }
 
-  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Integer scheduleId, Integer monetaryAccountId) {
+  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Long scheduleId, Long monetaryAccountId) {
     return list(scheduleId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Integer scheduleId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<ScheduleInstanceApiObject>> list(Long scheduleId, Long monetaryAccountId, Map<String, String> params) {
     return list(scheduleId, monetaryAccountId, params, null);
   }
 

@@ -42,7 +42,7 @@ public class MonetaryAccountCardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the MonetaryAccountCard's creation.
@@ -94,13 +94,6 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   private AmountObject balance;
 
   /**
-   * The current real balance Amount of the MonetaryAccountCard.
-   */
-  @Expose
-  @SerializedName("balance_real")
-  private AmountObject balanceReal;
-
-  /**
    * The aliases for the MonetaryAccount.
    */
   @Expose
@@ -133,7 +126,7 @@ public class MonetaryAccountCardApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * The RelationUser when the MonetaryAccount is accessed by the User via a share/connect.
@@ -143,11 +136,19 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   private RelationUserApiObject relationUser;
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
+
+  /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -238,7 +239,7 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   /**
    * Get a specific MonetaryAccountCard.
    */
-  public static BunqResponse<MonetaryAccountCardApiObject> get(Integer monetaryAccountCardId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<MonetaryAccountCardApiObject> get(Long monetaryAccountCardId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), monetaryAccountCardId), params, customHeaders);
 
@@ -249,18 +250,18 @@ public class MonetaryAccountCardApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountCardApiObject> get(Integer monetaryAccountCardId) {
+  public static BunqResponse<MonetaryAccountCardApiObject> get(Long monetaryAccountCardId) {
     return get(monetaryAccountCardId, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountCardApiObject> get(Integer monetaryAccountCardId, Map<String, String> params) {
+  public static BunqResponse<MonetaryAccountCardApiObject> get(Long monetaryAccountCardId, Map<String, String> params) {
     return get(monetaryAccountCardId, params, null);
   }
 
   /**
    * Update a specific existing MonetaryAccountCard.
    */
-  public static BunqResponse<Integer> update(Integer monetaryAccountCardId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long monetaryAccountCardId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -275,7 +276,7 @@ public class MonetaryAccountCardApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountCardId) {
+  public static BunqResponse<Long> update(Long monetaryAccountCardId) {
     return update(monetaryAccountCardId, null);
   }
 
@@ -300,11 +301,11 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   /**
    * The id of the MonetaryAccountCard.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -386,17 +387,6 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   }
 
   /**
-   * The current real balance Amount of the MonetaryAccountCard.
-   */
-  public AmountObject getBalanceReal() {
-    return this.balanceReal;
-  }
-
-  public void setBalanceReal(AmountObject balanceReal) {
-    this.balanceReal = balanceReal;
-  }
-
-  /**
    * The aliases for the MonetaryAccount.
    */
   public List<PointerObject> getAlias() {
@@ -443,11 +433,11 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   /**
    * The id of the User who owns the MonetaryAccountCard.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
@@ -463,13 +453,25 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   }
 
   /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
+  }
+
+  /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -642,10 +644,6 @@ public class MonetaryAccountCardApiObject extends BunqModel {
       return false;
     }
 
-    if (this.balanceReal != null) {
-      return false;
-    }
-
     if (this.alias != null) {
       return false;
     }
@@ -667,6 +665,10 @@ public class MonetaryAccountCardApiObject extends BunqModel {
     }
 
     if (this.relationUser != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

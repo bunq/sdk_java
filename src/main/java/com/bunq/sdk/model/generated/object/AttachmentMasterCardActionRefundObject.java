@@ -20,31 +20,31 @@ public class AttachmentMasterCardActionRefundObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The id of the Attachment.
    */
   @Expose
   @SerializedName("id_field_for_request")
-  private Integer idFieldForRequest;
+  private Long idFieldForRequest;
 
   public AttachmentMasterCardActionRefundObject() {
   this(null);
   }
 
-  public AttachmentMasterCardActionRefundObject(Integer id) {
+  public AttachmentMasterCardActionRefundObject(Long id) {
     this.idFieldForRequest = id;
   }
 
   /**
    * The id of the attached Attachment.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

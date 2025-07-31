@@ -62,7 +62,7 @@ public class OauthCallbackUrlApiObject extends BunqModel {
     this.urlFieldForRequest = url;
   }  /**
    */
-  public static BunqResponse<OauthCallbackUrlApiObject> get(Integer oauthClientId, Integer oauthCallbackUrlId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<OauthCallbackUrlApiObject> get(Long oauthClientId, Long oauthCallbackUrlId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), oauthClientId, oauthCallbackUrlId), params, customHeaders);
 
@@ -73,22 +73,22 @@ public class OauthCallbackUrlApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<OauthCallbackUrlApiObject> get(Integer oauthClientId) {
+  public static BunqResponse<OauthCallbackUrlApiObject> get(Long oauthClientId) {
     return get(oauthClientId, null, null, null);
   }
 
-  public static BunqResponse<OauthCallbackUrlApiObject> get(Integer oauthClientId, Integer oauthCallbackUrlId) {
+  public static BunqResponse<OauthCallbackUrlApiObject> get(Long oauthClientId, Long oauthCallbackUrlId) {
     return get(oauthClientId, oauthCallbackUrlId, null, null);
   }
 
-  public static BunqResponse<OauthCallbackUrlApiObject> get(Integer oauthClientId, Integer oauthCallbackUrlId, Map<String, String> params) {
+  public static BunqResponse<OauthCallbackUrlApiObject> get(Long oauthClientId, Long oauthCallbackUrlId, Map<String, String> params) {
     return get(oauthClientId, oauthCallbackUrlId, params, null);
   }
 
   /**
    * @param url The URL for this callback.
    */
-  public static BunqResponse<Integer> create(Integer oauthClientId, String url, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long oauthClientId, String url, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -104,22 +104,22 @@ requestMap.put(FIELD_URL, url);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer oauthClientId) {
+  public static BunqResponse<Long> create(Long oauthClientId) {
     return create(oauthClientId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer oauthClientId, String url) {
+  public static BunqResponse<Long> create(Long oauthClientId, String url) {
     return create(oauthClientId, url, null);
   }
 
   /**
    * @param url The URL for this callback.
    */
-  public static BunqResponse<Integer> update(Integer oauthClientId, Integer oauthCallbackUrlId, String url, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long oauthClientId, Long oauthCallbackUrlId, String url, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -135,21 +135,21 @@ requestMap.put(FIELD_URL, url);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId) {
+  public static BunqResponse<Long> update(Long oauthClientId) {
     return update(oauthClientId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId, Integer oauthCallbackUrlId) {
+  public static BunqResponse<Long> update(Long oauthClientId, Long oauthCallbackUrlId) {
     return update(oauthClientId, oauthCallbackUrlId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer oauthClientId, Integer oauthCallbackUrlId, String url) {
+  public static BunqResponse<Long> update(Long oauthClientId, Long oauthCallbackUrlId, String url) {
     return update(oauthClientId, oauthCallbackUrlId, url, null);
   }
 
   /**
    */
-  public static BunqResponse<List<OauthCallbackUrlApiObject>> list(Integer oauthClientId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<OauthCallbackUrlApiObject>> list(Long oauthClientId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), oauthClientId), params, customHeaders);
 
@@ -160,28 +160,28 @@ requestMap.put(FIELD_URL, url);
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<OauthCallbackUrlApiObject>> list(Integer oauthClientId) {
+  public static BunqResponse<List<OauthCallbackUrlApiObject>> list(Long oauthClientId) {
     return list(oauthClientId, null, null);
   }
 
-  public static BunqResponse<List<OauthCallbackUrlApiObject>> list(Integer oauthClientId, Map<String, String> params) {
+  public static BunqResponse<List<OauthCallbackUrlApiObject>> list(Long oauthClientId, Map<String, String> params) {
     return list(oauthClientId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<OauthCallbackUrlApiObject> delete(Integer oauthClientId, Integer oauthCallbackUrlId, Map<String, String> customHeaders) {
+  public static BunqResponse<OauthCallbackUrlApiObject> delete(Long oauthClientId, Long oauthCallbackUrlId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), oauthClientId, oauthCallbackUrlId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<OauthCallbackUrlApiObject> delete(Integer oauthClientId) {
+  public static BunqResponse<OauthCallbackUrlApiObject> delete(Long oauthClientId) {
     return delete(oauthClientId, null, null);
   }
 
-  public static BunqResponse<OauthCallbackUrlApiObject> delete(Integer oauthClientId, Integer oauthCallbackUrlId) {
+  public static BunqResponse<OauthCallbackUrlApiObject> delete(Long oauthClientId, Long oauthCallbackUrlId) {
     return delete(oauthClientId, oauthCallbackUrlId, null);
   }
 

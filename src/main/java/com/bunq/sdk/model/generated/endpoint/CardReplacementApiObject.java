@@ -36,14 +36,14 @@ public class CardReplacementApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("card_id")
-  private Integer cardId;
+  private Long cardId;
 
   /**
    * The new card that replaces the original card in the CardReplacement.
    */
   @Expose
   @SerializedName("card_new_id")
-  private Integer cardNewId;
+  private Long cardNewId;
 
   /**
    * The status of the CardReplacement.
@@ -98,22 +98,22 @@ public class CardReplacementApiObject extends BunqModel {
   /**
    * The original card that belongs to the CardReplacement.
    */
-  public Integer getCardId() {
+  public Long getCardId() {
     return this.cardId;
   }
 
-  public void setCardId(Integer cardId) {
+  public void setCardId(Long cardId) {
     this.cardId = cardId;
   }
 
   /**
    * The new card that replaces the original card in the CardReplacement.
    */
-  public Integer getCardNewId() {
+  public Long getCardNewId() {
     return this.cardNewId;
   }
 
-  public void setCardNewId(Integer cardNewId) {
+  public void setCardNewId(Long cardNewId) {
     this.cardNewId = cardNewId;
   }
 

@@ -46,7 +46,7 @@ public class NoteTextSchedulePaymentApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the note's creation.
@@ -92,7 +92,7 @@ public class NoteTextSchedulePaymentApiObject extends BunqModel {
   }  /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> create(Integer schedulePaymentId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long schedulePaymentId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -108,26 +108,26 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer schedulePaymentId) {
+  public static BunqResponse<Long> create(Long schedulePaymentId) {
     return create(schedulePaymentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer schedulePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long schedulePaymentId, Long monetaryAccountId) {
     return create(schedulePaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer schedulePaymentId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> create(Long schedulePaymentId, Long monetaryAccountId, String content) {
     return create(schedulePaymentId, monetaryAccountId, content, null);
   }
 
   /**
    * @param content The content of the note.
    */
-  public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId, String content, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId, String content, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -143,47 +143,47 @@ requestMap.put(FIELD_CONTENT, content);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer schedulePaymentId) {
+  public static BunqResponse<Long> update(Long schedulePaymentId) {
     return update(schedulePaymentId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer noteTextSchedulePaymentId) {
+  public static BunqResponse<Long> update(Long schedulePaymentId, Long noteTextSchedulePaymentId) {
     return update(schedulePaymentId, noteTextSchedulePaymentId, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<Long> update(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId) {
     return update(schedulePaymentId, noteTextSchedulePaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId, String content) {
+  public static BunqResponse<Long> update(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId, String content) {
     return update(schedulePaymentId, noteTextSchedulePaymentId, monetaryAccountId, content, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentId, noteTextSchedulePaymentId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Integer schedulePaymentId) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Long schedulePaymentId) {
     return delete(schedulePaymentId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Integer schedulePaymentId, Integer noteTextSchedulePaymentId) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Long schedulePaymentId, Long noteTextSchedulePaymentId) {
     return delete(schedulePaymentId, noteTextSchedulePaymentId, null, null);
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> delete(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId) {
     return delete(schedulePaymentId, noteTextSchedulePaymentId, monetaryAccountId, null);
   }
 
   /**
    * Manage the notes for a given user.
    */
-  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Integer schedulePaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Long schedulePaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentId), params, customHeaders);
 
@@ -194,21 +194,21 @@ requestMap.put(FIELD_CONTENT, content);
     return list(null, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Integer schedulePaymentId) {
+  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Long schedulePaymentId) {
     return list(schedulePaymentId, null, null, null);
   }
 
-  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Integer schedulePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Long schedulePaymentId, Long monetaryAccountId) {
     return list(schedulePaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Integer schedulePaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<NoteTextSchedulePaymentApiObject>> list(Long schedulePaymentId, Long monetaryAccountId, Map<String, String> params) {
     return list(schedulePaymentId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), schedulePaymentId, noteTextSchedulePaymentId), params, customHeaders);
 
@@ -219,30 +219,30 @@ requestMap.put(FIELD_CONTENT, content);
     return get(null, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Integer schedulePaymentId) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Long schedulePaymentId) {
     return get(schedulePaymentId, null, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Integer schedulePaymentId, Integer noteTextSchedulePaymentId) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Long schedulePaymentId, Long noteTextSchedulePaymentId) {
     return get(schedulePaymentId, noteTextSchedulePaymentId, null, null, null);
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId) {
     return get(schedulePaymentId, noteTextSchedulePaymentId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Integer schedulePaymentId, Integer noteTextSchedulePaymentId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<NoteTextSchedulePaymentApiObject> get(Long schedulePaymentId, Long noteTextSchedulePaymentId, Long monetaryAccountId, Map<String, String> params) {
     return get(schedulePaymentId, noteTextSchedulePaymentId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the note.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

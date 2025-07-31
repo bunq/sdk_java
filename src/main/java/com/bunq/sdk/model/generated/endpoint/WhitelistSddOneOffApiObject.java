@@ -53,7 +53,7 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The account to which payments will come in before possibly being 'redirected' by the
@@ -61,7 +61,7 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_incoming_id")
-  private Integer monetaryAccountIncomingId;
+  private Long monetaryAccountIncomingId;
 
   /**
    * The account from which payments will be deducted when a transaction is matched with this
@@ -69,7 +69,7 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_paying_id")
-  private Integer monetaryAccountPayingId;
+  private Long monetaryAccountPayingId;
 
   /**
    * The type of the SDD whitelist, can be CORE or B2B.
@@ -132,14 +132,14 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_paying_id_field_for_request")
-  private Integer monetaryAccountPayingIdFieldForRequest;
+  private Long monetaryAccountPayingIdFieldForRequest;
 
   /**
    * ID of the request for which you want to whitelist the originating SDD.
    */
   @Expose
   @SerializedName("request_id_field_for_request")
-  private Integer requestIdFieldForRequest;
+  private Long requestIdFieldForRequest;
 
   /**
    * The maximum amount of money that is allowed to be deducted per month based on the whitelist.
@@ -168,23 +168,23 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
   this(null, null, null, null, null);
   }
 
-  public WhitelistSddOneOffApiObject(Integer monetaryAccountPayingId) {
+  public WhitelistSddOneOffApiObject(Long monetaryAccountPayingId) {
   this(monetaryAccountPayingId, null, null, null, null);
   }
 
-  public WhitelistSddOneOffApiObject(Integer monetaryAccountPayingId, Integer requestId) {
+  public WhitelistSddOneOffApiObject(Long monetaryAccountPayingId, Long requestId) {
   this(monetaryAccountPayingId, requestId, null, null, null);
   }
 
-  public WhitelistSddOneOffApiObject(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth) {
+  public WhitelistSddOneOffApiObject(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth) {
   this(monetaryAccountPayingId, requestId, maximumAmountPerMonth, null, null);
   }
 
-  public WhitelistSddOneOffApiObject(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
+  public WhitelistSddOneOffApiObject(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
   this(monetaryAccountPayingId, requestId, maximumAmountPerMonth, maximumAmountPerPayment, null);
   }
 
-  public WhitelistSddOneOffApiObject(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
+  public WhitelistSddOneOffApiObject(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
     this.monetaryAccountPayingIdFieldForRequest = monetaryAccountPayingId;
     this.requestIdFieldForRequest = requestId;
     this.maximumAmountPerMonthFieldForRequest = maximumAmountPerMonth;
@@ -193,7 +193,7 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
   }  /**
    * Get a specific one off SDD whitelist entry.
    */
-  public static BunqResponse<WhitelistSddOneOffApiObject> get(Integer whitelistSddOneOffId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<WhitelistSddOneOffApiObject> get(Long whitelistSddOneOffId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), whitelistSddOneOffId), params, customHeaders);
 
@@ -204,11 +204,11 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<WhitelistSddOneOffApiObject> get(Integer whitelistSddOneOffId) {
+  public static BunqResponse<WhitelistSddOneOffApiObject> get(Long whitelistSddOneOffId) {
     return get(whitelistSddOneOffId, null, null);
   }
 
-  public static BunqResponse<WhitelistSddOneOffApiObject> get(Integer whitelistSddOneOffId, Map<String, String> params) {
+  public static BunqResponse<WhitelistSddOneOffApiObject> get(Long whitelistSddOneOffId, Map<String, String> params) {
     return get(whitelistSddOneOffId, params, null);
   }
 
@@ -223,7 +223,7 @@ public class WhitelistSddOneOffApiObject extends BunqModel {
    * @param routingType The type of routing for this whitelist. Should be changed to non-optional
    * CIT/technical#12806.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -243,27 +243,27 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId) {
+  public static BunqResponse<Long> create(Long monetaryAccountPayingId) {
     return create(monetaryAccountPayingId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId) {
+  public static BunqResponse<Long> create(Long monetaryAccountPayingId, Long requestId) {
     return create(monetaryAccountPayingId, requestId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth) {
+  public static BunqResponse<Long> create(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth) {
     return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
+  public static BunqResponse<Long> create(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
     return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, maximumAmountPerPayment, null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountPayingId, Integer requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
+  public static BunqResponse<Long> create(Long monetaryAccountPayingId, Long requestId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
     return create(monetaryAccountPayingId, requestId, maximumAmountPerMonth, maximumAmountPerPayment, routingType, null);
   }
 
@@ -276,7 +276,7 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
    * @param routingType The type of routing for this whitelist. Should be changed to non-optional
    * CIT/technical#12806.
    */
-  public static BunqResponse<Integer> update(Integer whitelistSddOneOffId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long whitelistSddOneOffId, Long monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -295,36 +295,36 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddOneOffId) {
+  public static BunqResponse<Long> update(Long whitelistSddOneOffId) {
     return update(whitelistSddOneOffId, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddOneOffId, Integer monetaryAccountPayingId) {
+  public static BunqResponse<Long> update(Long whitelistSddOneOffId, Long monetaryAccountPayingId) {
     return update(whitelistSddOneOffId, monetaryAccountPayingId, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddOneOffId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth) {
+  public static BunqResponse<Long> update(Long whitelistSddOneOffId, Long monetaryAccountPayingId, AmountObject maximumAmountPerMonth) {
     return update(whitelistSddOneOffId, monetaryAccountPayingId, maximumAmountPerMonth, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddOneOffId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
+  public static BunqResponse<Long> update(Long whitelistSddOneOffId, Long monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment) {
     return update(whitelistSddOneOffId, monetaryAccountPayingId, maximumAmountPerMonth, maximumAmountPerPayment, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer whitelistSddOneOffId, Integer monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
+  public static BunqResponse<Long> update(Long whitelistSddOneOffId, Long monetaryAccountPayingId, AmountObject maximumAmountPerMonth, AmountObject maximumAmountPerPayment, String routingType) {
     return update(whitelistSddOneOffId, monetaryAccountPayingId, maximumAmountPerMonth, maximumAmountPerPayment, routingType, null);
   }
 
   /**
    */
-  public static BunqResponse<WhitelistSddOneOffApiObject> delete(Integer whitelistSddOneOffId, Map<String, String> customHeaders) {
+  public static BunqResponse<WhitelistSddOneOffApiObject> delete(Long whitelistSddOneOffId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), whitelistSddOneOffId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<WhitelistSddOneOffApiObject> delete(Integer whitelistSddOneOffId) {
+  public static BunqResponse<WhitelistSddOneOffApiObject> delete(Long whitelistSddOneOffId) {
     return delete(whitelistSddOneOffId, null);
   }
 
@@ -349,11 +349,11 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
   /**
    * The ID of the whitelist entry.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -361,11 +361,11 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
    * The account to which payments will come in before possibly being 'redirected' by the
    * whitelist.
    */
-  public Integer getMonetaryAccountIncomingId() {
+  public Long getMonetaryAccountIncomingId() {
     return this.monetaryAccountIncomingId;
   }
 
-  public void setMonetaryAccountIncomingId(Integer monetaryAccountIncomingId) {
+  public void setMonetaryAccountIncomingId(Long monetaryAccountIncomingId) {
     this.monetaryAccountIncomingId = monetaryAccountIncomingId;
   }
 
@@ -373,11 +373,11 @@ requestMap.put(FIELD_ROUTING_TYPE, routingType);
    * The account from which payments will be deducted when a transaction is matched with this
    * whitelist.
    */
-  public Integer getMonetaryAccountPayingId() {
+  public Long getMonetaryAccountPayingId() {
     return this.monetaryAccountPayingId;
   }
 
-  public void setMonetaryAccountPayingId(Integer monetaryAccountPayingId) {
+  public void setMonetaryAccountPayingId(Long monetaryAccountPayingId) {
     this.monetaryAccountPayingId = monetaryAccountPayingId;
   }
 

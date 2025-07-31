@@ -43,7 +43,7 @@ public class CoOwnerInviteResponseApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_id")
-  private Integer monetaryAccountId;
+  private Long monetaryAccountId;
 
   /**
    * The extension type of the monetaryAccount
@@ -121,11 +121,11 @@ public class CoOwnerInviteResponseApiObject extends BunqModel {
   /**
    * The ID of the monetaryAccount
    */
-  public Integer getMonetaryAccountId() {
+  public Long getMonetaryAccountId() {
     return this.monetaryAccountId;
   }
 
-  public void setMonetaryAccountId(Integer monetaryAccountId) {
+  public void setMonetaryAccountId(Long monetaryAccountId) {
     this.monetaryAccountId = monetaryAccountId;
   }
 

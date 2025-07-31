@@ -24,7 +24,7 @@ public class WhitelistResultApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The account from which payments will be deducted when a transaction is matched with this
@@ -32,7 +32,7 @@ public class WhitelistResultApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("monetary_account_paying_id")
-  private Integer monetaryAccountPayingId;
+  private Long monetaryAccountPayingId;
 
   /**
    * The status of the WhitelistResult.
@@ -80,11 +80,11 @@ public class WhitelistResultApiObject extends BunqModel {
   /**
    * The ID of the whitelist entry.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -92,11 +92,11 @@ public class WhitelistResultApiObject extends BunqModel {
    * The account from which payments will be deducted when a transaction is matched with this
    * whitelist.
    */
-  public Integer getMonetaryAccountPayingId() {
+  public Long getMonetaryAccountPayingId() {
     return this.monetaryAccountPayingId;
   }
 
-  public void setMonetaryAccountPayingId(Integer monetaryAccountPayingId) {
+  public void setMonetaryAccountPayingId(Long monetaryAccountPayingId) {
     this.monetaryAccountPayingId = monetaryAccountPayingId;
   }
 

@@ -65,7 +65,7 @@ public class MonetaryAccountBankApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the MonetaryAccountBank's creation.
@@ -189,14 +189,14 @@ public class MonetaryAccountBankApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("user_id")
-  private Integer userId;
+  private Long userId;
 
   /**
    * The profiles of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private MonetaryAccountProfileApiObject monetaryAccountProfile;
+  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
 
   /**
    * The legal name of the user / company using this monetary account.
@@ -225,6 +225,14 @@ public class MonetaryAccountBankApiObject extends BunqModel {
   @Expose
   @SerializedName("fulfillments")
   private List<FulfillmentApiObject> fulfillments;
+
+  /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  @Expose
+  @SerializedName("balance_converted")
+  private AmountObject balanceConverted;
 
   /**
    * The budgets of the MonetaryAccount.
@@ -438,7 +446,7 @@ public class MonetaryAccountBankApiObject extends BunqModel {
    * @param setting The settings of the MonetaryAccountBank.
    * @param countryIban The country of the monetary account IBAN.
    */
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, String countryIban, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, String countryIban, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -464,58 +472,58 @@ requestMap.put(FIELD_COUNTRY_IBAN, countryIban);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency) {
+  public static BunqResponse<Long> create(String currency) {
     return create(currency, null, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description) {
+  public static BunqResponse<Long> create(String currency, String description) {
     return create(currency, description, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit) {
     return create(currency, description, dailyLimit, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid) {
     return create(currency, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status) {
     return create(currency, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus) {
     return create(currency, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
     return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
     return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
     return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting) {
     return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null, null);
   }
 
-  public static BunqResponse<Integer> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, String countryIban) {
+  public static BunqResponse<Long> create(String currency, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, String countryIban) {
     return create(currency, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, countryIban, null);
   }
 
   /**
    * Get a specific MonetaryAccountBank.
    */
-  public static BunqResponse<MonetaryAccountBankApiObject> get(Integer monetaryAccountBankId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<MonetaryAccountBankApiObject> get(Long monetaryAccountBankId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), monetaryAccountBankId), params, customHeaders);
 
@@ -526,11 +534,11 @@ requestMap.put(FIELD_COUNTRY_IBAN, countryIban);
     return get(null, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountBankApiObject> get(Integer monetaryAccountBankId) {
+  public static BunqResponse<MonetaryAccountBankApiObject> get(Long monetaryAccountBankId) {
     return get(monetaryAccountBankId, null, null);
   }
 
-  public static BunqResponse<MonetaryAccountBankApiObject> get(Integer monetaryAccountBankId, Map<String, String> params) {
+  public static BunqResponse<MonetaryAccountBankApiObject> get(Long monetaryAccountBankId, Map<String, String> params) {
     return get(monetaryAccountBankId, params, null);
   }
 
@@ -557,7 +565,7 @@ requestMap.put(FIELD_COUNTRY_IBAN, countryIban);
    * @param displayName The legal name of the user / company using this monetary account.
    * @param setting The settings of the MonetaryAccountBank.
    */
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -581,43 +589,43 @@ requestMap.put(FIELD_SETTING, setting);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId) {
     return update(monetaryAccountBankId, null, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description) {
     return update(monetaryAccountBankId, description, null, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit) {
     return update(monetaryAccountBankId, description, dailyLimit, null, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, null, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, null, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, null, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, null, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, null, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, null, null);
   }
 
-  public static BunqResponse<Integer> update(Integer monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting) {
+  public static BunqResponse<Long> update(Long monetaryAccountBankId, String description, AmountObject dailyLimit, String avatarUuid, String status, String subStatus, String reason, String reasonDescription, String displayName, MonetaryAccountSettingObject setting) {
     return update(monetaryAccountBankId, description, dailyLimit, avatarUuid, status, subStatus, reason, reasonDescription, displayName, setting, null);
   }
 
@@ -642,11 +650,11 @@ requestMap.put(FIELD_SETTING, setting);
   /**
    * The id of the MonetaryAccountBank.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -834,22 +842,22 @@ requestMap.put(FIELD_SETTING, setting);
   /**
    * The id of the User who owns the MonetaryAccountBank.
    */
-  public Integer getUserId() {
+  public Long getUserId() {
     return this.userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 
   /**
    * The profiles of the account.
    */
-  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
+  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
@@ -895,6 +903,18 @@ requestMap.put(FIELD_SETTING, setting);
 
   public void setFulfillments(List<FulfillmentApiObject> fulfillments) {
     this.fulfillments = fulfillments;
+  }
+
+  /**
+   * The current available balance amount of the MonetaryAccount, converted to the user's default
+   * currency.
+   */
+  public AmountObject getBalanceConverted() {
+    return this.balanceConverted;
+  }
+
+  public void setBalanceConverted(AmountObject balanceConverted) {
+    this.balanceConverted = balanceConverted;
   }
 
   /**
@@ -1055,6 +1075,10 @@ requestMap.put(FIELD_SETTING, setting);
     }
 
     if (this.fulfillments != null) {
+      return false;
+    }
+
+    if (this.balanceConverted != null) {
       return false;
     }
 

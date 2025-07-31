@@ -44,7 +44,7 @@ public class SessionContext implements java.io.Serializable {
 
     @Expose
     @SerializedName("user_id")
-    private final Integer userId;
+    private final Long userId;
 
     @Expose
     @SerializedName("user_person")
@@ -129,7 +129,7 @@ public class SessionContext implements java.io.Serializable {
         return expiryTime;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 

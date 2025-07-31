@@ -35,7 +35,7 @@ public class AttachmentUserContentApiObject extends BunqModel {
   /**
    * Get the raw content of a specific attachment.
    */
-  public static BunqResponse<byte[]> list(Integer attachmentId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<byte[]> list(Long attachmentId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), attachmentId), params, customHeaders);
 
@@ -45,10 +45,10 @@ public class AttachmentUserContentApiObject extends BunqModel {
   public static BunqResponse<byte[]> list() {
     return list(null, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer attachmentId) {
+  public static BunqResponse<byte[]> list(Long attachmentId) {
     return list(attachmentId, null, null);
   }
-  public static BunqResponse<byte[]> list(Integer attachmentId, Map<String, String> params) {
+  public static BunqResponse<byte[]> list(Long attachmentId, Map<String, String> params) {
     return list(attachmentId, params, null);
   }
 

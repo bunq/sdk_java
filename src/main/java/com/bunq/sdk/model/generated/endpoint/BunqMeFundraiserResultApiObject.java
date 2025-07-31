@@ -36,7 +36,7 @@ public class BunqMeFundraiserResultApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp when the bunq.me was created.
@@ -68,7 +68,7 @@ public class BunqMeFundraiserResultApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Integer bunqMeFundraiserResultId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Long bunqMeFundraiserResultId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), bunqMeFundraiserResultId), params, customHeaders);
 
@@ -79,26 +79,26 @@ public class BunqMeFundraiserResultApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Integer bunqMeFundraiserResultId) {
+  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Long bunqMeFundraiserResultId) {
     return get(bunqMeFundraiserResultId, null, null, null);
   }
 
-  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Integer bunqMeFundraiserResultId, Integer monetaryAccountId) {
+  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Long bunqMeFundraiserResultId, Long monetaryAccountId) {
     return get(bunqMeFundraiserResultId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Integer bunqMeFundraiserResultId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<BunqMeFundraiserResultApiObject> get(Long bunqMeFundraiserResultId, Long monetaryAccountId, Map<String, String> params) {
     return get(bunqMeFundraiserResultId, monetaryAccountId, params, null);
   }
 
   /**
    * The id of the bunq.me.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

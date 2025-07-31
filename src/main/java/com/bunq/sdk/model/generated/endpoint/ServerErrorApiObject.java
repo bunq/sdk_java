@@ -28,7 +28,7 @@ public class ServerErrorApiObject extends BunqModel {
 
   /**
    */
-  public static BunqResponse<Integer> create(Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -43,7 +43,7 @@ public class ServerErrorApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null);
   }
 

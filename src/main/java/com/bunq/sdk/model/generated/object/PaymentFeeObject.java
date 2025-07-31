@@ -34,7 +34,7 @@ public class PaymentFeeObject extends BunqModel {
    */
   @Expose
   @SerializedName("invoice_id")
-  private Integer invoiceId;
+  private Long invoiceId;
 
   /**
    * The amount formatted to two decimal places.
@@ -61,11 +61,11 @@ public class PaymentFeeObject extends BunqModel {
   /**
    * The id of the invoice related to possible payment fee.
    */
-  public Integer getInvoiceId() {
+  public Long getInvoiceId() {
     return this.invoiceId;
   }
 
-  public void setInvoiceId(Integer invoiceId) {
+  public void setInvoiceId(Long invoiceId) {
     this.invoiceId = invoiceId;
   }
 

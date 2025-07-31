@@ -38,7 +38,7 @@ public class UserPaymentServiceProviderApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the user object's creation.
@@ -131,11 +131,11 @@ public class UserPaymentServiceProviderApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("session_timeout")
-  private Integer sessionTimeout;
+  private Long sessionTimeout;
 
   /**
    */
-  public static BunqResponse<UserPaymentServiceProviderApiObject> get(Integer userPaymentServiceProviderId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<UserPaymentServiceProviderApiObject> get(Long userPaymentServiceProviderId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, userPaymentServiceProviderId), params, customHeaders);
 
@@ -146,22 +146,22 @@ public class UserPaymentServiceProviderApiObject extends BunqModel {
     return get(null, null, null);
   }
 
-  public static BunqResponse<UserPaymentServiceProviderApiObject> get(Integer userPaymentServiceProviderId) {
+  public static BunqResponse<UserPaymentServiceProviderApiObject> get(Long userPaymentServiceProviderId) {
     return get(userPaymentServiceProviderId, null, null);
   }
 
-  public static BunqResponse<UserPaymentServiceProviderApiObject> get(Integer userPaymentServiceProviderId, Map<String, String> params) {
+  public static BunqResponse<UserPaymentServiceProviderApiObject> get(Long userPaymentServiceProviderId, Map<String, String> params) {
     return get(userPaymentServiceProviderId, params, null);
   }
 
   /**
    * The id of the user.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -302,11 +302,11 @@ public class UserPaymentServiceProviderApiObject extends BunqModel {
   /**
    * The setting for the session timeout of the user in seconds.
    */
-  public Integer getSessionTimeout() {
+  public Long getSessionTimeout() {
     return this.sessionTimeout;
   }
 
-  public void setSessionTimeout(Integer sessionTimeout) {
+  public void setSessionTimeout(Long sessionTimeout) {
     this.sessionTimeout = sessionTimeout;
   }
 

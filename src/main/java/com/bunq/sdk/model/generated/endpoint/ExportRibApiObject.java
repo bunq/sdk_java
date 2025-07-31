@@ -39,7 +39,7 @@ public class ExportRibApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the RIB's creation.
@@ -58,7 +58,7 @@ public class ExportRibApiObject extends BunqModel {
   /**
    * Create a new RIB.
    */
-  public static BunqResponse<Integer> create(Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -73,18 +73,18 @@ public class ExportRibApiObject extends BunqModel {
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(Integer monetaryAccountId) {
+  public static BunqResponse<Long> create(Long monetaryAccountId) {
     return create(monetaryAccountId, null);
   }
 
   /**
    * Get a RIB for a monetary account by its id.
    */
-  public static BunqResponse<ExportRibApiObject> get(Integer exportRibId, Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportRibApiObject> get(Long exportRibId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), determineMonetaryAccountId(monetaryAccountId), exportRibId), params, customHeaders);
 
@@ -95,39 +95,39 @@ public class ExportRibApiObject extends BunqModel {
     return get(null, null, null, null);
   }
 
-  public static BunqResponse<ExportRibApiObject> get(Integer exportRibId) {
+  public static BunqResponse<ExportRibApiObject> get(Long exportRibId) {
     return get(exportRibId, null, null, null);
   }
 
-  public static BunqResponse<ExportRibApiObject> get(Integer exportRibId, Integer monetaryAccountId) {
+  public static BunqResponse<ExportRibApiObject> get(Long exportRibId, Long monetaryAccountId) {
     return get(exportRibId, monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<ExportRibApiObject> get(Integer exportRibId, Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<ExportRibApiObject> get(Long exportRibId, Long monetaryAccountId, Map<String, String> params) {
     return get(exportRibId, monetaryAccountId, params, null);
   }
 
   /**
    */
-  public static BunqResponse<ExportRibApiObject> delete(Integer exportRibId, Integer monetaryAccountId, Map<String, String> customHeaders) {
+  public static BunqResponse<ExportRibApiObject> delete(Long exportRibId, Long monetaryAccountId, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.delete(String.format(ENDPOINT_URL_DELETE, determineUserId(), determineMonetaryAccountId(monetaryAccountId), exportRibId), customHeaders);
 
     return new BunqResponse<>(null, responseRaw.getHeaders());
   }
 
-  public static BunqResponse<ExportRibApiObject> delete(Integer exportRibId) {
+  public static BunqResponse<ExportRibApiObject> delete(Long exportRibId) {
     return delete(exportRibId, null, null);
   }
 
-  public static BunqResponse<ExportRibApiObject> delete(Integer exportRibId, Integer monetaryAccountId) {
+  public static BunqResponse<ExportRibApiObject> delete(Long exportRibId, Long monetaryAccountId) {
     return delete(exportRibId, monetaryAccountId, null);
   }
 
   /**
    * List all the RIBs for a monetary account.
    */
-  public static BunqResponse<List<ExportRibApiObject>> list(Integer monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
+  public static BunqResponse<List<ExportRibApiObject>> list(Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
     BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_LISTING, determineUserId(), determineMonetaryAccountId(monetaryAccountId)), params, customHeaders);
 
@@ -138,22 +138,22 @@ public class ExportRibApiObject extends BunqModel {
     return list(null, null, null);
   }
 
-  public static BunqResponse<List<ExportRibApiObject>> list(Integer monetaryAccountId) {
+  public static BunqResponse<List<ExportRibApiObject>> list(Long monetaryAccountId) {
     return list(monetaryAccountId, null, null);
   }
 
-  public static BunqResponse<List<ExportRibApiObject>> list(Integer monetaryAccountId, Map<String, String> params) {
+  public static BunqResponse<List<ExportRibApiObject>> list(Long monetaryAccountId, Map<String, String> params) {
     return list(monetaryAccountId, params, null);
   }
 
   /**
    * The id of the rib as created on the server.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

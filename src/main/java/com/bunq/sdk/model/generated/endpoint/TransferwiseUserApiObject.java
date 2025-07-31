@@ -42,7 +42,7 @@ public class TransferwiseUserApiObject extends BunqModel {
    */
   @Expose
   @SerializedName("id")
-  private Integer id;
+  private Long id;
 
   /**
    * The timestamp of the TransferwiseUser's creation.
@@ -97,7 +97,7 @@ public class TransferwiseUserApiObject extends BunqModel {
    * @param oauthCode The OAuth code returned by Transferwise we should be using to gain access to
    * the user's Transferwise account.
    */
-  public static BunqResponse<Integer> create(String oauthCode, Map<String, String> customHeaders) {
+  public static BunqResponse<Long> create(String oauthCode, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
 
     if (customHeaders == null) {
@@ -113,11 +113,11 @@ requestMap.put(FIELD_OAUTH_CODE, oauthCode);
     return processForId(responseRaw);
   }
 
-  public static BunqResponse<Integer> create() {
+  public static BunqResponse<Long> create() {
     return create(null, null);
   }
 
-  public static BunqResponse<Integer> create(String oauthCode) {
+  public static BunqResponse<Long> create(String oauthCode) {
     return create(oauthCode, null);
   }
 
@@ -141,11 +141,11 @@ requestMap.put(FIELD_OAUTH_CODE, oauthCode);
   /**
    * The id of the TransferwiseUser.
    */
-  public Integer getId() {
+  public Long getId() {
     return this.id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
