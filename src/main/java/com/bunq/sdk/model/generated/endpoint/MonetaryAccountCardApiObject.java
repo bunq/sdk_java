@@ -144,11 +144,11 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   private AmountObject balanceConverted;
 
   /**
-   * The profiles of the account.
+   * The profile of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
+  private MonetaryAccountProfileApiObject monetaryAccountProfile;
 
   /**
    * The settings of the MonetaryAccount.
@@ -465,13 +465,13 @@ public class MonetaryAccountCardApiObject extends BunqModel {
   }
 
   /**
-   * The profiles of the account.
+   * The profile of the account.
    */
-  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
+  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 
