@@ -22,9 +22,9 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     /**
      * Constants for scenario testing.
      */
-    private final static int PAYMENT_LISTING_PAGE_SIZE = 2;
-    private final static int PAYMENT_REQUIRED_COUNT_MINIMUM = PAYMENT_LISTING_PAGE_SIZE * 2;
-    private final static int NUMBER_ZERO = 0;
+    private final static long PAYMENT_LISTING_PAGE_SIZE = 2;
+    private final static long PAYMENT_REQUIRED_COUNT_MINIMUM = PAYMENT_LISTING_PAGE_SIZE * 2;
+    private final static long NUMBER_ZERO = 0;
 
     /**
      * Constants for payment creation.
@@ -39,17 +39,17 @@ public class PaginationScenarioTest extends BunqSdkTestBase {
     private static final Gson gson = BunqGsonBuilder.buildDefault().create();
 
     private static void EnsureEnoughPayments() {
-        int missingPaymentCount = GetPaymentsMissingCount();
+        long missingPaymentCount = GetPaymentsMissingCount();
         List<PaymentApiObject> allPayment = new ArrayList<>();
 
-        for (int i = NUMBER_ZERO; i < missingPaymentCount; ++i) {
+        for (long i = NUMBER_ZERO; i < missingPaymentCount; ++i) {
             allPayment.add(createPayment());
         }
 
         PaymentBatchApiObject.create(allPayment);
     }
 
-    private static int GetPaymentsMissingCount() {
+    private static long GetPaymentsMissingCount() {
         return PAYMENT_REQUIRED_COUNT_MINIMUM - GetPaymentsRequired().size();
     }
 

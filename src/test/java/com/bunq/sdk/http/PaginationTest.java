@@ -16,10 +16,10 @@ public class PaginationTest {
     /**
      * Values of pagination properties for testing.
      */
-    private static final int PAGINATION_OLDER_ID_CUSTOM = 1;
-    private static final int PAGINATION_NEWER_ID_CUSTOM = 2;
-    private static final int PAGINATION_FUTURE_ID_CUSTOM = 3;
-    private static final int PAGINATION_COUNT_CUSTOM = 5;
+    private static final long PAGINATION_OLDER_ID_CUSTOM = 1;
+    private static final long PAGINATION_NEWER_ID_CUSTOM = 2;
+    private static final long PAGINATION_FUTURE_ID_CUSTOM = 3;
+    private static final long PAGINATION_COUNT_CUSTOM = 5;
 
     private static Pagination createPaginationWithAllPropertiesSet() {
         Pagination pagination = new Pagination();
@@ -36,7 +36,7 @@ public class PaginationTest {
         Pagination pagination = createPaginationWithAllPropertiesSet();
         Map<String, String> urlParamsCountOnlyExpected = new HashMap<>();
         urlParamsCountOnlyExpected.put(Pagination.PARAM_COUNT,
-                Integer.toString(PAGINATION_COUNT_CUSTOM));
+                Long.toString(PAGINATION_COUNT_CUSTOM));
 
         Assert.assertEquals(urlParamsCountOnlyExpected, pagination.getUrlParamsCountOnly());
     }
@@ -46,9 +46,9 @@ public class PaginationTest {
         Pagination pagination = createPaginationWithAllPropertiesSet();
         Map<String, String> urlParamsPreviousPageExpected = new HashMap<>();
         urlParamsPreviousPageExpected.put(Pagination.PARAM_COUNT,
-                Integer.toString(PAGINATION_COUNT_CUSTOM));
+                Long.toString(PAGINATION_COUNT_CUSTOM));
         urlParamsPreviousPageExpected.put(Pagination.PARAM_OLDER_ID,
-                Integer.toString(PAGINATION_OLDER_ID_CUSTOM));
+                Long.toString(PAGINATION_OLDER_ID_CUSTOM));
 
         Assert.assertTrue(pagination.hasPreviousPage());
         Assert.assertEquals(urlParamsPreviousPageExpected, pagination.getUrlParamsPreviousPage());
@@ -60,7 +60,7 @@ public class PaginationTest {
         pagination.setCount(null);
         Map<String, String> urlParamsPreviousPageExpected = new HashMap<>();
         urlParamsPreviousPageExpected.put(Pagination.PARAM_OLDER_ID,
-                Integer.toString(PAGINATION_OLDER_ID_CUSTOM));
+                Long.toString(PAGINATION_OLDER_ID_CUSTOM));
 
         Assert.assertTrue(pagination.hasPreviousPage());
         Assert.assertEquals(urlParamsPreviousPageExpected, pagination.getUrlParamsPreviousPage());
@@ -71,9 +71,9 @@ public class PaginationTest {
         Pagination pagination = createPaginationWithAllPropertiesSet();
         Map<String, String> urlParamsNextPageExpected = new HashMap<>();
         urlParamsNextPageExpected.put(Pagination.PARAM_COUNT,
-                Integer.toString(PAGINATION_COUNT_CUSTOM));
+                Long.toString(PAGINATION_COUNT_CUSTOM));
         urlParamsNextPageExpected.put(Pagination.PARAM_NEWER_ID,
-                Integer.toString(PAGINATION_NEWER_ID_CUSTOM));
+                Long.toString(PAGINATION_NEWER_ID_CUSTOM));
 
         Assert.assertTrue(pagination.hasNextPageAssured());
         Assert.assertEquals(urlParamsNextPageExpected, pagination.getUrlParamsNextPage());
@@ -85,7 +85,7 @@ public class PaginationTest {
         pagination.setCount(null);
         Map<String, String> urlParamsNextPageExpected = new HashMap<>();
         urlParamsNextPageExpected.put(Pagination.PARAM_NEWER_ID,
-                Integer.toString(PAGINATION_NEWER_ID_CUSTOM));
+                Long.toString(PAGINATION_NEWER_ID_CUSTOM));
 
         Assert.assertTrue(pagination.hasNextPageAssured());
         Assert.assertEquals(urlParamsNextPageExpected, pagination.getUrlParamsNextPage());
@@ -97,9 +97,9 @@ public class PaginationTest {
         pagination.setNewerId(null);
         Map<String, String> urlParamsNextPageExpected = new HashMap<>();
         urlParamsNextPageExpected.put(Pagination.PARAM_COUNT,
-                Integer.toString(PAGINATION_COUNT_CUSTOM));
+                Long.toString(PAGINATION_COUNT_CUSTOM));
         urlParamsNextPageExpected.put(Pagination.PARAM_NEWER_ID,
-                Integer.toString(PAGINATION_FUTURE_ID_CUSTOM));
+                Long.toString(PAGINATION_FUTURE_ID_CUSTOM));
 
         Assert.assertFalse(pagination.hasNextPageAssured());
         Assert.assertEquals(urlParamsNextPageExpected, pagination.getUrlParamsNextPage());
@@ -112,7 +112,7 @@ public class PaginationTest {
         pagination.setCount(null);
         Map<String, String> urlParamsNextPageExpected = new HashMap<>();
         urlParamsNextPageExpected.put(Pagination.PARAM_NEWER_ID,
-                Integer.toString(PAGINATION_FUTURE_ID_CUSTOM));
+                Long.toString(PAGINATION_FUTURE_ID_CUSTOM));
 
         Assert.assertFalse(pagination.hasNextPageAssured());
         Assert.assertEquals(urlParamsNextPageExpected, pagination.getUrlParamsNextPage());
