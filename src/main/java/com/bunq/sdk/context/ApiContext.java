@@ -49,7 +49,7 @@ public class ApiContext implements java.io.Serializable {
     /**
      * Dummy ID to pass to Session endpoint.
      */
-    private static final int SESSION_ID_DUMMY = 0;
+    private static final long SESSION_ID_DUMMY = 0;
 
     /**
      * Minimum time to session expiry not requiring session reset.

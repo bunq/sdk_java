@@ -81,13 +81,6 @@ public class NotificationFilterFailureApiObject extends BunqModel {
   private Long responseCode;
 
   /**
-   * This is the URL to which the callback will be made.
-   */
-  @Expose
-  @SerializedName("notification_target")
-  private String notificationTarget;
-
-  /**
    * The IDs to retry.
    */
   @Expose
@@ -211,17 +204,6 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
   }
 
   /**
-   * This is the URL to which the callback will be made.
-   */
-  public String getNotificationTarget() {
-    return this.notificationTarget;
-  }
-
-  public void setNotificationTarget(String notificationTarget) {
-    this.notificationTarget = notificationTarget;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.notificationFilters != null) {
@@ -245,10 +227,6 @@ requestMap.put(FIELD_NOTIFICATION_FILTER_FAILED_IDS, notificationFilterFailedIds
     }
 
     if (this.responseCode != null) {
-      return false;
-    }
-
-    if (this.notificationTarget != null) {
       return false;
     }
 

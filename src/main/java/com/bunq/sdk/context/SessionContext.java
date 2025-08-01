@@ -75,7 +75,7 @@ public class SessionContext implements java.io.Serializable {
         this.userPaymentServiceProvider = sessionServer.getUserPaymentServiceProviderOrNull();
     }
 
-    private int getUserId(BunqModel user) {
+    private long getUserId(BunqModel user) {
         if (user instanceof UserPersonApiObject) {
             return ((UserPersonApiObject) user).getId();
         } else if (user instanceof UserCompanyApiObject) {
@@ -97,7 +97,7 @@ public class SessionContext implements java.io.Serializable {
         return expiryTime;
     }
 
-    private static int getSessionTimeout(SessionServer sessionServer) {
+    private static long getSessionTimeout(SessionServer sessionServer) {
         BunqModel user = sessionServer.getReferencedUser();
 
         if (user instanceof UserApiKeyApiObject) {
@@ -109,7 +109,7 @@ public class SessionContext implements java.io.Serializable {
         }
     }
 
-    private static int getSessionTimeOutFromUser(BunqModel user) {
+    private static long getSessionTimeOutFromUser(BunqModel user) {
         if (user instanceof UserCompanyApiObject) {
             return ((UserCompanyApiObject) user).getSessionTimeout();
         } else if (user instanceof UserPersonApiObject) {
