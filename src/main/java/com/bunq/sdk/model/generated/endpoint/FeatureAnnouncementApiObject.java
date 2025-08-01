@@ -1,5 +1,9 @@
 package com.bunq.sdk.model.generated.endpoint;
 
+import com.bunq.sdk.context.ApiContext;
+import com.bunq.sdk.http.ApiClient;
+import com.bunq.sdk.http.BunqResponse;
+import com.bunq.sdk.http.BunqResponseRaw;
 import com.bunq.sdk.model.core.BunqModel;
 import com.bunq.sdk.model.core.MonetaryAccountReference;
 import com.bunq.sdk.model.generated.object.AvatarObject;
@@ -11,21 +15,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.lang.model.type.NullType;
 
 /**
- * view for creating the feature announcement.
+ * view for updating the feature display.
  */
 public class FeatureAnnouncementApiObject extends BunqModel {
 
   /**
-   * Field constants.
+   * Endpoint constants.
    */
-  public static final String FIELD_AVATAR_UUID = "avatar_uuid";
-  public static final String FIELD_TITLE = "title";
-  public static final String FIELD_SUB_TITLE = "sub_title";
-  public static final String FIELD_STATUS = "status";
-  public static final String FIELD_FEATURE_ACCESS_ID = "feature_access_id";
-  public static final String FIELD_CONTENT_TYPE = "content_type";
+  protected static final String ENDPOINT_URL_READ = "user/%s/feature-announcement/%s";
+
+  /**
+   * Object type.
+   */
+  protected static final String OBJECT_TYPE_GET = "FeatureAnnouncement";
 
   /**
    * The Avatar of the event overview.
@@ -35,113 +40,45 @@ public class FeatureAnnouncementApiObject extends BunqModel {
   private AvatarObject avatar;
 
   /**
-   * The event title of the feature announcement.
+   * The event overview title of the feature display
    */
   @Expose
   @SerializedName("title")
-  private List<String> title;
+  private String title;
 
   /**
-   * The event sub title of the feature announcement.
+   * The event overview subtitle of the feature display
    */
   @Expose
   @SerializedName("sub_title")
-  private List<String> subTitle;
+  private String subTitle;
 
   /**
-   * The type of the feature announcement.
+   * The type of the feature announcement so apps can override with their own stuff if desired
    */
   @Expose
   @SerializedName("type")
   private String type;
 
   /**
-   * The status of the feature announcement.
    */
-  @Expose
-  @SerializedName("status")
-  private String status;
+  public static BunqResponse<FeatureAnnouncementApiObject> get(Long featureAnnouncementId, Map<String, String> params, Map<String, String> customHeaders) {
+    ApiClient apiClient = new ApiClient(getApiContext());
+    BunqResponseRaw responseRaw = apiClient.get(String.format(ENDPOINT_URL_READ, determineUserId(), featureAnnouncementId), params, customHeaders);
 
-  /**
-   * The event sub title of the feature announcement.
-   */
-  @Expose
-  @SerializedName("all_feature_announcement_content")
-  private List<String> allFeatureAnnouncementContent;
-
-  /**
-   * The avatar uuid.
-   */
-  @Expose
-  @SerializedName("avatar_uuid_field_for_request")
-  private String avatarUuidFieldForRequest;
-
-  /**
-   * The event title of the feature announcement.
-   */
-  @Expose
-  @SerializedName("title_field_for_request")
-  private List<String> titleFieldForRequest;
-
-  /**
-   * The event sub title of the feature announcement.
-   */
-  @Expose
-  @SerializedName("sub_title_field_for_request")
-  private List<String> subTitleFieldForRequest;
-
-  /**
-   * The status of the feature announcement.
-   */
-  @Expose
-  @SerializedName("status_field_for_request")
-  private String statusFieldForRequest;
-
-  /**
-   * The feature access id that controls the feature announcement.
-   */
-  @Expose
-  @SerializedName("feature_access_id_field_for_request")
-  private String featureAccessIdFieldForRequest;
-
-  /**
-   * The content type of the feature announcement.
-   */
-  @Expose
-  @SerializedName("content_type_field_for_request")
-  private String contentTypeFieldForRequest;
-
-  public FeatureAnnouncementApiObject() {
-  this(null, null, null, null, null, null);
+    return fromJson(FeatureAnnouncementApiObject.class, responseRaw, OBJECT_TYPE_GET);
   }
 
-  public FeatureAnnouncementApiObject(List<String> title) {
-  this(title, null, null, null, null, null);
+  public static BunqResponse<FeatureAnnouncementApiObject> get() {
+    return get(null, null, null);
   }
 
-  public FeatureAnnouncementApiObject(List<String> title, List<String> subTitle) {
-  this(title, subTitle, null, null, null, null);
+  public static BunqResponse<FeatureAnnouncementApiObject> get(Long featureAnnouncementId) {
+    return get(featureAnnouncementId, null, null);
   }
 
-  public FeatureAnnouncementApiObject(List<String> title, List<String> subTitle, String contentType) {
-  this(title, subTitle, contentType, null, null, null);
-  }
-
-  public FeatureAnnouncementApiObject(List<String> title, List<String> subTitle, String contentType, String avatarUuid) {
-  this(title, subTitle, contentType, avatarUuid, null, null);
-  }
-
-  public FeatureAnnouncementApiObject(List<String> title, List<String> subTitle, String contentType, String avatarUuid, String status) {
-  this(title, subTitle, contentType, avatarUuid, status, null);
-  }
-
-  public FeatureAnnouncementApiObject(List<String> title, List<String> subTitle, String contentType, String avatarUuid, String status, String featureAccessId) {
-    this.avatarUuidFieldForRequest = avatarUuid;
-    this.titleFieldForRequest = title;
-    this.subTitleFieldForRequest = subTitle;
-    this.statusFieldForRequest = status;
-    this.featureAccessIdFieldForRequest = featureAccessId;
-    this.contentTypeFieldForRequest = contentType;
+  public static BunqResponse<FeatureAnnouncementApiObject> get(Long featureAnnouncementId, Map<String, String> params) {
+    return get(featureAnnouncementId, params, null);
   }
 
   /**
@@ -156,29 +93,29 @@ public class FeatureAnnouncementApiObject extends BunqModel {
   }
 
   /**
-   * The event title of the feature announcement.
+   * The event overview title of the feature display
    */
-  public List<String> getTitle() {
+  public String getTitle() {
     return this.title;
   }
 
-  public void setTitle(List<String> title) {
+  public void setTitle(String title) {
     this.title = title;
   }
 
   /**
-   * The event sub title of the feature announcement.
+   * The event overview subtitle of the feature display
    */
-  public List<String> getSubTitle() {
+  public String getSubTitle() {
     return this.subTitle;
   }
 
-  public void setSubTitle(List<String> subTitle) {
+  public void setSubTitle(String subTitle) {
     this.subTitle = subTitle;
   }
 
   /**
-   * The type of the feature announcement.
+   * The type of the feature announcement so apps can override with their own stuff if desired
    */
   public String getType() {
     return this.type;
@@ -186,28 +123,6 @@ public class FeatureAnnouncementApiObject extends BunqModel {
 
   public void setType(String type) {
     this.type = type;
-  }
-
-  /**
-   * The status of the feature announcement.
-   */
-  public String getStatus() {
-    return this.status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  /**
-   * The event sub title of the feature announcement.
-   */
-  public List<String> getAllFeatureAnnouncementContent() {
-    return this.allFeatureAnnouncementContent;
-  }
-
-  public void setAllFeatureAnnouncementContent(List<String> allFeatureAnnouncementContent) {
-    this.allFeatureAnnouncementContent = allFeatureAnnouncementContent;
   }
 
   /**
@@ -226,14 +141,6 @@ public class FeatureAnnouncementApiObject extends BunqModel {
     }
 
     if (this.type != null) {
-      return false;
-    }
-
-    if (this.status != null) {
-      return false;
-    }
-
-    if (this.allFeatureAnnouncementContent != null) {
       return false;
     }
 

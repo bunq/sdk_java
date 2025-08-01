@@ -97,13 +97,6 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
   private List<GinmonTransactionApiObject> allGinmonTransactionOrder;
 
   /**
-   * All Kraken transactions executed with this instance.
-   */
-  @Expose
-  @SerializedName("all_kraken_transaction")
-  private List<KrakenTransactionApiObject> allKrakenTransaction;
-
-  /**
    */
   public static BunqResponse<List<PaymentAutoAllocateInstanceApiObject>> list(Long paymentAutoAllocateId, Long monetaryAccountId, Map<String, String> params, Map<String, String> customHeaders) {
     ApiClient apiClient = new ApiClient(getApiContext());
@@ -257,17 +250,6 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
   }
 
   /**
-   * All Kraken transactions executed with this instance.
-   */
-  public List<KrakenTransactionApiObject> getAllKrakenTransaction() {
-    return this.allKrakenTransaction;
-  }
-
-  public void setAllKrakenTransaction(List<KrakenTransactionApiObject> allKrakenTransaction) {
-    this.allKrakenTransaction = allKrakenTransaction;
-  }
-
-  /**
    */
   public boolean isAllFieldNull() {
     if (this.id != null) {
@@ -303,10 +285,6 @@ public class PaymentAutoAllocateInstanceApiObject extends BunqModel {
     }
 
     if (this.allGinmonTransactionOrder != null) {
-      return false;
-    }
-
-    if (this.allKrakenTransaction != null) {
       return false;
     }
 
