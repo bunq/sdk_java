@@ -192,11 +192,11 @@ public class MonetaryAccountBankApiObject extends BunqModel {
   private Long userId;
 
   /**
-   * The profiles of the account.
+   * The profile of the account.
    */
   @Expose
   @SerializedName("monetary_account_profile")
-  private List<MonetaryAccountProfileApiObject> monetaryAccountProfile;
+  private MonetaryAccountProfileApiObject monetaryAccountProfile;
 
   /**
    * The legal name of the user / company using this monetary account.
@@ -851,13 +851,13 @@ requestMap.put(FIELD_SETTING, setting);
   }
 
   /**
-   * The profiles of the account.
+   * The profile of the account.
    */
-  public List<MonetaryAccountProfileApiObject> getMonetaryAccountProfile() {
+  public MonetaryAccountProfileApiObject getMonetaryAccountProfile() {
     return this.monetaryAccountProfile;
   }
 
-  public void setMonetaryAccountProfile(List<MonetaryAccountProfileApiObject> monetaryAccountProfile) {
+  public void setMonetaryAccountProfile(MonetaryAccountProfileApiObject monetaryAccountProfile) {
     this.monetaryAccountProfile = monetaryAccountProfile;
   }
 

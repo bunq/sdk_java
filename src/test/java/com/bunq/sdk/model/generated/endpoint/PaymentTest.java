@@ -22,7 +22,7 @@ public class PaymentTest extends BunqSdkTestBase {
      */
     private static final String AMOUNT_EUR = "0.01";
     private static final String PAYMENT_DESCRIPTION = "Java test Payment";
-    private static final int PAGE_SIZE = 100;
+    private static final long PAGE_SIZE = 100;
     private static final int MAXIMUM_AMOUNT_OF_PAYMENT = 10;
 
     /**

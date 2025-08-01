@@ -22,7 +22,7 @@ public class SessionTest extends BunqSdkTestBase {
     /**
      * Config value.
      */
-    private static final int SESSION_ID_DUMMY = 0;
+    private static final long SESSION_ID_DUMMY = 0;
     private static final int SECONDS_TO_SLEEP = 2;
 
     /**
